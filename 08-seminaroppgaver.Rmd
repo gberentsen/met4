@@ -228,11 +228,11 @@ Oppgaveformuleringene finner du i seksjon \@ref(skoleeksamen).
 
 1. Nevn minst to grunner til at en ønsker å utføre en vanlig regresjonsanalyse. Reflekter så over hva hovedgrunnen er med å lage henholdsvis en KNN-modell og en regresjonsmodell.
 
-2. Diskuter i hvilken grad det er rimelig med komponenten $v_t$ i en paneldatamodell
+2. Diskuter i hvilken grad det er rimelig med komponenten $\nu_t$ i en paneldatamodell
 
 
 
-    $$y_{it} = \beta_0 + \beta_1 x_{it} + ...  + v_t + \alpha_i + \epsilon_{it} $$
+    $$y_{it} = \beta_0 + \beta_1 x_{it} + ...  + \nu_t + \alpha_i + \epsilon_{it} $$
      
 dersom en skal analysere paneldata av følgende responsvariabler $y_{it}$:
 
@@ -282,9 +282,9 @@ njmin <- njmin %>%
 
 Estimer deretter tre modeller som bygger opp til difference-in-differences-estimatet:
 
-   1. **Naiv sammenligning:** Bruk kun data fra november 1992 (`post == 1`), og estimer $\text{fte}_i = \beta_0 + \beta_1 \text{treat}_i + \varepsilon_i$
-   2. **Før-etter:** Bruk kun data fra New Jersey (`treat == 1`), og estimer $\text{fte}_t = \beta_0 + \beta_1 \text{post}_t + \varepsilon_t$
-   3. **Difference-in-differences:** Bruk hele datasettet: $\text{fte}_{it} = \beta_0 + \beta_1 \text{treat}_i + \beta_2 \text{post}_t + \beta_3 (\text{treat}_i \times \text{post}_t) + \varepsilon_{it}$
+   1. **Naiv sammenligning:** Bruk kun data fra november 1992 (`post == 1`), og estimer $\text{fte}_i = \beta_0 + \beta_1 \text{treat}_i + \epsilon_i$
+   2. **Før-etter:** Bruk kun data fra New Jersey (`treat == 1`), og estimer $\text{fte}_t = \beta_0 + \beta_1 \text{post}_t + \epsilon_t$
+   3. **Difference-in-differences:** Bruk hele datasettet: $\text{fte}_{it} = \beta_0 + \beta_1 \text{treat}_i + \beta_2 \text{post}_t + \beta_3 (\text{treat}_i \times \text{post}_t) + \epsilon_{it}$
 
 Presenter resultatene i en tabell (f.eks. med `etable()`). Tolk koeffisientene i hver modell — hva måler de, og hva er svakheten med de to første?
 
@@ -334,15 +334,14 @@ Fatalities <- Fatalities %>%
 ```
 Lag deretter et spredningsplott med `beertax` på x-aksen og `frate` på y-aksen. Hva ser du?
 
-b) Estimer en enkel lineær modell: $\text{frate}_{it} = \beta_0 + \beta_1 \text{beertax}_{it} + \varepsilon_{it}$. Tolk koeffisienten. Er resultatet overraskende?
+b) Estimer en enkel lineær modell: $\text{frate}_{it} = \beta_0 + \beta_1 \text{beertax}_{it} + \epsilon_{it}$. Tolk koeffisienten. Er resultatet overraskende?
 
 c) Hva kan forklare sammenhengen du ser i (b)? Diskuter mulige utelatte variabler.
 
 <details><summary>Løsning</summary>
 
 **a)**
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```{r, include=FALSE}
 library(dplyr)
 library(ggplot2)
 library(fixest)
@@ -375,9 +374,9 @@ Koeffisienten er positiv og signifikant: høyere ølskatt er assosiert med *fler
 **Oppgave 8**
 
 a) Estimer følgende modeller (bruk `state` som delstatsvariabel og `year` som tidsvariabel):
-   - Pooled OLS: $\text{frate}_{it} = \beta_0 + \beta_1 \text{beertax}_{it} + \varepsilon_{it}$
-   - Delstatsfaste effekter: $\text{frate}_{it} = \alpha_i + \beta_1 \text{beertax}_{it} + \varepsilon_{it}$
-   - Toveis faste effekter: $\text{frate}_{it} = \alpha_i + \nu_t + \beta_1 \text{beertax}_{it} + \varepsilon_{it}$
+   - Pooled OLS: $\text{frate}_{it} = \beta_0 + \beta_1 \text{beertax}_{it} + \epsilon_{it}$
+   - Delstatsfaste effekter: $\text{frate}_{it} = \alpha_i + \beta_1 \text{beertax}_{it} + \epsilon_{it}$
+   - Toveis faste effekter: $\text{frate}_{it} = \alpha_i + \nu_t + \beta_1 \text{beertax}_{it} + \epsilon_{it}$
 
 b) Forklar hva som skjer med koeffisienten når du legger til delstatsfaste effekter. Hvorfor endrer fortegnet seg?
 

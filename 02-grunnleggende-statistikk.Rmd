@@ -640,7 +640,7 @@ a. Forklar at $r$ er en konsistent estimator av $\rho$.
 
 b. Hva kjennetegner populasjoner hvor $\rho$ kan estimeres med stor sikkerhet ved hjelp av $r$ fra et utvalg?
 
-c. Beskriv en test av $H_0: \rho = 0$, mot $H_1: \rho \neq 0$.
+c. Beskriv en test av $H_0: \rho = 0$, mot $H_A: \rho \neq 0$.
 
 
 <details><summary>Løsning</summary>

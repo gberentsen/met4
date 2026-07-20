@@ -146,7 +146,7 @@ Kapittel **18** dekker de grunnleggende begrepene innen modellbygging. I kap. **
 
 1. Vi har lært tre typer log-transformasjoner. Hva blir fortolkningen av koeffisientene for hver av disse?
 1. Kan du nevne tre gode grunner til at log-transformasjoner er nyttige?
-1. Hvorfor sier vi at følgende modell er lineær? $Y = \beta_0 + \beta_1X + \beta_1X^2 + \varepsilon$
+1. Hvorfor sier vi at følgende modell er lineær? $Y = \beta_0 + \beta_1X + \beta_1X^2 + \epsilon$
 1. Vil vi ikke få problemer med multikolinearitet i modellen over?
 1. Nevn en veldig god grunn til at vi må være ytterst forsiktig med polynomtransformasjoner.
 1. Hva er en dummyvariabel? 
@@ -459,7 +459,7 @@ Merk at det ikke alltid er lett å se direkte fra figurene hva som er galt. Rikt
 #### Oppgave 4 {-}
 I en analyse skal en økonom teste om å ta høyere utdanning fører til at arbeidstakere får høyere lønn i arbeidslivet. Hun kjører følgende regresjon, som tester sammenhengen mellom (log av) lønn fem år etter endt utdanning og antall år med utdanning, på individnivå:
 
-$$ ln(\text{lønn}_i) = \beta_0+\beta_1\text{antall år med utdanning}_i+\varepsilon_i $$
+$$ ln(\text{lønn}_i) = \beta_0+\beta_1\text{antall år med utdanning}_i+\epsilon_i $$
 
 a) Er det grunn til å være bekymret for utelatt variabelskjevhet her? I hvilken retning påvirker den i så fall koeffisienten $\beta_1$?
 

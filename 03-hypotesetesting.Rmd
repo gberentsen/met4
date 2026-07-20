@@ -431,17 +431,17 @@ Introduksjon til hypotesetesting
 
 <details><summary>Løsning</summary>
 
-> a. $H_0$: Den nye medisinen er ikke trygg og effektiv. $H_1$: Den nye medisinen er trygg og effektiv. Type I-feil: Forkaste $H_0$ når $H_0$     er sann. Konsekvens: Risikerer at vi begynner å produsere en medisin som ikke er trygg og effektiv. Type II-feil: Forkaster *ikke* $H_0$     når $H_1$ er sann. Konsekvens: Vi lar være å produsere en medisin som faktisk er trygg og effektiv.
+> a. $H_0$: Den nye medisinen er ikke trygg og effektiv. $H_A$: Den nye medisinen er trygg og effektiv. Type I-feil: Forkaste $H_0$ når $H_0$     er sann. Konsekvens: Risikerer at vi begynner å produsere en medisin som ikke er trygg og effektiv. Type II-feil: Forkaster *ikke* $H_0$     når $H_A$ er sann. Konsekvens: Vi lar være å produsere en medisin som faktisk er trygg og effektiv.
 >
 >Kommentar: Signifikansnivået ved produksjon av medisiner settes ofte lavt fordi konsekvensene av en type I-feil kan være svært alvorlige.
 
 
-> b. $H_0$: Den mest risikable investeringen er mest lønnsom. $H_1$: Den mest risikable investeringen er ikke mest lønnsom. Type I-feil:          Forkaste $H_0$ når $H_0$ er sann. Konsekvens:Vi investerer i den minst risikable investeringen, som ikke er mest lønnsom. Type II-feil:      Forkaster *ikke* $H_0$ når $H_1$ er sann. Konsekvens: Vi investerer i den mest risikable investeringen, som ikke er mest lønnsom.
+> b. $H_0$: Den mest risikable investeringen er mest lønnsom. $H_A$: Den mest risikable investeringen er ikke mest lønnsom. Type I-feil:          Forkaste $H_0$ når $H_0$ er sann. Konsekvens:Vi investerer i den minst risikable investeringen, som ikke er mest lønnsom. Type II-feil:      Forkaster *ikke* $H_0$ når $H_A$ er sann. Konsekvens: Vi investerer i den mest risikable investeringen, som ikke er mest lønnsom.
 
 
 </details>
 
-2. Vi har følgende hypoteser og informasjon om dataene: $H_0: \mu = 150$ mot $H_1: \mu \neq 150$. $\sigma = 10$, $n =100$, $\overline{x} = 150$.
+2. Vi har følgende hypoteser og informasjon om dataene: $H_0: \mu = 150$ mot $H_A: \mu \neq 150$. $\sigma = 10$, $n =100$, $\overline{x} = 150$.
 
    Bestem verdi av testobservator, forkastelsesområde dersom signifikansnivået er $\alpha = 0.05$, og p-verdi. Konkluder.
 
@@ -455,7 +455,7 @@ Introduksjon til hypotesetesting
 
 </details>
 
-3. Vi har følgende hypoteser og informasjon om dataene: $H_0: \mu = 55$ mot $H_1: \mu > 55$.
+3. Vi har følgende hypoteser og informasjon om dataene: $H_0: \mu = 55$ mot $H_A: \mu > 55$.
   $\sigma = 20$, $n = 25$, $\overline{x} = 67$.
 
     a.	Regn ut testobservatoren $Z$.
@@ -487,7 +487,7 @@ Introduksjon til hypotesetesting
 </details>
 
 
-4. Annta at vi har følgende hypoteser og informasjon om dataene: $H_0: \mu = 50$ mot $H_1: \mu > 50$. $\sigma = 10$, $n = 40$, $\alpha = 0.05$.
+4. Annta at vi har følgende hypoteser og informasjon om dataene: $H_0: \mu = 50$ mot $H_A: \mu > 50$. $\sigma = 10$, $n = 40$, $\alpha = 0.05$.
 
    Bestem $\beta$, altså sannsynligheten for en type-II feil, under antagelsen at $\mu = 55$. 
 
@@ -498,7 +498,7 @@ Introduksjon til hypotesetesting
 >$$Z = \frac{\overline{X} - 50}{10/\sqrt{40}} > Z_{0.05} = 1.645 $$
 >dvs at vi forkaster $H_0$ når
 > $$\overline{X} > 50 + 1.645\times\frac{10}{\sqrt{40}}=52.6$$
->En type-II feil svarer til å *ikke* forkaste $H_0$ når $H_1$ er sann. For å regne på sannsynligheten for type-II feil må vi ikke bare anta at $H_1$ er sann, men være spesifike på hva verdien til $\mu$ er (i dette tilfellet 55). Vi lurer altså på hva sannsynligheten for at vi *ikke* er i forkastnings området ($\overline{X} < 52.6$) gitt at $\mu = 55$: 
+>En type-II feil svarer til å *ikke* forkaste $H_0$ når $H_A$ er sann. For å regne på sannsynligheten for type-II feil må vi ikke bare anta at $H_A$ er sann, men være spesifike på hva verdien til $\mu$ er (i dette tilfellet 55). Vi lurer altså på hva sannsynligheten for at vi *ikke* er i forkastnings området ($\overline{X} < 52.6$) gitt at $\mu = 55$: 
 > \begin{equation*}
 \begin{split}
 \beta &= P(\overline{X} < 52.6\quad\text{gitt at $\mu = 55$})\\
@@ -506,7 +506,7 @@ Introduksjon til hypotesetesting
 &=P(Z < -1.52) = 0.064
 \end{split}
 \end{equation*}
-> Merk: Et begrep som ofte blir brukt om tester er *styrken* til testen $1-\beta$ som da er sannsynligheten for å forkaste $H_0$ når $H_1$ er sann. En god test har god (stor) styrke. Hadde vi gjentatt denne testen mange ganger ville vi ha forkastet $H_0$  i $(100 - 6.4)\% = 93.6\%$ av gangene dersom det faktisk er slik at sann $\mu$ er 55. 
+> Merk: Et begrep som ofte blir brukt om tester er *styrken* til testen $1-\beta$ som da er sannsynligheten for å forkaste $H_0$ når $H_A$ er sann. En god test har god (stor) styrke. Hadde vi gjentatt denne testen mange ganger ville vi ha forkastet $H_0$  i $(100 - 6.4)\% = 93.6\%$ av gangene dersom det faktisk er slik at sann $\mu$ er 55. 
 
 </details>
 
@@ -520,11 +520,11 @@ Introduksjon til hypotesetesting
 
 <details><summary>Løsning</summary>
 
->   a. Lederen ønsker altså å teste $H_0: \mu = 45$ mot alternativ hypotesen $H_1: \mu > 45$. Testobservatoren er da gitt ved 
+>   a. Lederen ønsker altså å teste $H_0: \mu = 45$ mot alternativ hypotesen $H_A: \mu > 45$. Testobservatoren er da gitt ved 
 >
 >$$Z = \frac{\overline{X} - \mu_0}{\sigma/\sqrt{n}} = \frac{53.46 - 45}{20/\sqrt{15}} = 1.64$$ 
 >
->Sannsynligheten for å observerer noe minst like ekstremt og til fordel for $H_1$ (p-verdien) er da
+>Sannsynligheten for å observerer noe minst like ekstremt og til fordel for $H_A$ (p-verdien) er da
 >
 >$$P-verdi = P(Z > 1.645) \approx 0.05 > 0.01$$.
 >
@@ -569,10 +569,10 @@ Introduksjon til hypotesetesting
 
 
 <details><summary>Løsning</summary>
->La $p$ være den sanne andelen av flyreiser som kommer presist under krisen. Vi skal da teste $H_0: p = 0.92$ mot $H_1: p > 0.92$. Vårt estimat på $p$ er $\hat{p}=156/165 \approx 0.945$ og testobservatoren er gitt ved
+>La $p$ være den sanne andelen av flyreiser som kommer presist under krisen. Vi skal da teste $H_0: p = 0.92$ mot $H_A: p > 0.92$. Vårt estimat på $p$ er $\hat{p}=156/165 \approx 0.945$ og testobservatoren er gitt ved
 
 >$$z = \frac{\hat{p} - p_0}{\sqrt{p_0(1 - p_0)/n}} = \frac{0.945 - 0.92}{\sqrt{0.92(1 - 0.92)/165}} \approx 1.18$$
->Dersom vi bruker kritisk verdi ville forkastningsområdet vært $z > 1.645$ og siden $z < 1.645$ kan vi altså ikke forkaste $H_0$. Alternativt kan vi regne ut p-verdien som er "sannsynligheten for det vi har observert eller noe enda mer til fordel for $H_1$. En enda mer positiv verdi enn 1.18 ville vært til fordel for $H_1$, derfor er 
+>Dersom vi bruker kritisk verdi ville forkastningsområdet vært $z > 1.645$ og siden $z < 1.645$ kan vi altså ikke forkaste $H_0$. Alternativt kan vi regne ut p-verdien som er "sannsynligheten for det vi har observert eller noe enda mer til fordel for $H_A$. En enda mer positiv verdi enn 1.18 ville vært til fordel for $H_A$, derfor er 
 
 >$$p-verdi = P(Z >  1.18) = = 1 - P(Z < 1.18) \approx 0.12$$
 >og vi kan derfor *ikke* forkaste $H_0$ siden p-verdien *ikke* er mindre enn 0.05. TIPS: $P(Z<1.18) =$ `pnorm(1.18)` i R.
@@ -595,7 +595,7 @@ Introduksjon til hypotesetesting
 	  
 <details><summary>Løsning</summary>
 
-a. Vi skal altså teste $H_0: \mu_1 - \mu_2 = 0$ mot $H_1: \mu_1 - \mu_2 > 0$. Siden variansene i utvalget er såpass ulike antar vi at vi må bruke varianten av testen med ulik varians. Testobservatoren er da gitt ved
+a. Vi skal altså teste $H_0: \mu_1 - \mu_2 = 0$ mot $H_A: \mu_1 - \mu_2 > 0$. Siden variansene i utvalget er såpass ulike antar vi at vi må bruke varianten av testen med ulik varians. Testobservatoren er da gitt ved
 
 $$T = \frac{\overline{x}_1 - \overline{x}_2 - 0}{\sqrt{\frac{s^2_{1}}{n_1} + \frac{s^2_{2}}{n_2}}}=\frac{400 - 390}{\sqrt{\frac{130^2}{130} + \frac{50^2}{130}}} = 0.82$$
 Antall frihetsgrader oppgis til å være $v \approx 166$. Vi forkaster $H_0$ dersom $T > t_{0.05, 166} = 1.654$, og siden dette *ikke* er tilfelle her kan vi *ikke* forkaste $H_0$ ved 5 % signifikansnivå. 
@@ -663,11 +663,11 @@ c. Hvilke av de to foregående testene bør en bruke i dette tilfellet?
 
 <details><summary>Løsning</summary>
 
->a. La $\mu_1$ og $\mu_2$ være forventet tid til registrering av lus i et basseng for hhv metode B og metode A. Da er R-utskriften en test av $H_0: \mu_1 - \mu_2 = 0$ mot det enside alternativet $H_1: \mu_1-\mu_2 > 0$. Fra utskriften ser vi at $p-value= 0.06164 > 0.05$, altså kan vi ikke forkaste $H_0$ ved $5\%$ signifikansnivå.
+>a. La $\mu_1$ og $\mu_2$ være forventet tid til registrering av lus i et basseng for hhv metode B og metode A. Da er R-utskriften en test av $H_0: \mu_1 - \mu_2 = 0$ mot det enside alternativet $H_A: \mu_1-\mu_2 > 0$. Fra utskriften ser vi at $p-value= 0.06164 > 0.05$, altså kan vi ikke forkaste $H_0$ ved $5\%$ signifikansnivå.
 >
 Praktisk tolkning: Vi kan ikke konkludere med at det er noe forskjell i tiden de to metodene bruker.
 >
->b.I en paret t-test baserer vil testen på de parvise differansene $d_i = x_i - y_i$, der $x_i$ og $y_i$ er tiden hhv metode B og A bruker på å registrere lus i basseng nr. i. Utskriften viser en test av $H_0: \mu_d = 0$ mot det ensidige alternativet $H_1: \mu_d > 0$. Testobservatoren er da gitt ved
+>b.I en paret t-test baserer vil testen på de parvise differansene $d_i = x_i - y_i$, der $x_i$ og $y_i$ er tiden hhv metode B og A bruker på å registrere lus i basseng nr. i. Utskriften viser en test av $H_0: \mu_d = 0$ mot det ensidige alternativet $H_A: \mu_d > 0$. Testobservatoren er da gitt ved
 >
 > $$T=\frac{\overline{d}-0}{s_d/\sqrt{n}}$$ 
 >
@@ -689,11 +689,11 @@ Praktisk tolkning: Vi kan ikke konkludere med at det er noe forskjell i tiden de
 	  c. Fastslå hva som er effekten på verdi av testobservator og konklusjon av testen når vi reduserer           utvalgsstørrelse.
 
 <details><summary>Løsning</summary>
->a. Her ønsker vi å test $H_0: \sigma_{1}^2/\sigma_{2}^2 = 1$ mot $H_1: \sigma_{1}^2/\sigma_{2}^2 \neq 1$. Husk at for en tosidig test er det smart å formulere null- og alternativ hypotesen slik at den største utvalgsvariansen kommer i telleren til testobservatoren:
+>a. Her ønsker vi å test $H_0: \sigma_{1}^2/\sigma_{2}^2 = 1$ mot $H_A: \sigma_{1}^2/\sigma_{2}^2 \neq 1$. Husk at for en tosidig test er det smart å formulere null- og alternativ hypotesen slik at den største utvalgsvariansen kommer i telleren til testobservatoren:
 >
 >$$F = s_{1}^2/s_{2}^2 = 1400/700 = 2$$
 >
->Da trenger vi nemlig kun å sammenligne testobservatoren med den øvre kvantilen i F-fordelingen. Forkastningsområdet blir i dette tilfellet $F > F_{0.025, 59, 59} = 1.67$. Siden $F = 2$ er større enn $1.67$ kan vi altså forkaste $H_0$ til fordel for $H_1$ på et 5 % signifikansnivå. 
+>Da trenger vi nemlig kun å sammenligne testobservatoren med den øvre kvantilen i F-fordelingen. Forkastningsområdet blir i dette tilfellet $F > F_{0.025, 59, 59} = 1.67$. Siden $F = 2$ er større enn $1.67$ kan vi altså forkaste $H_0$ til fordel for $H_A$ på et 5 % signifikansnivå. 
 
 
 >b. Forkastningsområdet er da $F > F_{0.025, 29, 29} = 2.1$ og siden $F < 2.1$ kan vi ikke forkaste $H_0$ på et 5 % signifikansnivå.
@@ -726,13 +726,13 @@ t.test(uten_sparkesykkel, med_sparkesykkel, var.equal = TRUE, alternative = "gre
 ```
 <details><summary>Løsning</summary>
 
-> a. La $\sigma^2_{1}$ og $\sigma^2_{2}$ være populasjonsvariansene til antall biler som kommer for å parkere på henholdsvis dager der sparkesykler *ikke* er tilgjengelig og dager der sparkesykler er tilgjengelig. Utskriften viser da en test av $H_0: \sigma^2_{1}/\sigma^2_{2} = 1$ mot $H_1: \sigma^2_{1}/\sigma^2_{2} \neq 1$.
+> a. La $\sigma^2_{1}$ og $\sigma^2_{2}$ være populasjonsvariansene til antall biler som kommer for å parkere på henholdsvis dager der sparkesykler *ikke* er tilgjengelig og dager der sparkesykler er tilgjengelig. Utskriften viser da en test av $H_0: \sigma^2_{1}/\sigma^2_{2} = 1$ mot $H_A: \sigma^2_{1}/\sigma^2_{2} \neq 1$.
 >
 > Den ansatte utfører denne testen for å se om han kan bruke varianten av to-utvalgs t-test som antar lik varians når vedkommende tester om innføringen av sparkesykler har noen effekt (se b.). Ut fra p-verdien på 0.3559 (altså ingen forkastning av $H_0$) vil det være greit å bruke en slik test i dette tilfellet.
 >
 > Tips: variabel navnet som står først i testen ("uten_sparkesykkel") indikerer hvilke av de to variansen som står i telleren av $\sigma^2_{1}/\sigma^2_{2}$ (i $H_0$) og $s^2_{1}/s^2_{2}$ (i testobservatoren) i testen R utfører.
 
-> b. La $\mu_1$ og $\mu_2$ være forventet antall biler på henholdsvis dager der sparkesykler *ikke* er tilgjengelig og dager der sparkesykler er tilgjengelig. Utskriften viser en en-sidig, to-utvalgs t-test av hypotesen $H_0: \mu_1 - \mu_2 = 0$ mot $H_1: \mu_1 - \mu_2 > 0$. $H_1$ er altså om det forventes ferre biler på dager med sparkesykler enn på dager uten sparkesykler. 
+> b. La $\mu_1$ og $\mu_2$ være forventet antall biler på henholdsvis dager der sparkesykler *ikke* er tilgjengelig og dager der sparkesykler er tilgjengelig. Utskriften viser en en-sidig, to-utvalgs t-test av hypotesen $H_0: \mu_1 - \mu_2 = 0$ mot $H_A: \mu_1 - \mu_2 > 0$. $H_A$ er altså om det forventes ferre biler på dager med sparkesykler enn på dager uten sparkesykler. 
 >
 >"Two sample t-test" betyr at vi har antatt lik varians (ellers ville det stått "Welch two sample t-test"), og testobservatoren er derfor gitt ved:
 >
@@ -755,13 +755,13 @@ c. Gjenta a., denne gangen med $x_1 = 190$ og $x_2 = 180$. Fastslå effekten på
 
 <details><summary>Løsning</summary>
 
->a. Vi skal her teste hypotsen $H_0: p_1 - p_2 = 0$ mot $H_1: p_1 - p_2 \neq 0$. Med $\hat{p_1} = 100/200 = 0.5$, $\hat{p}_2 = 90/200 = 0.45$ og $\hat{p} = (100 + 90)/(200 + 200) = 0.475$ er testobservatoren er gitt ved 
+>a. Vi skal her teste hypotsen $H_0: p_1 - p_2 = 0$ mot $H_A: p_1 - p_2 \neq 0$. Med $\hat{p_1} = 100/200 = 0.5$, $\hat{p}_2 = 90/200 = 0.45$ og $\hat{p} = (100 + 90)/(200 + 200) = 0.475$ er testobservatoren er gitt ved 
 
 >$$Z = \frac{\hat{p}_1 - \hat{p}_2}{\sqrt{\hat{p}(1-\hat{p})(1/n_1 + 1/n_2)}} = \frac{0.5 - 0.45}{\sqrt{0.475(1-0.475)(1/200 + 1/200)}}=1.00$$
 >
 > Siden dette er en tosidig test er forkastningsområdet til testen $|Z| > z_{\alpha/2} = z_{0.025}=1.96$. Siden 1 < 1.96 kan vi altså *ikke* forkaste $H_0$ ved 5 % signifikansnivå.
 
-> b. P-verdier for tosidige tester kan være litt tricky å forstå. Vi er altså ute etter sannsynligheten for at noe "minst like ekstremt og til fordel for $H_1$ intreffer". For en tosidig test ville vi også reagert på store negative verdier av $Z$, og "minst like ekstremt" i negativ retning ville vært $Z < - 1.00$. Altså blir p-verdien
+> b. P-verdier for tosidige tester kan være litt tricky å forstå. Vi er altså ute etter sannsynligheten for at noe "minst like ekstremt og til fordel for $H_A$ intreffer". For en tosidig test ville vi også reagert på store negative verdier av $Z$, og "minst like ekstremt" i negativ retning ville vært $Z < - 1.00$. Altså blir p-verdien
 >
 >$$\text{P-value} = P(Z < -1.00\quad \text{og/eller}\quad Z > 1.00)\\ = P(Z < -1.00) + P(Z > 1.00) = 2P(Z > 1.00) = 2*(1 - 0.841) = 0.317$$
 >
@@ -773,7 +773,7 @@ c. Gjenta a., denne gangen med $x_1 = 190$ og $x_2 = 180$. Fastslå effekten på
 >
 > $$ \text{P-value} = 2P(Z > 1.89) = 2*(1 - 0.97) = 0.06 $$
 >
-> Vi ser at p-verdien avtar når andelene blir større. Vi er her ganske nære på å forkaste $H_0$ selv om differansen mellom $\hat{p}_1$ og $\hat{p}_2$ er den samme som i oppgave a. I nevneren til testobservatoren ser vi at variansen til differansen $\hat{p}_1 - \hat{p}_2$ er proposjonal med $\hat{p}(1-\hat{p})$. Denne vil bli mindre når $\hat{p}$ nærmer seg 1 (eller 0), og er størst når $\hat{p} = 0.5$. Vi er derfor sikrere på at differansen $\hat{p}_1 - \hat{p}_2$ i oppgave b. ligger nær den sanne differansen i populasjon sammenlignet med oppgave a. Bevismateriale mot $H_1$ øker (p-verdien går ned), men i dette tilfellet holder det ikke til å forkaste $H_0$. 
+> Vi ser at p-verdien avtar når andelene blir større. Vi er her ganske nære på å forkaste $H_0$ selv om differansen mellom $\hat{p}_1$ og $\hat{p}_2$ er den samme som i oppgave a. I nevneren til testobservatoren ser vi at variansen til differansen $\hat{p}_1 - \hat{p}_2$ er proposjonal med $\hat{p}(1-\hat{p})$. Denne vil bli mindre når $\hat{p}$ nærmer seg 1 (eller 0), og er størst når $\hat{p} = 0.5$. Vi er derfor sikrere på at differansen $\hat{p}_1 - \hat{p}_2$ i oppgave b. ligger nær den sanne differansen i populasjon sammenlignet med oppgave a. Bevismateriale mot $H_A$ øker (p-verdien går ned), men i dette tilfellet holder det ikke til å forkaste $H_0$. 
 
 <!-- z = (0.5 - 0.45)/sqrt(0.475*(1 - 0.475)*(1/200 + 1/200)) -->
 <!-- pval = 2*(1 - pnorm(z)) -->
@@ -792,7 +792,7 @@ Kan vi konkludere med at personer med rating lavere enn 800 har høyere sannsynl
 
 <details><summary>Løsning</summary>
 
->La $p_1$ være sannsynlighet for mislighold for de med rating under 800 og la $p_2$ være den samme sannsynligheten for de med rating over 800. Vi skal da teste $H_0: p_1 - p_2 = 0$ mot det ensidige alternativet $H_1: p_1 - p_2 > 0$. Med $\hat{p_1} = 14/612 = 0.0229$, $\hat{p}_2 = 0.0105$, og $\hat{p}=(14 + 9)/(612 + 854)=0.0157$ er testobservatoren gitt ved
+>La $p_1$ være sannsynlighet for mislighold for de med rating under 800 og la $p_2$ være den samme sannsynligheten for de med rating over 800. Vi skal da teste $H_0: p_1 - p_2 = 0$ mot det ensidige alternativet $H_A: p_1 - p_2 > 0$. Med $\hat{p_1} = 14/612 = 0.0229$, $\hat{p}_2 = 0.0105$, og $\hat{p}=(14 + 9)/(612 + 854)=0.0157$ er testobservatoren gitt ved
 >
 >    $$Z =  \frac{\hat{p}_1 - \hat{p}_2}{\sqrt{\hat{p}(1-\hat{p})(1/n_1 + 1/n_2)}} = \frac{0.0229 - 0.0105}{\sqrt{0.0157(1-0.0157)(1/612 + 1/854)}}=1.874$$
 >
@@ -819,7 +819,7 @@ Har markedsandelene endret seg?
 
 <details><summary>Løsning</summary>
 
->Vi skal her test $H_0: p_1 = 0.4, p_2 = 0.5, p_3 = 0.1$ mot $H_1:$ minst to sannsynligheter er forskjellige. Utregning av testobservator blir da som følger:
+>Vi skal her test $H_0: p_1 = 0.4, p_2 = 0.5, p_3 = 0.1$ mot $H_A:$ minst to sannsynligheter er forskjellige. Utregning av testobservator blir da som følger:
 
 |Foretrukket selskap |  $f_i$ | $e_i$  | $(f_i - e_i)^2/e_i$|
 |:---:|:---:|:---:|:---:|
@@ -861,7 +861,7 @@ Utfør en test for å avgjøre om det er en sammenheng mellom mangelfulle produk
 
 <details><summary>Løsning</summary>
 
->Vi skal altså teste $H_0:$ *De to variablene klassfisering og kjemikalie er uavhengige* mot $H_1:$ *Variablene klassifisering og kjemikalie er avhengige*. Vi begynner med å regne ut de forventede frekvensene ved bruk av formelen $e_{ij} = f_{i.}f_{.j}/n$: 
+>Vi skal altså teste $H_0:$ *De to variablene klassfisering og kjemikalie er uavhengige* mot $H_A:$ *Variablene klassifisering og kjemikalie er avhengige*. Vi begynner med å regne ut de forventede frekvensene ved bruk av formelen $e_{ij} = f_{i.}f_{.j}/n$: 
 
 |klas./kjem. |  Kjem 1 | Kjem 2  | Kjem 3 |
 |:---:|:---:|:---:|:---:|:---:|
@@ -968,8 +968,8 @@ Vi kan bytte ut alternativhypotesen til ensidige tester over alt ved å sette `a
 
 Når du gjør en ensidig to-utvalgs $t$-test er det viktig å forstå hva `alternative = "greater"` og `alternative = "less"` faktisk betyr. Funksjonen `t.test()` ser alltid på differansen mellom *første* og *andre* argument. Altså:
 
-- `t.test(x, y, alternative = "greater")` tester $H_1: \mu_x - \mu_y > 0$, dvs. at gjennomsnittet i `x` er *høyere* enn i `y`.
-- `t.test(x, y, alternative = "less")` tester $H_1: \mu_x - \mu_y < 0$, dvs. at gjennomsnittet i `x` er *lavere* enn i `y`.
+- `t.test(x, y, alternative = "greater")` tester $H_A: \mu_x - \mu_y > 0$, dvs. at gjennomsnittet i `x` er *høyere* enn i `y`.
+- `t.test(x, y, alternative = "less")` tester $H_A: \mu_x - \mu_y < 0$, dvs. at gjennomsnittet i `x` er *lavere* enn i `y`.
 
 Det betyr at du kan snu på resultatet ved å bytte rekkefølgen på argumentene. Følgende to tester er ekvivalente:
 ```{r, eval = FALSE}
@@ -1118,7 +1118,7 @@ krysstabell
 ```
 Det ser ut til at det er en klar sammenheng mellom faktisk og opplevd voldelighet ved at de fleste forsøkspersonene havner på diagonalen i krysstabellen over.
 
-Nå skal vi utføre en test av nullhypotesen $H_0$: faktisk og opplevd voldelighet er uavhengige kjennetegn, mot den alternative hypotesen $H_1:$ at de er avhengige kjennetegn. Dette er en chikvadrattest som kan utføres i R på følgende måte:
+Nå skal vi utføre en test av nullhypotesen $H_0$: faktisk og opplevd voldelighet er uavhengige kjennetegn, mot den alternative hypotesen $H_A:$ at de er avhengige kjennetegn. Dette er en chikvadrattest som kan utføres i R på følgende måte:
 
 ```{r chisq}
 chisq.test(krysstabell)
@@ -1133,14 +1133,14 @@ De kritiske verdiene finner vi ved å bruke kvantilfunksjonene til den respektiv
 
 #### Kritiske verdier i T-fordelingen {-}
 
-Dersom du f.eks skal utføre en t-test for $H_0: \mu = \mu_0$ mot $H_1: \mu < \mu_0$, med signifikansnivå $\alpha = 0.05$ og har $40$ observasjoner er kritisk verdi:
+Dersom du f.eks skal utføre en t-test for $H_0: \mu = \mu_0$ mot $H_A: \mu < \mu_0$, med signifikansnivå $\alpha = 0.05$ og har $40$ observasjoner er kritisk verdi:
 
 ```{r, eval = TRUE}
 qt(0.05, df = 40 - 1)
 ```
 og du forkaster da dersom din testobservator $T$ er mindre enn dette tallet.
 
-Hadde alternativ hypotesen vært $H_1: \mu > \mu_0$ ville kritisk verdi vært
+Hadde alternativ hypotesen vært $H_A: \mu > \mu_0$ ville kritisk verdi vært
 
 
 ```{r, eval = TRUE}
@@ -1148,7 +1148,7 @@ qt(1 - 0.05, df = 40 - 1)
 ```
 og du forkaster dersom din testobservator $T$ er større enn dette tallet.
 
-For en to-sidig test ($H_1: \mu\neq \mu_0$) forkaster du dersom $T$ faller uten for intervallet:
+For en to-sidig test ($H_A: \mu\neq \mu_0$) forkaster du dersom $T$ faller uten for intervallet:
 ```{r, eval = TRUE}
 L <- qt(0.05/2, df = 40 - 1)
 U <- qt(1 - 0.05/2, df = 40 - 1)
@@ -1180,21 +1180,21 @@ $\chi^2$-fordelingen brukes i to ulike sammenhenger i MET4: varianstester og kji
 
 **Varianstester:**
 
-Dersom du tester $H_0: \sigma^2 = \sigma_0^2$ mot $H_1: \sigma^2 < \sigma_0^2$ (variansen er *mindre* enn påstått), forkaster du i nedre hale:
+Dersom du tester $H_0: \sigma^2 = \sigma_0^2$ mot $H_A: \sigma^2 < \sigma_0^2$ (variansen er *mindre* enn påstått), forkaster du i nedre hale:
 ```{r, eval = TRUE}
 # Kritisk verdi, 5% nivå, ensidig test, nedre hale, 30 frihetsgrader
 qchisq(0.05, df = 30)
 ```
 og du forkaster dersom testobservatoren er mindre enn dette tallet.
 
-Dersom du tester mot $H_1: \sigma^2 > \sigma_0^2$ (variansen er *større* enn påstått), forkaster du i øvre hale:
+Dersom du tester mot $H_A: \sigma^2 > \sigma_0^2$ (variansen er *større* enn påstått), forkaster du i øvre hale:
 ```{r, eval = TRUE}
 # Kritisk verdi, 5% nivå, ensidig test, øvre hale, 30 frihetsgrader
 qchisq(1 - 0.05, df = 30)
 ```
 og du forkaster dersom testobservatoren er større enn dette tallet.
 
-For en tosidig test ($H_1: \sigma^2 \neq \sigma_0^2$) trenger du begge grensene:
+For en tosidig test ($H_A: \sigma^2 \neq \sigma_0^2$) trenger du begge grensene:
 ```{r, eval = TRUE}
 # Kritisk verdi, 5% nivå, tosidig test, 30 frihetsgrader
 L <- qchisq(0.05/2, df = 30)
@@ -1220,14 +1220,14 @@ $$F = \frac{S_{1}^2}{S_{2}^2}.$$
 
   Uavhengig om det er en ensidig eller tosidig test, trenger vi da bare å sjekke om testobservatoren overstiger den kritiske verdien i den øvre halen i F-fordelingen.
 
-Har vi brukt $30$ observasjoner til å regne ut $S_{1}^2$ og $25$ observasjoner til å regne ut $S_{1}^2$ blir kritisk verdi i en to-sidig test der $H_1: \sigma_{1}^2 \neq \sigma_{2}^2$ :
+Har vi brukt $30$ observasjoner til å regne ut $S_{1}^2$ og $25$ observasjoner til å regne ut $S_{1}^2$ blir kritisk verdi i en to-sidig test der $H_A: \sigma_{1}^2 \neq \sigma_{2}^2$ :
 
 ```{r, eval = TRUE}
 # Kritisk verdi, 5% nivå, tosidig test
 
 qf(1 - 0.05/2, df1 = 30 - 1, df2 = 25 - 1)
 ```
-Er det en ensidig test hvor $H_1: \sigma_{1}^2 > \sigma_{2}^2$ blir kritisk verdi:
+Er det en ensidig test hvor $H_A: \sigma_{1}^2 > \sigma_{2}^2$ blir kritisk verdi:
 
 ```{r, eval = TRUE}
 # Kritisk verdi, 5% nivå, ensidig test

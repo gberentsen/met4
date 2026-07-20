@@ -210,26 +210,26 @@ Ser vi på disse dataene samlet sett ser du til å være en klart positiv korrel
 
 Effektene av de fenomene vi beskrev over kan vi ta hensyn til ved å *inkludere* dem i regresjonsmodellen på følgende måte: 
  
- $$y_{it} = \beta_0 + \beta_1 x_{it} + v_t + \alpha_i + \epsilon_{it} $$
-hvor vi nå har lagt til to nye ledd, $v_t$ og $\alpha_i$, i modellen:
+ $$y_{it} = \beta_0 + \beta_1 x_{it} + \nu_t + \alpha_i + \epsilon_{it} $$
+hvor vi nå har lagt til to nye ledd, $\nu_t$ og $\alpha_i$, i modellen:
 
-1. Her representerer $v_t$ den generelle utviklingen i tid som er felles for alle individene (det er ingen "i"-indeks i denne). Det kan f.eks være en lineær trend ($v_t = \delta t$) eller helt unike årlige effekter $v_t$, som fanger opp *gode* og *dårlige* år. 
+1. Her representerer $\nu_t$ den generelle utviklingen i tid som er felles for alle individene (det er ingen "i"-indeks i denne). Det kan f.eks være en lineær trend ($\nu_t = \delta t$) eller helt unike årlige effekter $\nu_t$, som fanger opp *gode* og *dårlige* år. 
 
 2. Leddene $\alpha_i$ representerer så de individuelle lønnsnivåene (disse er "i" indeksert). Har individ $1$ høyere lønn enn individ $2$ så vil $\alpha_1$ blir estimert til å være større enn $\alpha_2$. 
 
 Vi justerer altså for at individer kan ligge på et forskjellig lønnsnivå, og at det er en felles årlige variasjoner i lønn. I praksis betyr dette at vi justerer regresjonslinjen *vertikalt* slik at den tilpasser seg lønnsnivået til hvert individ. Effekten $\beta_1$ av å jobbe mer er derimot antatt lik for hvert individ og den estimerte effekten vil da bli et slags gjennomsnitt av hvor mye det individuelt lønner seg å jobbe mer.
 
-I utgangspunktet kan vi betrakte $v_t$ og $\alpha_i$ som kategoriske variabler som kan estimeres ved hjelp av dummyvariabler slik vi har lært før. Problemet er at i et tradisjonelt paneldatasett så er $N$ (antall individer) et stort tall, mens $T$ (antall observasjoner per individ) et relativt lite tall. Dette fører til svært mange kategoriske variabler $\alpha_i$ å estimere, og i praksis må vi derfor betrakte andre metoder. Vi noterer oss følgende:
+I utgangspunktet kan vi betrakte $\nu_t$ og $\alpha_i$ som kategoriske variabler som kan estimeres ved hjelp av dummyvariabler slik vi har lært før. Problemet er at i et tradisjonelt paneldatasett så er $N$ (antall individer) et stort tall, mens $T$ (antall observasjoner per individ) et relativt lite tall. Dette fører til svært mange kategoriske variabler $\alpha_i$ å estimere, og i praksis må vi derfor betrakte andre metoder. Vi noterer oss følgende:
 
 * Egenskapene til $\alpha_i$ bestemmer typen paneldatamodell og vi deler disse modellene grovt sett inn i modeller med *faste effekter* og *tilfeldige effekter*. Selve ligningene vil altså se like ut, men tolkning og estimering er forskjellig.
 
-* Leddene $v_t$ vil vi i de fleste tilfeller klare å estimere som kategoriske variabler og i fortsettelsen ser vi bort fra dette leddet 
+* Leddene $\nu_t$ vil vi i de fleste tilfeller klare å estimere som kategoriske variabler og i fortsettelsen ser vi bort fra dette leddet 
 
 * For enkelthets skyld betrakter vi bare èn forklaringsvariabel, men det kan selvsagt være flere forklaringsvariabler i en regresjonsmodell for panel data også.    
 
 #### Forskjellige parameteriseringer
 
-Merk at det både i lærebøker og i forskjellige R-pakker veksles mellom å to typer formuleringer av den generelle modellen over. Hvis vi ser bort fra $v_t$ leddet, er modellen vi til nå har betraktet formulert som:
+Merk at det både i lærebøker og i forskjellige R-pakker veksles mellom å to typer formuleringer av den generelle modellen over. Hvis vi ser bort fra $\nu_t$ leddet, er modellen vi til nå har betraktet formulert som:
 
 \begin{align}
 y_{it} = \beta_0 + \beta_1 x_{it}  + \alpha_i + \epsilon_{it} 
@@ -358,9 +358,9 @@ plot(reg.fe2)
 
 Denne figuren viser også hvordan regresjonskurven ville sett ut dersom vi hadde sett bort fra paneldatastrukturen og brukt en helt vanlig (pooled) regresjonsmodell. Sammenlignet med modellen med faste faste effekter (within) så ville vi da estimert effekten av jobbe mer til å være større. Selv om produktet her er $3$ individuelle regresjonsmodeller, presiserer vi at dette ikke er $3$ uavhengige analyser; alle observasjonene er brukt til å finne et estimat på $\beta_1$.        
 
-<!-- Vi husker at det også kunne være en felles tidskomponent $v_t$ i en slik modell og at denne kunne betraktes som en kategorisk variabel siden det typisk ikke er så mange ($T$) av disse. Vi kan derfor bare legge til `year`  som en ekstra (kategorisk) forklaringsvariabel forutsatt at den er koded som en `factor`:-->
+<!-- Vi husker at det også kunne være en felles tidskomponent $\nu_t$ i en slik modell og at denne kunne betraktes som en kategorisk variabel siden det typisk ikke er så mange ($T$) av disse. Vi kan derfor bare legge til `year`  som en ekstra (kategorisk) forklaringsvariabel forutsatt at den er koded som en `factor`:-->
 
-Vi husker at det også kunne være en felles tidskomponent $v_t$ i en slik modell og at denne kunne betraktes som en kategorisk variabel siden det typisk ikke er så mange ($T$) av disse. Vi kan derfor bare legge til `year`  som en ekstra (kategorisk) forklaringsvariabel. Med `feols` kan vi gjøre dette ved å skrive `i()` rundt variabelnavnet:
+Vi husker at det også kunne være en felles tidskomponent $\nu_t$ i en slik modell og at denne kunne betraktes som en kategorisk variabel siden det typisk ikke er så mange ($T$) av disse. Vi kan derfor bare legge til `year`  som en ekstra (kategorisk) forklaringsvariabel. Med `feols` kan vi gjøre dette ved å skrive `i()` rundt variabelnavnet:
 
 
 ```{r}
@@ -467,12 +467,12 @@ Vi kan selvsagt ikke gjennomføre dette eksperimentet. Men det gir oss et refera
 Når vi skal tolke en statistisk sammenheng som en årsakssammenheng trenger vi både å si noe om en sammenheng vi ser i virkeligheten (noe deskriptivt), og å si noe om hva som ville skjedd under andre omstendigheter (noe **kontrafaktisk**). I den moderne økonometrilitteraturen omtales dette rammeverket som "potensielle utfall". Tenk deg at vi kunne observert det samme individet i to helt like settinger som bare er ulike på én måte, nemlig at det mottar en form for behandling (treatment) i den ene settingen og ikke mottar slik behandling. Da kunne vi sammenliknet de to utfallene og vært sikre på at enhver forskjell i utfallene må skyldes behandlingen individet mottok. I virkeligheten kan det kontrafaktiske utfallet nødvendigvis ikke observeres, og vi må tilnærme oss dette idealet ved å holde så mange faktorer som mulig, konstante. Siden dette aldri vil bli helt ideelt -- eller kan testes -- må vi gjøre *antakelser* for å kunne trekke kausale konklusjoner. Hvorvidt disse antakelsene er rimelige, vil variere fra kontekst til kontekst. 
 
 I praksis anvender vi ofte regresjonsmodeller for å trekke ut statistiske sammenhenger. I modulen om "Enkel regresjon" gjennomgikk vi noen forutsetninger for OLS. En enkel regresjonslikning kunne se slik ut: 
-$$y_{i}=\beta_0+\beta_1x_{i}+\varepsilon_{i}$$
-Med denne likningen deler vi opp $y_i$ i tre deler: Konstantleddet $\beta_0$, det $x$ forklarer ($\beta_1x_i$) og det $x$ ikke forklarer (restleddet $\varepsilon_i$). 
+$$y_{i}=\beta_0+\beta_1x_{i}+\epsilon_{i}$$
+Med denne likningen deler vi opp $y_i$ i tre deler: Konstantleddet $\beta_0$, det $x$ forklarer ($\beta_1x_i$) og det $x$ ikke forklarer (restleddet $\epsilon_i$). 
 
-Én sentral betingelse for OLS var **eksogenitet**, nemlig at forventningsverdien til restleddet $\varepsilon_i$ gitt forklaringsvariabelen $X_i$, er lik null: 
-$$\mathbb{E}[\varepsilon_i \vert x_i]=0$$
-Dette innebærer at det ikke må være noen systematisk sammenheng mellom restleddet og forklaringsvariabelen -- vilkåret forutsetter bl.a. at det ikke er noen korrelasjon mellom $\varepsilon$ og $x$, slik at $\mathbb{E}[\varepsilon_i x_i]=0$. Intuitivt krever eksogenitet at  oppdelingen av $y_i$ i ulike deler er "ren", dvs. at det vi putter i $\varepsilon$-boksen virkelig er uavhengig av $x$. Hvis noe i $\varepsilon$-boksen egentlig hører sammen med $x$, har vi et problem.
+Én sentral betingelse for OLS var **eksogenitet**, nemlig at forventningsverdien til restleddet $\epsilon_i$ gitt forklaringsvariabelen $X_i$, er lik null: 
+$$\mathbb{E}[\epsilon_i \vert x_i]=0$$
+Dette innebærer at det ikke må være noen systematisk sammenheng mellom restleddet og forklaringsvariabelen -- vilkåret forutsetter bl.a. at det ikke er noen korrelasjon mellom $\epsilon$ og $x$, slik at $\mathbb{E}[\epsilon_i x_i]=0$. Intuitivt krever eksogenitet at  oppdelingen av $y_i$ i ulike deler er "ren", dvs. at det vi putter i $\epsilon$-boksen virkelig er uavhengig av $x$. Hvis noe i $\epsilon$-boksen egentlig hører sammen med $x$, har vi et problem.
 
 Dersom dette vilkåret ikke holder sier vi at $x_i$ er **endogen**. Da blir regresjonsparameteren $\beta_1$ forventningsskjev, og plukker opp noe mer enn bare sammenhengen mellom forklaringsvariabelen $X_i$ og utfallsvariabelen $Y_i$. Vi skal se på noen eksempler lenger ned. 
 
@@ -483,14 +483,14 @@ Dersom dette vilkåret ikke holder sier vi at $x_i$ er **endogen**. Da blir regr
 ##### Eksempel 1: Fører sykehusopphold til dårligere helse? {-}
 <!-- Formål: Vise seleksjon --> 
 Et typisk lærebokeksempel (se for eksempel Angrist og Pischke, 2009) er sykehusopphold. La oss si at vi ønsker å lære noe om hvorvidt sykehusopphold bedrer helsetilstanden til de innlagte. 
-I gjennomsnitt har en pasient innlagt på sykehus signifikant dårligere helsetilstand enn noen som ikke er innlagt på sykehus. Dersom vi skulle gjort en regresjon eller en hypotesetest, ville denne konkludert med at innlagte på sykehus har dårligere helse enn befolkningen forøvrig. Betyr det at sykehusbehandling *fører til* dårligere helsetilstand? Det høres lite sannsynlig ut. Det er mer nærliggende å tro at pasienter som er innlagt på sykehus, er innlagt fordi de *allerede* har dårligere helsetilstand enn befolkningen forøvrig. I dette eksempelet er altså $X_i$ og $\varepsilon_i$ korrelert. Det er lettere å tro på omvendt kausalitet -- altså at det er den dårlige helsetilstanden som førte til sykehusoppholdet -- enn opprinnelige tolkningen om at sykehusoppholdet førte til dårligere helsetilstand! 
+I gjennomsnitt har en pasient innlagt på sykehus signifikant dårligere helsetilstand enn noen som ikke er innlagt på sykehus. Dersom vi skulle gjort en regresjon eller en hypotesetest, ville denne konkludert med at innlagte på sykehus har dårligere helse enn befolkningen forøvrig. Betyr det at sykehusbehandling *fører til* dårligere helsetilstand? Det høres lite sannsynlig ut. Det er mer nærliggende å tro at pasienter som er innlagt på sykehus, er innlagt fordi de *allerede* har dårligere helsetilstand enn befolkningen forøvrig. I dette eksempelet er altså $X_i$ og $\epsilon_i$ korrelert. Det er lettere å tro på omvendt kausalitet -- altså at det er den dårlige helsetilstanden som førte til sykehusoppholdet -- enn opprinnelige tolkningen om at sykehusoppholdet førte til dårligere helsetilstand! 
 
 Dette er et klassisk eksempel på **seleksjonsskjevhet**: Forventningsskjevhet i estimatene som introduseres fordi individene tildeles behandling på bakgrunn av ikke-tilfeldige egenskaper som eksisterte før behandlingen trådde i kraft. Individene ville hatt ulik helse også i fravær av behandlingen -- vi kan derfor ikke sammenlikne disse gruppene for å lære noe om effekten av behandlingen på utfallet vi var interessert i. 
 
 
 ##### Eksempel 2: Fører lengre utdanning til høyere lønn? ([Angrist og Krueger, 1991](https://www.jstor.org/stable/2937954))  {-#eks2}
 Effekten av utdanning på lønn er et sentralt spørsmål i arbeidsmarkedsøkonomien. Umiddelbart kan man fristes til å ville kjøre en regresjon med lønn på venstre side av likhetstegnet, og hvor lang utdanning individet har på høyre side av likhetstegnet. La oss kalle utfallsvariabelen lønn $w_i$, og la oss kalle variabelen for hvor mange års utdanning individet har fullført $x_i$. Da vil en enkel regresjonslikning se slik ut: 
-$$ \log w_i = \beta_0 + \beta_1 x_i + \varepsilon_i$$ 
+$$ \log w_i = \beta_0 + \beta_1 x_i + \epsilon_i$$ 
 Dersom $x_i$ er eksogen kan vi tolke $\beta_1$ som at ett års ekstra utdanning fører til at individet får omtrent $\beta_1 \%$ høyere lønn. 
 
 La oss bruke dette datasettet^[Datasettet vi skal bruke er en forenklet versjon av Angrist og Kruegers replikasjonspakke, som kan hentes [her](https://economics.mit.edu/people/faculty/josh-angrist/angrist-data-archive).]:
@@ -536,17 +536,17 @@ Dersom vi vet hvordan to variabler $x$ og $y$ henger sammen, og at de begge påv
 I figuren over ser vi dette tydelig. Dersom A er en felles faktor som påvirker både $x$ og $y$, er  årsakssammenhengen mellom  $x$ og $y$ i utgangspunktet ikke identifisert. Men dersom vi kan kontrollere for $A$ fordi vi observerer denne i datasettet vårt, kan vi "stenge ned" A-kanalen, og dermed identifisere den kausale sammenhengen! 
 
 Hvis vi skal omformulere diagrammet over til en regresjonsmodell, vil den ta denne formen:
-$$y_i=\beta_0+\beta_1x_i+\beta_2A_i+\varepsilon_i$$
+$$y_i=\beta_0+\beta_1x_i+\beta_2A_i+\epsilon_i$$
 Pilen mellom $A_i$ og $x_i$ forteller oss at disse to variablene er korrelerte, og tilsvarende for $A_i$ og $y_i$. Formelt innebærer dette (generelt) at $\mathbb{E}[A_i x_i]\neq0$ og $\mathbb{E}[A_i y_i]\neq0$. Se for deg at vi i stedet for å inkludere $A_i$, hadde kjørt den enkle regresjonen med bare $x_i$ som forklaringsvariabel:
-$$y_i=\beta_0+\beta_1x_i+\xi_i\qquad \text{der } \xi_i=\beta_2A_i+\varepsilon_i$$
-Fordi det er sammenheng mellom $A$ og $y$, inneholder det nye restleddet vårt $\xi$ nå også $A$. I avsnitt \@ref(ekso) så vi at vi trenger *eksogenitet* for å kunne trekke kausale slutninger, som krevde at det ikke var noen sammenheng mellom forklaringsvariabelen og restleddet ($\mathbb{E}[\varepsilon_i\vert x_i]=0$). Dette ser vi tydelig at ikke kan være tilfelle når restleddet $\xi_i$ inneholder $A_i$. $A_i$ er jo korrelert med $x$, så da blir $\mathbb{E}[\xi_i\vert x_i]\neq0$, og eksogenitetsbetingelsen er brutt. Dette er en formell illustrasjon av *utelatt variabelskjevhet*, som vi diskuterte i [eksempel 2](#eks2): Når det er en utelatt variabel som er korrelert med både utfalls- og forklaringsvariabelen vår, fanger $\beta_1$ opp mer enn bare effekten av $x_i$ på $y_i$. 
+$$y_i=\beta_0+\beta_1x_i+\xi_i\qquad \text{der } \xi_i=\beta_2A_i+\epsilon_i$$
+Fordi det er sammenheng mellom $A$ og $y$, inneholder det nye restleddet vårt $\xi$ nå også $A$. I avsnitt \@ref(ekso) så vi at vi trenger *eksogenitet* for å kunne trekke kausale slutninger, som krevde at det ikke var noen sammenheng mellom forklaringsvariabelen og restleddet ($\mathbb{E}[\epsilon_i\vert x_i]=0$). Dette ser vi tydelig at ikke kan være tilfelle når restleddet $\xi_i$ inneholder $A_i$. $A_i$ er jo korrelert med $x$, så da blir $\mathbb{E}[\xi_i\vert x_i]\neq0$, og eksogenitetsbetingelsen er brutt. Dette er en formell illustrasjon av *utelatt variabelskjevhet*, som vi diskuterte i [eksempel 2](#eks2): Når det er en utelatt variabel som er korrelert med både utfalls- og forklaringsvariabelen vår, fanger $\beta_1$ opp mer enn bare effekten av $x_i$ på $y_i$. 
 
-Dersom vi observerer $A_i$ kan vi i stedet inkluderer  denne  som **kontrollvariabel**, som i den multipple regresjonsmodellen over. Da løser vi dette endogenitetsproblemet, og kan lettere tolke $\beta_1$ kausalt. Merk at $A_i$ ikke selv trenger å være eksogen (ukorrelert med restleddet $\varepsilon_i$) for at vi skal kunne inkludere den som kontrollvariabel -- men dersom vi ønsker å gi $\beta_2$ en kausal tolkning, må vi ha like strenge krav til $A_i$ som vi her har stilt til $x_i$. I praksis er det imidlertid en begrensning at vi ikke alltid observerer alle variabler som påvirker både $x_i$ og $y_i$. Noen ganger betyr dette at vi må være forsiktige i tolkningene våre -- andre ganger kan vi gjøre antakelser som lar oss implisitt kontrollere for uobserverte variabler, for eksempel hvis vi har paneldata. Dette diskuteres mer i neste avsnitt.
+Dersom vi observerer $A_i$ kan vi i stedet inkluderer  denne  som **kontrollvariabel**, som i den multipple regresjonsmodellen over. Da løser vi dette endogenitetsproblemet, og kan lettere tolke $\beta_1$ kausalt. Merk at $A_i$ ikke selv trenger å være eksogen (ukorrelert med restleddet $\epsilon_i$) for at vi skal kunne inkludere den som kontrollvariabel -- men dersom vi ønsker å gi $\beta_2$ en kausal tolkning, må vi ha like strenge krav til $A_i$ som vi her har stilt til $x_i$. I praksis er det imidlertid en begrensning at vi ikke alltid observerer alle variabler som påvirker både $x_i$ og $y_i$. Noen ganger betyr dette at vi må være forsiktige i tolkningene våre -- andre ganger kan vi gjøre antakelser som lar oss implisitt kontrollere for uobserverte variabler, for eksempel hvis vi har paneldata. Dette diskuteres mer i neste avsnitt.
 
 
 ##### Faste effekter {#FE}
 I modulen om [paneldata](#paneldata) introduseres et eksempel på faste effekter. Vi satte opp en paneldatamodell med en individkomponent $\alpha_i$ og en tidskomponent $\nu_t$:
-$$ y_{it}=\beta_1x_{it}+\nu_t+\alpha_i+\varepsilon_{it}$$
+$$ y_{it}=\beta_1x_{it}+\nu_t+\alpha_i+\epsilon_{it}$$
 Her er  $\alpha_i$ konstant for samme enhet $i$ (lik for samme enhet over tid), og $\nu_t$ konstant for samme tidsperiode $t$ (lik for alle enheter innad i én periode). 
 I [eksempel 2](#eks2) diskuterte vi at ulike evner kan være korrelert med hvor lang skolegang ulike personer tar, og med lønna de får etter endt skolegang. Hvis vi tenker at evner er noe man er født med, og et slags permanent personlighetstrekk, vil dette fanges opp av $\alpha_i$, som inneholder alle egenskaper som er konstante ved en person. Tilsvarende kan tids-faste effekter ($\nu_t$) være nyttige å inkludere, fordi de fanger opp makroøkonomiske sjokk eller generell lønnsvekst, slik at vi får en renere sammenlikning av ulike tidsperioder. 
 
@@ -605,7 +605,7 @@ etable(ols_model, fe_model, fe_model2) # vis resultat
 Den nye faste effekten fanger opp effekten mellom arbeidstakeres produktivitet, arbeidstimer og om de har barn. Estimatet endrer fortegn -- selv om det heller ikke nå er signifikant ulikt fra null. 
 
 I mange anvendelser kan vi nærmest introdusere så mange dimensjoner av faste effekter vi ønsker. Dersom vi har et datasett bestående av alle norske bedrifter fra 2000 til 2020, kan vi for eksempel trekke ut mange nivå av faste effekter. Hvis vi ønsker å si noe om hvordan en skatteendring påvirket produksjonen i bedriftene, vil vi antakelig både kontrollere for størrelsen på bedriften, makroøkonomiske trender (som finanskrisa), og hvordan etterspørselen etter varer fra hver enkelt næring har endret seg gjennom tidsperioden. Fordi vi observerer mange bedrifter innad i samme næring $k$ og i samme år $t$, kan vi kontrollere for nærings- og tidsfaste effekter $\eta_{kt}$:
-$$ y_{it}=\beta_1x_{it}+\nu_t+\alpha_i+\eta_{kt}+\varepsilon_{it}$$
+$$ y_{it}=\beta_1x_{it}+\nu_t+\alpha_i+\eta_{kt}+\epsilon_{it}$$
  Dette betyr at vi lager dummy-variabler for hver næring i hvert enkelt år. Her tilhører hver observasjon $i,t$ én næring $k$ i det aktuelle året $t$.
 Merk at vi må ha mange observasjoner innad i hver næring og hvert år for å kunne inkludere så mange faste effekter. Formelt trenger vi mange observasjoner, fordi sentralgrenseteoremet må holde innad i næring og år (men vi skal ikke vise dette formelt). Intuitivt kan vi illustrere det med et ekstremt eksempel:  Dersom vi i stedet inkluderte en dummy-variabel for tid multiplisert med individ, ville vi absorbert *all* variasjon i  $x_{it}$. Faktisk ville vi fått perfekt multikollinearitet med med alle andre variabler som varierer på nivået $i,t$! 
 
@@ -710,7 +710,7 @@ $$
 
 I dag estimerer vi som regel DiD med en regresjonsmodell. Spesifikasjonen vi er ute etter tar formen 
 $$
-y_{it}=\beta_0+\beta_1\text{Treat}_i+\beta_2\text{Post}_t+\beta_3(\text{Treat}_i\times\text{Post}_t)+\varepsilon_{it}
+y_{it}=\beta_0+\beta_1\text{Treat}_i+\beta_2\text{Post}_t+\beta_3(\text{Treat}_i\times\text{Post}_t)+\epsilon_{it}
 $$
 For å se hvorfor regresjonen gir oss DiD-estimatet direkte, kan vi sette inn for de fire gruppene:
 <table style="border-collapse: collapse; text-align: center; margin: 20px 0;">
@@ -741,7 +741,7 @@ Regresjonen gir oss altså $\beta_3$ direkte som DiD-estimatet, samtidig som vi 
 
 Den oppmerksomme leser ser kanskje at $\text{Treat}_i$ er en fast effekt på individnivå, og at $\text{Post}_t$ er en fast effekt på tidsperiodenivå (f.eks. årsnivå). Dette betyr at vi enten kan implementere spesifikasjonen over med dummyvariabler, eller at vi rett og slett kan kjøre den som toveis faste effekter (som beskrevet i avsnitt \@ref(FE)): 
 $$
-y_{it}=\beta_1(\text{Treat}_i\times\text{Post}_t)+\nu_t+\alpha_i+\varepsilon_{it}
+y_{it}=\beta_1(\text{Treat}_i\times\text{Post}_t)+\nu_t+\alpha_i+\epsilon_{it}
 $$
 
 
@@ -844,7 +844,7 @@ Men er dette nok til å trekke en kausal konklusjon? I virkeligheten kan det ald
 ### Kontrollspørsmål 
 * Hva er forskjellen mellom en statistisk sammenheng og en kausal sammenheng? 
 * Hva menes med at en parameter er identifisert? 
-* Forklar med egne ord hva eksogenitetsbetingelsen $\mathbb{E}[\varepsilon_i \vert x_i]=0$ innebærer. 
+* Forklar med egne ord hva eksogenitetsbetingelsen $\mathbb{E}[\epsilon_i \vert x_i]=0$ innebærer. 
 * Kan vi teste om eksogenitetsantakelsen holder?  
 * I sykehuseksempelet observerer vi at innlagte pasienter har dårligere helse enn resten av befolkningen. Hvorfor kan vi ikke tolke dette som at sykehusopphold forårsaker dårligere helse? 
 * Hva er seleksjonsskjevhet? Gi et eksempel. 
@@ -985,8 +985,8 @@ Siden vi bare har seks observasjoner vil alle verdier av $k\geq 6$ fullstendig i
 
 For et paneldata bestående av en responsvariabel $Y$ og en forklaringsvariabel $X$ har du estimert modellen
 
-$$y_{it} =  \beta_1 x_{it}  + v_t + \alpha_i + \epsilon_{it} $$
-der du har betraktet $\alpha_i$ som faste effekter og $v_t$ som kategoriske variabler. Estimatet av $\beta_1$ er $\hat{\beta}_1 = 1.5$. 
+$$y_{it} =  \beta_1 x_{it}  + \nu_t + \alpha_i + \epsilon_{it} $$
+der du har betraktet $\alpha_i$ som faste effekter og $\nu_t$ som kategoriske variabler. Estimatet av $\beta_1$ er $\hat{\beta}_1 = 1.5$. 
 
 a) For individ $4$ i datasettet har du estimert $\alpha_4$ til å være $0.2$. Videre er årseffekten for 2012, $v_{2012}$, estimert til å være $-0.5$. Prediker responsvariabelen til dette individet for 2012 dersom $x_{4,2012} = 2$.
 
@@ -1102,12 +1102,12 @@ c) Når skolene selv melder sin interesse, får vi et seleksjonsproblem (seleksj
 **Oppgave 2**
 
 En dagligvarekjede ønsker å finne ut om lokal markedsføring øker omsetningen. De har data fra 200 butikker, og estimerer følgende modell:
-$$\log(\text{Omsetning}_i) = \beta_0 + \beta_1 \log(\text{Reklamekroner}_i) + \varepsilon_i$$
+$$\log(\text{Omsetning}_i) = \beta_0 + \beta_1 \log(\text{Reklamekroner}_i) + \epsilon_i$$
 der $\text{Omsetning}_i$ er månedlig omsetning i kroner for butikk $i$, og $\text{Reklamekroner}_i$ er beløpet butikken brukte på lokal reklame (flyers, Facebook-annonser o.l.) den måneden.
 
-a) Forklar med egne ord hva eksogenitetsbetingelsen $\mathbb{E}[\varepsilon_i \vert x_i]=0$ krever i denne sammenhengen. Hva må vi anta om restleddet?
+a) Forklar med egne ord hva eksogenitetsbetingelsen $\mathbb{E}[\epsilon_i \vert x_i]=0$ krever i denne sammenhengen. Hva må vi anta om restleddet?
 
-b) Nevn minst to variabler som kan tenkes å ligge i restleddet $\varepsilon_i$, og som sannsynligvis er korrelert med hvor mye butikken bruker på reklame. Tegn gjerne et DAG-diagram.
+b) Nevn minst to variabler som kan tenkes å ligge i restleddet $\epsilon_i$, og som sannsynligvis er korrelert med hvor mye butikken bruker på reklame. Tegn gjerne et DAG-diagram.
 
 c) Hvis du kunne observert én av disse variablene -- for eksempel butikkens beliggenhet (sentrum vs. utkant) -- hvordan ville du inkludert den i modellen? Forklar hvordan dette "stenger ned" en kanal for endogenitet.
 
@@ -1115,7 +1115,7 @@ d) Noen av variablene du nevnte i b) er kanskje ikke observerbare. Hva kunne vi 
 
 <details><summary>Løsning</summary>
 
-a) Eksogenitetsbetingelsen krever at restleddet $\varepsilon_i$ -- alt annet som påvirker omsetningen utover reklame -- ikke er systematisk relatert til hvor mye butikken bruker på reklame. Hvis vi visste at en butikk brukte 50 000 kroner på reklame denne måneden, skal dette ikke fortelle oss noe om de andre faktorene som påvirker omsetningen. Intuitivt: butikker som bruker mye på reklame skal ikke være systematisk annerledes (på relevante måter) enn butikker som bruker lite.
+a) Eksogenitetsbetingelsen krever at restleddet $\epsilon_i$ -- alt annet som påvirker omsetningen utover reklame -- ikke er systematisk relatert til hvor mye butikken bruker på reklame. Hvis vi visste at en butikk brukte 50 000 kroner på reklame denne måneden, skal dette ikke fortelle oss noe om de andre faktorene som påvirker omsetningen. Intuitivt: butikker som bruker mye på reklame skal ikke være systematisk annerledes (på relevante måter) enn butikker som bruker lite.
 
 b) To aktuelle variabler:
 
@@ -1125,7 +1125,7 @@ b) To aktuelle variabler:
 Begge variablene er felles årsaker som påvirker både forklaringsvariabelen og utfallsvariabelen. I et DAG-diagram ville vi tegnet piler fra beliggenhet (eller størrelse) til *både* reklamekroner og omsetning.
 
 c) Vi kan inkludere beliggenhet som kontrollvariabel:
-$$\log(\text{Omsetning}_i) = \beta_0 + \beta_1 \log(\text{Reklamekroner}_i) + \beta_2 \text{Sentrum}_i + \varepsilon_i$$
+$$\log(\text{Omsetning}_i) = \beta_0 + \beta_1 \log(\text{Reklamekroner}_i) + \beta_2 \text{Sentrum}_i + \epsilon_i$$
 Når vi kontrollerer for beliggenhet, sammenligner vi i praksis butikker med *lik* beliggenhet. Dermed "stenger vi ned" kanalen der beliggenhet påvirker både reklamebudsjett og omsetning. $\beta_1$ fanger da bare opp sammenhengen mellom reklame og omsetning *innenfor* samme type beliggenhet.
 
 d) Dersom vi har data fra de samme butikkene over flere måneder, har vi paneldata. Da kan vi inkludere butikkfaste effekter, som kontrollerer for *alle* tidskonstante egenskaper ved butikken -- inkludert beliggenhet, størrelse, og andre ting vi kanskje ikke observerer direkte. Vi identifiserer da sammenhengen mellom reklame og omsetning utelukkende fra variasjon *innad i* hver butikk over tid: Selger butikk $i$ mer i måneder der den bruker mer på reklame enn i måneder der den bruker mindre?
@@ -1167,7 +1167,7 @@ d) Forskeren finner at $\hat{\beta}_3 = -4,2$ med en $p$-verdi på 0,03. Tolk de
 <details><summary>Løsning</summary>
 
 a) Behandlingsgruppen er Bergen (innfører piggdekkgebyr). Kontrollgruppen er Øygarden (innfører ikke gebyr). "Før"-perioden er tiden før gebyret ble innført (f.eks. forrige vinter), og "etter"-perioden er tiden etter innføringen (f.eks. første vinter med gebyr). Regresjonsmodellen:
-$$\text{PM}_{10,it} = \beta_0 + \beta_1 \text{Bergen}_i + \beta_2 \text{Etter}_t + \beta_3 (\text{Bergen}_i \times \text{Etter}_t) + \varepsilon_{it}$$
+$$\text{PM}_{10,it} = \beta_0 + \beta_1 \text{Bergen}_i + \beta_2 \text{Etter}_t + \beta_3 (\text{Bergen}_i \times \text{Etter}_t) + \epsilon_{it}$$
 der $\beta_3$ er DiD-estimatet -- den estimerte effekten av piggdekkgebyret på svevestøvnivået.
 
 b) Antakelsen om parallelle trender må holde: Luftkvaliteten i Bergen og Øygarden ville fulgt *samme utvikling* i fravær av piggdekkgebyret. Det er grunner til å være skeptisk. Bergen er en stor by med langt høyere trafikktetthet, tunneler, og mer kompleks topografi (fjord og fjell som "fanger" forurenset luft) enn Øygarden. Faktorer som påvirker luftkvaliteten -- f.eks. byggeaktivitet, endringer i trafikkmønstre, eller værforhold -- kan slå ulikt ut i de to kommunene. Dersom noe annet enn piggdekkgebyret endret seg i Bergen mellom periodene (f.eks. et stort veiprosjekt ble ferdigstilt), vil dette forstyrre estimatet. På den annen side er Øygarden en nabokommune med lignende klima, og piggdekkgebyret ble innført på et bestemt tidspunkt som trolig var uavhengig av kortsiktige endringer i luftkvalitet. Hvis trendene i PM$_{10}$ var like i de to kommunene i årene før innføringen, styrker det troverdigheten.
@@ -1195,7 +1195,7 @@ d) Foreslå ett konkret grep forskerne kunne tatt for å styrke troverdigheten t
 <details><summary>Løsning</summary>
 
 a) Forskerne bruker en difference-in-differences-strategi. Regresjonsmodellen de sannsynligvis har estimert er:
-$$\log(\text{Produktivitet}_{it}) = \beta_0 + \beta_1 \text{NæringA}_i + \beta_2 \text{Etter2021}_t + \beta_3 (\text{NæringA}_i \times \text{Etter2021}_t) + \varepsilon_{it}$$
+$$\log(\text{Produktivitet}_{it}) = \beta_0 + \beta_1 \text{NæringA}_i + \beta_2 \text{Etter2021}_t + \beta_3 (\text{NæringA}_i \times \text{Etter2021}_t) + \epsilon_{it}$$
 der $\beta_3$ er DiD-estimatet som måler den relative produktivitetsveksten i næring A sammenlignet med næring B.
 
 b) To sentrale antakelser:
