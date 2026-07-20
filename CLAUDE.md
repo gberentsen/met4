@@ -54,6 +54,62 @@ Forklarende tekst.
 
 Kryssreferanser bruker bookdown-syntaks (`\@ref(seminar)`), og matematikk skrives i `$…$`/`$$…$$`.
 
+## Notasjonsstandard
+
+`MET4-formelark.qmd` er **fasit for notasjon**. Er du i tvil, sjekk der før du skriver.
+
+| Størrelse | Skriv | Ikke |
+|---|---|---|
+| Alternativhypotese | `H_A` | `H_1`, `H_a` |
+| Feilledd, regresjon | `\epsilon` (ϵ) | `\varepsilon` (ε) – rendres synlig ulikt |
+| Residual, regresjon | `\hat{\epsilon}_i` | `e_i` |
+| Hvit støy / innovasjon, tidsrekke | `u_t` | `\epsilon_t`, `Z_t` |
+| Residual, tidsrekke | `\hat{u}_t` | |
+| Individuell fast effekt | `\alpha_i` | |
+| Tidseffekt, paneldata | `\nu_t` (gresk nu) | `v_t` (latinsk v) |
+| Sammensatt feilledd | `\xi_i` | |
+| Variabler i modeller | stor `Y`, `X` | liten `y`, `x` |
+
+To ting som ser ut som inkonsistens, men ikke er det:
+
+- **Regresjon bruker `\epsilon`, tidsrekker bruker `u_t`.** Dette er et bevisst skille som følger
+  formelarket. Ikke sveip dem sammen.
+- **`\xi` i `06-avansert-regresjon-og-maskinlaering.Rmd`** er et *sammensatt* feilledd
+  (`\xi_i = \beta_2 A_i + \epsilon_i`) i utelatt-variabel-argumentet, ikke en skrivefeil for `\epsilon`.
+
+Bokstavstørrelse koder **ikke** stokastisk variabel vs. observert realisasjon på denne siden.
+Distinksjonen er bare nyttig hvis den holdes hundre prosent konsekvent, og MET4 tester den ikke –
+delvis håndhevet ville den fått studentene til å lese mening inn i tilfeldig variasjon.
+
+## Pedagogiske føringer
+
+- Intuisjon før formalisme. Formelen skal begrunnes, ikke bare presenteres.
+- **Løsningsforslag skal forklare hvorfor, ikke bare vise kode.** En chunk med output er ikke et
+  løsningsforslag; studenten trenger tolkningen.
+- Norsk fagterminologi der den finnes: feilledd, forkastningsområde, signifikansnivå, forventningsrett.
+- Skillet korrelasjon/kausalitet er et eksplisitt læringsutbytte i kursbeskrivelsen. Skriv «henger
+  sammen med», ikke «fører til», når modellen ikke gir kausal tolkning.
+- Læreboken er Keller, *Statistics for Management and Economics* (2. EMEA-utgave). Modulene 1–4
+  kommenterer boken kapittelvis; 5–6 er stort sett eget materiale med egne referanser.
+- Ikke stryk en oppgave uten å sjekke om den er lenket fra `08-seminaroppgaver.Rmd` eller
+  `09-Eksamensoppgaver.Rmd`.
+
+## Kapittelstatus og åpne punkter
+
+Oppdateres løpende. Holdes kort – vokser den forbi ~10 linjer, flytt den ut av denne filen.
+
+| Kapittel | Notasjon | Sist gjennomgått |
+|---|---|---|
+| 01–09 | ikke harmonisert | – |
+
+Åpne punkter:
+
+- Notasjon i `script-slides/` er ikke harmonisert (hypotesetesting-slides bruker `H_1`,
+  regresjon-slides bruker `H_A`). Krever separat rendring; kilde og publisert HTML kan komme i utakt.
+- `MET4-formelark.qmd` er ikke lenket fra nettsiden ennå. Bør bygges til PDF og lenkes fra
+  `index.Rmd` og `09-Eksamensoppgaver.Rmd`. Avklar først om det er tillatt eksamenshjelpemiddel.
+
 ## Git
 
-Rotfilene `chap` og `qq` er tilfeldig lagret `git log`-output, ikke innhold – ikke bygg videre på dem.
+Innhold og bygg er **alltid separate commits**. Flere innholdscommits kan samles under ett `Build`.
+Blandes de, mister du evnen til å lese en innholdsdiff – `docs/` er 700+ filer.

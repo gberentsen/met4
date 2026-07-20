@@ -30,6 +30,17 @@ $pandocDir = Finn-Fil @(
 
 $env:RSTUDIO_PANDOC = $pandocDir
 
+# Innsjekket docs/ er bygget med bookdown >= 0.46. Bygger du med en eldre
+# versjon, nedgraderes den genererte HTML-en og du får ~110 filers diff-stoy
+# som skjuler de faktiske innholdsendringene. Derfor stopper vi her.
+$minBookdown = "0.46"
+$ver = (& $rscript -e "cat(as.character(packageVersion('bookdown')))")
+if ([version]$ver -lt [version]$minBookdown) {
+    throw "bookdown $ver er for gammel (krever >= $minBookdown). " +
+          "Kjor: install.packages(c('knitr','rmarkdown','bookdown'))"
+}
+Write-Host "bookdown $ver" -ForegroundColor DarkGray
+
 if ($Sjekk) {
     $ut = Join-Path $env:TEMP "met4-byggsjekk"
     Write-Host "Sjekkbygg til $ut (docs/ røres ikke)" -ForegroundColor Cyan
