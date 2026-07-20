@@ -163,7 +163,7 @@ n <- 10
 rnorm(n)
 ```
 
-Ved å skrive `mean(dnorm(n))` i stedet regner vi ut gjennomsnittet av observasjonene direkte. 
+Ved å skrive `mean(rnorm(n))` i stedet regner vi ut gjennomsnittet av observasjonene direkte.
 
 La oss gjøre dette 100 ganger og notere ned gjennomsnittet hver gang. I stedet for å gjøre det manuelt, kan vi skrive et lite program som gjør dette for oss ved å bruke en for-løkke. Det er ikke nødvendig (eller pensum) å forstå akkurat hvordan dette fungerer, men dersom du kjører følgende linjer vil du få en ny vektor `gj.snitt` som inneholder 100 slike gjennomsnitt:
 

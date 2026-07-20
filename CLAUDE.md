@@ -109,6 +109,10 @@ Oppdateres løpende. Holdes kort – vokser den forbi ~10 linjer, flytt den ut a
 |---|---|---|
 | 01–09 | ikke harmonisert | – |
 
+**`utvalg-og-estimering.html` endres ved hvert bygg.** Kapittel 2 har en `rnorm()` uten `set.seed()`,
+og teksten sier eksplisitt at studenten «helt sikkert får andre verdier». Tilfeldigheten er tilsiktet –
+å seede den ville motsagt teksten. Regn med den ene filen som permanent støy i byggdiffen.
+
 Åpne punkter:
 
 - Notasjon i `script-slides/` er ikke harmonisert (hypotesetesting-slides bruker `H_1`,
