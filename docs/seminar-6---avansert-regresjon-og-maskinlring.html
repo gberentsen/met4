@@ -265,8 +265,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">8.6.1</span> Logistisk regresjon, maskinlæring, paneldata<a href="seminar-6---avansert-regresjon-og-maskinlring.html#logistisk-regresjon-maskinlring-paneldata" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol style="list-style-type: decimal">
 <li><p>Nevn minst to grunner til at en ønsker å utføre en vanlig regresjonsanalyse. Reflekter så over hva hovedgrunnen er med å lage henholdsvis en KNN-modell og en regresjonsmodell.</p></li>
-<li><p>Diskuter i hvilken grad det er rimelig med komponenten <span class="math inline">\(v_t\)</span> i en paneldatamodell</p>
-<p><span class="math display">\[y_{it} = \beta_0 + \beta_1 x_{it} + ...  + v_t + \alpha_i + \epsilon_{it} \]</span></p></li>
+<li><p>Diskuter i hvilken grad det er rimelig med komponenten <span class="math inline">\(\nu_t\)</span> i en paneldatamodell</p>
+<p><span class="math display">\[y_{it} = \beta_0 + \beta_1 x_{it} + ...  + \nu_t + \alpha_i + \epsilon_{it} \]</span></p></li>
 </ol>
 <p>dersom en skal analysere paneldata av følgende responsvariabler <span class="math inline">\(y_{it}\)</span>:</p>
 <ol style="list-style-type: lower-alpha">
@@ -309,9 +309,9 @@ hvor en ville fått bedre prediksjoner av <span class="math inline">\(Y\)</span>
 <span id="cb385-5"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb385-5" tabindex="-1"></a>  )</span></code></pre></div>
 <p>Estimer deretter tre modeller som bygger opp til difference-in-differences-estimatet:</p>
 <ol style="list-style-type: decimal">
-<li><strong>Naiv sammenligning:</strong> Bruk kun data fra november 1992 (<code>post == 1</code>), og estimer <span class="math inline">\(\text{fte}_i = \beta_0 + \beta_1 \text{treat}_i + \varepsilon_i\)</span></li>
-<li><strong>Før-etter:</strong> Bruk kun data fra New Jersey (<code>treat == 1</code>), og estimer <span class="math inline">\(\text{fte}_t = \beta_0 + \beta_1 \text{post}_t + \varepsilon_t\)</span></li>
-<li><strong>Difference-in-differences:</strong> Bruk hele datasettet: <span class="math inline">\(\text{fte}_{it} = \beta_0 + \beta_1 \text{treat}_i + \beta_2 \text{post}_t + \beta_3 (\text{treat}_i \times \text{post}_t) + \varepsilon_{it}\)</span></li>
+<li><strong>Naiv sammenligning:</strong> Bruk kun data fra november 1992 (<code>post == 1</code>), og estimer <span class="math inline">\(\text{fte}_i = \beta_0 + \beta_1 \text{treat}_i + \epsilon_i\)</span></li>
+<li><strong>Før-etter:</strong> Bruk kun data fra New Jersey (<code>treat == 1</code>), og estimer <span class="math inline">\(\text{fte}_t = \beta_0 + \beta_1 \text{post}_t + \epsilon_t\)</span></li>
+<li><strong>Difference-in-differences:</strong> Bruk hele datasettet: <span class="math inline">\(\text{fte}_{it} = \beta_0 + \beta_1 \text{treat}_i + \beta_2 \text{post}_t + \beta_3 (\text{treat}_i \times \text{post}_t) + \epsilon_{it}\)</span></li>
 </ol>
 <p>Presenter resultatene i en tabell (f.eks. med <code>etable()</code>). Tolk koeffisientene i hver modell — hva måler de, og hva er svakheten med de to første?</p>
 <ol start="4" style="list-style-type: lower-alpha">
@@ -347,7 +347,7 @@ hvor en ville fått bedre prediksjoner av <span class="math inline">\(Y\)</span>
 <span id="cb386-2"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb386-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">frate =</span> fatal <span class="sc">/</span> pop <span class="sc">*</span> <span class="dv">10000</span>)</span></code></pre></div>
 <p>Lag deretter et spredningsplott med <code>beertax</code> på x-aksen og <code>frate</code> på y-aksen. Hva ser du?</p>
 <ol start="2" style="list-style-type: lower-alpha">
-<li><p>Estimer en enkel lineær modell: <span class="math inline">\(\text{frate}_{it} = \beta_0 + \beta_1 \text{beertax}_{it} + \varepsilon_{it}\)</span>. Tolk koeffisienten. Er resultatet overraskende?</p></li>
+<li><p>Estimer en enkel lineær modell: <span class="math inline">\(\text{frate}_{it} = \beta_0 + \beta_1 \text{beertax}_{it} + \epsilon_{it}\)</span>. Tolk koeffisienten. Er resultatet overraskende?</p></li>
 <li><p>Hva kan forklare sammenhengen du ser i (b)? Diskuter mulige utelatte variabler.</p></li>
 </ol>
 <details>
@@ -363,7 +363,7 @@ Løsning
 <span id="cb387-6"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb387-6" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb387-7"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb387-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Ølskatt (dollar per kasse)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Trafikkdødsfall per 10 000 innbyggere&quot;</span>) <span class="sc">+</span></span>
 <span id="cb387-8"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb387-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="met4_files/figure-html/unnamed-chunk-343-1.png" alt="" width="672" />
+<p><img src="met4_files/figure-html/unnamed-chunk-344-1.png" alt="" width="672" />
 Spredningsplottet viser en <strong>positiv</strong> sammenheng mellom ølskatt og trafikkdødsfall — overraskende og kontraintuitivt.</p>
 <p><strong>b)</strong></p>
 <div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb388-1" tabindex="-1"></a>pooled <span class="ot">&lt;-</span> <span class="fu">feols</span>(frate <span class="sc">~</span> beertax, <span class="at">data =</span> Fatalities)</span>
@@ -384,9 +384,9 @@ Spredningsplottet viser en <strong>positiv</strong> sammenheng mellom ølskatt o
 <ol style="list-style-type: lower-alpha">
 <li><p>Estimer følgende modeller (bruk <code>state</code> som delstatsvariabel og <code>year</code> som tidsvariabel):</p>
 <ul>
-<li>Pooled OLS: <span class="math inline">\(\text{frate}_{it} = \beta_0 + \beta_1 \text{beertax}_{it} + \varepsilon_{it}\)</span></li>
-<li>Delstatsfaste effekter: <span class="math inline">\(\text{frate}_{it} = \alpha_i + \beta_1 \text{beertax}_{it} + \varepsilon_{it}\)</span></li>
-<li>Toveis faste effekter: <span class="math inline">\(\text{frate}_{it} = \alpha_i + \nu_t + \beta_1 \text{beertax}_{it} + \varepsilon_{it}\)</span></li>
+<li>Pooled OLS: <span class="math inline">\(\text{frate}_{it} = \beta_0 + \beta_1 \text{beertax}_{it} + \epsilon_{it}\)</span></li>
+<li>Delstatsfaste effekter: <span class="math inline">\(\text{frate}_{it} = \alpha_i + \beta_1 \text{beertax}_{it} + \epsilon_{it}\)</span></li>
+<li>Toveis faste effekter: <span class="math inline">\(\text{frate}_{it} = \alpha_i + \nu_t + \beta_1 \text{beertax}_{it} + \epsilon_{it}\)</span></li>
 </ul></li>
 <li><p>Forklar hva som skjer med koeffisienten når du legger til delstatsfaste effekter. Hvorfor endrer fortegnet seg?</p></li>
 <li><p>Hva kontrollerer tidsfaste effekter (<span class="math inline">\(\nu_t\)</span>) for? Gi eksempler på faktorer som påvirker trafikkdødsfall på landsbasis over tid.</p></li>

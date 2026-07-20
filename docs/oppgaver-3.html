@@ -430,8 +430,8 @@ Løsning
 <h3><span class="header-section-number">6.5.3</span> Oppgaver om paneldata<a href="oppgaver-3.html#oppgaver-om-paneldata" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Oppgave 1</strong></p>
 <p>For et paneldata bestående av en responsvariabel <span class="math inline">\(Y\)</span> og en forklaringsvariabel <span class="math inline">\(X\)</span> har du estimert modellen</p>
-<p><span class="math display">\[y_{it} =  \beta_1 x_{it}  + v_t + \alpha_i + \epsilon_{it} \]</span>
-der du har betraktet <span class="math inline">\(\alpha_i\)</span> som faste effekter og <span class="math inline">\(v_t\)</span> som kategoriske variabler. Estimatet av <span class="math inline">\(\beta_1\)</span> er <span class="math inline">\(\hat{\beta}_1 = 1.5\)</span>.</p>
+<p><span class="math display">\[y_{it} =  \beta_1 x_{it}  + \nu_t + \alpha_i + \epsilon_{it} \]</span>
+der du har betraktet <span class="math inline">\(\alpha_i\)</span> som faste effekter og <span class="math inline">\(\nu_t\)</span> som kategoriske variabler. Estimatet av <span class="math inline">\(\beta_1\)</span> er <span class="math inline">\(\hat{\beta}_1 = 1.5\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
 <li>For individ <span class="math inline">\(4\)</span> i datasettet har du estimert <span class="math inline">\(\alpha_4\)</span> til å være <span class="math inline">\(0.2\)</span>. Videre er årseffekten for 2012, <span class="math inline">\(v_{2012}\)</span>, estimert til å være <span class="math inline">\(-0.5\)</span>. Prediker responsvariabelen til dette individet for 2012 dersom <span class="math inline">\(x_{4,2012} = 2\)</span>.</li>
 </ol>
@@ -565,11 +565,11 @@ Løsning
 </details>
 <p><strong>Oppgave 2</strong></p>
 <p>En dagligvarekjede ønsker å finne ut om lokal markedsføring øker omsetningen. De har data fra 200 butikker, og estimerer følgende modell:
-<span class="math display">\[\log(\text{Omsetning}_i) = \beta_0 + \beta_1 \log(\text{Reklamekroner}_i) + \varepsilon_i\]</span>
+<span class="math display">\[\log(\text{Omsetning}_i) = \beta_0 + \beta_1 \log(\text{Reklamekroner}_i) + \epsilon_i\]</span>
 der <span class="math inline">\(\text{Omsetning}_i\)</span> er månedlig omsetning i kroner for butikk <span class="math inline">\(i\)</span>, og <span class="math inline">\(\text{Reklamekroner}_i\)</span> er beløpet butikken brukte på lokal reklame (flyers, Facebook-annonser o.l.) den måneden.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Forklar med egne ord hva eksogenitetsbetingelsen <span class="math inline">\(\mathbb{E}[\varepsilon_i \vert x_i]=0\)</span> krever i denne sammenhengen. Hva må vi anta om restleddet?</p></li>
-<li><p>Nevn minst to variabler som kan tenkes å ligge i restleddet <span class="math inline">\(\varepsilon_i\)</span>, og som sannsynligvis er korrelert med hvor mye butikken bruker på reklame. Tegn gjerne et DAG-diagram.</p></li>
+<li><p>Forklar med egne ord hva eksogenitetsbetingelsen <span class="math inline">\(\mathbb{E}[\epsilon_i \vert x_i]=0\)</span> krever i denne sammenhengen. Hva må vi anta om restleddet?</p></li>
+<li><p>Nevn minst to variabler som kan tenkes å ligge i restleddet <span class="math inline">\(\epsilon_i\)</span>, og som sannsynligvis er korrelert med hvor mye butikken bruker på reklame. Tegn gjerne et DAG-diagram.</p></li>
 <li><p>Hvis du kunne observert én av disse variablene – for eksempel butikkens beliggenhet (sentrum vs. utkant) – hvordan ville du inkludert den i modellen? Forklar hvordan dette “stenger ned” en kanal for endogenitet.</p></li>
 <li><p>Noen av variablene du nevnte i b) er kanskje ikke observerbare. Hva kunne vi gjort dersom vi hadde hatt data fra de samme butikkene over flere måneder?</p></li>
 </ol>
@@ -578,7 +578,7 @@ der <span class="math inline">\(\text{Omsetning}_i\)</span> er månedlig omsetni
 Løsning
 </summary>
 <ol style="list-style-type: lower-alpha">
-<li><p>Eksogenitetsbetingelsen krever at restleddet <span class="math inline">\(\varepsilon_i\)</span> – alt annet som påvirker omsetningen utover reklame – ikke er systematisk relatert til hvor mye butikken bruker på reklame. Hvis vi visste at en butikk brukte 50 000 kroner på reklame denne måneden, skal dette ikke fortelle oss noe om de andre faktorene som påvirker omsetningen. Intuitivt: butikker som bruker mye på reklame skal ikke være systematisk annerledes (på relevante måter) enn butikker som bruker lite.</p></li>
+<li><p>Eksogenitetsbetingelsen krever at restleddet <span class="math inline">\(\epsilon_i\)</span> – alt annet som påvirker omsetningen utover reklame – ikke er systematisk relatert til hvor mye butikken bruker på reklame. Hvis vi visste at en butikk brukte 50 000 kroner på reklame denne måneden, skal dette ikke fortelle oss noe om de andre faktorene som påvirker omsetningen. Intuitivt: butikker som bruker mye på reklame skal ikke være systematisk annerledes (på relevante måter) enn butikker som bruker lite.</p></li>
 <li><p>To aktuelle variabler:</p></li>
 </ol>
 <ul>
@@ -588,7 +588,7 @@ Løsning
 <p>Begge variablene er felles årsaker som påvirker både forklaringsvariabelen og utfallsvariabelen. I et DAG-diagram ville vi tegnet piler fra beliggenhet (eller størrelse) til <em>både</em> reklamekroner og omsetning.</p>
 <ol start="3" style="list-style-type: lower-alpha">
 <li><p>Vi kan inkludere beliggenhet som kontrollvariabel:
-<span class="math display">\[\log(\text{Omsetning}_i) = \beta_0 + \beta_1 \log(\text{Reklamekroner}_i) + \beta_2 \text{Sentrum}_i + \varepsilon_i\]</span>
+<span class="math display">\[\log(\text{Omsetning}_i) = \beta_0 + \beta_1 \log(\text{Reklamekroner}_i) + \beta_2 \text{Sentrum}_i + \epsilon_i\]</span>
 Når vi kontrollerer for beliggenhet, sammenligner vi i praksis butikker med <em>lik</em> beliggenhet. Dermed “stenger vi ned” kanalen der beliggenhet påvirker både reklamebudsjett og omsetning. <span class="math inline">\(\beta_1\)</span> fanger da bare opp sammenhengen mellom reklame og omsetning <em>innenfor</em> samme type beliggenhet.</p></li>
 <li><p>Dersom vi har data fra de samme butikkene over flere måneder, har vi paneldata. Da kan vi inkludere butikkfaste effekter, som kontrollerer for <em>alle</em> tidskonstante egenskaper ved butikken – inkludert beliggenhet, størrelse, og andre ting vi kanskje ikke observerer direkte. Vi identifiserer da sammenhengen mellom reklame og omsetning utelukkende fra variasjon <em>innad i</em> hver butikk over tid: Selger butikk <span class="math inline">\(i\)</span> mer i måneder der den bruker mer på reklame enn i måneder der den bruker mindre?</p></li>
 </ol>
@@ -624,7 +624,7 @@ Løsning
 </summary>
 <ol style="list-style-type: lower-alpha">
 <li><p>Behandlingsgruppen er Bergen (innfører piggdekkgebyr). Kontrollgruppen er Øygarden (innfører ikke gebyr). “Før”-perioden er tiden før gebyret ble innført (f.eks. forrige vinter), og “etter”-perioden er tiden etter innføringen (f.eks. første vinter med gebyr). Regresjonsmodellen:
-<span class="math display">\[\text{PM}_{10,it} = \beta_0 + \beta_1 \text{Bergen}_i + \beta_2 \text{Etter}_t + \beta_3 (\text{Bergen}_i \times \text{Etter}_t) + \varepsilon_{it}\]</span>
+<span class="math display">\[\text{PM}_{10,it} = \beta_0 + \beta_1 \text{Bergen}_i + \beta_2 \text{Etter}_t + \beta_3 (\text{Bergen}_i \times \text{Etter}_t) + \epsilon_{it}\]</span>
 der <span class="math inline">\(\beta_3\)</span> er DiD-estimatet – den estimerte effekten av piggdekkgebyret på svevestøvnivået.</p></li>
 <li><p>Antakelsen om parallelle trender må holde: Luftkvaliteten i Bergen og Øygarden ville fulgt <em>samme utvikling</em> i fravær av piggdekkgebyret. Det er grunner til å være skeptisk. Bergen er en stor by med langt høyere trafikktetthet, tunneler, og mer kompleks topografi (fjord og fjell som “fanger” forurenset luft) enn Øygarden. Faktorer som påvirker luftkvaliteten – f.eks. byggeaktivitet, endringer i trafikkmønstre, eller værforhold – kan slå ulikt ut i de to kommunene. Dersom noe annet enn piggdekkgebyret endret seg i Bergen mellom periodene (f.eks. et stort veiprosjekt ble ferdigstilt), vil dette forstyrre estimatet. På den annen side er Øygarden en nabokommune med lignende klima, og piggdekkgebyret ble innført på et bestemt tidspunkt som trolig var uavhengig av kortsiktige endringer i luftkvalitet. Hvis trendene i PM<span class="math inline">\(_{10}\)</span> var like i de to kommunene i årene før innføringen, styrker det troverdigheten.</p></li>
 <li><p>Mange bilister pendler mellom Bergen og Øygarden. Dersom piggdekkgebyret gjør at pendlere bytter til piggfrie dekk, vil disse bilene også forurense mindre når de kjører i Øygarden. Da <em>forbedres</em> luftkvaliteten i kontrollgruppen som en følge av behandlingen i Bergen. Kontrollgruppen viser da ikke lenger det “rene” kontrafaktiske utfallet – altså hva som ville skjedd uten piggdekkgebyret – fordi den selv er påvirket av tiltaket. Konsekvensen er at DiD-estimatet vil <em>undervurdere</em> den sanne effekten av gebyret: Luftkvaliteten forbedres i begge kommuner, og forskjellen mellom dem blir mindre enn den faktiske effekten.</p></li>
@@ -648,7 +648,7 @@ Løsning
 </summary>
 <ol style="list-style-type: lower-alpha">
 <li><p>Forskerne bruker en difference-in-differences-strategi. Regresjonsmodellen de sannsynligvis har estimert er:
-<span class="math display">\[\log(\text{Produktivitet}_{it}) = \beta_0 + \beta_1 \text{NæringA}_i + \beta_2 \text{Etter2021}_t + \beta_3 (\text{NæringA}_i \times \text{Etter2021}_t) + \varepsilon_{it}\]</span>
+<span class="math display">\[\log(\text{Produktivitet}_{it}) = \beta_0 + \beta_1 \text{NæringA}_i + \beta_2 \text{Etter2021}_t + \beta_3 (\text{NæringA}_i \times \text{Etter2021}_t) + \epsilon_{it}\]</span>
 der <span class="math inline">\(\beta_3\)</span> er DiD-estimatet som måler den relative produktivitetsveksten i næring A sammenlignet med næring B.</p></li>
 <li><p>To sentrale antakelser:</p></li>
 </ol>

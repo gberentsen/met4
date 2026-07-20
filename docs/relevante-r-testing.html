@@ -293,8 +293,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4>Ensidige to-utvalgs tester: Hvilken vei tester vi?<a href="relevante-r-testing.html#ensidige-to-utvalgs-tester-hvilken-vei-tester-vi" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Når du gjør en ensidig to-utvalgs <span class="math inline">\(t\)</span>-test er det viktig å forstå hva <code>alternative = "greater"</code> og <code>alternative = "less"</code> faktisk betyr. Funksjonen <code>t.test()</code> ser alltid på differansen mellom <em>første</em> og <em>andre</em> argument. Altså:</p>
 <ul>
-<li><code>t.test(x, y, alternative = "greater")</code> tester <span class="math inline">\(H_1: \mu_x - \mu_y &gt; 0\)</span>, dvs. at gjennomsnittet i <code>x</code> er <em>høyere</em> enn i <code>y</code>.</li>
-<li><code>t.test(x, y, alternative = "less")</code> tester <span class="math inline">\(H_1: \mu_x - \mu_y &lt; 0\)</span>, dvs. at gjennomsnittet i <code>x</code> er <em>lavere</em> enn i <code>y</code>.</li>
+<li><code>t.test(x, y, alternative = "greater")</code> tester <span class="math inline">\(H_A: \mu_x - \mu_y &gt; 0\)</span>, dvs. at gjennomsnittet i <code>x</code> er <em>høyere</em> enn i <code>y</code>.</li>
+<li><code>t.test(x, y, alternative = "less")</code> tester <span class="math inline">\(H_A: \mu_x - \mu_y &lt; 0\)</span>, dvs. at gjennomsnittet i <code>x</code> er <em>lavere</em> enn i <code>y</code>.</li>
 </ul>
 <p>Det betyr at du kan snu på resultatet ved å bytte rekkefølgen på argumentene. Følgende to tester er ekvivalente:</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="relevante-r-testing.html#cb75-1" tabindex="-1"></a><span class="fu">t.test</span>(testdata<span class="sc">$</span>X1, testdata<span class="sc">$</span>X2, <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>)</span>
@@ -426,7 +426,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##      Less Violent          114       9
 ##      Violent                33      93</code></pre>
 <p>Det ser ut til at det er en klar sammenheng mellom faktisk og opplevd voldelighet ved at de fleste forsøkspersonene havner på diagonalen i krysstabellen over.</p>
-<p>Nå skal vi utføre en test av nullhypotesen <span class="math inline">\(H_0\)</span>: faktisk og opplevd voldelighet er uavhengige kjennetegn, mot den alternative hypotesen <span class="math inline">\(H_1:\)</span> at de er avhengige kjennetegn. Dette er en chikvadrattest som kan utføres i R på følgende måte:</p>
+<p>Nå skal vi utføre en test av nullhypotesen <span class="math inline">\(H_0\)</span>: faktisk og opplevd voldelighet er uavhengige kjennetegn, mot den alternative hypotesen <span class="math inline">\(H_A:\)</span> at de er avhengige kjennetegn. Dette er en chikvadrattest som kan utføres i R på følgende måte:</p>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="relevante-r-testing.html#cb89-1" tabindex="-1"></a><span class="fu">chisq.test</span>(krysstabell)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
@@ -441,15 +441,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>De kritiske verdiene finner vi ved å bruke kvantilfunksjonene til den respektive fordelingen. Disse funksjonene har alltid et argument <code>p</code> og har som output det tallet som har sannsynlighetsmasse <code>p</code> til venstre for seg. Du må derfor velge <code>p</code> ut fra signifikansnivå og om det er en ensidig/tosidig test.</p>
 <div id="kritiske-verdier-i-t-fordelingen" class="section level4 unnumbered hasAnchor">
 <h4>Kritiske verdier i T-fordelingen<a href="relevante-r-testing.html#kritiske-verdier-i-t-fordelingen" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Dersom du f.eks skal utføre en t-test for <span class="math inline">\(H_0: \mu = \mu_0\)</span> mot <span class="math inline">\(H_1: \mu &lt; \mu_0\)</span>, med signifikansnivå <span class="math inline">\(\alpha = 0.05\)</span> og har <span class="math inline">\(40\)</span> observasjoner er kritisk verdi:</p>
+<p>Dersom du f.eks skal utføre en t-test for <span class="math inline">\(H_0: \mu = \mu_0\)</span> mot <span class="math inline">\(H_A: \mu &lt; \mu_0\)</span>, med signifikansnivå <span class="math inline">\(\alpha = 0.05\)</span> og har <span class="math inline">\(40\)</span> observasjoner er kritisk verdi:</p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="relevante-r-testing.html#cb91-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.05</span>, <span class="at">df =</span> <span class="dv">40</span> <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] -1.684875</code></pre>
 <p>og du forkaster da dersom din testobservator <span class="math inline">\(T\)</span> er mindre enn dette tallet.</p>
-<p>Hadde alternativ hypotesen vært <span class="math inline">\(H_1: \mu &gt; \mu_0\)</span> ville kritisk verdi vært</p>
+<p>Hadde alternativ hypotesen vært <span class="math inline">\(H_A: \mu &gt; \mu_0\)</span> ville kritisk verdi vært</p>
 <div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="relevante-r-testing.html#cb93-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>, <span class="at">df =</span> <span class="dv">40</span> <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 1.684875</code></pre>
 <p>og du forkaster dersom din testobservator <span class="math inline">\(T\)</span> er større enn dette tallet.</p>
-<p>For en to-sidig test (<span class="math inline">\(H_1: \mu\neq \mu_0\)</span>) forkaster du dersom <span class="math inline">\(T\)</span> faller uten for intervallet:</p>
+<p>For en to-sidig test (<span class="math inline">\(H_A: \mu\neq \mu_0\)</span>) forkaster du dersom <span class="math inline">\(T\)</span> faller uten for intervallet:</p>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="relevante-r-testing.html#cb95-1" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.05</span><span class="sc">/</span><span class="dv">2</span>, <span class="at">df =</span> <span class="dv">40</span> <span class="sc">-</span> <span class="dv">1</span>)</span>
 <span id="cb95-2"><a href="relevante-r-testing.html#cb95-2" tabindex="-1"></a>U <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span><span class="sc">/</span><span class="dv">2</span>, <span class="at">df =</span> <span class="dv">40</span> <span class="sc">-</span> <span class="dv">1</span>)</span>
 <span id="cb95-3"><a href="relevante-r-testing.html#cb95-3" tabindex="-1"></a><span class="fu">c</span>(U,L)</span></code></pre></div>
@@ -475,17 +475,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4>Kritiske verdier i <span class="math inline">\(\chi^2\)</span>-fordelingen<a href="relevante-r-testing.html#kritiske-verdier-i-chi2-fordelingen" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><span class="math inline">\(\chi^2\)</span>-fordelingen brukes i to ulike sammenhenger i MET4: varianstester og kjikvadrattester (goodness-of-fit og uavhengighet). For <strong>kjikvadrattestene</strong> er det kun den øvre halen som er relevant, fordi en stor testobservator betyr at de observerte frekvensene er langt fra de forventede. For <strong>varianstester</strong> kan vi derimot trenge nedre hale, øvre hale eller begge, avhengig av alternativhypotesen.</p>
 <p><strong>Varianstester:</strong></p>
-<p>Dersom du tester <span class="math inline">\(H_0: \sigma^2 = \sigma_0^2\)</span> mot <span class="math inline">\(H_1: \sigma^2 &lt; \sigma_0^2\)</span> (variansen er <em>mindre</em> enn påstått), forkaster du i nedre hale:</p>
+<p>Dersom du tester <span class="math inline">\(H_0: \sigma^2 = \sigma_0^2\)</span> mot <span class="math inline">\(H_A: \sigma^2 &lt; \sigma_0^2\)</span> (variansen er <em>mindre</em> enn påstått), forkaster du i nedre hale:</p>
 <div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="relevante-r-testing.html#cb103-1" tabindex="-1"></a><span class="co"># Kritisk verdi, 5% nivå, ensidig test, nedre hale, 30 frihetsgrader</span></span>
 <span id="cb103-2"><a href="relevante-r-testing.html#cb103-2" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.05</span>, <span class="at">df =</span> <span class="dv">30</span>)</span></code></pre></div>
 <pre><code>## [1] 18.49266</code></pre>
 <p>og du forkaster dersom testobservatoren er mindre enn dette tallet.</p>
-<p>Dersom du tester mot <span class="math inline">\(H_1: \sigma^2 &gt; \sigma_0^2\)</span> (variansen er <em>større</em> enn påstått), forkaster du i øvre hale:</p>
+<p>Dersom du tester mot <span class="math inline">\(H_A: \sigma^2 &gt; \sigma_0^2\)</span> (variansen er <em>større</em> enn påstått), forkaster du i øvre hale:</p>
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="relevante-r-testing.html#cb105-1" tabindex="-1"></a><span class="co"># Kritisk verdi, 5% nivå, ensidig test, øvre hale, 30 frihetsgrader</span></span>
 <span id="cb105-2"><a href="relevante-r-testing.html#cb105-2" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>, <span class="at">df =</span> <span class="dv">30</span>)</span></code></pre></div>
 <pre><code>## [1] 43.77297</code></pre>
 <p>og du forkaster dersom testobservatoren er større enn dette tallet.</p>
-<p>For en tosidig test (<span class="math inline">\(H_1: \sigma^2 \neq \sigma_0^2\)</span>) trenger du begge grensene:</p>
+<p>For en tosidig test (<span class="math inline">\(H_A: \sigma^2 \neq \sigma_0^2\)</span>) trenger du begge grensene:</p>
 <div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="relevante-r-testing.html#cb107-1" tabindex="-1"></a><span class="co"># Kritisk verdi, 5% nivå, tosidig test, 30 frihetsgrader</span></span>
 <span id="cb107-2"><a href="relevante-r-testing.html#cb107-2" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(<span class="fl">0.05</span><span class="sc">/</span><span class="dv">2</span>, <span class="at">df =</span> <span class="dv">30</span>)</span>
 <span id="cb107-3"><a href="relevante-r-testing.html#cb107-3" tabindex="-1"></a>U <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span><span class="sc">/</span><span class="dv">2</span>, <span class="at">df =</span> <span class="dv">30</span>)</span>
@@ -504,12 +504,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>F-fordelingen trenger vi når vi skal teste om to varianser er like. Skal du gjøre denne testen manuelt er det lurt å sette den største variansen i telleren av testobservatoren</p>
 <p><span class="math display">\[F = \frac{S_{1}^2}{S_{2}^2}.\]</span></p>
 <p>Uavhengig om det er en ensidig eller tosidig test, trenger vi da bare å sjekke om testobservatoren overstiger den kritiske verdien i den øvre halen i F-fordelingen.</p>
-<p>Har vi brukt <span class="math inline">\(30\)</span> observasjoner til å regne ut <span class="math inline">\(S_{1}^2\)</span> og <span class="math inline">\(25\)</span> observasjoner til å regne ut <span class="math inline">\(S_{1}^2\)</span> blir kritisk verdi i en to-sidig test der <span class="math inline">\(H_1: \sigma_{1}^2 \neq \sigma_{2}^2\)</span> :</p>
+<p>Har vi brukt <span class="math inline">\(30\)</span> observasjoner til å regne ut <span class="math inline">\(S_{1}^2\)</span> og <span class="math inline">\(25\)</span> observasjoner til å regne ut <span class="math inline">\(S_{1}^2\)</span> blir kritisk verdi i en to-sidig test der <span class="math inline">\(H_A: \sigma_{1}^2 \neq \sigma_{2}^2\)</span> :</p>
 <div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="relevante-r-testing.html#cb111-1" tabindex="-1"></a><span class="co"># Kritisk verdi, 5% nivå, tosidig test</span></span>
 <span id="cb111-2"><a href="relevante-r-testing.html#cb111-2" tabindex="-1"></a></span>
 <span id="cb111-3"><a href="relevante-r-testing.html#cb111-3" tabindex="-1"></a><span class="fu">qf</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span><span class="sc">/</span><span class="dv">2</span>, <span class="at">df1 =</span> <span class="dv">30</span> <span class="sc">-</span> <span class="dv">1</span>, <span class="at">df2 =</span> <span class="dv">25</span> <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 2.217443</code></pre>
-<p>Er det en ensidig test hvor <span class="math inline">\(H_1: \sigma_{1}^2 &gt; \sigma_{2}^2\)</span> blir kritisk verdi:</p>
+<p>Er det en ensidig test hvor <span class="math inline">\(H_A: \sigma_{1}^2 &gt; \sigma_{2}^2\)</span> blir kritisk verdi:</p>
 <div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="relevante-r-testing.html#cb113-1" tabindex="-1"></a><span class="co"># Kritisk verdi, 5% nivå, ensidig test</span></span>
 <span id="cb113-2"><a href="relevante-r-testing.html#cb113-2" tabindex="-1"></a></span>
 <span id="cb113-3"><a href="relevante-r-testing.html#cb113-3" tabindex="-1"></a><span class="fu">qf</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>, <span class="at">df1 =</span> <span class="dv">30</span> <span class="sc">-</span> <span class="dv">1</span>, <span class="at">df2 =</span> <span class="dv">25</span> <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div>
