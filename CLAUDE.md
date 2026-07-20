@@ -68,7 +68,9 @@ Kryssreferanser bruker bookdown-syntaks (`\@ref(seminar)`), og matematikk skrive
 | Individuell fast effekt | `\alpha_i` | |
 | Tidseffekt, paneldata | `\nu_t` (gresk nu) | `v_t` (latinsk v) |
 | Sammensatt feilledd | `\xi_i` | |
-| Variabler i modeller | stor `Y`, `X` | liten `y`, `x` |
+| Autokorrelasjon ved lag *k* | `\rho_k` | `\gamma_k` (det er autokovariansen) |
+| Variabler, klassisk regresjon (kap. 2–5) | stor `Y_i`, `X_i` | |
+| Variabler, paneldata og kausalitet (kap. 6, 8) | liten `y_{it}`, `x_{it}` | |
 
 To ting som ser ut som inkonsistens, men ikke er det:
 
@@ -78,8 +80,13 @@ To ting som ser ut som inkonsistens, men ikke er det:
   (`\xi_i = \beta_2 A_i + \epsilon_i`) i utelatt-variabel-argumentet, ikke en skrivefeil for `\epsilon`.
 
 Bokstavstørrelse koder **ikke** stokastisk variabel vs. observert realisasjon på denne siden.
-Distinksjonen er bare nyttig hvis den holdes hundre prosent konsekvent, og MET4 tester den ikke –
-delvis håndhevet ville den fått studentene til å lese mening inn i tilfeldig variasjon.
+Distinksjonen er bare nyttig hvis den holdes hundre prosent konsekvent, og MET4 tester den ikke.
+
+Det som *derimot* skiller stor og liten bokstav her, er sjanger: klassisk regresjon (kap. 2–5)
+bruker stor `Y`/`X`, mens paneldata og kausal identifikasjon (kap. 6 og 8) bruker liten
+`y_{it}`/`x_{it}`. Det siste følger økonometrilitteraturen studentene går videre til
+(Stock & Watson, Wooldridge), og begge kapitlene er interne konsekvente. Ikke «rett opp» det ene
+til det andre – skillet er tilsiktet.
 
 ## Pedagogiske føringer
 

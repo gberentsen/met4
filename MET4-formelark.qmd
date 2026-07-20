@@ -423,7 +423,7 @@ $$Y_i = \beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \cdots + \beta_k X_{ik} + \e
 $$\hat{\beta}_1 = \frac{S_{XY}}{S_X^2} = \frac{\sum(X_i - \bar{X})(Y_i - \bar{Y})}{\sum(X_i - \bar{X})^2}, \qquad \hat{\beta}_0 = \bar{Y} - \hat{\beta}_1\bar{X}$$
 
 **Predikerte verdier og residualer:**
-$$\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_i + \cdots, \qquad \hat{\epsilon}_i = Y_i - \hat{Y}_i$$
+$$\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_{i1} + \cdots + \hat{\beta}_k X_{ik}, \qquad \hat{\epsilon}_i = Y_i - \hat{Y}_i$$
 
 **Estimert standardavvik til feilleddet:**
 $$\hat{\sigma} = S_\epsilon = \sqrt{\frac{\sum_{i=1}^n \hat{\epsilon}_i^2}{n-k-1}} = \sqrt{\frac{\mathrm{SSE}}{n-k-1}}$$
@@ -554,7 +554,7 @@ Predikert neste verdi: $\hat{Y}_{t+1} = S_t$.
 ::: {.callout-tip title="Autokorrelasjon"}
 
 **Autokorrelasjon ved lag $k$:**
-$$\gamma_k = \mathrm{Cor}(Y_t, Y_{t-k}), \qquad -1 \le \gamma_k \le 1$$
+$$\rho_k = \mathrm{Cor}(Y_t, Y_{t-k}), \qquad -1 \le \rho_k \le 1$$
 
 ACF-plottet viser de \emph{empiriske} autokorrelasjonene for ulike lag $k$. De stiplede linjene er (omtrentlige) forkastningsgrenser: utslag utenfor grensene tyder på signifikant autokorrelasjon.
 
@@ -570,7 +570,7 @@ En tidsrekke $\{Y_t\}$ er svakt stasjonær dersom:
 
 1. Konstant forventning: $E(Y_t) = \mu$ for alle $t$
 2. Konstant og endelig varians: $\mathrm{Var}(Y_t) = \sigma^2 < \infty$ for alle $t$
-3. Autokorrelasjon avhenger kun av avstand: $\mathrm{Cor}(Y_t, Y_{t-k}) = \gamma_k$
+3. Autokorrelasjon avhenger kun av avstand: $\mathrm{Cor}(Y_t, Y_{t-k}) = \rho_k$
 
 :::
 
@@ -712,7 +712,7 @@ $$y_{it} = \beta_0 + \beta_1 x_{it} + \alpha_i + \nu_t + \epsilon_{it}$$
 
 Sammenligner endringer over tid mellom en behandlingsgruppe og en kontrollgruppe:
 
-$$Y_{it} = \beta_0 + \beta_1 \mathrm{Treat}_i + \beta_2 \mathrm{Post}_t + \beta_3 (\mathrm{Treat}_i \times \mathrm{Post}_t) + \epsilon_{it}$$
+$$y_{it} = \beta_0 + \beta_1 \mathrm{Treat}_i + \beta_2 \mathrm{Post}_t + \beta_3 (\mathrm{Treat}_i \times \mathrm{Post}_t) + \epsilon_{it}$$
 
 - $\mathrm{Treat}_i = 1$ for enheter i behandlingsgruppen
 - $\mathrm{Post}_t = 1$ for perioder etter behandlingen
