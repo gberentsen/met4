@@ -1,0 +1,731 @@
+---
+title: "MET4 Formelark"
+author: ""
+format: 
+  pdf:
+    documentclass: article
+    fontsize: 11pt
+    spacing: onehalf
+    pdf-engine: pdflatex
+    geometry:
+      - a4paper
+      - top=20mm
+      - bottom=30mm
+      - left=20mm
+      
+header-includes:
+  - \usepackage{amsmath}
+  - \usepackage{amsfonts}
+  - \usepackage{amssymb}
+  - \usepackage{scrlayer-scrpage}
+  - \rofoot{\includegraphics[width=2cm]{met4_logo.png}}
+  - \rohead{}
+  - \usepackage{lastpage}
+  - \cofoot{\thepage\ av \pageref*{LastPage}}
+  - \usepackage{etoolbox}
+  - \AtBeginEnvironment{tcolorbox}{\tcbset{breakable=false}}
+---
+
+```{r setup, include = FALSE, warning = FALSE, message = FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = FALSE)
+```
+
+Formelarket gir referanser til de viktigste formlene i kurset. Husk at tolkning og anvendelse er det som vektlegges på eksamen. Formlene i seg selv er ikke tilstrekkelig kunnskap.
+
+## 1 Viktige populasjonsparametre, regneregler og fordelinger
+
+::: {.callout-tip title="Definisjon av forventning, varians og kovarians"}
+
+**Forventning:** Mål på sentrum i fordeling:
+
+$$E(X) = \mu = \sum_x x \cdot P(X = x) \qquad \text{(diskret)}$$
+$$E(X) = \mu = \int_{-\infty}^{\infty} x \, f(x)\, dx \qquad \text{(kontinuerlig)}$$
+
+**Varians:** mål på spredning rundt forventningen:
+
+$$\mathrm{Var}(X) = \sigma^2 = E\!\left[(X - \mu)^2\right] = E(X^2) - [E(X)]^2$$
+
+**Standardavvik:** $\;\sigma = \sqrt{\mathrm{Var}(X)}$, har samme enhet som $X$.
+
+\vspace{0.3cm}
+
+**Kovarians:**  mål på lineær samvariasjon mellom to variable:
+
+$$\mathrm{Cov}(X,Y) = \sigma_{XY} = E\!\left[(X - \mu_X)(Y - \mu_Y)\right] = E(XY) - E(X)E(Y)$$
+
+**Korrelasjon:**  standardisert kovarians, alltid mellom $-1$ og $1$:
+
+$$\rho = \frac{\mathrm{Cov}(X,Y)}{\sigma_X \sigma_Y}$$
+
+:::
+::: {.callout-tip title="Regneregler for forventning, varians og kovarians"}
+
+**Forventning** ($a$, $b$ er konstanter):
+
+$$E[aX + bY] = aE[X] + bE[Y], \qquad E[XY] = E[X]E[Y] + \mathrm{Cov}(X,Y)$$
+
+**Varians:**
+
+$$\mathrm{Var}(aX + b) = a^2\mathrm{Var}(X), \qquad \mathrm{Var}(X \pm Y) = \mathrm{Var}(X) + \mathrm{Var}(Y) \pm 2\,\mathrm{Cov}(X,Y)$$
+
+**Kovarians:**
+
+$$\mathrm{Cov}(X,Y) = E[XY] - E[X]E[Y], \qquad \mathrm{Cov}(X,X) = \mathrm{Var}(X)$$
+$$\mathrm{Cov}(aX, bY) = ab\,\mathrm{Cov}(X,Y), \qquad \mathrm{Cov}(X+Y, Z) = \mathrm{Cov}(X,Z) + \mathrm{Cov}(Y,Z)$$
+
+Kovariansen mellom en konstant og en variabel er alltid $0$.
+:::
+
+::: {.callout-tip title="Viktige fordelinger"}
+| Fordeling | Notasjon | Forventning | Varians |
+|-----------|----------|-------------|---------|
+| Normal | $N(\mu, \sigma^2)$ | $\mu$ | $\sigma^2$ |
+| Student-$t$ | $t_\nu$ | $0$ | $\frac{\nu}{\nu-2}$ $(\nu>2)$ |
+| Bernoulli | $\mathrm{Bernoulli}(p)$ | $p$ | $p(1-p)$ |
+| Binomisk | $\mathrm{Binom}(n,p)$ | $np$ | $np(1-p)$ |
+| Kji-kvadrat | $\chi^2_\nu$ | $\nu$ | $2\nu$ |
+| $F$-fordeling | $F_{\nu_1, \nu_2}$ | -- | -- |
+
+$t_\nu \to N(0,1)$ når $\nu \to \infty$. For store $n$ kan vi bruke $z$-kvantiler i stedet for $t$-kvantiler.
+:::
+
+::: {.callout-tip title="Persentiler og kvantiler"}
+
+En **$p$-persentil** (eller **$p$-kvantil**) av en fordeling er den verdien $q$ slik at 
+andelen $p$ av fordelingen ligger til venstre for $q$. Med andre ord: $P(X \leq q) = p$.
+
+\vspace{0.2cm}
+
+**Notasjon:**
+
+Vi skriver $z_p$ for $p$-persentilen av $N(0, 1)$, $t_{p,\nu}$ for $p$-persentilen av $t_\nu$,
+$\chi^2_{p,\nu}$ for $p$-persentilen av $\chi^2_\nu$, og $F_{p,\nu_1,\nu_2}$ for $p$-persentilen av $F_{\nu_1, \nu_2}$.
+
+\vspace{0.2cm}
+
+:::
+
+## 2 Deskriptiv statistikk og estimering
+
+
+::: {.callout-tip title="Deskriptiv statistikk — populasjonsparametre og estimatorer"}
+Navnekonvensjon: Populasjonsparametre som estimeres fra et utvalg får ofte «empirisk» eller «utvalgs-» foran seg (f.eks. empirisk varians eller utvalgsvarians).
+\renewcommand{\arraystretch}{1.8}
+
+| Parameter (populasjon) | Estimator (utvalg) |
+|---|---|
+| Forventning/populasjonsgjennomsnitt: $\mu = E(X)$ | Empirisk gjennomsnitt: $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$ |
+| Varians: $\sigma^2 = \mathrm{Var}(X)$ | Empirisk varians: $S^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar{X})^2$ |
+| Standardavvik: $\sigma$ | Empirisk standardavvik: $S = \sqrt{S^2}$ |
+| Kovarians: $\sigma_{XY} = \mathrm{Cov}(X,Y)$ | Empirisk kovarians: $S_{XY} = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar{X})(Y_i - \bar{Y})$ |
+| Korrelasjon: $\rho = \frac{\sigma_{XY}}{\sigma_X \sigma_Y}$ | Empirisk korrelasjon: $r = \frac{S_{XY}}{S_X \cdot S_Y},\quad -1 \le r \le 1$ |
+| Andel: $p$ | Observert andel: $\hat{p} = X/n$ |
+
+\renewcommand{\arraystretch}{1}
+
+:::
+
+::: {.callout-tip title="Standardfeil"}
+**Standardfeil** er det estimerte standardavviket til en estimator og som notasjon brukes ofte SE:
+$$\text{SE}(\bar{X}) = \frac{S_X}{\sqrt{n}}, \qquad \text{SE}(\hat{p}) = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$
+:::
+
+::: {.callout-tip title="Sentralgrenseteoremet og samplingfordelinger"}
+
+
+**Sentralgrenseteoremet (SGT):**
+
+Gitt uavhengige og identisk fordelte variable $X_i$ med forventning $\mu$ og endelig varians $\sigma^2$:
+$$\bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i \;\sim \; N\!\left(\mu,\, \frac{\sigma^2}{n}\right) \quad \text{for stort } n$$
+
+ Tommelfingerregel: $n \gtrsim 30$ er ofte tilstrekkelig.
+
+\vspace{0.3cm}
+
+**Sentralgrenseteoremet for andel** (for store $n$ slik at $n\hat{p} > 5$ og $n(1-\hat{p}) > 5$):
+$$\hat{p} \;\sim \; N\!\left(p,\, \frac{p(1-p)}{n}\right)$$
+
+SGT rettferdiggjør bruk av normalfordelingen for gjennomsnitt og andeler selv når de underliggende observasjonene ikke er normalfordelte. I praksis bruker vi ofte den kvadrerte standardfeilen som varians: $\bar{X} \sim N(\mu, \text{SE}(\bar{X})^2)$ og $\hat{p} \sim N(p, \text{SE}(\hat{p})^2)$.
+
+:::
+
+::: {.callout-tip title="Konfidensintervall"}
+Generelt:
+$$\text{KI} = \text{punktestimat} \pm \text{kritisk verdi} \times \text{standardfeil}$$
+
+Eksempel: $(1-\alpha)\cdot 100\%$ konfidensintervall for $\mu$:
+$$\bar{X} \pm t_{1-\alpha/2,\; n-1} \cdot \frac{S}{\sqrt{n}}$$
+
+
+:::
+
+\newpage 
+
+## 3 Hypotesetesting
+
+<!-- ::: {.callout-tip title="Grunnbegreper i hypotesetesting"} -->
+
+<!-- - **Nullhypotese $H_0$:** Verdi(er) av populasjonsparametre dersom det vi ønsker å påvise er feil. "Det konservative", "ingen effekt", "rådende oppfatning". -->
+<!-- - **Alternativhypotese $H_A$:** Verdier av populasjonsparametre dersom det vi ønsker å påvise er riktig. "Det er en effekt". -->
+<!-- - **Signifikansnivå $\alpha$:** sannsynligheten vi aksepterer for Type I-feil  -->
+<!-- - **Testobservator:** standardisert mål som kvantifiserer avviket mellom data og $H_0$ -->
+<!-- - **Kritisk verdi:** Persentilen som definerer forkastningsområdet for testobservatoren. -->
+<!-- - **P-verdi:** sannsynligheten for å observere en like eller mer ekstrem testobservator under $H_0$ -->
+<!-- - **Forkastningsregel:** forkast $H_0$ dersom p-verdi $< \alpha$ eller testobservator ligger i forkastningsområdet. -->
+<!-- - **Ensidig vs. tosidig:** tosidig når vi har $\neq$ i alternativ hypotesen; ensidig når vi har $>$ eller $<$ -->
+
+<!-- ::: -->
+
+<!-- ::: {.callout-tip title="Type I- og Type II-feil"} -->
+
+<!-- |  | $H_0$ sann | $H_0$ usann | -->
+<!-- |--|:---:|:---:| -->
+<!-- | **Forkaste $H_0$** | Type I-feil (sannsynlighet $\alpha$) | Riktig beslutning $\checkmark$ | -->
+<!-- | **Beholde $H_0$** | Riktig beslutning $\checkmark$ | Type II-feil (sannsynlighet $\beta$) | -->
+
+<!-- \vspace{0.3cm} -->
+
+<!-- **Type I-feil:** Forkaste $H_0$ når den er sann (falsk positiv). Sannsynligheten $\alpha$ kontrolleres ved valg av signifikansnivå. -->
+
+<!-- **Type II-feil:** Beholde $H_0$ når den er usann (falsk negativ). Sannsynligheten $\beta$ avhenger av effektstørrelse, utvalgsstørrelse og signifikansnivå. -->
+
+<!-- **Styrke:** $1 - \beta$ = sannsynligheten for å forkaste $H_0$ når den er usann. Høyere styrke er bedre. -->
+
+<!-- ::: -->
+
+::: {.callout-tip title="Test for forventning i én populasjon"}
+
+$$H_0\!: \mu = \mu_0 \quad \text{mot} \quad H_A\!: \mu \neq \mu_0 \;\;(\text{tosidig}), \quad \mu > \mu_0 \;\;(\text{ensidig}), \quad \mu < \mu_0 \;\;(\text{ensidig})$$
+
+**Testobservator:**
+$$T = \frac{\bar{X} - \mu_0}{S / \sqrt{n}} \sim t_{n-1}$$
+
+**Forkastning med kritisk verdi:**
+
+- Tosidig: forkast $H_0$ dersom $|T| > t_{1-\alpha/2,\; n-1}$
+- Ensidig ($H_A\!: \mu > \mu_0$): forkast $H_0$ dersom $T > t_{1-\alpha,\; n-1}$
+- Ensidig ($H_A\!: \mu < \mu_0$): forkast $H_0$ dersom $T < -t_{1-\alpha,\; n-1}$
+
+\vspace{0.3cm}
+
+**Forkastning med p-verdi:** Forkast $H_0$ dersom p-verdi $< \alpha$, der
+
+- Tosidig: p-verdi $= 2 \cdot P(t_{n-1} > |T|)$
+- Ensidig ($H_A\!: \mu > \mu_0$): p-verdi $= P(t_{n-1} > T)$
+- Ensidig ($H_A\!: \mu < \mu_0$): p-verdi $= P(t_{n-1} < T)$
+
+\vspace{0.2cm}
+
+der $t_{n-1}$ er t-fordelt med $n-1$ frihetsgrader.
+:::
+
+::: {.callout-tip title="Test for andel i én populasjon"}
+
+$$H_0\!: p = p_0 \quad \text{mot} \quad H_A\!: p \neq p_0 \;\;(\text{tosidig}), \quad p > p_0 \;\;(\text{ensidig}), \quad p < p_0 \;\;(\text{ensidig})$$
+
+**Testobservator** (krever $n p_0 > 5$ og $n(1-p_0) > 5$):
+$$Z = \frac{\hat{p} - p_0}{\sqrt{p_0(1-p_0)/n}} \;\stackrel{.}{\sim}\; N(0,1)$$
+
+**Forkastning med kritisk verdi:**
+
+- Tosidig: forkast $H_0$ dersom $|Z| > z_{1-\alpha/2}$
+- Ensidig ($H_A\!: p > p_0$): forkast $H_0$ dersom $Z > z_{1-\alpha}$
+- Ensidig ($H_A\!: p < p_0$): forkast $H_0$ dersom $Z < -z_{1-\alpha}$
+
+\vspace{0.3cm}
+
+**Forkastning med p-verdi:** Forkast $H_0$ dersom p-verdi $< \alpha$, der
+
+- Tosidig: p-verdi $= 2 \cdot P(Z_0 > |Z|)$
+- Ensidig ($H_A\!: p > p_0$): p-verdi $= P(Z_0 > Z)$
+- Ensidig ($H_A\!: p < p_0$): p-verdi $= P(Z_0 < Z)$
+
+\vspace{0.2cm}
+
+der $Z_0 \sim N(0,1)$.
+:::
+
+\newpage
+
+::: {.callout-tip title="Test for varians i én populasjon"}
+
+$$H_0\!: \sigma^2 = \sigma_0^2 \quad \text{mot} \quad H_A\!: \sigma^2 \neq \sigma_0^2 \;\;(\text{tosidig}), \quad \sigma^2 > \sigma_0^2 \;\;(\text{ensidig}), \quad \sigma^2 < \sigma_0^2 \;\;(\text{ensidig})$$
+
+\vspace{0.2cm}
+
+**Testobservator:**
+$$\chi^2 = \frac{(n-1)S^2}{\sigma_0^2} \sim \chi^2_{n-1}$$
+
+\vspace{0.2cm}
+
+**Forkastning med kritisk verdi:**
+
+- Tosidig: forkast $H_0$ dersom $\chi^2 < \chi^2_{\alpha/2,\; n-1}$ eller $\chi^2 > \chi^2_{1-\alpha/2,\; n-1}$
+- Ensidig ($H_A\!: \sigma^2 > \sigma_0^2$): forkast $H_0$ dersom $\chi^2 > \chi^2_{1-\alpha,\; n-1}$
+- Ensidig ($H_A\!: \sigma^2 < \sigma_0^2$): forkast $H_0$ dersom $\chi^2 < \chi^2_{\alpha,\; n-1}$
+
+:::
+
+
+
+::: {.callout-tip title="Test for forskjell i forventning mellom to uavhengige populasjoner"}
+
+$$H_0\!: \mu_1 = \mu_2 \quad \text{mot} \quad H_A\!: \mu_1 \neq \mu_2 \;\;(\text{tosidig}), \quad \mu_1 > \mu_2 \;\;(\text{ensidig}), \quad \mu_1 < \mu_2 \;\;(\text{ensidig})$$
+
+**Testobservator:** $T \sim t_{\nu}$, men formel og frihetsgrader $\nu$ avhenger av variansantagelsen:
+
+\vspace{0.2cm}
+
+*Lik ukjent varians (pooled):*
+$$T = \frac{\bar{X}_1 - \bar{X}_2}{\sqrt{S_P^2\!\left(\frac{1}{n_1}+\frac{1}{n_2}\right)}}, \quad S_P^2 = \frac{(n_1-1)S_1^2 + (n_2-1)S_2^2}{n_1+n_2-2}, \quad \nu = n_1+n_2-2$$
+
+*Ulik varians (Welch):*
+$$T = \frac{\bar{X}_1 - \bar{X}_2}{\sqrt{S_1^2/n_1 + S_2^2/n_2}}, \quad \nu = \frac{\left(S_1^2/n_1 + S_2^2/n_2\right)^2}{\frac{(S_1^2/n_1)^2}{n_1-1}+\frac{(S_2^2/n_2)^2}{n_2-1}}$$
+
+\vspace{0.2cm}
+
+**Forkastning med kritisk verdi:**
+
+- Tosidig: forkast $H_0$ dersom $|T| > t_{1-\alpha/2,\; \nu}$
+- Ensidig ($H_A\!: \mu_1 > \mu_2$): forkast $H_0$ dersom $T > t_{1-\alpha,\; \nu}$
+- Ensidig ($H_A\!: \mu_1 < \mu_2$): forkast $H_0$ dersom $T < -t_{1-\alpha,\; \nu}$
+
+\vspace{0.2cm}
+
+**Forkastning med p-verdi:** Forkast $H_0$ dersom p-verdi $< \alpha$, der
+
+- Tosidig: p-verdi $= 2 \cdot P(t_{\nu} > |T|)$
+- Ensidig ($H_A\!: \mu_1 > \mu_2$): p-verdi $= P(t_{\nu} > T)$
+- Ensidig ($H_A\!: \mu_1 < \mu_2$): p-verdi $= P(t_{\nu} < T)$
+
+\vspace{0.2cm}
+
+der $t_\nu$ er t-fordelt med $\nu$ frihetsgrader som angitt over.
+
+:::
+
+\newpage 
+
+::: {.callout-tip title="Paret $t$-test"}
+
+Definer differansene $D_i = X_i - Y_i$ og test som én populasjon:
+
+$$H_0\!: \mu_D = 0 \quad \text{mot} \quad H_A\!: \mu_D \neq 0 \;\;(\text{tosidig}), \quad \mu_D > 0 \;\;(\text{ensidig}), \quad \mu_D < 0 \;\;(\text{ensidig})$$
+
+**Testobservator:**
+$$T = \frac{\bar{D}}{S_D/\sqrt{n}} \sim t_{n-1}$$
+
+Forkastningsregler er identiske med testen for forventning i én populasjon, med $\nu = n-1$.
+
+:::
+
+
+::: {.callout-tip title="Test for forskjell i andel mellom to populasjoner"}
+
+$$H_0\!: p_1 = p_2 \quad \text{mot} \quad H_A\!: p_1 \neq p_2 \;\;(\text{tosidig}), \quad p_1 > p_2 \;\;(\text{ensidig}), \quad p_1 < p_2 \;\;(\text{ensidig})$$
+
+**Testobservator:**
+$$Z = \frac{\hat{p}_1 - \hat{p}_2}{\sqrt{\bar{p}(1-\bar{p})\left(\frac{1}{n_1}+\frac{1}{n_2}\right)}} \;\stackrel{.}{\sim}\; N(0,1), \qquad \bar{p} = \frac{X_1 + X_2}{n_1 + n_2}$$
+
+der $X_1$ og $X_2$ er antall suksesser i de to utvalgene og $\bar{p}$ er den samlede andelen under $H_0$.
+
+\vspace{0.2cm}
+
+**Forkastning med kritisk verdi:**
+
+- Tosidig: forkast $H_0$ dersom $|Z| > z_{1-\alpha/2}$
+- Ensidig ($H_A\!: p_1 > p_2$): forkast $H_0$ dersom $Z > z_{1-\alpha}$
+- Ensidig ($H_A\!: p_1 < p_2$): forkast $H_0$ dersom $Z < -z_{1-\alpha}$
+
+\vspace{0.2cm}
+
+**Forkastning med p-verdi:** Forkast $H_0$ dersom p-verdi $< \alpha$, der
+
+- Tosidig: p-verdi $= 2 \cdot P(Z_0 > |Z|)$
+- Ensidig ($H_A\!: p_1 > p_2$): p-verdi $= P(Z_0 > Z)$
+- Ensidig ($H_A\!: p_1 < p_2$): p-verdi $= P(Z_0 < Z)$
+
+\vspace{0.2cm}
+
+der $Z_0 \sim N(0,1)$.
+
+:::
+
+::: {.callout-tip title="$F$-test for likhet av to varianser"}
+
+$$H_0\!: \sigma_1^2 = \sigma_2^2 \quad \text{mot} \quad H_A\!: \sigma_1^2 \neq \sigma_2^2$$
+
+**Testobservator** (sett den største variansen i telleren slik at $F \geq 1$):
+$$F = \frac{S_{\max}^2}{S_{\min}^2} \sim F_{n_{\max}-1,\; n_{\min}-1}$$
+
+**Forkastning:** Forkast $H_0$ dersom $F > F_{1-\alpha/2,\; n_{\max}-1,\; n_{\min}-1}$.
+
+:::
+
+\newpage
+
+::: {.callout-tip title="Kjikvadrattest: Goodness-of-fit (test for spesifisert fordeling)"}
+
+$H_0$: Observasjonene følger en spesifisert fordeling med sannsynligheter $p_1, p_2, \ldots, p_k$.
+
+$H_A$: Observasjonene følger ikke denne fordelingen.
+
+\vspace{0.2cm}
+
+**Testobservator:**
+$$\chi^2 = \sum_{i=1}^k \frac{(f_i - e_i)^2}{e_i} \sim \chi^2_{k-1}, \qquad e_i = n \cdot p_i$$
+
+der $f_i$ er observert frekvens og $e_i$ er forventet frekvens under $H_0$. Krever $e_i \geq 5$ for alle $i$.
+
+\vspace{0.2cm}
+
+**Forkastning:** Forkast $H_0$ dersom $\chi^2 > \chi^2_{1-\alpha,\; k-1}$.
+
+:::
+
+::: {.callout-tip title="Kjikvadrattest: Uavhengighet"}
+
+$H_0$: To kategoriske variabler er uavhengige.
+
+$H_A$: De to variablene er ikke uavhengige.
+
+\vspace{0.2cm}
+
+**Testobservator** ($r$ rader, $s$ kolonner):
+$$\chi^2 = \sum_{i=1}^r\sum_{j=1}^s \frac{(f_{ij}-e_{ij})^2}{e_{ij}} \sim \chi^2_{(r-1)(s-1)}, \qquad e_{ij} = \frac{f_{i\cdot}\,f_{\cdot j}}{n}$$
+
+der $f_{ij}$ er observert frekvens, $f_{i\cdot}$ og $f_{\cdot j}$ er rad- og kolonnesummer, og $e_{ij}$ er forventet frekvens under $H_0$. Krever $e_{ij} \geq 5$ for alle $i, j$.
+
+\vspace{0.2cm}
+
+**Forkastning:** Forkast $H_0$ dersom $\chi^2 > \chi^2_{1-\alpha,\; (r-1)(s-1)}$.
+
+:::
+
+\newpage
+
+## 4 Lineær regresjon
+
+::: {.callout-tip title="Regresjonsmodellen"}
+
+**Enkel lineær regresjon:**
+$$Y_i = \beta_0 + \beta_1 X_i + \epsilon_i, \qquad \epsilon_i \sim N(0, \sigma^2)$$
+
+**Multippel lineær regresjon:**
+$$Y_i = \beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \cdots + \beta_k X_{ik} + \epsilon_i, \qquad \epsilon_i \sim N(0, \sigma^2)$$
+
+
+:::
+
+::: {.callout-tip title="OLS-estimater og inferens"}
+
+**Minste kvadraters estimater (enkel regresjon):**
+$$\hat{\beta}_1 = \frac{S_{XY}}{S_X^2} = \frac{\sum(X_i - \bar{X})(Y_i - \bar{Y})}{\sum(X_i - \bar{X})^2}, \qquad \hat{\beta}_0 = \bar{Y} - \hat{\beta}_1\bar{X}$$
+
+**Predikerte verdier og residualer:**
+$$\hat{Y}_i = \hat{\beta}_0 + \hat{\beta}_1 X_i + \cdots, \qquad \hat{\epsilon}_i = Y_i - \hat{Y}_i$$
+
+**Estimert standardavvik til feilleddet:**
+$$\hat{\sigma} = S_\epsilon = \sqrt{\frac{\sum_{i=1}^n \hat{\epsilon}_i^2}{n-k-1}} = \sqrt{\frac{\mathrm{SSE}}{n-k-1}}$$
+
+**Inferens om enkeltkoeffisienter** ($H_0\!: \beta_j = 0$):
+$$T = \frac{\hat{\beta}_j}{\mathrm{SE}(\hat{\beta}_j)} \sim t_{n-k-1}$$
+
+der $k$ er antall forklaringsvariable og $\mathrm{SE}(\hat{\beta}_j)$ er standardfeilen til koeffisientestimatet (oppgitt som `Std. Error` i R-utskriften). For enkel regresjon:
+$$\mathrm{SE}(\hat{\beta}_1) = \frac{S_\epsilon}{\sqrt{(n-1)S_X^2}}$$
+
+Forkast $H_0$ dersom p-verdien er mindre enn valgt signifikansnivå $\alpha$ — i R indikert med stjerner.
+
+\vspace{0.2cm}
+
+**$F$-test for samlet signifikans** ($H_0\!: \beta_1 = \beta_2 = \cdots = \beta_k = 0$):
+
+Oppgitt i R-utskriften som `F-statistic`. Forkast $H_0$ dersom p-verdien er liten. En signifikant $F$-test betyr at minst én forklaringsvariabel har en sammenheng med $Y$.
+
+:::
+
+
+::: {.callout-tip title="Forklaringskraft"}
+$$\mathrm{SST} = \sum_{i=1}^n (Y_i - \bar{Y})^2, \quad \mathrm{SSE} = \sum_{i=1}^n (Y_i - \hat{Y}_i)^2$$
+$$R^2 = 1 - \frac{\mathrm{SSE}}{\mathrm{SST}}, \qquad R^2_{\text{justert}} = 1 - \frac{\mathrm{SSE}/(n-k-1)}{\mathrm{SST}/(n-1)}$$
+
+:::
+
+::: {.callout-tip title="Prediksjon"}
+
+**Prediksjon** for nye verdier $X_1, X_2,\dots, X_k$:
+$$\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X_{1} + \cdots + \hat{\beta}_k X_{k}$$
+
+**Konfidensintervall** (for $E(Y \mid X_1, X_2,\dots,X_k)$): Representerer usikkerheten i *forventet verdi* av $Y$ for gitte forklaringsvariable. 
+
+**Prediksjonsintervall** (for en ny observasjon $Y$): Representerer usikkerheten i en *enkelt ny observasjon*. 
+
+:::
+
+::: {.callout-tip title="Dummy-variabler og interaksjonsledd"}
+
+**Dummy-variabel** $D_i$: tar verdien 0 eller 1 (f.eks. kjønn, region).
+
+\vspace{0.2cm}
+
+*Generell modell med dummy:* $Y_i = \beta_0 + \beta_1 X_{i1} + \cdots + \beta_k X_{ik} + \beta_{k+1} D_i + \epsilon_i$
+
+\vspace{0.2cm}
+
+- $\hat{\beta}_{k+1}$: Det å gå fra gruppe $D_i=0$ til gruppe $D_i=1$ henger sammen med $\hat{\beta}_{k+1}$ enhets endring i forventet $Y_i$, gitt at alle andre forklaringsvariable holdes konstant.
+
+
+\vspace{0.2cm}
+
+*Modell med interaksjonsledd mellom $X_{i1}$ og $D_i$:*
+
+\vspace{0.2cm}
+
+$Y_i = \beta_0 + \beta_1 X_{i1} + \cdots + \beta_k X_{ik} + \beta_{k+1} D_i + \beta_{k+2}\, X_{i1} \cdot D_i + \epsilon_i$
+
+- $\hat{\beta}_{k+2}$: estimert forskjell i effekten av $X_{i1}$ mellom de to gruppene, gitt at alle andre forklaringsvariable holdes konstant.
+
+
+\vspace{0.2cm}
+
+For en kategorisk variabel med $m$ kategorier brukes $m-1$ dummy-variabler. Kategorien uten egen dummy er *referansekategorien*.
+
+:::
+
+
+::: {.callout-tip title="Transformasjoner og tolkning"}
+
+| Modell | Uttrykk | Tolkning av $\hat{\beta}_1$ |
+|--------|---------|----------------------|
+| Lin–lin | $Y = \beta_0 + \beta_1 X$ | Én enhets økning i $X$ henger sammen med $\hat{\beta}_1$ enhets endring i $Y$ |
+| Log–lin | $\log(Y) = \beta_0 + \beta_1 X$ | Én enhets økning i $X$ henger sammen med ca. $100\hat{\beta}_1$% endring i $Y$\textsuperscript{*} |
+| Lin–log | $Y = \beta_0 + \beta_1\log(X)$ | 1% økning i $X$ henger sammen med $\hat{\beta}_1 / 100$ enhets endring i $Y$ |
+| Log–log | $\log(Y) = \beta_0 + \beta_1\log(X)$ | 1% økning i $X$ henger sammen med ca. $\hat{\beta}_1$% endring i $Y$ (elastisitet) |
+
+\textsuperscript{*}Tilnærmingen $100\hat{\beta}_1$% er god for $|\hat{\beta}_1| < 0.1$. Eksakt: $(e^{\hat{\beta}_1}-1)\times 100\%$.
+
+\vspace{0.2cm}
+
+Ved flere forklaringsvariable gjelder tolkningen *gitt at alle andre forklaringsvariable holdes konstant*.
+:::
+
+::: {.callout-tip title="Forutsetninger og diagnostikk"}
+
+\renewcommand{\arraystretch}{1.6}
+
+| Forutsetning | Diagnostikk |
+|---|---|
+| 1. **Linearitet:** Sann sammenheng mellom $Y$ og $X$ er lineær | Residualplott ($\hat{\epsilon}_i$ mot $\hat{Y}_i$): mønster? |
+| 2. **Homoskedastisitet:** $\mathrm{Var}(\epsilon_i) = \sigma^2$ konstant | Residualplott: symmetrisk, men mønster? (vifteform?) |
+| 3. **Uavhengige feilledd:** $\epsilon_i$ uavhengig av $\epsilon_j$ | ACF-plott av residualer |
+| 4. **Normalfordelte feilledd:** $\epsilon_i \sim N(0, \sigma^2)$ | Histogram / QQ-plott av residualer |
+| 5. **Ingen perfekt multikollinearitet** | Korrelasjoner / VIF mellom forklaringsvariable |
+| 6. **Eksogenitet:** $\mathrm{E}(\epsilon_i| X_i) = 0$ | Utelatte variabler? Seleksjonskjevhet? |
+
+:::
+
+::: {.callout-tip title="Modellvalg og diagnostikk"}
+
+**Variance Inflation Factor (VIF):**
+$$\mathrm{VIF}_j = \frac{1}{1 - R_j^2}$$
+der $R_j^2$ er $R^2$ fra regresjon av $X_j$ på alle andre $X$. Tommelfingerregel: $\mathrm{VIF} > 10$ antyder problem.
+
+**Cooks avstand:** Identifiserer innflytelsesrike observasjoner — enkeltobservasjoner som har uforholdsmessig stor påvirkning på regresjonsestimatene.
+
+**Akaike informasjonskriterium (AIC):**
+$$\mathrm{AIC} = 2k - 2\log L$$
+der $k$ er antall parametre og $L$ er likelihoodfunksjonens verdi. Lavere AIC = bedre modell.
+
+:::
+
+\newpage
+## 5 Tidsrekker
+
+::: {.callout-tip title="Glidende gjennomsnitt og eksponensiell glatting"}
+**Glidende gjennomsnitt** (vindusstørrelse $m$):
+$$\hat{Y}_t = \frac{1}{m}\sum_{j=-(m-1)/2}^{(m-1)/2} Y_{t+j}$$
+
+
+**Eksponensiell glatting** (glattefaktor $0 < w < 1$):
+$$S_t = w Y_t + (1-w) S_{t-1}$$
+Predikert neste verdi: $\hat{Y}_{t+1} = S_t$. 
+:::
+
+::: {.callout-tip title="Autokorrelasjon"}
+
+**Autokorrelasjon ved lag $k$:**
+$$\gamma_k = \mathrm{Cor}(Y_t, Y_{t-k}), \qquad -1 \le \gamma_k \le 1$$
+
+ACF-plottet viser de \emph{empiriske} autokorrelasjonene for ulike lag $k$. De stiplede linjene er (omtrentlige) forkastningsgrenser: utslag utenfor grensene tyder på signifikant autokorrelasjon.
+
+**ACF-mønster for identifisering:**
+
+- *AR-prosess:* Autokorrelasjon avtar gradvis mot null (eksponensielt eller oscillerende).
+- *MA($q$)-prosess:* Autokorrelasjon er «brått» null fra og med lag $q+1$.
+- *Hvit støy:* Ingen signifikante utslag (alle lag innenfor forkastningsgrensene).
+:::
+
+::: {.callout-tip title="Stasjonaritet"}
+En tidsrekke $\{Y_t\}$ er svakt stasjonær dersom:
+
+1. Konstant forventning: $E(Y_t) = \mu$ for alle $t$
+2. Konstant og endelig varians: $\mathrm{Var}(Y_t) = \sigma^2 < \infty$ for alle $t$
+3. Autokorrelasjon avhenger kun av avstand: $\mathrm{Cor}(Y_t, Y_{t-k}) = \gamma_k$
+
+:::
+
+
+
+::: {.callout-tip title="Dekomponering"}
+En tidsrekke kan dekomponeres i:
+$$Y_t = T_t + S_t + R_t$$
+der $T_t$ er trend, $S_t$ er sesongkomponent, og $R_t$ er residualkomponent.
+
+For prediksjon: Tilpass en tidsrekkemodell (f.eks. ARIMA) til $R_t$, ekstrapoler $T_t$, og legg på $S_t$.
+:::
+
+\newpage
+
+::: {.callout-tip title="AR, MA, ARMA og ARIMA"}
+
+**Hvit støy:** $u_t$ er en følge av ukorrelerte variable med $E(u_t) = 0$ og $\mathrm{Var}(u_t) = \sigma^2$.
+
+\vspace{0.3cm}
+
+**AR($p$)** (autoregressiv modell av orden $p$):
+$$Y_t = c + \phi_1 Y_{t-1} + \phi_2 Y_{t-2} + \cdots + \phi_p Y_{t-p} + u_t$$
+Stasjonaritetsbetingelse for AR(1): $|\phi_1| < 1$.
+
+\vspace{0.2cm}
+
+**MA($q$)** (glidende gjennomsnitt av orden $q$):
+$$Y_t = c + \theta_1 u_{t-1} + \theta_2 u_{t-2} + \cdots + \theta_q u_{t-q} + u_t$$
+
+\vspace{0.2cm}
+
+**ARMA($p$,$q$):** Kombinasjon av AR og MA:
+$$Y_t = c + \sum_{i=1}^p \phi_i Y_{t-i} + \sum_{j=1}^q \theta_j u_{t-j} + u_t$$
+
+Konstantleddet $c$ styrer det stasjonære gjennomsnittet til tidsrekken. Når $c = 0$ svinger tidsrekken rundt null. Når $c \neq 0$: for MA er $E(Y_t) = c$; for AR/ARMA er $E(Y_t) = c\,/\,(1 - \phi_1 - \cdots - \phi_p)$.
+
+\vspace{0.2cm}
+
+**Differensiering:** $\Delta Y_t = Y_t - Y_{t-1}$, $\Delta^2 Y_t = \Delta Y_t - \Delta Y_{t-1}$, og generelt $\Delta^d Y_t = \Delta^{d-1} Y_t - \Delta^{d-1} Y_{t-1}$.
+
+\vspace{0.2cm}
+
+**ARIMA($p$,$d$,$q$):** En ARMA($p$,$q$)-modell for den $d$ ganger differensierte rekken:
+$$\Delta^d Y_t = c + \sum_{i=1}^p \phi_i \,\Delta^d Y_{t-i} + \sum_{j=1}^q \theta_j\, u_{t-j} + u_t$$
+
+For ARIMA med $d \geq 1$ innebærer $c \neq 0$ at tidsrekken har en deterministisk trend (drift).
+
+\vspace{0.3cm}
+
+**Prediksjon:** Plugg inn kjente verdier og erstatt ukjent fremtidig støy $u_{t+h}$ med $0$ (beste gjetning). For lange horisonter konvergerer AR-prediksjonen mot det stasjonære gjennomsnittet.
+
+:::
+
+\newpage
+
+## 6 Avansert regresjon og maskinlæring
+
+::: {.callout-tip title="Logistisk regresjon"}
+
+Brukes når responsvariabelen $Y$ er en dummy-variabel ($0$ eller $1$).
+
+La $p = P(Y=1 \mid X_1, \ldots, X_k)$. Den logistiske regresjonsmodellen er:
+$$p = \frac{e^z}{1 + e^z}, \qquad z = \beta_0 + \beta_1 X_1 + \cdots + \beta_k X_k$$
+Ekvivalent (logit-formen):
+$$\mathrm{logit}(p) = \log\!\left(\frac{p}{1-p}\right) = z$$
+
+\vspace{0.2cm}
+
+**Tolkning av koeffisienter via odds:**
+
+- $\hat{\beta}_0$: Dersom alle forklaringsvariable er $0$, er oddsen for $Y=1$ lik $e^{\hat{\beta}_0}$. (Sjelden meningsfull i praksis.)
+- $\hat{\beta}_j$: Én enhets økning i $X_j$, alt annet likt, henger sammen med at oddsen for $Y=1$ endres med en multiplikativ faktor $e^{\hat{\beta}_j}$, dvs. en prosentvis endring på $(e^{\hat{\beta}_j} - 1)\times 100\%$.
+  
+\vspace{0.2cm}
+
+**Beregning av $p$ for gitte verdier:** Sett inn forklaringsvariablene i $z$, deretter $p = e^z/(1+e^z)$.
+
+\vspace{0.2cm}
+
+**Hypotesetesting:** $H_0\!: \beta_j = 0$ kan leses fra R-utskriften via p-verdier og stjerner, som i lineær regresjon.
+
+\vspace{0.2cm}
+
+**Klassifiseringsregel:** Klassifiser som $\hat{Y} = 1$ dersom $\hat{p} > \delta$, ellers $\hat{Y} = 0$, der $\delta$ er en valgt terskelverdi (ofte $\delta = 0.5$).
+
+:::
+
+
+::: {.callout-tip title="$k$ nærmeste naboer (kNN)"}
+
+Klassifiseringsmetode som ikke hviler på modellantagelser.
+
+For en ny observasjon med forklaringsvariable $X_1, X_2, \ldots, X_p$:
+
+1. Velg $k$ (tommelfingerregel: $k = \sqrt{n}$).
+2. Finn de $k$ observasjonene i treningssettet med minst euklidsk avstand:
+$$d = \sqrt{(X_1 - X_1')^2 + (X_2 - X_2')^2 + \cdots + (X_p - X_p')^2}$$
+3. Klassifiser til den kategorien som er hyppigst blant de $k$ naboene (flertallsvotering).
+
+\vspace{0.2cm}
+
+- $k$ kan også velges ved å teste ulike verdier og se hvilken som gir best treffsikkerhet på et testsett.
+
+:::
+
+\newpage
+
+::: {.callout-tip title="Klassifisering"}
+
+**Klassifiseringstabell (confusion matrix):**
+
+|  | Faktisk $Y=1$ | Faktisk $Y=0$ |
+|--|:---:|:---:|
+| **Predikert** $\hat{Y}=1$ | Sann positiv (SP) | Falsk positiv (FP) |
+| **Predikert** $\hat{Y}=0$ | Falsk negativ (FN) | Sann negativ (SN) |
+
+**Sensitivitet** (treffrate): $\frac{\text{SP}}{\text{SP} + \text{FN}}$ = andel av faktiske positiver som klassifiseres riktig.
+
+**Spesifisitet**: $\frac{\text{SN}}{\text{SN} + \text{FP}}$ = andel av faktiske negativer som klassifiseres riktig.
+
+:::
+
+
+
+::: {.callout-tip title="Paneldata og faste effekter"}
+
+**Paneldata:** Samme enheter $i = 1, \ldots, N$ observert over flere tidsperioder $t = 1, \ldots, T$.
+
+$$y_{it} = \beta_0 + \beta_1 x_{it} + \alpha_i + \nu_t + \epsilon_{it}$$
+
+- $\alpha_i$: individuell fast effekt — fanger opp alt som er konstant ved enhet $i$ over tid (observert og uobservert)
+- $\nu_t$: tidseffekt — fanger opp det som er felles for alle enheter i periode $t$
+
+:::
+
+
+::: {.callout-tip title="Difference-in-Differences (DiD)"}
+
+Sammenligner endringer over tid mellom en behandlingsgruppe og en kontrollgruppe:
+
+$$Y_{it} = \beta_0 + \beta_1 \mathrm{Treat}_i + \beta_2 \mathrm{Post}_t + \beta_3 (\mathrm{Treat}_i \times \mathrm{Post}_t) + \epsilon_{it}$$
+
+- $\mathrm{Treat}_i = 1$ for enheter i behandlingsgruppen
+- $\mathrm{Post}_t = 1$ for perioder etter behandlingen
+- $\hat{\beta}_1$: forskjell mellom gruppene før behandlingen
+- $\hat{\beta}_2$: felles tidseffekt for begge grupper
+- $\hat{\beta}_3$: **behandlingseffekten** (differansen i differanser)
+
+\vspace{0.2cm}
+
+**Sentrale antakelser:**
+
+- *Parallelle trender:* Behandlingsgruppen ville fulgt samme utvikling som kontrollgruppen uten behandlingen. Tillater ulikt nivå, men krever lik trend i fravær av behandling. Kan ikke testes direkte, men like pre-trender er et støttetegn.
+- *Ingen smitte:* Kontrollgruppen påvirkes ikke av behandlingen.
+
+:::
+

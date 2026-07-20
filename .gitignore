@@ -1,5 +1,22 @@
+# R / RStudio
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
 /_bookdown_files
+
+# Knitr-figurer for rot-Rmd. Regenereres ved hvert bygg, og den versjonen
+# som faktisk serveres ligger i docs/met4_files/.
+/met4_files/
+
+# OS- og Office-rusk
+.DS_Store
+Thumbs.db
+~$*
+
+# Merge-etterlatenskaper
+*.orig
+
+# Feillagret git-output (se historikken: filene chap og qq lå sporet i rota)
+/chap
+/qq

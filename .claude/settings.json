@@ -1,0 +1,46 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(git status:*)",
+      "PowerShell(git diff:*)",
+      "PowerShell(git log:*)",
+      "PowerShell(git show:*)",
+      "PowerShell(git ls-files:*)",
+      "PowerShell(git branch:*)",
+      "PowerShell(git add:*)",
+      "PowerShell(git commit:*)",
+      "PowerShell(git checkout:*)",
+      "PowerShell(git restore:*)",
+      "PowerShell(git switch:*)",
+      "PowerShell(git pull:*)",
+      "PowerShell(git push:*)",
+      "PowerShell(git stash:*)",
+      "PowerShell(gh pr:*)",
+      "PowerShell(gh issue:*)",
+      "PowerShell(.\\_build.ps1:*)",
+      "PowerShell(Get-ChildItem:*)",
+      "PowerShell(Test-Path:*)",
+      "PowerShell(Get-Command:*)",
+      "PowerShell(Select-String:*)",
+      "PowerShell(Measure-Object:*)",
+      "PowerShell(pdftotext:*)",
+      "Read",
+      "Grep",
+      "Glob",
+      "Edit",
+      "Write",
+      "WebFetch(domain:www.nhh.no)",
+      "WebFetch(domain:bookdown.org)",
+      "WebFetch(domain:cran.r-project.org)"
+    ],
+    "deny": [
+      "PowerShell(git push --force:*)",
+      "PowerShell(git push -f:*)",
+      "PowerShell(git push --delete:*)",
+      "PowerShell(git reset --hard:*)",
+      "PowerShell(git clean -f:*)",
+      "PowerShell(git rebase:*)",
+      "PowerShell(Remove-Item:*)"
+    ]
+  }
+}
