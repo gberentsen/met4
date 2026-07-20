@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.3 Paneldata | MET4 - Empiriske Metoder - vår 2026</title>
   <meta name="description" content="Dette er hjemmesiden til kurset MET4 - Empiriske Metoder, som gis på bachelorstudiet ved Norges Handelshøyskole." />
-  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.3 Paneldata | MET4 - Empiriske Metoder - vår 2026" />
   <meta property="og:type" content="book" />
@@ -290,7 +290,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="struktur-pa-paneldata" class="section level4 hasAnchor" number="6.3.3.1">
 <h4><span class="header-section-number">6.3.3.1</span> Struktur på Paneldata<a href="paneldata.html#struktur-pa-paneldata" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Til nå har vi typisk observert <span class="math inline">\(n\)</span> individer <em>en</em> gang. Hvis vi holder oss til eksempelet fra videoforelesningen, kan vi tenke oss at vi har spurt <span class="math inline">\(n\)</span> arbeidstakere om hvor mange timer de jobbet forrige år (<span class="math inline">\(X\)</span>), og hvor mye de hadde i timelønn (<span class="math inline">\(Y\)</span>). Da ville datasettet sett omtrent slik ut:</p>
-<p><img src="bilder/panel1.PNG" /><!-- --></p>
+<p><img src="bilder/panel1.PNG" alt="" width="76" /></p>
 <p>Her er <span class="math inline">\(y_i\)</span> timelønn til arbeidstaker nummer <span class="math inline">\(i\)</span>, og <span class="math inline">\(x_i\)</span> er antall timer jobbet for arbeidstaker nummer <span class="math inline">\(i\)</span>. Hvis vi så ønsker å se om det er en sammenheng mellom disse to variablene, kan vi sette opp en enkel regresjonsmodell som vi har gjort før:</p>
 <p><span class="math display">\[\begin{equation}
 y_i = \alpha + \beta x_i + \epsilon_i,
@@ -298,7 +298,7 @@ y_i = \alpha + \beta x_i + \epsilon_i,
 \end{equation}\]</span>
 der vi gjør de vanlige antakelsene om homoskedastisitet, uavhengige feilledd, og selvsagt at forklaringsvariabelen er <em>eksogen</em>, dvs at de stokastiske variablene <span class="math inline">\(X\)</span> og <span class="math inline">\(\epsilon\)</span> er <em>uavhengige fra hverandre</em>. Hvis vi aksepterer det, så kan vi estimere <span class="math inline">\(\beta\)</span> ved hjelp av minste kvadreters metode (OLS - orinary least squares), som vi kan tolke som forventet økning i timelønn ved å jobbe en time ekstra.</p>
 <p>For paneldata har vi ikke lenger kun observert <span class="math inline">\(n\)</span> arbeidstakere 1 gang, men spurt <span class="math inline">\(N\)</span> arbeidstakere <span class="math inline">\(T\)</span> ganger, slik at vi trenger to indekser til å identifisere hver enkelt observasjon: <span class="math inline">\(y_{i,t}\)</span> er timelønn til arbeidstaker nummer <span class="math inline">\(i\)</span> ved tidspunkt <span class="math inline">\(t\)</span>. Våre observerte <span class="math inline">\(X\)</span>er og <span class="math inline">\(Y\)</span>er kan vi samle i en tabell som før, se illustrasjonen under. Legg merke til at det bare er de to første kolonnene for <span class="math inline">\(X\)</span> og <span class="math inline">\(Y\)</span> som utgjør de faktiske observasjonene, mens de to neste kolonnene sier hvilket individ som er observert, og ved hvilket tidspunkt observasjonen er utført, og viser bare indeksene til <span class="math inline">\(X\)</span>- og <span class="math inline">\(Y\)</span>-observasjonene. Kall det gjerne <em>metadata</em>, og vi trenger den informasjonen når vi skal utføre paneldatateknikker.</p>
-<p><img src="bilder/panel2.PNG" /><!-- --></p>
+<p><img src="bilder/panel2.PNG" alt="" width="492" /></p>
 <p>Formatet i tabellen over kalles gjerne et <em>langt</em> format, og omtrent samtlige R-pakker og funksjoner som brukes til å analysere panel data forventer at dataene er organisert på denne måten.</p>
 <p>Vi kan ta en titt på hvordan dette ser ut i R for eksempelet vårt:</p>
 <div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="paneldata.html#cb235-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;panel_liten.csv&quot;</span>)              <span class="co"># Leser inn datasettet</span></span>
@@ -324,13 +324,13 @@ der vi gjør de vanlige antakelsene om homoskedastisitet, uavhengige feilledd, o
 <div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="paneldata.html#cb237-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)  </span>
 <span id="cb237-2"><a href="paneldata.html#cb237-2" tabindex="-1"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
 <span id="cb237-3"><a href="paneldata.html#cb237-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> lnwg, <span class="at">color =</span> <span class="fu">factor</span>(id)))</span></code></pre></div>
-<p><img src="met4_files/figure-html/unnamed-chunk-204-1.png" width="672" /></p>
+<p><img src="met4_files/figure-html/unnamed-chunk-204-1.png" alt="" width="672" /></p>
 <p>her ser vi f.eks at alle individene har et dårlig år i 1983, mens 1985 virker å være et godt år. Det også tydelig at lønnen holder seg relavivt lik lønnen det foregående året. Det er altså rimelig å tro at det er fellestrekk i lønnen til individene for gitte år.</p>
 <p>La oss så lage et spredningsplott mellom <code>lnhr</code> og <code>lnwg</code> hvor vi fargelegger hvilket individ observasjonene kommer fra:</p>
 <div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="paneldata.html#cb238-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)  </span>
 <span id="cb238-2"><a href="paneldata.html#cb238-2" tabindex="-1"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
 <span id="cb238-3"><a href="paneldata.html#cb238-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> lnhr, <span class="at">y =</span> lnwg, <span class="at">color =</span> <span class="fu">factor</span>(id)))</span></code></pre></div>
-<p><img src="met4_files/figure-html/unnamed-chunk-205-1.png" width="672" /></p>
+<p><img src="met4_files/figure-html/unnamed-chunk-205-1.png" alt="" width="672" /></p>
 <p>Ser vi på disse dataene samlet sett ser du til å være en klart positiv korrelasjon mellom lønn og antall timer jobbet. Men legg merke til at individ nr. 1 ligger på et høyere lønnsnivå og jobber mer enn de to andre individene. Det er dette som i stor grad skaper et bilde av en sterk positiv sammenheng mellom variablene. Hvis vi ser på de individuelle observasjonene (hver fargesky) hver for seg, virker ikke sammenhengen å være like sterk, og det har kanskje ikke like mye å si for lønnen om du individuelt velger å jobber mer. Dette svarer til fenomenet beskrevet i punkt 2. over.</p>
 </div>
 <div id="generelt-oppsett-av-modell" class="section level4 hasAnchor" number="6.3.3.3">
@@ -477,7 +477,7 @@ summary(reg.fe)
 <span id="cb243-9"><a href="paneldata.html#cb243-9" tabindex="-1"></a></span>
 <span id="cb243-10"><a href="paneldata.html#cb243-10" tabindex="-1"></a><span class="co"># plotter</span></span>
 <span id="cb243-11"><a href="paneldata.html#cb243-11" tabindex="-1"></a><span class="fu">plot</span>(reg.fe2)</span></code></pre></div>
-<p><img src="met4_files/figure-html/unnamed-chunk-210-1.png" width="672" /></p>
+<p><img src="met4_files/figure-html/unnamed-chunk-210-1.png" alt="" width="672" /></p>
 <p>Denne figuren viser også hvordan regresjonskurven ville sett ut dersom vi hadde sett bort fra paneldatastrukturen og brukt en helt vanlig (pooled) regresjonsmodell. Sammenlignet med modellen med faste faste effekter (within) så ville vi da estimert effekten av jobbe mer til å være større. Selv om produktet her er <span class="math inline">\(3\)</span> individuelle regresjonsmodeller, presiserer vi at dette ikke er <span class="math inline">\(3\)</span> uavhengige analyser; alle observasjonene er brukt til å finne et estimat på <span class="math inline">\(\beta_1\)</span>.</p>
 <!-- Vi husker at det også kunne være en felles tidskomponent $v_t$ i en slik modell og at denne kunne betraktes som en kategorisk variabel siden det typisk ikke er så mange ($T$) av disse. Vi kan derfor bare legge til `year`  som en ekstra (kategorisk) forklaringsvariabel forutsatt at den er koded som en `factor`:-->
 <p>Vi husker at det også kunne være en felles tidskomponent <span class="math inline">\(v_t\)</span> i en slik modell og at denne kunne betraktes som en kategorisk variabel siden det typisk ikke er så mange (<span class="math inline">\(T\)</span>) av disse. Vi kan derfor bare legge til <code>year</code> som en ekstra (kategorisk) forklaringsvariabel. Med <code>feols</code> kan vi gjøre dette ved å skrive <code>i()</code> rundt variabelnavnet:</p>

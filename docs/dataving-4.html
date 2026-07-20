@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.4 Dataøving 4 | MET4 - Empiriske Metoder - vår 2026</title>
   <meta name="description" content="Dette er hjemmesiden til kurset MET4 - Empiriske Metoder, som gis på bachelorstudiet ved Norges Handelshøyskole." />
-  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.4 Dataøving 4 | MET4 - Empiriske Metoder - vår 2026" />
   <meta property="og:type" content="book" />
@@ -278,11 +278,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Denne gang er datasettet pakket inn i en såkalt <code>.Rdata</code>-fil. Det er et enkelt filformat for å lagre R-objekter. Last ned <a href="datasett/p_da.Rdata">p_da.Rdata</a>, og last datasettet inn i R ved å kjøre følgende kommando (der du selvsagt har satt arbeidsmappen til der du har lagt datafilen):</p>
 <div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="dataving-4.html#cb328-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;p_DA.Rdata&quot;</span>)</span></code></pre></div>
 <p>Du skal nå få to tidsrekker i minnet: <code>n03</code> og <code>no5</code>, som i figuren under:</p>
-<p><img src="bilder/environ.png" width="800" /></p>
+<p><img src="bilder/environ.png" alt="" width="800" /></p>
 <p>Disse to tidsrekkene inneholder strømprisen i to prisområder i Norge hver time fra 1. januar 2022 til og med 21. september 2022. Tidsrekken <code>no3</code> inneholder prisen for Midt-Norge (NO3) og <code>no5</code> inneholder prisen for Vest-Norge (NO5).</p>
 <p>Vi konsentrerer oss om NO3 i første omgang, og kikker raskt på datasettet ved å plotte tidsrekken direkte med <code>autoplot()</code>-funksjonen som vi finner i <code>forecast</code>-pakken:</p>
 <div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="dataving-4.html#cb329-1" tabindex="-1"></a><span class="fu">autoplot</span>(no3)</span></code></pre></div>
-<p><img src="met4_files/figure-html/unnamed-chunk-285-1.png" width="672" /></p>
+<p><img src="met4_files/figure-html/unnamed-chunk-285-1.png" alt="" width="672" /></p>
 <p>På <span class="math inline">\(x\)</span>-aksen har vi antall dager siden 1. januar 2022. Skriv en kort kommentar der du peker på noen viktige karakteristikker ved denne tidsrekken. Du må gjerne bruke <code>xlim</code>-argumentet i <code>plot()</code>-funksjonen for å zoome inn og se på mindre tidsperioder. Ser tidsrekken ut til å være stasjonær?</p>
 </div>
 <div id="oppgave-2-gjem-bort-den-siste-dagen-slik-at-vi-kan-sjekke-prediksjonene-vare" class="section level3 hasAnchor" number="7.4.2">
@@ -298,10 +298,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Vi har lært at et første steg i tidsrekkeanalyse er å hente ut eventuelle sesong og trendkomponenter. Vi har også sett at det er en enkel funksjon i R som kan gjøre dette for oss, nemlig <code>stl()</code>, slik vi så i <a href="trend-og-sesong.html#trend-og-sesong">seksjonen om trend og sesong</a>.</p>
 <div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="dataving-4.html#cb331-1" tabindex="-1"></a>dekomponert <span class="ot">&lt;-</span> <span class="fu">stl</span>(no3_train, <span class="at">s.window =</span> <span class="st">&quot;periodic&quot;</span>)</span>
 <span id="cb331-2"><a href="dataving-4.html#cb331-2" tabindex="-1"></a><span class="fu">autoplot</span>(dekomponert)</span></code></pre></div>
-<p><img src="met4_files/figure-html/unnamed-chunk-287-1.png" width="672" /></p>
+<p><img src="met4_files/figure-html/unnamed-chunk-287-1.png" alt="" width="672" /></p>
 <p>Det var ikke så lett å se detaljer i sesongkomponenten i dette plottet, så vi zoomer inn på en mindre del av x-aksen:</p>
 <div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="dataving-4.html#cb332-1" tabindex="-1"></a><span class="fu">autoplot</span>(dekomponert) <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">245</span>, <span class="dv">260</span>)</span></code></pre></div>
-<p><img src="met4_files/figure-html/unnamed-chunk-288-1.png" width="672" /></p>
+<p><img src="met4_files/figure-html/unnamed-chunk-288-1.png" alt="" width="672" /></p>
 <p>Gi en kort beskrivelse av de ulike komponentene i tidsrekken.</p>
 </div>
 <div id="oppgave-4-prediker-treningstidsrekken-24-steg-frem-og-visualiser-resultatene." class="section level3 hasAnchor" number="7.4.4">
@@ -318,7 +318,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="dataving-4.html#cb333-1" tabindex="-1"></a>prognose <span class="ot">&lt;-</span> <span class="fu">forecast</span>(dekomponert, <span class="at">method =</span> <span class="st">&quot;arima&quot;</span>, <span class="at">h =</span> <span class="dv">24</span>, <span class="at">level =</span> <span class="dv">95</span>)</span></code></pre></div>
 <p>Vi kan visualisere resultatet ved hjelp av <code>autoplot()</code>. For å kunne se noe fornuftig i plottet så tar vi bare med de 100 siste observerte tidsstegene i tillegg til de 24 prediksjonene:</p>
 <div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="dataving-4.html#cb334-1" tabindex="-1"></a><span class="fu">autoplot</span>(prognose, <span class="at">include =</span> <span class="dv">100</span>)</span></code></pre></div>
-<p><img src="met4_files/figure-html/unnamed-chunk-290-1.png" width="672" /></p>
+<p><img src="met4_files/figure-html/unnamed-chunk-290-1.png" alt="" width="672" /></p>
 <p>Gi en kommentar til dette plottet.</p>
 </div>
 <div id="oppgave-5-sammenlign-prediksjonene-med-de-faktiske-observasjonene" class="section level3 hasAnchor" number="7.4.5">
@@ -342,14 +342,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb335-16"><a href="dataving-4.html#cb335-16" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
 <span id="cb335-17"><a href="dataving-4.html#cb335-17" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;24 timers prognose av strømpris&quot;</span>) <span class="sc">+</span></span>
 <span id="cb335-18"><a href="dataving-4.html#cb335-18" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="met4_files/figure-html/unnamed-chunk-291-1.png" width="672" /></p>
+<p><img src="met4_files/figure-html/unnamed-chunk-291-1.png" alt="" width="672" /></p>
 <p>I dette plottet er prediksjonene av strømprisen vist som en stiplet linje, mens de prisene som faktisk ble observert er vist som en tykk heltrukken linje. Kommenter plottet.</p>
 </div>
 <div id="oppgave-6-lag-prediksjoner-for-neste-dag" class="section level3 hasAnchor" number="7.4.6">
 <h3><span class="header-section-number">7.4.6</span> Oppgave 6: Lag prediksjoner for neste dag<a href="dataving-4.html#oppgave-6-lag-prediksjoner-for-neste-dag" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Så langt har vi brukt alle dagene i datasettet vårt <em>bortsett fra den siste</em> til å predikere strømprisen på den siste dagen. Resultatene ser ut til å være gode. Du kan nå gjenta denne prosedyren, men i stedet for tidsrekken <code>no3_train</code> skal du nå bruke hele tidsrekken <code>no3</code> til å predikere prisen for dagen etter det – den 22. september 2022 – en dag der vi ikke har de faktisk realiserte prisene i datasettet vårt.</p>
 <p>Du skal få et prediksjonsplott som ser slik ut:</p>
-<p><img src="met4_files/figure-html/unnamed-chunk-292-1.png" width="672" /></p>
+<p><img src="met4_files/figure-html/unnamed-chunk-292-1.png" alt="" width="672" /></p>
 <p>Du kan så samle prediksjonene i en data frame som i forrige oppgave, men der vi selvsagt ikke kan ha med en kolonne med observerte priser, siden vi ikke har dem tilgjengelige. Den endelige tabellen med observasjoner skal se slik ut:</p>
 <pre><code>##     x prediksjon       nedre      ovre
 ## 1   1   36.02709  12.1495723  59.90460
@@ -388,7 +388,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="oppgave-8-gjr-det-samme-for-no5" class="section level3 hasAnchor" number="7.4.8">
 <h3><span class="header-section-number">7.4.8</span> Oppgave 8: Gjør det samme for <code>no5</code><a href="dataving-4.html#oppgave-8-gjr-det-samme-for-no5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Du kan nå gjenta øvelsen over for å få ut samme type prediksjoner for det andre prisområdet. Tidsrekken finner du i <code>no5</code> og prediksjonsplottet ser slik ut:</p>
-<p><img src="met4_files/figure-html/unnamed-chunk-295-1.png" width="672" /></p>
+<p><img src="met4_files/figure-html/unnamed-chunk-295-1.png" alt="" width="672" /></p>
 <p>Data framen med prediksjonene skal se slik ut:</p>
 <div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="dataving-4.html#cb338-1" tabindex="-1"></a>prediksjoner3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb338-2"><a href="dataving-4.html#cb338-2" tabindex="-1"></a>  <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">24</span>,                            <span class="co"># Timer i døgnet for x-aksen</span></span>
