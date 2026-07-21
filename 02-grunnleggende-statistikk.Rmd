@@ -244,7 +244,7 @@ c(LCL, gj.snitt, UCL)
 
 Den kritiske verdien `qt(0.975, df = 24)` er omtrent 2,06, altså litt større enn 1,96 fra normalfordelingen. Det gjør intervallet en tanke bredere, og det er rimelig: vi betaler en liten pris i presisjon fordi vi måtte estimere standardavviket i stedet for å kjenne det på forhånd.
 
-Selve *fortolkningen* av et konfidensintervall er notorisk glatt, og verdt å bruke litt tid på. Hovedpoenget er:
+Selve *fortolkningen* av et konfidensintervall er lett å misforstå, og verdt å bruke litt tid på. Hovedpoenget er:
 
 - Et 95 %-konfidensintervall skal *ikke* tolkes som at «sannsynligheten for at den sanne parameterverdien ligger i intervallet er 95 %».
 - Den korrekte tolkningen er: «Dersom vi gjentatte ganger trakk nye utvalg av samme størrelse fra populasjonen og regnet ut et nytt konfidensintervall hver gang, ville 95 av 100 slike intervaller inneholde den sanne parameterverdien».
