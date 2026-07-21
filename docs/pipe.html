@@ -265,8 +265,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </iframe>
 <p>Vi går gjennom to nyttige programmeringsteknikker som begge er inneholdt i <code>dplyr</code>-pakken:</p>
 <ol style="list-style-type: decimal">
-<li>Pipe-operatoren <code>%&gt;%</code>. som gjør at vi kan skrive opp en sekvens av funksjonskall i den rekkefølgen de skal kjøres, og uten å miste oversikten i et hav av paranteser.</li>
-<li>Funksjoner for enkel datavask: <code>select()</code> for å velge ut kolonner i et datasett, <code>filter()</code> for å filtrere rader basert på kriterier, og <code>mutate()</code> for å lage nye kolonner.</li>
+<li>Pipe-operatoren <code>%&gt;%</code>, som gjør at vi kan skrive opp en sekvens av funksjonskall i den rekkefølgen de skal kjøres, og uten å miste oversikten i et hav av parenteser.</li>
+<li>Funksjoner for enkel datavask: <code>select()</code> for å velge ut kolonner i et datasett, <code>filter()</code> for å filtrere rader basert på kriterier, <code>mutate()</code> for å lage nye kolonner, og <code>summarise()</code> for å regne ut oppsummerende tall (som gjennomsnitt eller sum) fra en hel kolonne.</li>
 </ol>
 <p>Her er et par ekstra tips i denne sammenhengen:</p>
 <ul>
@@ -324,14 +324,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-42"><a href="pipe.html#cb13-42" tabindex="-1"></a><span class="co"># Bruk &quot;mutate()&quot; for å lage nye kolonner, gjerne basert på de vi allerede har:</span></span>
 <span id="cb13-43"><a href="pipe.html#cb13-43" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">sum =</span> X1 <span class="sc">+</span> X2)</span>
 <span id="cb13-44"><a href="pipe.html#cb13-44" tabindex="-1"></a></span>
-<span id="cb13-45"><a href="pipe.html#cb13-45" tabindex="-1"></a><span class="co"># Legg merke til at vi her bare skriver navnet på datasettet en gang, nemlig helt i</span></span>
-<span id="cb13-46"><a href="pipe.html#cb13-46" tabindex="-1"></a><span class="co"># starten. Vi kan også kjøre flere slike pipes etter hverandre, og lagre resultatet </span></span>
-<span id="cb13-47"><a href="pipe.html#cb13-47" tabindex="-1"></a><span class="co"># i en ny variabel:</span></span>
-<span id="cb13-48"><a href="pipe.html#cb13-48" tabindex="-1"></a>ny_testdata <span class="ot">&lt;-</span> </span>
-<span id="cb13-49"><a href="pipe.html#cb13-49" tabindex="-1"></a>    testdata <span class="sc">%&gt;%</span></span>
-<span id="cb13-50"><a href="pipe.html#cb13-50" tabindex="-1"></a>        <span class="fu">select</span>(X1, X2) <span class="sc">%&gt;%</span></span>
-<span id="cb13-51"><a href="pipe.html#cb13-51" tabindex="-1"></a>        <span class="fu">filter</span>(X1 <span class="sc">&gt;</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-52"><a href="pipe.html#cb13-52" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">sum =</span> X1 <span class="sc">+</span> X2)</span></code></pre></div>
+<span id="cb13-45"><a href="pipe.html#cb13-45" tabindex="-1"></a><span class="co"># Bruk &quot;summarise()&quot; for å regne ut ett oppsummerende tall fra en hel kolonne,</span></span>
+<span id="cb13-46"><a href="pipe.html#cb13-46" tabindex="-1"></a><span class="co"># for eksempel gjennomsnittet av alle verdiene i X1:</span></span>
+<span id="cb13-47"><a href="pipe.html#cb13-47" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">snitt_X1 =</span> <span class="fu">mean</span>(X1))</span>
+<span id="cb13-48"><a href="pipe.html#cb13-48" tabindex="-1"></a></span>
+<span id="cb13-49"><a href="pipe.html#cb13-49" tabindex="-1"></a><span class="co"># summarise() blir spesielt kraftig sammen med &quot;group_by()&quot;, som først deler</span></span>
+<span id="cb13-50"><a href="pipe.html#cb13-50" tabindex="-1"></a><span class="co"># dataene inn i grupper. Da får vi ett tall per gruppe. Her regner vi ut</span></span>
+<span id="cb13-51"><a href="pipe.html#cb13-51" tabindex="-1"></a><span class="co"># gjennomsnittet av X1 for hver verdi av A1-kolonnen:</span></span>
+<span id="cb13-52"><a href="pipe.html#cb13-52" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span></span>
+<span id="cb13-53"><a href="pipe.html#cb13-53" tabindex="-1"></a>    <span class="fu">group_by</span>(A1) <span class="sc">%&gt;%</span></span>
+<span id="cb13-54"><a href="pipe.html#cb13-54" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">snitt_X1 =</span> <span class="fu">mean</span>(X1))</span>
+<span id="cb13-55"><a href="pipe.html#cb13-55" tabindex="-1"></a></span>
+<span id="cb13-56"><a href="pipe.html#cb13-56" tabindex="-1"></a><span class="co"># Legg merke til at vi her bare skriver navnet på datasettet en gang, nemlig helt i</span></span>
+<span id="cb13-57"><a href="pipe.html#cb13-57" tabindex="-1"></a><span class="co"># starten. Vi kan også kjøre flere slike pipes etter hverandre, og lagre resultatet </span></span>
+<span id="cb13-58"><a href="pipe.html#cb13-58" tabindex="-1"></a><span class="co"># i en ny variabel:</span></span>
+<span id="cb13-59"><a href="pipe.html#cb13-59" tabindex="-1"></a>ny_testdata <span class="ot">&lt;-</span> </span>
+<span id="cb13-60"><a href="pipe.html#cb13-60" tabindex="-1"></a>    testdata <span class="sc">%&gt;%</span></span>
+<span id="cb13-61"><a href="pipe.html#cb13-61" tabindex="-1"></a>        <span class="fu">select</span>(X1, X2) <span class="sc">%&gt;%</span></span>
+<span id="cb13-62"><a href="pipe.html#cb13-62" tabindex="-1"></a>        <span class="fu">filter</span>(X1 <span class="sc">&gt;</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-63"><a href="pipe.html#cb13-63" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">sum =</span> X1 <span class="sc">+</span> X2)</span></code></pre></div>
+<p>Legg spesielt merke til <code>summarise()</code> og <code>group_by()</code> over. Der <code>select()</code>, <code>filter()</code> og <code>mutate()</code> gir oss en ny tabell tilbake, <em>kollapser</em> <code>summarise()</code> mange rader ned til noen få oppsummerende tall. Kombinert med <code>group_by()</code> er dette en av de mest brukte teknikkene i praktisk dataanalyse: del dataene inn i grupper, og regn ut et tall — gjennomsnitt, sum, antall og så videre — for hver gruppe.</p>
 <p><strong>Oppgave:</strong> Basert på <code>testdata</code>, lag en tabell som bare inneholder radene der <code>A1</code>-kolonnen er lik 1 <em>og</em> <code>A2</code>-kolonnen er lik 0, men der vi bare skal ha med kolonnene <code>X1</code> og <code>X2</code>. Lag til slutt en ny kolonne som inneholder differansen av tallene i <code>X1</code> og <code>X2</code>-kolonnene.</p>
 <details>
 <summary>
