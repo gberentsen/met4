@@ -17,44 +17,88 @@ I videoforelesningene går vi gjennom noen slides, og vi skriver et R-skript. Du
 
 <div style='padding:74.79% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7748078/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
 
-### Kommentarer
+### Teori
 
-Deskriptiv statistikk handler ikke om analyse eller regning, men om å presentere kompleks informasjon på en effektiv måte. Det er altså noe ganske annet enn det vi ellers snakker om i kurset, men det er likevel et av de nyttigste læringspunktet vi har. Hvem kan ikke regne med å måtte presentere tall og resultater i løpet av sin karriere? Eller selge inn forslag og planer for overordnede i håp om å bli lyttet til? Det kan være direkte avgjørende for din egen gjennomslagskraft at du er i stand til å produsere overbevisende tabeller og figurer i slike situasjoner, og det er det dette temaet handler om. 
+Deskriptiv statistikk har to hovedformål. Det første er å **bli kjent med et datasett**: før vi setter i gang med mer avansert analyse, vil vi danne oss et bilde av hva slags tall vi har foran oss, om det finnes åpenbare feil eller ekstremverdier, og hvilke mønstre som umiddelbart trer frem. Det andre formålet er å **presentere resultater** slik at de er lette å forstå for andre. Et viktig poeng er at deskriptiv statistikk verken generaliserer fra utvalget til en større populasjon eller tester årsakssammenhenger — vi lar rett og slett dataene fortelle sin egen historie. Selve slutningen fra utvalg til populasjon kommer vi tilbake til i neste delkapittel.
 
-I læreboken er det kapitlene **2--4** som behandler deskriptiv statistikk, men det er veldig Excel-fokusert, som ikke er så relevant for oss. Det er likevel ikke dumt å lese gjennom stoffet for å se hva det går i, og legg spesielt merke til følgende punkter:
+Når vi beskriver en tallvariabel numerisk, er det særlig to spørsmål vi stiller: *hvor ligger tyngdepunktet i dataene*, og *hvor spredt er de rundt dette tyngdepunktet*? Har vi to variabler, kommer et tredje spørsmål til: *henger de sammen*?
 
-- Ulike datatyper i avsnitt **2-1**.
-- **3-4**: The art and science of graphical presentations. Hva er det som gjør en grafisk illustrasjon god? Prøv å ta inn over dere all informasjonen som vi lett kan lese ut av bildet på side 75 om Napoleons felttog mot Moskva. Her presenteres informasjon om tid, antall, geografi og temperatur på en helt eksepsjonelt effektiv måte! Videre er det noen grelle eksempler på hvordan vi kan bruke grafiske virkemidler til å gi skjeve fremstillinger. I videoforelesningen gir vi flere eksempler på dette. 
-- Kapittel **4** går litt mer i dybden om numeriske deskriptive teknikker, som gjennomsnitt, median, standardavvik, korrelasjon, osv. Dette skal være dekket greit i forelesningen, men boken går litt lenger.
+#### Sentraltendens
 
-Det kan være en fin øvelse å kikke på eksemplene i læreboken og forsøke å gjenskape noen av Excel-figurene i R. Se på eksempel 3.2, der man skal lage to histogrammer over historiske avkastninger for to ulike investeringsstrategier. Vi leser inn datasettet (last ned fra Canvas) som under og kikker på det:
+Tyngdepunktet, eller sentraltendensen, kan måles på flere måter:
 
-```{r, echo = FALSE}
-library(readxl)
-returns <- read_xlsx("datasett/Xm03-02.xlsx")
+- **Gjennomsnittet** $\overline{X} = \frac{1}{n}\sum_{i=1}^n X_i$ er summen av alle verdiene delt på antallet. Dette er det vanligste målet, men det trekkes lett i retning av ekstremverdier.
+- **Medianen** er den midterste verdien når observasjonene sorteres etter størrelse.
+- **Typetallet** er den verdien som forekommer oftest.
+
+Hvorfor bry seg med mer enn gjennomsnittet? Fordi medianen er langt mer **robust** mot ekstremverdier. Tenk deg lønningene på en liten arbeidsplass med ti ansatte, der én av dem tilfeldigvis er konsernsjefen. Gjennomsnittslønnen kan da bli misvisende høy og gi et helt feilaktig bilde av hva en «typisk» ansatt tjener, mens medianen er upåvirket av hvor ekstremt høy den ene lønnen er. Nettopp derfor rapporteres for eksempel medianinntekt, og ikke gjennomsnittsinntekt, i mange sammenhenger.
+
+#### Spredning
+
+To datasett kan ha nøyaktig samme gjennomsnitt og likevel se helt forskjellige ut, fordi verdiene er ulikt spredt. Det vanligste spredningsmålet er **standardavviket**
+
+$$S = \sqrt{\frac{1}{n-1}\sum_{i=1}^n (X_i - \overline{X})^2},$$
+
+som grovt sagt måler hvor langt observasjonene i gjennomsnitt ligger fra $\overline{X}$. Kvadratet $S^2$ kalles **variansen**. Standardavviket har samme måleenhet som dataene selv (kroner, centimeter, ...) og er derfor lettest å tolke.
+
+Et alternativ som — i likhet med medianen — er robust mot ekstremverdier, er å bruke **prosentiler**. Den $p$-te prosentilen er den verdien som har $p$ % av observasjonene under seg. De tre kvartilene (25-, 50- og 75-prosentilene) deler dataene i fire like store deler, og avstanden mellom øvre og nedre kvartil kalles **interkvartilbredden** (IQR). Et boksplott er en effektiv grafisk fremstilling av nettopp disse størrelsene.
+
+#### Sammenheng mellom to variabler
+
+Har vi målt to variabler for de samme observasjonene — for eksempel høyde og vekt — vil vi ofte vite om de henger sammen. Grafisk gjør vi det med et **spredningsdiagram**, og numerisk med **korrelasjonskoeffisienten** $r$. Den forteller oss hvor nær punktene ligger en rett linje, og har tre egenskaper det er verdt å merke seg:
+
+- $r$ ligger alltid mellom $-1$ og $1$.
+- Fortegnet forteller om samvariasjonen er positiv (begge øker sammen) eller negativ (den ene øker når den andre synker).
+- Tallverdien forteller hvor sterk den *lineære* sammenhengen er, men sier ingenting om *stigningstallet*.
+
+Her lurer en klassisk felle: **at $r = 0$ betyr ikke at variablene er uavhengige.** Korrelasjonskoeffisienten fanger bare opp *lineære* sammenhenger. To variabler kan ha en tydelig, men krum, sammenheng (for eksempel U-formet) og likevel ha korrelasjon null. Det motsatte holder derimot alltid: er to variabler uavhengige, er de også ukorrelerte.
+
+#### Å presentere data
+
+Deskriptiv statistikk handler like mye om å *presentere* tall som om å regne dem ut. Dette er en ferdighet det er verdt å ta på alvor: evnen til å lage en overbevisende tabell eller figur kan være direkte avgjørende for gjennomslagskraften din, enten du legger fram resultater for en sjef, en kunde eller en eksamenssensor.
+
+Et av de mest berømte eksemplene på god deskriptiv statistikk er Charles Minards figur fra 1869 over Napoleons felttog mot Moskva, som vi ser nærmere på i videoforelesningen. På ett enkelt bilde klarer den å formidle tid, antall soldater, geografisk posisjon og temperatur samtidig — et forbilledlig eksempel på hvor mye informasjon en gjennomtenkt figur kan bære. I forelesningen ser vi også på noen *grelle* eksempler på det motsatte: hvordan grafiske virkemidler kan brukes til å gi skjeve og misvisende fremstillinger.
+
+#### Et eksempel i R
+
+La oss se hvordan vi kan beskrive et datasett i praksis. Tenk deg den daglige avkastningen (i prosent) til to ulike investeringsstrategier — en *forsiktig* og en *offensiv* — over 1000 handledager. Her simulerer vi tallene selv, slik at du kan kjøre koden og få nøyaktig de samme resultatene:
+
+```{r}
+set.seed(42)
+avkastning <- data.frame(
+  forsiktig = rnorm(1000, mean = 0.10, sd = 0.4),
+  offensiv  = rnorm(1000, mean = 0.10, sd = 1.6)
+)
 ```
 
-```{r, eval = FALSE}
-library(readxl)
-returns <- read_xlsx("Xm03-02.xlsx")
-returns
+Vi regner ut de sentrale målene fra teorien over for hver strategi. Her bruker vi `summarise()` fra `dplyr`, som vi ble kjent med i forrige modul:
+
+```{r, message=FALSE, warning=FALSE}
+library(dplyr)
+avkastning %>%
+  summarise(
+    snitt_forsiktig = mean(forsiktig),
+    sd_forsiktig    = sd(forsiktig),
+    snitt_offensiv  = mean(offensiv),
+    sd_offensiv     = sd(offensiv)
+  )
 ```
 
-```{r, echo = FALSE}
-returns
-```
+De to strategiene har praktisk talt samme gjennomsnittlige daglige avkastning (rundt 0,09 %), men legg merke til hvor forskjellige *standardavvikene* er. Det illustrerer et hovedpoeng fra teorien: gjennomsnittet alene forteller ikke hele historien — spredningen er vel så viktig. Det kommer enda tydeligere fram i et histogram for hver strategi:
 
-Hver stategi har sin kolonne. Merk at variabelnavnene har mellomrom i seg, noe som er upraktisk når vi jobber med et seriøst programmeringsspråk. En god vane er å rett og slett gi dem nye navn, ved f.eks. å kjøre `colnames(returns) <- c("returnA", "returnB")`, eller så må vi alltid referere til variabelnavnene ved å bruke slike "backticks" som vi ser under.
-
-Vi kan lage to enkle histogrammer slik vi gjorde det i forelesningen:
-
-```{r to-histogrammer, fig.show = "hold", fig.cap="To histogrammer"}
+```{r hist-avkastning, fig.show='hold', fig.cap='Daglig avkastning for to strategier med samme gjennomsnitt, men ulik spredning.', message=FALSE, warning=FALSE}
 library(ggplot2)
-ggplot(returns, aes(x = `Return A`)) +
-        geom_histogram(bins = 10)
-ggplot(returns, aes(x = `Return B`)) +
-        geom_histogram(bins = 10)
+ggplot(avkastning, aes(x = forsiktig)) +
+  geom_histogram(bins = 30) +
+  labs(x = "Daglig avkastning (%)", y = "Antall dager", title = "Forsiktig strategi")
+ggplot(avkastning, aes(x = offensiv)) +
+  geom_histogram(bins = 30) +
+  labs(x = "Daglig avkastning (%)", y = "Antall dager", title = "Offensiv strategi")
 ```
+
+Den offensive strategien har en langt bredere fordeling — større svingninger, og dermed høyere risiko — selv om den i snitt gir like mye som den forsiktige.
+
+### Kontrollspørsmål
 
 Her er noen kontrollspørsmål som du kan prøve deg på:
 
@@ -71,78 +115,99 @@ Her er noen kontrollspørsmål som du kan prøve deg på:
 
 <div style='padding:74.93% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7774368/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
 
-### Kommentarer
+### Teori
 
-I videoforelesningene over går vi gjennom noen sentrale begreper i statistikk. Noen av dem skal vi bruke mye i fortsettelsen, mens andre er ment for å gi dere et solid teoretisk fundament når vi etter hvert skal begi oss ut på anvendt statistikk.
+I forrige delkapittel beskrev vi data slik de forelå. Nå tar vi et viktig steg videre: vi tenker på datasettet vårt som et **utvalg** trukket fra en større **populasjon**, og vi vil bruke utvalget til å si noe om populasjonen. Dette er kjernen i **statistisk inferens**, og et tema som følger oss gjennom resten av kurset.
 
-Vi startet med å sette opp en liten agenda. Som et første steg kan du kikke på, og notere ned noen setninger til, disse punktene og se om du har fått med deg hva de betyr:
+#### Populasjon, parameter og estimator
 
-- Samplingfordelinger
-- Forventning/varians
-- Sentralgrenseteoremet
-- Hva er samplingfordelingen til et gjennomsnitt?
-- Hva er samplingfordelingen til en andel?
-- Forventningsrett
-- Konsistens
+Populasjonen er hele mengden vi egentlig er interessert i — for eksempel alle norske velgere, eller all fisk i en oppdrettsmerd. En **parameter** er et tall som beskriver populasjonen, slik som den sanne forventningen $\mu$, det sanne standardavviket $\sigma$, eller den sanne andelen $p$. Problemet er at vi nesten aldri kan måle hele populasjonen; vi må nøye oss med et utvalg. Ut fra utvalget regner vi så ut en **estimator** (også kalt en observator) — en «regel» for å gjette parameterverdien, for eksempel gjennomsnittet $\overline{X}$ som et anslag på $\mu$.
 
-I Boken er det kapittel **9** (*Sampling distributions*) og **10** (*Introduction to estimation*) som gjelder. Kapittel **6**--**8** omhandler stoff skal skal være greit dekket i MET2 (Sannsynlighet, fordelinger, stokastiske variable, osv.), men det kan være nyttig å skumme gjennom likevel hvis disse begrepene ligger langt bak i bevissheten din. 
+Det helt sentrale poenget er dette: siden observasjonene i utvalget er tilfeldige, blir også estimatoren tilfeldig. Trekker vi et nytt utvalg, får vi et litt annet gjennomsnitt. Estimatoren er altså selv en stokastisk variabel med sin egen fordeling — og den fordelingen kaller vi en **samplingfordeling**. Nesten alt vi gjør senere i kurset, handler i bunn og grunn om å forstå samplingfordelinger.
 
-Kapittel **9** starter med å diskutere samplingfordelingen til et gjennomsnitt. Dette er nyttig lesestoff, men de viktigste punktene er som følger:
+#### Utvalgsstørrelser og populasjonsstørrelser
 
-- Dersom observasjonene $X_1, X_2, \ldots, X_n$ er normalfordelt, er også gjennomsnittet $\overline X = \frac{1}{n}\sum_{i=1}^n X_i$ normalfordelt.
-- Dersom E$(X_i) = \mu$ og Var$(X_i) = \sigma^2$ for alle $i = 1,\ldots,n$, er E$(\overline X)=\mu$ og Var$(\overline X) = \sigma^2/n$. Dette regnet vi ut formelt.
-- Dersom $n$ er *stor*, er $\overline X$ tilnærmet normalfordelt, uavhengig av fordelingen til den enkelte $X_i$. Dette følger av **sentralgrensesetningen**. 
+Et poeng det er verdt å feste seg ved med en gang, er at nesten alle størrelsene vi jobber med, finnes i **to varianter**: én for populasjonen og én for utvalget. Populasjonsstørrelsen er den sanne, men ukjente verdien vi er ute etter. Utvalgsstørrelsen er det vi faktisk regner ut fra dataene, og som vi bruker som et anslag på den første.
 
-Dette står i en boks på slutten av seksjon **9-1a**. Hvor stor må $n$ være for at denne tilnærmingen er god nok? Det finnes ikke et entydig svar på, men når vi passerer 50-100 observasjoner kan vi i våre MET4-problemer gjerne si at $n$ er «stor nok». I **9-1b** og **9-1c** brukes sentralgrenseteoremet til å regne på normalsannsynligheter i MET2-stil. I **9-1d** er det noen Excel-instruksjoner som du kan hoppe over hvis du vil.
+| Størrelse | I populasjonen (sann, ukjent) | I utvalget (beregnet fra data) |
+|---|---|---|
+| Gjennomsnitt | populasjonsgjennomsnitt $\mu$ | utvalgsgjennomsnitt $\overline{X}$ |
+| Standardavvik | populasjonsstandardavvik $\sigma$ | utvalgsstandardavvik $S$ |
+| Andel | populasjonsandel $p$ | utvalgsandel $\widehat{p}$ |
 
-Tekstboksen i **9-2c** oppsummerer det vi fant ut om samplingfordelingen til en observert andel. I seksjon **9-3** snakkes det om samplingfordelingen til *differansen av to gjennomsnitt*. Vi gikk ikke gjennom det eksplisitt i forelesningen, men det er ikke noe substansielt nytt her. Vi skal bruke dette reultatet i neste modul når vi skal sammenligne to gjennomsnitt. I seksjon **9-4** får vi forklart hva vi skal bruke samplingfordelinger til fremover. Bør leses.
+Skillet er grunnleggende, og de to variantene er lette å blande sammen. Når vi snakker om «gjennomsnittet», må vi hele tiden være bevisste på om vi mener det sanne **populasjonsgjennomsnittet** $\mu$ (som vi sjelden kjenner) eller **utvalgsgjennomsnittet** $\overline{X}$ (som vi regner ut fra dataene våre, og som vil variere fra utvalg til utvalg). Notasjonen hjelper oss å holde dem fra hverandre: populasjonsstørrelser skrives gjerne med greske bokstaver ($\mu$, $\sigma$, $p$), mens utvalgsstørrelser skrives med latinske bokstaver eller med en «hatt», som i $\overline{X}$ og $\widehat{p}$.
 
-Kapittel **10** omhandler *estimering*, dvs hvordan vi bruker data til å «gjette» på verdien til en ukjent parameter. Vi forsøkte i forelesningen å gi litt intuisjon til begrepene
+#### Samplingfordelingen til et gjennomsnitt
 
-- forventningsrett estimator,
-- variansen til en estimator, og
-- konsistens.
+Anta at observasjonene $X_1, X_2, \ldots, X_n$ er uavhengige, med forventning $\mu$ og varians $\sigma^2$. Ved hjelp av regnereglene for forventning og varians (se formelarket) kan man vise at gjennomsnittet oppfyller
 
-Vi kan lage et *punktestimat* av en forventningsverdi ved å ta gjennomsnittet av observasjoner, og vi kan lage et *konfidensintervall* ved å følge oppskriften i boksen på s. 316 (i 11. utgave).
+$$\textrm{E}(\overline{X}) = \mu, \qquad \textrm{Var}(\overline{X}) = \frac{\sigma^2}{n}, \qquad \textrm{det vil si} \qquad \sigma(\overline{X}) = \frac{\sigma}{\sqrt{n}}.$$
 
-I eksempel 10.1 har vi 25 observasjoner fra en normalfordeling. Oppgaven er å estimere forventningsverdien med et tilhørende 95% konfidensuntervall. Pass på at du forstår den manuelle utregningen. I stedet for å bruke Excel (eller taste alle disse tallene inn på en kalkulator) kan du skrive et lite R-script som gjør det samme:
+To ting er verdt å dvele ved. For det første er gjennomsnittet **forventningsrett**: i snitt treffer det den sanne verdien $\mu$. For det andre — og dette er kanskje det viktigste enkeltresultatet i modulen — skrumper standardavviket til gjennomsnittet inn som $1/\sqrt{n}$ når utvalget vokser. Med andre ord: jo flere observasjoner vi samler inn, jo mer presist blir anslaget vårt. Men presisjonen øker bare med *kvadratroten* av $n$, så for å halvere usikkerheten må vi firedoble antall observasjoner.
+
+#### Sentralgrenseteoremet
+
+Dersom $X$-ene i utgangspunktet er normalfordelte, er gjennomsnittet også eksakt normalfordelt. Men hva om vi ikke kjenner fordelingen til den enkelte observasjonen? Her kommer statistikkfagets kanskje mest bemerkelsesverdige resultat til unnsetning. **Sentralgrenseteoremet** sier at fordelingen til gjennomsnittet nærmer seg normalfordelingen når $n$ blir stor — *nesten uansett hvordan de enkelte observasjonene er fordelt*. Det er dette som gjør normalfordelingen så gjennomgripende i statistikken: så snart vi jobber med gjennomsnitt (eller summer) av mange observasjoner, dukker den nesten alltid opp. En vanlig tommelfingerregel er at tilnærmingen er god når vi har mer enn 50–100 observasjoner.
+
+#### Samplingfordelingen til en andel
+
+Ofte er vi ikke ute etter et gjennomsnitt, men en **andel** — for eksempel andelen velgere som støtter et bestemt parti, eller andelen defekte enheter i en produksjon. En observert andel $\widehat{p}$ kan skrives som et gjennomsnitt av nuller og enere (fiasko og suksess), og da slår sentralgrenseteoremet til på nytt:
+
+$$\widehat{p} \;\sim\; N\!\left(p,\; \frac{p(1-p)}{n}\right).$$
+
+Tilnærmingen regnes som god når $np > 5$ og $n(1-p) > 5$. Legg merke til at også her avtar usikkerheten som $1/\sqrt{n}$ — det er derfor en meningsmåling med rundt 1000 respondenter kan gi et brukbart anslag på hva et helt land mener.
+
+#### Gode estimatorer
+
+Det finnes gjerne flere mulige estimatorer for samme parameter, og da må vi kunne vurdere hvilken som er best. Tre egenskaper står sentralt:
+
+- En estimator er **forventningsrett** dersom forventningen er lik den sanne parameterverdien, $\textrm{E}(\widehat{\theta}) = \theta$. Da bommer den ikke systematisk, verken for høyt eller for lavt.
+- Blant flere forventningsrette estimatorer foretrekker vi den mest **effektive** — den med minst varians.
+- En estimator er **konsistent** dersom den nærmer seg den sanne verdien når utvalget vokser. Gjennomsnittet er konsistent nettopp fordi variansen $\sigma^2/n$ går mot null når $n$ øker.
+
+#### Konfidensintervall
+
+Begrepene i dette delkapittelet bygger videre på sannsynlighetsregningen fra MET2 — fordelinger, stokastiske variabler, forventning og varians. Ligger dette langt bak i bevisstheten, kan det være lurt å friske det opp.
+
+Vi kan lage et *punktestimat* av en forventningsverdi ved å ta gjennomsnittet av observasjonene. Men et enkelt tall sier ingenting om hvor sikkert anslaget er, og derfor er vi ofte mer interessert i et **konfidensintervall** — et helt intervall av rimelige verdier, der bredden forteller oss hvor presist estimatet er.
+
+La oss se et eksempel. Tenk deg at vi vil anslå den forventede vekten til laksen i en stor oppdrettsmerd. Vi kan ikke veie all fisken, så vi trekker et tilfeldig **utvalg** på 25 laks og veier dem. Fra tidligere erfaring vet vi at populasjonsstandardavviket i vekt er omtrent 0,8 kg. Vi simulerer et slikt utvalg:
 
 ```{r}
-# Vi skriver inn datasettet i en vektor
-demand <- c(235, 374, 309, 499, 253, 
-            421, 361, 514, 462, 369,
-            394, 439, 348, 344, 330,
-            261, 374, 302, 466, 535,
-            386, 316, 296, 332, 334)
+set.seed(1)
+# Vekten (i kg) til 25 tilfeldig valgte laks
+vekt <- rnorm(25, mean = 5.2, sd = 0.8)
+```
 
-# Vi trenger 4 verdier for å regne ut konfidensintervallet:
-gj.snitt <- mean(demand)     # Regner ut gjennomsnittet
-z <- 1.96                    # Denne finner vi i tabellen
-sigma <- 75                  # Oppgitt i oppgaven
-n <- length(demand)          # Antall observasjoner
+Punktestimatet vårt for den forventede vekten er rett og slett utvalgsgjennomsnittet. For å lage et 95 %-konfidensintervall legger vi en margin til og fra dette gjennomsnittet — en margin som avhenger av standardavviket, utvalgsstørrelsen og en kritisk verdi fra normalfordelingen:
 
-# Vårt estimat av forventningsverdien er bare gjennomsnittet. 
-# Regner ut nedre og øvre grense i konfidensintervallet (LCL, UCL):
-LCL <- gj.snitt - z*sigma/sqrt(n)
-UCL <- gj.snitt + z*sigma/sqrt(n)
+```{r}
+gj.snitt <- mean(vekt)       # utvalgsgjennomsnittet, vårt punktestimat
+sigma    <- 0.8              # kjent populasjonsstandardavvik
+n        <- length(vekt)     # antall observasjoner
+z        <- 1.96             # kritisk verdi for 95 %
 
-# Samler de tre tallene i en vektor og skriver ut:
+# Nedre og øvre grense i konfidensintervallet (LCL og UCL):
+LCL <- gj.snitt - z * sigma / sqrt(n)
+UCL <- gj.snitt + z * sigma / sqrt(n)
+
 c(LCL, gj.snitt, UCL)
 ```
- 
- I seksjon **10-2a** forsøker boken å forklare fortolkningen av et konfidensintervall. Hovedpoengene her er at:
- 
- - Et 95%-konfidensintervall skal *ikke* tolkes som «sannsynligheten for at den sanne parameterverdien ligger i intervallet er 95%».
- - Den korrekte tolkningen er: «Dersom vi hadde hatt tilgang til å trekke nye utvalg fra populasjonen med like mange observasjoner og bruker dem til å regne ut nye konfidensintervaller, vil 95 av 100 intervaller inneholde den sanne parameterverdien».
- 
-Forskjellen på disse formuleringene er meget subtil, så subtil faktisk at det ikke er åpenbart at det er særlig god pedagogikk å peke på den. Problemet med den første formuleringen er at vi der kan få inntrykk av at det er den sanne parameterverdien som er stokastisk og avhengig av datasettet vi observerer, mens det strengt tatt er grensene til konfidensintervallet som er tilfeldige, og altså avhengige av datasettet. Det kommer klarere frem i den andre formuleringen.
- 
-Bredden til et konfidensintervall er altså et uttrykk for *usikkerhet*, eller motsatt: *presisjon*.  
 
-Seksjon **10-2b** og **10-2c** kan skummes raskt gjennom. Seksjon **10-3** handler om at vi først bestemmer oss for et presisjonsnivå (dvs bredde på konfiensintervallet) $B$, og så regner ut hvor mange observasjoner vi trenger for å oppnå det. Vi kommer frem til en formelen
+Selve *fortolkningen* av et konfidensintervall er notorisk glatt, og verdt å bruke litt tid på. Hovedpoenget er:
 
-$$n = \left(\frac{z_{\alpha/2}\sigma}{B}\right)^2,$$
-men problemet i praksis er at vi gjerne ikke kjenner $\sigma$, og vi kan heller ikke estimere den fordi vi ikke har samlet inn data enda. Løsningen er at vi enten på bruke fornuften, eller eventuelt et tidligere estimat av $\sigma$ dersom det er tilgjengelig.
+- Et 95 %-konfidensintervall skal *ikke* tolkes som at «sannsynligheten for at den sanne parameterverdien ligger i intervallet er 95 %».
+- Den korrekte tolkningen er: «Dersom vi gjentatte ganger trakk nye utvalg av samme størrelse fra populasjonen og regnet ut et nytt konfidensintervall hver gang, ville 95 av 100 slike intervaller inneholde den sanne parameterverdien».
+
+Forskjellen er subtil, men viktig. Problemet med den første formuleringen er at den gir inntrykk av at det er *parameteren* som er tilfeldig og hopper inn og ut av et fast intervall. Det motsatte er tilfellet: den sanne parameterverdien er fast, mens det er *grensene* til konfidensintervallet som er tilfeldige, siden de regnes ut fra et tilfeldig utvalg. Bredden til intervallet er dermed et uttrykk for *usikkerhet*, eller motsatt: *presisjon*.
+
+Til slutt en nyttig sammenheng: bestemmer vi oss på forhånd for hvor bredt konfidensintervallet skal være (et presisjonsnivå $B$), kan vi regne ut hvor mange observasjoner vi trenger:
+
+$$n = \left(\frac{z_{\alpha/2}\,\sigma}{B}\right)^2.$$
+
+Haken i praksis er at vi sjelden kjenner $\sigma$ på forhånd — vi har jo ikke samlet inn data ennå. Da må vi enten bruke skjønn eller støtte oss på et tidligere estimat av $\sigma$ dersom vi har et.
+
+### Kontrollspørsmål
 
 Når du har vært gjennom dette stoffet skal du forhåpentligvis være i stand til å diskutere følgende spørsmål med f.eks. en medstudent:
 
