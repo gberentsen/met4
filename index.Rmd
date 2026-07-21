@@ -1,6 +1,6 @@
 --- 
 title: "MET4 - Empiriske Metoder - høst 2026"
-author: "Håkon Otneim og Geir Drage Berentsen"
+author: "Geir Drage Berentsen, Håkon Otneim og Maren Holthe Hedne"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
@@ -20,12 +20,12 @@ description: "Dette er hjemmesiden til kurset MET4 - Empiriske Metoder, som gis 
   <figcaption>Maren</figcaption>
 </figure>
 
-Velkommen til hjemmesiden for kurset [MET4 - Empiriske metoder](https://www.nhh.no/emner/empiriske-metoder/), som er et obligatorisk kurs på Bachelorprogrammet i Økonomi og Administrasjon ved Norges Handelshøyskole. Dette er et kurs i anvendt statistikk, spesielt tilpasset økonomistudiet, og vi skal fokusere på korrekt bruk av statistisk metodikk for å løse relevante problemstillinger i en verden der innsamlet data utgjør en stadig større del av beslutningsgrunlaget i bedrifts- og samfunnsstyring.
+Velkommen til hjemmesiden for kurset [MET4 - Empiriske metoder](https://www.nhh.no/emner/empiriske-metoder/), som er et obligatorisk kurs på Bachelorprogrammet i Økonomi og Administrasjon ved Norges Handelshøyskole. Dette er et kurs i anvendt statistikk, spesielt tilpasset økonomistudiet, og vi skal fokusere på korrekt bruk av statistisk metodikk for å løse relevante problemstillinger i en verden der innsamlet data utgjør en stadig større del av beslutningsgrunnlaget i bedrifts- og samfunnsstyring.
 
-Kursansvarlige er Maren Holthe Hedne og Geir Drage Berentsen, som begge jobber ved Institutt for Foretaksøkonomi ved NHH.
+Kursansvarlige er Geir Drage Berentsen og Maren Holthe Hedne, som begge jobber ved Institutt for Foretaksøkonomi ved NHH.
 
 <figure style="float:right; padding:10px; text-align:center">
-  <img alt="Håkon" src="bilder/geir.jpg" width="130" height="130"/>
+  <img alt="Geir" src="bilder/geir.jpg" width="130" height="130"/>
   <figcaption>Geir</figcaption>
 </figure>
 
@@ -35,17 +35,17 @@ På denne siden vil du finne alle videosnuttene med kommentarer til lærebokens 
 
 ### Fremdriftsplan {-}
 
-Vi har laget et forslag til progresjon i tabellen under. Kolonnen "jobbe med" refererer til tema på denne siden som dere finner igjen i menyen til venstre. I hovedsak bruker vi to uker på hvert tema i kurset og aktivitetene i disse ukene er i all hovedsag strukturert som følger:
+Vi har laget et forslag til progresjon i tabellen under. Kolonnen "jobbe med" refererer til tema på denne siden som dere finner igjen i menyen til venstre. De to første modulene "Introduksjon til R" og "Grunnleggende statistikk" bruker vi en uke på hver. For de andre modulene bruker vi to uker, og aktivitetene i disse ukene er i all hovedsak strukturert som følger:
 
-**Uke 1**: Selvstudie av det respektive temaet ved hjelp av videoer, regneoppgaver og teori på denne nettsiden. Vi tar derfor en dag uten noen organisert aktivitet, og så tar vi en dag der dere kan komme i Aud. A og spørre om ting dere lurer på samt jobbe med regneoppgaver. **Vi passer på at alle har noen å jobbe med, så du må gjerne komme selv om du ikke har noen spesifikke som du har planlagt å sitte med.** Regneoppgavene finner du under hvert tema til venstre. Foreleser vil være tilgjengelig.
+**Uke 1**: Vi starter med en oversiktsforelesning som tar for seg de store linjene i modulen. Resten av denne uken brukes på selvstudie ved hjelp av videoer, regneoppgaver og teori på denne nettsiden. Vi tar derfor en dag uten noen organisert aktivitet. Regneoppgavene finner du under hvert tema til venstre. 
 
-**Uke 2**: Vi gir en oversiktsforelesning i temaet og tar et seminar med mer utfordrende oppgaver i fellesskap, begge deler i Aud A (se Avsnitt \@ref(seminar) for seminaroppgavene). 
+**Uke 2**: I denne uken gis det et seminar med mer utfordrende oppgaver i fellesskap i Aud A (se Avsnitt \@ref(seminar) for seminaroppgavene). Dere skal også jobbe med en dataøving knyttet til modulen denne uken. I kalenderen under har vi markert med grønn farge de ukene der dere har tid på datasal med studentassistenter. Du finner oppgaver til dataøvingene i menyen til venstre.
 
-Ingen av de fysiske aktivitetene vil bli tatt opp eller streamet. Videoene og teorien på denne nettsiden er et mer en godt nok digitalt tilbud. Notatene fra oversiktsforelesningene og oppgaveseminar (Se \@ref(seminar)) vil bli lagt ut på Canvas.
+Ingen av de fysiske aktivitetene vil bli tatt opp eller streamet. Videoene og teorien på denne nettsiden er et mer enn godt nok digitalt tilbud. Notatene fra oversiktsforelesningene og oppgaveseminarene (se \@ref(seminar)) vil bli lagt ut på Canvas.
 
-Selv om det nå legges opp til et fleksibelt undervisningsopplegg der tempo og progresjon til dels kan tilpasses den enkeltes timeplan og studieteknikk, er det viktig å jobbe jevnt med kurset. **MET4 er et krevende kurs som krever full innsats fra første til siste dag.** For eksempel får en mye bedre utbytte av av de fysiske aktivitetene dersom man på forhånd har sett videoene og gjort noen av  regneoppgavene relatert til temaet.
+Selv om det nå legges opp til et fleksibelt undervisningsopplegg der tempo og progresjon til dels kan tilpasses den enkeltes timeplan og studieteknikk, er det viktig å jobbe jevnt med kurset. **MET4 er et krevende kurs som krever full innsats fra første til siste dag.** 
 
-Praktisk bruk av statistiske metoder står sentralt i MET4, og denne delen dekker vi gjenom dataøvinger med studentassistenter. I kalenderen under har vi markert ukene der vi har tid på datasal med studentassistenter med grønn farge. Du finner oppgaver til dataøvingene i menyen til venstre.
+
 
 
 <!-- Vi vil som en hovedregel bruke tirsdagen som en ren kontakttime der kursansvalig(e) er tilgjengelige for spørsmål og diskusjon, mens torsdagstimen blir mer strukturert, med oppgaveregning i plenum (se \@ref(seminar) for seminaroppgavene) og oversiktsforelesninger. **Begge disse aktivitetene er digitale i starten av semesteret, men dette vil bli flyttet til Aud Max så snart vi kan**. -->
@@ -107,11 +107,11 @@ tidsplan %>%
 ### Lærebok og pensum {-}
 
 <figure style="float:right; padding:10px; text-align:center">
-  <img alt="Håkon" src="bilder/keller.jpg" width="130" height="170"/>
+  <img alt="Læreboken av Keller" src="bilder/keller.jpg" width="130" height="170"/>
   <figcaption>Second EMEA edition.</figcaption>
 </figure>
 
-Vi bruker læreboken *Statistics for Management and Economics* av Gerald Keller, som nå foreligger i en relansert utgave (Second EMEA edition). I utgangspunktet er følgende kapitler pensum: 1--5, 9--13, 15--18 og 20. Mot slutten av kurset går vi gjennom noen tema som ikke er dekket i læreboken (logistisk regresjon, maskinlæring, paneldatamodeller, tidrekkemodeller). Der finner du referanser til andre kilder, samt en del materiale som vi har skrevet selv. I pensumgjennomgangen på denne siden finner du også en del kommentarer til læreboken, som for eksempel hva som er viktig, og hva som er mindre viktig for oss. 
+Vi bruker læreboken *Statistics for Management and Economics* av Gerald Keller, som nå foreligger i en relansert utgave (Second EMEA edition). I utgangspunktet er følgende kapitler pensum: 1--5, 9--13, 15--18 og 20. Mot slutten av kurset går vi gjennom noen tema som ikke er dekket i læreboken (logistisk regresjon, maskinlæring, paneldatamodeller, tidsrekkemodeller). Der finner du referanser til andre kilder, samt en del materiale som vi har skrevet selv. I pensumgjennomgangen på denne siden finner du også en del kommentarer til læreboken, som for eksempel hva som er viktig, og hva som er mindre viktig for oss. 
 
 Eldre utgaver av læreboken går bra. Vi har sluttet å bruke regneoppgaver fra boken, så vi trenger ikke lenger oppdatere oppgavenummer etc. for hver nye utgave. Regneoppgaver finner du her på denne siden under hvert tema. 
 
