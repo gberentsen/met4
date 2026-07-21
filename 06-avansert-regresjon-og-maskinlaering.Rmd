@@ -12,7 +12,7 @@ I denne modulen tar vi en titt på noen litt mer avanserte statistiske metoder. 
 
 ## Logistisk regresjon
 
-### Videoforelesninger
+### Videoforelesninger {-}
 
 <div style='padding:56.25% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7802418/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
 
@@ -49,7 +49,7 @@ Når du er klar til å prøve selv, kan du se på oppg *10a*, *b* og første del
 
 ## Introduksjon til maskinlæring med kNN
 
-### Videoforelesninger
+### Videoforelesninger {-}
 
 <div style='padding:56.25% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7802427/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
 
@@ -117,7 +117,7 @@ I Figur \@ref(fig:churn) kan du prøve følgende: En liten $k$ svarer til å se 
 
 ## Paneldata {#paneldata}
 
-### Videoforelesninger
+### Videoforelesninger {-}
 
 <div style='padding:56.25% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7802431/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
 

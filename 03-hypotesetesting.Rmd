@@ -13,7 +13,7 @@ I videoforelesningene går vi gjennom noen slides, og vi skriver et R-skript. Du
 
 ## Generelt om hypotesetesting
 
-### Videoforelesninger 
+### Videoforelesninger {-}
 
 <div style='padding:74.93% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7780028/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
 
@@ -29,7 +29,7 @@ Her snakker vi om kapittel **11** i læreboken. Hvis du kan svare på følgende 
 
 ## Inferens om en populasjon {#enpop}
 
-### Videoforelesninger
+### Videoforelesninger {-}
 
 <div style='padding:74.93% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7780035/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
 
@@ -191,7 +191,7 @@ Seksjonene **12-3d-f** bør leses på egen hånd, mens vi hopper over **12-3g**.
 
 ## Inferens om to populasjoner
 
-### Videoforelesninger
+### Videoforelesninger {-}
 
 <div style='padding:74.64% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7780048/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
 
@@ -343,7 +343,7 @@ Siden $z = `r format(z, digits = 3)`$ forkaster vi nullhypotesen om at det er li
 
 ## Kjikvadrattester
 
-### Videoforelesninger
+### Videoforelesninger {-}
 
 <div style='padding:74.43% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7780062/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
 

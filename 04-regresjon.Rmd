@@ -21,7 +21,7 @@ I videoforelesningene går vi gjennom noen slides, og vi skriver et R-skript. Du
 
 ## Enkel regresjon
 
-### Videoforelesninger
+### Videoforelesninger {-}
 
 <div style='padding:75% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7781447/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
 
@@ -71,7 +71,7 @@ Her er noen grunnleggende ferdigheter fra kapittel 16. Klarer du dette?
 
 ## Multippel regresjon
 
-### Videoforelesninger
+### Videoforelesninger {-}
 
 <div style='padding:75.14% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7793207/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
 
@@ -136,7 +136,7 @@ Grunnleggende ferdigheter: Klarer du dette?
 
 ## Modellbygging
 
-### Videoforelesninger
+### Videoforelesninger {-}
 
 <div style='padding:75.21% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7793253/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
 
