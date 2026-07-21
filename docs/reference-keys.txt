@@ -34,6 +34,7 @@ kontrollsprsmal
 utvalg-og-estimering
 populasjon-parameter-og-estimator
 populasjonen-som-sannsynlighetsmodell
+forventning-varians
 utvalgsstrrelser-og-populasjonsstrrelser
 samplingfordelingen-til-et-gjennomsnitt
 sentralgrenseteoremet

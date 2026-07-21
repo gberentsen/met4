@@ -289,8 +289,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>En <strong>sannsynlighetsmodell</strong> er en slik matematisk beskrivelse av en stokastisk variabel. Fra MET2 kjenner du flere: den kontinuerlige <strong>normalfordelingen</strong> <span class="math inline">\(N(\mu, \sigma^2)\)</span>, som beskriver mange naturlige størrelser og spiller en helt sentral rolle i dette kurset, og diskrete modeller som binomisk- og poissonfordelingen. En fordeling er fullt bestemt av noen få <strong>parametre</strong> (for normalfordelingen forventningen <span class="math inline">\(\mu\)</span> og standardavviket <span class="math inline">\(\sigma\)</span>), og vi skriver gjerne <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span> for å si at <span class="math inline">\(X\)</span> følger en slik fordeling.</p>
 <p>Poenget for oss er dette: når vi antar at observasjonene våre er trekninger fra en fordeling med forventning <span class="math inline">\(\mu\)</span> og varians <span class="math inline">\(\sigma^2\)</span>, kan vi bruke sannsynlighetsregningen til å si noe presist om hvordan estimatorene våre oppfører seg. Det er akkurat det vi bygger videre på når vi snart skal finne samplingfordelingen til gjennomsnittet.</p>
 </div>
-<div id="utvalgsstrrelser-og-populasjonsstrrelser" class="section level3 hasAnchor" number="2.2.3">
-<h3><span class="header-section-number">2.2.3</span> Utvalgsstørrelser og populasjonsstørrelser<a href="utvalg-og-estimering.html#utvalgsstrrelser-og-populasjonsstrrelser" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="forventning-varians" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Forventning og varians<a href="utvalg-og-estimering.html#forventning-varians" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Når vi tenker på en observasjon <span class="math inline">\(X\)</span> som en trekning fra en fordeling, er de to viktigste kjennetegnene ved fordelingen <strong>forventningen</strong> og <strong>variansen</strong>.</p>
+<p><strong>Forventningen</strong> <span class="math inline">\(\textrm{E}(X)\)</span> er tyngdepunktet i fordelingen, altså den verdien vi i gjennomsnitt ender opp med dersom vi trekker svært mange ganger. For populasjonen er nettopp <span class="math inline">\(\textrm{E}(X) = \mu\)</span>, populasjonsgjennomsnittet.</p>
+<p><strong>Variansen</strong> <span class="math inline">\(\textrm{Var}(X) = \textrm{E}\!\left[(X - \mu)^2\right] = \sigma^2\)</span> måler hvor mye verdiene typisk spriker rundt forventningen. Standardavviket <span class="math inline">\(\sigma = \sqrt{\textrm{Var}(X)}\)</span> er kvadratroten av variansen, og har samme måleenhet som <span class="math inline">\(X\)</span> selv.</p>
+<p>Det som gjør disse to størrelsene så anvendelige, er at de følger noen enkle <strong>regneregler</strong>. La <span class="math inline">\(a\)</span> og <span class="math inline">\(b\)</span> være konstanter og <span class="math inline">\(X, Y\)</span> stokastiske variabler. For forventningen gjelder:</p>
+<p><span class="math display">\[\textrm{E}(aX + b) = a\,\textrm{E}(X) + b, \qquad \textrm{E}(X + Y) = \textrm{E}(X) + \textrm{E}(Y).\]</span></p>
+<p>Forventningen er altså <strong>lineær</strong>: den kan flyttes rett inn i en sum og forbi konstanter. For variansen gjelder:</p>
+<p><span class="math display">\[\textrm{Var}(aX + b) = a^2\,\textrm{Var}(X), \qquad \textrm{Var}(X + Y) = \textrm{Var}(X) + \textrm{Var}(Y) \quad (\text{når } X \text{ og } Y \text{ er uavhengige}).\]</span></p>
+<p>To ting er verdt å merke seg. Et konstantledd <span class="math inline">\(b\)</span> påvirker ikke variansen: å flytte hele fordelingen sidelengs endrer ikke spredningen. En skaleringsfaktor <span class="math inline">\(a\)</span> slår derimot inn i <em>annen</em> potens, fordi varians måles i kvadrerte enheter (og standardavviket dermed skaleres med <span class="math inline">\(|a|\)</span>). Og mens forventningen alltid kan splittes over en sum, krever den enkle variansregelen at leddene er uavhengige.</p>
+</div>
+<div id="utvalgsstrrelser-og-populasjonsstrrelser" class="section level3 hasAnchor" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> Utvalgsstørrelser og populasjonsstørrelser<a href="utvalg-og-estimering.html#utvalgsstrrelser-og-populasjonsstrrelser" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Et poeng det er verdt å feste seg ved med en gang, er at nesten alle størrelsene vi jobber med, finnes i <strong>to varianter</strong>: én for populasjonen og én for utvalget. Populasjonsstørrelsen er den sanne, men ukjente verdien vi er ute etter. Utvalgsstørrelsen er det vi faktisk regner ut fra dataene, og som vi bruker som et anslag på den første.</p>
 <table>
 <colgroup>
@@ -325,24 +336,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p>Skillet er grunnleggende, og de to variantene er lette å blande sammen. Når vi snakker om «gjennomsnittet», må vi hele tiden være bevisste på om vi mener det sanne <strong>populasjonsgjennomsnittet</strong> <span class="math inline">\(\mu\)</span> (som vi sjelden kjenner) eller <strong>utvalgsgjennomsnittet</strong> <span class="math inline">\(\overline{X}\)</span> (som vi regner ut fra dataene våre, og som vil variere fra utvalg til utvalg). Notasjonen hjelper oss å holde dem fra hverandre: populasjonsstørrelser skrives gjerne med greske bokstaver (<span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(p\)</span>), mens utvalgsstørrelser skrives med latinske bokstaver eller med en «hatt», som i <span class="math inline">\(\overline{X}\)</span> og <span class="math inline">\(\widehat{p}\)</span>.</p>
 </div>
-<div id="samplingfordelingen-til-et-gjennomsnitt" class="section level3 hasAnchor" number="2.2.4">
-<h3><span class="header-section-number">2.2.4</span> Samplingfordelingen til et gjennomsnitt<a href="utvalg-og-estimering.html#samplingfordelingen-til-et-gjennomsnitt" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Anta at observasjonene <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> er uavhengige, med forventning <span class="math inline">\(\mu\)</span> og varians <span class="math inline">\(\sigma^2\)</span>. Ved hjelp av regnereglene for forventning og varians (se formelarket) kan man vise at gjennomsnittet oppfyller</p>
-<p><span class="math display">\[\textrm{E}(\overline{X}) = \mu, \qquad \textrm{Var}(\overline{X}) = \frac{\sigma^2}{n}, \qquad \textrm{det vil si} \qquad \sigma(\overline{X}) = \frac{\sigma}{\sqrt{n}}.\]</span></p>
+<div id="samplingfordelingen-til-et-gjennomsnitt" class="section level3 hasAnchor" number="2.2.5">
+<h3><span class="header-section-number">2.2.5</span> Samplingfordelingen til et gjennomsnitt<a href="utvalg-og-estimering.html#samplingfordelingen-til-et-gjennomsnitt" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Anta at observasjonene <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> er uavhengige, med samme forventning <span class="math inline">\(\mu\)</span> og varians <span class="math inline">\(\sigma^2\)</span>, og se på gjennomsnittet <span class="math inline">\(\overline{X} = \frac{1}{n}\sum_{i=1}^n X_i\)</span>. Nå får vi bruk for regnereglene fra avsnitt <a href="utvalg-og-estimering.html#forventning-varians">2.2.3</a>. Forventningen følger av at forventningen er lineær:</p>
+<p><span class="math display">\[\textrm{E}(\overline{X}) = \frac{1}{n}\sum_{i=1}^n \textrm{E}(X_i) = \frac{1}{n}\cdot n\mu = \mu.\]</span></p>
+<p>For variansen bruker vi at observasjonene er uavhengige, og at faktoren <span class="math inline">\(1/n\)</span> kvadreres:</p>
+<p><span class="math display">\[\textrm{Var}(\overline{X}) = \frac{1}{n^2}\sum_{i=1}^n \textrm{Var}(X_i) = \frac{1}{n^2}\cdot n\sigma^2 = \frac{\sigma^2}{n}, \qquad \textrm{det vil si} \qquad \sigma(\overline{X}) = \frac{\sigma}{\sqrt{n}}.\]</span></p>
 <p>To ting er verdt å dvele ved. For det første er gjennomsnittet <strong>forventningsrett</strong>: i snitt treffer det den sanne verdien <span class="math inline">\(\mu\)</span>. For det andre, og dette er kanskje det viktigste enkeltresultatet i modulen, skrumper standardavviket til gjennomsnittet inn som <span class="math inline">\(1/\sqrt{n}\)</span> når utvalget vokser. Med andre ord: jo flere observasjoner vi samler inn, jo mer presist blir anslaget vårt. Men presisjonen øker bare med <em>kvadratroten</em> av <span class="math inline">\(n\)</span>, så for å halvere usikkerheten må vi firedoble antall observasjoner.</p>
 </div>
-<div id="sentralgrenseteoremet" class="section level3 hasAnchor" number="2.2.5">
-<h3><span class="header-section-number">2.2.5</span> Sentralgrenseteoremet<a href="utvalg-og-estimering.html#sentralgrenseteoremet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="sentralgrenseteoremet" class="section level3 hasAnchor" number="2.2.6">
+<h3><span class="header-section-number">2.2.6</span> Sentralgrenseteoremet<a href="utvalg-og-estimering.html#sentralgrenseteoremet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Dersom <span class="math inline">\(X\)</span>-ene i utgangspunktet er normalfordelte, er gjennomsnittet også eksakt normalfordelt. Men hva om vi ikke kjenner fordelingen til den enkelte observasjonen? Her kommer statistikkfagets kanskje mest bemerkelsesverdige resultat til unnsetning. <strong>Sentralgrenseteoremet</strong> sier at fordelingen til gjennomsnittet nærmer seg normalfordelingen når <span class="math inline">\(n\)</span> blir stor, <em>nesten uansett hvordan de enkelte observasjonene er fordelt</em>. Det er dette som gjør normalfordelingen så gjennomgripende i statistikken: så snart vi jobber med gjennomsnitt (eller summer) av mange observasjoner, dukker den nesten alltid opp. En vanlig tommelfingerregel er at tilnærmingen er god når vi har mer enn 50–100 observasjoner.</p>
 </div>
-<div id="samplingfordelingen-til-en-andel" class="section level3 hasAnchor" number="2.2.6">
-<h3><span class="header-section-number">2.2.6</span> Samplingfordelingen til en andel<a href="utvalg-og-estimering.html#samplingfordelingen-til-en-andel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="samplingfordelingen-til-en-andel" class="section level3 hasAnchor" number="2.2.7">
+<h3><span class="header-section-number">2.2.7</span> Samplingfordelingen til en andel<a href="utvalg-og-estimering.html#samplingfordelingen-til-en-andel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Ofte er vi ikke ute etter et gjennomsnitt, men en <strong>andel</strong>, for eksempel andelen velgere som støtter et bestemt parti, eller andelen defekte enheter i en produksjon. En observert andel <span class="math inline">\(\widehat{p}\)</span> kan skrives som et gjennomsnitt av nuller og enere (fiasko og suksess), og da slår sentralgrenseteoremet til på nytt:</p>
 <p><span class="math display">\[\widehat{p} \;\sim\; N\!\left(p,\; \frac{p(1-p)}{n}\right).\]</span></p>
 <p>Tilnærmingen regnes som god når <span class="math inline">\(np &gt; 5\)</span> og <span class="math inline">\(n(1-p) &gt; 5\)</span>. Legg merke til at også her avtar usikkerheten som <span class="math inline">\(1/\sqrt{n}\)</span>. Det er derfor en meningsmåling med rundt 1000 respondenter kan gi et brukbart anslag på hva et helt land mener.</p>
 </div>
-<div id="gode-estimatorer" class="section level3 hasAnchor" number="2.2.7">
-<h3><span class="header-section-number">2.2.7</span> Gode estimatorer<a href="utvalg-og-estimering.html#gode-estimatorer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="gode-estimatorer" class="section level3 hasAnchor" number="2.2.8">
+<h3><span class="header-section-number">2.2.8</span> Gode estimatorer<a href="utvalg-og-estimering.html#gode-estimatorer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Det finnes gjerne flere mulige estimatorer for samme parameter, og da må vi kunne vurdere hvilken som er best. Tre egenskaper står sentralt:</p>
 <ul>
 <li>En estimator er <strong>forventningsrett</strong> dersom forventningen er lik den sanne parameterverdien, <span class="math inline">\(\textrm{E}(\widehat{\theta}) = \theta\)</span>. Da bommer den ikke systematisk, verken for høyt eller for lavt.</li>
@@ -350,8 +363,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>En estimator er <strong>konsistent</strong> dersom den nærmer seg den sanne verdien når utvalget vokser. Gjennomsnittet er konsistent nettopp fordi variansen <span class="math inline">\(\sigma^2/n\)</span> går mot null når <span class="math inline">\(n\)</span> øker.</li>
 </ul>
 </div>
-<div id="konfidensintervall" class="section level3 hasAnchor" number="2.2.8">
-<h3><span class="header-section-number">2.2.8</span> Konfidensintervall<a href="utvalg-og-estimering.html#konfidensintervall" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="konfidensintervall" class="section level3 hasAnchor" number="2.2.9">
+<h3><span class="header-section-number">2.2.9</span> Konfidensintervall<a href="utvalg-og-estimering.html#konfidensintervall" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Begrepene i dette delkapittelet bygger videre på sannsynlighetsregningen fra MET2: fordelinger, stokastiske variabler, forventning og varians. Ligger dette langt bak i bevisstheten, kan det være lurt å friske det opp.</p>
 <p>Vi kan lage et <em>punktestimat</em> av en forventningsverdi ved å ta gjennomsnittet av observasjonene. Men et enkelt tall sier ingenting om hvor sikkert anslaget er, og derfor er vi ofte mer interessert i et <strong>konfidensintervall</strong>: et helt intervall av rimelige verdier, der bredden forteller oss hvor presist estimatet er.</p>
 <p>La oss se et eksempel. Tenk deg at vi vil anslå den forventede vekten til laksen i en stor oppdrettsmerd. Vi kan ikke veie all fisken, så vi trekker et tilfeldig <strong>utvalg</strong> på 25 laks og veier dem. Vi simulerer et slikt utvalg:</p>
@@ -381,8 +394,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[n = \left(\frac{z_{\alpha/2}\,\sigma}{B}\right)^2.\]</span></p>
 <p>Haken i praksis er at vi sjelden kjenner <span class="math inline">\(\sigma\)</span> på forhånd. Vi har jo ikke samlet inn data ennå. Da må vi enten bruke skjønn eller støtte oss på et tidligere estimat av <span class="math inline">\(\sigma\)</span> dersom vi har et.</p>
 </div>
-<div id="kontrollsprsmal-1" class="section level3 hasAnchor" number="2.2.9">
-<h3><span class="header-section-number">2.2.9</span> Kontrollspørsmål<a href="utvalg-og-estimering.html#kontrollsprsmal-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="kontrollsprsmal-1" class="section level3 hasAnchor" number="2.2.10">
+<h3><span class="header-section-number">2.2.10</span> Kontrollspørsmål<a href="utvalg-og-estimering.html#kontrollsprsmal-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Når du har vært gjennom dette stoffet skal du forhåpentligvis være i stand til å diskutere følgende spørsmål med f.eks. en medstudent:</p>
 <ol style="list-style-type: decimal">
 <li>Hva er en samplingfordeling?</li>
@@ -394,8 +407,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Hva vil det si at et estimator er konsistent?</li>
 </ol>
 </div>
-<div id="ekstra-ving-i-r" class="section level3 hasAnchor" number="2.2.10">
-<h3><span class="header-section-number">2.2.10</span> Ekstra øving i R<a href="utvalg-og-estimering.html#ekstra-ving-i-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="ekstra-ving-i-r" class="section level3 hasAnchor" number="2.2.11">
+<h3><span class="header-section-number">2.2.11</span> Ekstra øving i R<a href="utvalg-og-estimering.html#ekstra-ving-i-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Som demonstrert i forelesningen kan vi i R simulere standard normalfordelte observasjoner (dvs normalfordelte observasjoner med <span class="math inline">\(\mu = 0\)</span> og <span class="math inline">\(\sigma^2 = 1\)</span>) med kommandoen <code>rnorm(n)</code>, der <code>n</code> er antallet observasjoner vi ønsker. For eksempel kan vi kjøre følgende kode for å generere 10 observasjoner (du vil helt sikkert få andre verdier):</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="utvalg-og-estimering.html#cb32-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
 <span id="cb32-2"><a href="utvalg-og-estimering.html#cb32-2" tabindex="-1"></a><span class="fu">rnorm</span>(n)</span></code></pre></div>
