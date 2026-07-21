@@ -59,7 +59,7 @@ Legg merke til følgende viktige datoer:
 <!-- - **29.april** Individuell digital **skole**eksamen.Eksamen vil være en 6 timers digital skoleeksamen. Eksamen vil ha fokus på  både teori og dataanalyse i R. Begge delene er like omfattende og vil bli vurdert samlet hvor det settes en karakter. Hele eksamen vil gjennomføres digitalt og kandidaten disponerer selv hvor mye tid som brukes på teori og dataanalyse.  TILLATTE HJELPEMIDLER: Alle trykte/egenskrevne hjelpemidler. Altså kan dere ta med så mange utskrifter, bøker og notater som dere ønsker.  -->
 
 - **11. september** Siste frist for oppmelding av grupper til obligatorisk øvelse.
-- **9. oktober** Frist for innlevering av den obligatoriske innleveringen.
+- **2. oktober** Frist for innlevering av den obligatoriske innleveringen.
 - **24. november** Individuell digital **skole**eksamen. Eksamen vil være en 6 timers digital skoleeksamen. Eksamen vil ha fokus på  både teori og dataanalyse i R. Begge delene er like omfattende og vil bli vurdert samlet hvor det settes en karakter. Hele eksamen vil gjennomføres digitalt på skolen og kandidaten disponerer selv hvor mye tid som brukes på teori og dataanalyse.  
 
 
