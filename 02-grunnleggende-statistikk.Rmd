@@ -171,7 +171,7 @@ Begrepene i dette delkapittelet bygger videre på sannsynlighetsregningen fra ME
 
 Vi kan lage et *punktestimat* av en forventningsverdi ved å ta gjennomsnittet av observasjonene. Men et enkelt tall sier ingenting om hvor sikkert anslaget er, og derfor er vi ofte mer interessert i et **konfidensintervall**: et helt intervall av rimelige verdier, der bredden forteller oss hvor presist estimatet er.
 
-La oss se et eksempel. Tenk deg at vi vil anslå den forventede vekten til laksen i en stor oppdrettsmerd. Vi kan ikke veie all fisken, så vi trekker et tilfeldig **utvalg** på 25 laks og veier dem. Fra tidligere erfaring vet vi at populasjonsstandardavviket i vekt er omtrent 0,8 kg. Vi simulerer et slikt utvalg:
+La oss se et eksempel. Tenk deg at vi vil anslå den forventede vekten til laksen i en stor oppdrettsmerd. Vi kan ikke veie all fisken, så vi trekker et tilfeldig **utvalg** på 25 laks og veier dem. Vi simulerer et slikt utvalg:
 
 ```{r}
 set.seed(1)
@@ -179,20 +179,22 @@ set.seed(1)
 vekt <- rnorm(25, mean = 5.2, sd = 0.8)
 ```
 
-Punktestimatet vårt for den forventede vekten er rett og slett utvalgsgjennomsnittet. For å lage et 95 %-konfidensintervall legger vi en margin til og fra dette gjennomsnittet, en margin som avhenger av standardavviket, utvalgsstørrelsen og en kritisk verdi fra normalfordelingen:
+Punktestimatet vårt for den forventede vekten er rett og slett utvalgsgjennomsnittet. I praksis kjenner vi ikke det sanne standardavviket i populasjonen, så vi må estimere det med utvalgsstandardavviket $s$. Denne ekstra usikkerheten gjør at vi bruker **t-fordelingen** i stedet for normalfordelingen når vi finner den kritiske verdien. For et 95 %-konfidensintervall henter vi verdien fra t-fordelingen med $n - 1$ frihetsgrader ved hjelp av `qt()`:
 
 ```{r}
-gj.snitt <- mean(vekt)       # utvalgsgjennomsnittet, vårt punktestimat
-sigma    <- 0.8              # kjent populasjonsstandardavvik
-n        <- length(vekt)     # antall observasjoner
-z        <- 1.96             # kritisk verdi for 95 %
+gj.snitt <- mean(vekt)              # utvalgsgjennomsnittet, vårt punktestimat
+s        <- sd(vekt)                # utvalgsstandardavviket (vi kjenner ikke det sanne)
+n        <- length(vekt)            # antall observasjoner
+t_krit   <- qt(0.975, df = n - 1)   # kritisk verdi fra t-fordelingen
 
 # Nedre og øvre grense i konfidensintervallet (LCL og UCL):
-LCL <- gj.snitt - z * sigma / sqrt(n)
-UCL <- gj.snitt + z * sigma / sqrt(n)
+LCL <- gj.snitt - t_krit * s / sqrt(n)
+UCL <- gj.snitt + t_krit * s / sqrt(n)
 
 c(LCL, gj.snitt, UCL)
 ```
+
+Den kritiske verdien `qt(0.975, df = 24)` er omtrent 2,06, altså litt større enn 1,96 fra normalfordelingen. Det gjør intervallet en tanke bredere, og det er rimelig: vi betaler en liten pris i presisjon fordi vi måtte estimere standardavviket i stedet for å kjenne det på forhånd.
 
 Selve *fortolkningen* av et konfidensintervall er notorisk glatt, og verdt å bruke litt tid på. Hovedpoenget er:
 
@@ -861,6 +863,31 @@ survey %>%                                # Krysstabell av to variabler (krever
   table                                   # fra dplyr-pakken)
 
 ```
+
+### Kjente fordelinger: kvantiler og sannsynligheter {-}
+
+Utover å beskrive et datasett trenger vi ofte å regne på selve *sannsynlighetsfordelingene*. For hver kjente fordeling har R et sett funksjoner. De to vi bruker mest, er:
+
+- `q...()` gir en **kvantil** (persentil): verdien som har en gitt andel av fordelingen under seg. Det er nettopp dette vi trenger for å finne kritiske verdier, slik som `qt()` i konfidensintervallet lenger opp.
+- `p...()` gir en **sannsynlighet**: andelen av fordelingen som ligger *under* en gitt verdi (arealet til venstre).
+
+De fire fordelingene vi møter i kurset, har hvert sitt funksjonspar:
+
+```{r, eval = FALSE}
+# KVANTILER (persentiler): hvilken verdi har denne andelen under seg?
+qnorm(0.975)                 # 97,5-persentilen i standardnormalfordelingen (ca. 1,96)
+qt(0.975, df = 24)           # 97,5-persentilen i t-fordelingen med 24 frihetsgrader
+qchisq(0.95, df = 5)         # 95-persentilen i kji-kvadratfordelingen med 5 frihetsgrader
+qf(0.95, df1 = 3, df2 = 20)  # 95-persentilen i F-fordelingen
+
+# SANNSYNLIGHETER: hvor stor andel ligger under denne verdien?
+pnorm(1.96)                  # P(Z < 1,96) i standardnormalfordelingen (ca. 0,975)
+pt(2.0, df = 24)             # P(T < 2,0) i t-fordelingen med 24 frihetsgrader
+pchisq(11.07, df = 5)        # P(X < 11,07) i kji-kvadratfordelingen
+pf(3.10, df1 = 3, df2 = 20)  # P(X < 3,10) i F-fordelingen
+```
+
+Legg merke til at `q...()` og `p...()` er motsatte operasjoner: `qnorm(0.975)` gir 1,96, og `pnorm(1.96)` gir 0,975 tilbake. Vil du ha sannsynligheten *over* en verdi (arealet til høyre), tar du `1 - p...()`, for eksempel `1 - pnorm(1.96)`.
 
 ### Grafisk deskriptiv statistikk med `ggplot2` {-}
 
