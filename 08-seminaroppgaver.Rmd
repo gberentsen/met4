@@ -62,6 +62,12 @@ knitr::include_graphics("bilder/gun.PNG")
     a. Lag en tabell med deskriptiv statistikk for variablene `driver_age`, `years_license`, `car_age` og `mileage_km`. Kommenter kort sentraltendens og spredning for variablene.
     b. Lag et histogram av `mileage_km`. Lag også et boksplott som sammenligner fordelingen av `driver_age` for kundene med og uten `early_claim`. Kommenter kort hva du ser i figurene.
     c. Lag et søylediagram for `channel` og frekvenstabeller for `garage`, `region` og `multi_policy`. Kommenter kort hva figuren og tabellene viser om kundene i utvalget.
+
+    **Bonus (frivillig).** Oppgavene under bruker det samme datasettet, men noen andre figurer og utregninger fra modulen:
+
+    d. Lag et spredningsdiagram av `driver_age` mot `years_license`, og regn ut korrelasjonskoeffisienten mellom de to variablene med `cor()`. Beskriv sammenhengen. Er den som du ville forvente?
+    e. Lag en krysstabell mellom `region` og `early_claim`. Regn deretter ut andelen kunder med tidlig skade (`early_claim == "Yes"`) i hver region. Ser risikoen for tidlig skade ut til å henge sammen med hvor kunden bor?
+    f. Estimer et 95 %-konfidensintervall for gjennomsnittlig alder (`driver_age`) blant kundene i utvalget. Bruk `mean()`, `sd()`, `length()` og `qt()`, slik som i konfidensintervall-eksempelet i modulen. Hva forteller intervallet deg?
     
 6. La $X$ være en standard normalfordelt variabel. Du får oppgitt at det medfører at E$(X^3) = 0$. La $Y = X^2$.
     a. Vis at korrelasjonen mellom $X$ og $Y$ er lik null.
