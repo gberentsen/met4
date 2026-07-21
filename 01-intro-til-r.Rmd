@@ -59,6 +59,24 @@ hva_som_helst <- "hello world"
 hva_som_helst
 ```
 
+R har også en rekke innebygde **standardfunksjoner** for vanlige matematiske operasjoner. To av dem, eksponentialfunksjonen `exp()` og logaritmen `log()`, kommer vi til å bruke mye senere i kurset, blant annet til logaritmiske transformasjoner i regresjon og til logaritmisk avkastning i tidsrekker:
+
+```{r, eval = FALSE}
+# Eksponentialfunksjonen og logaritmen:
+exp(1)              # e opphøyd i 1, altså tallet e (ca. 2.718)
+log(exp(1))         # naturlig logaritme (grunntall e), motstykket til exp()
+log(100)            # NB: log() regner ut den NATURLIGE logaritmen
+log10(100)          # tierlogaritmen (grunntall 10)
+log(8, base = 2)    # logaritme med valgfritt grunntall (her 2)
+
+# Noen andre nyttige standardfunksjoner:
+sqrt(16)            # kvadratrot
+abs(-5)             # absoluttverdi
+round(3.14159, 2)   # avrunding til 2 desimaler
+```
+
+Legg spesielt merke til at `log()` som standard regner ut den *naturlige* logaritmen (grunntall $e$), ikke tierlogaritmen. Ønsker du tierlogaritmen, bruker du `log10()`.
+
 
 Når du er ferdig med det kan du prøve deg på følgende lille oppgave:
 
@@ -349,7 +367,7 @@ Her er et par ekstra tips i denne sammenhengen:
     - `!=` = "er ikke lik"
     
 ```{r, eval = FALSE}
-# Vi kan bruke klammeparantesen til å hente ut enkelttall, kolonner eller rader:
+# Vi kan bruke klammeparentesen til å hente ut enkelttall, kolonner eller rader:
 testdata[1,2]
 testdata[1,]
 testdata[,2]
@@ -363,7 +381,7 @@ testdata$sum <- testdata$X1 + testdata$X2
 
 # Det finnes en enklere måte å gjøre dette på ved hjelp av den såkalte 
 # "pipe"-operatoren og egne funksjoner for datamanipulasjon. Begge deler
-# er inkludert i dplyr-pakken, som du eventuelt på installere:
+# er inkludert i dplyr-pakken, som du eventuelt må installere:
 # install.packages("dplyr")
 library(dplyr)
 
@@ -379,7 +397,7 @@ log(sqrt(2))
 2 %>% sqrt %>% log
 
 # Dette kan vi lese fra venstre mot høyre i den rekkefølgen det skjer, og vi trenger 
-# ikke holde styr på flere lag med paranteser.
+# ikke holde styr på flere lag med parenteser.
 
 # Dette er en teknikk som gjør det veldig greit å jobbe med tabeller av data, og
 # vi skal se på tre veldig sentrale funksjoner i dplyr-pakken:
@@ -415,7 +433,7 @@ ny_testdata <-
 
 ```
 
-Legg spesielt merke til `summarise()` og `group_by()` over. Der `select()`, `filter()` og `mutate()` gir oss en ny tabell tilbake, *kollapser* `summarise()` mange rader ned til noen få oppsummerende tall. Kombinert med `group_by()` er dette en av de mest brukte teknikkene i praktisk dataanalyse: del dataene inn i grupper, og regn ut et tall — gjennomsnitt, sum, antall og så videre — for hver gruppe.
+Legg spesielt merke til `summarise()` og `group_by()` over. Der `select()`, `filter()` og `mutate()` gir oss en ny tabell tilbake, *kollapser* `summarise()` mange rader ned til noen få oppsummerende tall. Kombinert med `group_by()` er dette en av de mest brukte teknikkene i praktisk dataanalyse: del dataene inn i grupper, og regn ut et tall (gjennomsnitt, sum, antall og så videre) for hver gruppe.
 
 **Oppgave:** Basert på `testdata`, lag en tabell som bare inneholder radene der `A1`-kolonnen er lik 1 *og* `A2`-kolonnen er lik 0, men der vi bare skal ha med kolonnene `X1` og `X2`. Lag til slutt en ny kolonne som inneholder differansen av tallene i `X1` og `X2`-kolonnene.
 
