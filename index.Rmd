@@ -106,11 +106,6 @@ tidsplan %>%
 
 ### Lærebok og pensum {-}
 
-<figure style="float:right; padding:10px; text-align:center">
-  <img alt="Læreboken av Keller" src="bilder/keller.jpg" width="130" height="170"/>
-  <figcaption>Second EMEA edition.</figcaption>
-</figure>
-
 I utgangspunktet dekker denne siden, sammen med forelesninger, seminar og dataøvinger hele pensum i MET4. 
 
 For de som ønsker en lærebok som støtte anbefaler vi *Statistics for Management and Economics* av Gerald Keller, som nå foreligger i en relansert utgave (Second EMEA edition). I utgangspunktet er følgende kapitler pensum: 1--5, 9--13, 15--18 og 20. Mot slutten av kurset går vi gjennom noen tema som ikke er dekket i læreboken (logistisk regresjon, maskinlæring, paneldatamodeller, tidsrekkemodeller). Eldre utgaver av læreboken går bra.  
