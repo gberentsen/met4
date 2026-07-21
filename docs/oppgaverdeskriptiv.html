@@ -465,14 +465,14 @@ Løsning
 </blockquote>
 </details>
 <ol start="11" style="list-style-type: decimal">
-<li>Kovariansen til to variabler fra et utvalg har blitt beregnet til -150. Videre får du vite at empirisk standardavviket til den ene variabelen er 12 og 16 for den andre. Regn ut (utvalgs-) korrelasjonskoeffisienten <span class="math inline">\(r\)</span> og bruk denne til å beskrive sammenhengen mellom variablene.</li>
+<li>Kovariansen til to variabler fra et utvalg har blitt beregnet til -150. Videre får du vite at utvalgsstandardavviket til den ene variabelen er 12 og 16 for den andre. Regn ut (utvalgs-) korrelasjonskoeffisienten <span class="math inline">\(r\)</span> og bruk denne til å beskrive sammenhengen mellom variablene.</li>
 </ol>
 <details>
 <summary>
 Løsning
 </summary>
 <blockquote>
-<p>Utvalgs korrelasjonskoeffisient er definert som utvalgskovariansen mellom to variabler delt på de empiriske standardavvikene til variablene.</p>
+<p>Utvalgs korrelasjonskoeffisient er definert som utvalgskovariansen mellom to variabler delt på utvalgsstandardavvikene til variablene.</p>
 </blockquote>
 <p><span class="math display">\[r=s_{xy}/(s_x s_y )=-150/(16\cdot12)=-0,7813\]</span></p>
 <blockquote>
@@ -553,7 +553,7 @@ Løsning
 Løsning
 </summary>
 <blockquote>
-<p>Her bruker vi sentralgrenseteoremet som sier at <span class="math inline">\(\hat{p}\sim N(p, p(1-p))\)</span>:</p>
+<p>Her bruker vi sentralgrenseteoremet som sier at <span class="math inline">\(\hat{p}\sim N(p, p(1-p)/n)\)</span>:</p>
 </blockquote>
 <blockquote>
 <ol style="list-style-type: lower-alpha">
@@ -651,7 +651,7 @@ P(\hat{p}&gt;0.06) &amp;= P\left(\frac{\hat{p} - 0.04}{\sqrt{0.04(1-0.04)/100}}&
 <li>Sannsynligheten for et slikt utfall er da
 <span class="math display">\[\begin{equation*}
 \begin{split}
-P(\hat{p}&gt;0.06) &amp;= P\left(\frac{\hat{p} - 0.04}{\sqrt{0.04(1-0.04)/300}}&gt; \frac{0.06 - 0.04}{\sqrt{0.04(1-0.04)/300}}\right)\\
+P(\hat{p}&gt;0.06) &amp;= P\left(\frac{\hat{p} - 0.04}{\sqrt{0.04(1-0.04)/400}}&gt; \frac{0.06 - 0.04}{\sqrt{0.04(1-0.04)/400}}\right)\\
 &amp;= P(Z &gt; 2.04) = 1 - P(Z &lt; 2.04) = 1 - 0.9793 = 0.02
 \end{split}
 \end{equation*}\]</span></li>
@@ -716,6 +716,43 @@ Vi vet fra før at <span class="math inline">\(E(\overline{X}) = \mu\)</span>. V
 <span class="math display">\[\text{Var}(\hat{p}) = \text{Var}\left(\frac{X}{n}\right) = \left(\frac{1}{n}\right)^2 \cdot\text{Var}(X) = \left(\frac{1}{n}\right)^2\cdot np(1 - p) = \frac{p(1 - p)}{n}\]</span>
 Igjen ser vi at variansen avtar når <span class="math inline">\(n\)</span> øker altså vil forskjellen mellom <span class="math inline">\(\hat{p}\)</span> og <span class="math inline">\(p\)</span> bli mindre jo større utvalg vi får.</li>
 </ol>
+</blockquote>
+</details>
+<ol start="21" style="list-style-type: decimal">
+<li><p>Et tilfeldig utvalg på <span class="math inline">\(n = 16\)</span> studenter brukte i gjennomsnitt <span class="math inline">\(\overline{x} = 5.2\)</span> timer på en innlevering, med utvalgsstandardavvik <span class="math inline">\(s = 1.5\)</span> timer. Anta at tidsbruken er tilnærmet normalfordelt, og at vi ikke kjenner det sanne standardavviket i populasjonen.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Regn ut et 95 %-konfidensintervall for den forventede tidsbruken. Den kritiske verdien henter du fra t-fordelingen: <code>qt(0.975, df = 15)</code> <span class="math inline">\(\approx 2.131\)</span>.</li>
+<li>En medstudent sier: «Det er 95 % sannsynlig at den sanne forventede tidsbruken ligger i dette intervallet.» Er dette en presis formulering? Forklar.</li>
+</ol></li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<blockquote>
+<ol style="list-style-type: lower-alpha">
+<li>Siden vi ikke kjenner det sanne standardavviket, bruker vi utvalgsstandardavviket <span class="math inline">\(s\)</span> og t-fordelingen med <span class="math inline">\(n - 1 = 15\)</span> frihetsgrader:
+<span class="math display">\[\overline{x} \pm t_{0.975,\,15}\cdot \frac{s}{\sqrt{n}} = 5.2 \pm 2.131\cdot\frac{1.5}{\sqrt{16}} = 5.2 \pm 0.80 = [4.40,\; 6.00].\]</span>
+Vi anslår altså at den forventede tidsbruken ligger mellom 4.4 og 6.0 timer.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Nei, formuleringen er upresis. Den sanne forventningen er et fast (men ukjent) tall, ikke noe tilfeldig som «ligger i intervallet med 95 % sannsynlighet». Det er <em>grensene</em> til konfidensintervallet som er tilfeldige, siden de regnes ut fra et tilfeldig utvalg. Den korrekte tolkningen er at dersom vi gjentatte ganger trakk nye utvalg og regnet ut et nytt intervall hver gang, ville 95 % av intervallene inneholde den sanne forventningen.</li>
+</ol>
+</blockquote>
+</details>
+<ol start="22" style="list-style-type: decimal">
+<li>Du planlegger å estimere den forventede vekten til laksen i en merd, og vil at 95 %-konfidensintervallet skal ha en feilmargin på høyst <span class="math inline">\(B = 0.2\)</span> kg. Fra tidligere år vet du at standardavviket i vekt er omtrent <span class="math inline">\(\sigma = 0.8\)</span> kg. Omtrent hvor mange laks må du veie?</li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<blockquote>
+<p>Vi bruker sammenhengen mellom feilmargin og utvalgsstørrelse:
+<span class="math display">\[n = \left(\frac{z_{0.975}\,\sigma}{B}\right)^2 = \left(\frac{1.96 \cdot 0.8}{0.2}\right)^2 = 7.84^2 \approx 61.5.\]</span>
+Vi runder alltid <em>opp</em> for å være på den sikre siden, så vi bør veie minst 62 laks. Her bruker vi <span class="math inline">\(z\)</span> og en antatt <span class="math inline">\(\sigma\)</span> fordi vi planlegger <em>før</em> vi har samlet inn data. Når vi etterpå faktisk har utvalget og må estimere standardavviket, bruker vi t-fordelingen som i oppgave 21.</p>
 </blockquote>
 </details>
 </div>
@@ -833,6 +870,58 @@ Kasinoer vet med andre ord å utnytte sentralgrenseteoremet. Har du noen penger 
 <blockquote>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Det finnes noen strategier som kan sikre positiv gevinst, men som i praksis krever svært mye egenkapital og at det ikke er noe tak for hvor mye du kan satse ved bordet. Den såkalte <em>Martingal</em> strategien går ut på at du dobler innsatsen etter hvert tap og gir deg ved første gevinst. Gevinsten vil da svare til det første beløpet du satset.</li>
+</ol>
+</blockquote>
+</details>
+<p>Nøtt 4. I formelen for utvalgsvariansen deler vi på <span class="math inline">\(n - 1\)</span> og ikke på <span class="math inline">\(n\)</span>:</p>
+<p><span class="math display">\[s^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \overline{X})^2.\]</span></p>
+<p>Det kan virke rart å dele på <span class="math inline">\(n - 1\)</span> når vi har <span class="math inline">\(n\)</span> observasjoner. Grunnen er at nettopp dette gjør <span class="math inline">\(s^2\)</span> til en <em>forventningsrett</em> estimator av populasjonsvariansen <span class="math inline">\(\sigma^2\)</span>. Anta at <span class="math inline">\(X_1, \ldots, X_n\)</span> er uavhengige med forventning <span class="math inline">\(\mu\)</span> og varians <span class="math inline">\(\sigma^2\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Forklar intuitivt hvorfor <span class="math inline">\(\sum_{i=1}^n (X_i - \overline{X})^2\)</span> har en tendens til å bli litt for liten som mål på spredningen rundt den <em>sanne</em> forventningen <span class="math inline">\(\mu\)</span>.</p></li>
+<li><p>Det kan vises at <span class="math inline">\(\text{E}\!\left[\sum_{i=1}^n (X_i - \overline{X})^2\right] = (n-1)\sigma^2\)</span>. Bruk dette til å vise at <span class="math inline">\(\text{E}(s^2) = \sigma^2\)</span>.</p></li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<blockquote>
+<ol style="list-style-type: lower-alpha">
+<li>Avvikene måles fra utvalgsgjennomsnittet <span class="math inline">\(\overline{X}\)</span>, ikke fra den sanne forventningen <span class="math inline">\(\mu\)</span>. Men <span class="math inline">\(\overline{X}\)</span> er nettopp det tallet som ligger «midt i» dataene og gjør summen av kvadrerte avvik <em>så liten som mulig</em>. Kvadratsummen rundt <span class="math inline">\(\overline{X}\)</span> blir derfor systematisk litt mindre enn den ville blitt rundt <span class="math inline">\(\mu\)</span>. Deler vi på <span class="math inline">\(n\)</span>, undervurderer vi <span class="math inline">\(\sigma^2\)</span>; å dele på <span class="math inline">\(n-1\)</span> i stedet retter opp for dette.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Med resultatet som er gitt:
+<span class="math display">\[\text{E}(s^2) = \text{E}\!\left[\frac{1}{n-1}\sum_{i=1}^n (X_i - \overline{X})^2\right] = \frac{1}{n-1}\cdot(n-1)\sigma^2 = \sigma^2.\]</span>
+Nettopp fordi vi deler på <span class="math inline">\(n-1\)</span>, treffer estimatoren <span class="math inline">\(\sigma^2\)</span> i gjennomsnitt.</li>
+</ol>
+</blockquote>
+</details>
+<p>Nøtt 5. To studenter trekker hvert sitt <em>uavhengige</em> tilfeldige utvalg fra samme populasjon, og hver av dem regner ut et 95 %-konfidensintervall for den samme forventningen <span class="math inline">\(\mu\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Hva er sannsynligheten for at <em>begge</em> intervallene inneholder den sanne <span class="math inline">\(\mu\)</span>?</p></li>
+<li><p>Hva er sannsynligheten for at <em>minst ett</em> av dem gjør det?</p></li>
+<li><p>Hva forteller denne oppgaven om hvordan vi bør tenke på et konfidensintervall?</p></li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<blockquote>
+<ol style="list-style-type: lower-alpha">
+<li>Hvert intervall inneholder <span class="math inline">\(\mu\)</span> med sannsynlighet 0.95, og siden utvalgene er uavhengige:
+<span class="math display">\[P(\text{begge}) = 0.95 \cdot 0.95 = 0.9025.\]</span></li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Det er lettest å regne ut sannsynligheten for at <em>ingen</em> av dem treffer, og trekke fra 1:
+<span class="math display">\[P(\text{minst ett}) = 1 - (0.05)^2 = 1 - 0.0025 = 0.9975.\]</span></li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>At vi i det hele tatt kan regne slik, understreker poenget fra teorien: det er <em>intervallet</em> (grensene) som er tilfeldig, ikke <span class="math inline">\(\mu\)</span>. «95 %» er en egenskap ved prosedyren over gjentatte utvalg, ikke en sannsynlighet for hvor <span class="math inline">\(\mu\)</span> ligger i ett bestemt intervall.</li>
 </ol>
 </blockquote>
 </details>
