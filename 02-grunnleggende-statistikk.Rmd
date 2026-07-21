@@ -98,6 +98,16 @@ ggplot(avkastning, aes(x = offensiv)) +
 
 Den offensive strategien har en langt bredere fordeling (større svingninger, og dermed høyere risiko) selv om den i snitt gir like mye som den forsiktige.
 
+Et **boksplott** oppsummerer mye av den samme informasjonen enda mer kompakt, og egner seg godt til å sammenlikne de to strategiene side om side. Her bruker vi den innebygde funksjonen `boxplot()`, som tar en data.frame med to kolonner og tegner én boks for hver:
+
+```{r boks-avkastning, fig.cap='Boksplott av daglig avkastning for de to strategiene.'}
+boxplot(avkastning,
+        ylab = "Daglig avkastning (%)",
+        main = "Fordeling av daglig avkastning per strategi")
+```
+
+Slik leser vi figuren (jf. spredningsmålene i avsnittet om spredning): streken inne i boksen er medianen, selve boksen dekker interkvartilbredden fra nedre til øvre kvartil, og «værhårene» strekker seg ut til de mest ekstreme observasjonene som ikke regnes som uteliggere. Punktene utenfor værhårene er nettopp uteliggere. Igjen ser vi at de to strategiene har omtrent samme midtpunkt, men at den offensive har en mye høyere boks og lengre værhår, altså langt større spredning.
+
 ### Kontrollspørsmål
 
 Her er noen kontrollspørsmål som du kan prøve deg på:
@@ -122,6 +132,18 @@ I forrige delkapittel beskrev vi data slik de forelå. Nå tar vi et viktig steg
 Populasjonen er hele mengden vi egentlig er interessert i, for eksempel alle norske velgere, eller all fisk i en oppdrettsmerd. En **parameter** er et tall som beskriver populasjonen, slik som den sanne forventningen $\mu$, det sanne standardavviket $\sigma$, eller den sanne andelen $p$. Problemet er at vi nesten aldri kan måle hele populasjonen; vi må nøye oss med et utvalg. Ut fra utvalget regner vi så ut en **estimator** (også kalt en observator), en «regel» for å gjette parameterverdien, for eksempel gjennomsnittet $\overline{X}$ som et anslag på $\mu$.
 
 Det helt sentrale poenget er dette: siden observasjonene i utvalget er tilfeldige, blir også estimatoren tilfeldig. Trekker vi et nytt utvalg, får vi et litt annet gjennomsnitt. Estimatoren er altså selv en stokastisk variabel med sin egen fordeling, og den fordelingen kaller vi en **samplingfordeling**. Nesten alt vi gjør senere i kurset, handler i bunn og grunn om å forstå samplingfordelinger.
+
+### Populasjonen som sannsynlighetsmodell
+
+Hittil har vi snakket om populasjonen som en konkret samling enheter: all fisken i en oppdrettsmerd, alle norske velgere. Da er en parameter som $\mu$ rett og slett gjennomsnittet regnet over samtlige enheter, og å trekke et utvalg betyr å plukke ut noen av dem tilfeldig.
+
+Det finnes en annen, og ofte mer fruktbar, måte å tenke på en populasjon: som en **sannsynlighetsfordeling**. Da ser vi på hver observasjon som en tilfeldig trekning fra en fordeling, og «populasjonen» er selve denne fordelingen, altså en matematisk beskrivelse av hvilke verdier som er mulige og hvor sannsynlige de er. Parameteren $\mu$ er forventningen i fordelingen, $\sigma$ er standardavviket, og så videre.
+
+Denne fordelingstankegangen er spesielt naturlig når «alle mulige observasjoner» ikke er en fast, tellbar mengde. Den daglige avkastningen til en investeringsstrategi er et godt eksempel: det finnes ingen ferdig liste over «alle avkastninger», men vi kan tenke oss at hver dags avkastning trekkes fra en underliggende fordeling. De to synsmåtene er dessuten forenlige: for en stor populasjon vil histogrammet over alle enhetene se ut som en jevn fordelingskurve, og det er nettopp den kurven fordelingsmodellen beskriver.
+
+En **sannsynlighetsmodell** er en slik matematisk beskrivelse av en stokastisk variabel. Fra MET2 kjenner du flere: den kontinuerlige **normalfordelingen** $N(\mu, \sigma^2)$, som beskriver mange naturlige størrelser og spiller en helt sentral rolle i dette kurset, og diskrete modeller som binomisk- og poissonfordelingen. En fordeling er fullt bestemt av noen få **parametre** (for normalfordelingen forventningen $\mu$ og standardavviket $\sigma$), og vi skriver gjerne $X \sim N(\mu, \sigma^2)$ for å si at $X$ følger en slik fordeling.
+
+Poenget for oss er dette: når vi antar at observasjonene våre er trekninger fra en fordeling med forventning $\mu$ og varians $\sigma^2$, kan vi bruke sannsynlighetsregningen til å si noe presist om hvordan estimatorene våre oppfører seg. Det er akkurat det vi bygger videre på når vi snart skal finne samplingfordelingen til gjennomsnittet.
 
 ### Utvalgsstørrelser og populasjonsstørrelser
 
