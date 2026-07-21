@@ -34,15 +34,36 @@ knitr::include_graphics("bilder/gun.PNG")
 <!--     a. Gjør oppgave 1a og 1b på dette oppgavesettet. -->
 <!--     b. Kan du foreslå en *grafisk* fremstilling som kan vise eventuelle forskjeller i responstid før og etter omleggingen? -->
     
-5. La oss anta at 50 avgangsstudenter som gikk ut av NHHs masterprogram i fjor svarte på et spørreskjema hvor mye de har i startlønn i sin første jobb. Gjennomsnittslønnen var 450.000, med et standardavvik på 120.000. Anta videre at lønnsfordelingen for årets studenter er den samme (og se bort fra inflasjon). 
-    a. Estimer sannsynligheten for at gjennomsnittlig startlønn for 50 responenter i år vil være større enn 450.000.
-    b. Estimer sannsynligheten for at gjennomsnittlig startlønn for 50 responenter i år vil være større enn 500.000.
+5. **(Skoleeksamen H25, oppgave 1)** I denne oppgaven skal du analysere data fra et forsikringsselskap som tilbyr bilforsikringer til privatkunder. Selskapet ønsker å forstå hvorfor enkelte nye kunder melder skade kort tid etter at forsikringen er tegnet («early claims»), slik at de kan identifisere risikokunder tidlig og sette inn forebyggende tiltak.
+
+    Datasettet `claims` inneholder informasjon om et utvalg på 1500 kunder som nylig har kjøpt bilforsikring. Last det inn i R med følgende kommando (vi antar at filen ligger i arbeidsmappen din):
+
+    ```{r, eval = FALSE}
+    load("claims.Rdata")
+    ```
+
+    Variablene i datasettet er:
+
+    | Variabel | Beskrivelse |
+    |---|---|
+    | `id` | Unik identifikator for hver kunde (1–1500) |
+    | `early_claim` | `"Yes"` = meldte skade innen 90 dager, `"No"` = ingen skade |
+    | `driver_age` | Alder på hovedfører (18–85 år) |
+    | `years_license` | Antall år med førerkort (0–60 år) |
+    | `car_age` | Bilens alder i hele år (0–20) |
+    | `mileage_km` | Deklarert årlig kjørelengde (3 000–50 000 km) |
+    | `engine_power_hp` | Motoreffekt i hestekrefter (60–350 hk) |
+    | `channel` | Kjøpskanal: `"Web"`, `"Agent"` eller `"Phone"` |
+    | `garage` | `"Yes"` = garasje, `"No"` = ingen garasje |
+    | `region` | Bostedsområde: `"Urban"` (by) eller `"Rural"` (landlig) |
+    | `multi_policy` | `"Yes"` = flere forsikringer i selskapet, `"No"` = kun bilforsikring |
+    | `payment_method` | Betalingsmåte: `"AvtaleGiro"` eller `"Faktura"` |
+
+    a. Lag en tabell med deskriptiv statistikk for variablene `driver_age`, `years_license`, `car_age` og `mileage_km`. Kommenter kort sentraltendens og spredning for variablene.
+    b. Lag et histogram av `mileage_km`. Lag også et boksplott som sammenligner fordelingen av `driver_age` for kundene med og uten `early_claim`. Kommenter kort hva du ser i figurene.
+    c. Lag et søylediagram for `channel` og frekvenstabeller for `garage`, `region` og `multi_policy`. Kommenter kort hva figuren og tabellene viser om kundene i utvalget.
     
-6. La $X$ være en stokastisk variabel med forventningsverdi lik 5 og varians lik 2. Definer to nye stokastiske variabler $Y = 2X-1$ og $Z = X^2 + Y$. Regn ut:
-    a. E$(Y)$ og Var$(Y)$.
-    b. E$(Z)$ og Var$(Z)$.
-    
-7. La $X$ være en standard normalfordelt variabel. Du får oppgitt at det medfører at E$(X^3) = 0$. La $Y = X^2$.
+6. La $X$ være en standard normalfordelt variabel. Du får oppgitt at det medfører at E$(X^3) = 0$. La $Y = X^2$.
     a. Vis at korrelasjonen mellom $X$ og $Y$ er lik null.
     b. Er $X$ og $Y$ uavhengige?
 
