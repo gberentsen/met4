@@ -100,8 +100,8 @@ hold symbolene fra hverandre:
 | Begrep | Populasjon (sann, ukjent) | Utvalg (beregnet fra data) |
 |---|---|---|
 | Gjennomsnitt | populasjonsgjennomsnitt `\mu` | utvalgsgjennomsnitt `\overline{X}` |
-| Standardavvik | populasjonsstandardavvik `\sigma` | utvalgsstandardavvik `S` |
-| Varians | populasjonsvarians `\sigma^2` | utvalgsvarians `S^2` |
+| Standardavvik | populasjonsstandardavvik `\sigma` | utvalgsstandardavvik `s` |
+| Varians | populasjonsvarians `\sigma^2` | utvalgsvarians `s^2` |
 | Andel | populasjonsandel `p` | utvalgsandel `\widehat{p}` |
 
 Andre faste valg (bruk venstre, unngå høyre):
@@ -114,12 +114,11 @@ Andre faste valg (bruk venstre, unngå høyre):
 | standardfeil | | *estimert* standardavvik til en estimator – ikke synonymt med standardavvik |
 | samplingfordeling | utvalgsfordeling | |
 
-Åpne inkonsekvenser å rydde (ikke gjort ennå):
+Utvalgsstandardavviket skrives med **liten `s`** (matcher forelesningsvideoen; besluttet). Åpne
+inkonsekvenser å rydde:
 
-- Formelarket bruker «empirisk standardavvik» for `S`; kurset går nå over til «utvalgsstandardavvik».
-  Formelarket bør oppdateres så det matcher.
-- Enkelte eldre seksjoner bruker liten `$s$` for utvalgsstandardavviket der standarden er stor `$S$`
-  (bl.a. i Nøtter-delen av modul 2).
+- `MET4-formelark.qmd` bruker fortsatt stor `S` og ordet «empirisk standardavvik». Bør endres til
+  liten `s` og «utvalgsstandardavvik» så det matcher videoen og modul 2.
 
 ## Pedagogiske føringer
 
@@ -127,10 +126,12 @@ Andre faste valg (bruk venstre, unngå høyre):
 - **Løsningsforslag skal forklare hvorfor, ikke bare vise kode.** En chunk med output er ikke et
   løsningsforslag; studenten trenger tolkningen.
 - Norsk fagterminologi der den finnes: feilledd, forkastningsområde, signifikansnivå, forventningsrett.
+- **Ikke bruk tankestrek (— eller –) som skilletegn i brødtekst.** Bruk komma, kolon, parentes eller
+  punktum i stedet. (Tallintervaller som `1–5` og `50–100` er greit.)
 - Skillet korrelasjon/kausalitet er et eksplisitt læringsutbytte i kursbeskrivelsen. Skriv «henger
   sammen med», ikke «fører til», når modellen ikke gir kausal tolkning.
 - **Alle henvisninger til læreboken (Keller) fjernes.** Sidene skal stå på egne ben, og eksempler
-  skal være selvstendige – simulerte datasett er greit (bruk alltid `set.seed()` for reproduserbart
+  skal være selvstendige. Simulerte datasett er greit (bruk alltid `set.seed()` for reproduserbart
   bygg). Modul 2 er ryddet; 3–6, seminar (08) og eksamen (09) gjenstår, se åpne punkter.
 - Ikke stryk en oppgave uten å sjekke om den er lenket fra `08-seminaroppgaver.Rmd` eller
   `09-Eksamensoppgaver.Rmd`.

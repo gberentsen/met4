@@ -19,7 +19,7 @@ I videoforelesningene går vi gjennom noen slides, og vi skriver et R-skript. Du
 
 ### Teori
 
-Deskriptiv statistikk har to hovedformål. Det første er å **bli kjent med et datasett**: før vi setter i gang med mer avansert analyse, vil vi danne oss et bilde av hva slags tall vi har foran oss, om det finnes åpenbare feil eller ekstremverdier, og hvilke mønstre som umiddelbart trer frem. Det andre formålet er å **presentere resultater** slik at de er lette å forstå for andre. Et viktig poeng er at deskriptiv statistikk verken generaliserer fra utvalget til en større populasjon eller tester årsakssammenhenger — vi lar rett og slett dataene fortelle sin egen historie. Selve slutningen fra utvalg til populasjon kommer vi tilbake til i neste delkapittel.
+Deskriptiv statistikk har to hovedformål. Det første er å **bli kjent med et datasett**: før vi setter i gang med mer avansert analyse, vil vi danne oss et bilde av hva slags tall vi har foran oss, om det finnes åpenbare feil eller ekstremverdier, og hvilke mønstre som umiddelbart trer frem. Det andre formålet er å **presentere resultater** slik at de er lette å forstå for andre. Et viktig poeng er at deskriptiv statistikk verken generaliserer fra utvalget til en større populasjon eller tester årsakssammenhenger. Vi lar rett og slett dataene fortelle sin egen historie. Selve slutningen fra utvalg til populasjon kommer vi tilbake til i neste delkapittel.
 
 Når vi beskriver en tallvariabel numerisk, er det særlig to spørsmål vi stiller: *hvor ligger tyngdepunktet i dataene*, og *hvor spredt er de rundt dette tyngdepunktet*? Har vi to variabler, kommer et tredje spørsmål til: *henger de sammen*?
 
@@ -37,15 +37,15 @@ Hvorfor bry seg med mer enn gjennomsnittet? Fordi medianen er langt mer **robust
 
 To datasett kan ha nøyaktig samme gjennomsnitt og likevel se helt forskjellige ut, fordi verdiene er ulikt spredt. Det vanligste spredningsmålet er **standardavviket**
 
-$$S = \sqrt{\frac{1}{n-1}\sum_{i=1}^n (X_i - \overline{X})^2},$$
+$$s = \sqrt{\frac{1}{n-1}\sum_{i=1}^n (X_i - \overline{X})^2},$$
 
-som grovt sagt måler hvor langt observasjonene i gjennomsnitt ligger fra $\overline{X}$. Kvadratet $S^2$ kalles **variansen**. Standardavviket har samme måleenhet som dataene selv (kroner, centimeter, ...) og er derfor lettest å tolke.
+som grovt sagt måler hvor langt observasjonene i gjennomsnitt ligger fra $\overline{X}$. Kvadratet $s^2$ kalles **variansen**. Standardavviket har samme måleenhet som dataene selv (kroner, centimeter, ...) og er derfor lettest å tolke.
 
-Et alternativ som — i likhet med medianen — er robust mot ekstremverdier, er å bruke **prosentiler**. Den $p$-te prosentilen er den verdien som har $p$ % av observasjonene under seg. De tre kvartilene (25-, 50- og 75-prosentilene) deler dataene i fire like store deler, og avstanden mellom øvre og nedre kvartil kalles **interkvartilbredden** (IQR). Et boksplott er en effektiv grafisk fremstilling av nettopp disse størrelsene.
+Et alternativ som (i likhet med medianen) er robust mot ekstremverdier, er å bruke **prosentiler**. Den $p$-te prosentilen er den verdien som har $p$ % av observasjonene under seg. De tre kvartilene (25-, 50- og 75-prosentilene) deler dataene i fire like store deler, og avstanden mellom øvre og nedre kvartil kalles **interkvartilbredden** (IQR). Et boksplott er en effektiv grafisk fremstilling av nettopp disse størrelsene.
 
 #### Sammenheng mellom to variabler
 
-Har vi målt to variabler for de samme observasjonene — for eksempel høyde og vekt — vil vi ofte vite om de henger sammen. Grafisk gjør vi det med et **spredningsdiagram**, og numerisk med **korrelasjonskoeffisienten** $r$. Den forteller oss hvor nær punktene ligger en rett linje, og har tre egenskaper det er verdt å merke seg:
+Har vi målt to variabler for de samme observasjonene (for eksempel høyde og vekt), vil vi ofte vite om de henger sammen. Grafisk gjør vi det med et **spredningsdiagram**, og numerisk med **korrelasjonskoeffisienten** $r$. Den forteller oss hvor nær punktene ligger en rett linje, og har tre egenskaper det er verdt å merke seg:
 
 - $r$ ligger alltid mellom $-1$ og $1$.
 - Fortegnet forteller om samvariasjonen er positiv (begge øker sammen) eller negativ (den ene øker når den andre synker).
@@ -57,11 +57,11 @@ Her lurer en klassisk felle: **at $r = 0$ betyr ikke at variablene er uavhengige
 
 Deskriptiv statistikk handler like mye om å *presentere* tall som om å regne dem ut. Dette er en ferdighet det er verdt å ta på alvor: evnen til å lage en overbevisende tabell eller figur kan være direkte avgjørende for gjennomslagskraften din, enten du legger fram resultater for en sjef, en kunde eller en eksamenssensor.
 
-Et av de mest berømte eksemplene på god deskriptiv statistikk er Charles Minards figur fra 1869 over Napoleons felttog mot Moskva, som vi ser nærmere på i videoforelesningen. På ett enkelt bilde klarer den å formidle tid, antall soldater, geografisk posisjon og temperatur samtidig — et forbilledlig eksempel på hvor mye informasjon en gjennomtenkt figur kan bære. I forelesningen ser vi også på noen *grelle* eksempler på det motsatte: hvordan grafiske virkemidler kan brukes til å gi skjeve og misvisende fremstillinger.
+Et av de mest berømte eksemplene på god deskriptiv statistikk er Charles Minards figur fra 1869 over Napoleons felttog mot Moskva, som vi ser nærmere på i videoforelesningen. På ett enkelt bilde klarer den å formidle tid, antall soldater, geografisk posisjon og temperatur samtidig, et forbilledlig eksempel på hvor mye informasjon en gjennomtenkt figur kan bære. I forelesningen ser vi også på noen *grelle* eksempler på det motsatte: hvordan grafiske virkemidler kan brukes til å gi skjeve og misvisende fremstillinger.
 
 #### Et eksempel i R
 
-La oss se hvordan vi kan beskrive et datasett i praksis. Tenk deg den daglige avkastningen (i prosent) til to ulike investeringsstrategier — en *forsiktig* og en *offensiv* — over 1000 handledager. Her simulerer vi tallene selv, slik at du kan kjøre koden og få nøyaktig de samme resultatene:
+La oss se hvordan vi kan beskrive et datasett i praksis. Tenk deg den daglige avkastningen (i prosent) til to ulike investeringsstrategier (en *forsiktig* og en *offensiv*) over 1000 handledager. Her simulerer vi tallene selv, slik at du kan kjøre koden og få nøyaktig de samme resultatene:
 
 ```{r}
 set.seed(42)
@@ -84,7 +84,7 @@ avkastning %>%
   )
 ```
 
-De to strategiene har praktisk talt samme gjennomsnittlige daglige avkastning (rundt 0,09 %), men legg merke til hvor forskjellige *standardavvikene* er. Det illustrerer et hovedpoeng fra teorien: gjennomsnittet alene forteller ikke hele historien — spredningen er vel så viktig. Det kommer enda tydeligere fram i et histogram for hver strategi:
+De to strategiene har praktisk talt samme gjennomsnittlige daglige avkastning (rundt 0,09 %), men legg merke til hvor forskjellige *standardavvikene* er. Det illustrerer et hovedpoeng fra teorien: gjennomsnittet alene forteller ikke hele historien. Spredningen er vel så viktig. Det kommer enda tydeligere fram i et histogram for hver strategi:
 
 ```{r hist-avkastning, fig.show='hold', fig.cap='Daglig avkastning for to strategier med samme gjennomsnitt, men ulik spredning.', message=FALSE, warning=FALSE}
 library(ggplot2)
@@ -96,7 +96,7 @@ ggplot(avkastning, aes(x = offensiv)) +
   labs(x = "Daglig avkastning (%)", y = "Antall dager", title = "Offensiv strategi")
 ```
 
-Den offensive strategien har en langt bredere fordeling — større svingninger, og dermed høyere risiko — selv om den i snitt gir like mye som den forsiktige.
+Den offensive strategien har en langt bredere fordeling (større svingninger, og dermed høyere risiko) selv om den i snitt gir like mye som den forsiktige.
 
 ### Kontrollspørsmål
 
@@ -121,9 +121,9 @@ I forrige delkapittel beskrev vi data slik de forelå. Nå tar vi et viktig steg
 
 #### Populasjon, parameter og estimator
 
-Populasjonen er hele mengden vi egentlig er interessert i — for eksempel alle norske velgere, eller all fisk i en oppdrettsmerd. En **parameter** er et tall som beskriver populasjonen, slik som den sanne forventningen $\mu$, det sanne standardavviket $\sigma$, eller den sanne andelen $p$. Problemet er at vi nesten aldri kan måle hele populasjonen; vi må nøye oss med et utvalg. Ut fra utvalget regner vi så ut en **estimator** (også kalt en observator) — en «regel» for å gjette parameterverdien, for eksempel gjennomsnittet $\overline{X}$ som et anslag på $\mu$.
+Populasjonen er hele mengden vi egentlig er interessert i, for eksempel alle norske velgere, eller all fisk i en oppdrettsmerd. En **parameter** er et tall som beskriver populasjonen, slik som den sanne forventningen $\mu$, det sanne standardavviket $\sigma$, eller den sanne andelen $p$. Problemet er at vi nesten aldri kan måle hele populasjonen; vi må nøye oss med et utvalg. Ut fra utvalget regner vi så ut en **estimator** (også kalt en observator), en «regel» for å gjette parameterverdien, for eksempel gjennomsnittet $\overline{X}$ som et anslag på $\mu$.
 
-Det helt sentrale poenget er dette: siden observasjonene i utvalget er tilfeldige, blir også estimatoren tilfeldig. Trekker vi et nytt utvalg, får vi et litt annet gjennomsnitt. Estimatoren er altså selv en stokastisk variabel med sin egen fordeling — og den fordelingen kaller vi en **samplingfordeling**. Nesten alt vi gjør senere i kurset, handler i bunn og grunn om å forstå samplingfordelinger.
+Det helt sentrale poenget er dette: siden observasjonene i utvalget er tilfeldige, blir også estimatoren tilfeldig. Trekker vi et nytt utvalg, får vi et litt annet gjennomsnitt. Estimatoren er altså selv en stokastisk variabel med sin egen fordeling, og den fordelingen kaller vi en **samplingfordeling**. Nesten alt vi gjør senere i kurset, handler i bunn og grunn om å forstå samplingfordelinger.
 
 #### Utvalgsstørrelser og populasjonsstørrelser
 
@@ -132,7 +132,7 @@ Et poeng det er verdt å feste seg ved med en gang, er at nesten alle størrelse
 | Størrelse | I populasjonen (sann, ukjent) | I utvalget (beregnet fra data) |
 |---|---|---|
 | Gjennomsnitt | populasjonsgjennomsnitt $\mu$ | utvalgsgjennomsnitt $\overline{X}$ |
-| Standardavvik | populasjonsstandardavvik $\sigma$ | utvalgsstandardavvik $S$ |
+| Standardavvik | populasjonsstandardavvik $\sigma$ | utvalgsstandardavvik $s$ |
 | Andel | populasjonsandel $p$ | utvalgsandel $\widehat{p}$ |
 
 Skillet er grunnleggende, og de to variantene er lette å blande sammen. Når vi snakker om «gjennomsnittet», må vi hele tiden være bevisste på om vi mener det sanne **populasjonsgjennomsnittet** $\mu$ (som vi sjelden kjenner) eller **utvalgsgjennomsnittet** $\overline{X}$ (som vi regner ut fra dataene våre, og som vil variere fra utvalg til utvalg). Notasjonen hjelper oss å holde dem fra hverandre: populasjonsstørrelser skrives gjerne med greske bokstaver ($\mu$, $\sigma$, $p$), mens utvalgsstørrelser skrives med latinske bokstaver eller med en «hatt», som i $\overline{X}$ og $\widehat{p}$.
@@ -143,33 +143,33 @@ Anta at observasjonene $X_1, X_2, \ldots, X_n$ er uavhengige, med forventning $\
 
 $$\textrm{E}(\overline{X}) = \mu, \qquad \textrm{Var}(\overline{X}) = \frac{\sigma^2}{n}, \qquad \textrm{det vil si} \qquad \sigma(\overline{X}) = \frac{\sigma}{\sqrt{n}}.$$
 
-To ting er verdt å dvele ved. For det første er gjennomsnittet **forventningsrett**: i snitt treffer det den sanne verdien $\mu$. For det andre — og dette er kanskje det viktigste enkeltresultatet i modulen — skrumper standardavviket til gjennomsnittet inn som $1/\sqrt{n}$ når utvalget vokser. Med andre ord: jo flere observasjoner vi samler inn, jo mer presist blir anslaget vårt. Men presisjonen øker bare med *kvadratroten* av $n$, så for å halvere usikkerheten må vi firedoble antall observasjoner.
+To ting er verdt å dvele ved. For det første er gjennomsnittet **forventningsrett**: i snitt treffer det den sanne verdien $\mu$. For det andre, og dette er kanskje det viktigste enkeltresultatet i modulen, skrumper standardavviket til gjennomsnittet inn som $1/\sqrt{n}$ når utvalget vokser. Med andre ord: jo flere observasjoner vi samler inn, jo mer presist blir anslaget vårt. Men presisjonen øker bare med *kvadratroten* av $n$, så for å halvere usikkerheten må vi firedoble antall observasjoner.
 
 #### Sentralgrenseteoremet
 
-Dersom $X$-ene i utgangspunktet er normalfordelte, er gjennomsnittet også eksakt normalfordelt. Men hva om vi ikke kjenner fordelingen til den enkelte observasjonen? Her kommer statistikkfagets kanskje mest bemerkelsesverdige resultat til unnsetning. **Sentralgrenseteoremet** sier at fordelingen til gjennomsnittet nærmer seg normalfordelingen når $n$ blir stor — *nesten uansett hvordan de enkelte observasjonene er fordelt*. Det er dette som gjør normalfordelingen så gjennomgripende i statistikken: så snart vi jobber med gjennomsnitt (eller summer) av mange observasjoner, dukker den nesten alltid opp. En vanlig tommelfingerregel er at tilnærmingen er god når vi har mer enn 50–100 observasjoner.
+Dersom $X$-ene i utgangspunktet er normalfordelte, er gjennomsnittet også eksakt normalfordelt. Men hva om vi ikke kjenner fordelingen til den enkelte observasjonen? Her kommer statistikkfagets kanskje mest bemerkelsesverdige resultat til unnsetning. **Sentralgrenseteoremet** sier at fordelingen til gjennomsnittet nærmer seg normalfordelingen når $n$ blir stor, *nesten uansett hvordan de enkelte observasjonene er fordelt*. Det er dette som gjør normalfordelingen så gjennomgripende i statistikken: så snart vi jobber med gjennomsnitt (eller summer) av mange observasjoner, dukker den nesten alltid opp. En vanlig tommelfingerregel er at tilnærmingen er god når vi har mer enn 50–100 observasjoner.
 
 #### Samplingfordelingen til en andel
 
-Ofte er vi ikke ute etter et gjennomsnitt, men en **andel** — for eksempel andelen velgere som støtter et bestemt parti, eller andelen defekte enheter i en produksjon. En observert andel $\widehat{p}$ kan skrives som et gjennomsnitt av nuller og enere (fiasko og suksess), og da slår sentralgrenseteoremet til på nytt:
+Ofte er vi ikke ute etter et gjennomsnitt, men en **andel**, for eksempel andelen velgere som støtter et bestemt parti, eller andelen defekte enheter i en produksjon. En observert andel $\widehat{p}$ kan skrives som et gjennomsnitt av nuller og enere (fiasko og suksess), og da slår sentralgrenseteoremet til på nytt:
 
 $$\widehat{p} \;\sim\; N\!\left(p,\; \frac{p(1-p)}{n}\right).$$
 
-Tilnærmingen regnes som god når $np > 5$ og $n(1-p) > 5$. Legg merke til at også her avtar usikkerheten som $1/\sqrt{n}$ — det er derfor en meningsmåling med rundt 1000 respondenter kan gi et brukbart anslag på hva et helt land mener.
+Tilnærmingen regnes som god når $np > 5$ og $n(1-p) > 5$. Legg merke til at også her avtar usikkerheten som $1/\sqrt{n}$. Det er derfor en meningsmåling med rundt 1000 respondenter kan gi et brukbart anslag på hva et helt land mener.
 
 #### Gode estimatorer
 
 Det finnes gjerne flere mulige estimatorer for samme parameter, og da må vi kunne vurdere hvilken som er best. Tre egenskaper står sentralt:
 
 - En estimator er **forventningsrett** dersom forventningen er lik den sanne parameterverdien, $\textrm{E}(\widehat{\theta}) = \theta$. Da bommer den ikke systematisk, verken for høyt eller for lavt.
-- Blant flere forventningsrette estimatorer foretrekker vi den mest **effektive** — den med minst varians.
+- Blant flere forventningsrette estimatorer foretrekker vi den mest **effektive**, altså den med minst varians.
 - En estimator er **konsistent** dersom den nærmer seg den sanne verdien når utvalget vokser. Gjennomsnittet er konsistent nettopp fordi variansen $\sigma^2/n$ går mot null når $n$ øker.
 
 #### Konfidensintervall
 
-Begrepene i dette delkapittelet bygger videre på sannsynlighetsregningen fra MET2 — fordelinger, stokastiske variabler, forventning og varians. Ligger dette langt bak i bevisstheten, kan det være lurt å friske det opp.
+Begrepene i dette delkapittelet bygger videre på sannsynlighetsregningen fra MET2: fordelinger, stokastiske variabler, forventning og varians. Ligger dette langt bak i bevisstheten, kan det være lurt å friske det opp.
 
-Vi kan lage et *punktestimat* av en forventningsverdi ved å ta gjennomsnittet av observasjonene. Men et enkelt tall sier ingenting om hvor sikkert anslaget er, og derfor er vi ofte mer interessert i et **konfidensintervall** — et helt intervall av rimelige verdier, der bredden forteller oss hvor presist estimatet er.
+Vi kan lage et *punktestimat* av en forventningsverdi ved å ta gjennomsnittet av observasjonene. Men et enkelt tall sier ingenting om hvor sikkert anslaget er, og derfor er vi ofte mer interessert i et **konfidensintervall**: et helt intervall av rimelige verdier, der bredden forteller oss hvor presist estimatet er.
 
 La oss se et eksempel. Tenk deg at vi vil anslå den forventede vekten til laksen i en stor oppdrettsmerd. Vi kan ikke veie all fisken, så vi trekker et tilfeldig **utvalg** på 25 laks og veier dem. Fra tidligere erfaring vet vi at populasjonsstandardavviket i vekt er omtrent 0,8 kg. Vi simulerer et slikt utvalg:
 
@@ -179,7 +179,7 @@ set.seed(1)
 vekt <- rnorm(25, mean = 5.2, sd = 0.8)
 ```
 
-Punktestimatet vårt for den forventede vekten er rett og slett utvalgsgjennomsnittet. For å lage et 95 %-konfidensintervall legger vi en margin til og fra dette gjennomsnittet — en margin som avhenger av standardavviket, utvalgsstørrelsen og en kritisk verdi fra normalfordelingen:
+Punktestimatet vårt for den forventede vekten er rett og slett utvalgsgjennomsnittet. For å lage et 95 %-konfidensintervall legger vi en margin til og fra dette gjennomsnittet, en margin som avhenger av standardavviket, utvalgsstørrelsen og en kritisk verdi fra normalfordelingen:
 
 ```{r}
 gj.snitt <- mean(vekt)       # utvalgsgjennomsnittet, vårt punktestimat
@@ -205,7 +205,7 @@ Til slutt en nyttig sammenheng: bestemmer vi oss på forhånd for hvor bredt kon
 
 $$n = \left(\frac{z_{\alpha/2}\,\sigma}{B}\right)^2.$$
 
-Haken i praksis er at vi sjelden kjenner $\sigma$ på forhånd — vi har jo ikke samlet inn data ennå. Da må vi enten bruke skjønn eller støtte oss på et tidligere estimat av $\sigma$ dersom vi har et.
+Haken i praksis er at vi sjelden kjenner $\sigma$ på forhånd. Vi har jo ikke samlet inn data ennå. Da må vi enten bruke skjønn eller støtte oss på et tidligere estimat av $\sigma$ dersom vi har et.
 
 ### Kontrollspørsmål
 
