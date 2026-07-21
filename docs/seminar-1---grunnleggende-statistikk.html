@@ -352,6 +352,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Lag en tabell med deskriptiv statistikk for variablene <code>driver_age</code>, <code>years_license</code>, <code>car_age</code> og <code>mileage_km</code>. Kommenter kort sentraltendens og spredning for variablene.</li>
 <li>Lag et histogram av <code>mileage_km</code>. Lag også et boksplott som sammenligner fordelingen av <code>driver_age</code> for kundene med og uten <code>early_claim</code>. Kommenter kort hva du ser i figurene.</li>
 <li>Lag et søylediagram for <code>channel</code> og frekvenstabeller for <code>garage</code>, <code>region</code> og <code>multi_policy</code>. Kommenter kort hva figuren og tabellene viser om kundene i utvalget.</li>
+</ol>
+<p><strong>Bonus (frivillig).</strong> Oppgavene under bruker det samme datasettet, men noen andre figurer og utregninger fra modulen:</p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Lag et spredningsdiagram av <code>driver_age</code> mot <code>years_license</code>, og regn ut korrelasjonskoeffisienten mellom de to variablene med <code>cor()</code>. Beskriv sammenhengen. Er den som du ville forvente?</li>
+<li>Lag en krysstabell mellom <code>region</code> og <code>early_claim</code>. Regn deretter ut andelen kunder med tidlig skade (<code>early_claim == "Yes"</code>) i hver region. Ser risikoen for tidlig skade ut til å henge sammen med hvor kunden bor?</li>
+<li>Estimer et 95 %-konfidensintervall for gjennomsnittlig alder (<code>driver_age</code>) blant kundene i utvalget. Bruk <code>mean()</code>, <code>sd()</code>, <code>length()</code> og <code>qt()</code>, slik som i konfidensintervall-eksempelet i modulen. Hva forteller intervallet deg?</li>
 </ol></li>
 <li><p>La <span class="math inline">\(X\)</span> være en standard normalfordelt variabel. Du får oppgitt at det medfører at E<span class="math inline">\((X^3) = 0\)</span>. La <span class="math inline">\(Y = X^2\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
