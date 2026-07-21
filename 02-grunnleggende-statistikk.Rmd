@@ -893,9 +893,8 @@ data <- tibble(variabel1 = rnorm(20),
                variabel2 = rnorm(20) + 1)
 
 write.xlsx(x = data, file = "datasett/data.xlsx")
-write.csv(data, file = "datasett/data.csv", 
-          sep = ",", 
-          quote = FALSE, 
+write.csv(data, file = "datasett/data.csv",
+          quote = FALSE,
           row.names = FALSE)
 
 ```
@@ -907,7 +906,7 @@ Under følger en liste over hvilke oppgaver du skal klare i R fra denne modulen.
 
 Det antas at du har kontroll på hvilken mappesti R bruker, og at du kan forandre den dersom nødvendig.
 
-I denne modulen kan du anta at alle datasett består av $p$ kolonner (variabler) med variabelnavn og $n$ rader (observasjoner). Datasettene blir gitt enten som Excel-filer (`.xls` elle `.xlsx`) eller som `.csv`-filer. Dersom du ønsker å prøve på kommandoene selv, kan du laste ned følgende eksempelfiler: [data.xls](datasett/data.xls), [data.xlsx](datasett/data.xlsx), [data.csv](datasett/data.csv).
+I denne modulen kan du anta at alle datasett består av $p$ kolonner (variabler) med variabelnavn og $n$ rader (observasjoner). Datasettene blir gitt enten som Excel-filer (`.xls` eller `.xlsx`) eller som `.csv`-filer. Dersom du ønsker å prøve på kommandoene selv, kan du laste ned følgende eksempelfiler: [data.xls](datasett/data.xls), [data.xlsx](datasett/data.xlsx), [data.csv](datasett/data.csv).
 
 Excel-filer kan leses inn i R ved hjelp av `read_excel()` som ligger i `readxl`-pakken:
 
@@ -928,8 +927,8 @@ data <- read_csv("data.csv")
 
 "csv" er en forkortelse for "comma separated values", og grunnen til det kan du se ved å åpne opp `data.csv` i en ren tekst-editor. Da ser du at verdiene på rekken er separert med et komma. Av og til har disse filene litt andre formater, så vi må kunne håndtere følgende varianter:
 
-- Dersom det ikke er komma som er brukt til å separere verdiene (det kan du alltid sjekke ved å se på filen i en tekst-editor), så kan du bruke funksjonen `read_delim` i stedet for `read_csv`, og bruke et argument for å spesifisere hvilket tegn som er brukt. Dersom det for eksempel er brukt semikolon ";", kan du lese datasettet ved å bruke `read_delim("data.xlsx", delim = ";")`.
-- Dersom komma er brukt for å skille desimaler fra heltall, som er vanlig i europeiske datasett, kan du bruke følgende kommando (der vi fortsatt antar at semikolon blir brukt til å skille mellom kolonner): `read_delim("data.xlsx", delim = ";", locale = locale(decimal_mark = ",")`.
+- Dersom det ikke er komma som er brukt til å separere verdiene (det kan du alltid sjekke ved å se på filen i en tekst-editor), så kan du bruke funksjonen `read_delim` i stedet for `read_csv`, og bruke et argument for å spesifisere hvilket tegn som er brukt. Dersom det for eksempel er brukt semikolon ";", kan du lese datasettet ved å bruke `read_delim("data.csv", delim = ";")`.
+- Dersom komma er brukt for å skille desimaler fra heltall, som er vanlig i europeiske datasett, kan du bruke følgende kommando (der vi fortsatt antar at semikolon blir brukt til å skille mellom kolonner): `read_delim("data.csv", delim = ";", locale = locale(decimal_mark = ","))`.
 - Dersom en bestemt tekst-streng blir brukt til å indikere manglende verdier i datasettet kan du bruke argumentet `na` i `read_csv()` og `read_delim()` til å spesifisere denne tekst-strengen, slik at den blir tolket riktig ved innlesingen som manglende verdi. Dette argumentet fungerer også i `read_excel()`.
 
 ### Numerisk deskriptiv statistikk {-}
