@@ -304,44 +304,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb31-17"><a href="relevant-r-grunnleggende.html#cb31-17" tabindex="-1"></a>  <span class="fu">select</span>(party, religious) <span class="sc">%&gt;%</span>            <span class="co"># pipe-operatoren og select()-funks.  </span></span>
 <span id="cb31-18"><a href="relevant-r-grunnleggende.html#cb31-18" tabindex="-1"></a>  table                                   <span class="co"># fra dplyr-pakken)</span></span></code></pre></div>
 </div>
+<div id="kjente-fordelinger-kvantiler-og-sannsynligheter" class="section level3 unnumbered hasAnchor">
+<h3>Kjente fordelinger: kvantiler og sannsynligheter<a href="relevant-r-grunnleggende.html#kjente-fordelinger-kvantiler-og-sannsynligheter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Utover å beskrive et datasett trenger vi ofte å regne på selve <em>sannsynlighetsfordelingene</em>. For hver kjente fordeling har R et sett funksjoner. De to vi bruker mest, er:</p>
+<ul>
+<li><code>q...()</code> gir en <strong>kvantil</strong> (persentil): verdien som har en gitt andel av fordelingen under seg. Det er nettopp dette vi trenger for å finne kritiske verdier, slik som <code>qt()</code> i konfidensintervallet lenger opp.</li>
+<li><code>p...()</code> gir en <strong>sannsynlighet</strong>: andelen av fordelingen som ligger <em>under</em> en gitt verdi (arealet til venstre).</li>
+</ul>
+<p>De fire fordelingene vi møter i kurset, har hvert sitt funksjonspar:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="relevant-r-grunnleggende.html#cb32-1" tabindex="-1"></a><span class="co"># KVANTILER (persentiler): hvilken verdi har denne andelen under seg?</span></span>
+<span id="cb32-2"><a href="relevant-r-grunnleggende.html#cb32-2" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>)                 <span class="co"># 97,5-persentilen i standardnormalfordelingen (ca. 1,96)</span></span>
+<span id="cb32-3"><a href="relevant-r-grunnleggende.html#cb32-3" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="dv">24</span>)           <span class="co"># 97,5-persentilen i t-fordelingen med 24 frihetsgrader</span></span>
+<span id="cb32-4"><a href="relevant-r-grunnleggende.html#cb32-4" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">5</span>)         <span class="co"># 95-persentilen i kji-kvadratfordelingen med 5 frihetsgrader</span></span>
+<span id="cb32-5"><a href="relevant-r-grunnleggende.html#cb32-5" tabindex="-1"></a><span class="fu">qf</span>(<span class="fl">0.95</span>, <span class="at">df1 =</span> <span class="dv">3</span>, <span class="at">df2 =</span> <span class="dv">20</span>)  <span class="co"># 95-persentilen i F-fordelingen</span></span>
+<span id="cb32-6"><a href="relevant-r-grunnleggende.html#cb32-6" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="relevant-r-grunnleggende.html#cb32-7" tabindex="-1"></a><span class="co"># SANNSYNLIGHETER: hvor stor andel ligger under denne verdien?</span></span>
+<span id="cb32-8"><a href="relevant-r-grunnleggende.html#cb32-8" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.96</span>)                  <span class="co"># P(Z &lt; 1,96) i standardnormalfordelingen (ca. 0,975)</span></span>
+<span id="cb32-9"><a href="relevant-r-grunnleggende.html#cb32-9" tabindex="-1"></a><span class="fu">pt</span>(<span class="fl">2.0</span>, <span class="at">df =</span> <span class="dv">24</span>)             <span class="co"># P(T &lt; 2,0) i t-fordelingen med 24 frihetsgrader</span></span>
+<span id="cb32-10"><a href="relevant-r-grunnleggende.html#cb32-10" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="fl">11.07</span>, <span class="at">df =</span> <span class="dv">5</span>)        <span class="co"># P(X &lt; 11,07) i kji-kvadratfordelingen</span></span>
+<span id="cb32-11"><a href="relevant-r-grunnleggende.html#cb32-11" tabindex="-1"></a><span class="fu">pf</span>(<span class="fl">3.10</span>, <span class="at">df1 =</span> <span class="dv">3</span>, <span class="at">df2 =</span> <span class="dv">20</span>)  <span class="co"># P(X &lt; 3,10) i F-fordelingen</span></span></code></pre></div>
+<p>Legg merke til at <code>q...()</code> og <code>p...()</code> er motsatte operasjoner: <code>qnorm(0.975)</code> gir 1,96, og <code>pnorm(1.96)</code> gir 0,975 tilbake. Vil du ha sannsynligheten <em>over</em> en verdi (arealet til høyre), tar du <code>1 - p...()</code>, for eksempel <code>1 - pnorm(1.96)</code>.</p>
+</div>
 <div id="grafisk-deskriptiv-statistikk-med-ggplot2" class="section level3 unnumbered hasAnchor">
 <h3>Grafisk deskriptiv statistikk med <code>ggplot2</code><a href="relevant-r-grunnleggende.html#grafisk-deskriptiv-statistikk-med-ggplot2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Du skal kunne lage følgende plott ved hjelp av <code>ggplot2</code>-pakken;</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="relevant-r-grunnleggende.html#cb32-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb32-2"><a href="relevant-r-grunnleggende.html#cb32-2" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="relevant-r-grunnleggende.html#cb32-3" tabindex="-1"></a><span class="co"># Boksplott</span></span>
-<span id="cb32-4"><a href="relevant-r-grunnleggende.html#cb32-4" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
-<span id="cb32-5"><a href="relevant-r-grunnleggende.html#cb32-5" tabindex="-1"></a>  ggplot <span class="sc">+</span></span>
-<span id="cb32-6"><a href="relevant-r-grunnleggende.html#cb32-6" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> total_mercury)) </span>
-<span id="cb32-7"><a href="relevant-r-grunnleggende.html#cb32-7" tabindex="-1"></a></span>
-<span id="cb32-8"><a href="relevant-r-grunnleggende.html#cb32-8" tabindex="-1"></a><span class="co"># Deler opp i grupper basert på en annen variabel</span></span>
-<span id="cb32-9"><a href="relevant-r-grunnleggende.html#cb32-9" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
-<span id="cb32-10"><a href="relevant-r-grunnleggende.html#cb32-10" tabindex="-1"></a>  ggplot <span class="sc">+</span></span>
-<span id="cb32-11"><a href="relevant-r-grunnleggende.html#cb32-11" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> total_mercury, <span class="at">x =</span> <span class="fu">as.factor</span>(fisherman))) </span>
-<span id="cb32-12"><a href="relevant-r-grunnleggende.html#cb32-12" tabindex="-1"></a></span>
-<span id="cb32-13"><a href="relevant-r-grunnleggende.html#cb32-13" tabindex="-1"></a><span class="co"># Søylediagram</span></span>
-<span id="cb32-14"><a href="relevant-r-grunnleggende.html#cb32-14" tabindex="-1"></a>survey <span class="sc">%&gt;%</span> </span>
-<span id="cb32-15"><a href="relevant-r-grunnleggende.html#cb32-15" tabindex="-1"></a>  ggplot <span class="sc">+</span></span>
-<span id="cb32-16"><a href="relevant-r-grunnleggende.html#cb32-16" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(religious)))</span>
-<span id="cb32-17"><a href="relevant-r-grunnleggende.html#cb32-17" tabindex="-1"></a></span>
-<span id="cb32-18"><a href="relevant-r-grunnleggende.html#cb32-18" tabindex="-1"></a><span class="co"># Histogram</span></span>
-<span id="cb32-19"><a href="relevant-r-grunnleggende.html#cb32-19" tabindex="-1"></a>survey <span class="sc">%&gt;%</span> </span>
-<span id="cb32-20"><a href="relevant-r-grunnleggende.html#cb32-20" tabindex="-1"></a>  ggplot <span class="sc">+</span> </span>
-<span id="cb32-21"><a href="relevant-r-grunnleggende.html#cb32-21" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> age))</span>
-<span id="cb32-22"><a href="relevant-r-grunnleggende.html#cb32-22" tabindex="-1"></a></span>
-<span id="cb32-23"><a href="relevant-r-grunnleggende.html#cb32-23" tabindex="-1"></a><span class="co"># Spredningsplott</span></span>
-<span id="cb32-24"><a href="relevant-r-grunnleggende.html#cb32-24" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
-<span id="cb32-25"><a href="relevant-r-grunnleggende.html#cb32-25" tabindex="-1"></a>  ggplot <span class="sc">+</span> </span>
-<span id="cb32-26"><a href="relevant-r-grunnleggende.html#cb32-26" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> weight))</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="relevant-r-grunnleggende.html#cb33-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb33-2"><a href="relevant-r-grunnleggende.html#cb33-2" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="relevant-r-grunnleggende.html#cb33-3" tabindex="-1"></a><span class="co"># Boksplott</span></span>
+<span id="cb33-4"><a href="relevant-r-grunnleggende.html#cb33-4" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
+<span id="cb33-5"><a href="relevant-r-grunnleggende.html#cb33-5" tabindex="-1"></a>  ggplot <span class="sc">+</span></span>
+<span id="cb33-6"><a href="relevant-r-grunnleggende.html#cb33-6" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> total_mercury)) </span>
+<span id="cb33-7"><a href="relevant-r-grunnleggende.html#cb33-7" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="relevant-r-grunnleggende.html#cb33-8" tabindex="-1"></a><span class="co"># Deler opp i grupper basert på en annen variabel</span></span>
+<span id="cb33-9"><a href="relevant-r-grunnleggende.html#cb33-9" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
+<span id="cb33-10"><a href="relevant-r-grunnleggende.html#cb33-10" tabindex="-1"></a>  ggplot <span class="sc">+</span></span>
+<span id="cb33-11"><a href="relevant-r-grunnleggende.html#cb33-11" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> total_mercury, <span class="at">x =</span> <span class="fu">as.factor</span>(fisherman))) </span>
+<span id="cb33-12"><a href="relevant-r-grunnleggende.html#cb33-12" tabindex="-1"></a></span>
+<span id="cb33-13"><a href="relevant-r-grunnleggende.html#cb33-13" tabindex="-1"></a><span class="co"># Søylediagram</span></span>
+<span id="cb33-14"><a href="relevant-r-grunnleggende.html#cb33-14" tabindex="-1"></a>survey <span class="sc">%&gt;%</span> </span>
+<span id="cb33-15"><a href="relevant-r-grunnleggende.html#cb33-15" tabindex="-1"></a>  ggplot <span class="sc">+</span></span>
+<span id="cb33-16"><a href="relevant-r-grunnleggende.html#cb33-16" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(religious)))</span>
+<span id="cb33-17"><a href="relevant-r-grunnleggende.html#cb33-17" tabindex="-1"></a></span>
+<span id="cb33-18"><a href="relevant-r-grunnleggende.html#cb33-18" tabindex="-1"></a><span class="co"># Histogram</span></span>
+<span id="cb33-19"><a href="relevant-r-grunnleggende.html#cb33-19" tabindex="-1"></a>survey <span class="sc">%&gt;%</span> </span>
+<span id="cb33-20"><a href="relevant-r-grunnleggende.html#cb33-20" tabindex="-1"></a>  ggplot <span class="sc">+</span> </span>
+<span id="cb33-21"><a href="relevant-r-grunnleggende.html#cb33-21" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> age))</span>
+<span id="cb33-22"><a href="relevant-r-grunnleggende.html#cb33-22" tabindex="-1"></a></span>
+<span id="cb33-23"><a href="relevant-r-grunnleggende.html#cb33-23" tabindex="-1"></a><span class="co"># Spredningsplott</span></span>
+<span id="cb33-24"><a href="relevant-r-grunnleggende.html#cb33-24" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
+<span id="cb33-25"><a href="relevant-r-grunnleggende.html#cb33-25" tabindex="-1"></a>  ggplot <span class="sc">+</span> </span>
+<span id="cb33-26"><a href="relevant-r-grunnleggende.html#cb33-26" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> weight))</span></code></pre></div>
 <p>Du skal kunne grunnleggende bearbeiding av <code>ggplot</code>-figurer:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="relevant-r-grunnleggende.html#cb33-1" tabindex="-1"></a><span class="co"># En bearbeidet variant</span></span>
-<span id="cb33-2"><a href="relevant-r-grunnleggende.html#cb33-2" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
-<span id="cb33-3"><a href="relevant-r-grunnleggende.html#cb33-3" tabindex="-1"></a>  ggplot <span class="sc">+</span> </span>
-<span id="cb33-4"><a href="relevant-r-grunnleggende.html#cb33-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> weight)) <span class="sc">+</span>          <span class="co"># Dette er selve figuren</span></span>
-<span id="cb33-5"><a href="relevant-r-grunnleggende.html#cb33-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Høyde&quot;</span>) <span class="sc">+</span>                                    <span class="co"># Tittel x-akse</span></span>
-<span id="cb33-6"><a href="relevant-r-grunnleggende.html#cb33-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Vekt&quot;</span>) <span class="sc">+</span>                                     <span class="co"># Tittel y-akse</span></span>
-<span id="cb33-7"><a href="relevant-r-grunnleggende.html#cb33-7" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Sammenheng mellom høyde og vekt&quot;</span>) <span class="sc">+</span>       <span class="co"># Tittel plott</span></span>
-<span id="cb33-8"><a href="relevant-r-grunnleggende.html#cb33-8" tabindex="-1"></a>  <span class="fu">theme_classic</span>()                                    <span class="co"># Ryddig layout</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="relevant-r-grunnleggende.html#cb34-1" tabindex="-1"></a><span class="co"># En bearbeidet variant</span></span>
+<span id="cb34-2"><a href="relevant-r-grunnleggende.html#cb34-2" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
+<span id="cb34-3"><a href="relevant-r-grunnleggende.html#cb34-3" tabindex="-1"></a>  ggplot <span class="sc">+</span> </span>
+<span id="cb34-4"><a href="relevant-r-grunnleggende.html#cb34-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> weight)) <span class="sc">+</span>          <span class="co"># Dette er selve figuren</span></span>
+<span id="cb34-5"><a href="relevant-r-grunnleggende.html#cb34-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Høyde&quot;</span>) <span class="sc">+</span>                                    <span class="co"># Tittel x-akse</span></span>
+<span id="cb34-6"><a href="relevant-r-grunnleggende.html#cb34-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Vekt&quot;</span>) <span class="sc">+</span>                                     <span class="co"># Tittel y-akse</span></span>
+<span id="cb34-7"><a href="relevant-r-grunnleggende.html#cb34-7" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Sammenheng mellom høyde og vekt&quot;</span>) <span class="sc">+</span>       <span class="co"># Tittel plott</span></span>
+<span id="cb34-8"><a href="relevant-r-grunnleggende.html#cb34-8" tabindex="-1"></a>  <span class="fu">theme_classic</span>()                                    <span class="co"># Ryddig layout</span></span></code></pre></div>
 
 </div>
 </div>
