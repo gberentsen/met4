@@ -88,6 +88,39 @@ bruker stor `Y`/`X`, mens paneldata og kausal identifikasjon (kap. 6 og 8) bruke
 (Stock & Watson, Wooldridge), og begge kapitlene er interne konsekvente. Ikke «rett opp» det ene
 til det andre – skillet er tilsiktet.
 
+## Terminologi
+
+Fast norsk term for hvert begrep, så kurset er konsekvent på tvers av moduler. `MET4-formelark.qmd`
+er fasit for *notasjon*; denne lista er fasit for *ord*.
+
+**Utvalgs- vs. populasjonsstørrelser.** Nesten alle størrelser finnes i to varianter — én sann
+(populasjon) og én beregnet (utvalg). Bruk prefiksene `populasjons-` og `utvalgs-` konsekvent, og
+hold symbolene fra hverandre:
+
+| Begrep | Populasjon (sann, ukjent) | Utvalg (beregnet fra data) |
+|---|---|---|
+| Gjennomsnitt | populasjonsgjennomsnitt `\mu` | utvalgsgjennomsnitt `\overline{X}` |
+| Standardavvik | populasjonsstandardavvik `\sigma` | utvalgsstandardavvik `S` |
+| Varians | populasjonsvarians `\sigma^2` | utvalgsvarians `S^2` |
+| Andel | populasjonsandel `p` | utvalgsandel `\widehat{p}` |
+
+Andre faste valg (bruk venstre, unngå høyre):
+
+| Bruk | Ikke | Merknad |
+|---|---|---|
+| sentralgrenseteoremet | sentralgrensesetningen | begge fantes i teksten; teoremet er valgt |
+| estimator | observator | «observator» henger fortsatt igjen enkelte steder |
+| estimat | | den konkrete tallverdien en estimator gir på et datasett |
+| standardfeil | | *estimert* standardavvik til en estimator – ikke synonymt med standardavvik |
+| samplingfordeling | utvalgsfordeling | |
+
+Åpne inkonsekvenser å rydde (ikke gjort ennå):
+
+- Formelarket bruker «empirisk standardavvik» for `S`; kurset går nå over til «utvalgsstandardavvik».
+  Formelarket bør oppdateres så det matcher.
+- Enkelte eldre seksjoner bruker liten `$s$` for utvalgsstandardavviket der standarden er stor `$S$`
+  (bl.a. i Nøtter-delen av modul 2).
+
 ## Pedagogiske føringer
 
 - Intuisjon før formalisme. Formelen skal begrunnes, ikke bare presenteres.
@@ -96,8 +129,9 @@ til det andre – skillet er tilsiktet.
 - Norsk fagterminologi der den finnes: feilledd, forkastningsområde, signifikansnivå, forventningsrett.
 - Skillet korrelasjon/kausalitet er et eksplisitt læringsutbytte i kursbeskrivelsen. Skriv «henger
   sammen med», ikke «fører til», når modellen ikke gir kausal tolkning.
-- Læreboken er Keller, *Statistics for Management and Economics* (2. EMEA-utgave). Modulene 1–4
-  kommenterer boken kapittelvis; 5–6 er stort sett eget materiale med egne referanser.
+- **Alle henvisninger til læreboken (Keller) fjernes.** Sidene skal stå på egne ben, og eksempler
+  skal være selvstendige – simulerte datasett er greit (bruk alltid `set.seed()` for reproduserbart
+  bygg). Modul 2 er ryddet; 3–6, seminar (08) og eksamen (09) gjenstår, se åpne punkter.
 - Ikke stryk en oppgave uten å sjekke om den er lenket fra `08-seminaroppgaver.Rmd` eller
   `09-Eksamensoppgaver.Rmd`.
 
@@ -105,9 +139,11 @@ til det andre – skillet er tilsiktet.
 
 Oppdateres løpende. Holdes kort – vokser den forbi ~10 linjer, flytt den ut av denne filen.
 
-| Kapittel | Notasjon | Sist gjennomgått |
-|---|---|---|
-| 01–09 | ikke harmonisert | – |
+| Kapittel | Status |
+|---|---|
+| 01 Introduksjon til R | språkvasket; `summarise()` lagt til i pipe-seksjonen |
+| 02 Grunnleggende statistikk | teoritekst skrevet for 2.1 og 2.2; Kommentarer integrert i hovedtekst; lærebok-henvisninger fjernet; egne (simulerte) eksempler; utvalg/populasjon-distinksjon innført |
+| 03–09 | ikke gjennomgått; lærebok-henvisninger gjenstår |
 
 **`utvalg-og-estimering.html` endres ved hvert bygg.** Kapittel 2 har en `rnorm()` uten `set.seed()`,
 og teksten sier eksplisitt at studenten «helt sikkert får andre verdier». Tilfeldigheten er tilsiktet –
@@ -119,6 +155,10 @@ og teksten sier eksplisitt at studenten «helt sikkert får andre verdier». Til
   regresjon-slides bruker `H_A`). Krever separat rendring; kilde og publisert HTML kan komme i utakt.
 - `MET4-formelark.qmd` er ikke lenket fra nettsiden ennå. Bør bygges til PDF og lenkes fra
   `index.Rmd` og `09-Eksamensoppgaver.Rmd`. Avklar først om det er tillatt eksamenshjelpemiddel.
+- **Lærebok-henvisninger gjenstår** i `03`–`06`, `08`, `09` og `index.Rmd` (Keller, kapittel-/
+  seksjons-/eksempelnumre). Skal fjernes som i modul 2.
+- Formelarket sier «empirisk standardavvik»; kurset går over til «utvalgsstandardavvik» (se Terminologi).
+- Feil i `02` Nøtter-del: en løsning skriver `\hat{p} ~ N(p, p(1-p))` uten `/n` (mangler `n` i variansen).
 
 ## Git
 
