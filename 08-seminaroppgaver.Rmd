@@ -36,10 +36,10 @@ knitr::include_graphics("bilder/gun.PNG")
     
 5. **(Skoleeksamen H25, oppgave 1)** I denne oppgaven skal du analysere data fra et forsikringsselskap som tilbyr bilforsikringer til privatkunder. Selskapet ønsker å forstå hvorfor enkelte nye kunder melder skade kort tid etter at forsikringen er tegnet («early claims»), slik at de kan identifisere risikokunder tidlig og sette inn forebyggende tiltak.
 
-    Datasettet `claims` inneholder informasjon om et utvalg på 1500 kunder som nylig har kjøpt bilforsikring. Last det inn i R med følgende kommando (vi antar at filen ligger i arbeidsmappen din):
+    Datasettet `claims` inneholder informasjon om et utvalg på 1500 kunder som nylig har kjøpt bilforsikring. Du kan laste det ned her: [claims-datasettet (zip)](tidligere-eksamensoppgaver/skole-25-h-ekstra.zip). Pakk ut `claims.RData` og last det inn i R med følgende kommando (vi antar at filen ligger i arbeidsmappen din):
 
     ```{r, eval = FALSE}
-    load("claims.Rdata")
+    load("claims.RData")
     ```
 
     Variablene i datasettet er:
