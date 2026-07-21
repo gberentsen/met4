@@ -167,7 +167,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.8" data-path="r-plotting.html"><a href="r-plotting.html"><i class="fa fa-check"></i><b>1.8</b> Plotting</a></li>
 <li class="chapter" data-level="1.9" data-path="script.html"><a href="script.html"><i class="fa fa-check"></i><b>1.9</b> Script</a></li>
 <li class="chapter" data-level="1.10" data-path="pipe.html"><a href="pipe.html"><i class="fa fa-check"></i><b>1.10</b> Pipe-operatoren <code>%&gt;%</code> og enkel datavask</a></li>
-<li class="chapter" data-level="1.11" data-path="r-ekstra.html"><a href="r-ekstra.html"><i class="fa fa-check"></i><b>1.11</b> Oppsummering og ekstra oppgaver</a></li>
+<li class="chapter" data-level="1.11" data-path="r-ekstra.html"><a href="r-ekstra.html"><i class="fa fa-check"></i><b>1.11</b> Oppgaver</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="grunnleggende-statistikk.html"><a href="grunnleggende-statistikk.html"><i class="fa fa-check"></i><b>2</b> Grunnleggende statistikk</a>
 <ul>
@@ -289,8 +289,8 @@ hvor en ville fått bedre prediksjoner av <span class="math inline">\(Y\)</span>
 <ol style="list-style-type: lower-alpha">
 <li>Last inn <a href="datasett/Card_Krueger.Rdata">Card-Krueger-datasettet</a>. Lag først variabelen for årsverk (FTE), der <code>empft</code> er antall fulltidsansatte, <code>nmgrs</code> er antall ledere, og <code>emppt</code> er antall deltidsansatte (som teller halvparten):</li>
 </ol>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb388-1" tabindex="-1"></a>njmin <span class="ot">&lt;-</span> njmin <span class="sc">%&gt;%</span></span>
-<span id="cb388-2"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb388-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fte =</span> empft <span class="sc">+</span> nmgrs <span class="sc">+</span> <span class="fl">0.5</span><span class="sc">*</span>emppt)</span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb393-1" tabindex="-1"></a>njmin <span class="ot">&lt;-</span> njmin <span class="sc">%&gt;%</span></span>
+<span id="cb393-2"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb393-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fte =</span> empft <span class="sc">+</span> nmgrs <span class="sc">+</span> <span class="fl">0.5</span><span class="sc">*</span>emppt)</span></code></pre></div>
 <p>Lag deretter en figur som viser gjennomsnittlig <code>fte</code> over tid (<code>observation</code>), separat for New Jersey og Pennsylvania (<code>state</code>). Beskriv hva du ser.</p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Hva ville vi konkludert dersom vi bare sammenlignet sysselsettingsnivået i New Jersey og Pennsylvania i november 1992? Hvorfor er denne sammenligningen problematisk?</li>
@@ -302,11 +302,11 @@ hvor en ville fått bedre prediksjoner av <span class="math inline">\(Y\)</span>
 <li><p>Forklar med egne ord hvorfor vi bruker Pennsylvania som sammenligningsgruppe. Hva antar vi om hvordan sysselsettingen i New Jersey ville utviklet seg dersom minstelønnen <em>ikke</em> hadde økt?</p></li>
 <li><p>Lag dummy-variabler for behandling:</p></li>
 </ol>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb389-1" tabindex="-1"></a>njmin <span class="ot">&lt;-</span> njmin <span class="sc">%&gt;%</span></span>
-<span id="cb389-2"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb389-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb389-3"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb389-3" tabindex="-1"></a>    <span class="at">treat =</span> <span class="fu">if_else</span>(state <span class="sc">==</span> <span class="st">&quot;New Jersey&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb389-4"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb389-4" tabindex="-1"></a>    <span class="at">post =</span> <span class="fu">if_else</span>(observation <span class="sc">==</span> <span class="st">&quot;November 1992&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb389-5"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb389-5" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb394-1" tabindex="-1"></a>njmin <span class="ot">&lt;-</span> njmin <span class="sc">%&gt;%</span></span>
+<span id="cb394-2"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb394-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb394-3"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb394-3" tabindex="-1"></a>    <span class="at">treat =</span> <span class="fu">if_else</span>(state <span class="sc">==</span> <span class="st">&quot;New Jersey&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb394-4"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb394-4" tabindex="-1"></a>    <span class="at">post =</span> <span class="fu">if_else</span>(observation <span class="sc">==</span> <span class="st">&quot;November 1992&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb394-5"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb394-5" tabindex="-1"></a>  )</span></code></pre></div>
 <p>Estimer deretter tre modeller som bygger opp til difference-in-differences-estimatet:</p>
 <ol style="list-style-type: decimal">
 <li><strong>Naiv sammenligning:</strong> Bruk kun data fra november 1992 (<code>post == 1</code>), og estimer <span class="math inline">\(\text{fte}_i = \beta_0 + \beta_1 \text{treat}_i + \epsilon_i\)</span></li>
@@ -343,8 +343,8 @@ hvor en ville fått bedre prediksjoner av <span class="math inline">\(Y\)</span>
 <ol style="list-style-type: lower-alpha">
 <li>Last inn datasettet fra <code>AER</code>-pakken med <code>data("Fatalities")</code>. Lag først variabelen for dødsfall per 10 000 innbyggere:</li>
 </ol>
-<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb390-1" tabindex="-1"></a>Fatalities <span class="ot">&lt;-</span> Fatalities <span class="sc">%&gt;%</span></span>
-<span id="cb390-2"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb390-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">frate =</span> fatal <span class="sc">/</span> pop <span class="sc">*</span> <span class="dv">10000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb395-1" tabindex="-1"></a>Fatalities <span class="ot">&lt;-</span> Fatalities <span class="sc">%&gt;%</span></span>
+<span id="cb395-2"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb395-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">frate =</span> fatal <span class="sc">/</span> pop <span class="sc">*</span> <span class="dv">10000</span>)</span></code></pre></div>
 <p>Lag deretter et spredningsplott med <code>beertax</code> på x-aksen og <code>frate</code> på y-aksen. Hva ser du?</p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li><p>Estimer en enkel lineær modell: <span class="math inline">\(\text{frate}_{it} = \beta_0 + \beta_1 \text{beertax}_{it} + \epsilon_{it}\)</span>. Tolk koeffisienten. Er resultatet overraskende?</p></li>
@@ -355,19 +355,19 @@ hvor en ville fått bedre prediksjoner av <span class="math inline">\(Y\)</span>
 Løsning
 </summary>
 <p><strong>a)</strong></p>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb391-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;Fatalities&quot;</span>)</span>
-<span id="cb391-2"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb391-2" tabindex="-1"></a>Fatalities <span class="ot">&lt;-</span> Fatalities <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">frate =</span> fatal <span class="sc">/</span> pop <span class="sc">*</span> <span class="dv">10000</span>)</span>
-<span id="cb391-3"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb391-3" tabindex="-1"></a></span>
-<span id="cb391-4"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb391-4" tabindex="-1"></a><span class="fu">ggplot</span>(Fatalities, <span class="fu">aes</span>(<span class="at">x =</span> beertax, <span class="at">y =</span> frate)) <span class="sc">+</span></span>
-<span id="cb391-5"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb391-5" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb391-6"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb391-6" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb391-7"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb391-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Ølskatt (dollar per kasse)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Trafikkdødsfall per 10 000 innbyggere&quot;</span>) <span class="sc">+</span></span>
-<span id="cb391-8"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb391-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="met4_files/figure-html/unnamed-chunk-346-1.png" alt="" width="672" />
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb396-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;Fatalities&quot;</span>)</span>
+<span id="cb396-2"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb396-2" tabindex="-1"></a>Fatalities <span class="ot">&lt;-</span> Fatalities <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">frate =</span> fatal <span class="sc">/</span> pop <span class="sc">*</span> <span class="dv">10000</span>)</span>
+<span id="cb396-3"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb396-3" tabindex="-1"></a></span>
+<span id="cb396-4"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb396-4" tabindex="-1"></a><span class="fu">ggplot</span>(Fatalities, <span class="fu">aes</span>(<span class="at">x =</span> beertax, <span class="at">y =</span> frate)) <span class="sc">+</span></span>
+<span id="cb396-5"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb396-5" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb396-6"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb396-6" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb396-7"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb396-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Ølskatt (dollar per kasse)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Trafikkdødsfall per 10 000 innbyggere&quot;</span>) <span class="sc">+</span></span>
+<span id="cb396-8"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb396-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="met4_files/figure-html/unnamed-chunk-351-1.png" alt="" width="672" />
 Spredningsplottet viser en <strong>positiv</strong> sammenheng mellom ølskatt og trafikkdødsfall — overraskende og kontraintuitivt.</p>
 <p><strong>b)</strong></p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb392-1" tabindex="-1"></a>pooled <span class="ot">&lt;-</span> <span class="fu">feols</span>(frate <span class="sc">~</span> beertax, <span class="at">data =</span> Fatalities)</span>
-<span id="cb392-2"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb392-2" tabindex="-1"></a><span class="fu">summary</span>(pooled)</span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb397-1" tabindex="-1"></a>pooled <span class="ot">&lt;-</span> <span class="fu">feols</span>(frate <span class="sc">~</span> beertax, <span class="at">data =</span> Fatalities)</span>
+<span id="cb397-2"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb397-2" tabindex="-1"></a><span class="fu">summary</span>(pooled)</span></code></pre></div>
 <pre><code>## OLS estimation, Dep. Var.: frate
 ## Observations: 336
 ## Standard-errors: IID 
@@ -397,10 +397,10 @@ Spredningsplottet viser en <strong>positiv</strong> sammenheng mellom ølskatt o
 Løsning
 </summary>
 <p><strong>a)</strong></p>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb394-1" tabindex="-1"></a>pooled   <span class="ot">&lt;-</span> <span class="fu">feols</span>(frate <span class="sc">~</span> beertax, <span class="at">data =</span> Fatalities)</span>
-<span id="cb394-2"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb394-2" tabindex="-1"></a>state_fe <span class="ot">&lt;-</span> <span class="fu">feols</span>(frate <span class="sc">~</span> beertax <span class="sc">|</span> state, <span class="at">data =</span> Fatalities)</span>
-<span id="cb394-3"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb394-3" tabindex="-1"></a>twfe     <span class="ot">&lt;-</span> <span class="fu">feols</span>(frate <span class="sc">~</span> beertax <span class="sc">|</span> state <span class="sc">+</span> year, <span class="at">data =</span> Fatalities)</span>
-<span id="cb394-4"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb394-4" tabindex="-1"></a><span class="fu">etable</span>(pooled, state_fe, twfe)</span></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb399-1" tabindex="-1"></a>pooled   <span class="ot">&lt;-</span> <span class="fu">feols</span>(frate <span class="sc">~</span> beertax, <span class="at">data =</span> Fatalities)</span>
+<span id="cb399-2"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb399-2" tabindex="-1"></a>state_fe <span class="ot">&lt;-</span> <span class="fu">feols</span>(frate <span class="sc">~</span> beertax <span class="sc">|</span> state, <span class="at">data =</span> Fatalities)</span>
+<span id="cb399-3"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb399-3" tabindex="-1"></a>twfe     <span class="ot">&lt;-</span> <span class="fu">feols</span>(frate <span class="sc">~</span> beertax <span class="sc">|</span> state <span class="sc">+</span> year, <span class="at">data =</span> Fatalities)</span>
+<span id="cb399-4"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb399-4" tabindex="-1"></a><span class="fu">etable</span>(pooled, state_fe, twfe)</span></code></pre></div>
 <pre><code>##                             pooled            state_fe               twfe
 ## Dependent Var.:              frate               frate              frate
 ##                                                                          
@@ -431,7 +431,7 @@ Løsning
 Løsning
 </summary>
 <p><strong>a)</strong></p>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb396-1" tabindex="-1"></a><span class="fu">summary</span>(pooled)    <span class="co"># N=336, K=2, df=334</span></span></code></pre></div>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb401-1" tabindex="-1"></a><span class="fu">summary</span>(pooled)    <span class="co"># N=336, K=2, df=334</span></span></code></pre></div>
 <pre><code>## OLS estimation, Dep. Var.: frate
 ## Observations: 336
 ## Standard-errors: IID 
@@ -441,7 +441,7 @@ Løsning
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## RMSE: 0.542116   Adj. R2: 0.090648</code></pre>
-<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb398-1" tabindex="-1"></a><span class="fu">summary</span>(state_fe)  <span class="co"># N=336, K=49, df=287</span></span></code></pre></div>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb403-1" tabindex="-1"></a><span class="fu">summary</span>(state_fe)  <span class="co"># N=336, K=49, df=287</span></span></code></pre></div>
 <pre><code>## OLS estimation, Dep. Var.: frate
 ## Observations: 336
 ## Fixed-effects: state: 48
@@ -452,7 +452,7 @@ Løsning
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## RMSE: 0.17547     Adj. R2: 0.889129
 ##                 Within R2: 0.040745</code></pre>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb400-1" tabindex="-1"></a><span class="fu">summary</span>(twfe)      <span class="co"># N=336, K=56, df=280</span></span></code></pre></div>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb405-1" tabindex="-1"></a><span class="fu">summary</span>(twfe)      <span class="co"># N=336, K=56, df=280</span></span></code></pre></div>
 <pre><code>## OLS estimation, Dep. Var.: frate
 ## Observations: 336
 ## Fixed-effects: state: 48,  year: 7
@@ -466,7 +466,7 @@ Løsning
 <p>Antall observasjoner er likt (336), men antall estimerte koeffisienter øker og frihetsgrader synker for hver modell.</p>
 <p><strong>b)</strong> Standardfeilen for <code>beertax</code> øker (presisjonen synker) når vi legger til faste effekter. Faste effekter absorberer variasjon og reduserer effektive frihetsgrader — vi betaler for bedre kontroll med lavere presisjon.</p>
 <p><strong>c)</strong></p>
-<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb402-1" tabindex="-1"></a><span class="fu">feols</span>(frate <span class="sc">~</span> beertax <span class="sc">|</span> state <span class="sc">+</span> year <span class="sc">+</span> state<span class="sc">:</span>year, <span class="at">data =</span> Fatalities)</span></code></pre></div>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="seminar-6---avansert-regresjon-og-maskinlring.html#cb407-1" tabindex="-1"></a><span class="fu">feols</span>(frate <span class="sc">~</span> beertax <span class="sc">|</span> state <span class="sc">+</span> year <span class="sc">+</span> state<span class="sc">:</span>year, <span class="at">data =</span> Fatalities)</span></code></pre></div>
 <p>Modellen kan ikke estimeres. Vi har 48 × 7 = 336 delstat-år-kombinasjoner og nøyaktig 336 observasjoner. En fast effekt per kombinasjon gir perfekt kollinearitet — ingen variasjon gjenstår til å estimere effekten av <code>beertax</code>.</p>
 </details>
 <p><strong>Oppgave 10</strong></p>
