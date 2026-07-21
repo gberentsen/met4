@@ -338,6 +338,17 @@ Figur 2.1: Daglig avkastning for to strategier med samme gjennomsnitt, men ulik 
 </p>
 </div>
 <p>Den offensive strategien har en langt bredere fordeling (større svingninger, og dermed høyere risiko) selv om den i snitt gir like mye som den forsiktige.</p>
+<p>Et <strong>boksplott</strong> oppsummerer mye av den samme informasjonen enda mer kompakt, og egner seg godt til å sammenlikne de to strategiene side om side. Her bruker vi den innebygde funksjonen <code>boxplot()</code>, som tar en data.frame med to kolonner og tegner én boks for hver:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="deskriptiv-statistikk.html#cb28-1" tabindex="-1"></a><span class="fu">boxplot</span>(avkastning,</span>
+<span id="cb28-2"><a href="deskriptiv-statistikk.html#cb28-2" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">&quot;Daglig avkastning (%)&quot;</span>,</span>
+<span id="cb28-3"><a href="deskriptiv-statistikk.html#cb28-3" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Fordeling av daglig avkastning per strategi&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:boks-avkastning"></span>
+<img src="met4_files/figure-html/boks-avkastning-1.png" alt="Boksplott av daglig avkastning for de to strategiene." width="672" />
+<p class="caption">
+Figur 2.2: Boksplott av daglig avkastning for de to strategiene.
+</p>
+</div>
+<p>Slik leser vi figuren (jf. spredningsmålene i avsnittet om spredning): streken inne i boksen er medianen, selve boksen dekker interkvartilbredden fra nedre til øvre kvartil, og «værhårene» strekker seg ut til de mest ekstreme observasjonene som ikke regnes som uteliggere. Punktene utenfor værhårene er nettopp uteliggere. Igjen ser vi at de to strategiene har omtrent samme midtpunkt, men at den offensive har en mye høyere boks og lengre værhår, altså langt større spredning.</p>
 </div>
 <div id="kontrollsprsmal" class="section level3 hasAnchor" number="2.1.6">
 <h3><span class="header-section-number">2.1.6</span> Kontrollspørsmål<a href="deskriptiv-statistikk.html#kontrollsprsmal" class="anchor-section" aria-label="Anchor link to header"></a></h3>

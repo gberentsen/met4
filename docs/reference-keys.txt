@@ -1,4 +1,5 @@
 fig:hist-avkastning
+fig:boks-avkastning
 fig:churn
 eq:withb
 eq:withoutb
@@ -32,6 +33,7 @@ et-eksempel-i-r
 kontrollsprsmal
 utvalg-og-estimering
 populasjon-parameter-og-estimator
+populasjonen-som-sannsynlighetsmodell
 utvalgsstrrelser-og-populasjonsstrrelser
 samplingfordelingen-til-et-gjennomsnitt
 sentralgrenseteoremet
