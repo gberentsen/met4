@@ -449,6 +449,24 @@ testdata %>%
 
 </details>    
 
+## KI og programmering
+
+De siste årene har verktøy basert på kunstig intelligens (KI), som ChatGPT, Claude, Copilot og lignende, blitt en naturlig del av hverdagen til mange som programmerer. Slike verktøy kan være til god hjelp også når du skriver R-kode, og du er velkommen til å bruke dem mens du jobber deg gjennom kurset. Noen typiske måter de kan hjelpe deg på:
+
+- **Forklare feilmeldinger.** Feilmeldingene i R kan være kryptiske. Lim inn feilmeldingen sammen med koden din, og be om en forklaring på hva som er galt og hvordan du retter det.
+- **Foreslå funksjoner.** Vet du hva du vil gjøre, men ikke hvilken funksjon du trenger? Beskriv oppgaven med vanlige ord (for eksempel «hvordan regner jeg ut medianen av en kolonne i R?»), så får du gjerne et forslag.
+- **Forklare kode.** Har du en kodesnutt du ikke forstår, kan du be om en forklaring, gjerne linje for linje.
+- **Komme i gang.** Du kan be om et utkast til kode for en oppgave, og deretter jobbe videre med det selv.
+
+**Men hvorfor lære å programmere selv, når KI kan gjøre det for oss?** Vi mener det fortsatt er gode grunner til å lære litt programmering selv, slik vi gjør i dette kurset:
+
+- **Du må kunne vurdere om svaret er riktig.** KI-verktøy er ikke feilfrie. De kan finne på funksjoner som ikke finnes, bruke feil argumenter, eller gi kode som kjører helt fint, men som svarer på feil spørsmål. I statistikk er dette ekstra lumskt: en analyse kan se riktig ut og likevel være metodisk feil. Uten egen kompetanse har du ingen mulighet til å oppdage det.
+- **Forståelsen kan ingen ta fra deg.** Målet i MET4 er ikke å produsere kode, men å forstå og bruke statistiske metoder riktig. KI kan skrive koden, men den kan ikke overta forståelsen din av *hva* du gjør og *hvorfor*. Det er den forståelsen som gjør deg i stand til å stille de riktige spørsmålene og til å tolke svarene fornuftig.
+- **På eksamen er du på egen hånd.** Eksamen i MET4 er en digital skoleeksamen der du har tilgang til R, men skal klare deg uten KI-hjelp. Da må du kunne skrive og forstå koden selv.
+- **KI blir et bedre verktøy jo mer du selv kan.** Jo mer du forstår, jo mer presist kan du spørre, jo raskere ser du når svaret er feil, og jo bedre klarer du å bygge videre på det du får. Litt programmeringskompetanse gjør deg altså til en langt mer effektiv bruker av KI, ikke en overflødig en.
+
+Kort sagt: bruk gjerne KI som en tålmodig hjelpelærer mens du lærer, men bruk den til å *forstå mer*, ikke til å slippe å forstå. Det er nettopp derfor vi bruker tid på å skrive kode selv i dette kurset.
+
 ## Oppgaver {#r-ekstra}
 
 Her er noen oppgaver du kan bruke til å øve på det vi har gått gjennom i modulen. Prøv å skrive koden selv i R før du sjekker løsningsforslaget.
