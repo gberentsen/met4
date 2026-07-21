@@ -297,6 +297,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-31"><a href="enkle-beregninger-og-variabler.html#cb1-31" tabindex="-1"></a><span class="co"># større prosjekter!</span></span>
 <span id="cb1-32"><a href="enkle-beregninger-og-variabler.html#cb1-32" tabindex="-1"></a>hva_som_helst <span class="ot">&lt;-</span> <span class="st">&quot;hello world&quot;</span></span>
 <span id="cb1-33"><a href="enkle-beregninger-og-variabler.html#cb1-33" tabindex="-1"></a>hva_som_helst</span></code></pre></div>
+<p>R har også en rekke innebygde <strong>standardfunksjoner</strong> for vanlige matematiske operasjoner. To av dem, eksponentialfunksjonen <code>exp()</code> og logaritmen <code>log()</code>, kommer vi til å bruke mye senere i kurset, blant annet til logaritmiske transformasjoner i regresjon og til logaritmisk avkastning i tidsrekker:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="enkle-beregninger-og-variabler.html#cb2-1" tabindex="-1"></a><span class="co"># Eksponentialfunksjonen og logaritmen:</span></span>
+<span id="cb2-2"><a href="enkle-beregninger-og-variabler.html#cb2-2" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">1</span>)              <span class="co"># e opphøyd i 1, altså tallet e (ca. 2.718)</span></span>
+<span id="cb2-3"><a href="enkle-beregninger-og-variabler.html#cb2-3" tabindex="-1"></a><span class="fu">log</span>(<span class="fu">exp</span>(<span class="dv">1</span>))         <span class="co"># naturlig logaritme (grunntall e), motstykket til exp()</span></span>
+<span id="cb2-4"><a href="enkle-beregninger-og-variabler.html#cb2-4" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">100</span>)            <span class="co"># NB: log() regner ut den NATURLIGE logaritmen</span></span>
+<span id="cb2-5"><a href="enkle-beregninger-og-variabler.html#cb2-5" tabindex="-1"></a><span class="fu">log10</span>(<span class="dv">100</span>)          <span class="co"># tierlogaritmen (grunntall 10)</span></span>
+<span id="cb2-6"><a href="enkle-beregninger-og-variabler.html#cb2-6" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">8</span>, <span class="at">base =</span> <span class="dv">2</span>)    <span class="co"># logaritme med valgfritt grunntall (her 2)</span></span>
+<span id="cb2-7"><a href="enkle-beregninger-og-variabler.html#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="enkle-beregninger-og-variabler.html#cb2-8" tabindex="-1"></a><span class="co"># Noen andre nyttige standardfunksjoner:</span></span>
+<span id="cb2-9"><a href="enkle-beregninger-og-variabler.html#cb2-9" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">16</span>)            <span class="co"># kvadratrot</span></span>
+<span id="cb2-10"><a href="enkle-beregninger-og-variabler.html#cb2-10" tabindex="-1"></a><span class="fu">abs</span>(<span class="sc">-</span><span class="dv">5</span>)             <span class="co"># absoluttverdi</span></span>
+<span id="cb2-11"><a href="enkle-beregninger-og-variabler.html#cb2-11" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14159</span>, <span class="dv">2</span>)   <span class="co"># avrunding til 2 desimaler</span></span></code></pre></div>
+<p>Legg spesielt merke til at <code>log()</code> som standard regner ut den <em>naturlige</em> logaritmen (grunntall <span class="math inline">\(e\)</span>), ikke tierlogaritmen. Ønsker du tierlogaritmen, bruker du <code>log10()</code>.</p>
 <p>Når du er ferdig med det kan du prøve deg på følgende lille oppgave:</p>
 <p><strong>Oppgave:</strong> Velg dine tre favorittall og lagre dem i tre forskjellige variabler. Beregn så ditt magiske tall, som er summen av favorittallene dine. Lagre ditt magiske tall i en ny variabel, og gi denne variabelen et informativt navn som identifiserer hva det er.</p>
 <p>Fikk du det til? Kikk på løsningen under for å sjekke.</p>
@@ -304,11 +317,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <summary>
 Løsning
 </summary>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="enkle-beregninger-og-variabler.html#cb2-1" tabindex="-1"></a>tall1 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb2-2"><a href="enkle-beregninger-og-variabler.html#cb2-2" tabindex="-1"></a>tall2 <span class="ot">&lt;-</span> <span class="dv">87</span></span>
-<span id="cb2-3"><a href="enkle-beregninger-og-variabler.html#cb2-3" tabindex="-1"></a>tall3 <span class="ot">&lt;-</span> <span class="dv">101</span></span>
-<span id="cb2-4"><a href="enkle-beregninger-og-variabler.html#cb2-4" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="enkle-beregninger-og-variabler.html#cb2-5" tabindex="-1"></a>magisk_tall <span class="ot">&lt;-</span> tall1 <span class="sc">+</span> tall2 <span class="sc">+</span> tall3</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="enkle-beregninger-og-variabler.html#cb3-1" tabindex="-1"></a>tall1 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb3-2"><a href="enkle-beregninger-og-variabler.html#cb3-2" tabindex="-1"></a>tall2 <span class="ot">&lt;-</span> <span class="dv">87</span></span>
+<span id="cb3-3"><a href="enkle-beregninger-og-variabler.html#cb3-3" tabindex="-1"></a>tall3 <span class="ot">&lt;-</span> <span class="dv">101</span></span>
+<span id="cb3-4"><a href="enkle-beregninger-og-variabler.html#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="enkle-beregninger-og-variabler.html#cb3-5" tabindex="-1"></a>magisk_tall <span class="ot">&lt;-</span> tall1 <span class="sc">+</span> tall2 <span class="sc">+</span> tall3</span></code></pre></div>
 </details>
 </div>
             </section>

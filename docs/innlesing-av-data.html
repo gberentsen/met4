@@ -264,31 +264,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <iframe src="https://player.vimeo.com/video/638313361?h=393f457fdd" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
 </iframe>
 <p>Vi leser inn tabellen i excelfilen som en tabell (“data frame”) i R ved hjelp av funksjonen <code>read_excel()</code> i <code>readxl</code>-pakken og ser på noen enkle kommandoer for å jobbe med en slik tabell.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="innlesing-av-data.html#cb7-1" tabindex="-1"></a><span class="co"># Datasettet er i .xls-formatet, så vi trenger readxl-pakken for å laste det inn</span></span>
-<span id="cb7-2"><a href="innlesing-av-data.html#cb7-2" tabindex="-1"></a><span class="co"># i R.</span></span>
-<span id="cb7-3"><a href="innlesing-av-data.html#cb7-3" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb7-4"><a href="innlesing-av-data.html#cb7-4" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="innlesing-av-data.html#cb7-5" tabindex="-1"></a><span class="co"># Inne i denne pakken så er det en funksjon som heter read_excel:</span></span>
-<span id="cb7-6"><a href="innlesing-av-data.html#cb7-6" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">&quot;testdata.xls&quot;</span>)</span>
-<span id="cb7-7"><a href="innlesing-av-data.html#cb7-7" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="innlesing-av-data.html#cb7-8" tabindex="-1"></a><span class="co"># Det gikk bra, men for å bruke dette datasettet, så må vi lagre det til en </span></span>
-<span id="cb7-9"><a href="innlesing-av-data.html#cb7-9" tabindex="-1"></a><span class="co"># variabel.</span></span>
-<span id="cb7-10"><a href="innlesing-av-data.html#cb7-10" tabindex="-1"></a>testdata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;testdata.xls&quot;</span>)</span>
-<span id="cb7-11"><a href="innlesing-av-data.html#cb7-11" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="innlesing-av-data.html#cb7-12" tabindex="-1"></a><span class="co"># Skriver ut (toppen av) datasettet.</span></span>
-<span id="cb7-13"><a href="innlesing-av-data.html#cb7-13" tabindex="-1"></a>testdata</span>
-<span id="cb7-14"><a href="innlesing-av-data.html#cb7-14" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="innlesing-av-data.html#cb7-15" tabindex="-1"></a><span class="co"># Nå ser vi datasettet i vinduet oppe til høyre. Vi kan se på det ved å </span></span>
-<span id="cb7-16"><a href="innlesing-av-data.html#cb7-16" tabindex="-1"></a><span class="co"># skrive navnet til datasettet i konsollen, og vi kan hente ut individuelle</span></span>
-<span id="cb7-17"><a href="innlesing-av-data.html#cb7-17" tabindex="-1"></a><span class="co"># kolonner som vektorer ved å bruke dollartegnet $:</span></span>
-<span id="cb7-18"><a href="innlesing-av-data.html#cb7-18" tabindex="-1"></a>testdata<span class="sc">$</span>X1</span>
-<span id="cb7-19"><a href="innlesing-av-data.html#cb7-19" tabindex="-1"></a></span>
-<span id="cb7-20"><a href="innlesing-av-data.html#cb7-20" tabindex="-1"></a><span class="co"># Regner ut gjennomsnittet for X1 og X2:</span></span>
-<span id="cb7-21"><a href="innlesing-av-data.html#cb7-21" tabindex="-1"></a><span class="fu">mean</span>(testdata<span class="sc">$</span>X1)</span>
-<span id="cb7-22"><a href="innlesing-av-data.html#cb7-22" tabindex="-1"></a><span class="fu">mean</span>(testdata<span class="sc">$</span>X2)</span>
-<span id="cb7-23"><a href="innlesing-av-data.html#cb7-23" tabindex="-1"></a></span>
-<span id="cb7-24"><a href="innlesing-av-data.html#cb7-24" tabindex="-1"></a><span class="co"># Hvor mange rekker/observasjoner har vi?</span></span>
-<span id="cb7-25"><a href="innlesing-av-data.html#cb7-25" tabindex="-1"></a><span class="fu">nrow</span>(testdata)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="innlesing-av-data.html#cb8-1" tabindex="-1"></a><span class="co"># Datasettet er i .xls-formatet, så vi trenger readxl-pakken for å laste det inn</span></span>
+<span id="cb8-2"><a href="innlesing-av-data.html#cb8-2" tabindex="-1"></a><span class="co"># i R.</span></span>
+<span id="cb8-3"><a href="innlesing-av-data.html#cb8-3" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb8-4"><a href="innlesing-av-data.html#cb8-4" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="innlesing-av-data.html#cb8-5" tabindex="-1"></a><span class="co"># Inne i denne pakken så er det en funksjon som heter read_excel:</span></span>
+<span id="cb8-6"><a href="innlesing-av-data.html#cb8-6" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">&quot;testdata.xls&quot;</span>)</span>
+<span id="cb8-7"><a href="innlesing-av-data.html#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="innlesing-av-data.html#cb8-8" tabindex="-1"></a><span class="co"># Det gikk bra, men for å bruke dette datasettet, så må vi lagre det til en </span></span>
+<span id="cb8-9"><a href="innlesing-av-data.html#cb8-9" tabindex="-1"></a><span class="co"># variabel.</span></span>
+<span id="cb8-10"><a href="innlesing-av-data.html#cb8-10" tabindex="-1"></a>testdata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;testdata.xls&quot;</span>)</span>
+<span id="cb8-11"><a href="innlesing-av-data.html#cb8-11" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="innlesing-av-data.html#cb8-12" tabindex="-1"></a><span class="co"># Skriver ut (toppen av) datasettet.</span></span>
+<span id="cb8-13"><a href="innlesing-av-data.html#cb8-13" tabindex="-1"></a>testdata</span>
+<span id="cb8-14"><a href="innlesing-av-data.html#cb8-14" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="innlesing-av-data.html#cb8-15" tabindex="-1"></a><span class="co"># Nå ser vi datasettet i vinduet oppe til høyre. Vi kan se på det ved å </span></span>
+<span id="cb8-16"><a href="innlesing-av-data.html#cb8-16" tabindex="-1"></a><span class="co"># skrive navnet til datasettet i konsollen, og vi kan hente ut individuelle</span></span>
+<span id="cb8-17"><a href="innlesing-av-data.html#cb8-17" tabindex="-1"></a><span class="co"># kolonner som vektorer ved å bruke dollartegnet $:</span></span>
+<span id="cb8-18"><a href="innlesing-av-data.html#cb8-18" tabindex="-1"></a>testdata<span class="sc">$</span>X1</span>
+<span id="cb8-19"><a href="innlesing-av-data.html#cb8-19" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="innlesing-av-data.html#cb8-20" tabindex="-1"></a><span class="co"># Regner ut gjennomsnittet for X1 og X2:</span></span>
+<span id="cb8-21"><a href="innlesing-av-data.html#cb8-21" tabindex="-1"></a><span class="fu">mean</span>(testdata<span class="sc">$</span>X1)</span>
+<span id="cb8-22"><a href="innlesing-av-data.html#cb8-22" tabindex="-1"></a><span class="fu">mean</span>(testdata<span class="sc">$</span>X2)</span>
+<span id="cb8-23"><a href="innlesing-av-data.html#cb8-23" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="innlesing-av-data.html#cb8-24" tabindex="-1"></a><span class="co"># Hvor mange rekker/observasjoner har vi?</span></span>
+<span id="cb8-25"><a href="innlesing-av-data.html#cb8-25" tabindex="-1"></a><span class="fu">nrow</span>(testdata)</span></code></pre></div>
 <p><strong>Oppgave:</strong></p>
 <ol style="list-style-type: decimal">
 <li>Hvor mange kolonner har datasettet vårt?</li>
@@ -299,14 +299,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <summary>
 Løsning
 </summary>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="innlesing-av-data.html#cb8-1" tabindex="-1"></a><span class="co"># 1</span></span>
-<span id="cb8-2"><a href="innlesing-av-data.html#cb8-2" tabindex="-1"></a><span class="fu">ncol</span>(testdata)</span>
-<span id="cb8-3"><a href="innlesing-av-data.html#cb8-3" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="innlesing-av-data.html#cb8-4" tabindex="-1"></a><span class="co"># 2 </span></span>
-<span id="cb8-5"><a href="innlesing-av-data.html#cb8-5" tabindex="-1"></a>testdata<span class="sc">$</span>X1 <span class="sc">+</span> testdata<span class="sc">$</span>X2</span>
-<span id="cb8-6"><a href="innlesing-av-data.html#cb8-6" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="innlesing-av-data.html#cb8-7" tabindex="-1"></a><span class="co"># 3</span></span>
-<span id="cb8-8"><a href="innlesing-av-data.html#cb8-8" tabindex="-1"></a><span class="fu">sum</span>(testdata<span class="sc">$</span>X1 <span class="sc">+</span> testdata<span class="sc">$</span>X2)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="innlesing-av-data.html#cb9-1" tabindex="-1"></a><span class="co"># 1</span></span>
+<span id="cb9-2"><a href="innlesing-av-data.html#cb9-2" tabindex="-1"></a><span class="fu">ncol</span>(testdata)</span>
+<span id="cb9-3"><a href="innlesing-av-data.html#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="innlesing-av-data.html#cb9-4" tabindex="-1"></a><span class="co"># 2 </span></span>
+<span id="cb9-5"><a href="innlesing-av-data.html#cb9-5" tabindex="-1"></a>testdata<span class="sc">$</span>X1 <span class="sc">+</span> testdata<span class="sc">$</span>X2</span>
+<span id="cb9-6"><a href="innlesing-av-data.html#cb9-6" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="innlesing-av-data.html#cb9-7" tabindex="-1"></a><span class="co"># 3</span></span>
+<span id="cb9-8"><a href="innlesing-av-data.html#cb9-8" tabindex="-1"></a><span class="fu">sum</span>(testdata<span class="sc">$</span>X1 <span class="sc">+</span> testdata<span class="sc">$</span>X2)</span></code></pre></div>
 </details>
 </div>
             </section>

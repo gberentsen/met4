@@ -280,80 +280,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>!=</code> = “er ikke lik”</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="pipe.html#cb13-1" tabindex="-1"></a><span class="co"># Vi kan bruke klammeparantesen til å hente ut enkelttall, kolonner eller rader:</span></span>
-<span id="cb13-2"><a href="pipe.html#cb13-2" tabindex="-1"></a>testdata[<span class="dv">1</span>,<span class="dv">2</span>]</span>
-<span id="cb13-3"><a href="pipe.html#cb13-3" tabindex="-1"></a>testdata[<span class="dv">1</span>,]</span>
-<span id="cb13-4"><a href="pipe.html#cb13-4" tabindex="-1"></a>testdata[,<span class="dv">2</span>]</span>
-<span id="cb13-5"><a href="pipe.html#cb13-5" tabindex="-1"></a>testdata[, <span class="fu">c</span>(<span class="st">&quot;X1&quot;</span>, <span class="st">&quot;X2&quot;</span>)]</span>
-<span id="cb13-6"><a href="pipe.html#cb13-6" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="pipe.html#cb13-7" tabindex="-1"></a><span class="co"># Vi kan også filtrere ut rader basert på kriterier:</span></span>
-<span id="cb13-8"><a href="pipe.html#cb13-8" tabindex="-1"></a>testdata[testdata<span class="sc">$</span>X1 <span class="sc">&gt;</span> <span class="dv">100</span>,]</span>
-<span id="cb13-9"><a href="pipe.html#cb13-9" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="pipe.html#cb13-10" tabindex="-1"></a><span class="co"># Eller vi kan legge til en ny kolonne, som er summen av to kolonner</span></span>
-<span id="cb13-11"><a href="pipe.html#cb13-11" tabindex="-1"></a>testdata<span class="sc">$</span>sum <span class="ot">&lt;-</span> testdata<span class="sc">$</span>X1 <span class="sc">+</span> testdata<span class="sc">$</span>X2</span>
-<span id="cb13-12"><a href="pipe.html#cb13-12" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="pipe.html#cb13-13" tabindex="-1"></a><span class="co"># Det finnes en enklere måte å gjøre dette på ved hjelp av den såkalte </span></span>
-<span id="cb13-14"><a href="pipe.html#cb13-14" tabindex="-1"></a><span class="co"># &quot;pipe&quot;-operatoren og egne funksjoner for datamanipulasjon. Begge deler</span></span>
-<span id="cb13-15"><a href="pipe.html#cb13-15" tabindex="-1"></a><span class="co"># er inkludert i dplyr-pakken, som du eventuelt på installere:</span></span>
-<span id="cb13-16"><a href="pipe.html#cb13-16" tabindex="-1"></a><span class="co"># install.packages(&quot;dplyr&quot;)</span></span>
-<span id="cb13-17"><a href="pipe.html#cb13-17" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb13-18"><a href="pipe.html#cb13-18" tabindex="-1"></a></span>
-<span id="cb13-19"><a href="pipe.html#cb13-19" tabindex="-1"></a><span class="co"># Det første konseptet er pipen, og det er en veldig fin kommando når vi</span></span>
-<span id="cb13-20"><a href="pipe.html#cb13-20" tabindex="-1"></a><span class="co"># skal bruke flere funksjoner etter hverandre. La oss si at vi skal regne ut</span></span>
-<span id="cb13-21"><a href="pipe.html#cb13-21" tabindex="-1"></a><span class="co"># logaritmen til kvadratroten til 2. I base R kan vi skrive:</span></span>
-<span id="cb13-22"><a href="pipe.html#cb13-22" tabindex="-1"></a><span class="fu">log</span>(<span class="fu">sqrt</span>(<span class="dv">2</span>))</span>
-<span id="cb13-23"><a href="pipe.html#cb13-23" tabindex="-1"></a></span>
-<span id="cb13-24"><a href="pipe.html#cb13-24" tabindex="-1"></a><span class="co"># Kvadratroten av 2 skrevet som en pipe blir</span></span>
-<span id="cb13-25"><a href="pipe.html#cb13-25" tabindex="-1"></a><span class="dv">2</span> <span class="sc">%&gt;%</span> sqrt</span>
-<span id="cb13-26"><a href="pipe.html#cb13-26" tabindex="-1"></a></span>
-<span id="cb13-27"><a href="pipe.html#cb13-27" tabindex="-1"></a><span class="co"># ... og logaritmen til kvadratroten til 2 blir da </span></span>
-<span id="cb13-28"><a href="pipe.html#cb13-28" tabindex="-1"></a><span class="dv">2</span> <span class="sc">%&gt;%</span> sqrt <span class="sc">%&gt;%</span> log</span>
-<span id="cb13-29"><a href="pipe.html#cb13-29" tabindex="-1"></a></span>
-<span id="cb13-30"><a href="pipe.html#cb13-30" tabindex="-1"></a><span class="co"># Dette kan vi lese fra venstre mot høyre i den rekkefølgen det skjer, og vi trenger </span></span>
-<span id="cb13-31"><a href="pipe.html#cb13-31" tabindex="-1"></a><span class="co"># ikke holde styr på flere lag med paranteser.</span></span>
-<span id="cb13-32"><a href="pipe.html#cb13-32" tabindex="-1"></a></span>
-<span id="cb13-33"><a href="pipe.html#cb13-33" tabindex="-1"></a><span class="co"># Dette er en teknikk som gjør det veldig greit å jobbe med tabeller av data, og</span></span>
-<span id="cb13-34"><a href="pipe.html#cb13-34" tabindex="-1"></a><span class="co"># vi skal se på tre veldig sentrale funksjoner i dplyr-pakken:</span></span>
-<span id="cb13-35"><a href="pipe.html#cb13-35" tabindex="-1"></a></span>
-<span id="cb13-36"><a href="pipe.html#cb13-36" tabindex="-1"></a><span class="co"># Bruk &quot;select()&quot; til å velge kolonner i et datasett:</span></span>
-<span id="cb13-37"><a href="pipe.html#cb13-37" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span> <span class="fu">select</span>(X1, X2)</span>
-<span id="cb13-38"><a href="pipe.html#cb13-38" tabindex="-1"></a></span>
-<span id="cb13-39"><a href="pipe.html#cb13-39" tabindex="-1"></a><span class="co"># Bruk &quot;filter()&quot; for å filtrere ut rader basert på kriterier:</span></span>
-<span id="cb13-40"><a href="pipe.html#cb13-40" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span> <span class="fu">filter</span>(X1 <span class="sc">&gt;</span> <span class="dv">100</span>)</span>
-<span id="cb13-41"><a href="pipe.html#cb13-41" tabindex="-1"></a></span>
-<span id="cb13-42"><a href="pipe.html#cb13-42" tabindex="-1"></a><span class="co"># Bruk &quot;mutate()&quot; for å lage nye kolonner, gjerne basert på de vi allerede har:</span></span>
-<span id="cb13-43"><a href="pipe.html#cb13-43" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">sum =</span> X1 <span class="sc">+</span> X2)</span>
-<span id="cb13-44"><a href="pipe.html#cb13-44" tabindex="-1"></a></span>
-<span id="cb13-45"><a href="pipe.html#cb13-45" tabindex="-1"></a><span class="co"># Bruk &quot;summarise()&quot; for å regne ut ett oppsummerende tall fra en hel kolonne,</span></span>
-<span id="cb13-46"><a href="pipe.html#cb13-46" tabindex="-1"></a><span class="co"># for eksempel gjennomsnittet av alle verdiene i X1:</span></span>
-<span id="cb13-47"><a href="pipe.html#cb13-47" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">snitt_X1 =</span> <span class="fu">mean</span>(X1))</span>
-<span id="cb13-48"><a href="pipe.html#cb13-48" tabindex="-1"></a></span>
-<span id="cb13-49"><a href="pipe.html#cb13-49" tabindex="-1"></a><span class="co"># summarise() blir spesielt kraftig sammen med &quot;group_by()&quot;, som først deler</span></span>
-<span id="cb13-50"><a href="pipe.html#cb13-50" tabindex="-1"></a><span class="co"># dataene inn i grupper. Da får vi ett tall per gruppe. Her regner vi ut</span></span>
-<span id="cb13-51"><a href="pipe.html#cb13-51" tabindex="-1"></a><span class="co"># gjennomsnittet av X1 for hver verdi av A1-kolonnen:</span></span>
-<span id="cb13-52"><a href="pipe.html#cb13-52" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span></span>
-<span id="cb13-53"><a href="pipe.html#cb13-53" tabindex="-1"></a>    <span class="fu">group_by</span>(A1) <span class="sc">%&gt;%</span></span>
-<span id="cb13-54"><a href="pipe.html#cb13-54" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">snitt_X1 =</span> <span class="fu">mean</span>(X1))</span>
-<span id="cb13-55"><a href="pipe.html#cb13-55" tabindex="-1"></a></span>
-<span id="cb13-56"><a href="pipe.html#cb13-56" tabindex="-1"></a><span class="co"># Legg merke til at vi her bare skriver navnet på datasettet en gang, nemlig helt i</span></span>
-<span id="cb13-57"><a href="pipe.html#cb13-57" tabindex="-1"></a><span class="co"># starten. Vi kan også kjøre flere slike pipes etter hverandre, og lagre resultatet </span></span>
-<span id="cb13-58"><a href="pipe.html#cb13-58" tabindex="-1"></a><span class="co"># i en ny variabel:</span></span>
-<span id="cb13-59"><a href="pipe.html#cb13-59" tabindex="-1"></a>ny_testdata <span class="ot">&lt;-</span> </span>
-<span id="cb13-60"><a href="pipe.html#cb13-60" tabindex="-1"></a>    testdata <span class="sc">%&gt;%</span></span>
-<span id="cb13-61"><a href="pipe.html#cb13-61" tabindex="-1"></a>        <span class="fu">select</span>(X1, X2) <span class="sc">%&gt;%</span></span>
-<span id="cb13-62"><a href="pipe.html#cb13-62" tabindex="-1"></a>        <span class="fu">filter</span>(X1 <span class="sc">&gt;</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-63"><a href="pipe.html#cb13-63" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">sum =</span> X1 <span class="sc">+</span> X2)</span></code></pre></div>
-<p>Legg spesielt merke til <code>summarise()</code> og <code>group_by()</code> over. Der <code>select()</code>, <code>filter()</code> og <code>mutate()</code> gir oss en ny tabell tilbake, <em>kollapser</em> <code>summarise()</code> mange rader ned til noen få oppsummerende tall. Kombinert med <code>group_by()</code> er dette en av de mest brukte teknikkene i praktisk dataanalyse: del dataene inn i grupper, og regn ut et tall — gjennomsnitt, sum, antall og så videre — for hver gruppe.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="pipe.html#cb14-1" tabindex="-1"></a><span class="co"># Vi kan bruke klammeparentesen til å hente ut enkelttall, kolonner eller rader:</span></span>
+<span id="cb14-2"><a href="pipe.html#cb14-2" tabindex="-1"></a>testdata[<span class="dv">1</span>,<span class="dv">2</span>]</span>
+<span id="cb14-3"><a href="pipe.html#cb14-3" tabindex="-1"></a>testdata[<span class="dv">1</span>,]</span>
+<span id="cb14-4"><a href="pipe.html#cb14-4" tabindex="-1"></a>testdata[,<span class="dv">2</span>]</span>
+<span id="cb14-5"><a href="pipe.html#cb14-5" tabindex="-1"></a>testdata[, <span class="fu">c</span>(<span class="st">&quot;X1&quot;</span>, <span class="st">&quot;X2&quot;</span>)]</span>
+<span id="cb14-6"><a href="pipe.html#cb14-6" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="pipe.html#cb14-7" tabindex="-1"></a><span class="co"># Vi kan også filtrere ut rader basert på kriterier:</span></span>
+<span id="cb14-8"><a href="pipe.html#cb14-8" tabindex="-1"></a>testdata[testdata<span class="sc">$</span>X1 <span class="sc">&gt;</span> <span class="dv">100</span>,]</span>
+<span id="cb14-9"><a href="pipe.html#cb14-9" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="pipe.html#cb14-10" tabindex="-1"></a><span class="co"># Eller vi kan legge til en ny kolonne, som er summen av to kolonner</span></span>
+<span id="cb14-11"><a href="pipe.html#cb14-11" tabindex="-1"></a>testdata<span class="sc">$</span>sum <span class="ot">&lt;-</span> testdata<span class="sc">$</span>X1 <span class="sc">+</span> testdata<span class="sc">$</span>X2</span>
+<span id="cb14-12"><a href="pipe.html#cb14-12" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="pipe.html#cb14-13" tabindex="-1"></a><span class="co"># Det finnes en enklere måte å gjøre dette på ved hjelp av den såkalte </span></span>
+<span id="cb14-14"><a href="pipe.html#cb14-14" tabindex="-1"></a><span class="co"># &quot;pipe&quot;-operatoren og egne funksjoner for datamanipulasjon. Begge deler</span></span>
+<span id="cb14-15"><a href="pipe.html#cb14-15" tabindex="-1"></a><span class="co"># er inkludert i dplyr-pakken, som du eventuelt må installere:</span></span>
+<span id="cb14-16"><a href="pipe.html#cb14-16" tabindex="-1"></a><span class="co"># install.packages(&quot;dplyr&quot;)</span></span>
+<span id="cb14-17"><a href="pipe.html#cb14-17" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb14-18"><a href="pipe.html#cb14-18" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="pipe.html#cb14-19" tabindex="-1"></a><span class="co"># Det første konseptet er pipen, og det er en veldig fin kommando når vi</span></span>
+<span id="cb14-20"><a href="pipe.html#cb14-20" tabindex="-1"></a><span class="co"># skal bruke flere funksjoner etter hverandre. La oss si at vi skal regne ut</span></span>
+<span id="cb14-21"><a href="pipe.html#cb14-21" tabindex="-1"></a><span class="co"># logaritmen til kvadratroten til 2. I base R kan vi skrive:</span></span>
+<span id="cb14-22"><a href="pipe.html#cb14-22" tabindex="-1"></a><span class="fu">log</span>(<span class="fu">sqrt</span>(<span class="dv">2</span>))</span>
+<span id="cb14-23"><a href="pipe.html#cb14-23" tabindex="-1"></a></span>
+<span id="cb14-24"><a href="pipe.html#cb14-24" tabindex="-1"></a><span class="co"># Kvadratroten av 2 skrevet som en pipe blir</span></span>
+<span id="cb14-25"><a href="pipe.html#cb14-25" tabindex="-1"></a><span class="dv">2</span> <span class="sc">%&gt;%</span> sqrt</span>
+<span id="cb14-26"><a href="pipe.html#cb14-26" tabindex="-1"></a></span>
+<span id="cb14-27"><a href="pipe.html#cb14-27" tabindex="-1"></a><span class="co"># ... og logaritmen til kvadratroten til 2 blir da </span></span>
+<span id="cb14-28"><a href="pipe.html#cb14-28" tabindex="-1"></a><span class="dv">2</span> <span class="sc">%&gt;%</span> sqrt <span class="sc">%&gt;%</span> log</span>
+<span id="cb14-29"><a href="pipe.html#cb14-29" tabindex="-1"></a></span>
+<span id="cb14-30"><a href="pipe.html#cb14-30" tabindex="-1"></a><span class="co"># Dette kan vi lese fra venstre mot høyre i den rekkefølgen det skjer, og vi trenger </span></span>
+<span id="cb14-31"><a href="pipe.html#cb14-31" tabindex="-1"></a><span class="co"># ikke holde styr på flere lag med parenteser.</span></span>
+<span id="cb14-32"><a href="pipe.html#cb14-32" tabindex="-1"></a></span>
+<span id="cb14-33"><a href="pipe.html#cb14-33" tabindex="-1"></a><span class="co"># Dette er en teknikk som gjør det veldig greit å jobbe med tabeller av data, og</span></span>
+<span id="cb14-34"><a href="pipe.html#cb14-34" tabindex="-1"></a><span class="co"># vi skal se på tre veldig sentrale funksjoner i dplyr-pakken:</span></span>
+<span id="cb14-35"><a href="pipe.html#cb14-35" tabindex="-1"></a></span>
+<span id="cb14-36"><a href="pipe.html#cb14-36" tabindex="-1"></a><span class="co"># Bruk &quot;select()&quot; til å velge kolonner i et datasett:</span></span>
+<span id="cb14-37"><a href="pipe.html#cb14-37" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span> <span class="fu">select</span>(X1, X2)</span>
+<span id="cb14-38"><a href="pipe.html#cb14-38" tabindex="-1"></a></span>
+<span id="cb14-39"><a href="pipe.html#cb14-39" tabindex="-1"></a><span class="co"># Bruk &quot;filter()&quot; for å filtrere ut rader basert på kriterier:</span></span>
+<span id="cb14-40"><a href="pipe.html#cb14-40" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span> <span class="fu">filter</span>(X1 <span class="sc">&gt;</span> <span class="dv">100</span>)</span>
+<span id="cb14-41"><a href="pipe.html#cb14-41" tabindex="-1"></a></span>
+<span id="cb14-42"><a href="pipe.html#cb14-42" tabindex="-1"></a><span class="co"># Bruk &quot;mutate()&quot; for å lage nye kolonner, gjerne basert på de vi allerede har:</span></span>
+<span id="cb14-43"><a href="pipe.html#cb14-43" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">sum =</span> X1 <span class="sc">+</span> X2)</span>
+<span id="cb14-44"><a href="pipe.html#cb14-44" tabindex="-1"></a></span>
+<span id="cb14-45"><a href="pipe.html#cb14-45" tabindex="-1"></a><span class="co"># Bruk &quot;summarise()&quot; for å regne ut ett oppsummerende tall fra en hel kolonne,</span></span>
+<span id="cb14-46"><a href="pipe.html#cb14-46" tabindex="-1"></a><span class="co"># for eksempel gjennomsnittet av alle verdiene i X1:</span></span>
+<span id="cb14-47"><a href="pipe.html#cb14-47" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">snitt_X1 =</span> <span class="fu">mean</span>(X1))</span>
+<span id="cb14-48"><a href="pipe.html#cb14-48" tabindex="-1"></a></span>
+<span id="cb14-49"><a href="pipe.html#cb14-49" tabindex="-1"></a><span class="co"># summarise() blir spesielt kraftig sammen med &quot;group_by()&quot;, som først deler</span></span>
+<span id="cb14-50"><a href="pipe.html#cb14-50" tabindex="-1"></a><span class="co"># dataene inn i grupper. Da får vi ett tall per gruppe. Her regner vi ut</span></span>
+<span id="cb14-51"><a href="pipe.html#cb14-51" tabindex="-1"></a><span class="co"># gjennomsnittet av X1 for hver verdi av A1-kolonnen:</span></span>
+<span id="cb14-52"><a href="pipe.html#cb14-52" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span></span>
+<span id="cb14-53"><a href="pipe.html#cb14-53" tabindex="-1"></a>    <span class="fu">group_by</span>(A1) <span class="sc">%&gt;%</span></span>
+<span id="cb14-54"><a href="pipe.html#cb14-54" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">snitt_X1 =</span> <span class="fu">mean</span>(X1))</span>
+<span id="cb14-55"><a href="pipe.html#cb14-55" tabindex="-1"></a></span>
+<span id="cb14-56"><a href="pipe.html#cb14-56" tabindex="-1"></a><span class="co"># Legg merke til at vi her bare skriver navnet på datasettet en gang, nemlig helt i</span></span>
+<span id="cb14-57"><a href="pipe.html#cb14-57" tabindex="-1"></a><span class="co"># starten. Vi kan også kjøre flere slike pipes etter hverandre, og lagre resultatet </span></span>
+<span id="cb14-58"><a href="pipe.html#cb14-58" tabindex="-1"></a><span class="co"># i en ny variabel:</span></span>
+<span id="cb14-59"><a href="pipe.html#cb14-59" tabindex="-1"></a>ny_testdata <span class="ot">&lt;-</span> </span>
+<span id="cb14-60"><a href="pipe.html#cb14-60" tabindex="-1"></a>    testdata <span class="sc">%&gt;%</span></span>
+<span id="cb14-61"><a href="pipe.html#cb14-61" tabindex="-1"></a>        <span class="fu">select</span>(X1, X2) <span class="sc">%&gt;%</span></span>
+<span id="cb14-62"><a href="pipe.html#cb14-62" tabindex="-1"></a>        <span class="fu">filter</span>(X1 <span class="sc">&gt;</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-63"><a href="pipe.html#cb14-63" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">sum =</span> X1 <span class="sc">+</span> X2)</span></code></pre></div>
+<p>Legg spesielt merke til <code>summarise()</code> og <code>group_by()</code> over. Der <code>select()</code>, <code>filter()</code> og <code>mutate()</code> gir oss en ny tabell tilbake, <em>kollapser</em> <code>summarise()</code> mange rader ned til noen få oppsummerende tall. Kombinert med <code>group_by()</code> er dette en av de mest brukte teknikkene i praktisk dataanalyse: del dataene inn i grupper, og regn ut et tall (gjennomsnitt, sum, antall og så videre) for hver gruppe.</p>
 <p><strong>Oppgave:</strong> Basert på <code>testdata</code>, lag en tabell som bare inneholder radene der <code>A1</code>-kolonnen er lik 1 <em>og</em> <code>A2</code>-kolonnen er lik 0, men der vi bare skal ha med kolonnene <code>X1</code> og <code>X2</code>. Lag til slutt en ny kolonne som inneholder differansen av tallene i <code>X1</code> og <code>X2</code>-kolonnene.</p>
 <details>
 <summary>
 Løsning
 </summary>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="pipe.html#cb14-1" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span> </span>
-<span id="cb14-2"><a href="pipe.html#cb14-2" tabindex="-1"></a>  <span class="fu">filter</span>(A1 <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-3"><a href="pipe.html#cb14-3" tabindex="-1"></a>  <span class="fu">filter</span>(A2 <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-4"><a href="pipe.html#cb14-4" tabindex="-1"></a>  <span class="fu">select</span>(X1, X2) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-5"><a href="pipe.html#cb14-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">differanse =</span> X1 <span class="sc">-</span> X2)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="pipe.html#cb15-1" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="pipe.html#cb15-2" tabindex="-1"></a>  <span class="fu">filter</span>(A1 <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="pipe.html#cb15-3" tabindex="-1"></a>  <span class="fu">filter</span>(A2 <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="pipe.html#cb15-4" tabindex="-1"></a>  <span class="fu">select</span>(X1, X2) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-5"><a href="pipe.html#cb15-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">differanse =</span> X1 <span class="sc">-</span> X2)</span></code></pre></div>
 </details>
 </div>
             </section>
