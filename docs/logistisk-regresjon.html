@@ -268,8 +268,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </iframe>
 </div>
 </div>
-<div id="kontrollsprsmal-4" class="section level3 hasAnchor" number="6.1.2">
-<h3><span class="header-section-number">6.1.2</span> Kontrollspørsmål<a href="logistisk-regresjon.html#kontrollsprsmal-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="kontrollsprsmal-6" class="section level3 hasAnchor" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Kontrollspørsmål<a href="logistisk-regresjon.html#kontrollsprsmal-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>I hvilke situasjoner bruker vi logistisk regresjon?</li>
 <li>Hva er det vi modellerer?</li>
@@ -279,17 +279,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Hvis vi har flere modeller, hvilke(n) metode(r) kan vi bruker til å velge den beste?</li>
 </ul>
 </div>
-<div id="teori" class="section level3 hasAnchor" number="6.1.3">
-<h3><span class="header-section-number">6.1.3</span> Teori<a href="logistisk-regresjon.html#teori" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="teori-2" class="section level3 hasAnchor" number="6.1.3">
+<h3><span class="header-section-number">6.1.3</span> Teori<a href="logistisk-regresjon.html#teori-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>I denne forelesningen ser vi på situasjonen der vi ønsker å forklare utfallet av en <em>binær</em> variabel (en dummyvariabel) ved hjelp av et sett med forklaringsvariabler. Vi så at vanlig lineær regresjon ikke er særlig passende her fordi utfallet bare kan ta to verdier (0 eller 1, <code>FALSE</code> eller <code>TRUE</code> etc.), og fordi vi heller ikke kan tolke et kontinuerlig utfall direkte som en sannsynlighet fordi vi kan få ut verdier utenfor intervallet <span class="math inline">\([0, 1]\)</span>.</p>
 <p>Løsningen er å heller forklare <em>log-oddsen til suksessansynligheten</em>. Sagt på en annen måte: på venstresiden i regresjonsligningen plasserer vi en <em>transformasjon</em> av suksessansynligheten, som gir oss en kontinuerlig variabel som kun kan variere mellom 0 og 1.</p>
 <p>Pensumboken vår behandler desverre ikke logistisk regresjon. Heldigvis finnes det et meget godt alternativ, <em>An Introduction to Statistical Learning</em> (ISLR) av James m.fl. som kan lastes ned gratis her:</p>
 <p><a href="https://www.statlearning.com/">An introduction to statistical learning</a> (trykk på “Download the first edition”)</p>
 <p>Denne boken er for øvrig pensum i <strong>BAN404</strong>. Logistisk regresjon er omhandlet i kapittel <em>4.3</em> (avsnitt 4.3.5 er ikke pensum). Eksempelet vårt er tatt herfra, og datasettet er, som vist i forelesningsscriptet, inkludert i bokens egen R-pakke <code>ISLR</code>.</p>
 <p>Bruk litt tid på å lese gjennom disse sidene, konseptet er ganske godt forklart. Bli også kjent med R-syntaksen, som ligner på den vi allerede kan for vanlig lineær regresjon. Vi bruker f.eks.</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="logistisk-regresjon.html#cb234-1" tabindex="-1"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(default <span class="sc">~</span> balance, </span>
-<span id="cb234-2"><a href="logistisk-regresjon.html#cb234-2" tabindex="-1"></a>            <span class="at">data =</span> Default,</span>
-<span id="cb234-3"><a href="logistisk-regresjon.html#cb234-3" tabindex="-1"></a>            <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="logistisk-regresjon.html#cb236-1" tabindex="-1"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(default <span class="sc">~</span> balance, </span>
+<span id="cb236-2"><a href="logistisk-regresjon.html#cb236-2" tabindex="-1"></a>            <span class="at">data =</span> Default,</span>
+<span id="cb236-3"><a href="logistisk-regresjon.html#cb236-3" tabindex="-1"></a>            <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
 <p>Når du er klar til å prøve selv, kan du se på oppg <em>10a</em>, <em>b</em> og første del av <em>d</em> på s. 171 i ISLR. Dette datasettet er også inneholdt i <code>ISLR</code>-pakken.</p>
 </div>
 </div>

@@ -274,67 +274,108 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </iframe>
 </div>
 </div>
-<div id="kommentarer-1" class="section level3 hasAnchor" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> Kommentarer<a href="utvalg-og-estimering.html#kommentarer-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>I videoforelesningene over går vi gjennom noen sentrale begreper i statistikk. Noen av dem skal vi bruke mye i fortsettelsen, mens andre er ment for å gi dere et solid teoretisk fundament når vi etter hvert skal begi oss ut på anvendt statistikk.</p>
-<p>Vi startet med å sette opp en liten agenda. Som et første steg kan du kikke på, og notere ned noen setninger til, disse punktene og se om du har fått med deg hva de betyr:</p>
+<div id="teori-1" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Teori<a href="utvalg-og-estimering.html#teori-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>I forrige delkapittel beskrev vi data slik de forelå. Nå tar vi et viktig steg videre: vi tenker på datasettet vårt som et <strong>utvalg</strong> trukket fra en større <strong>populasjon</strong>, og vi vil bruke utvalget til å si noe om populasjonen. Dette er kjernen i <strong>statistisk inferens</strong>, og et tema som følger oss gjennom resten av kurset.</p>
+<div id="populasjon-parameter-og-estimator" class="section level4 hasAnchor" number="2.2.2.1">
+<h4><span class="header-section-number">2.2.2.1</span> Populasjon, parameter og estimator<a href="utvalg-og-estimering.html#populasjon-parameter-og-estimator" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Populasjonen er hele mengden vi egentlig er interessert i — for eksempel alle norske velgere, eller all fisk i en oppdrettsmerd. En <strong>parameter</strong> er et tall som beskriver populasjonen, slik som den sanne forventningen <span class="math inline">\(\mu\)</span>, det sanne standardavviket <span class="math inline">\(\sigma\)</span>, eller den sanne andelen <span class="math inline">\(p\)</span>. Problemet er at vi nesten aldri kan måle hele populasjonen; vi må nøye oss med et utvalg. Ut fra utvalget regner vi så ut en <strong>estimator</strong> (også kalt en observator) — en «regel» for å gjette parameterverdien, for eksempel gjennomsnittet <span class="math inline">\(\overline{X}\)</span> som et anslag på <span class="math inline">\(\mu\)</span>.</p>
+<p>Det helt sentrale poenget er dette: siden observasjonene i utvalget er tilfeldige, blir også estimatoren tilfeldig. Trekker vi et nytt utvalg, får vi et litt annet gjennomsnitt. Estimatoren er altså selv en stokastisk variabel med sin egen fordeling — og den fordelingen kaller vi en <strong>samplingfordeling</strong>. Nesten alt vi gjør senere i kurset, handler i bunn og grunn om å forstå samplingfordelinger.</p>
+</div>
+<div id="utvalgsstrrelser-og-populasjonsstrrelser" class="section level4 hasAnchor" number="2.2.2.2">
+<h4><span class="header-section-number">2.2.2.2</span> Utvalgsstørrelser og populasjonsstørrelser<a href="utvalg-og-estimering.html#utvalgsstrrelser-og-populasjonsstrrelser" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Et poeng det er verdt å feste seg ved med en gang, er at nesten alle størrelsene vi jobber med, finnes i <strong>to varianter</strong>: én for populasjonen og én for utvalget. Populasjonsstørrelsen er den sanne, men ukjente verdien vi er ute etter. Utvalgsstørrelsen er det vi faktisk regner ut fra dataene, og som vi bruker som et anslag på den første.</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Størrelse</th>
+<th>I populasjonen (sann, ukjent)</th>
+<th>I utvalget (beregnet fra data)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Gjennomsnitt</td>
+<td>populasjonsgjennomsnitt <span class="math inline">\(\mu\)</span></td>
+<td>utvalgsgjennomsnitt <span class="math inline">\(\overline{X}\)</span></td>
+</tr>
+<tr class="even">
+<td>Standardavvik</td>
+<td>populasjonsstandardavvik <span class="math inline">\(\sigma\)</span></td>
+<td>utvalgsstandardavvik <span class="math inline">\(S\)</span></td>
+</tr>
+<tr class="odd">
+<td>Andel</td>
+<td>populasjonsandel <span class="math inline">\(p\)</span></td>
+<td>utvalgsandel <span class="math inline">\(\widehat{p}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Skillet er grunnleggende, og de to variantene er lette å blande sammen. Når vi snakker om «gjennomsnittet», må vi hele tiden være bevisste på om vi mener det sanne <strong>populasjonsgjennomsnittet</strong> <span class="math inline">\(\mu\)</span> (som vi sjelden kjenner) eller <strong>utvalgsgjennomsnittet</strong> <span class="math inline">\(\overline{X}\)</span> (som vi regner ut fra dataene våre, og som vil variere fra utvalg til utvalg). Notasjonen hjelper oss å holde dem fra hverandre: populasjonsstørrelser skrives gjerne med greske bokstaver (<span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(p\)</span>), mens utvalgsstørrelser skrives med latinske bokstaver eller med en «hatt», som i <span class="math inline">\(\overline{X}\)</span> og <span class="math inline">\(\widehat{p}\)</span>.</p>
+</div>
+<div id="samplingfordelingen-til-et-gjennomsnitt" class="section level4 hasAnchor" number="2.2.2.3">
+<h4><span class="header-section-number">2.2.2.3</span> Samplingfordelingen til et gjennomsnitt<a href="utvalg-og-estimering.html#samplingfordelingen-til-et-gjennomsnitt" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Anta at observasjonene <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> er uavhengige, med forventning <span class="math inline">\(\mu\)</span> og varians <span class="math inline">\(\sigma^2\)</span>. Ved hjelp av regnereglene for forventning og varians (se formelarket) kan man vise at gjennomsnittet oppfyller</p>
+<p><span class="math display">\[\textrm{E}(\overline{X}) = \mu, \qquad \textrm{Var}(\overline{X}) = \frac{\sigma^2}{n}, \qquad \textrm{det vil si} \qquad \sigma(\overline{X}) = \frac{\sigma}{\sqrt{n}}.\]</span></p>
+<p>To ting er verdt å dvele ved. For det første er gjennomsnittet <strong>forventningsrett</strong>: i snitt treffer det den sanne verdien <span class="math inline">\(\mu\)</span>. For det andre — og dette er kanskje det viktigste enkeltresultatet i modulen — skrumper standardavviket til gjennomsnittet inn som <span class="math inline">\(1/\sqrt{n}\)</span> når utvalget vokser. Med andre ord: jo flere observasjoner vi samler inn, jo mer presist blir anslaget vårt. Men presisjonen øker bare med <em>kvadratroten</em> av <span class="math inline">\(n\)</span>, så for å halvere usikkerheten må vi firedoble antall observasjoner.</p>
+</div>
+<div id="sentralgrenseteoremet" class="section level4 hasAnchor" number="2.2.2.4">
+<h4><span class="header-section-number">2.2.2.4</span> Sentralgrenseteoremet<a href="utvalg-og-estimering.html#sentralgrenseteoremet" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Dersom <span class="math inline">\(X\)</span>-ene i utgangspunktet er normalfordelte, er gjennomsnittet også eksakt normalfordelt. Men hva om vi ikke kjenner fordelingen til den enkelte observasjonen? Her kommer statistikkfagets kanskje mest bemerkelsesverdige resultat til unnsetning. <strong>Sentralgrenseteoremet</strong> sier at fordelingen til gjennomsnittet nærmer seg normalfordelingen når <span class="math inline">\(n\)</span> blir stor — <em>nesten uansett hvordan de enkelte observasjonene er fordelt</em>. Det er dette som gjør normalfordelingen så gjennomgripende i statistikken: så snart vi jobber med gjennomsnitt (eller summer) av mange observasjoner, dukker den nesten alltid opp. En vanlig tommelfingerregel er at tilnærmingen er god når vi har mer enn 50–100 observasjoner.</p>
+</div>
+<div id="samplingfordelingen-til-en-andel" class="section level4 hasAnchor" number="2.2.2.5">
+<h4><span class="header-section-number">2.2.2.5</span> Samplingfordelingen til en andel<a href="utvalg-og-estimering.html#samplingfordelingen-til-en-andel" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Ofte er vi ikke ute etter et gjennomsnitt, men en <strong>andel</strong> — for eksempel andelen velgere som støtter et bestemt parti, eller andelen defekte enheter i en produksjon. En observert andel <span class="math inline">\(\widehat{p}\)</span> kan skrives som et gjennomsnitt av nuller og enere (fiasko og suksess), og da slår sentralgrenseteoremet til på nytt:</p>
+<p><span class="math display">\[\widehat{p} \;\sim\; N\!\left(p,\; \frac{p(1-p)}{n}\right).\]</span></p>
+<p>Tilnærmingen regnes som god når <span class="math inline">\(np &gt; 5\)</span> og <span class="math inline">\(n(1-p) &gt; 5\)</span>. Legg merke til at også her avtar usikkerheten som <span class="math inline">\(1/\sqrt{n}\)</span> — det er derfor en meningsmåling med rundt 1000 respondenter kan gi et brukbart anslag på hva et helt land mener.</p>
+</div>
+<div id="gode-estimatorer" class="section level4 hasAnchor" number="2.2.2.6">
+<h4><span class="header-section-number">2.2.2.6</span> Gode estimatorer<a href="utvalg-og-estimering.html#gode-estimatorer" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Det finnes gjerne flere mulige estimatorer for samme parameter, og da må vi kunne vurdere hvilken som er best. Tre egenskaper står sentralt:</p>
 <ul>
-<li>Samplingfordelinger</li>
-<li>Forventning/varians</li>
-<li>Sentralgrenseteoremet</li>
-<li>Hva er samplingfordelingen til et gjennomsnitt?</li>
-<li>Hva er samplingfordelingen til en andel?</li>
-<li>Forventningsrett</li>
-<li>Konsistens</li>
+<li>En estimator er <strong>forventningsrett</strong> dersom forventningen er lik den sanne parameterverdien, <span class="math inline">\(\textrm{E}(\widehat{\theta}) = \theta\)</span>. Da bommer den ikke systematisk, verken for høyt eller for lavt.</li>
+<li>Blant flere forventningsrette estimatorer foretrekker vi den mest <strong>effektive</strong> — den med minst varians.</li>
+<li>En estimator er <strong>konsistent</strong> dersom den nærmer seg den sanne verdien når utvalget vokser. Gjennomsnittet er konsistent nettopp fordi variansen <span class="math inline">\(\sigma^2/n\)</span> går mot null når <span class="math inline">\(n\)</span> øker.</li>
 </ul>
-<p>I Boken er det kapittel <strong>9</strong> (<em>Sampling distributions</em>) og <strong>10</strong> (<em>Introduction to estimation</em>) som gjelder. Kapittel <strong>6</strong>–<strong>8</strong> omhandler stoff skal skal være greit dekket i MET2 (Sannsynlighet, fordelinger, stokastiske variable, osv.), men det kan være nyttig å skumme gjennom likevel hvis disse begrepene ligger langt bak i bevissheten din.</p>
-<p>Kapittel <strong>9</strong> starter med å diskutere samplingfordelingen til et gjennomsnitt. Dette er nyttig lesestoff, men de viktigste punktene er som følger:</p>
+</div>
+<div id="konfidensintervall" class="section level4 hasAnchor" number="2.2.2.7">
+<h4><span class="header-section-number">2.2.2.7</span> Konfidensintervall<a href="utvalg-og-estimering.html#konfidensintervall" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Begrepene i dette delkapittelet bygger videre på sannsynlighetsregningen fra MET2 — fordelinger, stokastiske variabler, forventning og varians. Ligger dette langt bak i bevisstheten, kan det være lurt å friske det opp.</p>
+<p>Vi kan lage et <em>punktestimat</em> av en forventningsverdi ved å ta gjennomsnittet av observasjonene. Men et enkelt tall sier ingenting om hvor sikkert anslaget er, og derfor er vi ofte mer interessert i et <strong>konfidensintervall</strong> — et helt intervall av rimelige verdier, der bredden forteller oss hvor presist estimatet er.</p>
+<p>La oss se et eksempel. Tenk deg at vi vil anslå den forventede vekten til laksen i en stor oppdrettsmerd. Vi kan ikke veie all fisken, så vi trekker et tilfeldig <strong>utvalg</strong> på 25 laks og veier dem. Fra tidligere erfaring vet vi at populasjonsstandardavviket i vekt er omtrent 0,8 kg. Vi simulerer et slikt utvalg:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="utvalg-og-estimering.html#cb22-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb22-2"><a href="utvalg-og-estimering.html#cb22-2" tabindex="-1"></a><span class="co"># Vekten (i kg) til 25 tilfeldig valgte laks</span></span>
+<span id="cb22-3"><a href="utvalg-og-estimering.html#cb22-3" tabindex="-1"></a>vekt <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">25</span>, <span class="at">mean =</span> <span class="fl">5.2</span>, <span class="at">sd =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<p>Punktestimatet vårt for den forventede vekten er rett og slett utvalgsgjennomsnittet. For å lage et 95 %-konfidensintervall legger vi en margin til og fra dette gjennomsnittet — en margin som avhenger av standardavviket, utvalgsstørrelsen og en kritisk verdi fra normalfordelingen:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="utvalg-og-estimering.html#cb23-1" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">mean</span>(vekt)       <span class="co"># utvalgsgjennomsnittet, vårt punktestimat</span></span>
+<span id="cb23-2"><a href="utvalg-og-estimering.html#cb23-2" tabindex="-1"></a>sigma    <span class="ot">&lt;-</span> <span class="fl">0.8</span>              <span class="co"># kjent populasjonsstandardavvik</span></span>
+<span id="cb23-3"><a href="utvalg-og-estimering.html#cb23-3" tabindex="-1"></a>n        <span class="ot">&lt;-</span> <span class="fu">length</span>(vekt)     <span class="co"># antall observasjoner</span></span>
+<span id="cb23-4"><a href="utvalg-og-estimering.html#cb23-4" tabindex="-1"></a>z        <span class="ot">&lt;-</span> <span class="fl">1.96</span>             <span class="co"># kritisk verdi for 95 %</span></span>
+<span id="cb23-5"><a href="utvalg-og-estimering.html#cb23-5" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="utvalg-og-estimering.html#cb23-6" tabindex="-1"></a><span class="co"># Nedre og øvre grense i konfidensintervallet (LCL og UCL):</span></span>
+<span id="cb23-7"><a href="utvalg-og-estimering.html#cb23-7" tabindex="-1"></a>LCL <span class="ot">&lt;-</span> gj.snitt <span class="sc">-</span> z <span class="sc">*</span> sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb23-8"><a href="utvalg-og-estimering.html#cb23-8" tabindex="-1"></a>UCL <span class="ot">&lt;-</span> gj.snitt <span class="sc">+</span> z <span class="sc">*</span> sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb23-9"><a href="utvalg-og-estimering.html#cb23-9" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="utvalg-og-estimering.html#cb23-10" tabindex="-1"></a><span class="fu">c</span>(LCL, gj.snitt, UCL)</span></code></pre></div>
+<pre><code>## [1] 5.021332 5.334932 5.648532</code></pre>
+<p>Selve <em>fortolkningen</em> av et konfidensintervall er notorisk glatt, og verdt å bruke litt tid på. Hovedpoenget er:</p>
 <ul>
-<li>Dersom observasjonene <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> er normalfordelt, er også gjennomsnittet <span class="math inline">\(\overline X = \frac{1}{n}\sum_{i=1}^n X_i\)</span> normalfordelt.</li>
-<li>Dersom E<span class="math inline">\((X_i) = \mu\)</span> og Var<span class="math inline">\((X_i) = \sigma^2\)</span> for alle <span class="math inline">\(i = 1,\ldots,n\)</span>, er E<span class="math inline">\((\overline X)=\mu\)</span> og Var<span class="math inline">\((\overline X) = \sigma^2/n\)</span>. Dette regnet vi ut formelt.</li>
-<li>Dersom <span class="math inline">\(n\)</span> er <em>stor</em>, er <span class="math inline">\(\overline X\)</span> tilnærmet normalfordelt, uavhengig av fordelingen til den enkelte <span class="math inline">\(X_i\)</span>. Dette følger av <strong>sentralgrensesetningen</strong>.</li>
+<li>Et 95 %-konfidensintervall skal <em>ikke</em> tolkes som at «sannsynligheten for at den sanne parameterverdien ligger i intervallet er 95 %».</li>
+<li>Den korrekte tolkningen er: «Dersom vi gjentatte ganger trakk nye utvalg av samme størrelse fra populasjonen og regnet ut et nytt konfidensintervall hver gang, ville 95 av 100 slike intervaller inneholde den sanne parameterverdien».</li>
 </ul>
-<p>Dette står i en boks på slutten av seksjon <strong>9-1a</strong>. Hvor stor må <span class="math inline">\(n\)</span> være for at denne tilnærmingen er god nok? Det finnes ikke et entydig svar på, men når vi passerer 50-100 observasjoner kan vi i våre MET4-problemer gjerne si at <span class="math inline">\(n\)</span> er «stor nok». I <strong>9-1b</strong> og <strong>9-1c</strong> brukes sentralgrenseteoremet til å regne på normalsannsynligheter i MET2-stil. I <strong>9-1d</strong> er det noen Excel-instruksjoner som du kan hoppe over hvis du vil.</p>
-<p>Tekstboksen i <strong>9-2c</strong> oppsummerer det vi fant ut om samplingfordelingen til en observert andel. I seksjon <strong>9-3</strong> snakkes det om samplingfordelingen til <em>differansen av to gjennomsnitt</em>. Vi gikk ikke gjennom det eksplisitt i forelesningen, men det er ikke noe substansielt nytt her. Vi skal bruke dette reultatet i neste modul når vi skal sammenligne to gjennomsnitt. I seksjon <strong>9-4</strong> får vi forklart hva vi skal bruke samplingfordelinger til fremover. Bør leses.</p>
-<p>Kapittel <strong>10</strong> omhandler <em>estimering</em>, dvs hvordan vi bruker data til å «gjette» på verdien til en ukjent parameter. Vi forsøkte i forelesningen å gi litt intuisjon til begrepene</p>
-<ul>
-<li>forventningsrett estimator,</li>
-<li>variansen til en estimator, og</li>
-<li>konsistens.</li>
-</ul>
-<p>Vi kan lage et <em>punktestimat</em> av en forventningsverdi ved å ta gjennomsnittet av observasjoner, og vi kan lage et <em>konfidensintervall</em> ved å følge oppskriften i boksen på s. 316 (i 11. utgave).</p>
-<p>I eksempel 10.1 har vi 25 observasjoner fra en normalfordeling. Oppgaven er å estimere forventningsverdien med et tilhørende 95% konfidensuntervall. Pass på at du forstår den manuelle utregningen. I stedet for å bruke Excel (eller taste alle disse tallene inn på en kalkulator) kan du skrive et lite R-script som gjør det samme:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="utvalg-og-estimering.html#cb22-1" tabindex="-1"></a><span class="co"># Vi skriver inn datasettet i en vektor</span></span>
-<span id="cb22-2"><a href="utvalg-og-estimering.html#cb22-2" tabindex="-1"></a>demand <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">235</span>, <span class="dv">374</span>, <span class="dv">309</span>, <span class="dv">499</span>, <span class="dv">253</span>, </span>
-<span id="cb22-3"><a href="utvalg-og-estimering.html#cb22-3" tabindex="-1"></a>            <span class="dv">421</span>, <span class="dv">361</span>, <span class="dv">514</span>, <span class="dv">462</span>, <span class="dv">369</span>,</span>
-<span id="cb22-4"><a href="utvalg-og-estimering.html#cb22-4" tabindex="-1"></a>            <span class="dv">394</span>, <span class="dv">439</span>, <span class="dv">348</span>, <span class="dv">344</span>, <span class="dv">330</span>,</span>
-<span id="cb22-5"><a href="utvalg-og-estimering.html#cb22-5" tabindex="-1"></a>            <span class="dv">261</span>, <span class="dv">374</span>, <span class="dv">302</span>, <span class="dv">466</span>, <span class="dv">535</span>,</span>
-<span id="cb22-6"><a href="utvalg-og-estimering.html#cb22-6" tabindex="-1"></a>            <span class="dv">386</span>, <span class="dv">316</span>, <span class="dv">296</span>, <span class="dv">332</span>, <span class="dv">334</span>)</span>
-<span id="cb22-7"><a href="utvalg-og-estimering.html#cb22-7" tabindex="-1"></a></span>
-<span id="cb22-8"><a href="utvalg-og-estimering.html#cb22-8" tabindex="-1"></a><span class="co"># Vi trenger 4 verdier for å regne ut konfidensintervallet:</span></span>
-<span id="cb22-9"><a href="utvalg-og-estimering.html#cb22-9" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">mean</span>(demand)     <span class="co"># Regner ut gjennomsnittet</span></span>
-<span id="cb22-10"><a href="utvalg-og-estimering.html#cb22-10" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fl">1.96</span>                    <span class="co"># Denne finner vi i tabellen</span></span>
-<span id="cb22-11"><a href="utvalg-og-estimering.html#cb22-11" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">75</span>                  <span class="co"># Oppgitt i oppgaven</span></span>
-<span id="cb22-12"><a href="utvalg-og-estimering.html#cb22-12" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(demand)          <span class="co"># Antall observasjoner</span></span>
-<span id="cb22-13"><a href="utvalg-og-estimering.html#cb22-13" tabindex="-1"></a></span>
-<span id="cb22-14"><a href="utvalg-og-estimering.html#cb22-14" tabindex="-1"></a><span class="co"># Vårt estimat av forventningsverdien er bare gjennomsnittet. </span></span>
-<span id="cb22-15"><a href="utvalg-og-estimering.html#cb22-15" tabindex="-1"></a><span class="co"># Regner ut nedre og øvre grense i konfidensintervallet (LCL, UCL):</span></span>
-<span id="cb22-16"><a href="utvalg-og-estimering.html#cb22-16" tabindex="-1"></a>LCL <span class="ot">&lt;-</span> gj.snitt <span class="sc">-</span> z<span class="sc">*</span>sigma<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
-<span id="cb22-17"><a href="utvalg-og-estimering.html#cb22-17" tabindex="-1"></a>UCL <span class="ot">&lt;-</span> gj.snitt <span class="sc">+</span> z<span class="sc">*</span>sigma<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
-<span id="cb22-18"><a href="utvalg-og-estimering.html#cb22-18" tabindex="-1"></a></span>
-<span id="cb22-19"><a href="utvalg-og-estimering.html#cb22-19" tabindex="-1"></a><span class="co"># Samler de tre tallene i en vektor og skriver ut:</span></span>
-<span id="cb22-20"><a href="utvalg-og-estimering.html#cb22-20" tabindex="-1"></a><span class="fu">c</span>(LCL, gj.snitt, UCL)</span></code></pre></div>
-<pre><code>## [1] 340.76 370.16 399.56</code></pre>
-<p>I seksjon <strong>10-2a</strong> forsøker boken å forklare fortolkningen av et konfidensintervall. Hovedpoengene her er at:</p>
-<ul>
-<li>Et 95%-konfidensintervall skal <em>ikke</em> tolkes som «sannsynligheten for at den sanne parameterverdien ligger i intervallet er 95%».</li>
-<li>Den korrekte tolkningen er: «Dersom vi hadde hatt tilgang til å trekke nye utvalg fra populasjonen med like mange observasjoner og bruker dem til å regne ut nye konfidensintervaller, vil 95 av 100 intervaller inneholde den sanne parameterverdien».</li>
-</ul>
-<p>Forskjellen på disse formuleringene er meget subtil, så subtil faktisk at det ikke er åpenbart at det er særlig god pedagogikk å peke på den. Problemet med den første formuleringen er at vi der kan få inntrykk av at det er den sanne parameterverdien som er stokastisk og avhengig av datasettet vi observerer, mens det strengt tatt er grensene til konfidensintervallet som er tilfeldige, og altså avhengige av datasettet. Det kommer klarere frem i den andre formuleringen.</p>
-<p>Bredden til et konfidensintervall er altså et uttrykk for <em>usikkerhet</em>, eller motsatt: <em>presisjon</em>.</p>
-<p>Seksjon <strong>10-2b</strong> og <strong>10-2c</strong> kan skummes raskt gjennom. Seksjon <strong>10-3</strong> handler om at vi først bestemmer oss for et presisjonsnivå (dvs bredde på konfiensintervallet) <span class="math inline">\(B\)</span>, og så regner ut hvor mange observasjoner vi trenger for å oppnå det. Vi kommer frem til en formelen</p>
-<p><span class="math display">\[n = \left(\frac{z_{\alpha/2}\sigma}{B}\right)^2,\]</span>
-men problemet i praksis er at vi gjerne ikke kjenner <span class="math inline">\(\sigma\)</span>, og vi kan heller ikke estimere den fordi vi ikke har samlet inn data enda. Løsningen er at vi enten på bruke fornuften, eller eventuelt et tidligere estimat av <span class="math inline">\(\sigma\)</span> dersom det er tilgjengelig.</p>
+<p>Forskjellen er subtil, men viktig. Problemet med den første formuleringen er at den gir inntrykk av at det er <em>parameteren</em> som er tilfeldig og hopper inn og ut av et fast intervall. Det motsatte er tilfellet: den sanne parameterverdien er fast, mens det er <em>grensene</em> til konfidensintervallet som er tilfeldige, siden de regnes ut fra et tilfeldig utvalg. Bredden til intervallet er dermed et uttrykk for <em>usikkerhet</em>, eller motsatt: <em>presisjon</em>.</p>
+<p>Til slutt en nyttig sammenheng: bestemmer vi oss på forhånd for hvor bredt konfidensintervallet skal være (et presisjonsnivå <span class="math inline">\(B\)</span>), kan vi regne ut hvor mange observasjoner vi trenger:</p>
+<p><span class="math display">\[n = \left(\frac{z_{\alpha/2}\,\sigma}{B}\right)^2.\]</span></p>
+<p>Haken i praksis er at vi sjelden kjenner <span class="math inline">\(\sigma\)</span> på forhånd — vi har jo ikke samlet inn data ennå. Da må vi enten bruke skjønn eller støtte oss på et tidligere estimat av <span class="math inline">\(\sigma\)</span> dersom vi har et.</p>
+</div>
+</div>
+<div id="kontrollsprsmal-1" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Kontrollspørsmål<a href="utvalg-og-estimering.html#kontrollsprsmal-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Når du har vært gjennom dette stoffet skal du forhåpentligvis være i stand til å diskutere følgende spørsmål med f.eks. en medstudent:</p>
 <ol style="list-style-type: decimal">
 <li>Hva er en samplingfordeling?</li>
@@ -346,19 +387,19 @@ men problemet i praksis er at vi gjerne ikke kjenner <span class="math inline">\
 <li>Hva vil det si at et estimator er konsistent?</li>
 </ol>
 </div>
-<div id="ekstra-ving-i-r" class="section level3 hasAnchor" number="2.2.3">
-<h3><span class="header-section-number">2.2.3</span> Ekstra øving i R<a href="utvalg-og-estimering.html#ekstra-ving-i-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="ekstra-ving-i-r" class="section level3 hasAnchor" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> Ekstra øving i R<a href="utvalg-og-estimering.html#ekstra-ving-i-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Som demonstrert i forelesningen kan vi i R simulere standard normalfordelte observasjoner (dvs normalfordelte observasjoner med <span class="math inline">\(\mu = 0\)</span> og <span class="math inline">\(\sigma^2 = 1\)</span>) med kommandoen <code>rnorm(n)</code>, der <code>n</code> er antallet observasjoner vi ønsker. For eksempel kan vi kjøre følgende kode for å generere 10 observasjoner (du vil helt sikkert få andre verdier):</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="utvalg-og-estimering.html#cb24-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb24-2"><a href="utvalg-og-estimering.html#cb24-2" tabindex="-1"></a><span class="fu">rnorm</span>(n)</span></code></pre></div>
-<pre><code>##  [1]  1.1395053 -0.8901123 -0.2394094  0.7474844  0.8530044  0.1587833
-##  [7]  0.1021855  0.9293306 -1.7462254 -0.6882344</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="utvalg-og-estimering.html#cb25-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb25-2"><a href="utvalg-og-estimering.html#cb25-2" tabindex="-1"></a><span class="fu">rnorm</span>(n)</span></code></pre></div>
+<pre><code>##  [1] -0.05612874 -0.15579551 -1.47075238 -0.47815006  0.41794156  1.35867955
+##  [7] -0.10278773  0.38767161 -0.05380504 -1.37705956</code></pre>
 <p>Ved å skrive <code>mean(rnorm(n))</code> i stedet regner vi ut gjennomsnittet av observasjonene direkte.</p>
 <p>La oss gjøre dette 100 ganger og notere ned gjennomsnittet hver gang. I stedet for å gjøre det manuelt, kan vi skrive et lite program som gjør dette for oss ved å bruke en for-løkke. Det er ikke nødvendig (eller pensum) å forstå akkurat hvordan dette fungerer, men dersom du kjører følgende linjer vil du få en ny vektor <code>gj.snitt</code> som inneholder 100 slike gjennomsnitt:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="utvalg-og-estimering.html#cb26-1" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
-<span id="cb26-2"><a href="utvalg-og-estimering.html#cb26-2" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
-<span id="cb26-3"><a href="utvalg-og-estimering.html#cb26-3" tabindex="-1"></a>    gj.snitt[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(n))</span>
-<span id="cb26-4"><a href="utvalg-og-estimering.html#cb26-4" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="utvalg-og-estimering.html#cb27-1" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb27-2"><a href="utvalg-og-estimering.html#cb27-2" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb27-3"><a href="utvalg-og-estimering.html#cb27-3" tabindex="-1"></a>    gj.snitt[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(n))</span>
+<span id="cb27-4"><a href="utvalg-og-estimering.html#cb27-4" tabindex="-1"></a>}</span></code></pre></div>
 <p>Skriv ut denne vektoren og kontroller at det ser korrekt ut. Vi husker at funksjonen <code>sd()</code> regner ut standardavviket til en vektor. Hvilket tall forventer du å få ut dersom du nå kjører <code>sd(gj.snitt)</code> i konsollen? Stemmer det?</p>
 <details>
 <summary>
@@ -371,10 +412,10 @@ Hint
 <summary>
 Hint
 </summary>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="utvalg-og-estimering.html#cb27-1" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">1000</span>)            <span class="co"># Lager en tom vektor med 1000 plasser</span></span>
-<span id="cb27-2"><a href="utvalg-og-estimering.html#cb27-2" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) {                   <span class="co"># Fyller hver plass med et gjennomsnitt av</span></span>
-<span id="cb27-3"><a href="utvalg-og-estimering.html#cb27-3" tabindex="-1"></a>    gj.snitt[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(n))    <span class="co"># 10 standard normalfordelte observasjoner.</span></span>
-<span id="cb27-4"><a href="utvalg-og-estimering.html#cb27-4" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="utvalg-og-estimering.html#cb28-1" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">1000</span>)            <span class="co"># Lager en tom vektor med 1000 plasser</span></span>
+<span id="cb28-2"><a href="utvalg-og-estimering.html#cb28-2" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) {                   <span class="co"># Fyller hver plass med et gjennomsnitt av</span></span>
+<span id="cb28-3"><a href="utvalg-og-estimering.html#cb28-3" tabindex="-1"></a>    gj.snitt[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(n))    <span class="co"># 10 standard normalfordelte observasjoner.</span></span>
+<span id="cb28-4"><a href="utvalg-og-estimering.html#cb28-4" tabindex="-1"></a>}</span></code></pre></div>
 </details>
 <p>Prøv å forklare.</p>
 <details>
