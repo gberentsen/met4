@@ -909,10 +909,9 @@ $$P(\text{minst ett}) = 1 - (0.05)^2 = 1 - 0.0025 = 0.9975.$$
 ## Relevante R-kommandoer {#relevant-r-grunnleggende}
 
 ```{r, eval = FALSE, echo = FALSE}
-# Lage testfilene:
+# Slik lages eksempelfilene i denne modulen (kjøres ikke ved bygging):
 
 library(tidyverse)
-library(readxl)
 library(openxlsx)
 
 set.seed(1)
@@ -920,10 +919,15 @@ set.seed(1)
 data <- tibble(variabel1 = rnorm(20),
                variabel2 = rnorm(20) + 1)
 
-write.xlsx(x = data, file = "datasett/data.xlsx")
-write.csv(data, file = "datasett/data.csv",
-          quote = FALSE,
-          row.names = FALSE)
+# .xlsx og .csv skrives direkte fra R:
+write.xlsx(data, file = "datasett/data.xlsx")
+write.csv(data,  file = "datasett/data.csv", row.names = FALSE)
+
+# .xls (det eldre binærformatet) skrives ikke av openxlsx eller writexl.
+# For å få en ekte .xls: åpne data.xlsx i Excel og lagre som
+# "Excel 97-2003 (.xls)". (Fra R kan det gjøres med pakken WriteXLS eller
+# xlsx, som krever henholdsvis Perl og Java.) Filen har de samme dataene,
+# slik at studentene kan øve på read_excel() med begge Excel-formatene.
 
 ```
 
