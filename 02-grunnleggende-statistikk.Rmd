@@ -323,35 +323,35 @@ e.	Vi kan estimere at andelen defekte maskindeler i populasjonen er 12%. Ved å 
 </details>
 
 
-4. Avgjør om de følgende datasettene inneholder forholdsdata, intervalldata, ordinale data eller dikotome og nominale data. Avgjør også hvilke regneoperasjoner som er tillatt. 
+<!-- 4. Avgjør om de følgende datasettene inneholder forholdsdata, intervalldata, ordinale data eller dikotome og nominale data. Avgjør også hvilke regneoperasjoner som er tillatt.  -->
 
-    a.	Antall mil en gruppe joggere løper hver uke 
-    b.	Starlønnen til nyutdannede fra masterprogrammet til NHH 
-    c.	Månedene et selskaps ansatte velger å ta ut ferie
-    d.  Temperatur i Celsius
-    e.	Bokstavkarakterene til studentene i MET4
-    f.	De daglige aksjeprisene til Tesla
-    g.	Klesstørrelser (S, M, L)
-    h.	Antallet Toyota som er importert månedlig til USA de siste 5 årene
-    i.	Stillingene i Kjernestyret i NHHS (Leder, Prosjektansvarlig, Internansvarlig osv)
-    j.  Dato
+<!--     a.	Antall mil en gruppe joggere løper hver uke  -->
+<!--     b.	Starlønnen til nyutdannede fra masterprogrammet til NHH  -->
+<!--     c.	Månedene et selskaps ansatte velger å ta ut ferie -->
+<!--     d.  Temperatur i Celsius -->
+<!--     e.	Bokstavkarakterene til studentene i MET4 -->
+<!--     f.	De daglige aksjeprisene til Tesla -->
+<!--     g.	Klesstørrelser (S, M, L) -->
+<!--     h.	Antallet Toyota som er importert månedlig til USA de siste 5 årene -->
+<!--     i.	Stillingene i Kjernestyret i NHHS (Leder, Prosjektansvarlig, Internansvarlig osv) -->
+<!--     j.  Dato -->
 
-<details><summary>Løsning</summary>
+<!-- <details><summary>Løsning</summary> -->
 
->  a.	Forholdsdata: =, ≠, <, >, +, -, *, /
-    b.	Forholdsdata: =, ≠, <, >, +, -, *, /
-    c.	Nominale data: =, ≠
-    d.  Intervalldata: =, ≠, <, >, +, -
-    e.	Ordinale data: =, ≠, <, >
-    f.	Forholdsdata: =, ≠, <, >, +, -, *, /
-    g.	Ordinale data: =, ≠, <, >
-    h.	Forholdsdata: =, ≠, <, >, +, -, *, /
-    i.	Nominale data: =, ≠
-    j.  Intervalldata: =, ≠, <, >, +, -
+<!-- >  a.	Forholdsdata: =, ≠, <, >, +, -, *, / -->
+<!--     b.	Forholdsdata: =, ≠, <, >, +, -, *, / -->
+<!--     c.	Nominale data: =, ≠ -->
+<!--     d.  Intervalldata: =, ≠, <, >, +, - -->
+<!--     e.	Ordinale data: =, ≠, <, > -->
+<!--     f.	Forholdsdata: =, ≠, <, >, +, -, *, / -->
+<!--     g.	Ordinale data: =, ≠, <, > -->
+<!--     h.	Forholdsdata: =, ≠, <, >, +, -, *, / -->
+<!--     i.	Nominale data: =, ≠ -->
+<!--     j.  Intervalldata: =, ≠, <, >, +, - -->
 
-</details>
+<!-- </details> -->
 
-5. Skattebetalere som fyller ut egenmeldingen sin blir spurt de følgende spørsmålene. Hvilken type data utgjør svarene og hvilke regneoperasjoner er tillatt?
+4. Skattebetalere som fyller ut egenmeldingen sin blir spurt de følgende spørsmålene. Hvilken type data utgjør svarene og hvilke regneoperasjoner er tillatt?
     a.	Er det første gang du fyller ut egenmeldingen din?
     b.	Hvor lang tid brukte du på å fylle ut egenmeldingen? 
     c.	Hvor enkelt/vanskelig var det å fylle ut egenmeldingen? (Veldig enkelt, nokså enkelt, hverken enkelt eller vanskelig, nokså vanskelig, veldig vanskelig) 
@@ -364,16 +364,16 @@ e.	Vi kan estimere at andelen defekte maskindeler i populasjonen er 12%. Ved å 
 
 </details>
 
-6. Du får oppgitt at gjennomsnittlig startlønn for NHH studenter etter endt utdanning er 560 000kr. Median startlønnen er 520 000kr. Hva forteller disse tallene deg? 
+5. Du får oppgitt at gjennomsnittlig startlønn for NHH studenter etter endt utdanning er 700 000kr. Median startlønnen er 600 000kr. Hva forteller disse tallene deg? 
 
 <details><summary>Løsning</summary>
 
->Selv om den gjennomsnittlige startlønnen er 560 000kr, så får halvparten av arbeidstakerne 520 000kr eller mindre. Det forteller også at det er noen arbeidstakere som drar gjennomsnittet opp. 
+>Selv om den gjennomsnittlige startlønnen er 700 000kr, så får halvparten av arbeidstakerne 600 000kr eller mindre. Det forteller også at det er noen arbeidstakere som drar gjennomsnittet opp. 
 
 </details>
 
 
-7. En videregående skole rapporterer at gjennomsnittsfraværet i antall dager i løpet av ett skoleår er 10 dager. Medianen er 3,5 dager. Hva forteller de to målene oss, og hvilke av de to beskriver best fraværet? Hvorfor? 
+6. En videregående skole rapporterer at gjennomsnittsfraværet i antall dager i løpet av ett skoleår er 10 dager. Medianen er 3,5 dager. Hva forteller de to målene oss, og hvilke av de to beskriver best fraværet? Hvorfor? 
 
 <details><summary>Løsning</summary>
 
@@ -381,7 +381,7 @@ e.	Vi kan estimere at andelen defekte maskindeler i populasjonen er 12%. Ved å 
 
 </details>
 
-8. Du skal ta en språktest før utveksling og kan velge mellom to ulike språkkurs som skal forberede deg til testen. Begge kursene har rapportert kvartilene til testresultatene oppgitt i antall poeng studentene deres fikk på testene: 
+7. Du skal ta en språktest før utveksling og kan velge mellom to ulike språkkurs som skal forberede deg til testen. Begge kursene har rapportert kvartilene til testresultatene oppgitt i antall poeng studentene deres fikk på testene: 
 
 | Kvartil	| Kurs nummer 1	| Kurs nummer 2 |
 |:----------:|:------:|:------:|
@@ -399,7 +399,7 @@ Hvordan tolker du kvartilene og hvilket kurs ville du ha valgt?
 
 
 
-9. MET4 ble et år rettet av to sensorer og et boxplot av poengene de ga sine respektive kandidater var som følger:
+8. MET4 ble et år rettet av to sensorer og et boxplot av poengene de ga sine respektive kandidater var som følger:
 
 ```{r, warning=F, echo=F, message=F}
 library(ggplot2)
@@ -426,7 +426,7 @@ Hva kan du si karakterfordelingen til de to sensorene?
 
 </details>
 
-10. Du er kvalitetsansvarlig for et produkt og samler inn data på levetiden i måneder til produktet. Et histogram over disse dataene ser ut som følger:
+9. Du er kvalitetsansvarlig for et produkt og samler inn data på levetiden i måneder til produktet. Et histogram over disse dataene ser ut som følger:
 
 ```{r, warning=F, echo=F, message=F}
 library(ggplot2)
@@ -450,7 +450,7 @@ Hva sier histogrammet deg om produktet?
 
 
 
-11. Kovariansen til to variabler fra et utvalg har blitt beregnet til -150. Videre får du vite at utvalgsstandardavviket til den ene variabelen er 12 og 16 for den andre. Regn ut (utvalgs-) korrelasjonskoeffisienten $r$ og bruk denne til å beskrive sammenhengen mellom variablene. 
+10. Kovariansen til to variabler fra et utvalg har blitt beregnet til -150. Videre får du vite at utvalgsstandardavviket til den ene variabelen er 12 og 16 for den andre. Regn ut (utvalgs-) korrelasjonskoeffisienten $r$ og bruk denne til å beskrive sammenhengen mellom variablene. 
 
 <details><summary>Løsning</summary>
  
@@ -462,7 +462,7 @@ $$r=s_{xy}/(s_x s_y )=-150/(16\cdot12)=-0,7813$$
 
 </details>
 
-12. Betrakt spredningsplottene for datasett a-d under, og par hvert datasett med en av de følgende korrelasjonene:
+11. Betrakt spredningsplottene for datasett a-d under, og par hvert datasett med en av de følgende korrelasjonene:
 
 $$r_1 = -0.37,\quad r_2 = 0.81,\quad r_3 = -0.02,\quad r_4 = -0.96 $$
 
@@ -496,20 +496,20 @@ ggplot(df) +
 
 </details>
 
-13. En normalfordelt populasjon har gjennomsnitt 40 og standardavvik 12. 
+12. En normalfordelt populasjon har gjennomsnitt 40 og standardavvik 12. 
 
   a.  Hva sier sentralgrenseteoremet om gjennomsnittet av et utvalg på 100 observasjoner fra denne populasjonen? 
   b.  Dersom populasjonen ikke var normalfordelt, hvordan endrer dette svaret ditt i a?
   
 <details><summary>Løsning</summary>
 
-> a. Dersom populasjonen er normalfordelt så vil også gjennomsnittet av et utvalg av populasjonen være normalfordelt. Gjennomsnittet vil ha forventning $40$ og ha standardavvik $12/\sqrt{100} = 1.2$.
+> a. Dersom populasjonen er normalfordelt så vil også utvalgsgjennomsnittet være normalfordelt. Utvalgsgjennomsnittet vil ha forventning $40$ (populasjonsgjennomsnittet) og standardavvik $12/\sqrt{100} = 1.2$.
  b. Sentralgrenseteoremet sier at fordelingen til gjennomsnittet vil for alle praktiske formål nærme seg normalfordelingen når antall observasjoner øker, uavhengig av fordelingen til populasjonen. Dette endrer altså ikke konklusjonen om fordelingen til utvalget. 
  
 </details>  
 
 
-14. La $X_1, X_2,\dots X_n$ være utfallet av en rekke kast med en tilfeldig terning.
+13. La $X_1, X_2,\dots X_n$ være utfallet av en rekke kast med en tilfeldig terning.
 
   a. Hva er $P(X_1 = 1)$ og $P(X_1 = 6)$?
   b. Hva er $P(\overline{X} = 1)$ og $P(\overline{X} = 6)$ dersom $n = 2$?
@@ -550,11 +550,13 @@ ggplot(df) +
 
 </details>
 
-15. La $\hat{p}=X/n$ være den estimerte suksessannsynligheten i et binomisk eksperiment $X$ med $n=300$ forsøk og (populasjons) suksessannsynlighet $p$.
+14. La $\hat{p}=X/n$ være den estimerte suksessannsynligheten i et binomisk eksperiment $X$ med $n=300$ forsøk og (populasjons) suksessannsynlighet $p$.
 
 a.	Hva er sannsynligheten for at $\hat{p}$ er høyere enn 60%  dersom $p = 0.5$? 
 b.	Gjenta oppgave a med $p = 0.55$.
 c.	Gjenta oppgave a med $p = 0.60$.
+
+*Tips: normalsannsynligheter som $P(Z > z)$ finner du i R med `pnorm()`, se Avsnitt \@ref(relevant-r-grunnleggende).*
 
 
 <details><summary>Løsning</summary>
@@ -584,7 +586,9 @@ P(\hat{p} > 0.60) &= P\left(\frac{\hat{p} - p}{\sqrt{p(1 - p)/n}} > \frac{0.60 -
 
 </details>
 
-16. Anta at vi har to normalfordelte populasjoner hvor observasjoner fra populasjon 1 følger en $N(40, 6^2)$ og observasjoner fra populasjon 2 følger en $N(38, 8^2)$. Dersom man trekker 25 tilfeldige observasjoner fra hver populasjon, hva er sannsynligheten for at gjennomsnittet til trekningen fra populasjon 1 er større enn gjennomsnittet til trekningen fra populasjon 2?
+15. Anta at vi har to normalfordelte populasjoner hvor observasjoner fra populasjon 1 følger en $N(40, 6^2)$ og observasjoner fra populasjon 2 følger en $N(38, 8^2)$. Dersom man trekker 25 tilfeldige observasjoner fra hver populasjon, hva er sannsynligheten for at gjennomsnittet til trekningen fra populasjon 1 er større enn gjennomsnittet til trekningen fra populasjon 2?
+
+*Tips: normalsannsynligheter som $P(Z > z)$ finner du i R med `pnorm()`, se Avsnitt \@ref(relevant-r-grunnleggende).*
 
 
 <details><summary>Løsning</summary>
@@ -599,10 +603,12 @@ P(\overline{X}_1 - \overline{X}_2 > 0) &= P\left(\frac{\overline{X}_1 - \overlin
  
 </details> 
 
-17. Produsenten av en kaviar forteller deg at hver tube er reklamert til å veie 65 gram, men at maskinen som produserer kaviaren gir en vekt som er en normalfordelt med gjennomsnitt lik 65,5 gram og standardavvik 3.6 gram. La oss si at du trekker et tilfeldig utvalg av 40 tuber for å undersøke denne påstanden og at det tilfeldige utvalget har en gjennomsnittlig vekt lavere enn 64. 
+16. Produsenten av en kaviar forteller deg at hver tube er reklamert til å veie 65 gram, men at maskinen som produserer kaviaren gir en vekt som er normalfordelt med forventning (populasjonsgjennomsnitt) lik 65,5 gram og standardavvik 3.6 gram. La oss si at du trekker et tilfeldig utvalg av 40 tuber for å undersøke denne påstanden og at dette utvalget har et utvalgsgjennomsnitt lavere enn 64.
 
 a. Hva er sannsynligheten for dette utfallet?
 b. Kommenter påstanden til produsenten.
+
+*Tips: normalsannsynligheter som $P(Z < z)$ finner du i R med `pnorm()`, se Avsnitt \@ref(relevant-r-grunnleggende).*
 
 <details><summary>Løsning</summary>
 
@@ -611,10 +617,12 @@ b. Det er svært usannsynlig at vi observerer et gjennomsnitt mindre enn 64 ders
 
 </details>
 
-18. En selger av robotgressklippere påstår at bare 4% av produktene må på service innen det første året etter installasjon. Du skal undersøke om påstanden stemmer og spør et tilfeldig utvalg av 100 husholdninger som har kjøpt robotgressklippere om de hadde den på service det første året. 
+17. En selger av robotgressklippere påstår at bare 4% av produktene må på service innen det første året etter installasjon. Du skal undersøke om påstanden stemmer og spør et tilfeldig utvalg av 100 husholdninger som har kjøpt robotgressklippere om de hadde den på service det første året. 
 
 a. Hva vil du si om selgerens påstand dersom mer enn 6% svarer at de har hatt behov for service?
 b. Anta nå at du istedet spurte 400 hustander. Hva vil du si om selgerens påstand dersom mer enn 6% svarer at de har hatt behov for service?
+
+*Tips: normalsannsynligheter som $P(Z > z)$ finner du i R med `pnorm()`, se Avsnitt \@ref(relevant-r-grunnleggende).*
 
 <details><summary>Løsning</summary>
 
@@ -644,7 +652,7 @@ P(\hat{p}>0.06) &= P\left(\frac{\hat{p} - 0.04}{\sqrt{0.04(1-0.04)/400}}> \frac{
 </details>
 
 
-19. Forventningsrette estimatorer.
+18. Forventningsrette estimatorer.
 a. Hva vil det si at en estimator er forventningsrett?
 b. Vis at hvis $X_1, X_2,\dots X_n$ er observasjoner fra en populasjon der $E(X_i) = \mu$ så er gjennomsnittet $\overline{X}$ en forventningsrett estimator av $\mu$.
 c. Vis at hvis $X$ er et binomisk forsøk med $n$ forsøk og suksessannsynlighet $p$ så er $\hat{p} = X/n$ en forventningsett estimator av $p$. 
@@ -663,10 +671,10 @@ c. Vi husker at en binomisk variabel $X$ har forventning $np$. Altså er
 $$E\left(\frac{X}{n}\right) = \frac{1}{n}E(X) = \frac{1}{n}\cdot np = p$$
 </details>
 
-20. Konsistente estimatorer.
+19. Konsistente estimatorer.
 a. Hva vil det si at en estimator er konsistent?
-b. Vis at hvis $X_1, X_2,\dots X_n$ er observasjoner fra en populasjon der $\text{Var}(X_i) = \sigma^2$ så er $\text{Var}(\overline{X}) = \sigma^2/n$. Bruk dette resultatet sammen med resultatet i 19 b til å forklare at $\overline{X}$ er en konsistent estimator av $\mu$.  
-c. Vis at hvis $X$ er et binomisk forsøk med $n$ forsøk og suksessannsynlighet $p$ så er $\text{Var}(\hat{p}) = p(1-p)/n$. Bruk dette resultatet sammen med resultatet fra 19 c til å forklare at $\hat{p}$ er en konsistent estimator av $p$. 
+b. Vis at hvis $X_1, X_2,\dots X_n$ er observasjoner fra en populasjon der $\text{Var}(X_i) = \sigma^2$ så er $\text{Var}(\overline{X}) = \sigma^2/n$. Bruk dette resultatet sammen med resultatet i 18 b til å forklare at $\overline{X}$ er en konsistent estimator av $\mu$.  
+c. Vis at hvis $X$ er et binomisk forsøk med $n$ forsøk og suksessannsynlighet $p$ så er $\text{Var}(\hat{p}) = p(1-p)/n$. Bruk dette resultatet sammen med resultatet fra 18 c til å forklare at $\hat{p}$ er en konsistent estimator av $p$. 
 
 <details><summary>Løsning</summary>
 
@@ -685,7 +693,7 @@ Igjen ser vi at variansen avtar når $n$ øker altså vil forskjellen mellom $\h
 
 </details>
 
-21. Et tilfeldig utvalg på $n = 16$ studenter brukte i gjennomsnitt $\overline{x} = 5.2$ timer på en innlevering, med utvalgsstandardavvik $s = 1.5$ timer. Anta at tidsbruken er tilnærmet normalfordelt, og at vi ikke kjenner det sanne standardavviket i populasjonen.
+20. Et tilfeldig utvalg på $n = 16$ studenter brukte i gjennomsnitt $\overline{x} = 5.2$ timer på en innlevering, med utvalgsstandardavvik $s = 1.5$ timer. Anta at tidsbruken er tilnærmet normalfordelt, og at vi ikke kjenner det sanne standardavviket i populasjonen.
 
     a. Regn ut et 95 %-konfidensintervall for den forventede tidsbruken. Den kritiske verdien henter du fra t-fordelingen: `qt(0.975, df = 15)` $\approx 2.131$.
     b. En medstudent sier: «Det er 95 % sannsynlig at den sanne forventede tidsbruken ligger i dette intervallet.» Er dette en presis formulering? Forklar.
@@ -700,13 +708,13 @@ Vi anslår altså at den forventede tidsbruken ligger mellom 4.4 og 6.0 timer.
 
 </details>
 
-22. Du planlegger å estimere den forventede vekten til laksen i en merd, og vil at 95 %-konfidensintervallet skal ha en feilmargin på høyst $B = 0.2$ kg. Fra tidligere år vet du at standardavviket i vekt er omtrent $\sigma = 0.8$ kg. Omtrent hvor mange laks må du veie?
+21. Du planlegger å estimere den forventede vekten til laksen i en merd, og vil at 95 %-konfidensintervallet skal ha en feilmargin på høyst $B = 0.2$ kg. Fra tidligere år vet du at standardavviket i vekt er omtrent $\sigma = 0.8$ kg. Omtrent hvor mange laks må du veie?
 
 <details><summary>Løsning</summary>
 
 >Vi bruker sammenhengen mellom feilmargin og utvalgsstørrelse:
 $$n = \left(\frac{z_{0.975}\,\sigma}{B}\right)^2 = \left(\frac{1.96 \cdot 0.8}{0.2}\right)^2 = 7.84^2 \approx 61.5.$$
-Vi runder alltid *opp* for å være på den sikre siden, så vi bør veie minst 62 laks. Her bruker vi $z$ og en antatt $\sigma$ fordi vi planlegger *før* vi har samlet inn data. Når vi etterpå faktisk har utvalget og må estimere standardavviket, bruker vi t-fordelingen som i oppgave 21.
+Vi runder alltid *opp* for å være på den sikre siden, så vi bør veie minst 62 laks. Her bruker vi $z$ og en antatt $\sigma$ fordi vi planlegger *før* vi har samlet inn data. Når vi etterpå faktisk har utvalget og må estimere standardavviket, bruker vi t-fordelingen som i oppgave 20.
 
 </details>
 
