@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="Dette er hjemmesiden til kurset MET4 - Empiriske Metoder, som gis på bachelorstudiet ved Norges Handelshøyskole." />
   
 
-<meta name="author" content="Håkon Otneim og Geir Drage Berentsen" />
+<meta name="author" content="Geir Drage Berentsen, Håkon Otneim og Maren Holthe Hedne" />
 
 
 
@@ -351,8 +351,8 @@ men problemet i praksis er at vi gjerne ikke kjenner <span class="math inline">\
 <p>Som demonstrert i forelesningen kan vi i R simulere standard normalfordelte observasjoner (dvs normalfordelte observasjoner med <span class="math inline">\(\mu = 0\)</span> og <span class="math inline">\(\sigma^2 = 1\)</span>) med kommandoen <code>rnorm(n)</code>, der <code>n</code> er antallet observasjoner vi ønsker. For eksempel kan vi kjøre følgende kode for å generere 10 observasjoner (du vil helt sikkert få andre verdier):</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="utvalg-og-estimering.html#cb24-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
 <span id="cb24-2"><a href="utvalg-og-estimering.html#cb24-2" tabindex="-1"></a><span class="fu">rnorm</span>(n)</span></code></pre></div>
-<pre><code>##  [1] -0.91919970  0.88025608 -0.20655225 -0.12421979  0.43740692  1.10179063
-##  [7]  0.07698474  0.50381419 -0.91514014  0.10440906</code></pre>
+<pre><code>##  [1]  0.9886943  0.1108051  0.6921928 -0.5901756 -1.1318205  0.2158524
+##  [7] -1.4490090  1.5671784 -0.5056188  0.4531560</code></pre>
 <p>Ved å skrive <code>mean(rnorm(n))</code> i stedet regner vi ut gjennomsnittet av observasjonene direkte.</p>
 <p>La oss gjøre dette 100 ganger og notere ned gjennomsnittet hver gang. I stedet for å gjøre det manuelt, kan vi skrive et lite program som gjør dette for oss ved å bruke en for-løkke. Det er ikke nødvendig (eller pensum) å forstå akkurat hvordan dette fungerer, men dersom du kjører følgende linjer vil du få en ny vektor <code>gj.snitt</code> som inneholder 100 slike gjennomsnitt:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="utvalg-og-estimering.html#cb26-1" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
