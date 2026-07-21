@@ -450,11 +450,11 @@ Hva sier histogrammet deg om produktet?
 
 
 
-11. Kovariansen til to variabler fra et utvalg har blitt beregnet til -150. Videre får du vite at empirisk standardavviket til den ene variabelen er 12 og 16 for den andre. Regn ut (utvalgs-) korrelasjonskoeffisienten $r$ og bruk denne til å beskrive sammenhengen mellom variablene. 
+11. Kovariansen til to variabler fra et utvalg har blitt beregnet til -150. Videre får du vite at utvalgsstandardavviket til den ene variabelen er 12 og 16 for den andre. Regn ut (utvalgs-) korrelasjonskoeffisienten $r$ og bruk denne til å beskrive sammenhengen mellom variablene. 
 
 <details><summary>Løsning</summary>
  
->	Utvalgs korrelasjonskoeffisient er definert som utvalgskovariansen mellom to variabler delt på de empiriske standardavvikene til variablene. 
+>	Utvalgs korrelasjonskoeffisient er definert som utvalgskovariansen mellom to variabler delt på utvalgsstandardavvikene til variablene.
 
 $$r=s_{xy}/(s_x s_y )=-150/(16\cdot12)=-0,7813$$
 
@@ -559,7 +559,7 @@ c.	Gjenta oppgave a med $p = 0.60$.
 
 <details><summary>Løsning</summary>
 
-> Her bruker vi sentralgrenseteoremet som sier at $\hat{p}\sim N(p, p(1-p))$:
+> Her bruker vi sentralgrenseteoremet som sier at $\hat{p}\sim N(p, p(1-p)/n)$:
 
 >	a.
 $$P(\hat{p} > 0.60) = P\left(\frac{\hat{p} - p}{\sqrt{p(1 - p)/n}} > \frac{0.60 - 0.5}{\sqrt{0.5(1 - 0.5)/300}}\right) = P(Z > 3.46)\approx 0$$.
@@ -634,7 +634,7 @@ P(\hat{p}>0.06) &= P\left(\frac{\hat{p} - 0.04}{\sqrt{0.04(1-0.04)/100}}> \frac{
 >b. Sannsynligheten for et slikt utfall er da
 \begin{equation*}
 \begin{split}
-P(\hat{p}>0.06) &= P\left(\frac{\hat{p} - 0.04}{\sqrt{0.04(1-0.04)/300}}> \frac{0.06 - 0.04}{\sqrt{0.04(1-0.04)/300}}\right)\\
+P(\hat{p}>0.06) &= P\left(\frac{\hat{p} - 0.04}{\sqrt{0.04(1-0.04)/400}}> \frac{0.06 - 0.04}{\sqrt{0.04(1-0.04)/400}}\right)\\
 &= P(Z > 2.04) = 1 - P(Z < 2.04) = 1 - 0.9793 = 0.02 
 \end{split}
 \end{equation*}
@@ -682,6 +682,31 @@ Vi vet fra før at $E(\overline{X}) = \mu$. Vi ser av utrykket over at variansen
 c. Vi husker at en binomisk variabel har varians $\text{Var}(X) = np(1 - p)$. Altså er 
 $$\text{Var}(\hat{p}) = \text{Var}\left(\frac{X}{n}\right) = \left(\frac{1}{n}\right)^2 \cdot\text{Var}(X) = \left(\frac{1}{n}\right)^2\cdot np(1 - p) = \frac{p(1 - p)}{n}$$
 Igjen ser vi at variansen avtar når $n$ øker altså vil forskjellen mellom $\hat{p}$ og $p$ bli mindre jo større utvalg vi får.
+
+</details>
+
+21. Et tilfeldig utvalg på $n = 16$ studenter brukte i gjennomsnitt $\overline{x} = 5.2$ timer på en innlevering, med utvalgsstandardavvik $s = 1.5$ timer. Anta at tidsbruken er tilnærmet normalfordelt, og at vi ikke kjenner det sanne standardavviket i populasjonen.
+
+    a. Regn ut et 95 %-konfidensintervall for den forventede tidsbruken. Den kritiske verdien henter du fra t-fordelingen: `qt(0.975, df = 15)` $\approx 2.131$.
+    b. En medstudent sier: «Det er 95 % sannsynlig at den sanne forventede tidsbruken ligger i dette intervallet.» Er dette en presis formulering? Forklar.
+
+<details><summary>Løsning</summary>
+
+>a. Siden vi ikke kjenner det sanne standardavviket, bruker vi utvalgsstandardavviket $s$ og t-fordelingen med $n - 1 = 15$ frihetsgrader:
+$$\overline{x} \pm t_{0.975,\,15}\cdot \frac{s}{\sqrt{n}} = 5.2 \pm 2.131\cdot\frac{1.5}{\sqrt{16}} = 5.2 \pm 0.80 = [4.40,\; 6.00].$$
+Vi anslår altså at den forventede tidsbruken ligger mellom 4.4 og 6.0 timer.
+
+>b. Nei, formuleringen er upresis. Den sanne forventningen er et fast (men ukjent) tall, ikke noe tilfeldig som «ligger i intervallet med 95 % sannsynlighet». Det er *grensene* til konfidensintervallet som er tilfeldige, siden de regnes ut fra et tilfeldig utvalg. Den korrekte tolkningen er at dersom vi gjentatte ganger trakk nye utvalg og regnet ut et nytt intervall hver gang, ville 95 % av intervallene inneholde den sanne forventningen.
+
+</details>
+
+22. Du planlegger å estimere den forventede vekten til laksen i en merd, og vil at 95 %-konfidensintervallet skal ha en feilmargin på høyst $B = 0.2$ kg. Fra tidligere år vet du at standardavviket i vekt er omtrent $\sigma = 0.8$ kg. Omtrent hvor mange laks må du veie?
+
+<details><summary>Løsning</summary>
+
+>Vi bruker sammenhengen mellom feilmargin og utvalgsstørrelse:
+$$n = \left(\frac{z_{0.975}\,\sigma}{B}\right)^2 = \left(\frac{1.96 \cdot 0.8}{0.2}\right)^2 = 7.84^2 \approx 61.5.$$
+Vi runder alltid *opp* for å være på den sikre siden, så vi bør veie minst 62 laks. Her bruker vi $z$ og en antatt $\sigma$ fordi vi planlegger *før* vi har samlet inn data. Når vi etterpå faktisk har utvalget og må estimere standardavviket, bruker vi t-fordelingen som i oppgave 21.
 
 </details>
 
@@ -781,7 +806,47 @@ P(\overline{X}>0) &= P\left(\frac{\overline{X} - \mu}{\sigma/\sqrt{n}} > \frac{0
 \end{equation*}
 Kasinoer vet med andre ord å utnytte sentralgrenseteoremet. Har du noen penger (som du har råd til å tape) så sett hele beløpet på en farge og spill 1 gang, framfor å plassere småbeløp over lang tid.  
 
->c. Det finnes noen strategier som kan sikre positiv gevinst, men som i praksis krever svært mye egenkapital og at det ikke er noe tak for hvor mye du kan satse ved bordet. Den såkalte *Martingal* strategien går ut på at du dobler innsatsen etter hvert tap og gir deg ved første gevinst. Gevinsten vil da svare til det første beløpet du satset.  
+>c. Det finnes noen strategier som kan sikre positiv gevinst, men som i praksis krever svært mye egenkapital og at det ikke er noe tak for hvor mye du kan satse ved bordet. Den såkalte *Martingal* strategien går ut på at du dobler innsatsen etter hvert tap og gir deg ved første gevinst. Gevinsten vil da svare til det første beløpet du satset.
+</details>
+
+Nøtt 4. I formelen for utvalgsvariansen deler vi på $n - 1$ og ikke på $n$:
+
+$$s^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \overline{X})^2.$$
+
+Det kan virke rart å dele på $n - 1$ når vi har $n$ observasjoner. Grunnen er at nettopp dette gjør $s^2$ til en *forventningsrett* estimator av populasjonsvariansen $\sigma^2$. Anta at $X_1, \ldots, X_n$ er uavhengige med forventning $\mu$ og varians $\sigma^2$.
+
+a. Forklar intuitivt hvorfor $\sum_{i=1}^n (X_i - \overline{X})^2$ har en tendens til å bli litt for liten som mål på spredningen rundt den *sanne* forventningen $\mu$.
+
+b. Det kan vises at $\text{E}\!\left[\sum_{i=1}^n (X_i - \overline{X})^2\right] = (n-1)\sigma^2$. Bruk dette til å vise at $\text{E}(s^2) = \sigma^2$.
+
+<details><summary>Løsning</summary>
+
+>a. Avvikene måles fra utvalgsgjennomsnittet $\overline{X}$, ikke fra den sanne forventningen $\mu$. Men $\overline{X}$ er nettopp det tallet som ligger «midt i» dataene og gjør summen av kvadrerte avvik *så liten som mulig*. Kvadratsummen rundt $\overline{X}$ blir derfor systematisk litt mindre enn den ville blitt rundt $\mu$. Deler vi på $n$, undervurderer vi $\sigma^2$; å dele på $n-1$ i stedet retter opp for dette.
+
+>b. Med resultatet som er gitt:
+$$\text{E}(s^2) = \text{E}\!\left[\frac{1}{n-1}\sum_{i=1}^n (X_i - \overline{X})^2\right] = \frac{1}{n-1}\cdot(n-1)\sigma^2 = \sigma^2.$$
+Nettopp fordi vi deler på $n-1$, treffer estimatoren $\sigma^2$ i gjennomsnitt.
+
+</details>
+
+Nøtt 5. To studenter trekker hvert sitt *uavhengige* tilfeldige utvalg fra samme populasjon, og hver av dem regner ut et 95 %-konfidensintervall for den samme forventningen $\mu$.
+
+a. Hva er sannsynligheten for at *begge* intervallene inneholder den sanne $\mu$?
+
+b. Hva er sannsynligheten for at *minst ett* av dem gjør det?
+
+c. Hva forteller denne oppgaven om hvordan vi bør tenke på et konfidensintervall?
+
+<details><summary>Løsning</summary>
+
+>a. Hvert intervall inneholder $\mu$ med sannsynlighet 0.95, og siden utvalgene er uavhengige:
+$$P(\text{begge}) = 0.95 \cdot 0.95 = 0.9025.$$
+
+>b. Det er lettest å regne ut sannsynligheten for at *ingen* av dem treffer, og trekke fra 1:
+$$P(\text{minst ett}) = 1 - (0.05)^2 = 1 - 0.0025 = 0.9975.$$
+
+>c. At vi i det hele tatt kan regne slik, understreker poenget fra teorien: det er *intervallet* (grensene) som er tilfeldig, ikke $\mu$. «95 %» er en egenskap ved prosedyren over gjentatte utvalg, ikke en sannsynlighet for hvor $\mu$ ligger i ett bestemt intervall.
+
 </details>
 
 ## Relevante R-kommandoer {#relevant-r-grunnleggende}

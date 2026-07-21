@@ -1115,7 +1115,7 @@ og vi ser at vi får en soleklar forkastning. Dette er også logisk gitt hva vi 
 
 Som vi har sett over baserer tester i R seg stort sett på en eller annen datainput. Som output får du både testobservator og p-verdi. Hvis du allikevel av en eller annen grunn (f.eks. på eksamen) trenger å finne en kritisk verdi i en fordeling, så kan det være nyttig å vite hvordan man gjør dette i R.
 
-De kritiske verdiene finner vi ved å bruke kvantilfunksjonene til den respektive fordelingen. Disse funksjonene har alltid et argument `p` og har som output det tallet som har sannsynlighetsmasse `p` til venstre for seg. Du må derfor velge `p` ut fra signifikansnivå og om det er en ensidig/tosidig test.
+De kritiske verdiene finner vi ved å bruke **kvantilfunksjonene** (`qnorm()`, `qt()`, `qchisq()`, `qf()`) til den respektive fordelingen. Vi ble kjent med disse, sammen med `p...()`-funksjonene for sannsynligheter, i modul 2 (se relevante R-kommandoer, Avsnitt \@ref(relevant-r-grunnleggende)). Her bruker vi dem til å finne kritiske verdier. Funksjonene har alltid et argument `p` og gir som output det tallet som har sannsynlighetsmasse `p` til venstre for seg. Du må derfor velge `p` ut fra signifikansnivå og om det er en ensidig/tosidig test.
 
 #### Kritiske verdier i T-fordelingen {-}
 
