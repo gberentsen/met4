@@ -25,12 +25,12 @@ Rstudio er et program som gjør det enklere å bruke R. På samme måte som Word
 Bruker du din egen datamaskin kan du enkelt laste ned og installere R og Rstudio. Begge programvarene er gratis og kan installeres med å følge instruksene under. Får du problemer kan du få en av studentassistentene til å hjelpe deg.
 
 1. Start med å installere R:
-    - Gå til [r-project.org](https://cran.uib.no/)
-    - Last ned versjonen som passer ditt operativsystem (Windows/Mac/Linux) 
-    - Kjør installasjonsfilen og følg instruksene. Standard innstillingene skal være greie å bruke, så du kan trykke neste/ok til installasjonen er ferdig. 
+    - Gå til [cloud.r-project.org](https://cloud.r-project.org/)
+    - Last ned versjonen som passer ditt operativsystem (Windows/Mac/Linux)
+    - Kjør installasjonsfilen og følg instruksene. Standard innstillingene skal være greie å bruke, så du kan trykke neste/ok til installasjonen er ferdig.
 2. Installer så RStudio:
-    - [rstudio.com](https://rstudio.com/), og naviger deg frem til siden for **RStudio**. Du skal der laste ned desktop-versjonen av programmet ("Open source edition") for ditt operativsystem og  installere på vanlig måte.
-    - Kjør installasjonsfilen som lastes ned og følg instruksene 
+    - Gå til [posit.co/download/rstudio-desktop](https://posit.co/download/rstudio-desktop/). Der laster du ned **RStudio**-programmet for ditt operativsystem og installerer på vanlig måte.
+    - Kjør installasjonsfilen som lastes ned og følg instruksene
 
 #### Vinduene i Rstudio og det å jobbe med R
 Første gang du åpner Rstudio vil du se tre vinduer. Et fjerde vindu åpner du med å klikke på **File** i menyen, så **New File**, og så **R Script**. Figur \@ref(fig:rstudio1) viser en oversikt over de fire vinduene. Det er viktig at du forstår forskjellen på de to vinduene til venstre. 

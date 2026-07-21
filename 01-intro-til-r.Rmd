@@ -1,13 +1,13 @@
 
 # Introduksjon til R 
 
-Vi skal i dette kurset bruke programmeringsspråket **R** til å gjøre beregninger og gjennomføre de ulike statistiske analysene som vi skal lære etter hvert. Dette vil være nytt for mange. Vi skal først og fremst skal skrive *kode* og *kommandolinjer* for å få ut resultater i R, noe som kan oppleves uvant siden vi ellers er vant med å klikke oss frem i et menysystem når vi jobber med ulike programmer. Trøsten kan være at ferdigheter i programmering blir stadig viktigere i mange yrker, spesielt innen økonomifaget. 
+Vi skal i dette kurset bruke programmeringsspråket **R** til å gjøre beregninger og gjennomføre de ulike statistiske analysene som vi skal lære etter hvert. Dette vil være nytt for mange. Vi skal først og fremst skrive *kode* og *kommandolinjer* for å få ut resultater i R, noe som kan oppleves uvant siden vi ellers er vant til å klikke oss frem i et menysystem når vi jobber med ulike programmer. Trøsten kan være at ferdigheter i programmering blir stadig viktigere i mange yrker, spesielt innen økonomifaget.
 
-Vi må installere to ting på maskinen vår før vi går videre; selve programeringsspråket R, samt programmet RStudio som vi skal bruke til å skrive og kjøre koden. Begge deler er gratis, og begge deler fungerer fint på både Windows og Mac (og Linux!). Det er greiest å gjøre dette i riktig rekkefølge:
+Vi må installere to ting på maskinen vår før vi går videre: selve programmeringsspråket R, samt programmet RStudio som vi skal bruke til å skrive og kjøre koden. Begge deler er gratis, og begge deler fungerer fint på både Windows og Mac (og Linux!). Det er greiest å gjøre dette i riktig rekkefølge:
 
-1. Gå til [r-project.org](https://cran.uib.no/) for å laste ned R til ditt operativsystem, og installer på vanlig måte uten å forandre på foreslåtte innstillinger.
+1. Gå til [cloud.r-project.org](https://cloud.r-project.org/) for å laste ned R til ditt operativsystem, og installer på vanlig måte uten å forandre på foreslåtte innstillinger.
 
-2. Gå til [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/). Du skal der laste ned **RStudio** programmet for ditt operativsystem og installere på vanlig måte. Det er heller ikke her nødvendig å forandre på de foreslåtte innstillingene.
+2. Gå til [posit.co/download/rstudio-desktop](https://posit.co/download/rstudio-desktop/). Der laster du ned **RStudio**-programmet for ditt operativsystem og installerer på vanlig måte. Det er heller ikke her nødvendig å forandre på de foreslåtte innstillingene.
 
 Du kan så åpne RStudio, og følge sekvensen av videoforelesninger som følger under. 
 
@@ -15,7 +15,7 @@ Du kan så åpne RStudio, og følge sekvensen av videoforelesninger som følger 
 
 <iframe src="https://player.vimeo.com/video/638313293?h=a3e60f8e49" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
 
-I denne videoen snakke vi litt om forskjellen mellom *programmeringsspråket R* og *programmet* RStudio. Vi åpner opp Rstudio og rusler gjennom det grafiske grensesnittet.
+I denne videoen snakker vi litt om forskjellen mellom *programmeringsspråket R* og *programmet* RStudio. Vi åpner opp Rstudio og rusler gjennom det grafiske grensesnittet.
 
 ## Enkle beregninger og variabler
 
