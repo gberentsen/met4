@@ -17,6 +17,8 @@ I videoforelesningene går vi gjennom noen slides, og vi skriver et R-skript. Du
 
 <div style='padding:74.79% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7748078/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
 
+*Videovinduet inneholder flere videoer. Bruk nedtrekksmenyen øverst i vinduet for å få en oversikt over alle videoene i dette delkapittelet og bytte mellom dem.*
+
 ### Teori
 
 Deskriptiv statistikk har to hovedformål. Det første er å **bli kjent med et datasett**: før vi setter i gang med mer avansert analyse, vil vi danne oss et bilde av hva slags tall vi har foran oss, om det finnes åpenbare feil eller ekstremverdier, og hvilke mønstre som umiddelbart trer frem. Det andre formålet er å **presentere resultater** slik at de er lette å forstå for andre. Et viktig poeng er at deskriptiv statistikk verken generaliserer fra utvalget til en større populasjon eller tester årsakssammenhenger. Vi lar rett og slett dataene fortelle sin egen historie. Selve slutningen fra utvalg til populasjon kommer vi tilbake til i neste delkapittel.
@@ -283,44 +285,6 @@ Dette er ganske enkelt, men også litt vanskelig på en *inception*-aktig måte.
 
 </details>
 
-2. Du skal spille kron og mynt. Motspilleren din er eieren av mynten, og hun påstår at den er rettferdig. Det vil si at om man flipper mynten svært mange ganger vil den gi et likt antall kron som mynt. 
-
-    a.	Beskriv et eksperiment som tester denne påstanden. 
-    b.	Hva er populasjonen i eksperimentet?
-    c.	Hva er utvalget?
-    d.	Hva er parameteren? 
-    e.	Hva er estimatoren? 
-    f.	Beskriv kort hvordan statistisk inferens kan bli brukt til å teste påstanden til motspilleren din. 
-
-<details><summary>Løsning</summary>
-
->a.	Kast mynten ett gitt antall ganger, for eksempel 100 ganger. Registrer hvor mange ganger den viser mynt og hvor mange ganger den viser kron. 
-b.	Populasjonen er det teoretiske resultatet av å kaste mynten uendelig mange ganger og registrere hvor mange ganger den viser mynt og hvor mange            ganger den gir kron. 
-c.	Utvalget er antall mynt og kron i eksperimentet. 
-d.	Parameteren er andelen mynt (eller kron) i populasjonen.
-e.	Estimatoren er den registrerte andelen mynt (eller kron) i eksperimentet.
-f.	Estimatoren kan brukes til å vurdere om mynten faktisk er rettferdig. I neste modul av kurset skal dere lære om hypotesetesting og om hvilken               hypotesetest man kan utføre for å avgjøre om man kan forkaste nullhypotesen om at mynten er rettferdig. 
-
-</details>
-
-3. En fabrikant av maskindeler påstår at mindre enn 15% av produktene er defekte. Når 1000 deler ble trukket fra en stor produksjon, var 12% defekte. 
-
-    a.	Hva er populasjonen i dette tilfellet? 
-    b.	Hva er utvalget? 
-    c.	Hva er parameteren? 
-    d.	Hva er estimatoren? 
-    e.	Forklar kort hvordan estimatoren kan bli brukt til å gjøre inferens om parameteren for å undersøke påstanden om at 15% av produktene er defekte.
-
-<details><summary>Løsning</summary>
-
->a.	Populasjonen er alle de aktuelle maskindelene som lages av fabrikanten. 
-b.	Utvalget er de 1000 delene som ble trukket fra en stor produksjon. 
-c.	Parameteren er andelen defekte maskindeler i alle de aktuelle maskindelene som produseres. 15% er den påståtte parameter. 
-d.	Estimatoren er andelen defekte maskindeler i utvalget. 12% er den observerte estimatoren. 
-e.	Vi kan estimere at andelen defekte maskindeler i populasjonen er 12%. Ved å bruke statistisk inferens kan vi undersøke om vi har nok statistisk bevis til å avvise påstanden om at den sanne andelen defekte maskindeler er 15%. 
-
-
-</details>
 
 
 <!-- 4. Avgjør om de følgende datasettene inneholder forholdsdata, intervalldata, ordinale data eller dikotome og nominale data. Avgjør også hvilke regneoperasjoner som er tillatt.  -->
@@ -351,7 +315,7 @@ e.	Vi kan estimere at andelen defekte maskindeler i populasjonen er 12%. Ved å 
 
 <!-- </details> -->
 
-4. Skattebetalere som fyller ut egenmeldingen sin blir spurt de følgende spørsmålene. Hvilken type data utgjør svarene og hvilke regneoperasjoner er tillatt?
+2. Skattebetalere som fyller ut egenmeldingen sin blir spurt de følgende spørsmålene. Hvilken type data utgjør svarene og hvilke regneoperasjoner er tillatt?
     a.	Er det første gang du fyller ut egenmeldingen din?
     b.	Hvor lang tid brukte du på å fylle ut egenmeldingen? 
     c.	Hvor enkelt/vanskelig var det å fylle ut egenmeldingen? (Veldig enkelt, nokså enkelt, hverken enkelt eller vanskelig, nokså vanskelig, veldig vanskelig) 
@@ -364,7 +328,7 @@ e.	Vi kan estimere at andelen defekte maskindeler i populasjonen er 12%. Ved å 
 
 </details>
 
-5. Du får oppgitt at gjennomsnittlig startlønn for NHH studenter etter endt utdanning er 700 000kr. Median startlønnen er 600 000kr. Hva forteller disse tallene deg? 
+3. Du får oppgitt at gjennomsnittlig startlønn for NHH studenter etter endt utdanning er 700 000kr. Median startlønnen er 600 000kr. Hva forteller disse tallene deg? 
 
 <details><summary>Løsning</summary>
 
@@ -373,7 +337,7 @@ e.	Vi kan estimere at andelen defekte maskindeler i populasjonen er 12%. Ved å 
 </details>
 
 
-6. En videregående skole rapporterer at gjennomsnittsfraværet i antall dager i løpet av ett skoleår er 10 dager. Medianen er 3,5 dager. Hva forteller de to målene oss, og hvilke av de to beskriver best fraværet? Hvorfor? 
+4. En videregående skole rapporterer at gjennomsnittsfraværet i antall dager i løpet av ett skoleår er 10 dager. Medianen er 3,5 dager. Hva forteller de to målene oss, og hvilke av de to beskriver best fraværet? Hvorfor? 
 
 <details><summary>Løsning</summary>
 
@@ -381,7 +345,7 @@ e.	Vi kan estimere at andelen defekte maskindeler i populasjonen er 12%. Ved å 
 
 </details>
 
-7. Du skal ta en språktest før utveksling og kan velge mellom to ulike språkkurs som skal forberede deg til testen. Begge kursene har rapportert kvartilene til testresultatene oppgitt i antall poeng studentene deres fikk på testene: 
+5. Du skal ta en språktest før utveksling og kan velge mellom to ulike språkkurs som skal forberede deg til testen. Begge kursene har rapportert kvartilene til testresultatene oppgitt i antall poeng studentene deres fikk på testene: 
 
 | Kvartil	| Kurs nummer 1	| Kurs nummer 2 |
 |:----------:|:------:|:------:|
@@ -399,7 +363,7 @@ Hvordan tolker du kvartilene og hvilket kurs ville du ha valgt?
 
 
 
-8. MET4 ble et år rettet av to sensorer og et boxplot av poengene de ga sine respektive kandidater var som følger:
+6. MET4 ble et år rettet av to sensorer og et boxplot av poengene de ga sine respektive kandidater var som følger:
 
 ```{r, warning=F, echo=F, message=F}
 library(ggplot2)
@@ -426,7 +390,7 @@ Hva kan du si karakterfordelingen til de to sensorene?
 
 </details>
 
-9. Du er kvalitetsansvarlig for et produkt og samler inn data på levetiden i måneder til produktet. Et histogram over disse dataene ser ut som følger:
+7. Du er kvalitetsansvarlig for et produkt og samler inn data på levetiden i måneder til produktet. Et histogram over disse dataene ser ut som følger:
 
 ```{r, warning=F, echo=F, message=F}
 library(ggplot2)
@@ -450,7 +414,7 @@ Hva sier histogrammet deg om produktet?
 
 
 
-10. Kovariansen til to variabler fra et utvalg har blitt beregnet til -150. Videre får du vite at utvalgsstandardavviket til den ene variabelen er 12 og 16 for den andre. Regn ut (utvalgs-) korrelasjonskoeffisienten $r$ og bruk denne til å beskrive sammenhengen mellom variablene. 
+8. Kovariansen til to variabler fra et utvalg har blitt beregnet til -150. Videre får du vite at utvalgsstandardavviket til den ene variabelen er 12 og 16 for den andre. Regn ut (utvalgs-) korrelasjonskoeffisienten $r$ og bruk denne til å beskrive sammenhengen mellom variablene. 
 
 <details><summary>Løsning</summary>
  
@@ -462,7 +426,7 @@ $$r=s_{xy}/(s_x s_y )=-150/(16\cdot12)=-0,7813$$
 
 </details>
 
-11. Betrakt spredningsplottene for datasett a-d under, og par hvert datasett med en av de følgende korrelasjonene:
+9. Betrakt spredningsplottene for datasett a-d under, og par hvert datasett med en av de følgende korrelasjonene:
 
 $$r_1 = -0.37,\quad r_2 = 0.81,\quad r_3 = -0.02,\quad r_4 = -0.96 $$
 
@@ -493,6 +457,45 @@ ggplot(df) +
 >	Datasett a: $r_2 = 0.81$, Datasett b: $r_1 = -0.37$, Dasett c: $r_4 = -0.96$, Datasett d: $r_3 = -0.02$
 
 > Datasett d er et eksempel på at korrelasjonen mellom to variabler kan være svært nær 0, selv om det er en tydelig (ikke-lineær) sammenheng mellom dem. Det som skjer når vi regner ut $r$ i dette tilfellet er at den negative avhengigheten vi ser til venstre i figuren kanselleres av den positive avhengigheten til høyre i figuren. 
+
+</details>
+
+10. Du skal spille kron og mynt. Motspilleren din er eieren av mynten, og hun påstår at den er rettferdig. Det vil si at om man flipper mynten svært mange ganger vil den gi et likt antall kron som mynt. 
+
+    a.	Beskriv et eksperiment som tester denne påstanden. 
+    b.	Hva er populasjonen i eksperimentet?
+    c.	Hva er utvalget?
+    d.	Hva er parameteren? 
+    e.	Hva er estimatoren? 
+    f.	Beskriv kort hvordan statistisk inferens kan bli brukt til å teste påstanden til motspilleren din. 
+
+<details><summary>Løsning</summary>
+
+>a.	Kast mynten ett gitt antall ganger, for eksempel 100 ganger. Registrer hvor mange ganger den viser mynt og hvor mange ganger den viser kron. 
+b.	Populasjonen er det teoretiske resultatet av å kaste mynten uendelig mange ganger og registrere hvor mange ganger den viser mynt og hvor mange            ganger den gir kron. 
+c.	Utvalget er antall mynt og kron i eksperimentet. 
+d.	Parameteren er andelen mynt (eller kron) i populasjonen.
+e.	Estimatoren er den registrerte andelen mynt (eller kron) i eksperimentet.
+f.	Estimatoren kan brukes til å vurdere om mynten faktisk er rettferdig. I neste modul av kurset skal dere lære om hypotesetesting og om hvilken               hypotesetest man kan utføre for å avgjøre om man kan forkaste nullhypotesen om at mynten er rettferdig. 
+
+</details>
+
+11. En fabrikant av maskindeler påstår at mindre enn 15% av produktene er defekte. Når 1000 deler ble trukket fra en stor produksjon, var 12% defekte. 
+
+    a.	Hva er populasjonen i dette tilfellet? 
+    b.	Hva er utvalget? 
+    c.	Hva er parameteren? 
+    d.	Hva er estimatoren? 
+    e.	Forklar kort hvordan estimatoren kan bli brukt til å gjøre inferens om parameteren for å undersøke påstanden om at 15% av produktene er defekte.
+
+<details><summary>Løsning</summary>
+
+>a.	Populasjonen er alle de aktuelle maskindelene som lages av fabrikanten. 
+b.	Utvalget er de 1000 delene som ble trukket fra en stor produksjon. 
+c.	Parameteren er andelen defekte maskindeler i alle de aktuelle maskindelene som produseres. 15% er den påståtte parameter. 
+d.	Estimatoren er andelen defekte maskindeler i utvalget. 12% er den observerte estimatoren. 
+e.	Vi kan estimere at andelen defekte maskindeler i populasjonen er 12%. Ved å bruke statistisk inferens kan vi undersøke om vi har nok statistisk bevis til å avvise påstanden om at den sanne andelen defekte maskindeler er 15%. 
+
 
 </details>
 
