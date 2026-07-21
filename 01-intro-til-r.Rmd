@@ -449,28 +449,67 @@ testdata %>%
 
 </details>    
 
-## Oppsummering og ekstra oppgaver {#r-ekstra}
+## Oppgaver {#r-ekstra}
 
-I denne modulen har vi gått gjennom noen helt grunnleggende funksjoner i R. Du har lært at
+Her er noen oppgaver du kan bruke til å øve på det vi har gått gjennom i modulen. Prøv å skrive koden selv i R før du sjekker løsningsforslaget.
 
-- R er navnet på et programmeringsspråk,
-- RStudio er navnet på et program der vi kan skrive og kjøre R-kode, og
-- identifisert fire forskjellige vindu i RStudio: konsollen (der R-koden kjøres), teksteditoren (der vi skriver script), samt to vinduer der vi kan se en oversikt over hva som er i dataminnet og få opp plott og figurer som vi lager.
+1. Regn ut følgende i R:
+    a. 15 delt på 4
+    b. kvadratroten av 144
+    c. den naturlige logaritmen av 20
+    d. tallet $e$ opphøyd i 2
 
-Videre har du 
+<details><summary>Løsning</summary>
+```{r, eval = FALSE}
+15 / 4
+sqrt(144)
+log(20)
+exp(2)
+```
+</details>
 
-- kjørt noen enkle kommandoer,
-- lagret tall og vektorer ved hjelp av variabelnavn,
-- prøvd ut noen innebygde R-funksjoner for å regne ut f.eks. gjennomsnitt og standardavvik av tallvektorer,
-- laget et spredningsplott,
-- lært hva et *working directory* (arbeidsmappe) er, og 
-- installert R-pakker, f.eks. `readxl`, som vi brukte til å lese inn et lite datasett i R.
+2. Lag en variabel `pris` med verdien 250 og en variabel `antall` med verdien 12. Regn ut den totale kostnaden `pris * antall` og lagre resultatet i en ny variabel `total`. Skriv til slutt ut `total`.
 
-Til slutt har du
+<details><summary>Løsning</summary>
+```{r, eval = FALSE}
+pris <- 250
+antall <- 12
+total <- pris * antall
+total
+```
+</details>
 
-- kjørt en $t$-test,
-- skrevet et *script* (et lite program om du vil) der vi har lagret flere av kommandoene over i en tekstfil, og
-- lært om pipe-operatoren og enkel datavask ved hjelp av funksjoner i `dplyr`-pakken.
+3. Lag en vektor `alder` som inneholder tallene 23, 19, 31, 27 og 22. Bruk innebygde funksjoner til å regne ut (a) gjennomsnittsalderen, (b) den høyeste alderen og (c) hvor mange personer det er i vektoren.
+
+<details><summary>Løsning</summary>
+```{r, eval = FALSE}
+alder <- c(23, 19, 31, 27, 22)
+mean(alder)     # gjennomsnitt
+max(alder)      # høyeste alder
+length(alder)   # antall personer
+```
+</details>
+
+4. Vektoren `inntekt <- c(400000, 550000, 900000, 2500000)` inneholder fire årsinntekter. Slike data er ofte svært skjevfordelte, og da er det vanlig å se på logaritmen i stedet. Lag en ny vektor `log_inntekt` med den naturlige logaritmen av inntektene.
+
+<details><summary>Løsning</summary>
+```{r, eval = FALSE}
+inntekt <- c(400000, 550000, 900000, 2500000)
+log_inntekt <- log(inntekt)
+log_inntekt
+```
+</details>
+
+5. Bruk datasettet `testdata` og pipe-operatoren `%>%` til å lage en tabell som bare inneholder radene der `X1` er større enn 100, og bare kolonnene `X1` og `X2`.
+
+<details><summary>Løsning</summary>
+```{r, eval = FALSE}
+library(dplyr)
+testdata %>%
+  filter(X1 > 100) %>%
+  select(X1, X2)
+```
+</details>
 
 Dersom du har fulgt modulen selv har du nå kanskje skrevet et lite script i tekstvinduet som ser ut omtrent som koden under. Når du har gjort alt riktig, skal du nå kunne kjøre gjennom disse kodelinjene uten feilmeldinger ved hjelp av `Ctrl-Enter`.
 
@@ -504,9 +543,9 @@ p <- ggplot(testdata, aes(x = X1, y = X2)) +
 ggsave("testplot.pdf", plot = p)
 ```
 
-1. Lagre scriptet ditt. I RStudio velger du `File -> Save` og trykker `Ok` dersom det kommer opp et vindu om *character encoding* e.l. Finn en fornuftig plassering (gjerne i samme mappe som øvelsesdatasettet) og gi filen et fornuftig navn. Standard filending for R-script er `.R`, men det er skjult for de fleste Windowsbrukere. Lukk RStudio.
+6. Lagre scriptet ditt. I RStudio velger du `File -> Save` og trykker `Ok` dersom det kommer opp et vindu om *character encoding* e.l. Finn en fornuftig plassering (gjerne i samme mappe som øvelsesdatasettet) og gi filen et fornuftig navn. Standard filending for R-script er `.R`, men det er skjult for de fleste Windowsbrukere. Lukk RStudio.
 
-2. Du kan nå åpne skriptfilen i RStudio igjen. Enten ved å dobbeltklikke på den, eller ved å åpne RStudio, velge `File -> Open file`, og så videre (dersom skriptet ikke allerede ligger åpnet). Du kan også åpne skriptfilen i en hvilken som helst notatbok (Notebook e.l.) og se at det er en helt standard, *ren tekstfil*. Hva er fordelen med å lagre en analyse som *et skript* versus å gjøre ting i et menydrevet grafisk grensesnitt?
+7. Du kan nå åpne skriptfilen i RStudio igjen. Enten ved å dobbeltklikke på den, eller ved å åpne RStudio, velge `File -> Open file`, og så videre (dersom skriptet ikke allerede ligger åpnet). Du kan også åpne skriptfilen i en hvilken som helst notatbok (Notebook e.l.) og se at det er en helt standard, *ren tekstfil*. Hva er fordelen med å lagre en analyse som *et skript* versus å gjøre ting i et menydrevet grafisk grensesnitt?
 
 <details><summary>Løsning</summary>
 
@@ -515,7 +554,7 @@ Når vi lagrer koden vår i et skript sørger vi for at *hele analysen vår er l
 </details>
 
 
-3. Vi skal nå pynte på plottet og gjøre det riktig pent. Det gjør vi ved å legge til nye linjer i ggplot-kommandoen. Erstatt den nest siste linjen i skriptet med kommandoen under, og se at du får en figur omtrent som den som følger under det igjen (vi bruker aksetitler i henhold til oppgavene i den første datalabben, der vi får vite at datasettet representerer kvalitet på kaffeavlingen før og etter en omlegging i produksjonsmetode):
+8. Vi skal nå pynte på plottet og gjøre det riktig pent. Det gjør vi ved å legge til nye linjer i ggplot-kommandoen. Erstatt den nest siste linjen i skriptet med kommandoen under, og se at du får en figur omtrent som den som følger under det igjen (vi bruker aksetitler i henhold til oppgavene i den første datalabben, der vi får vite at datasettet representerer kvalitet på kaffeavlingen før og etter en omlegging i produksjonsmetode):
 
 ```{r, echo = F, warning = F}
 library(ggplot2)
@@ -530,9 +569,9 @@ ggplot(testdata, aes(x = X1, y = X2)) +
         theme_classic()
 ```
 
-4. Merk at vi bruker "+"-tegnet til å legge til flere "lag" med grafiske egenskaper til plottet. Hvert "lag" består av en funksjon, som ofte kan ta argumenter; f.eks. brukes funksjonen `geom_point()` til å lage prikker, og så kan vi f.eks. bruke argumentet `size` til å styre størrelsen på prikkene. Kan du finne ut hva hvert enkelt av disse "lagene" gjør? Hint: ta bort en linje av gangen, og se hva som skjer. Pass på at det er et pluss mellom hvert lag.
+9. Merk at vi bruker "+"-tegnet til å legge til flere "lag" med grafiske egenskaper til plottet. Hvert "lag" består av en funksjon, som ofte kan ta argumenter; f.eks. brukes funksjonen `geom_point()` til å lage prikker, og så kan vi f.eks. bruke argumentet `size` til å styre størrelsen på prikkene. Kan du finne ut hva hvert enkelt av disse "lagene" gjør? Hint: ta bort en linje av gangen, og se hva som skjer. Pass på at det er et pluss mellom hvert lag.
 
-5. Prøv å endre på noen av lagene eller legg til nye. For eksempel kan du lage en tittel ved å legge til funksjonen `ggtitle()` som et lag, og du kan endre aksetitlene. Prøv også å bruke argumentet `shape` i `geom_point()` til å bytte ut prikkene med en annen form. Det finnes flere andre "tema" i tillegg til `theme_classic()`, f.eks. `theme_bw()`, `theme_dark()`, etc. 
+10. Prøv å endre på noen av lagene eller legg til nye. For eksempel kan du lage en tittel ved å legge til funksjonen `ggtitle()` som et lag, og du kan endre aksetitlene. Prøv også å bruke argumentet `shape` i `geom_point()` til å bytte ut prikkene med en annen form. Det finnes flere andre "tema" i tillegg til `theme_classic()`, f.eks. `theme_bw()`, `theme_dark()`, etc. 
 
 <details><summary>Forslag</summary>
 
@@ -549,5 +588,5 @@ ggplot(testdata, aes(x = X1, y = X2)) +
 
 </details>
 
-6. Det følger med omfattende dokumentasjon med `R`. Du kan lese om alle `R`-funksjoner ved å skrive `?` før funksjonsnavnet i konsollen. Prøv for eksempel å skrive `?mean` i konsollen og trykk enter.
+11. Det følger med omfattende dokumentasjon med `R`. Du kan lese om alle `R`-funksjoner ved å skrive `?` før funksjonsnavnet i konsollen. Prøv for eksempel å skrive `?mean` i konsollen og trykk enter.
 

@@ -690,7 +690,7 @@ ggplot(visits, aes(x = Week, y = Museum)) +
 
 Vi ser at det er en sterk sammenheng mellom besøkstallene til museet og parken, spesielt etter gjenåpningen i 1995, og det skal vi utnytte når vi senere skal beregne erstatningssummen.
 
-**Oppgave 2.4:** Juster på argumentene i `geom_line()`-funskjonene, og legg til flere "lag" på samme måte som vi gjorde for å pynte på figuren i oppgave 3 i kapittel \@ref(r-ekstra) (det er 100% lov å Google). Dette ser bedre ut:
+**Oppgave 2.4:** Juster på argumentene i `geom_line()`-funskjonene, og legg til flere "lag" på samme måte som vi gjorde for å pynte på figuren i oppgave 8 i kapittel \@ref(r-ekstra) (det er 100% lov å Google). Dette ser bedre ut:
 
 ```{r, fig.keep='last', fig.height = 3.5, echo = FALSE}
 ggplot(visits, aes(x = Week, y = Museum)) +
