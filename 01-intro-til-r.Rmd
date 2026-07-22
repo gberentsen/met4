@@ -3,7 +3,9 @@
 
 Vi skal i dette kurset bruke programmeringsspråket **R** til å gjøre beregninger og gjennomføre de ulike statistiske analysene som vi skal lære etter hvert. Dette vil være nytt for mange. Vi skal først og fremst skrive *kode* og *kommandolinjer* for å få ut resultater i R, noe som kan oppleves uvant siden vi ellers er vant til å klikke oss frem i et menysystem når vi jobber med ulike programmer. Trøsten kan være at ferdigheter i programmering blir stadig viktigere i mange yrker, spesielt innen økonomifaget.
 
-Vi må installere to ting på maskinen vår før vi går videre: selve programmeringsspråket R, samt programmet RStudio som vi skal bruke til å skrive og kjøre koden. Begge deler er gratis, og begge deler fungerer fint på både Windows og Mac (og Linux!). Det er greiest å gjøre dette i riktig rekkefølge:
+R er *kommandobasert*: du skriver en kommando, og R regner ut svaret. Vil du for eksempel ha gjennomsnittet av tallene 3, 2 og 5, skriver du `mean(c(3, 2, 5))` og får svaret tilbake. Dette føles uvant i starten, men du kommer raskt inn i tankegangen, og datalabbene gir deg god trening.
+
+Vi må installere to ting på maskinen vår før vi går videre: selve programmeringsspråket R, samt programmet RStudio som vi skal bruke til å skrive og kjøre koden. RStudio gjør R enklere å bruke: på samme måte som Word hjelper deg å lage oversiktlige tekster, hjelper RStudio deg å skrive og kjøre oversiktlige R-analyser. Begge deler er gratis, og begge deler fungerer fint på både Windows og Mac (og Linux!). Det er greiest å gjøre dette i riktig rekkefølge:
 
 1. Gå til [cloud.r-project.org](https://cloud.r-project.org/) for å laste ned R til ditt operativsystem, og installer på vanlig måte uten å forandre på foreslåtte innstillinger.
 
@@ -16,6 +18,32 @@ Du kan så åpne RStudio, og følge sekvensen av videoforelesninger som følger 
 <iframe src="https://player.vimeo.com/video/638313293?h=a3e60f8e49" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
 
 I denne videoen snakker vi litt om forskjellen mellom *programmeringsspråket R* og *programmet* RStudio. Vi åpner opp Rstudio og rusler gjennom det grafiske grensesnittet.
+
+Under følger en skriftlig oversikt for deg som vil ha det i tillegg til videoen. Første gang du åpner RStudio ser du tre vinduer. Et fjerde vindu åpner du med å klikke på **File** i menyen, så **New File**, og så **R Script**. Figur \@ref(fig:rstudio1) viser en oversikt over de fire vinduene. Det er viktig at du forstår forskjellen på de to vinduene til venstre.
+
+```{r rstudio1, echo = F, fig.cap='Oversikt over vinduene i RStudio.'}
+knitr::include_graphics('bilder/Rstudio1.PNG')
+```
+
+Nederste vindu til venstre (b) viser R-konsollen, og det er her alle utregninger blir gjennomført. I dette vinduet kan du for eksempel skrive:
+
+```{r}
+(3*5 - 3/4)*(2 + 2)
+```
+
+Her er `(3*5 - 3/4)*(2 + 2)` en kommando, og det er R som finner ut hva du mener og gir deg svaret `57` i retur. R tillater alle de vanlige matteoperasjonene som gange, deling, pluss og minus (`*, /, +, -`).
+
+Det øverste vinduet til venstre (a) viser en `.R`-fil (et *skript*). En `.R`-fil fungerer som et manuskript med R-kommandoer, og kan lagres slik at du senere kan se hvilke kommandoer du har brukt og fortsette der du slapp. Når du vil at R skal utføre en kommando du har skrevet i `.R`-filen, markerer du linjen (eller lar pekeren stå i den) og trykker **Ctrl + Enter** (**Cmd + Enter** på Mac):
+
+```{r rstudiorun, echo = F, fig.cap='Utførelse av kommandoer du har skrevet i R-filen. Marker eller la pekeren stå i linjen du vil kjøre og trykk **Ctrl + Enter** (**Cmd + Enter** på Mac).'}
+knitr::include_graphics('bilder/Rstudiorun.PNG')
+```
+
+Vinduet nederst til høyre (d) viser blant annet figurer du lager og hjelpetekst. Vinduet øverst til høyre (c) gir deg en oversikt over hvilke objekter du har laget, og er spesielt nyttig hvis du vil ta en nærmere titt på et datasett du har lest inn.
+
+Det er viktig at du forstår forskjellen på de to vinduene til venstre, altså `.R`-filen og konsollen. R-kode du vil ta vare på, og som er en essensiell del av analysen, skriver og lagrer du i `.R`-filen, mens små eksperimenter og undersøkelser du ikke trenger senere kan du gjøre direkte i konsollen.
+
+For de av dere som er glad i hurtigtaster finnes det en oversikt i RStudio som kommer opp dersom du trykker **Alt + Shift + K** (**Option + Shift + K** på Mac). Hurtigtasten du kommer til å bruke desidert mest er **Ctrl + Enter** for å kjøre kode fra R-skriptet ditt i konsollen (på Mac erstatter du **Ctrl** med **Cmd** overalt).
 
 ## Enkle beregninger og variabler
 
@@ -276,6 +304,8 @@ str(testresult)
 ```
 
 
+Hjelpesiden til en funksjon er bygd opp likt for de fleste funksjoner: en kort beskrivelse av hva funksjonen gjør, en liste over argumentene den tar, og helt nederst noen konkrete eksempler på bruk. Eksemplene nederst er ofte det raskeste stedet å begynne når du skal lære en ny funksjon.
+
 **Oppgave:** Hva er verdien av *testobservatoren (test statistic)* i testen som vi gjorde i denne videoen? Hint: Bruk hjelpefilene til `t.test()`-funksjonen.
 
 <details><summary>Løsning</summary>
@@ -346,6 +376,32 @@ Finn ut hva gjeldende arbeidsmappe nå er i RStudio. Hva skjedde nå? Hvorfor er
 Når vi åpner RStudio ved å dobbeltklikke på skriptfilen, så blir arbeidsstien satt automatisk til mappen der skriptfilen ligger. Dette er veldig nyttig når vi kommer tilbake og skal jobbe videre med prosjektet vårt.
 
 </details>
+
+Det lønner seg å venne seg til å skrive ryddig kode fra starten. To enkle grep hjelper mye: bruk `#` til å skrive korte kommentarer som forklarer *hva* koden gjør, og gi variablene informative navn med litt luft (mellomrom og linjeskift) mellom kodebitene. Sammenlign disse to måtene å regne ut et konfidensintervall på. Først en lite lesbar variant:
+
+```{r, eval = FALSE}
+x<-c(4,8,6,5,7);m<-mean(x);s<-sd(x);n<-length(x)
+l<-m-qt(0.975,n-1)*s/sqrt(n);u<-m+qt(0.975,n-1)*s/sqrt(n)
+```
+
+og så den samme utregningen skrevet ryddig:
+
+```{r, eval = FALSE}
+# Data
+x <- c(4, 8, 6, 5, 7)
+
+# Byggeklosser
+n     <- length(x)              # antall observasjoner
+snitt <- mean(x)                # gjennomsnitt
+s     <- sd(x)                  # standardavvik
+tkrit <- qt(0.975, df = n - 1)  # kritisk verdi fra t-fordelingen
+
+# 95 %-konfidensintervall
+nedre <- snitt - tkrit * s / sqrt(n)
+ovre  <- snitt + tkrit * s / sqrt(n)
+```
+
+Begge gir nøyaktig samme resultat, men den nederste er lett å lese og lett å rette hvis noe er feil. Dårlige vaner kan være vonde å vende, så prøv å skrive pen kode allerede fra første datalab.
 
 ## Pipe-operatoren `%>%` og enkel datavask {#pipe}
 
