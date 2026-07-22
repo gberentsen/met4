@@ -98,11 +98,11 @@ knitr::include_graphics("bilder/descriptive.png")
 
 Bruk funksjoner som `min()`, `max()`, `median()`, `mean()`, `length()` og `summary()` til å finne ut om tallene stemmer (Du vil se at datasettet ditt inneholder noen færre observasjoner enn det som er oppgitt i tabellen, som gjør at tallene er litt forskjellige).
 
-**Oppgave 6.** Vi skal nå lage et histogram av hver av gruppene du lagret som vektorer i tidligere. Vi kan først kikke på Figur \@ref(fig:hist-avkastning) og koden som lagde disse figurene for å få en idé om hva vi må gjøre. Et svært viktig punkt er følgende:
+**Oppgave 6.** Vi skal nå lage et histogram av aggresjonsnivået, med ett histogram for hver av de to gruppene. Et svært viktig punkt er følgende:
 
 **`ggplot`-funksjonen skal alltid ha hele datasettet (en data frame) som argument!!**
 
-Det betyr at vi *ikke* skal bruke de to vektorene `voldelig` og `ikke_voldelig`, slik som i `hist()`-funksjonen, men bruke hele datasettet `violence`. Vi ser av oversikten over at variabelen som inneholder aggresjonsnivået er `aggression_level`, så det er den vi skal bruke som $x$-argument. Ved å ta utgangspunkt i koden som lagde Figur \@ref(fig:hist-avkastning), kan vi gjøre et første forsøk (der vi husker å laste inn `ggplot2`-pakken først):
+Det betyr at vi *ikke* skal bruke de to vektorene `voldelig` og `ikke_voldelig` som vi lagde over, men hele datasettet `violence`. Variabelen som inneholder aggresjonsnivået er `aggression_level`, så det er den vi bruker som $x$-argument. Vi husker å laste inn `ggplot2`-pakken først, og gjør et første forsøk:
 
 ```{r}
 library(ggplot2)

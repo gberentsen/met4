@@ -35,7 +35,7 @@ Her er `(3*5 - 3/4)*(2 + 2)` en kommando, og det er R som finner ut hva du mener
 
 Det øverste vinduet til venstre (a) viser en `.R`-fil (et *skript*). En `.R`-fil fungerer som et manuskript med R-kommandoer, og kan lagres slik at du senere kan se hvilke kommandoer du har brukt og fortsette der du slapp. Når du vil at R skal utføre en kommando du har skrevet i `.R`-filen, markerer du linjen (eller lar pekeren stå i den) og trykker **Ctrl + Enter** (**Cmd + Enter** på Mac):
 
-```{r rstudiorun, echo = F, fig.cap='Utførelse av kommandoer du har skrevet i R-filen. Marker eller la pekeren stå i linjen du vil kjøre og trykk **Ctrl + Enter** (**Cmd + Enter** på Mac).'}
+```{r rstudiorun, echo = F, out.width = "600px", fig.cap='Utførelse av kommandoer du har skrevet i R-filen. Marker eller la pekeren stå i linjen du vil kjøre og trykk **Ctrl + Enter** (**Cmd + Enter** på Mac).'}
 knitr::include_graphics('bilder/Rstudiorun.PNG')
 ```
 
@@ -296,11 +296,11 @@ t.test(testdata$X1, testdata$X2, var.equal = TRUE, alternative = "two.sided")
 # Kanskje ønsker vi å hente ut p-verdien for testen og bruke den til noe senere. 
 # Vi kan lagre testresultatet i en variabel først, og så bruke $-tegnet til å hente
 # ut p-verdien på følgende måte:
-testresult <- t.test(testdata$X1, testdata$X2, var.equal = TRUE, alternative = "two.sided")
-testresult$p.value
+testresultat <- t.test(testdata$X1, testdata$X2, var.equal = TRUE, alternative = "two.sided")
+testresultat$p.value
 
 # Hvilken annen informasjon finner vi i dette testobjektet?
-str(testresult)
+str(testresultat)
 ```
 
 
@@ -310,7 +310,7 @@ Hjelpesiden til en funksjon er bygd opp likt for de fleste funksjoner: en kort b
 
 <details><summary>Løsning</summary>
 ```{r, eval = FALSE}
-testresult$statistic
+testresultat$statistic
 ```
 </details>
 

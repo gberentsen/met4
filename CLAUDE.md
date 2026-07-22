@@ -161,6 +161,7 @@ og teksten sier eksplisitt at studenten «helt sikkert får andre verdier». Til
   seksjons-/eksempelnumre). Skal fjernes som i modul 2.
 - Formelarket sier «empirisk standardavvik»; kurset går over til «utvalgsstandardavvik» (se Terminologi).
 - Feil i `02` Nøtter-del: en løsning skriver `\hat{p} ~ N(p, p(1-p))` uten `/n` (mangler `n` i variansen).
+- Videoforelesningene bruker `<iframe>` med hardkodet `width="640" height="388"` (ikke responsive, flyter utenfor på mobil). Bør pakkes i en responsiv wrapper. Gjelder alle moduler.
 
 ## Git
 
