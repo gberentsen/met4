@@ -282,11 +282,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="to-utvalgs-t-test" class="section level3 hasAnchor" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> To-utvalgs t-test<a href="inferens-om-to-populasjoner.html#to-utvalgs-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Når vi vil sammenligne forventningene i to <em>uavhengige</em> grupper, tester vi <span class="math inline">\(H_0: \mu_1 = \mu_2\)</span>, altså at differansen <span class="math inline">\(\mu_1 - \mu_2\)</span> er null. Testobservatoren er differansen mellom de to utvalgsgjennomsnittene, delt på standardfeilen til denne differansen:</p>
+<p>Når vi vil sammenligne forventningene i to <em>uavhengige</em> grupper, tester vi <span class="math inline">\(H_0: \mu_1 = \mu_2\)</span>, altså at differansen <span class="math inline">\(\mu_1 - \mu_2\)</span> er null. Testobservatoren er differansen mellom de to utvalgsgjennomsnittene, målt i antall standardfeil:</p>
 <p><span class="math display">\[T = \frac{\overline{X}_1 - \overline{X}_2}{SE},\]</span></p>
-<p>og den er t-fordelt når <span class="math inline">\(H_0\)</span> er sann. Dersom vi antar at de to populasjonene har <em>lik</em> varians, slår vi sammen (pooler) de to utvalgsvariansene til et felles estimat <span class="math inline">\(s_p^2\)</span>, og</p>
-<p><span class="math display">\[SE = s_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}, \qquad s_p^2 = \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2},\]</span></p>
-<p>med <span class="math inline">\(n_1 + n_2 - 2\)</span> frihetsgrader. Antar vi <em>ikke</em> lik varians, bruker vi i stedet <span class="math inline">\(SE = \sqrt{s_1^2/n_1 + s_2^2/n_2}\)</span>. Dette kalles Welchs test, og er det R gjør som standard. Intuisjonen er den samme som før: ligger de to gjennomsnittene mange standardfeil fra hverandre, taler det mot at populasjonene har samme forventning.</p>
+<p>der <span class="math inline">\(SE\)</span> er standardfeilen til differansen <span class="math inline">\(\overline{X}_1 - \overline{X}_2\)</span>. Når <span class="math inline">\(H_0\)</span> er sann, er <span class="math inline">\(T\)</span> t-fordelt, men <em>hvordan</em> vi regner ut <span class="math inline">\(SE\)</span>, og <em>hvor mange frihetsgrader</em> t-fordelingen har, avhenger av om vi antar at de to populasjonene har lik varians.</p>
+<p>Antar vi <strong>lik varians</strong>, estimerer vi den felles variansen ved å slå sammen (poole) de to utvalgsvariansene,</p>
+<p><span class="math display">\[s_p^2 = \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2},\]</span></p>
+<p>og setter <span class="math inline">\(SE = s_p\sqrt{1/n_1 + 1/n_2}\)</span>. Testobservatoren <span class="math inline">\(T\)</span> er da t-fordelt med <span class="math inline">\(n_1 + n_2 - 2\)</span> frihetsgrader.</p>
+<p>Antar vi <strong>ulik varians</strong>, bruker vi i stedet <span class="math inline">\(SE = \sqrt{s_1^2/n_1 + s_2^2/n_2}\)</span>, og <span class="math inline">\(T\)</span> er tilnærmet t-fordelt med et frihetsgradstall som regnes ut fra dataene. Dette kalles Welchs test, og er det R gjør som standard.</p>
+<p>Intuisjonen er den samme som i ett-utvalgstesten: ligger de to gjennomsnittene mange standardfeil fra hverandre, taler det mot at populasjonene har samme forventning.</p>
 <p><strong>Eksempel.</strong> En nettbutikk tester to versjoner (A og B) av forsiden, og måler ordreverdien (i kr) til kundene som ser hver versjon. Gir versjon B høyere gjennomsnittlig ordreverdi?</p>
 <ol style="list-style-type: decimal">
 <li><strong>Spørsmål:</strong> Er den forventede ordreverdien høyere for versjon B enn for versjon A?</li>
