@@ -21,6 +21,22 @@ I videoforelesningene går vi gjennom noen slides, og vi skriver et R-skript. Du
 
 Deskriptiv statistikk har to hovedformål. Det første er å **bli kjent med et datasett**: før vi setter i gang med mer avansert analyse, vil vi danne oss et bilde av hva slags tall vi har foran oss, om det finnes åpenbare feil eller ekstremverdier, og hvilke mønstre som umiddelbart trer frem. Det andre formålet er å **presentere resultater** slik at de er lette å forstå for andre. Et viktig poeng er at deskriptiv statistikk verken generaliserer fra utvalget til en større populasjon eller tester årsakssammenhenger. Vi lar rett og slett dataene fortelle sin egen historie. Selve slutningen fra utvalg til populasjon kommer vi tilbake til i neste delkapittel.
 
+### Variabeltyper og målenivå
+
+Før vi beskriver et datasett, er det nyttig å vite *hva slags* variabler vi har med å gjøre, for det avgjør hvilke regnestykker og figurer som gir mening. Vi skiller grovt mellom to hovedtyper:
+
+- **Kategoriske variabler** deler observasjonene inn i grupper. Eksempler er kjønn, parti, bostedsfylke eller karakter (A til F). Vi kan telle hvor mange som havner i hver kategori, men det gir sjelden mening å regne ut et «gjennomsnitt» av dem.
+- **Numeriske (kvantitative) variabler** er tall vi faktisk kan regne med, som alder, inntekt, høyde eller antall barn.
+
+Innenfor disse to typene er det vanlig å skille mellom fire **målenivåer**, etter hvor mye informasjon verdiene bærer:
+
+- **Nominalnivå** (kategorisk): rene merkelapper uten naturlig rekkefølge, for eksempel parti eller sivilstand. Det eneste vi kan gjøre, er å avgjøre om to verdier er *like* eller *ulike* ($=$, $\neq$). En kategorisk variabel med bare to mulige verdier (ja/nei) kalles *dikotom*.
+- **Ordinalnivå** (kategorisk): kategorier med en naturlig *rangering*, men uten at avstanden mellom trinnene er veldefinert. Svaralternativene fra «svært misfornøyd» til «svært fornøyd» er ordinale: vi vet at «fornøyd» er bedre enn «misfornøyd» ($<$, $>$), men ikke *hvor mye* bedre.
+- **Intervallnivå** (numerisk): tall der *avstandene* er meningsfulle, men der nullpunktet er vilkårlig. Temperatur i Celsius er det klassiske eksempelet: forskjellen mellom 10 og 20 grader er like stor som mellom 20 og 30, men 0 °C betyr ikke «ingen temperatur», og 20 °C er *ikke* dobbelt så varmt som 10 °C. Vi kan legge til og trekke fra ($+$, $-$), men forholdstall gir ikke mening.
+- **Forholdsnivå** (numerisk): som intervallnivå, men med et ekte nullpunkt, slik at også *forholdstall* gir mening. Inntekt, vekt, tidsbruk og antall er forholdsdata: 0 kr betyr ingen inntekt, og 100 000 kr er dobbelt så mye som 50 000 kr. Her er alle de vanlige regneoperasjonene tillatt ($=, \neq, <, >, +, -, \times, /$).
+
+Nivåene bygger på hverandre: hvert nivå tillater alt det forrige gjør, pluss litt mer. Målenivået styrer også hvilke beskrivende mål som gir mening. For en nominal variabel er *typetallet* det eneste fornuftige sentralmålet; for ordinaldata kan vi i tillegg bruke *medianen*; og først for intervall- og forholdsdata er *gjennomsnittet* meningsfullt.
+
 Når vi beskriver en tallvariabel numerisk, er det særlig to spørsmål vi stiller: *hvor ligger tyngdepunktet i dataene*, og *hvor spredt er de rundt dette tyngdepunktet*? Har vi to variabler, kommer et tredje spørsmål til: *henger de sammen*?
 
 ### Sentraltendens
@@ -322,7 +338,7 @@ Til de fleste oppgavene under ligger det et løsningsforslag som du folder ut ve
 <details><summary>Løsning</summary>
 
  >  a.	Nominale data: =, ≠
-   b.	Intervalldata: =, ≠, <, >, +, -
+   b.	Forholdsdata: =, ≠, <, >, +, -, *, /
    c.	Ordinale data: =, ≠, <, >
 
 </details>
@@ -356,7 +372,7 @@ Hvordan tolker du kvartilene og hvilket kurs ville du ha valgt?
 
 <details><summary>Løsning</summary>
 
->Kvartilene kan fortelle oss noe om nivået og variasjonen i poengsummene til studentene som har tatt de to kursene. Vi ser at kurs nummer 1 har en symmetrisk fordeling med en median som er høyere enn kurs nummer 2. På en annen side har poengfordelingen til kurs nummer 2 en lengre høyre hale hvor tredje kvantilen tilsier at hele 25 % vil få 270 poeng eller mer. Det tilsvarende tallet for kurs nummer én er 250. Samlet sett er det kanskje "tryggere" med kurs nummer 1, mens det potensielle læringsutbytte har "større tak" i kurs nummer to.
+>Kvartilene kan fortelle oss noe om nivået og variasjonen i poengsummene til studentene som har tatt de to kursene. Vi ser at kurs nummer 1 har en symmetrisk fordeling med en median som er høyere enn kurs nummer 2. På en annen side har poengfordelingen til kurs nummer 2 en lengre høyre hale hvor tredje kvartilen tilsier at hele 25 % vil få 270 poeng eller mer. Det tilsvarende tallet for kurs nummer én er 250. Samlet sett er det kanskje "tryggere" med kurs nummer 1, mens det potensielle læringsutbytte har "større tak" i kurs nummer to.
 
 </details>
 
@@ -381,7 +397,7 @@ ggplot() +
 
 ```
 
-Hva kan du si karakterfordelingen til de to sensorene?
+Hva kan du si om karakterfordelingen til de to sensorene?
 
 <details><summary>Løsning</summary>
  
@@ -395,7 +411,7 @@ Hva kan du si karakterfordelingen til de to sensorene?
 library(ggplot2)
 set.seed(12345)
 levetid <- c(rep(1, 40), rep(2,30), rep(3, 25), rep(4, 20), rep(5, 12), 
-             rep(6, 10),rep(7, 5), sample(seq(8:100), size = 200, replace = T), rnorm(400, mean = 120, sd = 20))
+             rep(6, 10),rep(7, 5), sample(8:100, size = 200, replace = T), rnorm(400, mean = 120, sd = 20))
 
 ggplot(data = data.frame(levetid = levetid)) +
   geom_histogram(aes(x = levetid)) + 
@@ -453,7 +469,7 @@ ggplot(df) +
 
 <details><summary>Løsning</summary>
  
->	Datasett a: $r_2 = 0.81$, Datasett b: $r_1 = -0.37$, Dasett c: $r_4 = -0.96$, Datasett d: $r_3 = -0.02$
+>	Datasett a: $r_2 = 0.81$, Datasett b: $r_1 = -0.37$, Datasett c: $r_4 = -0.96$, Datasett d: $r_3 = -0.02$
 
 > Datasett d er et eksempel på at korrelasjonen mellom to variabler kan være svært nær 0, selv om det er en tydelig (ikke-lineær) sammenheng mellom dem. Det som skjer når vi regner ut $r$ i dette tilfellet er at den negative avhengigheten vi ser til venstre i figuren kanselleres av den positive avhengigheten til høyre i figuren. 
 
@@ -492,7 +508,7 @@ f.	Estimatoren kan brukes til å vurdere om mynten faktisk er rettferdig. I nest
 >a.	Populasjonen er alle de aktuelle maskindelene som lages av fabrikanten. 
 b.	Utvalget er de 1000 delene som ble trukket fra en stor produksjon. 
 c.	Parameteren er andelen defekte maskindeler i alle de aktuelle maskindelene som produseres. 15% er den påståtte parameter. 
-d.	Estimatoren er andelen defekte maskindeler i utvalget. 12% er den observerte estimatoren. 
+d.	Estimatoren er andelen defekte maskindeler i utvalget. 12% er det observerte estimatet. 
 e.	Vi kan estimere at andelen defekte maskindeler i populasjonen er 12%. Ved å bruke statistisk inferens kan vi undersøke om vi har nok statistisk bevis til å avvise påstanden om at den sanne andelen defekte maskindeler er 15%. 
 
 
@@ -519,11 +535,11 @@ e.	Vi kan estimere at andelen defekte maskindeler i populasjonen er 12%. Ved å 
 
 <details><summary>Løsning</summary>
  
->	a. $P(X_1 = 1) = P(X_2 = 6) = 1/6$
+>	a. $P(X_1 = 1) = P(X_1 = 6) = 1/6$
   b. Det er bare en måte at gjennomsnittet av to kast kan bli $1$ og det er at begge kastene blir $1$: $P(\overline{X} = 1) = P(X_1 = 1, X_2 = 1) = P(X_1 = 1)P(X_2 = 1) = 1/36$, og tilsvarende for $P(\overline{X} = 6)$.
   c.  Det er bare en måte at gjennomsnittet av 5 kast kan bli $1$ og det er at alle fem kastene blir $1$:$P(\overline{X} = 1) = P(X_1 = 1)P(X_2 = 1)P(X_3 = 1)P(X_4 = 1)P(X_5 = 1) = 0.00013$, og tilsvarende for $P(\overline{X} = 6)$.
 
-> Denne oppgaven illustrerer hvordan gjennomsnittet, uavhengig av fordelingen til $X$ som i dette tilfellet er uniformt fordelt på ${1,2,3,4,5,6}$, er normalfordelt $\overline{X}\sim N(\mu, \sigma^2/n)$ og beveger seg mot forventningen til $X$ (som i dette tilfellet er $\mu = 3.5$). Det at variansen til gjennomsnittet $\sigma^2/n$ blir mindre når $n$ øker ser vi er svært logisk her: Det er værre for gjennomsnittet til terningkastene å oppnå "ekstreme" verdier som $\overline{X} = 1$ eller $\overline{X} = 6$ siden dette innebærer at alle kastene må enten være 1 eller 6. Derimot er det en hel rekke kombinasjoner av kast som gir et gjennomsnitt nær $3.5$, så slike verdier av gjennomsnittet er mye mer sannsynlig.  
+> Denne oppgaven illustrerer hvordan gjennomsnittet, uavhengig av fordelingen til $X$ som i dette tilfellet er uniformt fordelt på ${1,2,3,4,5,6}$, for store $n$ er tilnærmet normalfordelt $\overline{X}\sim N(\mu, \sigma^2/n)$ og beveger seg mot forventningen til $X$ (som i dette tilfellet er $\mu = 3.5$). Det at variansen til gjennomsnittet $\sigma^2/n$ blir mindre når $n$ øker ser vi er svært logisk her: Det er verre for gjennomsnittet til terningkastene å oppnå "ekstreme" verdier som $\overline{X} = 1$ eller $\overline{X} = 6$ siden dette innebærer at alle kastene må enten være 1 eller 6. Derimot er det en hel rekke kombinasjoner av kast som gir et gjennomsnitt nær $3.5$, så slike verdier av gjennomsnittet er mye mer sannsynlig.  
 
 >Under ser du et histogram over gjennomsnittene dersom vi gjentar terningkasteksperimentet med henholdsvis $n=1,2, 5$ kast 2000 ganger. Allerede for $n=5$ ser vi at de fleste gjennomsnitt ligger nær det sanne gjennomsnittet på 3.5.  
 
@@ -534,8 +550,8 @@ X1 <- sample(seq(6), size = n, replace = T)
 X2 <- rep(NA, n)
 X3 <- rep(NA, n)
 for(i in 1:n){
-  foo1 <- sample(seq(6), 2)
-  foo2 <- sample(seq(6), 5)
+  foo1 <- sample(seq(6), 2, replace = TRUE)
+  foo2 <- sample(seq(6), 5, replace = TRUE)
   X2[i] <- mean(foo1)
   X3[i] <- mean(foo2)
 }
@@ -848,7 +864,7 @@ Nøtt 6. Anta at vi har to normalfordelte populasjoner hvor observasjoner fra po
 
 <details><summary>Løsning</summary>
 
-> Vi vet da at $\overline{X}_1 - \overline{X}_2 > 0$ og utnytter at denne størrelsen er normalfordelt:
+> Vi ser på hendelsen $\overline{X}_1 - \overline{X}_2 > 0$ og utnytter at differansen $\overline{X}_1 - \overline{X}_2$ er normalfordelt:
 \begin{equation*}
 \begin{split}
 P(\overline{X}_1 - \overline{X}_2 > 0) &= P\left(\frac{\overline{X}_1 - \overline{X}_2 - (40 - 38)}{\sqrt{\frac{6^2}{25} + \frac{8^2}{25}}} > \frac{0 - (40 - 38)}{\sqrt{\frac{6^2}{25} + \frac{8^2}{25}}} \right)\\
@@ -979,6 +995,9 @@ fishermen <- read_csv("data_fishermen_mercury.csv")
 
 mean(survey$age)                          # Gjennomsnitt
 median(survey$age)                        # Median
+min(survey$age)                           # Minste verdi
+max(survey$age)                           # Største verdi
+summary(survey$age)                       # Fem-tallssammendrag (min, kvartiler, maks) og snitt
 
 table(survey$party)                       # Kan lese av typetallet manuelt.
 which.max(table(survey$party))            # Eller bruke funksjonen which.max()
