@@ -269,60 +269,11 @@ Når du har vært gjennom dette stoffet skal du forhåpentligvis være i stand t
 6. Hva vil det si at et estimator er forventningsrett?
 7. Hva vil det si at et estimator er konsistent?
 
-### Ekstra øving i R
-
-Som demonstrert i forelesningen kan vi i R simulere standard normalfordelte observasjoner (dvs normalfordelte observasjoner med $\mu = 0$ og $\sigma^2 = 1$) med kommandoen `rnorm(n)`, der `n` er antallet observasjoner vi ønsker. For eksempel kan vi kjøre følgende kode for å generere 10 observasjoner (du vil helt sikkert få andre verdier):
-
-```{r}
-n <- 10
-rnorm(n)
-```
-
-Ved å skrive `mean(rnorm(n))` i stedet regner vi ut gjennomsnittet av observasjonene direkte.
-
-La oss gjøre dette 100 ganger og notere ned gjennomsnittet hver gang. I stedet for å gjøre det manuelt, kan vi skrive et lite program som gjør dette for oss ved å bruke en for-løkke. Det er ikke nødvendig (eller pensum) å forstå akkurat hvordan dette fungerer, men dersom du kjører følgende linjer vil du få en ny vektor `gj.snitt` som inneholder 100 slike gjennomsnitt:
-
-```{r}
-gj.snitt <- rep(NA, 100)
-for(i in 1:100) {
-    gj.snitt[i] <- mean(rnorm(n))
-}
-```
-
-Skriv ut denne vektoren og kontroller at det ser korrekt ut. Vi husker at funksjonen `sd()` regner ut standardavviket til en vektor. Hvilket tall forventer du å få ut dersom du nå kjører `sd(gj.snitt)` i konsollen? Stemmer det? 
-
-<details><summary>Hint</summary>
-
-Standardavviket til de enkelte observasjonene er $\sigma = 1$, og standardavviket til et gjennomsnitt bestående av 10 observasjoner er $\sigma/\sqrt{n} = 1/\sqrt{10} \approx 0.32$. Med andre ord skal det *empiriske* standardavviket `sd(gj.snitt)` være omtrent lik 0.32, pluss/minus en estimeringsfeil.
-
-</details>
-
-Du kan gjerne regne ut 1000 gjennomsnitt i stedet for 100 ved å erstatte erstatte `100` med `1000` på to steder i koden over. Stemmer det bedre da?
-
-<details><summary>Hint</summary>
-
-```{r, eval = F}
-gj.snitt <- rep(NA, 1000)            # Lager en tom vektor med 1000 plasser
-for(i in 1:1000) {                   # Fyller hver plass med et gjennomsnitt av
-    gj.snitt[i] <- mean(rnorm(n))    # 10 standard normalfordelte observasjoner.
-}
-```
-
-</details>
-
-Prøv å forklare.
-
-<details><summary>Svar</summary>
-
-Dette er ganske enkelt, men også litt vanskelig på en *inception*-aktig måte. På samme måte som at gjennomsnittet blir en mer og mer presis estimator for forventningsverdien når vi øker antall observasjoner (målt ved at standardavviket $\sigma/\sqrt{n}$ blir mindre når antall obserasjoner $n$ blir større), blir det empiriske standardavviket en mer og mer presis estimator av det sanne standardavviket når vi øker antall observasjoner. Altså; det empiriske standardavviket har *også* et standardavvik som går mot null som $1/\sqrt{n}$ `r knitr::asis_output("\U1F635")` 
-
-</details>
-
 ## Oppgaver {#oppgaverdeskriptiv}
 
 Til de fleste oppgavene under ligger det et løsningsforslag som du folder ut ved å trykke på **Løsning**. Rådet vårt er at du først forsøker å løse oppgaven skikkelig på egen hånd, og heller bruker løsningsforslaget etterpå til å kontrollere svaret ditt (eller som en pekepinn dersom du står helt fast). Du lærer langt mer av å bryne deg på oppgaven selv enn av å lese løsningen.
 
-### Standard oppgaver
+### Teorioppgaver
 
 
 1. Beskriv kort forskjellen mellom deskriptiv statistikk og statistisk inferens. 
@@ -904,6 +855,57 @@ P(\overline{X}_1 - \overline{X}_2 > 0) &= P\left(\frac{\overline{X}_1 - \overlin
 &= P(Z > -1) = 1 - P(Z < -1) = 1 - 0.1587 = 0.8413
 \end{split}
 \end{equation*}
+
+</details>
+
+### R-oppgaver
+
+Her bruker vi R til å utforske teorien fra dette kapittelet i praksis.
+
+**Oppgave 1.** Som demonstrert i forelesningen kan vi i R simulere standard normalfordelte observasjoner (altså normalfordelte observasjoner med $\mu = 0$ og $\sigma^2 = 1$) med kommandoen `rnorm(n)`, der `n` er antallet observasjoner vi ønsker. For eksempel kan vi kjøre følgende kode for å generere 10 observasjoner (du vil helt sikkert få andre verdier):
+
+```{r}
+n <- 10
+rnorm(n)
+```
+
+Ved å skrive `mean(rnorm(n))` i stedet regner vi ut gjennomsnittet av observasjonene direkte.
+
+La oss gjøre dette 100 ganger og notere ned gjennomsnittet hver gang. I stedet for å gjøre det manuelt, kan vi skrive et lite program som gjør dette for oss ved å bruke en for-løkke. Det er ikke nødvendig (eller pensum) å forstå akkurat hvordan dette fungerer, men dersom du kjører følgende linjer vil du få en ny vektor `gj.snitt` som inneholder 100 slike gjennomsnitt:
+
+```{r}
+gj.snitt <- rep(NA, 100)
+for(i in 1:100) {
+    gj.snitt[i] <- mean(rnorm(n))
+}
+```
+
+Skriv ut denne vektoren og kontroller at det ser korrekt ut. Vi husker at funksjonen `sd()` regner ut standardavviket til en vektor. Hvilket tall forventer du å få ut dersom du nå kjører `sd(gj.snitt)` i konsollen? Stemmer det?
+
+<details><summary>Hint</summary>
+
+Standardavviket til de enkelte observasjonene er $\sigma = 1$, og standardavviket til et gjennomsnitt bestående av 10 observasjoner er $\sigma/\sqrt{n} = 1/\sqrt{10} \approx 0.32$. Med andre ord skal utvalgsstandardavviket `sd(gj.snitt)` være omtrent lik 0.32, pluss/minus en estimeringsfeil.
+
+</details>
+
+Du kan gjerne regne ut 1000 gjennomsnitt i stedet for 100 ved å erstatte `100` med `1000` på to steder i koden over. Stemmer det bedre da?
+
+<details><summary>Hint</summary>
+
+```{r, eval = F}
+gj.snitt <- rep(NA, 1000)            # Lager en tom vektor med 1000 plasser
+for(i in 1:1000) {                   # Fyller hver plass med et gjennomsnitt av
+    gj.snitt[i] <- mean(rnorm(n))    # 10 standard normalfordelte observasjoner.
+}
+```
+
+</details>
+
+Prøv å forklare.
+
+<details><summary>Svar</summary>
+
+Dette er ganske enkelt, men også litt vanskelig på en *inception*-aktig måte. På samme måte som at gjennomsnittet blir en mer og mer presis estimator for forventningsverdien når vi øker antall observasjoner (målt ved at standardavviket $\sigma/\sqrt{n}$ blir mindre når antall observasjoner $n$ blir større), blir utvalgsstandardavviket en mer og mer presis estimator av det sanne standardavviket når vi øker antall observasjoner. Altså: utvalgsstandardavviket har *også* et standardavvik som går mot null som $1/\sqrt{n}$ `r knitr::asis_output("\U1F635")`
 
 </details>
 

@@ -147,9 +147,10 @@ Oppdateres løpende. Holdes kort – vokser den forbi ~10 linjer, flytt den ut a
 | 02 Grunnleggende statistikk | teoritekst skrevet for 2.1 og 2.2; Kommentarer integrert i hovedtekst; lærebok-henvisninger fjernet; egne (simulerte) eksempler; utvalg/populasjon-distinksjon innført |
 | 03–09 | ikke gjennomgått; lærebok-henvisninger gjenstår |
 
-**`utvalg-og-estimering.html` endres ved hvert bygg.** Kapittel 2 har en `rnorm()` uten `set.seed()`,
-og teksten sier eksplisitt at studenten «helt sikkert får andre verdier». Tilfeldigheten er tilsiktet –
-å seede den ville motsagt teksten. Regn med den ene filen som permanent støy i byggdiffen.
+**`oppgaverdeskriptiv.html` endres ved hvert bygg.** R-oppgaven i kapittel 2 har en `rnorm()` uten
+`set.seed()`, og teksten sier eksplisitt at studenten «helt sikkert får andre verdier». Tilfeldigheten
+er tilsiktet (å seede den ville motsagt teksten). Regn med den ene filen som permanent støy i byggdiffen.
+(R-oppgaven lå tidligere i `utvalg-og-estimering.html`.)
 
 Åpne punkter:
 
