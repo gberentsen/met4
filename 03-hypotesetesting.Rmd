@@ -19,9 +19,9 @@ I videoforelesningene går vi gjennom noen slides, og vi skriver et R-skript. Du
 
 ### Hva er en hypotesetest?
 
-En **hypotese** er en påstand om en ukjent størrelse i en populasjon, for eksempel om at et parti har oppslutning over sperregrensen, eller at forventet vekt på et produkt er en bestemt verdi. Vitenskapsfilosofen Karl Popper påpekte at gode hypoteser må være *falsifiserbare*: det må finnes tenkelige observasjoner som kan *motbevise* dem. Et viktig poeng følger av dette: at en hypotese ennå ikke er forkastet, betyr ikke at den er sann. Newtons fysikk sto uimotsagt i århundrer før Einstein viste at den bare var tilnærmet riktig.
+En **hypotese** er en påstand eller antakelse som vi ønsker å undersøke. Vitenskapsfilosofen Karl Popper påpekte at gode hypoteser må være *falsifiserbare*: det må finnes tenkelige observasjoner som kan *motbevise* dem. Et viktig poeng følger av dette: at en hypotese ennå ikke er forkastet, betyr ikke at den er sann. Newtons fysikk sto uimotsagt i århundrer før Einstein viste at den bare var tilnærmet riktig.
 
-Statistisk hypotesetesting bygger på nettopp denne tankegangen. Vi setter opp *to* konkurrerende hypoteser:
+Statistisk hypotesetesting bygger på denne tankegangen, men gjør den presis. En **statistisk hypotese** er en påstand om en ukjent størrelse i en populasjon, for eksempel om at et parti har oppslutning over sperregrensen, eller om at forventningen til en variabel er en bestemt verdi $\mu_0$. Vi setter opp *to* konkurrerende hypoteser:
 
 - **Nullhypotesen** $H_0$ er utgangspunktet, ofte en «kjedelig» eller skeptisk påstand om at det *ikke* er noen effekt eller forskjell (partiet ligger på sperregrensen, medisinen virker ikke, forventningen er lik en bestemt verdi $\mu_0$).
 - **Alternativhypotesen** $H_A$ er det vi egentlig mistenker eller ønsker å påvise (partiet ligger over sperregrensen, medisinen virker, forventningen er forskjellig fra $\mu_0$).
@@ -30,7 +30,7 @@ Logikken er den samme som i en rettssak: den tiltalte antas uskyldig ($H_0$) hel
 
 ### Framgangsmåten steg for steg
 
-En hypotesetest kan settes opp i fem steg. Vi følger dem med et konkret eksempel: *har partiet Venstre oppslutning over sperregrensen på 4 %?*
+En hypotesetest kan settes opp i fem steg, og de samme fem stegene gjelder for *alle* statistiske hypotesetester, uansett om vi tester en forventning, en andel, en forskjell mellom to grupper eller noe annet. De konkrete regnestykkene i steg 4 og 5 varierer fra test til test, men framgangsmåten er den samme. Vi følger stegene med et konkret eksempel: *har partiet Venstre oppslutning over sperregrensen på 4 %?*
 
 1. **Formuler spørsmålet.** Hva vil vi finne ut? Her: ligger den sanne oppslutningen $p$ over 4 %?
 2. **Oversett til $H_0$ og $H_A$.** Vi skriver spørsmålet som to hypoteser om populasjonsstørrelsen, og noterer hvilke antakelser vi gjør om populasjonen. Her: $H_0: p = 0.04$ mot $H_A: p > 0.04$.
@@ -38,7 +38,7 @@ En hypotesetest kan settes opp i fem steg. Vi følger dem med et konkret eksempe
 4. **Beregn testobservatoren.** Vi oppsummerer dataene i én tallstørrelse, en **testobservator**, som tallfester hvor mye beviset taler mot $H_0$. Poenget med en testobservator er at vi kjenner **fordelingen dens når $H_0$ er sann**.
 5. **Vurder signifikans og konkluder.** Vi spør hvor overraskende testobservatoren er dersom $H_0$ er sann. Er vi tilstrekkelig overrasket, forkaster vi $H_0$.
 
-Steg 5 er kjernen, og «overrasket» har en presis betydning: er $H_0$ sann, følger testobservatoren en kjent fordeling (en samplingfordeling), og vi kan regne ut hvor sannsynlig det er å få en verdi som er *minst så ekstrem* som den vi observerte. Er den sannsynligheten liten, er dataene vanskelige å forene med $H_0$.
+Steg 5 er kjernen, og «overrasket» har en presis betydning: er $H_0$ sann, følger testobservatoren en kjent fordeling (en samplingfordeling), og vi kan regne ut hvor sannsynlig det er å få en verdi som er *minst så ekstrem* som den vi observerte. Er den sannsynligheten liten, betyr det nettopp at vi er *overrasket*: dataene er da vanskelige å forene med $H_0$.
 
 Det finnes to likeverdige måter å ta beslutningen på i steg 5, og de gir alltid samme konklusjon:
 
@@ -49,10 +49,10 @@ Det finnes to likeverdige måter å ta beslutningen på i steg 5, og de gir allt
 
 Hvor overrasket må vi være før vi forkaster? Her må vi ta stilling til at en test kan gå galt på to måter:
 
-| | $H_0$ er sann | $H_0$ er usann |
-|---|:---:|:---:|
-| **Vi forkaster $H_0$** | Type I-feil | Riktig |
-| **Vi beholder $H_0$** | Riktig | Type II-feil |
+| Vår avgjørelse | $H_0$ er sann | $H_0$ er usann |
+|:---|:---:|:---:|
+| **Forkaster $H_0$** | Type I-feil | Riktig |
+| **Beholder $H_0$** | Riktig | Type II-feil |
 
 En **Type I-feil** er å forkaste en sann nullhypotese (dømme en uskyldig). En **Type II-feil** er å beholde en usann nullhypotese (frikjenne en skyldig).
 
@@ -76,10 +76,10 @@ p-verdien er lett å mistolke, så merk deg hva den *ikke* er:
 
 ### Ensidige og tosidige tester
 
-Alternativhypotesen kan peke i én eller begge retninger:
+Uansett hvilken størrelse vi tester, kan alternativhypotesen peke i én eller begge retninger. La $\theta$ stå for parameteren vi tester (en forventning, en andel, en differanse mellom to grupper, og så videre), og $\theta_0$ for verdien nullhypotesen påstår:
 
-- I en **tosidig** test er $H_A: \mu \neq \mu_0$. Vi bryr oss om avvik i *begge* retninger, og forkastningsområdet legges i begge haler av fordelingen.
-- I en **ensidig** test er $H_A: \mu > \mu_0$ (eller $\mu < \mu_0$), og hele forkastningsområdet legges i én hale. Venstre-eksempelet er ensidig: vi er bare interessert i om oppslutningen er *over* sperregrensen.
+- I en **tosidig** test er $H_A: \theta \neq \theta_0$. Vi bryr oss om avvik i *begge* retninger, og forkastningsområdet legges i begge haler av fordelingen til testobservatoren.
+- I en **ensidig** test er $H_A: \theta > \theta_0$ (eller $\theta < \theta_0$), og hele forkastningsområdet legges i én hale. Venstre-eksempelet er ensidig: der er parameteren oppslutningen $p$, og vi er bare interessert i om den er *over* sperregrensen.
 
 Vi velger en ensidig test når bare avvik til den ene siden er beslutningsrelevant, eller når vi på forhånd kan utelukke den andre siden. Ellers bruker vi en tosidig test. Valget må tas *før* vi ser dataene, ikke etterpå for å presse fram det svaret vi ønsker oss.
 
