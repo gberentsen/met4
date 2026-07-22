@@ -370,7 +370,7 @@ Se på **p-verdien**: den er 0.005, godt under signifikansnivået på 0.10, så 
 
 ### t-test for matchede par
 
-Noen ganger er de to utvalgene *ikke* uavhengige, men naturlig *paret*: vi måler den samme enheten to ganger (for eksempel før og etter et tiltak), eller vi matcher enheter parvis. Da ville en vanlig to-utvalgs t-test kaste bort informasjonen som ligger i paringen. Tenk på ombyggings-eksempelet under: butikkene er svært ulike i utgangspunktet, noen store og noen små, så variasjonen i omsetning *mellom* butikkene er stor. En to-utvalgs t-test behandler «før» og «etter» som to uavhengige grupper, og da drukner den lille, systematiske endringen vi er ute etter, i den store variasjonen mellom butikkene.
+Noen ganger er de to utvalgene *ikke* uavhengige, men naturlig *paret*: vi måler den samme enheten to ganger (for eksempel før og etter et tiltak), eller vi matcher enheter parvis. Da ville en vanlig to-utvalgs t-test kaste bort informasjonen som ligger i paringen. Tenk deg at en butikkjede måler omsetningen i hver butikk før og etter en ombygging. Butikkene er svært ulike i utgangspunktet, noen store og noen små, så variasjonen i omsetning *mellom* butikkene er stor. En to-utvalgs t-test behandler «før» og «etter» som to uavhengige grupper, og da drukner den lille, systematiske endringen vi er ute etter, i den store variasjonen mellom butikkene.
 
 Løsningen er å se på *differansen* innenfor hvert par, $d_i = x_i - y_i$. Da sammenligner vi hver butikk med seg selv, forskjellene i størrelse mellom butikkene faller bort, og bare selve effekten (pluss litt måletilfeldighet) blir igjen. På differansene gjør vi så en helt vanlig ett-utvalgs t-test: $H_0: \mu_d = 0$, med testobservator
 
