@@ -338,10 +338,10 @@ Løsning
 <span id="cb25-6"><a href="r-ekstra.html#cb25-6" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb25-7"><a href="r-ekstra.html#cb25-7" tabindex="-1"></a></span>
 <span id="cb25-8"><a href="r-ekstra.html#cb25-8" tabindex="-1"></a><span class="co"># Laster inn datasettet</span></span>
-<span id="cb25-9"><a href="r-ekstra.html#cb25-9" tabindex="-1"></a>testdata <span class="ot">&lt;-</span> <span class="fu">read_xls</span>(<span class="st">&quot;testdata.xls&quot;</span>)</span>
+<span id="cb25-9"><a href="r-ekstra.html#cb25-9" tabindex="-1"></a>testdata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;testdata.xls&quot;</span>)</span>
 <span id="cb25-10"><a href="r-ekstra.html#cb25-10" tabindex="-1"></a></span>
-<span id="cb25-11"><a href="r-ekstra.html#cb25-11" tabindex="-1"></a><span class="co"># Gjør t-testen til spørsmål F i den første dataøvingen</span></span>
-<span id="cb25-12"><a href="r-ekstra.html#cb25-12" tabindex="-1"></a>testresultat <span class="ot">&lt;-</span> <span class="fu">t.test</span>(testdata<span class="sc">$</span>X1, </span>
+<span id="cb25-11"><a href="r-ekstra.html#cb25-11" tabindex="-1"></a><span class="co"># En t-test for om X1 og X2 har samme forventning</span></span>
+<span id="cb25-12"><a href="r-ekstra.html#cb25-12" tabindex="-1"></a>testresultat <span class="ot">&lt;-</span> <span class="fu">t.test</span>(testdata<span class="sc">$</span>X1,</span>
 <span id="cb25-13"><a href="r-ekstra.html#cb25-13" tabindex="-1"></a>                       testdata<span class="sc">$</span>X2, </span>
 <span id="cb25-14"><a href="r-ekstra.html#cb25-14" tabindex="-1"></a>                       <span class="at">var.equal =</span> <span class="cn">TRUE</span>, </span>
 <span id="cb25-15"><a href="r-ekstra.html#cb25-15" tabindex="-1"></a>                       <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span>
