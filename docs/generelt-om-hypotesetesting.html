@@ -271,8 +271,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="hva-er-en-hypotesetest" class="section level3 hasAnchor" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Hva er en hypotesetest?<a href="generelt-om-hypotesetesting.html#hva-er-en-hypotesetest" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>En <strong>hypotese</strong> er en påstand om en ukjent størrelse i en populasjon, for eksempel om at et parti har oppslutning over sperregrensen, eller at forventet vekt på et produkt er en bestemt verdi. Vitenskapsfilosofen Karl Popper påpekte at gode hypoteser må være <em>falsifiserbare</em>: det må finnes tenkelige observasjoner som kan <em>motbevise</em> dem. Et viktig poeng følger av dette: at en hypotese ennå ikke er forkastet, betyr ikke at den er sann. Newtons fysikk sto uimotsagt i århundrer før Einstein viste at den bare var tilnærmet riktig.</p>
-<p>Statistisk hypotesetesting bygger på nettopp denne tankegangen. Vi setter opp <em>to</em> konkurrerende hypoteser:</p>
+<p>En <strong>hypotese</strong> er en påstand eller antakelse som vi ønsker å undersøke. Vitenskapsfilosofen Karl Popper påpekte at gode hypoteser må være <em>falsifiserbare</em>: det må finnes tenkelige observasjoner som kan <em>motbevise</em> dem. Et viktig poeng følger av dette: at en hypotese ennå ikke er forkastet, betyr ikke at den er sann. Newtons fysikk sto uimotsagt i århundrer før Einstein viste at den bare var tilnærmet riktig.</p>
+<p>Statistisk hypotesetesting bygger på denne tankegangen, men gjør den presis. En <strong>statistisk hypotese</strong> er en påstand om en ukjent størrelse i en populasjon, for eksempel om at et parti har oppslutning over sperregrensen, eller om at forventningen til en variabel er en bestemt verdi <span class="math inline">\(\mu_0\)</span>. Vi setter opp <em>to</em> konkurrerende hypoteser:</p>
 <ul>
 <li><strong>Nullhypotesen</strong> <span class="math inline">\(H_0\)</span> er utgangspunktet, ofte en «kjedelig» eller skeptisk påstand om at det <em>ikke</em> er noen effekt eller forskjell (partiet ligger på sperregrensen, medisinen virker ikke, forventningen er lik en bestemt verdi <span class="math inline">\(\mu_0\)</span>).</li>
 <li><strong>Alternativhypotesen</strong> <span class="math inline">\(H_A\)</span> er det vi egentlig mistenker eller ønsker å påvise (partiet ligger over sperregrensen, medisinen virker, forventningen er forskjellig fra <span class="math inline">\(\mu_0\)</span>).</li>
@@ -281,7 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="framgangsmaten-steg-for-steg" class="section level3 hasAnchor" number="3.1.2">
 <h3><span class="header-section-number">3.1.2</span> Framgangsmåten steg for steg<a href="generelt-om-hypotesetesting.html#framgangsmaten-steg-for-steg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>En hypotesetest kan settes opp i fem steg. Vi følger dem med et konkret eksempel: <em>har partiet Venstre oppslutning over sperregrensen på 4 %?</em></p>
+<p>En hypotesetest kan settes opp i fem steg, og de samme fem stegene gjelder for <em>alle</em> statistiske hypotesetester, uansett om vi tester en forventning, en andel, en forskjell mellom to grupper eller noe annet. De konkrete regnestykkene i steg 4 og 5 varierer fra test til test, men framgangsmåten er den samme. Vi følger stegene med et konkret eksempel: <em>har partiet Venstre oppslutning over sperregrensen på 4 %?</em></p>
 <ol style="list-style-type: decimal">
 <li><strong>Formuler spørsmålet.</strong> Hva vil vi finne ut? Her: ligger den sanne oppslutningen <span class="math inline">\(p\)</span> over 4 %?</li>
 <li><strong>Oversett til <span class="math inline">\(H_0\)</span> og <span class="math inline">\(H_A\)</span>.</strong> Vi skriver spørsmålet som to hypoteser om populasjonsstørrelsen, og noterer hvilke antakelser vi gjør om populasjonen. Her: <span class="math inline">\(H_0: p = 0.04\)</span> mot <span class="math inline">\(H_A: p &gt; 0.04\)</span>.</li>
@@ -289,7 +289,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>Beregn testobservatoren.</strong> Vi oppsummerer dataene i én tallstørrelse, en <strong>testobservator</strong>, som tallfester hvor mye beviset taler mot <span class="math inline">\(H_0\)</span>. Poenget med en testobservator er at vi kjenner <strong>fordelingen dens når <span class="math inline">\(H_0\)</span> er sann</strong>.</li>
 <li><strong>Vurder signifikans og konkluder.</strong> Vi spør hvor overraskende testobservatoren er dersom <span class="math inline">\(H_0\)</span> er sann. Er vi tilstrekkelig overrasket, forkaster vi <span class="math inline">\(H_0\)</span>.</li>
 </ol>
-<p>Steg 5 er kjernen, og «overrasket» har en presis betydning: er <span class="math inline">\(H_0\)</span> sann, følger testobservatoren en kjent fordeling (en samplingfordeling), og vi kan regne ut hvor sannsynlig det er å få en verdi som er <em>minst så ekstrem</em> som den vi observerte. Er den sannsynligheten liten, er dataene vanskelige å forene med <span class="math inline">\(H_0\)</span>.</p>
+<p>Steg 5 er kjernen, og «overrasket» har en presis betydning: er <span class="math inline">\(H_0\)</span> sann, følger testobservatoren en kjent fordeling (en samplingfordeling), og vi kan regne ut hvor sannsynlig det er å få en verdi som er <em>minst så ekstrem</em> som den vi observerte. Er den sannsynligheten liten, betyr det nettopp at vi er <em>overrasket</em>: dataene er da vanskelige å forene med <span class="math inline">\(H_0\)</span>.</p>
 <p>Det finnes to likeverdige måter å ta beslutningen på i steg 5, og de gir alltid samme konklusjon:</p>
 <ul>
 <li><strong>p-verdien:</strong> regn ut sannsynligheten for en testobservator minst så ekstrem som den observerte, gitt <span class="math inline">\(H_0\)</span>, og forkast dersom denne er liten.</li>
@@ -302,19 +302,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <table>
 <thead>
 <tr class="header">
-<th></th>
+<th align="left">Vår avgjørelse</th>
 <th align="center"><span class="math inline">\(H_0\)</span> er sann</th>
 <th align="center"><span class="math inline">\(H_0\)</span> er usann</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Vi forkaster <span class="math inline">\(H_0\)</span></strong></td>
+<td align="left"><strong>Forkaster <span class="math inline">\(H_0\)</span></strong></td>
 <td align="center">Type I-feil</td>
 <td align="center">Riktig</td>
 </tr>
 <tr class="even">
-<td><strong>Vi beholder <span class="math inline">\(H_0\)</span></strong></td>
+<td align="left"><strong>Beholder <span class="math inline">\(H_0\)</span></strong></td>
 <td align="center">Riktig</td>
 <td align="center">Type II-feil</td>
 </tr>
@@ -338,10 +338,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="ensidige-og-tosidige-tester" class="section level3 hasAnchor" number="3.1.5">
 <h3><span class="header-section-number">3.1.5</span> Ensidige og tosidige tester<a href="generelt-om-hypotesetesting.html#ensidige-og-tosidige-tester" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Alternativhypotesen kan peke i én eller begge retninger:</p>
+<p>Uansett hvilken størrelse vi tester, kan alternativhypotesen peke i én eller begge retninger. La <span class="math inline">\(\theta\)</span> stå for parameteren vi tester (en forventning, en andel, en differanse mellom to grupper, og så videre), og <span class="math inline">\(\theta_0\)</span> for verdien nullhypotesen påstår:</p>
 <ul>
-<li>I en <strong>tosidig</strong> test er <span class="math inline">\(H_A: \mu \neq \mu_0\)</span>. Vi bryr oss om avvik i <em>begge</em> retninger, og forkastningsområdet legges i begge haler av fordelingen.</li>
-<li>I en <strong>ensidig</strong> test er <span class="math inline">\(H_A: \mu &gt; \mu_0\)</span> (eller <span class="math inline">\(\mu &lt; \mu_0\)</span>), og hele forkastningsområdet legges i én hale. Venstre-eksempelet er ensidig: vi er bare interessert i om oppslutningen er <em>over</em> sperregrensen.</li>
+<li>I en <strong>tosidig</strong> test er <span class="math inline">\(H_A: \theta \neq \theta_0\)</span>. Vi bryr oss om avvik i <em>begge</em> retninger, og forkastningsområdet legges i begge haler av fordelingen til testobservatoren.</li>
+<li>I en <strong>ensidig</strong> test er <span class="math inline">\(H_A: \theta &gt; \theta_0\)</span> (eller <span class="math inline">\(\theta &lt; \theta_0\)</span>), og hele forkastningsområdet legges i én hale. Venstre-eksempelet er ensidig: der er parameteren oppslutningen <span class="math inline">\(p\)</span>, og vi er bare interessert i om den er <em>over</em> sperregrensen.</li>
 </ul>
 <p>Vi velger en ensidig test når bare avvik til den ene siden er beslutningsrelevant, eller når vi på forhånd kan utelukke den andre siden. Ellers bruker vi en tosidig test. Valget må tas <em>før</em> vi ser dataene, ikke etterpå for å presse fram det svaret vi ønsker oss.</p>
 </div>
