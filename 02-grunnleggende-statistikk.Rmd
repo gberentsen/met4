@@ -267,12 +267,6 @@ Selve *fortolkningen* av et konfidensintervall er lett å misforstå, og verdt �
 
 Forskjellen er subtil, men viktig. Problemet med den første formuleringen er at den gir inntrykk av at det er *parameteren* som er tilfeldig og hopper inn og ut av et fast intervall. Det motsatte er tilfellet: den sanne parameterverdien er fast, mens det er *grensene* til konfidensintervallet som er tilfeldige, siden de regnes ut fra et tilfeldig utvalg. Bredden til intervallet er dermed et uttrykk for *usikkerhet*, eller motsatt: *presisjon*.
 
-Til slutt en nyttig sammenheng: bestemmer vi oss på forhånd for hvor bredt konfidensintervallet skal være (et presisjonsnivå $B$), kan vi regne ut hvor mange observasjoner vi trenger:
-
-$$n = \left(\frac{z_{\alpha/2}\,\sigma}{B}\right)^2.$$
-
-Haken i praksis er at vi sjelden kjenner $\sigma$ på forhånd. Vi har jo ikke samlet inn data ennå. Da må vi enten bruke skjønn eller støtte oss på et tidligere estimat av $\sigma$ dersom vi har et.
-
 ### Kontrollspørsmål
 
 Når du har vært gjennom dette stoffet skal du forhåpentligvis være i stand til å diskutere følgende spørsmål med f.eks. en medstudent:
@@ -709,16 +703,6 @@ Vi anslår altså at den forventede tidsbruken ligger mellom 4.4 og 6.0 timer.
 
 </details>
 
-20. Du planlegger å estimere den forventede vekten til laksen i en merd, og vil at 95 %-konfidensintervallet skal ha en feilmargin på høyst $B = 0.2$ kg. Fra tidligere år vet du at standardavviket i vekt er omtrent $\sigma = 0.8$ kg. Omtrent hvor mange laks må du veie?
-
-<details><summary>Løsning</summary>
-
->Vi bruker sammenhengen mellom feilmargin og utvalgsstørrelse:
-$$n = \left(\frac{z_{0.975}\,\sigma}{B}\right)^2 = \left(\frac{1.96 \cdot 0.8}{0.2}\right)^2 = 7.84^2 \approx 61.5.$$
-Vi runder alltid *opp* for å være på den sikre siden, så vi bør veie minst 62 laks. Her bruker vi $z$ og en antatt $\sigma$ fordi vi planlegger *før* vi har samlet inn data. Når vi etterpå faktisk har utvalget og må estimere standardavviket, bruker vi t-fordelingen som i oppgave 19.
-
-</details>
-
 ### Nøtter
 
 
@@ -1011,6 +995,17 @@ table(survey$religious)                   # Frekvenstabell
 survey %>%                                # Krysstabell av to variabler (krever
   select(party, religious) %>%            # pipe-operatoren og select()-funks.  
   table                                   # fra dplyr-pakken)
+
+# Normalisert krysstabell: prop.table() gjør antall om til andeler.
+survey %>%
+  select(party, religious) %>%
+  table() %>%
+  prop.table()                            # andel av totalen
+
+survey %>%
+  select(party, religious) %>%
+  table() %>%
+  prop.table(margin = 1)                  # andel innenfor hver rad (margin = 2 gir kolonne)
 
 ```
 
