@@ -320,6 +320,8 @@ Dette er ganske enkelt, men også litt vanskelig på en *inception*-aktig måte.
 
 ## Oppgaver {#oppgaverdeskriptiv}
 
+Til de fleste oppgavene under ligger det et løsningsforslag som du folder ut ved å trykke på **Løsning**. Rådet vårt er at du først forsøker å løse oppgaven skikkelig på egen hånd, og heller bruker løsningsforslaget etterpå til å kontrollere svaret ditt (eller som en pekepinn dersom du står helt fast). Du lærer langt mer av å bryne deg på oppgaven selv enn av å lese løsningen.
+
 ### Standard oppgaver
 
 
@@ -635,24 +637,7 @@ P(\hat{p} > 0.60) &= P\left(\frac{\hat{p} - p}{\sqrt{p(1 - p)/n}} > \frac{0.60 -
 
 </details>
 
-15. Anta at vi har to normalfordelte populasjoner hvor observasjoner fra populasjon 1 følger en $N(40, 6^2)$ og observasjoner fra populasjon 2 følger en $N(38, 8^2)$. Dersom man trekker 25 tilfeldige observasjoner fra hver populasjon, hva er sannsynligheten for at gjennomsnittet til trekningen fra populasjon 1 er større enn gjennomsnittet til trekningen fra populasjon 2?
-
-*Tips: normalsannsynligheter som $P(Z > z)$ finner du i R med `pnorm()`, se Avsnitt \@ref(relevant-r-grunnleggende).*
-
-
-<details><summary>Løsning</summary>
-
-> Vi vet da at $\overline{X}_1 - \overline{X}_2 > 0$ og utnytter at denne størrelsen er normalfordelt:
-\begin{equation*}
-\begin{split}
-P(\overline{X}_1 - \overline{X}_2 > 0) &= P\left(\frac{\overline{X}_1 - \overline{X}_2 - (40 - 38)}{\sqrt{\frac{6^2}{25} + \frac{8^2}{25}}} > \frac{0 - (40 - 38)}{\sqrt{\frac{6^2}{25} + \frac{8^2}{25}}} \right)\\
-&= P(Z > -1) = 1 - P(Z < -1) = 1 - 0.1587 = 0.8413
-\end{split}
-\end{equation*}
- 
-</details> 
-
-16. Produsenten av en kaviar forteller deg at hver tube er reklamert til å veie 65 gram, men at maskinen som produserer kaviaren gir en vekt som er normalfordelt med forventning (populasjonsgjennomsnitt) lik 65,5 gram og standardavvik 3.6 gram. La oss si at du trekker et tilfeldig utvalg av 40 tuber for å undersøke denne påstanden og at dette utvalget har et utvalgsgjennomsnitt lavere enn 64.
+15. Produsenten av en kaviar forteller deg at hver tube er reklamert til å veie 65 gram, men at maskinen som produserer kaviaren gir en vekt som er normalfordelt med forventning (populasjonsgjennomsnitt) lik 65,5 gram og standardavvik 3.6 gram. La oss si at du trekker et tilfeldig utvalg av 40 tuber for å undersøke denne påstanden og at dette utvalget har et utvalgsgjennomsnitt lavere enn 64.
 
 a. Hva er sannsynligheten for dette utfallet?
 b. Kommenter påstanden til produsenten.
@@ -666,7 +651,7 @@ b. Det er svært usannsynlig at vi observerer et gjennomsnitt mindre enn 64 ders
 
 </details>
 
-17. En selger av robotgressklippere påstår at bare 4% av produktene må på service innen det første året etter installasjon. Du skal undersøke om påstanden stemmer og spør et tilfeldig utvalg av 100 husholdninger som har kjøpt robotgressklippere om de hadde den på service det første året. 
+16. En selger av robotgressklippere påstår at bare 4% av produktene må på service innen det første året etter installasjon. Du skal undersøke om påstanden stemmer og spør et tilfeldig utvalg av 100 husholdninger som har kjøpt robotgressklippere om de hadde den på service det første året. 
 
 a. Hva vil du si om selgerens påstand dersom mer enn 6% svarer at de har hatt behov for service?
 b. Anta nå at du istedet spurte 400 hustander. Hva vil du si om selgerens påstand dersom mer enn 6% svarer at de har hatt behov for service?
@@ -701,7 +686,7 @@ P(\hat{p}>0.06) &= P\left(\frac{\hat{p} - 0.04}{\sqrt{0.04(1-0.04)/400}}> \frac{
 </details>
 
 
-18. Forventningsrette estimatorer.
+17. Forventningsrette estimatorer.
 a. Hva vil det si at en estimator er forventningsrett?
 b. Vis at hvis $X_1, X_2,\dots X_n$ er observasjoner fra en populasjon der $E(X_i) = \mu$ så er gjennomsnittet $\overline{X}$ en forventningsrett estimator av $\mu$.
 c. Vis at hvis $X$ er et binomisk forsøk med $n$ forsøk og suksessannsynlighet $p$ så er $\hat{p} = X/n$ en forventningsett estimator av $p$. 
@@ -720,10 +705,10 @@ c. Vi husker at en binomisk variabel $X$ har forventning $np$. Altså er
 $$E\left(\frac{X}{n}\right) = \frac{1}{n}E(X) = \frac{1}{n}\cdot np = p$$
 </details>
 
-19. Konsistente estimatorer.
+18. Konsistente estimatorer.
 a. Hva vil det si at en estimator er konsistent?
-b. Vis at hvis $X_1, X_2,\dots X_n$ er observasjoner fra en populasjon der $\text{Var}(X_i) = \sigma^2$ så er $\text{Var}(\overline{X}) = \sigma^2/n$. Bruk dette resultatet sammen med resultatet i 18 b til å forklare at $\overline{X}$ er en konsistent estimator av $\mu$.  
-c. Vis at hvis $X$ er et binomisk forsøk med $n$ forsøk og suksessannsynlighet $p$ så er $\text{Var}(\hat{p}) = p(1-p)/n$. Bruk dette resultatet sammen med resultatet fra 18 c til å forklare at $\hat{p}$ er en konsistent estimator av $p$. 
+b. Vis at hvis $X_1, X_2,\dots X_n$ er observasjoner fra en populasjon der $\text{Var}(X_i) = \sigma^2$ så er $\text{Var}(\overline{X}) = \sigma^2/n$. Bruk dette resultatet sammen med resultatet i 17 b til å forklare at $\overline{X}$ er en konsistent estimator av $\mu$.  
+c. Vis at hvis $X$ er et binomisk forsøk med $n$ forsøk og suksessannsynlighet $p$ så er $\text{Var}(\hat{p}) = p(1-p)/n$. Bruk dette resultatet sammen med resultatet fra 17 c til å forklare at $\hat{p}$ er en konsistent estimator av $p$. 
 
 <details><summary>Løsning</summary>
 
@@ -742,7 +727,7 @@ Igjen ser vi at variansen avtar når $n$ øker altså vil forskjellen mellom $\h
 
 </details>
 
-20. Et tilfeldig utvalg på $n = 16$ studenter brukte i gjennomsnitt $\overline{x} = 5.2$ timer på en innlevering, med utvalgsstandardavvik $s = 1.5$ timer. Anta at tidsbruken er tilnærmet normalfordelt, og at vi ikke kjenner det sanne standardavviket i populasjonen.
+19. Et tilfeldig utvalg på $n = 16$ studenter brukte i gjennomsnitt $\overline{x} = 5.2$ timer på en innlevering, med utvalgsstandardavvik $s = 1.5$ timer. Anta at tidsbruken er tilnærmet normalfordelt, og at vi ikke kjenner det sanne standardavviket i populasjonen.
 
     a. Regn ut et 95 %-konfidensintervall for den forventede tidsbruken. Den kritiske verdien henter du fra t-fordelingen: `qt(0.975, df = 15)` $\approx 2.131$.
     b. En medstudent sier: «Det er 95 % sannsynlig at den sanne forventede tidsbruken ligger i dette intervallet.» Er dette en presis formulering? Forklar.
@@ -757,13 +742,13 @@ Vi anslår altså at den forventede tidsbruken ligger mellom 4.4 og 6.0 timer.
 
 </details>
 
-21. Du planlegger å estimere den forventede vekten til laksen i en merd, og vil at 95 %-konfidensintervallet skal ha en feilmargin på høyst $B = 0.2$ kg. Fra tidligere år vet du at standardavviket i vekt er omtrent $\sigma = 0.8$ kg. Omtrent hvor mange laks må du veie?
+20. Du planlegger å estimere den forventede vekten til laksen i en merd, og vil at 95 %-konfidensintervallet skal ha en feilmargin på høyst $B = 0.2$ kg. Fra tidligere år vet du at standardavviket i vekt er omtrent $\sigma = 0.8$ kg. Omtrent hvor mange laks må du veie?
 
 <details><summary>Løsning</summary>
 
 >Vi bruker sammenhengen mellom feilmargin og utvalgsstørrelse:
 $$n = \left(\frac{z_{0.975}\,\sigma}{B}\right)^2 = \left(\frac{1.96 \cdot 0.8}{0.2}\right)^2 = 7.84^2 \approx 61.5.$$
-Vi runder alltid *opp* for å være på den sikre siden, så vi bør veie minst 62 laks. Her bruker vi $z$ og en antatt $\sigma$ fordi vi planlegger *før* vi har samlet inn data. Når vi etterpå faktisk har utvalget og må estimere standardavviket, bruker vi t-fordelingen som i oppgave 20.
+Vi runder alltid *opp* for å være på den sikre siden, så vi bør veie minst 62 laks. Her bruker vi $z$ og en antatt $\sigma$ fordi vi planlegger *før* vi har samlet inn data. Når vi etterpå faktisk har utvalget og må estimere standardavviket, bruker vi t-fordelingen som i oppgave 19.
 
 </details>
 
@@ -903,6 +888,22 @@ $$P(\text{begge}) = 0.95 \cdot 0.95 = 0.9025.$$
 $$P(\text{minst ett}) = 1 - (0.05)^2 = 1 - 0.0025 = 0.9975.$$
 
 >c. At vi i det hele tatt kan regne slik, understreker poenget fra teorien: det er *intervallet* (grensene) som er tilfeldig, ikke $\mu$. «95 %» er en egenskap ved prosedyren over gjentatte utvalg, ikke en sannsynlighet for hvor $\mu$ ligger i ett bestemt intervall.
+
+</details>
+
+Nøtt 6. Anta at vi har to normalfordelte populasjoner hvor observasjoner fra populasjon 1 følger en $N(40, 6^2)$ og observasjoner fra populasjon 2 følger en $N(38, 8^2)$. Dersom man trekker 25 tilfeldige observasjoner fra hver populasjon, hva er sannsynligheten for at gjennomsnittet til trekningen fra populasjon 1 er større enn gjennomsnittet til trekningen fra populasjon 2?
+
+*Tips: normalsannsynligheter som $P(Z > z)$ finner du i R med `pnorm()`, se Avsnitt \@ref(relevant-r-grunnleggende).*
+
+<details><summary>Løsning</summary>
+
+> Vi vet da at $\overline{X}_1 - \overline{X}_2 > 0$ og utnytter at denne størrelsen er normalfordelt:
+\begin{equation*}
+\begin{split}
+P(\overline{X}_1 - \overline{X}_2 > 0) &= P\left(\frac{\overline{X}_1 - \overline{X}_2 - (40 - 38)}{\sqrt{\frac{6^2}{25} + \frac{8^2}{25}}} > \frac{0 - (40 - 38)}{\sqrt{\frac{6^2}{25} + \frac{8^2}{25}}} \right)\\
+&= P(Z > -1) = 1 - P(Z < -1) = 1 - 0.1587 = 0.8413
+\end{split}
+\end{equation*}
 
 </details>
 
