@@ -279,18 +279,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-12"><a href="statistiske-analyser.html#cb12-12" tabindex="-1"></a><span class="co"># Kanskje ønsker vi å hente ut p-verdien for testen og bruke den til noe senere. </span></span>
 <span id="cb12-13"><a href="statistiske-analyser.html#cb12-13" tabindex="-1"></a><span class="co"># Vi kan lagre testresultatet i en variabel først, og så bruke $-tegnet til å hente</span></span>
 <span id="cb12-14"><a href="statistiske-analyser.html#cb12-14" tabindex="-1"></a><span class="co"># ut p-verdien på følgende måte:</span></span>
-<span id="cb12-15"><a href="statistiske-analyser.html#cb12-15" tabindex="-1"></a>testresult <span class="ot">&lt;-</span> <span class="fu">t.test</span>(testdata<span class="sc">$</span>X1, testdata<span class="sc">$</span>X2, <span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span>
-<span id="cb12-16"><a href="statistiske-analyser.html#cb12-16" tabindex="-1"></a>testresult<span class="sc">$</span>p.value</span>
+<span id="cb12-15"><a href="statistiske-analyser.html#cb12-15" tabindex="-1"></a>testresultat <span class="ot">&lt;-</span> <span class="fu">t.test</span>(testdata<span class="sc">$</span>X1, testdata<span class="sc">$</span>X2, <span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span>
+<span id="cb12-16"><a href="statistiske-analyser.html#cb12-16" tabindex="-1"></a>testresultat<span class="sc">$</span>p.value</span>
 <span id="cb12-17"><a href="statistiske-analyser.html#cb12-17" tabindex="-1"></a></span>
 <span id="cb12-18"><a href="statistiske-analyser.html#cb12-18" tabindex="-1"></a><span class="co"># Hvilken annen informasjon finner vi i dette testobjektet?</span></span>
-<span id="cb12-19"><a href="statistiske-analyser.html#cb12-19" tabindex="-1"></a><span class="fu">str</span>(testresult)</span></code></pre></div>
+<span id="cb12-19"><a href="statistiske-analyser.html#cb12-19" tabindex="-1"></a><span class="fu">str</span>(testresultat)</span></code></pre></div>
 <p>Hjelpesiden til en funksjon er bygd opp likt for de fleste funksjoner: en kort beskrivelse av hva funksjonen gjør, en liste over argumentene den tar, og helt nederst noen konkrete eksempler på bruk. Eksemplene nederst er ofte det raskeste stedet å begynne når du skal lære en ny funksjon.</p>
 <p><strong>Oppgave:</strong> Hva er verdien av <em>testobservatoren (test statistic)</em> i testen som vi gjorde i denne videoen? Hint: Bruk hjelpefilene til <code>t.test()</code>-funksjonen.</p>
 <details>
 <summary>
 Løsning
 </summary>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="statistiske-analyser.html#cb13-1" tabindex="-1"></a>testresult<span class="sc">$</span>statistic</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="statistiske-analyser.html#cb13-1" tabindex="-1"></a>testresultat<span class="sc">$</span>statistic</span></code></pre></div>
 </details>
 </div>
             </section>
