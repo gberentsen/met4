@@ -17,15 +17,91 @@ I videoforelesningene går vi gjennom noen slides, og vi skriver et R-skript. Du
 
 <div style='padding:74.93% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7780028/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
 
-### Kommentarer
+### Hva er en hypotesetest?
 
-Her snakker vi om kapittel **11** i læreboken. Hvis du kan svare på følgende spørsmål har du i all hovedsak fått med deg de viktigste begrepene:
+En **hypotese** er en påstand om en ukjent størrelse i en populasjon, for eksempel om at et parti har oppslutning over sperregrensen, eller at forventet vekt på et produkt er en bestemt verdi. Vitenskapsfilosofen Karl Popper påpekte at gode hypoteser må være *falsifiserbare*: det må finnes tenkelige observasjoner som kan *motbevise* dem. Et viktig poeng følger av dette: at en hypotese ennå ikke er forkastet, betyr ikke at den er sann. Newtons fysikk sto uimotsagt i århundrer før Einstein viste at den bare var tilnærmet riktig.
 
-- Hva vil det si å gjennomføre en hypotesetest?
-- Hva er Type I-feil og hva er Type II-feil? (Seksjon **11-1** forklarer dette greit)
-- Hva er signifikansnivået ($\alpha$) til en test?
-- Styrken (the power) til en test er definert som $1-P(\textrm{Type II-feil})=1-\beta$. Hvordan tolker du denne størrelsen? Se også **11-3d**.
-- Hva er $p$-verdien til en test (Seksjon **11-2c**)? Les også **11-2d**, **e** og **f** om hvordan vi fortolker og snakker om $p$-verdien på en korrekt måte. Vi kommer tilbake til dette i kapittel \@ref(enpop).
+Statistisk hypotesetesting bygger på nettopp denne tankegangen. Vi setter opp *to* konkurrerende hypoteser:
+
+- **Nullhypotesen** $H_0$ er utgangspunktet, ofte en «kjedelig» eller skeptisk påstand om at det *ikke* er noen effekt eller forskjell (partiet ligger på sperregrensen, medisinen virker ikke, forventningen er lik en bestemt verdi $\mu_0$).
+- **Alternativhypotesen** $H_A$ er det vi egentlig mistenker eller ønsker å påvise (partiet ligger over sperregrensen, medisinen virker, forventningen er forskjellig fra $\mu_0$).
+
+Logikken er den samme som i en rettssak: den tiltalte antas uskyldig ($H_0$) helt til det motsatte er bevist. Vi *antar* at $H_0$ er sann, og spør så: er dataene vi observerte overraskende dersom $H_0$ er sann? Er de tilstrekkelig overraskende, **forkaster** vi $H_0$ til fordel for $H_A$. Er de ikke det, **beholder** vi $H_0$, ikke fordi vi har bevist at den er sann, men fordi vi ikke har nok bevis til å forkaste den. Akkurat som en frifinnelse ikke er det samme som å bevise uskyld, «beviser» en hypotesetest aldri nullhypotesen.
+
+### Framgangsmåten steg for steg
+
+En hypotesetest kan settes opp i fem steg. Vi følger dem med et konkret eksempel: *har partiet Venstre oppslutning over sperregrensen på 4 %?*
+
+1. **Formuler spørsmålet.** Hva vil vi finne ut? Her: ligger den sanne oppslutningen $p$ over 4 %?
+2. **Oversett til $H_0$ og $H_A$.** Vi skriver spørsmålet som to hypoteser om populasjonsstørrelsen, og noterer hvilke antakelser vi gjør om populasjonen. Her: $H_0: p = 0.04$ mot $H_A: p > 0.04$.
+3. **Samle data.** Vi trekker et utvalg fra populasjonen, for eksempel ved å spørre 1000 tilfeldig valgte velgere hva de vil stemme.
+4. **Beregn testobservatoren.** Vi oppsummerer dataene i én tallstørrelse, en **testobservator**, som tallfester hvor mye beviset taler mot $H_0$. Poenget med en testobservator er at vi kjenner **fordelingen dens når $H_0$ er sann**.
+5. **Vurder signifikans og konkluder.** Vi spør hvor overraskende testobservatoren er dersom $H_0$ er sann. Er vi tilstrekkelig overrasket, forkaster vi $H_0$.
+
+Steg 5 er kjernen, og «overrasket» har en presis betydning: er $H_0$ sann, følger testobservatoren en kjent fordeling (en samplingfordeling), og vi kan regne ut hvor sannsynlig det er å få en verdi som er *minst så ekstrem* som den vi observerte. Er den sannsynligheten liten, er dataene vanskelige å forene med $H_0$.
+
+Det finnes to likeverdige måter å ta beslutningen på i steg 5, og de gir alltid samme konklusjon:
+
+- **p-verdien:** regn ut sannsynligheten for en testobservator minst så ekstrem som den observerte, gitt $H_0$, og forkast dersom denne er liten.
+- **Forkastningsområdet:** finn på forhånd de mest ekstreme verdiene testobservatoren kan ta (forkastningsområdet), og forkast dersom den observerte verdien lander der. Grensen kalles den **kritiske verdien**.
+
+### Signifikansnivå og de to feiltypene
+
+Hvor overrasket må vi være før vi forkaster? Her må vi ta stilling til at en test kan gå galt på to måter:
+
+| | $H_0$ er sann | $H_0$ er usann |
+|---|:---:|:---:|
+| **Vi forkaster $H_0$** | Type I-feil | Riktig |
+| **Vi beholder $H_0$** | Riktig | Type II-feil |
+
+En **Type I-feil** er å forkaste en sann nullhypotese (dømme en uskyldig). En **Type II-feil** er å beholde en usann nullhypotese (frikjenne en skyldig).
+
+**Signifikansnivået** $\alpha$ er sannsynligheten vi på forhånd er villige til å godta for å gjøre en Type I-feil: $\alpha = P(\text{forkaste } H_0 \mid H_0 \text{ er sann})$. Vi velger $\alpha$ før vi ser dataene (typisk 5 %), og det er $\alpha$ som bestemmer hvor grensen for forkastningsområdet går. Et 5 %-nivå betyr at vi legger forkastningsområdet der de 5 % mest ekstreme verdiene under $H_0$ ligger.
+
+Sannsynligheten for en Type II-feil kaller vi $\beta$. **Styrken** (power) til testen er $1 - \beta$, altså sannsynligheten for at vi *korrekt* forkaster en usann nullhypotese. En sterk test er god til å oppdage en effekt når den faktisk finnes.
+
+De to feiltypene trekker i hver sin retning: krymper vi forkastningsområdet (lavere $\alpha$), gjør vi Type I-feil sjeldnere, men Type II-feil oftere. Den eneste måten å redusere begge samtidig på er å samle inn *mer data*: en større $n$ gir en mer presis testobservator, og dermed både lav $\alpha$ og høy styrke.
+
+### p-verdien
+
+**p-verdien** er sannsynligheten for å observere en testobservator som er *minst så ekstrem* som den vi faktisk fikk, gitt at $H_0$ er sann. En liten p-verdi betyr at dataene er svært overraskende under $H_0$, og teller som bevis *mot* $H_0$. Beslutningsregelen er enkel: vi **forkaster $H_0$ dersom $p \leq \alpha$**.
+
+I Venstre-eksempelet, dersom testobservatoren ga en p-verdi på 0.0006, ville vi ved $\alpha = 0.01$ forkastet $H_0$ og konkludert med at resultatet tyder på oppslutning over sperregrensen.
+
+p-verdien er lett å mistolke, så merk deg hva den *ikke* er:
+
+- Den er **ikke** sannsynligheten for at $H_0$ er sann. p-verdien sier noe om dataene *gitt* $H_0$, ikke om $H_0$ gitt dataene.
+- En stor p-verdi **beviser ikke** at $H_0$ er sann; den betyr bare at dataene er forenlige med $H_0$.
+- «Statistisk signifikant» ($p \leq \alpha$) er ikke det samme som «viktig». Med et stort nok utvalg kan selv en ubetydelig forskjell bli statistisk signifikant.
+
+### Ensidige og tosidige tester
+
+Alternativhypotesen kan peke i én eller begge retninger:
+
+- I en **tosidig** test er $H_A: \mu \neq \mu_0$. Vi bryr oss om avvik i *begge* retninger, og forkastningsområdet legges i begge haler av fordelingen.
+- I en **ensidig** test er $H_A: \mu > \mu_0$ (eller $\mu < \mu_0$), og hele forkastningsområdet legges i én hale. Venstre-eksempelet er ensidig: vi er bare interessert i om oppslutningen er *over* sperregrensen.
+
+Vi velger en ensidig test når bare avvik til den ene siden er beslutningsrelevant, eller når vi på forhånd kan utelukke den andre siden. Ellers bruker vi en tosidig test. Valget må tas *før* vi ser dataene, ikke etterpå for å presse fram det svaret vi ønsker oss.
+
+### Fallgruver ved hypotesetesting
+
+Hypotesetesting er et kraftig verktøy, men også lett å misbruke. Tre fallgruver er verdt å kjenne til:
+
+- **Feiltolkning av p-verdien.** Se listen over. Den amerikanske statistikkforeningen (ASA) har til og med gitt ut en egen uttalelse om hvor ofte p-verdien misforstås.
+- **Multippel testing.** Tester vi mange hypoteser samtidig, vil noen «bli signifikante» ved ren tilfeldighet. Tester du 20 helt uvirksomme effekter på 5 %-nivå, forventer du å få omtrent ett «signifikant» funn bare av flaks. Veien fra multippel testing til (bevisst eller ubevisst) juks er kort, og et signifikant funn som er plukket ut i etterkant blant mange tester, er lite verdt.
+- **Forutsetningene.** Testene hviler på antakelser (uavhengige observasjoner, en bestemt fordeling, stor nok $n$). Ofte er samplingfordelingen bare en *tilnærming* som støtter seg på sentralgrenseteoremet. Konklusjonen er ikke bedre enn forutsetningene den bygger på.
+
+### Kontrollspørsmål
+
+Når du har vært gjennom stoffet, bør du kunne svare på følgende:
+
+1. Hva vil det si å gjennomføre en hypotesetest, og hvorfor kan vi aldri «bevise» nullhypotesen?
+2. Hva er forskjellen på en Type I-feil og en Type II-feil?
+3. Hva er signifikansnivået $\alpha$, og hva har det med forkastningsområdet å gjøre?
+4. Hva er styrken til en test, og hvordan tolker du den?
+5. Hva er p-verdien, og hva er den *ikke*?
+6. Når bruker vi en ensidig test, og når en tosidig?
+7. Nevn minst én fallgruve ved hypotesetesting.
 
 ## Inferens om en populasjon {#enpop}
 
