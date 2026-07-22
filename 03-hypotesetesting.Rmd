@@ -510,74 +510,105 @@ prop.test(c(xB, xA), c(nB, nA), alternative = "greater", correct = FALSE)
 
 <div style='padding:74.43% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7780062/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
 
-### Kommentarer
+### Hva tester vi med kji-kvadrat?
 
-Vi må kunne *to* anvendelser av kjikvadrattester, der hver av de har sitt eget delkapittel i boken:
+De to foregående delkapitlene handlet om *tallstørrelser* (gjennomsnitt, andeler, varianser). Kji-kvadrattester handler i stedet om **antall**: vi teller hvor mange observasjoner som faller i hver *kategori*, og sammenligner de **observerte** antallene ($f$) med hvor mange vi ville **forventet** ($e$) dersom en bestemt påstand var sann. Er avviket mellom observert og forventet stort nok, forkaster vi påstanden. Det samlede avviket måler vi med testobservatoren
 
-1. Teste for om en gitt fordeling passer med obervasjoner (*"Goodness-of-fit"*).
-2. Teste for uavhengighet.
+$$\chi^2 = \sum \frac{(f - e)^2}{e},$$
 
-I den første anvendelsen får vi oppgitt en *diskret* sannsynlighetsfordeling der vi har noen mulige utfall $u_1, \ldots, u_k$, med tilhørende sannsynligheter $p_1, \ldots,p_k$. Dersom vi skal observere $n$ utfall fra denne fordelingen, vil vi forvente $e_i = p_i\cdot n$ observasjoner av utfall $u_i$.
+som er tilnærmet **kji-kvadratfordelt** ($\chi^2$) når $H_0$ er sann. Hvert ledd $(f - e)^2/e$ vokser jo lengre det observerte antallet ligger fra det forventede, så en stor $\chi^2$-verdi betyr at dataene passer dårlig med $H_0$. Tilnærmingen er god når alle de forventede antallene er større enn omtrent 5.
 
-Nå har det seg slik at vi *har* observert $n$ utfall fra fordelingen, og utfall $u_i$ har skjedd $f_i$ ganger. **Vi lurer da på om de observerte frekvensene ($f_i$) er så forskjellige fra de *forventede* frekvensene ($e_i$) at vi ikke lenger tror at $p_1, \ldots,p_k$ er den sanne sannsynlighetsfordelingen.**
+Vi ser på to anvendelser:
 
-Vi kom frem til en fornuftig testobservator:
+- **Goodness-of-fit:** passer en foreslått sannsynlighetsfordeling over noen kategorier med dataene?
+- **Uavhengighet:** er to kategoriske kjennetegn uavhengige av hverandre?
 
-$$\chi^2 = \sum_{i=1}^k \frac{(f_i - e_i)^2}{e_i},$$
-som er $\chi^2$-fordelt med $k-1$ frihetsgrader dersom nullhypotesen er sann. Det betyr at vi kan sjekke om verdien av testobservatoren så stor (dvs, $f$´ene er for forskjellige fra $e$`ene) at vi ikke lenger tror at $(p_1, \ldots, p_k)$ er den sanne sannsynlighetsfordelingen.
+### Test av en sannsynlighetsmodell (goodness-of-fit)
 
-Vi gjorde eksempelet i dette delkapitlet i forelesningen, og brukte følgende kommandoer:
+Anta at hver observasjon havner i én av $k$ kategorier, og at nullhypotesen sier at sannsynlighetene for kategoriene er $p_1, \ldots, p_k$. Har vi $n$ observasjoner, forventer vi da $e_i = n\,p_i$ i kategori $i$. Testobservatoren $\chi^2 = \sum_{i=1}^k (f_i - e_i)^2/e_i$ er kji-kvadratfordelt med $k - 1$ frihetsgrader når $H_0$ er sann, og vi forkaster for store verdier.
+
+**Eksempel.** To konkurrerende selskaper, A og B, hadde før to reklamekampanjer markedsandeler på henholdsvis 45 % og 40 %, mens 15 % foretrakk andre selskaper. Etter kampanjene vil et analysebyrå vite om andelene har endret seg.
+
+1. **Spørsmål:** Har fordelingen av markedsandeler (45 %, 40 %, 15 %) endret seg?
+2. **Hypoteser og signifikansnivå:** $H_0: (p_A, p_B, p_{\text{andre}}) = (0.45, 0.40, 0.15)$ mot $H_A$: minst én av andelene er forskjellig. En Type I-feil ville være å konkludere med at andelene har endret seg når de egentlig ikke har det. Konsekvensen er moderat, så vi velger $\alpha = 5\,\%$.
+3. **Data:** Et tilfeldig utvalg på 200 kunder fordeler seg slik: 102 foretrekker A, 82 foretrekker B, og 16 foretrekker et annet selskap.
+4. **Testobservator:** Under $H_0$ forventer vi $e_i = 200\,p_i$, altså 90, 80 og 30. Vi regner ut $\chi^2$ i R:
 
 ```{r}
-p0 <- c(0.45, 0.40, 0.15)  # Fordeling under H0
-f  <- c(102, 82, 16)       # Observerte frekvenser
+f  <- c(102, 82, 16)          # observerte antall
+p0 <- c(0.45, 0.40, 0.15)     # andeler under H0
+e  <- sum(f)*p0               # forventede antall: 90, 80, 30
 
+chikvadrat <- sum((f - e)^2/e)
+chikvadrat
+```
+
+5. **Kritisk verdi og konklusjon:** Med $k = 3$ kategorier er testobservatoren kji-kvadratfordelt med $k - 1 = 2$ frihetsgrader. Kritisk verdi på 5 %-nivå er 95-prosentilen (se \@ref(relevante-r-testing)):
+
+```{r}
+qchisq(0.95, df = 2)
+```
+
+Testobservatoren (8.18) er større enn den kritiske verdien (5.99), så vi forkaster $H_0$: markedsandelene ser ut til å ha endret seg. Ser vi på leddene, kommer det meste av avviket fra «andre»-kategorien (16 observert mot 30 forventet), så det ser ut til at kampanjene har trukket kunder bort fra de andre selskapene.
+
+**I R** gjør `chisq.test()` hele jobben når vi gir den de observerte antallene og andelene under $H_0$:
+
+```{r}
 chisq.test(x = f, p = p0)
 ```
 
-Den andre anvendelsen er å teste for om to kjennetegn opptrer uavhengig av hverandre. Ideen er den samme som over, fordi vi kan skrive sannsunligheten for «$A$ og $B$» som et produkt dersom de ar uavhengige: 
+Se på **p-verdien**: den er 0.017, altså under 0.05, så vi forkaster $H_0$, akkurat som med den kritiske verdien. Utskriften gir også `X-squared` (testobservatoren) og `df`.
 
-$$P(A \cap B) = P(A)\cdot P(B).$$
+### Test for uavhengighet
 
-Vi kan regne ut hvor mange observasjoner vi forventer å se for hver kombinasjon av de to kjennetegnene ($e_{ij}$), og bruke kjikvadrattesten over til å sjekke om disse er langt fra det vi *faktisk* har observert ($f_{ij}$). Boken har et eksempel på dette som de regner ut både for hånd og i Excel. Slik kan vi gjøre det i R:
+Ofte vil vi vite om to *kategoriske* kjennetegn henger sammen, for eksempel om holdning til innvandring henger sammen med politisk ståsted. Vi ordner da dataene i en **krysstabell** med $r$ rader og $s$ kolonner, og tester $H_0$: de to kjennetegnene er *uavhengige*. Er de uavhengige, er sannsynligheten for en celle produktet av de to marginale sannsynlighetene, og det forventede antallet i celle $(i,j)$ blir
 
-```{r, eval = F}
-# Leser inn data
-library(readxl)
-mba <- read_xlsx("Xm15-02.xlsx")
+$$e_{ij} = \frac{(\text{radsum}_i)\cdot(\text{kolonnesum}_j)}{n}.$$
 
-# Kikker på datasettet
-mba
-```
+Testobservatoren er den samme som før, $\chi^2 = \sum (f_{ij} - e_{ij})^2/e_{ij}$, nå kji-kvadratfordelt med $(r-1)(s-1)$ frihetsgrader.
 
-```{r, echo = F}
-# Leser inn data
-library(readxl)
-mba <- read_xlsx("datasett/Xm15-02.xlsx")
+**Eksempel.** I en spørreundersøkelse er respondentene delt inn etter politisk ståsted (venstre, sentrum, høyre) og etter hvor mange innvandrere de mener bør få bosette seg (mange, noen, få, ingen). Er de to kjennetegnene uavhengige? De observerte antallene (1000 respondenter) er:
 
-# Kikker på datasettet
-mba
-```
+|             | Mange | Noen | Få  | Ingen |
+|:------------|:-----:|:----:|:---:|:-----:|
+| **Venstre** | 90    | 120  | 60  | 30    |
+| **Sentrum** | 80    | 160  | 120 | 40    |
+| **Høyre**   | 30    | 90   | 120 | 60    |
 
-Vi legger merke til at strukturen på datasettet er litt annerledes enn krysstabellen som er vist s. 601 i læreboken. I stedet for at vi har telt opp antall studenter i hver enkelt kominasjon av «bachelorgrad» og «masterprofil», har vi fått oppgitt en tabell der hver rad representerer en enkeltstudents fagkombinasjon. Vi kan dog enkelt lage en krysstabell i R:
+1. **Spørsmål:** Er holdning til innvandring uavhengig av politisk ståsted?
+2. **Hypoteser og signifikansnivå:** $H_0$: de to kjennetegnene er uavhengige, mot $H_A$: de henger sammen. En Type I-feil ville være å hevde at det finnes en sammenheng når det egentlig ikke gjør det. Vi velger $\alpha = 5\,\%$.
+3. **Data:** krysstabellen over. Vi legger den inn i R som en matrise:
 
 ```{r}
-table(mba)
+tabell <- matrix(c(90, 120,  60, 30,
+                   80, 160, 120, 40,
+                   30,  90, 120, 60),
+                 nrow = 3, byrow = TRUE,
+                 dimnames = list(c("Venstre", "Sentrum", "Høyre"),
+                                 c("Mange", "Noen", "Få", "Ingen")))
+tabell
 ```
 
-Det er denne som brukes som argument i `chisq.test()`:
+4. **Testobservator:** Under uavhengighet er det forventede antallet radsum ganget med kolonnesum, delt på $n$. I cellen «Venstre, Mange» forventer vi for eksempel $300\cdot 200/1000 = 60$, mot 90 observerte. Å regne ut alle tolv cellene for hånd er tungvint, så vi lar `chisq.test()` gjøre det:
 
 ```{r}
-chisq.test(table(mba))
+chisq.test(tabell)
 ```
 
-Her er det bare å sammenligne tallene med det som læreboken finner i Excel.
+5. **Kritisk verdi og konklusjon:** Med $r = 3$ og $s = 4$ er testobservatoren kji-kvadratfordelt med $(r-1)(s-1) = 6$ frihetsgrader. Kritisk verdi på 5 %-nivå er
 
-Noen kontrollspørsmål:
+```{r}
+qchisq(0.95, df = 6)
+```
 
-1. Vi har lært to veldig spesifikke anvendelser av kjikvadrattester. Hvilke?
-2. Kan du gi en intuitiv forklaring på hvorfor testobservatoren vår er fornuftig?
-3. **Litt mer vanskelig:** Kan du gi en intuitiv forklaring for hvorfor testobservatoren er tilnærmet kjikvadratfordelt?
+Testobservatoren (`X-squared` $\approx 71.8$) er mange ganger større enn den kritiske verdien (12.59), og **p-verdien** er forsvinnende liten, så vi forkaster $H_0$: holdning til innvandring henger klart sammen med politisk ståsted. (Sjekk gjerne med `chisq.test(tabell)$expected` at ingen forventede celletall er under 5, ellers er tilnærmingen upålitelig.)
+
+### Kontrollspørsmål
+
+1. Hva er de to anvendelsene av kji-kvadrattesten?
+2. Hvordan regner vi ut de *forventede* antallene i hvert av de to tilfellene?
+3. Hvor mange frihetsgrader har testobservatoren for en goodness-of-fit-test med $k$ kategorier, og for en uavhengighetstest på en $r \times s$-tabell?
+4. Hvorfor krever testen at de forventede celletallene ikke er for små?
 
 ## Oppgaver
 
