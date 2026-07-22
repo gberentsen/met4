@@ -469,15 +469,15 @@ Løsning
 <ol style="list-style-type: lower-alpha">
 <li>Setter opp modellen (bruker pakken <code>fixest</code> og <code>feols</code> fordi vi skal bruke disse i senere deloppgaver):</li>
 </ol>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="oppgaver-3.html#cb279-1" tabindex="-1"></a><span class="fu">library</span>(readr)    <span class="co"># Lese inn csv-filer</span></span>
-<span id="cb279-2"><a href="oppgaver-3.html#cb279-2" tabindex="-1"></a><span class="fu">library</span>(fixest)   <span class="co"># Faste effekter (effektiv, og håndterer så mange faste effekter vi vil)</span></span>
-<span id="cb279-3"><a href="oppgaver-3.html#cb279-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;panel_liten.csv&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="oppgaver-3.html#cb280-1" tabindex="-1"></a><span class="co"># kjører først modellen uten faste effekter</span></span>
-<span id="cb280-2"><a href="oppgaver-3.html#cb280-2" tabindex="-1"></a>pols <span class="ot">&lt;-</span> <span class="fu">feols</span>(</span>
-<span id="cb280-3"><a href="oppgaver-3.html#cb280-3" tabindex="-1"></a>  lnwg <span class="sc">~</span> lnhr , </span>
-<span id="cb280-4"><a href="oppgaver-3.html#cb280-4" tabindex="-1"></a>  <span class="at">data =</span> df</span>
-<span id="cb280-5"><a href="oppgaver-3.html#cb280-5" tabindex="-1"></a>)</span>
-<span id="cb280-6"><a href="oppgaver-3.html#cb280-6" tabindex="-1"></a><span class="fu">etable</span>(pols)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="oppgaver-3.html#cb270-1" tabindex="-1"></a><span class="fu">library</span>(readr)    <span class="co"># Lese inn csv-filer</span></span>
+<span id="cb270-2"><a href="oppgaver-3.html#cb270-2" tabindex="-1"></a><span class="fu">library</span>(fixest)   <span class="co"># Faste effekter (effektiv, og håndterer så mange faste effekter vi vil)</span></span>
+<span id="cb270-3"><a href="oppgaver-3.html#cb270-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;panel_liten.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="oppgaver-3.html#cb271-1" tabindex="-1"></a><span class="co"># kjører først modellen uten faste effekter</span></span>
+<span id="cb271-2"><a href="oppgaver-3.html#cb271-2" tabindex="-1"></a>pols <span class="ot">&lt;-</span> <span class="fu">feols</span>(</span>
+<span id="cb271-3"><a href="oppgaver-3.html#cb271-3" tabindex="-1"></a>  lnwg <span class="sc">~</span> lnhr , </span>
+<span id="cb271-4"><a href="oppgaver-3.html#cb271-4" tabindex="-1"></a>  <span class="at">data =</span> df</span>
+<span id="cb271-5"><a href="oppgaver-3.html#cb271-5" tabindex="-1"></a>)</span>
+<span id="cb271-6"><a href="oppgaver-3.html#cb271-6" tabindex="-1"></a><span class="fu">etable</span>(pols)</span></code></pre></div>
 <pre><code>##                              pols
 ## Dependent Var.:              lnwg
 ##                                  
@@ -495,14 +495,14 @@ Løsning
 <li><p>Vi bør være forsiktige med å tolke dette som at flere arbeidstimer fører til høyere lønn. Fra modulen om OLS-betingelser husker vi at eksogenitet krever at det ikke er noen systematisk sammenheng mellom forklaringsvariabelen og restleddet. Her kan vi tenke oss at personer som jobber mange timer er systematisk annerledes enn de som jobber få timer – de kan ha høyere utdanning, mer erfaring, eller jobbe i andre typer stillinger. Slike egenskaper påvirker trolig også lønna, og ligger i restleddet. Da er eksogenitetsbetingelsen sannsynligvis brutt, og koeffisienten plukker opp mer enn bare sammenhengen mellom arbeidstimer og lønn.</p></li>
 <li><p>Kjører først modellen med faste effekter (fortsetter her videre fra deloppgave a)):</p></li>
 </ol>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="oppgaver-3.html#cb282-1" tabindex="-1"></a><span class="co"># legger først til individ-FE</span></span>
-<span id="cb282-2"><a href="oppgaver-3.html#cb282-2" tabindex="-1"></a>fe_id <span class="ot">&lt;-</span> <span class="fu">feols</span>(</span>
-<span id="cb282-3"><a href="oppgaver-3.html#cb282-3" tabindex="-1"></a>  lnwg <span class="sc">~</span> lnhr <span class="sc">|</span> id , <span class="co"># her er id individfaste effekter</span></span>
-<span id="cb282-4"><a href="oppgaver-3.html#cb282-4" tabindex="-1"></a>  <span class="at">data =</span> df</span>
-<span id="cb282-5"><a href="oppgaver-3.html#cb282-5" tabindex="-1"></a>)</span>
-<span id="cb282-6"><a href="oppgaver-3.html#cb282-6" tabindex="-1"></a></span>
-<span id="cb282-7"><a href="oppgaver-3.html#cb282-7" tabindex="-1"></a><span class="co"># skriv ut tabell</span></span>
-<span id="cb282-8"><a href="oppgaver-3.html#cb282-8" tabindex="-1"></a><span class="fu">etable</span>(pols, fe_id)</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="oppgaver-3.html#cb273-1" tabindex="-1"></a><span class="co"># legger først til individ-FE</span></span>
+<span id="cb273-2"><a href="oppgaver-3.html#cb273-2" tabindex="-1"></a>fe_id <span class="ot">&lt;-</span> <span class="fu">feols</span>(</span>
+<span id="cb273-3"><a href="oppgaver-3.html#cb273-3" tabindex="-1"></a>  lnwg <span class="sc">~</span> lnhr <span class="sc">|</span> id , <span class="co"># her er id individfaste effekter</span></span>
+<span id="cb273-4"><a href="oppgaver-3.html#cb273-4" tabindex="-1"></a>  <span class="at">data =</span> df</span>
+<span id="cb273-5"><a href="oppgaver-3.html#cb273-5" tabindex="-1"></a>)</span>
+<span id="cb273-6"><a href="oppgaver-3.html#cb273-6" tabindex="-1"></a></span>
+<span id="cb273-7"><a href="oppgaver-3.html#cb273-7" tabindex="-1"></a><span class="co"># skriv ut tabell</span></span>
+<span id="cb273-8"><a href="oppgaver-3.html#cb273-8" tabindex="-1"></a><span class="fu">etable</span>(pols, fe_id)</span></code></pre></div>
 <pre><code>##                              pols           fe_id
 ## Dependent Var.:              lnwg            lnwg
 ##                                                  
@@ -521,12 +521,12 @@ Løsning
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Fortsetter videre på koden, og legger til tidsfaste effekter:</li>
 </ol>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="oppgaver-3.html#cb284-1" tabindex="-1"></a><span class="co"># legger også til års-FE</span></span>
-<span id="cb284-2"><a href="oppgaver-3.html#cb284-2" tabindex="-1"></a>fe_id_t <span class="ot">&lt;-</span> <span class="fu">feols</span>(</span>
-<span id="cb284-3"><a href="oppgaver-3.html#cb284-3" tabindex="-1"></a>  lnwg <span class="sc">~</span> lnhr <span class="sc">|</span> id <span class="sc">+</span> year, <span class="co"># her er id og year individ- og årsfaste effekter</span></span>
-<span id="cb284-4"><a href="oppgaver-3.html#cb284-4" tabindex="-1"></a>  <span class="at">data =</span> df</span>
-<span id="cb284-5"><a href="oppgaver-3.html#cb284-5" tabindex="-1"></a>)</span>
-<span id="cb284-6"><a href="oppgaver-3.html#cb284-6" tabindex="-1"></a><span class="fu">etable</span>(pols, fe_id, fe_id_t)</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="oppgaver-3.html#cb275-1" tabindex="-1"></a><span class="co"># legger også til års-FE</span></span>
+<span id="cb275-2"><a href="oppgaver-3.html#cb275-2" tabindex="-1"></a>fe_id_t <span class="ot">&lt;-</span> <span class="fu">feols</span>(</span>
+<span id="cb275-3"><a href="oppgaver-3.html#cb275-3" tabindex="-1"></a>  lnwg <span class="sc">~</span> lnhr <span class="sc">|</span> id <span class="sc">+</span> year, <span class="co"># her er id og year individ- og årsfaste effekter</span></span>
+<span id="cb275-4"><a href="oppgaver-3.html#cb275-4" tabindex="-1"></a>  <span class="at">data =</span> df</span>
+<span id="cb275-5"><a href="oppgaver-3.html#cb275-5" tabindex="-1"></a>)</span>
+<span id="cb275-6"><a href="oppgaver-3.html#cb275-6" tabindex="-1"></a><span class="fu">etable</span>(pols, fe_id, fe_id_t)</span></code></pre></div>
 <pre><code>##                              pols           fe_id         fe_id_t
 ## Dependent Var.:              lnwg            lnwg            lnwg
 ##                                                                  

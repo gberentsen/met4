@@ -269,105 +269,81 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </iframe>
 </div>
 </div>
-<div id="kommentarer" class="section level3 hasAnchor" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> Kommentarer<a href="enpop.html#kommentarer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Dette er i hovedsak dekket av kapittel <strong>12</strong> i læreboken. Sjekk om du kan svare på følgende kontrollspørsmål:</p>
-<ol style="list-style-type: decimal">
-<li>Hva er det vi tester når vi gjennomfører en <span class="math inline">\(t\)</span>-test for én populasjon? Hva forutsetter vi?</li>
-<li>Hva er forskjellen på en ensidig og en tosidig test? (<strong>11-2j</strong>)</li>
-</ol>
-<p>Det kan også være greit å repetere konfidensintervaller i seksjon <strong>11-2k</strong> for de som har glemt det fra MET2.</p>
-<p>I Seksjon <strong>11-2g</strong> går boken gjennom en ett-utvalgs t-test i bokens Excel-plugin. La oss gjøre det samme i R. På kursets nettside finner du alle datasettene som følger med læreboken. I dette eksempelet er det snakk om <code>Xm11-01.xlsx</code>. Finn tak i denne filen (du kan også godt åpne den og se på den i Excel!), legg den i en mappe som du kan finne igjen, og åpne et nytt script i R-studio der du først sørger for å sette working directory til denne mappen slik vi gjorde i R-forelesningen.</p>
-<p>Etterpå leser du inn datasettet ved å bruke <code>read_xlsx()</code>-funksjonen som under:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="enpop.html#cb46-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb46-2"><a href="enpop.html#cb46-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;Xm11-01.xlsx&quot;</span>)     <span class="co"># Vi bruker read_xslx() fordi det er en .xlsx-fil</span></span></code></pre></div>
-<pre><code>## Warning: package &#39;readxl&#39; was built under R version 4.3.3</code></pre>
-<p>Konteksten til datasettet er gitt i eksempel 11.1. Det er altså balansen på 400 tilfeldig utvalgte kredittkontoer i en butikk, og en lurer på om forventet balanse er større enn 170. Vi setter opp følgende test:</p>
+<div id="hvilke-strrelser-kan-vi-teste" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Hvilke størrelser kan vi teste?<a href="enpop.html#hvilke-strrelser-kan-vi-teste" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Å gjøre inferens om <em>én</em> populasjon vil si å teste en hypotese om en enkelt ukjent parameter i populasjonen. Framgangsmåten er alltid den samme femstegsoppskriften fra forrige delkapittel; det som skifter fra test til test, er <em>hvilken</em> testobservator vi bruker, og <em>hvilken fordeling</em> den har under <span class="math inline">\(H_0\)</span>. De tre størrelsene vi oftest tester, er:</p>
+<ul>
+<li><strong>forventningen</strong> <span class="math inline">\(\mu\)</span> (populasjonsgjennomsnittet),</li>
+<li>en <strong>andel</strong> <span class="math inline">\(p\)</span>, og</li>
+<li><strong>standardavviket</strong> <span class="math inline">\(\sigma\)</span> (eller variansen <span class="math inline">\(\sigma^2\)</span>), altså spredningen.</li>
+</ul>
+<p>Vi går gjennom de tre i tur og orden.</p>
+</div>
+<div id="inferens-om-et-gjennomsnitt" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Inferens om et gjennomsnitt<a href="enpop.html#inferens-om-et-gjennomsnitt" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Vi vil teste om populasjonsgjennomsnittet er lik en bestemt verdi, altså <span class="math inline">\(H_0: \mu = \mu_0\)</span>. Fra samplingfordelingen til et gjennomsnitt (modul 2) vet vi at <span class="math inline">\(\overline{X}\)</span> har forventning <span class="math inline">\(\mu\)</span> og standardavvik <span class="math inline">\(\sigma/\sqrt{n}\)</span>. Dersom vi <em>kjente</em> <span class="math inline">\(\sigma\)</span>, kunne vi brukt testobservatoren</p>
+<p><span class="math display">\[Z = \frac{\overline{X} - \mu_0}{\sigma/\sqrt{n}},\]</span></p>
+<p>som er standardnormalfordelt når <span class="math inline">\(H_0\)</span> er sann. I praksis kjenner vi sjelden det sanne standardavviket, så vi må estimere det med utvalgsstandardavviket <span class="math inline">\(s\)</span>. Denne ekstra usikkerheten gjør at testobservatoren</p>
+<p><span class="math display">\[T = \frac{\overline{X} - \mu_0}{s/\sqrt{n}}\]</span></p>
+<p>ikke lenger er normalfordelt, men <strong>t-fordelt med <span class="math inline">\(n-1\)</span> frihetsgrader</strong>. Testobservatoren måler hvor mange (estimerte) standardfeil utvalgsgjennomsnittet ligger unna verdien <span class="math inline">\(\mu_0\)</span> som nullhypotesen påstår. Ligger den langt unna null, taler dataene mot <span class="math inline">\(H_0\)</span>. Den kritiske verdien henter vi fra t-fordelingen (<code>qt()</code> i R). Testen kalles gjerne en <strong>t-test</strong>, og den hviler på at observasjonene kommer fra en tilnærmet normalfordelt populasjon, eller at <span class="math inline">\(n\)</span> er stor nok til at sentralgrenseteoremet slår inn.</p>
+</div>
+<div id="inferens-om-en-andel" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Inferens om en andel<a href="enpop.html#inferens-om-en-andel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Ofte er størrelsen vi er ute etter, en <strong>andel</strong> <span class="math inline">\(p\)</span>, for eksempel andelen velgere som støtter et parti, eller andelen defekte enheter i en produksjon. Vi tester da <span class="math inline">\(H_0: p = p_0\)</span>. Fra samplingfordelingen til en andel (modul 2) vet vi at den observerte andelen <span class="math inline">\(\widehat{p}\)</span> er tilnærmet normalfordelt for store utvalg. Under nullhypotesen er <span class="math inline">\(p = p_0\)</span>, så testobservatoren blir</p>
+<p><span class="math display">\[Z = \frac{\widehat{p} - p_0}{\sqrt{p_0(1-p_0)/n}},\]</span></p>
+<p>som er tilnærmet standardnormalfordelt når <span class="math inline">\(H_0\)</span> er sann. Legg merke til at vi setter inn <span class="math inline">\(p_0\)</span> (verdien fra nullhypotesen), <em>ikke</em> <span class="math inline">\(\widehat{p}\)</span>, i nevneren: standardfeilen regnes ut under forutsetning av at <span class="math inline">\(H_0\)</span> er sann. Den kritiske verdien henter vi fra standardnormalfordelingen (<code>qnorm()</code>). Tilnærmingen er god når både <span class="math inline">\(np_0\)</span> og <span class="math inline">\(n(1-p_0)\)</span> er større enn omtrent 5.</p>
+</div>
+<div id="inferens-om-et-standardavvik" class="section level3 hasAnchor" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> Inferens om et standardavvik<a href="enpop.html#inferens-om-et-standardavvik" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Noen ganger er det <em>spredningen</em> i seg selv vi vil teste, for eksempel om en maskin produserer enheter med et standardavvik som er større enn en tillatt grense. Vi tester da <span class="math inline">\(H_0: \sigma = \sigma_0\)</span> (likeverdig med <span class="math inline">\(\sigma^2 = \sigma_0^2\)</span>), og bruker testobservatoren</p>
+<p><span class="math display">\[\chi^2 = \frac{(n-1)s^2}{\sigma_0^2},\]</span></p>
+<p>som under <span class="math inline">\(H_0\)</span> følger en <strong>kji-kvadratfordeling</strong> (<span class="math inline">\(\chi^2\)</span>-fordeling) med <span class="math inline">\(n-1\)</span> frihetsgrader. En viktig forskjell fra <span class="math inline">\(Z\)</span> og <span class="math inline">\(T\)</span> er at kji-kvadratfordelingen ikke er symmetrisk: den lever bare på positive verdier og har en lang høyre hale. Derfor er de kritiske verdiene forskjellige i øvre og nedre hale, og vi må være ekstra nøye med hvilken hale forkastningsområdet skal ligge i. Kritiske verdier henter vi fra <code>qchisq()</code>. Denne testen er følsom for brudd på antakelsen om at populasjonen er normalfordelt.</p>
+</div>
+<div id="et-eksempel-i-r-1" class="section level3 hasAnchor" number="3.2.5">
+<h3><span class="header-section-number">3.2.5</span> Et eksempel i R<a href="enpop.html#et-eksempel-i-r-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La oss gjennomføre en t-test for et gjennomsnitt i R. En kaffebar hevder at den gjennomsnittlige ventetiden i kø er 5 minutter. Vi mistenker at den egentlig er lengre, og måler ventetiden (i minutter) til 30 tilfeldig valgte kunder. Vi simulerer dataene selv, så du kan kjøre koden og få de samme tallene:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="enpop.html#cb46-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb46-2"><a href="enpop.html#cb46-2" tabindex="-1"></a>ventetid <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="fl">5.4</span>, <span class="at">sd =</span> <span class="fl">1.2</span>)   <span class="co"># 30 simulerte ventetider</span></span></code></pre></div>
+<p>Vi tester</p>
 <p><span class="math display">\[\begin{align*}
-&amp;H_0: \mu = 170 \\
-&amp;H_A: \mu &gt; 170,
-\end{align*}\]</span>
-der vi legger merke til at det blir brukt en ensidig test (hvorfor?).</p>
-<p>For å regne ut testobservatoren for å enutvalgs <span class="math inline">\(z\)</span>-test trenger vi fire tall: <span class="math inline">\(\overline X\)</span>, <span class="math inline">\(\mu_0\)</span>, <span class="math inline">\(n\)</span> og <span class="math inline">\(\sigma\)</span>. Legger merke til at <code>data</code> har en kolonne som heter <code>Accounts</code>, og vi bruker dollartegnet til å hente den ut som en vektor. Regner ut observatoren:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="enpop.html#cb48-1" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Accounts)     <span class="co"># Gjennomsnittet av observasjonene</span></span>
-<span id="cb48-2"><a href="enpop.html#cb48-2" tabindex="-1"></a>mu0      <span class="ot">&lt;-</span> <span class="dv">170</span>                     <span class="co"># Henter fra teksten</span></span>
-<span id="cb48-3"><a href="enpop.html#cb48-3" tabindex="-1"></a>n        <span class="ot">&lt;-</span> <span class="fu">length</span>(data<span class="sc">$</span>Accounts)   <span class="co"># Antall observasjoner</span></span>
-<span id="cb48-4"><a href="enpop.html#cb48-4" tabindex="-1"></a>sigma    <span class="ot">&lt;-</span> <span class="dv">65</span>                      <span class="co"># Henter fra teksten</span></span>
-<span id="cb48-5"><a href="enpop.html#cb48-5" tabindex="-1"></a></span>
-<span id="cb48-6"><a href="enpop.html#cb48-6" tabindex="-1"></a>Z <span class="ot">&lt;-</span> (gj.snitt <span class="sc">-</span> mu0)<span class="sc">/</span>(sigma<span class="sc">/</span><span class="fu">sqrt</span>(n))   <span class="co"># Verdien av testobservatoren</span></span>
-<span id="cb48-7"><a href="enpop.html#cb48-7" tabindex="-1"></a>Z                                       <span class="co"># Skriver ut testobservatoren</span></span></code></pre></div>
-<pre><code>## [1] 2.460462</code></pre>
-<p>Vi ser at testobservatoren har samme verdi som i Excel-gjennomgangen. Kritisk verdi finner vi rett fra R:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="enpop.html#cb50-1" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>)</span></code></pre></div>
-<pre><code>## [1] 1.644854</code></pre>
-<p>Uansett; vi forkaster <span class="math inline">\(H_0\)</span> siden testobservatoren er større enn kritisk verdi.</p>
-<p>Kapittel <strong>11-3a-d</strong> gir enda mer forståelse for hypotesetesting. Hopp over e og f om du vil. Kapittel 11-4 snakker litt om hvordan vi skal bruke hypotesetesting videre.</p>
-<p><strong>Kapittel 12</strong> presenterer de tre testene (ett gjennomsnitt, en varians, en andel) i tur og orden. Det du først og fremst må kunne fra dette kapitlet er å gjennomføre disse testene, både for hånd med penn og papir, og i R. Under følger kode for å gjøre noen av bokens eksempler i R (les i boken for kontekst):</p>
-<p><strong>Eksempel 12.1:</strong></p>
-<p><span class="math display">\[\begin{align*}
-&amp;H_0: \mu = 2.0 \\
-&amp;H_A: \mu &gt; 2.0,
+&amp;H_0: \mu = 5 \\
+&amp;H_A: \mu &gt; 5,
 \end{align*}\]</span></p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="enpop.html#cb52-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;Xm12-01.xlsx&quot;</span>)</span>
-<span id="cb52-2"><a href="enpop.html#cb52-2" tabindex="-1"></a></span>
-<span id="cb52-3"><a href="enpop.html#cb52-3" tabindex="-1"></a><span class="co"># Manuell utregning</span></span>
-<span id="cb52-4"><a href="enpop.html#cb52-4" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Newspaper)</span>
-<span id="cb52-5"><a href="enpop.html#cb52-5" tabindex="-1"></a>mu0      <span class="ot">&lt;-</span> <span class="fl">2.0</span></span>
-<span id="cb52-6"><a href="enpop.html#cb52-6" tabindex="-1"></a>n        <span class="ot">&lt;-</span> <span class="fu">length</span>(data<span class="sc">$</span>Newspaper)</span>
-<span id="cb52-7"><a href="enpop.html#cb52-7" tabindex="-1"></a>s        <span class="ot">&lt;-</span> <span class="fu">sd</span>(data<span class="sc">$</span>Newspaper)</span>
-<span id="cb52-8"><a href="enpop.html#cb52-8" tabindex="-1"></a></span>
-<span id="cb52-9"><a href="enpop.html#cb52-9" tabindex="-1"></a><span class="co"># Testobservator:</span></span>
-<span id="cb52-10"><a href="enpop.html#cb52-10" tabindex="-1"></a>(gj.snitt <span class="sc">-</span> mu0)<span class="sc">/</span>(s<span class="sc">/</span><span class="fu">sqrt</span>(n))</span></code></pre></div>
-<pre><code>## [1] 2.236869</code></pre>
-<p>Signifikansnivået er satt til <span class="math inline">\(\alpha = 1\%\)</span> i eksempelet. Kritisk verdi finner vi rett fra R:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="enpop.html#cb54-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.99</span>, <span class="at">df =</span> n<span class="dv">-1</span>)</span></code></pre></div>
-<pre><code>## [1] 2.351983</code></pre>
-<p>Altså forkaster vi <strong>ikke</strong> nullhypotesen. Sjekk gjerne verdiene vi regnet ut over og se at de stemmer overens med det som står i boken. Alternativt bruker vi <code>t.test()</code>-funksjonen direkte:</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="enpop.html#cb56-1" tabindex="-1"></a><span class="fu">t.test</span>(data<span class="sc">$</span>Newspaper, <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>, <span class="at">mu =</span> <span class="fl">2.0</span>, <span class="at">conf.level =</span> <span class="fl">0.99</span>)</span></code></pre></div>
+<p>altså en ensidig test, siden vi bare er interessert i om ventetiden er <em>lengre</em> enn påstått. Vi regner først ut testobservatoren <span class="math inline">\(T\)</span> for hånd:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="enpop.html#cb47-1" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">mean</span>(ventetid)          <span class="co"># utvalgsgjennomsnittet</span></span>
+<span id="cb47-2"><a href="enpop.html#cb47-2" tabindex="-1"></a>s        <span class="ot">&lt;-</span> <span class="fu">sd</span>(ventetid)            <span class="co"># utvalgsstandardavviket</span></span>
+<span id="cb47-3"><a href="enpop.html#cb47-3" tabindex="-1"></a>n        <span class="ot">&lt;-</span> <span class="fu">length</span>(ventetid)        <span class="co"># antall observasjoner</span></span>
+<span id="cb47-4"><a href="enpop.html#cb47-4" tabindex="-1"></a>mu0      <span class="ot">&lt;-</span> <span class="dv">5</span>                       <span class="co"># verdien fra nullhypotesen</span></span>
+<span id="cb47-5"><a href="enpop.html#cb47-5" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="enpop.html#cb47-6" tabindex="-1"></a>T_obs <span class="ot">&lt;-</span> (gj.snitt <span class="sc">-</span> mu0)<span class="sc">/</span>(s<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
+<span id="cb47-7"><a href="enpop.html#cb47-7" tabindex="-1"></a>T_obs</span></code></pre></div>
+<pre><code>## [1] 2.464379</code></pre>
+<p>Den kritiske verdien for en ensidig test på 5 %-nivå henter vi fra t-fordelingen med <span class="math inline">\(n-1 = 29\)</span> frihetsgrader:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="enpop.html#cb49-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.95</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 1.699127</code></pre>
+<p>Siden testobservatoren er større enn den kritiske verdien, forkaster vi <span class="math inline">\(H_0\)</span>: dataene tyder på at den forventede ventetiden er lengre enn 5 minutter. Vi kunne fått nøyaktig samme konklusjon ved å bruke den innebygde <code>t.test()</code>-funksjonen direkte, som i tillegg gir oss p-verdien:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="enpop.html#cb51-1" tabindex="-1"></a><span class="fu">t.test</span>(ventetid, <span class="at">mu =</span> <span class="dv">5</span>, <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
 ## 
-## data:  data$Newspaper
-## t = 2.2369, df = 147, p-value = 0.0134
-## alternative hypothesis: true mean is greater than 2
-## 99 percent confidence interval:
-##  1.990716      Inf
+## data:  ventetid
+## t = 2.4644, df = 29, p-value = 0.009946
+## alternative hypothesis: true mean is greater than 5
+## 95 percent confidence interval:
+##  5.154937      Inf
 ## sample estimates:
 ## mean of x 
-##  2.180405</code></pre>
-<p>Resultatet blir selvsagt det samme. Når <span class="math inline">\(p\)</span>-verdien er større enn signifikansnivået på 1%, kan vi ikke forkaste nullhypotesen. Eksempel 12.2 handler om å lage kondidensintervall, noe du også kan prøve å gjøre ved å regne ut de nødvendige tallene i R. De som synes dette er greit kan kikke på seksjonene <strong>12-1b-e</strong> for å utvikle forståelsen enda litt mer.</p>
-<p><strong>Eksempel 12.3:</strong></p>
-<p><span class="math display">\[\begin{align*}
-&amp;H_0: \sigma^2 = 1.0 \\
-&amp;H_A: \sigma^2 &lt; 1.0.
-\end{align*}\]</span></p>
-<p>Testobservator:</p>
-<p><span class="math display">\[\chi^2 = \frac{(n-1)s^2}{\sigma_0^2}.\]</span></p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="enpop.html#cb58-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;Xm12-03.xlsx&quot;</span>)</span>
-<span id="cb58-2"><a href="enpop.html#cb58-2" tabindex="-1"></a></span>
-<span id="cb58-3"><a href="enpop.html#cb58-3" tabindex="-1"></a><span class="co"># Regner ut testobservatoren direkte denne gangen, uten å lagre tallene underveis:</span></span>
-<span id="cb58-4"><a href="enpop.html#cb58-4" tabindex="-1"></a>(<span class="fu">length</span>(data<span class="sc">$</span>Fills) <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">*</span><span class="fu">var</span>(data<span class="sc">$</span>Fills)<span class="sc">/</span><span class="dv">1</span></span>
-<span id="cb58-5"><a href="enpop.html#cb58-5" tabindex="-1"></a></span>
-<span id="cb58-6"><a href="enpop.html#cb58-6" tabindex="-1"></a><span class="co"># Kritisk verdi, 5% nivå, ensidig test, nedre hale:</span></span>
-<span id="cb58-7"><a href="enpop.html#cb58-7" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.05</span>, <span class="at">df =</span> <span class="fu">length</span>(data<span class="sc">$</span>Fills) <span class="sc">-</span> <span class="dv">1</span>)     </span></code></pre></div>
-<pre><code>## [1] 15.2</code></pre>
-<pre><code>## [1] 13.84843</code></pre>
-<p>Vi kan altså ikke forkaste nullhypotesen. Igjen, les eksempelet i sin fulle lengde i boken for å forstå bedre hva som skjer. Figur 12.4 viser på en fin måte hva tallene betyr.</p>
-<p><strong>Eksempel 12.5</strong> kan være grei å kikke på også. Vi kan selvsagt bruke R som kalkulator og regne ut det vi trenger. Vi skal teste:</p>
-<p><span class="math display">\[\begin{align*}
-&amp;H_0: p = 0.5 \\
-&amp;H_A: p &gt; 0.5.
-\end{align*}\]</span></p>
-<p>Vi har en observert andel på <span class="math inline">\(\widehat p = 407/765 = 0.532\)</span> etter å ha spurt <span class="math inline">\(n = 765\)</span> personer. Testobservatoren er
-<span class="math display">\[Z = \frac{\widehat p - p}{\sqrt{p(1-p)/n}}.\]</span></p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="enpop.html#cb61-1" tabindex="-1"></a>p.hatt <span class="ot">&lt;-</span> <span class="dv">407</span><span class="sc">/</span><span class="dv">765</span></span>
-<span id="cb61-2"><a href="enpop.html#cb61-2" tabindex="-1"></a>p0     <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb61-3"><a href="enpop.html#cb61-3" tabindex="-1"></a>n      <span class="ot">&lt;-</span> <span class="dv">765</span></span>
-<span id="cb61-4"><a href="enpop.html#cb61-4" tabindex="-1"></a></span>
-<span id="cb61-5"><a href="enpop.html#cb61-5" tabindex="-1"></a>(p.hatt <span class="sc">-</span> p0)<span class="sc">/</span><span class="fu">sqrt</span>(p0<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p0)<span class="sc">/</span>n)</span></code></pre></div>
-<pre><code>## [1] 1.771599</code></pre>
-<p>Kritisk verdi for en ensidig z-test på 5% nivå er 1.645 (<code>qnorm(0.95)</code>), og vi kan forkaste nullhypotesen.</p>
-<p>Seksjonene <strong>12-3d-f</strong> bør leses på egen hånd, mens vi hopper over <strong>12-3g</strong>.</p>
+##   5.49895</code></pre>
+<p>p-verdien er langt mindre enn 0.05, så vi forkaster <span class="math inline">\(H_0\)</span>, akkurat som over.</p>
+</div>
+<div id="kontrollsprsmal-3" class="section level3 hasAnchor" number="3.2.6">
+<h3><span class="header-section-number">3.2.6</span> Kontrollspørsmål<a href="enpop.html#kontrollsprsmal-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Hva tester vi i en ett-utvalgs t-test, og hvilke forutsetninger hviler den på?</li>
+<li>Hvorfor bruker vi t-fordelingen og ikke normalfordelingen når vi tester et gjennomsnitt uten å kjenne <span class="math inline">\(\sigma\)</span>?</li>
+<li>Hvorfor setter vi inn <span class="math inline">\(p_0\)</span> og ikke <span class="math inline">\(\widehat{p}\)</span> i nevneren til testobservatoren for en andel?</li>
+<li>Hvorfor må vi være ekstra nøye med øvre og nedre kritisk verdi i en kji-kvadrattest for et standardavvik?</li>
+</ol>
 </div>
 </div>
             </section>
