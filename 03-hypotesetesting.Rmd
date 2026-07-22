@@ -332,7 +332,7 @@ Intuisjonen er den samme som i ett-utvalgstesten: ligger de to gjennomsnittene m
 **Eksempel.** En nettbutikk tester to versjoner (A og B) av forsiden, og måler ordreverdien (i kr) til kundene som ser hver versjon. Gir versjon B høyere gjennomsnittlig ordreverdi?
 
 1. **Spørsmål:** Er den forventede ordreverdien høyere for versjon B enn for versjon A?
-2. **Hypoteser og signifikansnivå:** $H_0: \mu_B = \mu_A$ mot $H_A: \mu_B > \mu_A$ (ensidig). En Type I-feil ville være å rulle ut versjon B i troen på at den er bedre, uten at den egentlig er det. Konsekvensen er begrenset, så vi velger $\alpha = 5\,\%$.
+2. **Hypoteser og signifikansnivå:** $H_0: \mu_B = \mu_A$ mot $H_A: \mu_B > \mu_A$ (ensidig). En Type I-feil ville være å rulle ut versjon B i troen på at den er bedre, uten at den egentlig er det. En slik feil har liten konsekvens (i verste fall bytter vi til en side som ikke er noe bedre enn den gamle), så her tillater vi oss et mildere krav og velger $\alpha = 10\,\%$.
 3. **Data:** 50 kunder ser hver versjon. Vi simulerer ordreverdiene:
 
 ```{r}
@@ -352,21 +352,21 @@ T_obs <- (mean(B) - mean(A))/(s_p*sqrt(1/n1 + 1/n2))
 T_obs
 ```
 
-5. **Kritisk verdi og konklusjon:** Testobservatoren er t-fordelt med $n_1 + n_2 - 2 = 98$ frihetsgrader. Kritisk verdi for en ensidig test på 5 %-nivå er 95-prosentilen $t_{0.95,\,98}$ (se \@ref(relevante-r-testing)):
+5. **Kritisk verdi og konklusjon:** Testobservatoren er t-fordelt med $n_1 + n_2 - 2 = 98$ frihetsgrader. Kritisk verdi for en ensidig test på 10 %-nivå er 90-prosentilen $t_{0.90,\,98}$ (se \@ref(relevante-r-testing)):
 
 ```{r}
-qt(0.95, df = n1 + n2 - 2)
+qt(0.90, df = n1 + n2 - 2)
 ```
 
-Testobservatoren (2.61) er større enn den kritiske verdien (1.66), så vi forkaster $H_0$: versjon B ser ut til å gi høyere ordreverdi.
+Testobservatoren (2.61) er større enn den kritiske verdien (1.29), så vi forkaster $H_0$: versjon B ser ut til å gi høyere ordreverdi.
 
 Over gjorde vi testen manuelt. **I R** gjør `t.test()` hele jobben direkte fra dataene. Vi setter `var.equal = TRUE` fordi vi antok lik varians (uten det argumentet gjør R en Welch-test som *ikke* antar lik varians):
 
 ```{r}
-t.test(B, A, alternative = "greater", var.equal = TRUE)
+t.test(B, A, alternative = "greater", var.equal = TRUE, conf.level = 0.90)
 ```
 
-Se på **p-verdien**: den er 0.005, altså under 0.05, så vi forkaster $H_0$. Merk at `t.test()` alltid ser på differansen mellom *første* og *andre* argument, så rekkefølgen (`B, A`) avgjør hva `alternative = "greater"` betyr.
+Se på **p-verdien**: den er 0.005, godt under signifikansnivået på 0.10, så vi forkaster $H_0$. Merk at `t.test()` alltid ser på differansen mellom *første* og *andre* argument, så rekkefølgen (`B, A`) avgjør hva `alternative = "greater"` betyr.
 
 ### t-test for matchede par
 
