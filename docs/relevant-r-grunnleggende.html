@@ -306,7 +306,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb42-18"><a href="relevant-r-grunnleggende.html#cb42-18" tabindex="-1"></a><span class="fu">table</span>(survey<span class="sc">$</span>religious)                   <span class="co"># Frekvenstabell </span></span>
 <span id="cb42-19"><a href="relevant-r-grunnleggende.html#cb42-19" tabindex="-1"></a>survey <span class="sc">%&gt;%</span>                                <span class="co"># Krysstabell av to variabler (krever</span></span>
 <span id="cb42-20"><a href="relevant-r-grunnleggende.html#cb42-20" tabindex="-1"></a>  <span class="fu">select</span>(party, religious) <span class="sc">%&gt;%</span>            <span class="co"># pipe-operatoren og select()-funks.  </span></span>
-<span id="cb42-21"><a href="relevant-r-grunnleggende.html#cb42-21" tabindex="-1"></a>  table                                   <span class="co"># fra dplyr-pakken)</span></span></code></pre></div>
+<span id="cb42-21"><a href="relevant-r-grunnleggende.html#cb42-21" tabindex="-1"></a>  table                                   <span class="co"># fra dplyr-pakken)</span></span>
+<span id="cb42-22"><a href="relevant-r-grunnleggende.html#cb42-22" tabindex="-1"></a></span>
+<span id="cb42-23"><a href="relevant-r-grunnleggende.html#cb42-23" tabindex="-1"></a><span class="co"># Normalisert krysstabell: prop.table() gjør antall om til andeler.</span></span>
+<span id="cb42-24"><a href="relevant-r-grunnleggende.html#cb42-24" tabindex="-1"></a>survey <span class="sc">%&gt;%</span></span>
+<span id="cb42-25"><a href="relevant-r-grunnleggende.html#cb42-25" tabindex="-1"></a>  <span class="fu">select</span>(party, religious) <span class="sc">%&gt;%</span></span>
+<span id="cb42-26"><a href="relevant-r-grunnleggende.html#cb42-26" tabindex="-1"></a>  <span class="fu">table</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb42-27"><a href="relevant-r-grunnleggende.html#cb42-27" tabindex="-1"></a>  <span class="fu">prop.table</span>()                            <span class="co"># andel av totalen</span></span>
+<span id="cb42-28"><a href="relevant-r-grunnleggende.html#cb42-28" tabindex="-1"></a></span>
+<span id="cb42-29"><a href="relevant-r-grunnleggende.html#cb42-29" tabindex="-1"></a>survey <span class="sc">%&gt;%</span></span>
+<span id="cb42-30"><a href="relevant-r-grunnleggende.html#cb42-30" tabindex="-1"></a>  <span class="fu">select</span>(party, religious) <span class="sc">%&gt;%</span></span>
+<span id="cb42-31"><a href="relevant-r-grunnleggende.html#cb42-31" tabindex="-1"></a>  <span class="fu">table</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb42-32"><a href="relevant-r-grunnleggende.html#cb42-32" tabindex="-1"></a>  <span class="fu">prop.table</span>(<span class="at">margin =</span> <span class="dv">1</span>)                  <span class="co"># andel innenfor hver rad (margin = 2 gir kolonne)</span></span></code></pre></div>
 </div>
 <div id="kjente-fordelinger-kvantiler-og-sannsynligheter" class="section level3 unnumbered hasAnchor">
 <h3>Kjente fordelinger: kvantiler og sannsynligheter<a href="relevant-r-grunnleggende.html#kjente-fordelinger-kvantiler-og-sannsynligheter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
