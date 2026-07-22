@@ -61,7 +61,6 @@ hvilke-strrelser-kan-vi-teste
 inferens-om-et-gjennomsnitt
 inferens-om-en-andel
 inferens-om-et-standardavvik
-et-eksempel-i-r-1
 kontrollsprsmal-3
 inferens-om-to-populasjoner
 kommentarer
