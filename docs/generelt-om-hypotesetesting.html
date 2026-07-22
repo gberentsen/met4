@@ -269,16 +269,103 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </iframe>
 </div>
 </div>
-<div id="kommentarer" class="section level3 hasAnchor" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> Kommentarer<a href="generelt-om-hypotesetesting.html#kommentarer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Her snakker vi om kapittel <strong>11</strong> i læreboken. Hvis du kan svare på følgende spørsmål har du i all hovedsak fått med deg de viktigste begrepene:</p>
+<div id="hva-er-en-hypotesetest" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Hva er en hypotesetest?<a href="generelt-om-hypotesetesting.html#hva-er-en-hypotesetest" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En <strong>hypotese</strong> er en påstand om en ukjent størrelse i en populasjon, for eksempel om at et parti har oppslutning over sperregrensen, eller at forventet vekt på et produkt er en bestemt verdi. Vitenskapsfilosofen Karl Popper påpekte at gode hypoteser må være <em>falsifiserbare</em>: det må finnes tenkelige observasjoner som kan <em>motbevise</em> dem. Et viktig poeng følger av dette: at en hypotese ennå ikke er forkastet, betyr ikke at den er sann. Newtons fysikk sto uimotsagt i århundrer før Einstein viste at den bare var tilnærmet riktig.</p>
+<p>Statistisk hypotesetesting bygger på nettopp denne tankegangen. Vi setter opp <em>to</em> konkurrerende hypoteser:</p>
 <ul>
-<li>Hva vil det si å gjennomføre en hypotesetest?</li>
-<li>Hva er Type I-feil og hva er Type II-feil? (Seksjon <strong>11-1</strong> forklarer dette greit)</li>
-<li>Hva er signifikansnivået (<span class="math inline">\(\alpha\)</span>) til en test?</li>
-<li>Styrken (the power) til en test er definert som <span class="math inline">\(1-P(\textrm{Type II-feil})=1-\beta\)</span>. Hvordan tolker du denne størrelsen? Se også <strong>11-3d</strong>.</li>
-<li>Hva er <span class="math inline">\(p\)</span>-verdien til en test (Seksjon <strong>11-2c</strong>)? Les også <strong>11-2d</strong>, <strong>e</strong> og <strong>f</strong> om hvordan vi fortolker og snakker om <span class="math inline">\(p\)</span>-verdien på en korrekt måte. Vi kommer tilbake til dette i kapittel <a href="enpop.html#enpop">3.2</a>.</li>
+<li><strong>Nullhypotesen</strong> <span class="math inline">\(H_0\)</span> er utgangspunktet, ofte en «kjedelig» eller skeptisk påstand om at det <em>ikke</em> er noen effekt eller forskjell (partiet ligger på sperregrensen, medisinen virker ikke, forventningen er lik en bestemt verdi <span class="math inline">\(\mu_0\)</span>).</li>
+<li><strong>Alternativhypotesen</strong> <span class="math inline">\(H_A\)</span> er det vi egentlig mistenker eller ønsker å påvise (partiet ligger over sperregrensen, medisinen virker, forventningen er forskjellig fra <span class="math inline">\(\mu_0\)</span>).</li>
 </ul>
+<p>Logikken er den samme som i en rettssak: den tiltalte antas uskyldig (<span class="math inline">\(H_0\)</span>) helt til det motsatte er bevist. Vi <em>antar</em> at <span class="math inline">\(H_0\)</span> er sann, og spør så: er dataene vi observerte overraskende dersom <span class="math inline">\(H_0\)</span> er sann? Er de tilstrekkelig overraskende, <strong>forkaster</strong> vi <span class="math inline">\(H_0\)</span> til fordel for <span class="math inline">\(H_A\)</span>. Er de ikke det, <strong>beholder</strong> vi <span class="math inline">\(H_0\)</span>, ikke fordi vi har bevist at den er sann, men fordi vi ikke har nok bevis til å forkaste den. Akkurat som en frifinnelse ikke er det samme som å bevise uskyld, «beviser» en hypotesetest aldri nullhypotesen.</p>
+</div>
+<div id="framgangsmaten-steg-for-steg" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Framgangsmåten steg for steg<a href="generelt-om-hypotesetesting.html#framgangsmaten-steg-for-steg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En hypotesetest kan settes opp i fem steg. Vi følger dem med et konkret eksempel: <em>har partiet Venstre oppslutning over sperregrensen på 4 %?</em></p>
+<ol style="list-style-type: decimal">
+<li><strong>Formuler spørsmålet.</strong> Hva vil vi finne ut? Her: ligger den sanne oppslutningen <span class="math inline">\(p\)</span> over 4 %?</li>
+<li><strong>Oversett til <span class="math inline">\(H_0\)</span> og <span class="math inline">\(H_A\)</span>.</strong> Vi skriver spørsmålet som to hypoteser om populasjonsstørrelsen, og noterer hvilke antakelser vi gjør om populasjonen. Her: <span class="math inline">\(H_0: p = 0.04\)</span> mot <span class="math inline">\(H_A: p &gt; 0.04\)</span>.</li>
+<li><strong>Samle data.</strong> Vi trekker et utvalg fra populasjonen, for eksempel ved å spørre 1000 tilfeldig valgte velgere hva de vil stemme.</li>
+<li><strong>Beregn testobservatoren.</strong> Vi oppsummerer dataene i én tallstørrelse, en <strong>testobservator</strong>, som tallfester hvor mye beviset taler mot <span class="math inline">\(H_0\)</span>. Poenget med en testobservator er at vi kjenner <strong>fordelingen dens når <span class="math inline">\(H_0\)</span> er sann</strong>.</li>
+<li><strong>Vurder signifikans og konkluder.</strong> Vi spør hvor overraskende testobservatoren er dersom <span class="math inline">\(H_0\)</span> er sann. Er vi tilstrekkelig overrasket, forkaster vi <span class="math inline">\(H_0\)</span>.</li>
+</ol>
+<p>Steg 5 er kjernen, og «overrasket» har en presis betydning: er <span class="math inline">\(H_0\)</span> sann, følger testobservatoren en kjent fordeling (en samplingfordeling), og vi kan regne ut hvor sannsynlig det er å få en verdi som er <em>minst så ekstrem</em> som den vi observerte. Er den sannsynligheten liten, er dataene vanskelige å forene med <span class="math inline">\(H_0\)</span>.</p>
+<p>Det finnes to likeverdige måter å ta beslutningen på i steg 5, og de gir alltid samme konklusjon:</p>
+<ul>
+<li><strong>p-verdien:</strong> regn ut sannsynligheten for en testobservator minst så ekstrem som den observerte, gitt <span class="math inline">\(H_0\)</span>, og forkast dersom denne er liten.</li>
+<li><strong>Forkastningsområdet:</strong> finn på forhånd de mest ekstreme verdiene testobservatoren kan ta (forkastningsområdet), og forkast dersom den observerte verdien lander der. Grensen kalles den <strong>kritiske verdien</strong>.</li>
+</ul>
+</div>
+<div id="signifikansniva-og-de-to-feiltypene" class="section level3 hasAnchor" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> Signifikansnivå og de to feiltypene<a href="generelt-om-hypotesetesting.html#signifikansniva-og-de-to-feiltypene" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Hvor overrasket må vi være før vi forkaster? Her må vi ta stilling til at en test kan gå galt på to måter:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="center"><span class="math inline">\(H_0\)</span> er sann</th>
+<th align="center"><span class="math inline">\(H_0\)</span> er usann</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Vi forkaster <span class="math inline">\(H_0\)</span></strong></td>
+<td align="center">Type I-feil</td>
+<td align="center">Riktig</td>
+</tr>
+<tr class="even">
+<td><strong>Vi beholder <span class="math inline">\(H_0\)</span></strong></td>
+<td align="center">Riktig</td>
+<td align="center">Type II-feil</td>
+</tr>
+</tbody>
+</table>
+<p>En <strong>Type I-feil</strong> er å forkaste en sann nullhypotese (dømme en uskyldig). En <strong>Type II-feil</strong> er å beholde en usann nullhypotese (frikjenne en skyldig).</p>
+<p><strong>Signifikansnivået</strong> <span class="math inline">\(\alpha\)</span> er sannsynligheten vi på forhånd er villige til å godta for å gjøre en Type I-feil: <span class="math inline">\(\alpha = P(\text{forkaste } H_0 \mid H_0 \text{ er sann})\)</span>. Vi velger <span class="math inline">\(\alpha\)</span> før vi ser dataene (typisk 5 %), og det er <span class="math inline">\(\alpha\)</span> som bestemmer hvor grensen for forkastningsområdet går. Et 5 %-nivå betyr at vi legger forkastningsområdet der de 5 % mest ekstreme verdiene under <span class="math inline">\(H_0\)</span> ligger.</p>
+<p>Sannsynligheten for en Type II-feil kaller vi <span class="math inline">\(\beta\)</span>. <strong>Styrken</strong> (power) til testen er <span class="math inline">\(1 - \beta\)</span>, altså sannsynligheten for at vi <em>korrekt</em> forkaster en usann nullhypotese. En sterk test er god til å oppdage en effekt når den faktisk finnes.</p>
+<p>De to feiltypene trekker i hver sin retning: krymper vi forkastningsområdet (lavere <span class="math inline">\(\alpha\)</span>), gjør vi Type I-feil sjeldnere, men Type II-feil oftere. Den eneste måten å redusere begge samtidig på er å samle inn <em>mer data</em>: en større <span class="math inline">\(n\)</span> gir en mer presis testobservator, og dermed både lav <span class="math inline">\(\alpha\)</span> og høy styrke.</p>
+</div>
+<div id="p-verdien" class="section level3 hasAnchor" number="3.1.4">
+<h3><span class="header-section-number">3.1.4</span> p-verdien<a href="generelt-om-hypotesetesting.html#p-verdien" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>p-verdien</strong> er sannsynligheten for å observere en testobservator som er <em>minst så ekstrem</em> som den vi faktisk fikk, gitt at <span class="math inline">\(H_0\)</span> er sann. En liten p-verdi betyr at dataene er svært overraskende under <span class="math inline">\(H_0\)</span>, og teller som bevis <em>mot</em> <span class="math inline">\(H_0\)</span>. Beslutningsregelen er enkel: vi <strong>forkaster <span class="math inline">\(H_0\)</span> dersom <span class="math inline">\(p \leq \alpha\)</span></strong>.</p>
+<p>I Venstre-eksempelet, dersom testobservatoren ga en p-verdi på 0.0006, ville vi ved <span class="math inline">\(\alpha = 0.01\)</span> forkastet <span class="math inline">\(H_0\)</span> og konkludert med at resultatet tyder på oppslutning over sperregrensen.</p>
+<p>p-verdien er lett å mistolke, så merk deg hva den <em>ikke</em> er:</p>
+<ul>
+<li>Den er <strong>ikke</strong> sannsynligheten for at <span class="math inline">\(H_0\)</span> er sann. p-verdien sier noe om dataene <em>gitt</em> <span class="math inline">\(H_0\)</span>, ikke om <span class="math inline">\(H_0\)</span> gitt dataene.</li>
+<li>En stor p-verdi <strong>beviser ikke</strong> at <span class="math inline">\(H_0\)</span> er sann; den betyr bare at dataene er forenlige med <span class="math inline">\(H_0\)</span>.</li>
+<li>«Statistisk signifikant» (<span class="math inline">\(p \leq \alpha\)</span>) er ikke det samme som «viktig». Med et stort nok utvalg kan selv en ubetydelig forskjell bli statistisk signifikant.</li>
+</ul>
+</div>
+<div id="ensidige-og-tosidige-tester" class="section level3 hasAnchor" number="3.1.5">
+<h3><span class="header-section-number">3.1.5</span> Ensidige og tosidige tester<a href="generelt-om-hypotesetesting.html#ensidige-og-tosidige-tester" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Alternativhypotesen kan peke i én eller begge retninger:</p>
+<ul>
+<li>I en <strong>tosidig</strong> test er <span class="math inline">\(H_A: \mu \neq \mu_0\)</span>. Vi bryr oss om avvik i <em>begge</em> retninger, og forkastningsområdet legges i begge haler av fordelingen.</li>
+<li>I en <strong>ensidig</strong> test er <span class="math inline">\(H_A: \mu &gt; \mu_0\)</span> (eller <span class="math inline">\(\mu &lt; \mu_0\)</span>), og hele forkastningsområdet legges i én hale. Venstre-eksempelet er ensidig: vi er bare interessert i om oppslutningen er <em>over</em> sperregrensen.</li>
+</ul>
+<p>Vi velger en ensidig test når bare avvik til den ene siden er beslutningsrelevant, eller når vi på forhånd kan utelukke den andre siden. Ellers bruker vi en tosidig test. Valget må tas <em>før</em> vi ser dataene, ikke etterpå for å presse fram det svaret vi ønsker oss.</p>
+</div>
+<div id="fallgruver-ved-hypotesetesting" class="section level3 hasAnchor" number="3.1.6">
+<h3><span class="header-section-number">3.1.6</span> Fallgruver ved hypotesetesting<a href="generelt-om-hypotesetesting.html#fallgruver-ved-hypotesetesting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Hypotesetesting er et kraftig verktøy, men også lett å misbruke. Tre fallgruver er verdt å kjenne til:</p>
+<ul>
+<li><strong>Feiltolkning av p-verdien.</strong> Se listen over. Den amerikanske statistikkforeningen (ASA) har til og med gitt ut en egen uttalelse om hvor ofte p-verdien misforstås.</li>
+<li><strong>Multippel testing.</strong> Tester vi mange hypoteser samtidig, vil noen «bli signifikante» ved ren tilfeldighet. Tester du 20 helt uvirksomme effekter på 5 %-nivå, forventer du å få omtrent ett «signifikant» funn bare av flaks. Veien fra multippel testing til (bevisst eller ubevisst) juks er kort, og et signifikant funn som er plukket ut i etterkant blant mange tester, er lite verdt.</li>
+<li><strong>Forutsetningene.</strong> Testene hviler på antakelser (uavhengige observasjoner, en bestemt fordeling, stor nok <span class="math inline">\(n\)</span>). Ofte er samplingfordelingen bare en <em>tilnærming</em> som støtter seg på sentralgrenseteoremet. Konklusjonen er ikke bedre enn forutsetningene den bygger på.</li>
+</ul>
+</div>
+<div id="kontrollsprsmal-2" class="section level3 hasAnchor" number="3.1.7">
+<h3><span class="header-section-number">3.1.7</span> Kontrollspørsmål<a href="generelt-om-hypotesetesting.html#kontrollsprsmal-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Når du har vært gjennom stoffet, bør du kunne svare på følgende:</p>
+<ol style="list-style-type: decimal">
+<li>Hva vil det si å gjennomføre en hypotesetest, og hvorfor kan vi aldri «bevise» nullhypotesen?</li>
+<li>Hva er forskjellen på en Type I-feil og en Type II-feil?</li>
+<li>Hva er signifikansnivået <span class="math inline">\(\alpha\)</span>, og hva har det med forkastningsområdet å gjøre?</li>
+<li>Hva er styrken til en test, og hvordan tolker du den?</li>
+<li>Hva er p-verdien, og hva er den <em>ikke</em>?</li>
+<li>Når bruker vi en ensidig test, og når en tosidig?</li>
+<li>Nevn minst én fallgruve ved hypotesetesting.</li>
+</ol>
 </div>
 </div>
             </section>
