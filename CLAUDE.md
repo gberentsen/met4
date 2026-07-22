@@ -145,7 +145,8 @@ Oppdateres løpende. Holdes kort – vokser den forbi ~10 linjer, flytt den ut a
 |---|---|
 | 01 Introduksjon til R | språkvasket; `summarise()` lagt til i pipe-seksjonen |
 | 02 Grunnleggende statistikk | teoritekst skrevet for 2.1 og 2.2; Kommentarer integrert i hovedtekst; lærebok-henvisninger fjernet; egne (simulerte) eksempler; utvalg/populasjon-distinksjon innført |
-| 03–09 | ikke gjennomgått; lærebok-henvisninger gjenstår |
+| 03 Hypotesetesting | 3.1 «Generelt om hypotesetesting» skrevet som egen teori (basert på forelesningsnotatene, lærebok-ref fjernet); 3.2–3.4 har fortsatt `### Kommentarer`-struktur med lærebok-ref |
+| 04–09 | ikke gjennomgått; lærebok-henvisninger gjenstår |
 
 Åpne punkter:
 
