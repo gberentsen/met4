@@ -334,7 +334,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Eksempel.</strong> En bank hevder at høyst 5 % av forbrukslånene deres blir misligholdt. En tilsynsmyndighet vil undersøke om den sanne misligholdsandelen er høyere.</p>
 <ol style="list-style-type: decimal">
 <li><strong>Spørsmål:</strong> Er den sanne misligholdsandelen <span class="math inline">\(p\)</span> større enn 0.05?</li>
-<li><strong>Hypoteser og signifikansnivå:</strong> <span class="math inline">\(H_0: p = 0.05\)</span> mot <span class="math inline">\(H_A: p &gt; 0.05\)</span> (ensidig). En Type I-feil ville her være å konkludere med at banken bryter kravet når den egentlig oppfyller det, noe som kan utløse unødvendige tilsynstiltak. Vi velger på forhånd et signifikansnivå på <span class="math inline">\(\alpha = 5\,\%\)</span>.</li>
+<li><strong>Hypoteser og signifikansnivå:</strong> <span class="math inline">\(H_0: p = 0.05\)</span> mot <span class="math inline">\(H_A: p &gt; 0.05\)</span> (ensidig). En Type I-feil ville her være å konkludere med at banken bryter kravet når den egentlig oppfyller det, noe som kan utløse unødvendige tilsynstiltak mot en bank som følger reglene. Fordi en slik feilaktig anklage er alvorlig, krever vi sterke bevis og setter et strengt signifikansnivå, <span class="math inline">\(\alpha = 1\,\%\)</span>.</li>
 <li><strong>Data:</strong> Tilsynet trekker 400 tilfeldige lån og finner at 30 av dem er misligholdt. Den observerte andelen er <span class="math inline">\(\widehat{p} = 30/400 = 0.075\)</span>.</li>
 <li><strong>Testobservator:</strong> Under <span class="math inline">\(H_0\)</span> er <span class="math inline">\(p_0 = 0.05\)</span>, så</li>
 </ol>
@@ -346,11 +346,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb53-4"><a href="enpop.html#cb53-4" tabindex="-1"></a>(p.hatt <span class="sc">-</span> p0)<span class="sc">/</span><span class="fu">sqrt</span>(p0<span class="sc">*</span>(<span class="dv">1</span> <span class="sc">-</span> p0)<span class="sc">/</span>n)</span></code></pre></div>
 <pre><code>## [1] 2.294157</code></pre>
 <ol start="5" style="list-style-type: decimal">
-<li><strong>Kritisk verdi og konklusjon:</strong> Testobservatoren er tilnærmet standardnormalfordelt. For en ensidig test på 5 %-nivå er den kritiske verdien <span class="math inline">\(z_{0.95}\)</span> (se <a href="relevante-r-testing.html#relevante-r-testing">3.6</a>):</li>
+<li><strong>Kritisk verdi og konklusjon:</strong> Testobservatoren er tilnærmet standardnormalfordelt. For en ensidig test på 1 %-nivå er den kritiske verdien <span class="math inline">\(z_{0.99}\)</span> (se <a href="relevante-r-testing.html#relevante-r-testing">3.6</a>):</li>
 </ol>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="enpop.html#cb55-1" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>)</span></code></pre></div>
-<pre><code>## [1] 1.644854</code></pre>
-<p>Siden testobservatoren (2.29) er større enn den kritiske verdien (1.645), forkaster vi <span class="math inline">\(H_0\)</span>: misligholdsandelen ser ut til å være høyere enn 5 %.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="enpop.html#cb55-1" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.99</span>)</span></code></pre></div>
+<pre><code>## [1] 2.326348</code></pre>
+<p>Her er testobservatoren (2.29) <em>mindre</em> enn den kritiske verdien (2.33), så den lander <em>ikke</em> i forkastningsområdet, og vi kan <strong>ikke</strong> forkaste <span class="math inline">\(H_0\)</span> på 1 %-nivå. Bevisene peker riktignok mot en høyere misligholdsandel, men de er ikke sterke nok til å møte det strenge kravet vi satte. (Med et vanlig 5 %-nivå ville vi forkastet, siden <span class="math inline">\(2.29 &gt; 1.645\)</span>. Nettopp derfor må nivået velges <em>før</em> testen, ut fra konsekvensene.)</p>
 <p>Over gjorde vi testen manuelt. <strong>I R</strong> kan vi bruke <code>prop.test()</code> direkte, med antall misligholdte lån, antall lån, verdien under <span class="math inline">\(H_0\)</span> og retningen på testen:</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="enpop.html#cb57-1" tabindex="-1"></a><span class="fu">prop.test</span>(<span class="dv">30</span>, <span class="dv">400</span>, <span class="at">p =</span> <span class="fl">0.05</span>, <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>, <span class="at">correct =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## 
@@ -364,7 +364,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## sample estimates:
 ##     p 
 ## 0.075</code></pre>
-<p>Igjen er det <strong>p-verdien</strong> du skal se på. Den er 0.011, altså under <span class="math inline">\(\alpha = 0.05\)</span>, så vi forkaster <span class="math inline">\(H_0\)</span>. (<code>prop.test()</code> rapporterer en <code>X-squared</code>-verdi som rett og slett er <span class="math inline">\(Z^2\)</span>. Vi bruker <code>correct = FALSE</code> for å få nøyaktig samme test som den vi regnet ut for hånd.)</p>
+<p>Igjen er det <strong>p-verdien</strong> du skal se på. Den er 0.011, altså <em>større</em> enn <span class="math inline">\(\alpha = 0.01\)</span>, så vi forkaster ikke <span class="math inline">\(H_0\)</span>. (<code>prop.test()</code> rapporterer en <code>X-squared</code>-verdi som rett og slett er <span class="math inline">\(Z^2\)</span>. Vi bruker <code>correct = FALSE</code> for å få nøyaktig samme test som den vi regnet ut for hånd.)</p>
 </div>
 <div id="inferens-om-et-standardavvik" class="section level3 hasAnchor" number="3.2.4">
 <h3><span class="header-section-number">3.2.4</span> Inferens om et standardavvik<a href="enpop.html#inferens-om-et-standardavvik" class="anchor-section" aria-label="Anchor link to header"></a></h3>

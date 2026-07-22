@@ -338,7 +338,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Eksempel.</strong> En butikkjede bygger om 12 av butikkene sine og vil vite om ombyggingen økte ukesomsetningen. For hver butikk har vi omsetningen (i 1000 kr) <em>før</em> og <em>etter</em> ombyggingen. Siden det er de <em>samme</em> butikkene som måles to ganger, er dataene paret.</p>
 <ol style="list-style-type: decimal">
 <li><strong>Spørsmål:</strong> Økte den forventede omsetningen etter ombyggingen?</li>
-<li><strong>Hypoteser og signifikansnivå:</strong> La $d = $ etter <span class="math inline">\(-\)</span> før. <span class="math inline">\(H_0: \mu_d = 0\)</span> mot <span class="math inline">\(H_A: \mu_d &gt; 0\)</span> (ensidig). En Type I-feil ville være å tro at ombyggingen virket, og bygge om alle butikkene, uten at den egentlig hjelper. Vi velger <span class="math inline">\(\alpha = 5\,\%\)</span>.</li>
+<li><strong>Hypoteser og signifikansnivå:</strong> La $d = $ etter <span class="math inline">\(-\)</span> før. <span class="math inline">\(H_0: \mu_d = 0\)</span> mot <span class="math inline">\(H_A: \mu_d &gt; 0\)</span> (ensidig). En Type I-feil ville være å konkludere med at ombyggingen økte omsetningen når den egentlig ikke gjorde det, og dermed anbefale den på sviktende grunnlag. Konsekvensen er verken ubetydelig eller dramatisk, så vi velger det vanlige nivået <span class="math inline">\(\alpha = 5\,\%\)</span>.</li>
 <li><strong>Data:</strong> (simulert, én verdi før og én etter for hver av de 12 butikkene):</li>
 </ol>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="inferens-om-to-populasjoner.html#cb73-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
@@ -421,7 +421,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Eksempel.</strong> Et selskap kjører to annonsekampanjer, A og B, og vil vite om B gir høyere konverteringsrate (andelen som handler). Av 500 som så kampanje A, handlet 45; av 500 som så kampanje B, handlet 68.</p>
 <ol style="list-style-type: decimal">
 <li><strong>Spørsmål:</strong> Er den sanne konverteringsraten høyere for B enn for A?</li>
-<li><strong>Hypoteser og signifikansnivå:</strong> <span class="math inline">\(H_0: p_A = p_B\)</span> mot <span class="math inline">\(H_A: p_B &gt; p_A\)</span> (ensidig). En Type I-feil ville være å satse videre på kampanje B i troen på at den er bedre, uten at den egentlig er det. Vi velger <span class="math inline">\(\alpha = 5\,\%\)</span>.</li>
+<li><strong>Hypoteser og signifikansnivå:</strong> <span class="math inline">\(H_0: p_A = p_B\)</span> mot <span class="math inline">\(H_A: p_B &gt; p_A\)</span> (ensidig). En Type I-feil ville være å satse videre på kampanje B i troen på at den er bedre, uten at den egentlig er det. En slik feil koster lite (i verste fall fortsetter vi med en kampanje som ikke er dårligere), så vi tillater et mildere nivå, <span class="math inline">\(\alpha = 10\,\%\)</span>.</li>
 <li><strong>Data:</strong> <span class="math inline">\(\widehat{p}_A = 45/500 = 0.09\)</span> og <span class="math inline">\(\widehat{p}_B = 68/500 = 0.136\)</span>.</li>
 <li><strong>Testobservator:</strong> Under <span class="math inline">\(H_0\)</span> pooler vi andelene: <span class="math inline">\(\widehat{p} = (45 + 68)/(500 + 500) = 0.113\)</span>. Regnet ut manuelt i R:</li>
 </ol>
@@ -433,11 +433,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb87-6"><a href="inferens-om-to-populasjoner.html#cb87-6" tabindex="-1"></a>Z</span></code></pre></div>
 <pre><code>## [1] 2.297348</code></pre>
 <ol start="5" style="list-style-type: decimal">
-<li><strong>Kritisk verdi og konklusjon:</strong> For en ensidig test på 5 %-nivå er den kritiske verdien <span class="math inline">\(z_{0.95}\)</span> (se <a href="relevante-r-testing.html#relevante-r-testing">3.6</a>):</li>
+<li><strong>Kritisk verdi og konklusjon:</strong> For en ensidig test på 10 %-nivå er den kritiske verdien <span class="math inline">\(z_{0.90}\)</span> (se <a href="relevante-r-testing.html#relevante-r-testing">3.6</a>):</li>
 </ol>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="inferens-om-to-populasjoner.html#cb89-1" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>)</span></code></pre></div>
-<pre><code>## [1] 1.644854</code></pre>
-<p>Siden testobservatoren (2.30) er større enn den kritiske verdien (1.645), forkaster vi <span class="math inline">\(H_0\)</span>: kampanje B ser ut til å ha høyere konverteringsrate.</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="inferens-om-to-populasjoner.html#cb89-1" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.90</span>)</span></code></pre></div>
+<pre><code>## [1] 1.281552</code></pre>
+<p>Siden testobservatoren (2.30) er større enn den kritiske verdien (1.28), forkaster vi <span class="math inline">\(H_0\)</span>: kampanje B ser ut til å ha høyere konverteringsrate.</p>
 <p>Over gjorde vi testen manuelt. <strong>I R</strong> kan vi bruke <code>prop.test()</code> med <em>vektorer</em> av antall suksesser og antall forsøk:</p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="inferens-om-to-populasjoner.html#cb91-1" tabindex="-1"></a><span class="fu">prop.test</span>(<span class="fu">c</span>(xB, xA), <span class="fu">c</span>(nB, nA), <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>, <span class="at">correct =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## 
@@ -451,7 +451,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## sample estimates:
 ## prop 1 prop 2 
 ##  0.136  0.090</code></pre>
-<p><strong>p-verdien</strong> er 0.011, under 0.05, så vi forkaster <span class="math inline">\(H_0\)</span>. (Igjen er <code>X-squared</code> lik <span class="math inline">\(Z^2\)</span>, og <code>correct = FALSE</code> gir samme test som håndregningen.)</p>
+<p><strong>p-verdien</strong> er 0.011, under <span class="math inline">\(\alpha = 0.10\)</span>, så vi forkaster <span class="math inline">\(H_0\)</span>. (Igjen er <code>X-squared</code> lik <span class="math inline">\(Z^2\)</span>, og <code>correct = FALSE</code> gir samme test som håndregningen.)</p>
 </div>
 <div id="kontrollsprsmal-4" class="section level3 hasAnchor" number="3.3.6">
 <h3><span class="header-section-number">3.3.6</span> Kontrollspørsmål<a href="inferens-om-to-populasjoner.html#kontrollsprsmal-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
