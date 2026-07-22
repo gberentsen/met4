@@ -67,8 +67,8 @@ inferens-om-to-populasjoner
 hvilke-sammenligninger-kan-vi-gjre
 to-utvalgs-t-test
 t-test-for-matchede-par
+sammenligning-av-to-varianser
 sammenligning-av-to-andeler
-sammenligning-av-to-standardavvik
 kontrollsprsmal-4
 kjikvadrattester
 kommentarer
