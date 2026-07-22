@@ -286,45 +286,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>som er standardnormalfordelt når <span class="math inline">\(H_0\)</span> er sann. I praksis kjenner vi sjelden det sanne standardavviket, så vi må estimere det med utvalgsstandardavviket <span class="math inline">\(s\)</span>. Denne ekstra usikkerheten gjør at testobservatoren</p>
 <p><span class="math display">\[T = \frac{\overline{X} - \mu_0}{s/\sqrt{n}}\]</span></p>
 <p>ikke lenger er normalfordelt, men <strong>t-fordelt med <span class="math inline">\(n-1\)</span> frihetsgrader</strong>. Testobservatoren måler hvor mange (estimerte) standardfeil utvalgsgjennomsnittet ligger unna verdien <span class="math inline">\(\mu_0\)</span> som nullhypotesen påstår. Ligger den langt unna null, taler dataene mot <span class="math inline">\(H_0\)</span>. Den kritiske verdien henter vi fra t-fordelingen (<code>qt()</code> i R). Testen kalles gjerne en <strong>t-test</strong>, og den hviler på at observasjonene kommer fra en tilnærmet normalfordelt populasjon, eller at <span class="math inline">\(n\)</span> er stor nok til at sentralgrenseteoremet slår inn.</p>
-<p><strong>Eksempel.</strong> NHHs karrieresenter oppgir at gjennomsnittlig startlønn for nyutdannede masterstudenter er 620 000 kr. En studentforening mistenker at den egentlig er høyere, og gjennomfører en spørreundersøkelse. Vi følger de fem stegene:</p>
+<p><strong>Eksempel.</strong> En bank oppgir at den gjennomsnittlige saksbehandlingstiden for en lånesøknad er 10 dager. En forbrukerorganisasjon mistenker at den egentlig er lengre, og gjennomfører en undersøkelse. Vi følger de fem stegene:</p>
 <ol style="list-style-type: decimal">
-<li><strong>Spørsmål:</strong> Er den forventede startlønnen høyere enn 620 000 kr?</li>
-<li><strong>Hypoteser og signifikansnivå:</strong> <span class="math inline">\(H_0: \mu = 620\,000\)</span> mot <span class="math inline">\(H_A: \mu &gt; 620\,000\)</span> (ensidig). Vi bestemmer <em>på forhånd</em>, før vi ser på dataene, at vi vil bruke et signifikansnivå på <span class="math inline">\(\alpha = 5\,\%\)</span>.</li>
-<li><strong>Data:</strong> Vi spør 40 tilfeldig valgte nyutdannede om startlønnen deres. Vi simulerer svarene, så du kan kjøre koden og få de samme tallene:</li>
+<li><strong>Spørsmål:</strong> Er den forventede saksbehandlingstiden lengre enn 10 dager?</li>
+<li><strong>Hypoteser og signifikansnivå:</strong> <span class="math inline">\(H_0: \mu = 10\)</span> mot <span class="math inline">\(H_A: \mu &gt; 10\)</span> (ensidig). Vi må velge signifikansnivået <em>på forhånd</em>, og bør da veie inn hvor alvorlig en Type I-feil er. Her ville en Type I-feil være å hevde at banken er tregere enn den lover, uten at det er sant. Det er en påstand vi ikke vil komme med for lettvint, men konsekvensen er ikke dramatisk, så vi holder oss til det vanlige nivået <span class="math inline">\(\alpha = 5\,\%\)</span>.</li>
+<li><strong>Data:</strong> Vi måler saksbehandlingstiden (i dager) for 40 tilfeldig valgte lånesøknader. Vi simulerer dataene, så du kan kjøre koden og få de samme tallene:</li>
 </ol>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="enpop.html#cb46-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
-<span id="cb46-2"><a href="enpop.html#cb46-2" tabindex="-1"></a>lonn <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">40</span>, <span class="at">mean =</span> <span class="dv">636000</span>, <span class="at">sd =</span> <span class="dv">52000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="enpop.html#cb46-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3</span>)</span>
+<span id="cb46-2"><a href="enpop.html#cb46-2" tabindex="-1"></a>dager <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">40</span>, <span class="at">mean =</span> <span class="fl">11.2</span>, <span class="at">sd =</span> <span class="fl">3.3</span>)</span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li><strong>Testobservator:</strong> Vi kjenner ikke det sanne standardavviket, så vi bruker <span class="math inline">\(T = (\overline{X} - \mu_0)/(s/\sqrt{n})\)</span>, og regner den ut manuelt med R som kalkulator:</li>
 </ol>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="enpop.html#cb47-1" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">mean</span>(lonn)     <span class="co"># utvalgsgjennomsnittet</span></span>
-<span id="cb47-2"><a href="enpop.html#cb47-2" tabindex="-1"></a>s        <span class="ot">&lt;-</span> <span class="fu">sd</span>(lonn)       <span class="co"># utvalgsstandardavviket</span></span>
-<span id="cb47-3"><a href="enpop.html#cb47-3" tabindex="-1"></a>n        <span class="ot">&lt;-</span> <span class="fu">length</span>(lonn)   <span class="co"># antall observasjoner</span></span>
-<span id="cb47-4"><a href="enpop.html#cb47-4" tabindex="-1"></a>mu0      <span class="ot">&lt;-</span> <span class="dv">620000</span>         <span class="co"># verdien fra nullhypotesen</span></span>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="enpop.html#cb47-1" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">mean</span>(dager)     <span class="co"># utvalgsgjennomsnittet</span></span>
+<span id="cb47-2"><a href="enpop.html#cb47-2" tabindex="-1"></a>s        <span class="ot">&lt;-</span> <span class="fu">sd</span>(dager)       <span class="co"># utvalgsstandardavviket</span></span>
+<span id="cb47-3"><a href="enpop.html#cb47-3" tabindex="-1"></a>n        <span class="ot">&lt;-</span> <span class="fu">length</span>(dager)   <span class="co"># antall observasjoner</span></span>
+<span id="cb47-4"><a href="enpop.html#cb47-4" tabindex="-1"></a>mu0      <span class="ot">&lt;-</span> <span class="dv">10</span>              <span class="co"># verdien fra nullhypotesen</span></span>
 <span id="cb47-5"><a href="enpop.html#cb47-5" tabindex="-1"></a></span>
 <span id="cb47-6"><a href="enpop.html#cb47-6" tabindex="-1"></a>T_obs <span class="ot">&lt;-</span> (gj.snitt <span class="sc">-</span> mu0)<span class="sc">/</span>(s<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
 <span id="cb47-7"><a href="enpop.html#cb47-7" tabindex="-1"></a>T_obs</span></code></pre></div>
-<pre><code>## [1] 2.306861</code></pre>
+<pre><code>## [1] 2.329312</code></pre>
 <ol start="5" style="list-style-type: decimal">
 <li><strong>Kritisk verdi og konklusjon:</strong> Testobservatoren er t-fordelt med <span class="math inline">\(n - 1 = 39\)</span> frihetsgrader. For en ensidig test på 5 %-nivå er den kritiske verdien 95-prosentilen <span class="math inline">\(t_{0.95,\,39}\)</span> (se avsnittet om kritiske verdier i <a href="relevante-r-testing.html#relevante-r-testing">3.6</a>):</li>
 </ol>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="enpop.html#cb49-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.95</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 1.684875</code></pre>
-<p>Testobservatoren (2.31) er større enn den kritiske verdien (1.69), så den lander i forkastningsområdet. Vi forkaster <span class="math inline">\(H_0\)</span> og konkluderer med at den forventede startlønnen er høyere enn 620 000 kr.</p>
+<p>Testobservatoren (2.33) er større enn den kritiske verdien (1.69), så den lander i forkastningsområdet. Vi forkaster <span class="math inline">\(H_0\)</span> og konkluderer med at den forventede saksbehandlingstiden er lengre enn 10 dager.</p>
 <p>Over gjorde vi testen manuelt, steg for steg. <strong>I R</strong> kan vi i stedet la <code>t.test()</code> gjøre hele jobben direkte fra dataene:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="enpop.html#cb51-1" tabindex="-1"></a><span class="fu">t.test</span>(lonn, <span class="at">mu =</span> <span class="dv">620000</span>, <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="enpop.html#cb51-1" tabindex="-1"></a><span class="fu">t.test</span>(dager, <span class="at">mu =</span> <span class="dv">10</span>, <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
 ## 
-## data:  lonn
-## t = 2.3069, df = 39, p-value = 0.01323
-## alternative hypothesis: true mean is greater than 620000
+## data:  dager
+## t = 2.3293, df = 39, p-value = 0.01256
+## alternative hypothesis: true mean is greater than 10
 ## 95 percent confidence interval:
-##  625682.2      Inf
+##  10.28011      Inf
 ## sample estimates:
 ## mean of x 
-##  641074.7</code></pre>
-<p>I utskriften er det særlig <strong>p-verdien</strong> du skal se på: er den mindre enn signifikansnivået vi valgte på forhånd (<span class="math inline">\(\alpha = 0.05\)</span>), forkaster vi <span class="math inline">\(H_0\)</span>. Her er p-verdien 0.013, altså under 0.05, så vi forkaster, akkurat som med den kritiske verdien. Utskriften gir også selve testobservatoren (<code>t</code>), antall frihetsgrader (<code>df</code>) og et konfidensintervall for den forventede startlønnen.</p>
+##  11.01244</code></pre>
+<p>I utskriften er det særlig <strong>p-verdien</strong> du skal se på: er den mindre enn signifikansnivået vi valgte på forhånd (<span class="math inline">\(\alpha = 0.05\)</span>), forkaster vi <span class="math inline">\(H_0\)</span>. Her er p-verdien 0.013, altså under 0.05, så vi forkaster, akkurat som med den kritiske verdien. Utskriften gir også selve testobservatoren (<code>t</code>), antall frihetsgrader (<code>df</code>) og et konfidensintervall for den forventede saksbehandlingstiden.</p>
 </div>
 <div id="inferens-om-en-andel" class="section level3 hasAnchor" number="3.2.3">
 <h3><span class="header-section-number">3.2.3</span> Inferens om en andel<a href="enpop.html#inferens-om-en-andel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -334,7 +334,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Eksempel.</strong> En bank hevder at høyst 5 % av forbrukslånene deres blir misligholdt. En tilsynsmyndighet vil undersøke om den sanne misligholdsandelen er høyere.</p>
 <ol style="list-style-type: decimal">
 <li><strong>Spørsmål:</strong> Er den sanne misligholdsandelen <span class="math inline">\(p\)</span> større enn 0.05?</li>
-<li><strong>Hypoteser og signifikansnivå:</strong> <span class="math inline">\(H_0: p = 0.05\)</span> mot <span class="math inline">\(H_A: p &gt; 0.05\)</span> (ensidig). Vi velger på forhånd et signifikansnivå på <span class="math inline">\(\alpha = 5\,\%\)</span>.</li>
+<li><strong>Hypoteser og signifikansnivå:</strong> <span class="math inline">\(H_0: p = 0.05\)</span> mot <span class="math inline">\(H_A: p &gt; 0.05\)</span> (ensidig). En Type I-feil ville her være å konkludere med at banken bryter kravet når den egentlig oppfyller det, noe som kan utløse unødvendige tilsynstiltak. Vi velger på forhånd et signifikansnivå på <span class="math inline">\(\alpha = 5\,\%\)</span>.</li>
 <li><strong>Data:</strong> Tilsynet trekker 400 tilfeldige lån og finner at 30 av dem er misligholdt. Den observerte andelen er <span class="math inline">\(\widehat{p} = 30/400 = 0.075\)</span>.</li>
 <li><strong>Testobservator:</strong> Under <span class="math inline">\(H_0\)</span> er <span class="math inline">\(p_0 = 0.05\)</span>, så</li>
 </ol>
@@ -374,7 +374,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Eksempel.</strong> Et aksjefond markedsfører seg med at risikoen, målt ved standardavviket til den månedlige avkastningen, er høyst 4 %. En analytiker vil teste om risikoen egentlig er høyere.</p>
 <ol style="list-style-type: decimal">
 <li><strong>Spørsmål:</strong> Er standardavviket <span class="math inline">\(\sigma\)</span> til den månedlige avkastningen større enn 4 %?</li>
-<li><strong>Hypoteser og signifikansnivå:</strong> <span class="math inline">\(H_0: \sigma = 4\)</span> mot <span class="math inline">\(H_A: \sigma &gt; 4\)</span> (ensidig). Vi velger på forhånd et signifikansnivå på <span class="math inline">\(\alpha = 5\,\%\)</span>.</li>
+<li><strong>Hypoteser og signifikansnivå:</strong> <span class="math inline">\(H_0: \sigma = 4\)</span> mot <span class="math inline">\(H_A: \sigma &gt; 4\)</span> (ensidig). En Type I-feil ville her være å beskylde fondet for høyere risiko enn det reklamerer med, uten grunnlag. Vi velger på forhånd et signifikansnivå på <span class="math inline">\(\alpha = 5\,\%\)</span>.</li>
 <li><strong>Data:</strong> Analytikeren ser på de månedlige avkastningene (i prosent) fra de siste 30 månedene (simulert):</li>
 </ol>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="enpop.html#cb59-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
