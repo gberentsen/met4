@@ -109,161 +109,92 @@ Når du har vært gjennom stoffet, bør du kunne svare på følgende:
 
 <div style='padding:74.93% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7780035/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
 
-### Kommentarer
+### Hvilke størrelser kan vi teste?
 
-Dette er i hovedsak dekket av kapittel **12** i læreboken. Sjekk om du kan svare på følgende kontrollspørsmål:
+Å gjøre inferens om *én* populasjon vil si å teste en hypotese om en enkelt ukjent parameter i populasjonen. Framgangsmåten er alltid den samme femstegsoppskriften fra forrige delkapittel; det som skifter fra test til test, er *hvilken* testobservator vi bruker, og *hvilken fordeling* den har under $H_0$. De tre størrelsene vi oftest tester, er:
 
-1. Hva er det vi tester når vi gjennomfører en $t$-test for én populasjon? Hva forutsetter vi?
-2. Hva er forskjellen på en ensidig og en tosidig test? (**11-2j**)
+- **forventningen** $\mu$ (populasjonsgjennomsnittet),
+- en **andel** $p$, og
+- **standardavviket** $\sigma$ (eller variansen $\sigma^2$), altså spredningen.
 
-Det kan også være greit å repetere konfidensintervaller i seksjon **11-2k** for de som har glemt det fra MET2.
+Vi går gjennom de tre i tur og orden.
 
-I Seksjon **11-2g** går boken gjennom en ett-utvalgs t-test i bokens Excel-plugin. La oss gjøre det samme i R. På kursets nettside finner du alle datasettene som følger med læreboken. I dette eksempelet er det snakk om `Xm11-01.xlsx`. Finn tak i denne filen (du kan også godt åpne den og se på den i Excel!), legg den i en mappe som du kan finne igjen, og åpne et nytt script i R-studio der du først sørger for å sette working directory til denne mappen slik vi gjorde i R-forelesningen.
+### Inferens om et gjennomsnitt
 
-Etterpå leser du inn datasettet ved å bruke `read_xlsx()`-funksjonen som under:
+Vi vil teste om populasjonsgjennomsnittet er lik en bestemt verdi, altså $H_0: \mu = \mu_0$. Fra samplingfordelingen til et gjennomsnitt (modul 2) vet vi at $\overline{X}$ har forventning $\mu$ og standardavvik $\sigma/\sqrt{n}$. Dersom vi *kjente* $\sigma$, kunne vi brukt testobservatoren
 
-```{r, eval = F}
-library(readxl)
-data <- read_xlsx("Xm11-01.xlsx")     # Vi bruker read_xslx() fordi det er en .xlsx-fil
+$$Z = \frac{\overline{X} - \mu_0}{\sigma/\sqrt{n}},$$
+
+som er standardnormalfordelt når $H_0$ er sann. I praksis kjenner vi sjelden det sanne standardavviket, så vi må estimere det med utvalgsstandardavviket $s$. Denne ekstra usikkerheten gjør at testobservatoren
+
+$$T = \frac{\overline{X} - \mu_0}{s/\sqrt{n}}$$
+
+ikke lenger er normalfordelt, men **t-fordelt med $n-1$ frihetsgrader**. Testobservatoren måler hvor mange (estimerte) standardfeil utvalgsgjennomsnittet ligger unna verdien $\mu_0$ som nullhypotesen påstår. Ligger den langt unna null, taler dataene mot $H_0$. Den kritiske verdien henter vi fra t-fordelingen (`qt()` i R). Testen kalles gjerne en **t-test**, og den hviler på at observasjonene kommer fra en tilnærmet normalfordelt populasjon, eller at $n$ er stor nok til at sentralgrenseteoremet slår inn.
+
+### Inferens om en andel
+
+Ofte er størrelsen vi er ute etter, en **andel** $p$, for eksempel andelen velgere som støtter et parti, eller andelen defekte enheter i en produksjon. Vi tester da $H_0: p = p_0$. Fra samplingfordelingen til en andel (modul 2) vet vi at den observerte andelen $\widehat{p}$ er tilnærmet normalfordelt for store utvalg. Under nullhypotesen er $p = p_0$, så testobservatoren blir
+
+$$Z = \frac{\widehat{p} - p_0}{\sqrt{p_0(1-p_0)/n}},$$
+
+som er tilnærmet standardnormalfordelt når $H_0$ er sann. Legg merke til at vi setter inn $p_0$ (verdien fra nullhypotesen), *ikke* $\widehat{p}$, i nevneren: standardfeilen regnes ut under forutsetning av at $H_0$ er sann. Den kritiske verdien henter vi fra standardnormalfordelingen (`qnorm()`). Tilnærmingen er god når både $np_0$ og $n(1-p_0)$ er større enn omtrent 5.
+
+### Inferens om et standardavvik
+
+Noen ganger er det *spredningen* i seg selv vi vil teste, for eksempel om en maskin produserer enheter med et standardavvik som er større enn en tillatt grense. Vi tester da $H_0: \sigma = \sigma_0$ (likeverdig med $\sigma^2 = \sigma_0^2$), og bruker testobservatoren
+
+$$\chi^2 = \frac{(n-1)s^2}{\sigma_0^2},$$
+
+som under $H_0$ følger en **kji-kvadratfordeling** ($\chi^2$-fordeling) med $n-1$ frihetsgrader. En viktig forskjell fra $Z$ og $T$ er at kji-kvadratfordelingen ikke er symmetrisk: den lever bare på positive verdier og har en lang høyre hale. Derfor er de kritiske verdiene forskjellige i øvre og nedre hale, og vi må være ekstra nøye med hvilken hale forkastningsområdet skal ligge i. Kritiske verdier henter vi fra `qchisq()`. Denne testen er følsom for brudd på antakelsen om at populasjonen er normalfordelt.
+
+### Et eksempel i R
+
+La oss gjennomføre en t-test for et gjennomsnitt i R. En kaffebar hevder at den gjennomsnittlige ventetiden i kø er 5 minutter. Vi mistenker at den egentlig er lengre, og måler ventetiden (i minutter) til 30 tilfeldig valgte kunder. Vi simulerer dataene selv, så du kan kjøre koden og få de samme tallene:
+
+```{r}
+set.seed(1)
+ventetid <- rnorm(30, mean = 5.4, sd = 1.2)   # 30 simulerte ventetider
 ```
 
-```{r, echo = F}
-library(readxl)
-data <- read_xlsx("datasett/Xm11-01.xlsx")     # Vi bruker read_xslx() fordi det er en .xlsx-fil
-```
-
-Konteksten til datasettet er gitt i eksempel 11.1. Det er altså balansen på 400 tilfeldig utvalgte kredittkontoer i en butikk, og en lurer på om forventet balanse er større enn 170. Vi setter opp følgende test:
+Vi tester
 
 \begin{align*}
-&H_0: \mu = 170 \\
-&H_A: \mu > 170,
-\end{align*}
-der vi legger merke til at det blir brukt en ensidig test (hvorfor?).
-
-For å regne ut testobservatoren for å enutvalgs $z$-test trenger vi fire tall: $\overline X$, $\mu_0$, $n$ og $\sigma$. Legger merke til at `data` har en kolonne som heter `Accounts`, og vi bruker dollartegnet til å hente den ut som en vektor. Regner ut observatoren:
-
-```{r}
-gj.snitt <- mean(data$Accounts)     # Gjennomsnittet av observasjonene
-mu0      <- 170                     # Henter fra teksten
-n        <- length(data$Accounts)   # Antall observasjoner
-sigma    <- 65                      # Henter fra teksten
-
-Z <- (gj.snitt - mu0)/(sigma/sqrt(n))   # Verdien av testobservatoren
-Z                                       # Skriver ut testobservatoren
-```
-Vi ser at testobservatoren har samme verdi som i Excel-gjennomgangen. Kritisk verdi finner vi rett fra R:
-
-```{r}
-qnorm(0.95)
-```
-
-Uansett; vi forkaster $H_0$ siden testobservatoren er større enn kritisk verdi.
-
-Kapittel **11-3a-d** gir enda mer forståelse for hypotesetesting. Hopp over e og f om du vil. Kapittel 11-4 snakker litt om hvordan vi skal bruke hypotesetesting videre.
-
-**Kapittel 12** presenterer de tre testene (ett gjennomsnitt, en varians, en andel) i tur og orden. Det du først og fremst må kunne fra dette kapitlet er å gjennomføre disse testene, både for hånd med penn og papir, og i R. Under følger kode for å gjøre noen av bokens eksempler i R (les i boken for kontekst):
-
-**Eksempel 12.1:** 
-
-\begin{align*}
-&H_0: \mu = 2.0 \\
-&H_A: \mu > 2.0,
+&H_0: \mu = 5 \\
+&H_A: \mu > 5,
 \end{align*}
 
-```{r, eval = F}
-data <- read_xlsx("Xm12-01.xlsx")
-
-# Manuell utregning
-gj.snitt <- mean(data$Newspaper)
-mu0      <- 2.0
-n        <- length(data$Newspaper)
-s        <- sd(data$Newspaper)
-
-# Testobservator:
-(gj.snitt - mu0)/(s/sqrt(n))
-```
-
-```{r, echo = F}
-data <- read_xlsx("datasett/Xm12-01.xlsx")
-
-# Manuell utregning
-gj.snitt <- mean(data$Newspaper)
-mu0      <- 2.0
-n        <- length(data$Newspaper)
-s        <- sd(data$Newspaper)
-
-# Testobservator:
-(gj.snitt - mu0)/(s/sqrt(n))
-```
-
-Signifikansnivået er satt til $\alpha = 1\%$ i eksempelet. Kritisk verdi finner vi rett fra R:
+altså en ensidig test, siden vi bare er interessert i om ventetiden er *lengre* enn påstått. Vi regner først ut testobservatoren $T$ for hånd:
 
 ```{r}
-qt(0.99, df = n-1)
+gj.snitt <- mean(ventetid)          # utvalgsgjennomsnittet
+s        <- sd(ventetid)            # utvalgsstandardavviket
+n        <- length(ventetid)        # antall observasjoner
+mu0      <- 5                       # verdien fra nullhypotesen
+
+T_obs <- (gj.snitt - mu0)/(s/sqrt(n))
+T_obs
 ```
 
-Altså forkaster vi **ikke** nullhypotesen. Sjekk gjerne verdiene vi regnet ut over og se at de stemmer overens med det som står i boken. Alternativt bruker vi `t.test()`-funksjonen direkte:
+Den kritiske verdien for en ensidig test på 5 %-nivå henter vi fra t-fordelingen med $n-1 = 29$ frihetsgrader:
 
 ```{r}
-t.test(data$Newspaper, alternative = "greater", mu = 2.0, conf.level = 0.99)
+qt(0.95, df = n - 1)
 ```
 
-Resultatet blir selvsagt det samme. Når $p$-verdien er større enn signifikansnivået på 1%, kan vi ikke forkaste nullhypotesen. Eksempel 12.2 handler om å lage kondidensintervall, noe du også kan prøve å gjøre ved å regne ut de nødvendige tallene i R. De som synes dette er greit kan kikke på seksjonene **12-1b-e** for å utvikle forståelsen enda litt mer.
-
-**Eksempel 12.3:** 
-
-\begin{align*}
-&H_0: \sigma^2 = 1.0 \\
-&H_A: \sigma^2 < 1.0.
-\end{align*}
-
-Testobservator:
-
-$$\chi^2 = \frac{(n-1)s^2}{\sigma_0^2}.$$
-
-```{r, eval = F}
-data <- read_xlsx("Xm12-03.xlsx")
-
-# Regner ut testobservatoren direkte denne gangen, uten å lagre tallene underveis:
-(length(data$Fills) - 1)*var(data$Fills)/1
-
-# Kritisk verdi, 5% nivå, ensidig test, nedre hale:
-qchisq(0.05, df = length(data$Fills) - 1)     
-```
-
-```{r, echo = F}
-data <- read_xlsx("datasett/Xm12-03.xlsx")
-
-# Regner ut testobservatoren direkte denne gangen, uten å lagre tallene underveis:
-(length(data$Fills) - 1)*var(data$Fills)/1
-
-# Kritisk verdi, 5% nivå, ensidig test, nedre hale:
-qchisq(0.05, df = length(data$Fills) - 1)     
-```
-
-Vi kan altså ikke forkaste nullhypotesen. Igjen, les eksempelet i sin fulle lengde i boken for å forstå bedre hva som skjer. Figur 12.4 viser på en fin måte hva tallene betyr.
-
-**Eksempel 12.5** kan være grei å kikke på også. Vi kan selvsagt bruke R som kalkulator og regne ut det vi trenger. Vi skal teste:
-
-\begin{align*}
-&H_0: p = 0.5 \\
-&H_A: p > 0.5.
-\end{align*}
-
-Vi har en observert andel på $\widehat p = 407/765 = 0.532$ etter å ha spurt $n = 765$ personer. Testobservatoren er 
-$$Z = \frac{\widehat p - p}{\sqrt{p(1-p)/n}}.$$
+Siden testobservatoren er større enn den kritiske verdien, forkaster vi $H_0$: dataene tyder på at den forventede ventetiden er lengre enn 5 minutter. Vi kunne fått nøyaktig samme konklusjon ved å bruke den innebygde `t.test()`-funksjonen direkte, som i tillegg gir oss p-verdien:
 
 ```{r}
-p.hatt <- 407/765
-p0     <- 0.5
-n      <- 765
-
-(p.hatt - p0)/sqrt(p0*(1-p0)/n)
+t.test(ventetid, mu = 5, alternative = "greater")
 ```
 
-Kritisk verdi for en ensidig z-test på 5% nivå er 1.645 (`qnorm(0.95)`), og vi kan forkaste nullhypotesen.
+p-verdien er langt mindre enn 0.05, så vi forkaster $H_0$, akkurat som over.
 
-Seksjonene **12-3d-f** bør leses på egen hånd, mens vi hopper over **12-3g**.
+### Kontrollspørsmål
+
+1. Hva tester vi i en ett-utvalgs t-test, og hvilke forutsetninger hviler den på?
+2. Hvorfor bruker vi t-fordelingen og ikke normalfordelingen når vi tester et gjennomsnitt uten å kjenne $\sigma$?
+3. Hvorfor setter vi inn $p_0$ og ikke $\widehat{p}$ i nevneren til testobservatoren for en andel?
+4. Hvorfor må vi være ekstra nøye med øvre og nedre kritisk verdi i en kji-kvadrattest for et standardavvik?
 
 ## Inferens om to populasjoner
 
@@ -289,6 +220,7 @@ Den enkleste måten å gjøre $t$-tester i R på er å bruke funksjonen `t.test(
 
 ```{r, eval = F}
 # Leser inn datasettet
+library(readxl)
 funds <- read_xlsx("Xm13-01.xlsx")
 
 # Ser at det er to kolonner, «Direct» og «Broker». Alternativhypotesen på s.433 spesifiserer at
@@ -303,6 +235,7 @@ t.test(funds$Direct, funds$Broker,
 
 ```{r, echo = F}
 # Leser inn datasettet
+library(readxl)
 funds <- read_xlsx("datasett/Xm13-01.xlsx")
 
 # Ser at det er to kolonner, «Direct» og «Broker». Alternativhypotesen på s.433 spesifiserer at
