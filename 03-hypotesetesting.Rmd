@@ -117,7 +117,7 @@ Når du har vært gjennom stoffet, bør du kunne svare på følgende:
 - en **andel** $p$, og
 - **standardavviket** $\sigma$ (eller variansen $\sigma^2$), altså spredningen.
 
-Vi går gjennom de tre i tur og orden.
+Vi går gjennom de tre i tur og orden. For hver av dem viser vi først hvordan testen gjøres *manuelt*, steg for steg med en kritisk verdi, og deretter hvordan R kan utføre hele testen direkte fra dataene.
 
 ### Inferens om et gjennomsnitt
 
@@ -131,126 +131,132 @@ $$T = \frac{\overline{X} - \mu_0}{s/\sqrt{n}}$$
 
 ikke lenger er normalfordelt, men **t-fordelt med $n-1$ frihetsgrader**. Testobservatoren måler hvor mange (estimerte) standardfeil utvalgsgjennomsnittet ligger unna verdien $\mu_0$ som nullhypotesen påstår. Ligger den langt unna null, taler dataene mot $H_0$. Den kritiske verdien henter vi fra t-fordelingen (`qt()` i R). Testen kalles gjerne en **t-test**, og den hviler på at observasjonene kommer fra en tilnærmet normalfordelt populasjon, eller at $n$ er stor nok til at sentralgrenseteoremet slår inn.
 
-**Eksempel.** En kaffebar hevder at den gjennomsnittlige ventetiden i kø er 5 minutter. Vi mistenker at den egentlig er lengre, og følger de fem stegene:
+**Eksempel.** NHHs karrieresenter oppgir at gjennomsnittlig startlønn for nyutdannede masterstudenter er 620 000 kr. En studentforening mistenker at den egentlig er høyere, og gjennomfører en spørreundersøkelse. Vi følger de fem stegene:
 
-1. **Spørsmål:** Er den forventede ventetiden lengre enn 5 minutter?
-2. **Hypoteser:** $H_0: \mu = 5$ mot $H_A: \mu > 5$ (ensidig, siden vi bare er interessert i om den er *lengre*).
-3. **Data:** Vi måler ventetiden (i minutter) til 30 tilfeldig valgte kunder. Vi simulerer dataene selv, så du kan kjøre koden og få nøyaktig de samme tallene:
+1. **Spørsmål:** Er den forventede startlønnen høyere enn 620 000 kr?
+2. **Hypoteser og signifikansnivå:** $H_0: \mu = 620\,000$ mot $H_A: \mu > 620\,000$ (ensidig). Vi bestemmer *på forhånd*, før vi ser på dataene, at vi vil bruke et signifikansnivå på $\alpha = 5\,\%$.
+3. **Data:** Vi spør 40 tilfeldig valgte nyutdannede om startlønnen deres. Vi simulerer svarene, så du kan kjøre koden og få de samme tallene:
 
 ```{r}
-set.seed(1)
-ventetid <- rnorm(30, mean = 5.4, sd = 1.2)
+set.seed(2)
+lonn <- rnorm(40, mean = 636000, sd = 52000)
 ```
 
-4. **Testobservator:** Vi kjenner ikke det sanne standardavviket, så vi bruker $T = (\overline{X} - \mu_0)/(s/\sqrt{n})$. Vi bruker R som kalkulator:
+4. **Testobservator:** Vi kjenner ikke det sanne standardavviket, så vi bruker $T = (\overline{X} - \mu_0)/(s/\sqrt{n})$, og regner den ut manuelt med R som kalkulator:
 
 ```{r}
-gj.snitt <- mean(ventetid)     # utvalgsgjennomsnittet
-s        <- sd(ventetid)       # utvalgsstandardavviket
-n        <- length(ventetid)   # antall observasjoner
-mu0      <- 5                  # verdien fra nullhypotesen
+gj.snitt <- mean(lonn)     # utvalgsgjennomsnittet
+s        <- sd(lonn)       # utvalgsstandardavviket
+n        <- length(lonn)   # antall observasjoner
+mu0      <- 620000         # verdien fra nullhypotesen
 
 T_obs <- (gj.snitt - mu0)/(s/sqrt(n))
 T_obs
 ```
 
-5. **Kritisk verdi og konklusjon:** Testobservatoren er t-fordelt med $n - 1 = 29$ frihetsgrader. For en ensidig test på 5 %-nivå er den kritiske verdien 95-prosentilen $t_{0.95,\,29}$, som vi henter fra t-fordelingen (se avsnittet om kritiske verdier i \@ref(relevante-r-testing)):
+5. **Kritisk verdi og konklusjon:** Testobservatoren er t-fordelt med $n - 1 = 39$ frihetsgrader. For en ensidig test på 5 %-nivå er den kritiske verdien 95-prosentilen $t_{0.95,\,39}$ (se avsnittet om kritiske verdier i \@ref(relevante-r-testing)):
 
 ```{r}
 qt(0.95, df = n - 1)
 ```
 
-Testobservatoren (2.46) er større enn den kritiske verdien (1.70), så den lander i forkastningsområdet. Vi forkaster $H_0$ og konkluderer med at den forventede ventetiden er lengre enn 5 minutter.
+Testobservatoren (2.31) er større enn den kritiske verdien (1.69), så den lander i forkastningsområdet. Vi forkaster $H_0$ og konkluderer med at den forventede startlønnen er høyere enn 620 000 kr.
 
-**I R** kan vi gjøre hele testen på én gang med `t.test()`:
+Over gjorde vi testen manuelt, steg for steg. **I R** kan vi i stedet la `t.test()` gjøre hele jobben direkte fra dataene:
 
 ```{r}
-t.test(ventetid, mu = 5, alternative = "greater")
+t.test(lonn, mu = 620000, alternative = "greater")
 ```
 
-I utskriften er det særlig **p-verdien** du skal se på. Her er den godt under 0.05, så vi forkaster $H_0$, akkurat som med den kritiske verdien. Utskriften gir også selve testobservatoren (`t`), antall frihetsgrader (`df`) og et konfidensintervall for den forventede ventetiden.
+I utskriften er det særlig **p-verdien** du skal se på: er den mindre enn signifikansnivået vi valgte på forhånd ($\alpha = 0.05$), forkaster vi $H_0$. Her er p-verdien 0.013, altså under 0.05, så vi forkaster, akkurat som med den kritiske verdien. Utskriften gir også selve testobservatoren (`t`), antall frihetsgrader (`df`) og et konfidensintervall for den forventede startlønnen.
 
 ### Inferens om en andel
 
-Ofte er størrelsen vi er ute etter, en **andel** $p$, for eksempel andelen velgere som støtter et parti, eller andelen defekte enheter i en produksjon. Vi tester da $H_0: p = p_0$. Fra samplingfordelingen til en andel (modul 2) vet vi at den observerte andelen $\widehat{p}$ er tilnærmet normalfordelt for store utvalg. Under nullhypotesen er $p = p_0$, så testobservatoren blir
+Ofte er størrelsen vi er ute etter, en **andel** $p$, for eksempel andelen kunder som misligholder et lån, eller andelen defekte enheter i en produksjon. Vi tester da $H_0: p = p_0$. Fra samplingfordelingen til en andel (modul 2) vet vi at den observerte andelen $\widehat{p}$ er tilnærmet normalfordelt for store utvalg. Under nullhypotesen er $p = p_0$, så testobservatoren blir
 
 $$Z = \frac{\widehat{p} - p_0}{\sqrt{p_0(1-p_0)/n}},$$
 
 som er tilnærmet standardnormalfordelt når $H_0$ er sann. Legg merke til at vi setter inn $p_0$ (verdien fra nullhypotesen), *ikke* $\widehat{p}$, i nevneren: standardfeilen regnes ut under forutsetning av at $H_0$ er sann. Den kritiske verdien henter vi fra standardnormalfordelingen (`qnorm()`). Tilnærmingen er god når både $np_0$ og $n(1-p_0)$ er større enn omtrent 5.
 
-**Eksempel.** Vi vender tilbake til partiet fra forrige delkapittel: har det oppslutning over sperregrensen på 4 %?
+**Eksempel.** En bank hevder at høyst 5 % av forbrukslånene deres blir misligholdt. En tilsynsmyndighet vil undersøke om den sanne misligholdsandelen er høyere.
 
-1. **Spørsmål:** Er den sanne oppslutningen $p$ større enn 0.04?
-2. **Hypoteser:** $H_0: p = 0.04$ mot $H_A: p > 0.04$ (ensidig).
-3. **Data:** Vi spør 1000 tilfeldig valgte velgere, og 55 av dem svarer at de vil stemme partiet. Den observerte andelen er $\widehat{p} = 55/1000 = 0.055$.
-4. **Testobservator:** Under $H_0$ er $p_0 = 0.04$, så
+1. **Spørsmål:** Er den sanne misligholdsandelen $p$ større enn 0.05?
+2. **Hypoteser og signifikansnivå:** $H_0: p = 0.05$ mot $H_A: p > 0.05$ (ensidig). Vi velger på forhånd et signifikansnivå på $\alpha = 5\,\%$.
+3. **Data:** Tilsynet trekker 400 tilfeldige lån og finner at 30 av dem er misligholdt. Den observerte andelen er $\widehat{p} = 30/400 = 0.075$.
+4. **Testobservator:** Under $H_0$ er $p_0 = 0.05$, så
 
-$$Z = \frac{\widehat{p} - p_0}{\sqrt{p_0(1-p_0)/n}} = \frac{0.055 - 0.04}{\sqrt{0.04 \cdot 0.96/1000}} \approx 2.42.$$
+$$Z = \frac{\widehat{p} - p_0}{\sqrt{p_0(1-p_0)/n}} = \frac{0.075 - 0.05}{\sqrt{0.05 \cdot 0.95/400}} \approx 2.29.$$
 
-Regnet ut i R:
+Regnet ut manuelt i R:
 
 ```{r}
-p.hatt <- 55/1000
-p0     <- 0.04
-n      <- 1000
+p.hatt <- 30/400
+p0     <- 0.05
+n      <- 400
 (p.hatt - p0)/sqrt(p0*(1 - p0)/n)
 ```
 
-5. **Kritisk verdi og konklusjon:** Testobservatoren er tilnærmet standardnormalfordelt. For en ensidig test på 5 %-nivå er den kritiske verdien $z_{0.95} = 1.645$ (`qnorm(0.95)`, se \@ref(relevante-r-testing)). Siden $2.42 > 1.645$, forkaster vi $H_0$: resultatet tyder på oppslutning over sperregrensen.
-
-**I R** kan vi bruke `prop.test()`, som tar antall «suksesser», antall forsøk, verdien under $H_0$ og retningen på testen:
+5. **Kritisk verdi og konklusjon:** Testobservatoren er tilnærmet standardnormalfordelt. For en ensidig test på 5 %-nivå er den kritiske verdien $z_{0.95}$ (se \@ref(relevante-r-testing)):
 
 ```{r}
-prop.test(55, 1000, p = 0.04, alternative = "greater", correct = FALSE)
+qnorm(0.95)
 ```
 
-Igjen er det **p-verdien** du skal se på. Den er 0.008, altså under 0.05, så vi forkaster $H_0$. (`prop.test()` rapporterer en `X-squared`-verdi som rett og slett er $Z^2$. Vi bruker `correct = FALSE` for å få nøyaktig samme test som den vi regnet ut for hånd.)
+Siden testobservatoren (2.29) er større enn den kritiske verdien (1.645), forkaster vi $H_0$: misligholdsandelen ser ut til å være høyere enn 5 %.
+
+Over gjorde vi testen manuelt. **I R** kan vi bruke `prop.test()` direkte, med antall misligholdte lån, antall lån, verdien under $H_0$ og retningen på testen:
+
+```{r}
+prop.test(30, 400, p = 0.05, alternative = "greater", correct = FALSE)
+```
+
+Igjen er det **p-verdien** du skal se på. Den er 0.011, altså under $\alpha = 0.05$, så vi forkaster $H_0$. (`prop.test()` rapporterer en `X-squared`-verdi som rett og slett er $Z^2$. Vi bruker `correct = FALSE` for å få nøyaktig samme test som den vi regnet ut for hånd.)
 
 ### Inferens om et standardavvik
 
-Noen ganger er det *spredningen* i seg selv vi vil teste, for eksempel om en maskin produserer enheter med et standardavvik som er større enn en tillatt grense. Vi tester da $H_0: \sigma = \sigma_0$ (likeverdig med $\sigma^2 = \sigma_0^2$), og bruker testobservatoren
+Noen ganger er det *spredningen* i seg selv vi vil teste, for eksempel om risikoen i en avkastningsserie er større enn en tillatt grense. Vi tester da $H_0: \sigma = \sigma_0$ (likeverdig med $\sigma^2 = \sigma_0^2$), og bruker testobservatoren
 
 $$\chi^2 = \frac{(n-1)s^2}{\sigma_0^2},$$
 
 som under $H_0$ følger en **kji-kvadratfordeling** ($\chi^2$-fordeling) med $n-1$ frihetsgrader. En viktig forskjell fra $Z$ og $T$ er at kji-kvadratfordelingen ikke er symmetrisk: den lever bare på positive verdier og har en lang høyre hale. Derfor er de kritiske verdiene forskjellige i øvre og nedre hale, og vi må være ekstra nøye med hvilken hale forkastningsområdet skal ligge i. Kritiske verdier henter vi fra `qchisq()`. Denne testen er følsom for brudd på antakelsen om at populasjonen er normalfordelt.
 
-**Eksempel.** En maskin skal fylle flasker slik at standardavviket i fyllmengde er høyst 2 ml. Vi vil teste om spredningen egentlig er større enn dette.
+**Eksempel.** Et aksjefond markedsfører seg med at risikoen, målt ved standardavviket til den månedlige avkastningen, er høyst 4 %. En analytiker vil teste om risikoen egentlig er høyere.
 
-1. **Spørsmål:** Er standardavviket $\sigma$ større enn 2 ml?
-2. **Hypoteser:** $H_0: \sigma = 2$ mot $H_A: \sigma > 2$ (ensidig).
-3. **Data:** Vi måler fyllmengden (i ml) til 20 tilfeldige flasker (simulert):
+1. **Spørsmål:** Er standardavviket $\sigma$ til den månedlige avkastningen større enn 4 %?
+2. **Hypoteser og signifikansnivå:** $H_0: \sigma = 4$ mot $H_A: \sigma > 4$ (ensidig). Vi velger på forhånd et signifikansnivå på $\alpha = 5\,\%$.
+3. **Data:** Analytikeren ser på de månedlige avkastningene (i prosent) fra de siste 30 månedene (simulert):
 
 ```{r}
-set.seed(2)
-fyllmengde <- rnorm(20, mean = 500, sd = 2.6)
+set.seed(1)
+avkastning <- rnorm(30, mean = 0.8, sd = 5.6)
 ```
 
-4. **Testobservator:** Vi bruker $\chi^2 = (n-1)s^2/\sigma_0^2$ med $\sigma_0 = 2$:
+4. **Testobservator:** Vi bruker $\chi^2 = (n-1)s^2/\sigma_0^2$ med $\sigma_0 = 4$, og regner den ut manuelt i R:
 
 ```{r}
-s      <- sd(fyllmengde)       # utvalgsstandardavviket
-n      <- length(fyllmengde)   # antall observasjoner
-sigma0 <- 2                    # standardavviket under H_0
+s      <- sd(avkastning)       # utvalgsstandardavviket
+n      <- length(avkastning)   # antall observasjoner
+sigma0 <- 4                    # standardavviket under H_0
 
 chikvadrat <- (n - 1)*s^2/sigma0^2
 chikvadrat
 ```
 
-5. **Kritisk verdi og konklusjon:** Testobservatoren er kji-kvadratfordelt med $n - 1 = 19$ frihetsgrader. Siden alternativet er $\sigma > 2$, ligger forkastningsområdet i *øvre* hale, og den kritiske verdien er 95-prosentilen i kji-kvadratfordelingen (`qchisq(0.95, df = 19)`, se \@ref(relevante-r-testing)):
+5. **Kritisk verdi og konklusjon:** Testobservatoren er kji-kvadratfordelt med $n - 1 = 29$ frihetsgrader. Siden alternativet er $\sigma > 4$, ligger forkastningsområdet i *øvre* hale, og den kritiske verdien er 95-prosentilen (se \@ref(relevante-r-testing)):
 
 ```{r}
 qchisq(0.95, df = n - 1)
 ```
 
-Testobservatoren (36.0) er større enn den kritiske verdien (30.1), så vi forkaster $H_0$: spredningen ser ut til å være større enn kravet på 2 ml.
+Testobservatoren (48.5) er større enn den kritiske verdien (42.6), så vi forkaster $H_0$: risikoen ser ut til å være høyere enn de annonserte 4 %.
 
-**I R** finnes det ingen ferdig funksjon for denne testen slik som `t.test()` og `prop.test()`, så vi gjør den «for hånd» i R slik vi nettopp gjorde. Vil du heller ha p-verdien direkte enn å sammenligne med en kritisk verdi, finner du den som arealet i øvre hale med `pchisq()`:
+**I R** finnes det ingen ferdig funksjon for denne testen slik som `t.test()` og `prop.test()`, så vi gjør den manuelt i R slik vi nettopp gjorde, direkte fra dataene. Vil du heller ha p-verdien enn å sammenligne med en kritisk verdi, finner du den som arealet i øvre hale med `pchisq()`:
 
 ```{r}
 1 - pchisq(chikvadrat, df = n - 1)
 ```
 
-p-verdien er under 0.05, så konklusjonen er den samme: vi forkaster $H_0$.
+p-verdien er 0.013, altså under $\alpha = 0.05$, så konklusjonen er den samme: vi forkaster $H_0$.
 
 ### Kontrollspørsmål
 
