@@ -76,7 +76,9 @@ test-av-en-sannsynlighetsmodell-goodness-of-fit
 test-for-uavhengighet
 kontrollsprsmal-5
 oppgaver
-standard-oppgaver
+teorioppgaver-1
+ntter-1
+r-oppgaver-1
 relevante-r-testing
 regresjon
 enkel-regresjon

@@ -262,9 +262,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="oppgaver" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Oppgaver<a href="oppgaver.html#oppgaver" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="standard-oppgaver" class="section level3 hasAnchor" number="3.5.1">
-<h3><span class="header-section-number">3.5.1</span> Standard oppgaver<a href="oppgaver.html#standard-oppgaver" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Introduksjon til hypotesetesting</p>
+<div id="teorioppgaver-1" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Teorioppgaver<a href="oppgaver.html#teorioppgaver-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol style="list-style-type: decimal">
 <li>For hvert av scenarioene i a og b, gjør følgende:
 <ul>
@@ -336,7 +335,7 @@ Løsning
 </blockquote>
 </details>
 <ol start="4" style="list-style-type: decimal">
-<li><p>Annta at vi har følgende hypoteser og informasjon om dataene: <span class="math inline">\(H_0: \mu = 50\)</span> mot <span class="math inline">\(H_A: \mu &gt; 50\)</span>. <span class="math inline">\(\sigma = 10\)</span>, <span class="math inline">\(n = 40\)</span>, <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+<li><p>Anta at vi har følgende hypoteser og informasjon om dataene: <span class="math inline">\(H_0: \mu = 50\)</span> mot <span class="math inline">\(H_A: \mu &gt; 50\)</span>. <span class="math inline">\(\sigma = 10\)</span>, <span class="math inline">\(n = 40\)</span>, <span class="math inline">\(\alpha = 0.05\)</span>.</p>
 <p>Bestem <span class="math inline">\(\beta\)</span>, altså sannsynligheten for en type-II feil, under antagelsen at <span class="math inline">\(\mu = 55\)</span>.</p></li>
 </ol>
 <details>
@@ -922,14 +921,274 @@ Løsning
 <!-- chisq.test(f) #OK -->
 </details>
 <ol start="16" style="list-style-type: decimal">
-<li><a href="tidligere-eksamensoppgaver/skole-21-v.pdf">Individuell eksamen V21, oppgave 1 a - c:</a>
+<li><p><em>(Eksamen vår 2024.)</em> En analytiker deler de månedlige avkastningene til S&amp;P 500-indeksen i to grupper: måneder klassifisert som <em>normal risiko</em> og måneder klassifisert som <em>høy risiko</em>. Utvalgene er oppsummert slik:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Gruppe</th>
+<th align="center">Gjennomsnitt</th>
+<th align="center">Standardavvik <span class="math inline">\(s\)</span></th>
+<th align="center">Antall <span class="math inline">\(n\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Normal risiko</td>
+<td align="center">5.52</td>
+<td align="center">4.83</td>
+<td align="center">231</td>
+</tr>
+<tr class="even">
+<td align="left">Høy risiko</td>
+<td align="center">0.68</td>
+<td align="center">8.60</td>
+<td align="center">162</td>
+</tr>
+</tbody>
+</table>
+<ol style="list-style-type: lower-alpha">
+<li><p>Test på 5 %-nivå om variansen i avkastning er den samme i de to gruppene.</p></li>
+<li><p>Test på 5 %-nivå om den forventede avkastningen er den samme i de to gruppene. Bruk resultatet fra a til å avgjøre hvilken variant av to-utvalgs t-testen du skal bruke.</p></li>
+</ol></li>
+</ol>
 <details>
 <summary>
 Løsning
 </summary>
-<a href="tidligere-eksamensoppgaver/skole-21-v-fasit.pdf">Løsningsforslag</a>
-</details></li>
+<blockquote>
+<ol style="list-style-type: lower-alpha">
+<li>Vi tester <span class="math inline">\(H_0: \sigma_1^2 = \sigma_2^2\)</span> mot <span class="math inline">\(H_A: \sigma_1^2 \neq \sigma_2^2\)</span> (tosidig). Vi setter den største variansen i telleren, altså høy-risiko-gruppen:</li>
 </ol>
+<p><span class="math display">\[F = \frac{s_1^2}{s_2^2} = \frac{8.60^2}{4.83^2} = 3.17.\]</span></p>
+<p>Forkastningsområdet i øvre hale er <span class="math inline">\(F &gt; F_{0.025,\,161,\,230} = 1.33\)</span> (fra <code>qf(0.975, df1 = 161, df2 = 230)</code>). Siden <span class="math inline">\(3.17 &gt; 1.33\)</span> forkaster vi <span class="math inline">\(H_0\)</span>: variansene er <em>forskjellige</em>.</p>
+</blockquote>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Fordi a viste ulik varians, bruker vi varianten med ulik varians (Welch). Vi tester <span class="math inline">\(H_0: \mu_1 - \mu_2 = 0\)</span> mot <span class="math inline">\(H_A: \mu_1 - \mu_2 \neq 0\)</span>:</li>
+</ol>
+<p><span class="math display">\[T = \frac{\overline{x}_1 - \overline{x}_2}{\sqrt{s_1^2/n_1 + s_2^2/n_2}} = \frac{0.68 - 5.52}{\sqrt{8.60^2/162 + 4.83^2/231}} = -6.48.\]</span></p>
+<p>Utvalgene er store, så den kritiske verdien er tilnærmet <span class="math inline">\(z_{0.025} = 1.96\)</span>. Siden <span class="math inline">\(|-6.48| = 6.48 &gt; 1.96\)</span> forkaster vi <span class="math inline">\(H_0\)</span>: den forventede avkastningen er forskjellig i de to gruppene (og lavest i høy-risiko-månedene).</p>
+</blockquote>
+</details>
+<ol start="17" style="list-style-type: decimal">
+<li><em>(Eksamen vår 2025.)</em> I et atferdseksperiment skal deltakerne rapportere om de gjettet riktig i et terningspill, der en riktig gjetning gir en liten belønning (det er ingen kontroll av om de snakker sant). En <em>kontrollgruppe</em> får ingen ekstra informasjon, mens en <em>tillitsgruppe</em> først får lese en tekst som understreker at forskerne stoler på dem. Av 400 i tillitsgruppen rapporterte 116 en riktig gjetning, mot 181 av 400 i kontrollgruppen. Kan vi konkludere med at «tillits-teksten» reduserer andelen som rapporterer en (mistenkelig ofte) riktig gjetning? Bruk 1 %-signifikansnivå.</li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<blockquote>
+<p>La <span class="math inline">\(p_1\)</span> og <span class="math inline">\(p_2\)</span> være andelene som rapporterer riktig gjetning i henholdsvis tillitsgruppen og kontrollgruppen. Vi tester <span class="math inline">\(H_0: p_1 = p_2\)</span> mot det ensidige alternativet <span class="math inline">\(H_A: p_1 &lt; p_2\)</span>. Estimatene er <span class="math inline">\(\widehat{p}_1 = 116/400 = 0.29\)</span> og <span class="math inline">\(\widehat{p}_2 = 181/400 = 0.4525\)</span>, og den poolede andelen er <span class="math inline">\(\widehat{p} = (116 + 181)/(400 + 400) = 0.371\)</span>. Testobservatoren er</p>
+<p><span class="math display">\[Z = \frac{\widehat{p}_1 - \widehat{p}_2}{\sqrt{\widehat{p}(1-\widehat{p})(1/n_1 + 1/n_2)}} = \frac{0.29 - 0.4525}{\sqrt{0.371(1-0.371)(1/400 + 1/400)}} = -4.76.\]</span></p>
+<p>Forkastningsområdet er <span class="math inline">\(Z &lt; z_{0.01} = -2.33\)</span> (fra <code>qnorm(0.01)</code>). Siden <span class="math inline">\(-4.76 &lt; -2.33\)</span> forkaster vi <span class="math inline">\(H_0\)</span>: tillits-teksten ser ut til å redusere andelen som rapporterer en riktig gjetning. En naturlig tolkning er at teksten fikk færre til å jukse.</p>
+</blockquote>
+</details>
+</div>
+<div id="ntter-1" class="section level3 hasAnchor" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Nøtter<a href="oppgaver.html#ntter-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Nøtt 1. En analytiker leter etter en «markedsslående» handelsstrategi og tester 20 forskjellige strategier, hver mot <span class="math inline">\(H_0:\)</span> <em>strategien gir ingen meravkastning</em>, på 5 %-nivå. Anta at <em>alle</em> de 20 strategiene i virkeligheten er verdiløse (alle nullhypotesene er sanne), og at testene er uavhengige.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Hva er sannsynligheten for at <em>minst én</em> av strategiene blir «signifikant» og altså feilaktig utropt til en vinner?</p></li>
+<li><p>Analytikeren presenterer stolt den ene strategien som ble signifikant. Hvorfor bør vi være skeptiske?</p></li>
+<li><p>Anta at vi vil holde sannsynligheten for <em>minst én</em> Type I-feil på tvers av alle 20 testene nede på 5 %. Hvor lavt må vi da sette signifikansnivået for hver enkelt test? (Dette kalles en Bonferroni-korreksjon.)</p></li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<blockquote>
+<ol style="list-style-type: lower-alpha">
+<li>Hver test forkaster med sannsynlighet <span class="math inline">\(\alpha = 0.05\)</span> når <span class="math inline">\(H_0\)</span> er sann, så den <em>beholder</em> <span class="math inline">\(H_0\)</span> med sannsynlighet <span class="math inline">\(0.95\)</span>. Siden testene er uavhengige, er sannsynligheten for at <em>ingen</em> av dem blir signifikant <span class="math inline">\(0.95^{20}\)</span>, og dermed
+<span class="math display">\[P(\text{minst én signifikant}) = 1 - 0.95^{20} = 0.64.\]</span>
+Det er altså mer sannsynlig enn ikke at vi får minst ett «funn», selv om alt vi tester er ren støy.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Nettopp fordi et signifikant funn er så sannsynlig når vi tester mange hypoteser, sier ett signifikant resultat plukket ut blant 20 nesten ingenting. Dette er fallgruven <em>multippel testing</em>: jo flere tester, jo lettere er det å finne noe «signifikant» ved ren flaks. Vi burde fått vite hvor mange strategier som ble testet, og helst sett strategien bekreftet på nye, uavhengige data.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Vil vi at <span class="math inline">\(P(\text{minst én Type I-feil}) \leq 0.05\)</span>, kan vi (litt konservativt) dele signifikansnivået på antall tester: <span class="math inline">\(\alpha^* = 0.05/20 = 0.0025\)</span>. Da kreves mye sterkere bevis i hver enkelt test, og prisen er lavere styrke.</li>
+</ol>
+</blockquote>
+</details>
+<p>Nøtt 2. En randomisert studie undersøker om det å vinne i et skattefradrags-lotteri påvirker hvor mange timer folk jobber per uke. På et lite tilfeldig utvalg gir en to-utvalgs t-test testobservator <span class="math inline">\(T = 1.44\)</span>, som <em>ikke</em> er signifikant på 5 %-nivå. Forskerne gjentar så nøyaktig samme test på hele populasjonen, som er omtrent 3000 ganger så stor. Den estimerte forskjellen mellom vinnere og ikke-vinnere er praktisk talt den samme, cirka 3.35 timer i uken.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Testobservatoren for et gjennomsnitt (eller en differanse) kan skrives som effekt delt på en standardfeil, og standardfeilen krymper proporsjonalt med <span class="math inline">\(1/\sqrt{n}\)</span>. Hvis forskjellen og standardavvikene er uendret, hva blir omtrent den nye testobservatoren når <span class="math inline">\(n\)</span> blir 3000 ganger større?</p></li>
+<li><p>Den nye p-verdien er forsvinnende liten. Betyr det at effekten er «viktigere» i den store studien enn i den lille?</p></li>
+<li><p>Hva er lærdommen om forholdet mellom statistisk signifikans og <em>praktisk</em> (økonomisk) betydning?</p></li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<blockquote>
+<ol style="list-style-type: lower-alpha">
+<li>Siden standardfeilen er proporsjonal med <span class="math inline">\(1/\sqrt{n}\)</span>, vokser testobservatoren proporsjonalt med <span class="math inline">\(\sqrt{n}\)</span> når effekten holdes fast. Å gjøre <span class="math inline">\(n\)</span> 3000 ganger større ganger testobservatoren med <span class="math inline">\(\sqrt{3000} \approx 55\)</span>:
+<span class="math display">\[T_{\text{ny}} \approx 1.44 \cdot \sqrt{3000} \approx 79.\]</span>
+En slik verdi gir en p-verdi som i praksis er null.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Nei. Den estimerte effekten er den samme (cirka 3.35 timer); det eneste som har endret seg, er at vi er mye <em>sikrere</em> på at den ikke er null. En liten p-verdi betyr «svært lite forenlig med at effekten er nøyaktig null», ikke «stor effekt».</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Med et stort nok utvalg blir selv en ubetydelig forskjell statistisk signifikant. Statistisk signifikans svarer på om en effekt finnes, ikke på om den er stor nok til å bety noe. En forskjell på 3.35 timer (nær 10 % av en normal arbeidsuke) er økonomisk betydelig i seg selv, uansett p-verdi, og <em>det</em> er vurderingen som teller for beslutninger. Statistisk signifikans og praktisk betydning er to forskjellige spørsmål.</li>
+</ol>
+</blockquote>
+</details>
+<p>Nøtt 3. En analytiker har regnet ut et 95 %-konfidensintervall for den forventede månedlige avkastningen <span class="math inline">\(\mu\)</span> til et fond, og får <span class="math inline">\([0.3\,\%,\ 1.7\,\%]\)</span>. Uten å regne ut noen testobservator skal du svare på følgende:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Kan vi forkaste <span class="math inline">\(H_0: \mu = 0\)</span> mot <span class="math inline">\(H_A: \mu \neq 0\)</span> på 5 %-nivå?</p></li>
+<li><p>Kan vi forkaste <span class="math inline">\(H_0: \mu = 2\,\%\)</span> mot <span class="math inline">\(H_A: \mu \neq 2\,\%\)</span> på 5 %-nivå?</p></li>
+<li><p>Forklar den generelle regelen som knytter et <span class="math inline">\((1-\alpha)\)</span>-konfidensintervall til en tosidig test på nivå <span class="math inline">\(\alpha\)</span>.</p></li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<blockquote>
+<ol style="list-style-type: lower-alpha">
+<li>Verdien <span class="math inline">\(0\)</span> ligger <em>utenfor</em> intervallet <span class="math inline">\([0.3\,\%, 1.7\,\%]\)</span>, så vi forkaster <span class="math inline">\(H_0: \mu = 0\)</span>. Dataene er ikke forenlige med at den forventede avkastningen er null.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Verdien <span class="math inline">\(2\,\%\)</span> ligger også utenfor intervallet, så vi forkaster <span class="math inline">\(H_0: \mu = 2\,\%\)</span> på samme måte.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Regelen er en <em>dualitet</em>: et <span class="math inline">\((1-\alpha)\)</span>-konfidensintervall består nettopp av alle verdiene <span class="math inline">\(\mu_0\)</span> som <em>ikke</em> ville blitt forkastet av en tosidig test på nivå <span class="math inline">\(\alpha\)</span>. Ligger <span class="math inline">\(\mu_0\)</span> innenfor intervallet, beholder vi <span class="math inline">\(H_0: \mu = \mu_0\)</span>; ligger den utenfor, forkaster vi. Et konfidensintervall er derfor en kompakt oppsummering av <em>alle</em> tosidige tester på én gang.</li>
+</ol>
+</blockquote>
+</details>
+<p>Nøtt 4. To forskere vil teste den samme effekten, <span class="math inline">\(H_0: \mu = 0\)</span> mot <span class="math inline">\(H_A: \mu &gt; 0\)</span>, der den sanne verdien i virkeligheten er <span class="math inline">\(\mu = 0.5\)</span> (målt i antall populasjonsstandardavvik, så <span class="math inline">\(\sigma = 1\)</span>). Forsker A samler <span class="math inline">\(n = 10\)</span> observasjoner, forsker B samler <span class="math inline">\(n = 100\)</span>. Begge bruker 5 %-nivå. For enkelhets skyld antar vi <span class="math inline">\(\sigma\)</span> kjent, så testobservatoren er <span class="math inline">\(Z = \overline{X}/(1/\sqrt{n})\)</span> og vi forkaster når <span class="math inline">\(Z &gt; 1.645\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Vis at forsker A forkaster <span class="math inline">\(H_0\)</span> dersom <span class="math inline">\(\overline{X} &gt; 1.645/\sqrt{n}\)</span>, og finn denne grensen for <span class="math inline">\(n = 10\)</span> og <span class="math inline">\(n = 100\)</span>.</p></li>
+<li><p>Styrken er sannsynligheten for å forkaste <span class="math inline">\(H_0\)</span> når <span class="math inline">\(H_A\)</span> er sann. Regn ut styrken til hver av de to testene når <span class="math inline">\(\mu = 0.5\)</span>. <em>Tips:</em> <span class="math inline">\(P(\overline{X} &gt; k) = P\!\left(Z &gt; (k - 0.5)\sqrt{n}\right)\)</span> når <span class="math inline">\(\mu = 0.5\)</span>.</p></li>
+<li><p>Forsker A får et ikke-signifikant resultat og konkluderer med at «effekten er null». Hva er galt med denne slutningen?</p></li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<blockquote>
+<ol style="list-style-type: lower-alpha">
+<li>Vi forkaster når <span class="math inline">\(Z = \overline{X}\sqrt{n} &gt; 1.645\)</span>, altså når <span class="math inline">\(\overline{X} &gt; 1.645/\sqrt{n}\)</span>. For <span class="math inline">\(n = 10\)</span> er grensen <span class="math inline">\(1.645/\sqrt{10} = 0.520\)</span>; for <span class="math inline">\(n = 100\)</span> er den <span class="math inline">\(1.645/\sqrt{100} = 0.165\)</span>.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Styrken er <span class="math inline">\(P(\overline{X} &gt; 1.645/\sqrt{n}\ \text{når}\ \mu = 0.5)\)</span>. Vi standardiserer med den sanne forventningen <span class="math inline">\(0.5\)</span>:
+<span class="math display">\[\text{styrke} = P\!\left(Z &gt; \frac{1.645/\sqrt{n} - 0.5}{1/\sqrt{n}}\right) = P\!\left(Z &gt; 1.645 - 0.5\sqrt{n}\right).\]</span>
+For <span class="math inline">\(n = 10\)</span>: <span class="math inline">\(P(Z &gt; 1.645 - 1.58) = P(Z &gt; 0.06) \approx 0.47\)</span>. For <span class="math inline">\(n = 100\)</span>: <span class="math inline">\(P(Z &gt; 1.645 - 5) = P(Z &gt; -3.36) \approx 1.00\)</span>. Med bare 10 observasjoner oppdager forsker A en reell effekt mindre enn halvparten av gangene.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Forsker A har en test med lav styrke: selv om effekten er reell (<span class="math inline">\(\mu = 0.5\)</span>), forkaster testen bare cirka 47 % av gangene. Et ikke-signifikant resultat betyr da bare at dataene var for få til å påvise effekten, ikke at den er null. «Vi fant ingen effekt» er ikke det samme som «det finnes ingen effekt», og en test beviser aldri <span class="math inline">\(H_0\)</span>.</li>
+</ol>
+</blockquote>
+</details>
+</div>
+<div id="r-oppgaver-1" class="section level3 hasAnchor" number="3.5.3">
+<h3><span class="header-section-number">3.5.3</span> R-oppgaver<a href="oppgaver.html#r-oppgaver-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Her bruker vi R til å utføre testene fra dette kapittelet i praksis. Vi bruker eksempeldatasettet <a href="datasett/testdata.xls">testdata.xls</a>, som har de numeriske kolonnene <code>X1</code> og <code>X2</code>.</p>
+<p><strong>Oppgave 1.</strong> Les inn datasettet og gjør deg kjent med det:</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="oppgaver.html#cb112-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb112-2"><a href="oppgaver.html#cb112-2" tabindex="-1"></a>testdata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;testdata.xls&quot;</span>)</span></code></pre></div>
+<ol style="list-style-type: lower-alpha">
+<li><p>Test på 5 %-nivå om den forventede verdien til <code>X1</code> er lik 100, mot det tosidige alternativet. Bruk <code>t.test()</code>. Hva blir konklusjonen?</p></li>
+<li><p>Test på 5 %-nivå om <code>X1</code> og <code>X2</code> har samme forventning. Se på <strong>p-verdien</strong> i utskriften og konkluder.</p></li>
+<li><p>Kjør testen i b på nytt, men med <code>alternative = "greater"</code>. Hva tester du nå, og hvordan endrer p-verdien seg?</p></li>
+</ol>
+<details>
+<summary>
+Hint
+</summary>
+<p><code>t.test(testdata$X1, mu = 100)</code> for a, <code>t.test(testdata$X1, testdata$X2)</code> for b. Husk at <code>t.test()</code> alltid ser på differansen mellom <em>første</em> og <em>andre</em> argument, se <a href="relevante-r-testing.html#relevante-r-testing">3.6</a>.</p>
+</details>
+<p><strong>Oppgave 2.</strong> Denne oppgaven demonstrerer hva signifikansnivået <span class="math inline">\(\alpha\)</span> <em>betyr</em> i praksis: at vi over mange gjentakelser forkaster en sann <span class="math inline">\(H_0\)</span> i en andel <span class="math inline">\(\alpha\)</span> av tilfellene. Vi later som vi gjentar den samme testen veldig mange ganger i en situasjon der <span class="math inline">\(H_0\)</span> er sann <em>med vilje</em>, og teller hvor ofte vi (feilaktig) forkaster.</p>
+<p>Vi tester <span class="math inline">\(H_0: \mu = 0\)</span> mot <span class="math inline">\(H_A: \mu \neq 0\)</span> på 5 %-nivå, og trekker hver gang <span class="math inline">\(n = 30\)</span> observasjoner fra en fordeling der forventningen faktisk <em>er</em> 0 (så <span class="math inline">\(H_0\)</span> er sann). Følgende kode gjør dette 5000 ganger og lagrer p-verdien hver gang:</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="oppgaver.html#cb113-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb113-2"><a href="oppgaver.html#cb113-2" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="dv">5000</span>                       <span class="co"># antall gjentakelser</span></span>
+<span id="cb113-3"><a href="oppgaver.html#cb113-3" tabindex="-1"></a>p_verdier <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, M)</span>
+<span id="cb113-4"><a href="oppgaver.html#cb113-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
+<span id="cb113-5"><a href="oppgaver.html#cb113-5" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)   <span class="co"># H0 er sann: forventning = 0</span></span>
+<span id="cb113-6"><a href="oppgaver.html#cb113-6" tabindex="-1"></a>    p_verdier[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x, <span class="at">mu =</span> <span class="dv">0</span>)<span class="sc">$</span>p.value</span>
+<span id="cb113-7"><a href="oppgaver.html#cb113-7" tabindex="-1"></a>}</span></code></pre></div>
+<ol style="list-style-type: lower-alpha">
+<li><p>Regn ut andelen av de 5000 testene som forkastet <span class="math inline">\(H_0\)</span> på 5 %-nivå, altså andelen p-verdier under 0.05: <code>mean(p_verdier &lt; 0.05)</code>. Hva forventer du å få, og hva forteller det deg om betydningen av <span class="math inline">\(\alpha\)</span>?</p></li>
+<li><p>Gjenta med <code>&lt; 0.01</code> i stedet. Stemmer det med et signifikansnivå på 1 %?</p></li>
+<li><p>Lag et histogram av p-verdiene med <code>hist(p_verdier)</code>. Fordelingen skal være tilnærmet <em>jevn</em> (flat) mellom 0 og 1. Kan du forklare intuitivt hvorfor p-verdien er jevnt fordelt når <span class="math inline">\(H_0\)</span> er sann?</p></li>
+</ol>
+<details>
+<summary>
+Svar
+</summary>
+<blockquote>
+<ol style="list-style-type: lower-alpha">
+<li>Andelen er cirka 0.05. Det er selve definisjonen på signifikansnivået: når <span class="math inline">\(H_0\)</span> er sann, forkaster vi ved ren tilfeldighet i en andel <span class="math inline">\(\alpha = 5\,\%\)</span> av tilfellene. Vi <em>kontrollerer</em> altså Type I-feilraten ved å velge <span class="math inline">\(\alpha\)</span>, akkurat som Neyman og Pearson påpekte (se Avsnitt <a href="generelt-om-hypotesetesting.html#generelt-om-hypotesetesting">3.1</a>, delen om de to feiltypene).</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Nå er andelen cirka 0.01, i tråd med et strengere signifikansnivå. Jo lavere <span class="math inline">\(\alpha\)</span>, jo sjeldnere forkaster vi en sann <span class="math inline">\(H_0\)</span>.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Når <span class="math inline">\(H_0\)</span> er sann, er p-verdien like sannsynlig å havne hvor som helst mellom 0 og 1: andelen tester med p-verdi under en hvilken som helst grense <span class="math inline">\(c\)</span> er nettopp <span class="math inline">\(c\)</span> (det er derfor andelen under 0.05 blir 0.05, og andelen under 0.01 blir 0.01). En jevn fordeling er akkurat det denne egenskapen krever.</li>
+</ol>
+</blockquote>
+</details>
+<p><strong>Oppgave 3.</strong> En butikkjede vil vite om det er en sammenheng mellom hvilken av tre butikker en kunde handler i, og om kunden bruker et lojalitetskort. Et tilfeldig utvalg på 500 kjøp er krysstabulert slik:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="center">Butikk A</th>
+<th align="center">Butikk B</th>
+<th align="center">Butikk C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Kort</strong></td>
+<td align="center">90</td>
+<td align="center">60</td>
+<td align="center">70</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Ikke</strong></td>
+<td align="center">60</td>
+<td align="center">100</td>
+<td align="center">20</td>
+</tr>
+</tbody>
+</table>
+<ol style="list-style-type: lower-alpha">
+<li><p>Legg tabellen inn i R som en matrise (se <a href="relevante-r-testing.html#relevante-r-testing">3.6</a> for oppskrift med <code>matrix()</code>), og bruk <code>chisq.test()</code> til å teste <span class="math inline">\(H_0:\)</span> <em>butikk og kortbruk er uavhengige</em> mot <span class="math inline">\(H_A:\)</span> <em>de henger sammen</em>.</p></li>
+<li><p>Se på <strong>p-verdien</strong> og konkluder på 5 %-nivå.</p></li>
+<li><p>Kjør <code>chisq.test(...)$expected</code> for å hente ut de forventede celletallene. Er alle større enn 5, slik tilnærmingen krever?</p></li>
+</ol>
+<details>
+<summary>
+Hint
+</summary>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="oppgaver.html#cb114-1" tabindex="-1"></a>tabell <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">60</span>, <span class="dv">70</span>,</span>
+<span id="cb114-2"><a href="oppgaver.html#cb114-2" tabindex="-1"></a>                   <span class="dv">60</span>, <span class="dv">100</span>, <span class="dv">20</span>),</span>
+<span id="cb114-3"><a href="oppgaver.html#cb114-3" tabindex="-1"></a>                 <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb114-4"><a href="oppgaver.html#cb114-4" tabindex="-1"></a>                 <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Kort&quot;</span>, <span class="st">&quot;Ikke&quot;</span>),</span>
+<span id="cb114-5"><a href="oppgaver.html#cb114-5" tabindex="-1"></a>                                 <span class="fu">c</span>(<span class="st">&quot;Butikk A&quot;</span>, <span class="st">&quot;Butikk B&quot;</span>, <span class="st">&quot;Butikk C&quot;</span>)))</span>
+<span id="cb114-6"><a href="oppgaver.html#cb114-6" tabindex="-1"></a><span class="fu">chisq.test</span>(tabell)</span></code></pre></div>
+</details>
 </div>
 </div>
             </section>
