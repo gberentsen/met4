@@ -50,7 +50,7 @@ Det finnes to likeverdige måter å ta beslutningen på i steg 5, og de gir allt
 Hvor overrasket må vi være før vi forkaster? Her må vi ta stilling til at en test kan gå galt på to måter:
 
 | Vår avgjørelse | $H_0$ er sann | $H_0$ er usann |
-|:---|:---:|:---:|
+|:---|:---|:---|
 | **Forkaster $H_0$** | Type I-feil | Riktig |
 | **Beholder $H_0$** | Riktig | Type II-feil |
 
