@@ -89,7 +89,7 @@ En **Type I-feil** er å forkaste en sann nullhypotese (dømme en uskyldig). En 
 
 Sannsynligheten for en Type II-feil kaller vi $\beta$. **Styrken** (power) til testen er $1 - \beta$, altså sannsynligheten for at vi *korrekt* forkaster en usann nullhypotese. En sterk test er god til å oppdage en effekt når den faktisk finnes.
 
-De to feiltypene trekker i hver sin retning: krymper vi forkastningsområdet (lavere $\alpha$), gjør vi Type I-feil sjeldnere, men Type II-feil oftere. Den eneste måten å redusere begge samtidig på er å samle inn *mer data*: en større $n$ gir en mer presis testobservator, og dermed både lav $\alpha$ og høy styrke.
+De to feiltypene trekker i hver sin retning: krymper vi forkastningsområdet (lavere $\alpha$), gjør vi Type I-feil sjeldnere, men Type II-feil oftere. Den eneste måten å redusere begge samtidig på er å samle inn *mer data*: en større $n$ gir en mer presis testobservator, og tillater dermed *både* et lavt $\alpha$ og høy styrke. Merk at $n$ ikke velger signifikansnivået for oss, det gjør vi selv; det en større $n$ gir oss, er at et lavt $\alpha$ ikke lenger trenger å gå på bekostning av styrken.
 
 ### p-verdien
 
