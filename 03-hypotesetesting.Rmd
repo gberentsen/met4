@@ -56,7 +56,7 @@ Hvor overrasket må vi være før vi forkaster? Her må vi ta stilling til at en
 
 En **Type I-feil** er å forkaste en sann nullhypotese (dømme en uskyldig). En **Type II-feil** er å beholde en usann nullhypotese (frikjenne en skyldig).
 
-**Signifikansnivået** $\alpha$ er sannsynligheten vi på forhånd er villige til å godta for å gjøre en Type I-feil: $\alpha = P(\text{forkaste } H_0 \mid H_0 \text{ er sann})$. Vi velger $\alpha$ før vi ser dataene (typisk 5 %), og det er $\alpha$ som bestemmer hvor grensen for forkastningsområdet går. Et 5 %-nivå betyr at vi legger forkastningsområdet der de 5 % mest ekstreme verdiene under $H_0$ ligger.
+**Signifikansnivået** $\alpha$ er sannsynligheten vi på forhånd er villige til å godta for å gjøre en Type I-feil: $\alpha = P(\text{forkaste } H_0 \mid H_0 \text{ er sann})$. Vi velger $\alpha$ før vi ser dataene (typisk 5 %), og det er $\alpha$ som bestemmer hvor grensen for forkastningsområdet går. Et 5 %-nivå betyr at vi legger forkastningsområdet der de 5 % mest ekstreme verdiene under $H_0$ ligger. Hvor lavt vi bør sette $\alpha$, avhenger av hvor alvorlig en Type I-feil er i den konkrete situasjonen: jo mer det koster å forkaste en sann nullhypotese, jo strengere (lavere) $\alpha$ bør vi kreve.
 
 Sannsynligheten for en Type II-feil kaller vi $\beta$. **Styrken** (power) til testen er $1 - \beta$, altså sannsynligheten for at vi *korrekt* forkaster en usann nullhypotese. En sterk test er god til å oppdage en effekt når den faktisk finnes.
 
@@ -131,24 +131,24 @@ $$T = \frac{\overline{X} - \mu_0}{s/\sqrt{n}}$$
 
 ikke lenger er normalfordelt, men **t-fordelt med $n-1$ frihetsgrader**. Testobservatoren måler hvor mange (estimerte) standardfeil utvalgsgjennomsnittet ligger unna verdien $\mu_0$ som nullhypotesen påstår. Ligger den langt unna null, taler dataene mot $H_0$. Den kritiske verdien henter vi fra t-fordelingen (`qt()` i R). Testen kalles gjerne en **t-test**, og den hviler på at observasjonene kommer fra en tilnærmet normalfordelt populasjon, eller at $n$ er stor nok til at sentralgrenseteoremet slår inn.
 
-**Eksempel.** NHHs karrieresenter oppgir at gjennomsnittlig startlønn for nyutdannede masterstudenter er 620 000 kr. En studentforening mistenker at den egentlig er høyere, og gjennomfører en spørreundersøkelse. Vi følger de fem stegene:
+**Eksempel.** En bank oppgir at den gjennomsnittlige saksbehandlingstiden for en lånesøknad er 10 dager. En forbrukerorganisasjon mistenker at den egentlig er lengre, og gjennomfører en undersøkelse. Vi følger de fem stegene:
 
-1. **Spørsmål:** Er den forventede startlønnen høyere enn 620 000 kr?
-2. **Hypoteser og signifikansnivå:** $H_0: \mu = 620\,000$ mot $H_A: \mu > 620\,000$ (ensidig). Vi bestemmer *på forhånd*, før vi ser på dataene, at vi vil bruke et signifikansnivå på $\alpha = 5\,\%$.
-3. **Data:** Vi spør 40 tilfeldig valgte nyutdannede om startlønnen deres. Vi simulerer svarene, så du kan kjøre koden og få de samme tallene:
+1. **Spørsmål:** Er den forventede saksbehandlingstiden lengre enn 10 dager?
+2. **Hypoteser og signifikansnivå:** $H_0: \mu = 10$ mot $H_A: \mu > 10$ (ensidig). Vi må velge signifikansnivået *på forhånd*, og bør da veie inn hvor alvorlig en Type I-feil er. Her ville en Type I-feil være å hevde at banken er tregere enn den lover, uten at det er sant. Det er en påstand vi ikke vil komme med for lettvint, men konsekvensen er ikke dramatisk, så vi holder oss til det vanlige nivået $\alpha = 5\,\%$.
+3. **Data:** Vi måler saksbehandlingstiden (i dager) for 40 tilfeldig valgte lånesøknader. Vi simulerer dataene, så du kan kjøre koden og få de samme tallene:
 
 ```{r}
-set.seed(2)
-lonn <- rnorm(40, mean = 636000, sd = 52000)
+set.seed(3)
+dager <- rnorm(40, mean = 11.2, sd = 3.3)
 ```
 
 4. **Testobservator:** Vi kjenner ikke det sanne standardavviket, så vi bruker $T = (\overline{X} - \mu_0)/(s/\sqrt{n})$, og regner den ut manuelt med R som kalkulator:
 
 ```{r}
-gj.snitt <- mean(lonn)     # utvalgsgjennomsnittet
-s        <- sd(lonn)       # utvalgsstandardavviket
-n        <- length(lonn)   # antall observasjoner
-mu0      <- 620000         # verdien fra nullhypotesen
+gj.snitt <- mean(dager)     # utvalgsgjennomsnittet
+s        <- sd(dager)       # utvalgsstandardavviket
+n        <- length(dager)   # antall observasjoner
+mu0      <- 10              # verdien fra nullhypotesen
 
 T_obs <- (gj.snitt - mu0)/(s/sqrt(n))
 T_obs
@@ -160,15 +160,15 @@ T_obs
 qt(0.95, df = n - 1)
 ```
 
-Testobservatoren (2.31) er større enn den kritiske verdien (1.69), så den lander i forkastningsområdet. Vi forkaster $H_0$ og konkluderer med at den forventede startlønnen er høyere enn 620 000 kr.
+Testobservatoren (2.33) er større enn den kritiske verdien (1.69), så den lander i forkastningsområdet. Vi forkaster $H_0$ og konkluderer med at den forventede saksbehandlingstiden er lengre enn 10 dager.
 
 Over gjorde vi testen manuelt, steg for steg. **I R** kan vi i stedet la `t.test()` gjøre hele jobben direkte fra dataene:
 
 ```{r}
-t.test(lonn, mu = 620000, alternative = "greater")
+t.test(dager, mu = 10, alternative = "greater")
 ```
 
-I utskriften er det særlig **p-verdien** du skal se på: er den mindre enn signifikansnivået vi valgte på forhånd ($\alpha = 0.05$), forkaster vi $H_0$. Her er p-verdien 0.013, altså under 0.05, så vi forkaster, akkurat som med den kritiske verdien. Utskriften gir også selve testobservatoren (`t`), antall frihetsgrader (`df`) og et konfidensintervall for den forventede startlønnen.
+I utskriften er det særlig **p-verdien** du skal se på: er den mindre enn signifikansnivået vi valgte på forhånd ($\alpha = 0.05$), forkaster vi $H_0$. Her er p-verdien 0.013, altså under 0.05, så vi forkaster, akkurat som med den kritiske verdien. Utskriften gir også selve testobservatoren (`t`), antall frihetsgrader (`df`) og et konfidensintervall for den forventede saksbehandlingstiden.
 
 ### Inferens om en andel
 
@@ -181,7 +181,7 @@ som er tilnærmet standardnormalfordelt når $H_0$ er sann. Legg merke til at vi
 **Eksempel.** En bank hevder at høyst 5 % av forbrukslånene deres blir misligholdt. En tilsynsmyndighet vil undersøke om den sanne misligholdsandelen er høyere.
 
 1. **Spørsmål:** Er den sanne misligholdsandelen $p$ større enn 0.05?
-2. **Hypoteser og signifikansnivå:** $H_0: p = 0.05$ mot $H_A: p > 0.05$ (ensidig). Vi velger på forhånd et signifikansnivå på $\alpha = 5\,\%$.
+2. **Hypoteser og signifikansnivå:** $H_0: p = 0.05$ mot $H_A: p > 0.05$ (ensidig). En Type I-feil ville her være å konkludere med at banken bryter kravet når den egentlig oppfyller det, noe som kan utløse unødvendige tilsynstiltak. Vi velger på forhånd et signifikansnivå på $\alpha = 5\,\%$.
 3. **Data:** Tilsynet trekker 400 tilfeldige lån og finner at 30 av dem er misligholdt. Den observerte andelen er $\widehat{p} = 30/400 = 0.075$.
 4. **Testobservator:** Under $H_0$ er $p_0 = 0.05$, så
 
@@ -223,7 +223,7 @@ som under $H_0$ følger en **kji-kvadratfordeling** ($\chi^2$-fordeling) med $n-
 **Eksempel.** Et aksjefond markedsfører seg med at risikoen, målt ved standardavviket til den månedlige avkastningen, er høyst 4 %. En analytiker vil teste om risikoen egentlig er høyere.
 
 1. **Spørsmål:** Er standardavviket $\sigma$ til den månedlige avkastningen større enn 4 %?
-2. **Hypoteser og signifikansnivå:** $H_0: \sigma = 4$ mot $H_A: \sigma > 4$ (ensidig). Vi velger på forhånd et signifikansnivå på $\alpha = 5\,\%$.
+2. **Hypoteser og signifikansnivå:** $H_0: \sigma = 4$ mot $H_A: \sigma > 4$ (ensidig). En Type I-feil ville her være å beskylde fondet for høyere risiko enn det reklamerer med, uten grunnlag. Vi velger på forhånd et signifikansnivå på $\alpha = 5\,\%$.
 3. **Data:** Analytikeren ser på de månedlige avkastningene (i prosent) fra de siste 30 månedene (simulert):
 
 ```{r}
