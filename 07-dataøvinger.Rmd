@@ -52,7 +52,7 @@ Marker linjene du nettopp skrev i R-skriptet ditt og trykk **Ctrl + Enter** (**C
 ls()
 ```
 
-Du ser at det har kommet et nytt objekt som heter `violence`. En tilsvarende oversikt finner du i vinduet øverst til   høyre i Rstudio (se Figur \@ref(fig:rstudio1)) hvor du også kan klikke på objektet for å se nærmere på det.
+Du ser at det har kommet et nytt objekt som heter `violence`. En tilsvarende oversikt finner du i vinduet øverst til høyre i RStudio (se Figur \@ref(fig:rstudio1)) hvor du også kan klikke på objektet for å se nærmere på det.
 
 **Oppgave 3.** Ta en titt på strukturen til datasettet du nettopp leste inn. Når du gjør slike små utforskninger kan du gjerne jobbe direkte i konsollen, og det du gjør i dette punktet trenger nødvendigvis ikke være med i .R-filen din. Gå til konsollen og bruk funksjoner som `class`, `dim`, `names`, `head` og `str` for å utforske strukturen på dataene. Vi ser at det er 5 variabler:
 
@@ -60,7 +60,7 @@ Du ser at det har kommet et nytt objekt som heter `violence`. En tilsvarende ove
 - `aggression_level` er aggresjonsnivået som ble målt rett etter at forsøkspersonen hadde spilt en viss tid.
 - `violent_treatment` er varianten av dataspillet som forsøkspersonen ble utsatt for; enten `Violent` eller `Less Violent`.
 - `difficulty_treatment` er vanskelighetsgraden av spillet, som enten var `Easy` eller `Hard`. En mulig forklaring på aggressiv adferd er at vanskelige spill fører til høyere stressnivå, som igjen kan føre til aggressivitet.
-- `experienced_violence` er svaret til forsøkspersonen på spørsmålet om vedkommende *oppfattet* spillet som `Violent` eller `Less Violent`.  Forsøkspersonene visste ikke selv hva forssøket gikk ut på, eller at det var flere varianter av det samme spillet.
+- `experienced_violence` er svaret til forsøkspersonen på spørsmålet om vedkommende *oppfattet* spillet som `Violent` eller `Less Violent`.  Forsøkspersonene visste ikke selv hva forsøket gikk ut på, eller at det var flere varianter av det samme spillet.
 
 **Oppgave 4.**
 
@@ -69,7 +69,7 @@ Vi skal se nærmere på om aggresjonsnivået er forskjellig i de to gruppene. Da
 La disse to vektorene få navn `voldelig` og `ikke_voldelig`, og lag dem ved å skrive følgende kodelinjer (se [video om pipe-operatoren og enkel datavask](#pipe) for en forklaring av disse funksjonene. Den siste linjen, `pull`, gjør en dataframe med én kolonne om til en vektor) :
 
 ```{r}
-# Laster inn dplyr-pakken for 
+# Laster inn dplyr-pakken
 library(dplyr)
 
 # Vektorer med aggresjonsnivå til gruppen som har spilt voldelig/ikke-voldelig spill 
@@ -86,7 +86,7 @@ ikke_voldelig <-
   pull
 ```
 
-Sjekk nå at dette har fungert ved å skrive `voldelig` og `ikke_voldelig` inn i konsollen for å se at det faktisk er vektorer som inneholder tallene 1 -- 9. Bruk også noen minutter til å prøve å forstå hva kodelinjene over faktisk gjør. 
+Sjekk nå at dette har fungert ved å skrive `voldelig` og `ikke_voldelig` inn i konsollen for å se at det faktisk er vektorer som inneholder tallene 1 til 9. Bruk også noen minutter til å prøve å forstå hva kodelinjene over faktisk gjør. 
 
 (**NB!** Pass på at du skriver `Violent` og `Less Violent` helt riktig med store og små bokstaver, ellers vil det ikke fungere!)
 
@@ -98,7 +98,7 @@ knitr::include_graphics("bilder/descriptive.png")
 
 Bruk funksjoner som `min()`, `max()`, `median()`, `mean()`, `length()` og `summary()` til å finne ut om tallene stemmer (Du vil se at datasettet ditt inneholder noen færre observasjoner enn det som er oppgitt i tabellen, som gjør at tallene er litt forskjellige).
 
-**Oppgave 6.** Vi skal nå lage et histogram av hver av gruppene du lagret som vektorer i tidligere. Vi kan først kikke på Figur \@ref(fig:hist-avkastning) og koden som lagde disse figurene for å få en idé om hva vi må gjøre. Et svært viktig punkt er føgende:
+**Oppgave 6.** Vi skal nå lage et histogram av hver av gruppene du lagret som vektorer i tidligere. Vi kan først kikke på Figur \@ref(fig:hist-avkastning) og koden som lagde disse figurene for å få en idé om hva vi må gjøre. Et svært viktig punkt er følgende:
 
 **`ggplot`-funksjonen skal alltid ha hele datasettet (en data frame) som argument!!**
 
@@ -121,7 +121,7 @@ ggplot(violence, aes(x = aggression_level)) +
 Dersom vi i stedet ønsker et skalert histogram kan vi spesifisere `y`-argumentet på følgende vis:
 
 ```{r, eval = FALSE}
-ggplot(violence, aes(x = aggression_level, y = ..density.. )) +
+ggplot(violence, aes(x = aggression_level, y = after_stat(density))) +
   geom_histogram(bins = 9) +
   facet_wrap(~ violent_treatment)
 ```

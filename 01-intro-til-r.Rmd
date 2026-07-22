@@ -17,7 +17,7 @@ Du kan så åpne RStudio, og følge sekvensen av videoforelesninger som følger 
 
 <iframe src="https://player.vimeo.com/video/638313293?h=a3e60f8e49" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
 
-I denne videoen snakker vi litt om forskjellen mellom *programmeringsspråket R* og *programmet* RStudio. Vi åpner opp Rstudio og rusler gjennom det grafiske grensesnittet.
+I denne videoen snakker vi litt om forskjellen mellom *programmeringsspråket R* og *programmet* RStudio. Vi åpner opp RStudio og rusler gjennom det grafiske grensesnittet.
 
 Under følger en skriftlig oversikt for deg som vil ha det i tillegg til videoen. Første gang du åpner RStudio ser du tre vinduer. Et fjerde vindu åpner du med å klikke på **File** i menyen, så **New File**, og så **R Script**. Figur \@ref(fig:rstudio1) viser en oversikt over de fire vinduene. Det er viktig at du forstår forskjellen på de to vinduene til venstre.
 
@@ -598,10 +598,10 @@ library(readxl)
 library(ggplot2)
 
 # Laster inn datasettet
-testdata <- read_xls("testdata.xls")
+testdata <- read_excel("testdata.xls")
 
-# Gjør t-testen til spørsmål F i den første dataøvingen
-testresultat <- t.test(testdata$X1, 
+# En t-test for om X1 og X2 har samme forventning
+testresultat <- t.test(testdata$X1,
                        testdata$X2, 
                        var.equal = TRUE, 
                        alternative = "two.sided")
@@ -632,7 +632,7 @@ Når vi lagrer koden vår i et skript sørger vi for at *hele analysen vår er l
 
 ```{r, echo = F, warning = F}
 library(ggplot2)
-testdata <- readxl::read_xls("datasett/testdata.xls")
+testdata <- readxl::read_excel("datasett/testdata.xls")
 ```
 
 ```{r, fig.height = 4, fig.width = 6}
