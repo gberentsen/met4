@@ -269,127 +269,195 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </iframe>
 </div>
 </div>
-<div id="kommentarer" class="section level3 hasAnchor" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> Kommentarer<a href="inferens-om-to-populasjoner.html#kommentarer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Vi har gått gjennom kapittel <strong>13</strong>, som i all hovedsak handler om å sammenligne to gjennomsnitt (som vi kan gjøre på tre forskjellige måter), to varianser og to andeler. Her følger noen kontrollspørsmål som du kan tenke over, og bruke som utgangspunkt for diskusjon i f.eks. kollokviegrupper:</p>
+<div id="hvilke-sammenligninger-kan-vi-gjre" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Hvilke sammenligninger kan vi gjøre?<a href="inferens-om-to-populasjoner.html#hvilke-sammenligninger-kan-vi-gjre" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Ofte er vi ikke ute etter én populasjon, men vil <em>sammenligne to</em>: er avkastningen høyere i det ene fondet enn i det andre? Solgte vi mer etter en ombygging enn før? Framgangsmåten er den samme femstegsoppskriften som før, og igjen er det bare testobservatoren og fordelingen dens som skifter. De fire sammenligningene vi ser på, er:</p>
 <ul>
-<li>Hva er nullhypotesen når vi skal gjennomføre en t-test for to populasjoner?</li>
-<li>… og hvilke antagelser må vi gjøre?</li>
-<li>Hvordan ser testobservatoren ut for en to-utvalgs t-test, og kan du gi en intuitiv forklaring for hvorfor den ser ut som den gjør?</li>
-<li>Når kan vi bruke matchede par, og hva er hensikten?</li>
-<li>Hvilken testobservator brukes for sammenligning av to varianser, og hvilken fordeling har den under nullhypotesen?</li>
-<li>Kan du gi en intuitiv forklaring for hvorfor den ser ut som den gjør?</li>
-<li>Hvilken test brukes for å teste om to andeler er like, og hva må du anta?</li>
+<li>to <strong>forventninger</strong> fra <em>uavhengige</em> utvalg (to-utvalgs t-test),</li>
+<li>to forventninger fra <em>matchede par</em> (paret t-test),</li>
+<li>to <strong>andeler</strong>, og</li>
+<li>to <strong>standardavvik</strong>.</li>
 </ul>
-<p>Videre bør du sjekke at du kan utføre <strong>3</strong> typer <span class="math inline">\(t\)</span>-tester, test for like varianser og test for like andeler både for hånd (relevant for skoleeksamen) og i R (relevant til hjemmeeksamen og datalabber).</p>
-<p>Den enkleste måten å gjøre <span class="math inline">\(t\)</span>-tester i R på er å bruke funksjonen <code>t.test()</code>. Kikk på eksempel 13.1 i lærebokens 11. utgave, der vi har observert årlige avkastninger til to aksjefond som er kjøpt henholdsvis med og uten megler.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="inferens-om-to-populasjoner.html#cb66-1" tabindex="-1"></a><span class="co"># Leser inn datasettet</span></span>
-<span id="cb66-2"><a href="inferens-om-to-populasjoner.html#cb66-2" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb66-3"><a href="inferens-om-to-populasjoner.html#cb66-3" tabindex="-1"></a>funds <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;Xm13-01.xlsx&quot;</span>)</span>
-<span id="cb66-4"><a href="inferens-om-to-populasjoner.html#cb66-4" tabindex="-1"></a></span>
-<span id="cb66-5"><a href="inferens-om-to-populasjoner.html#cb66-5" tabindex="-1"></a><span class="co"># Ser at det er to kolonner, «Direct» og «Broker». Alternativhypotesen på s.433 spesifiserer at</span></span>
-<span id="cb66-6"><a href="inferens-om-to-populasjoner.html#cb66-6" tabindex="-1"></a><span class="co"># differansen i forventninger er *større* enn null, signifikansnivået skal være 5%. Antar først </span></span>
-<span id="cb66-7"><a href="inferens-om-to-populasjoner.html#cb66-7" tabindex="-1"></a><span class="co"># ulik varians og at vi ikke skal gjøre en paret test:</span></span>
-<span id="cb66-8"><a href="inferens-om-to-populasjoner.html#cb66-8" tabindex="-1"></a><span class="fu">t.test</span>(funds<span class="sc">$</span>Direct, funds<span class="sc">$</span>Broker,</span>
-<span id="cb66-9"><a href="inferens-om-to-populasjoner.html#cb66-9" tabindex="-1"></a>       <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>,</span>
-<span id="cb66-10"><a href="inferens-om-to-populasjoner.html#cb66-10" tabindex="-1"></a>       <span class="at">paired =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb66-11"><a href="inferens-om-to-populasjoner.html#cb66-11" tabindex="-1"></a>       <span class="at">var.equal =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb66-12"><a href="inferens-om-to-populasjoner.html#cb66-12" tabindex="-1"></a>       <span class="at">conf.level =</span> <span class="fl">0.95</span>) </span></code></pre></div>
-<pre><code>## Warning: package &#39;readxl&#39; was built under R version 4.3.3</code></pre>
-<pre><code>## 
-##  Welch Two Sample t-test
-## 
-## data:  funds$Direct and funds$Broker
-## t = 2.2872, df = 97.489, p-value = 0.01217
-## alternative hypothesis: true difference in means is greater than 0
-## 95 percent confidence interval:
-##  0.79661     Inf
-## sample estimates:
-## mean of x mean of y 
-##    6.6312    3.7232</code></pre>
-<p>Du kan så sjekke at du får ut de samme tallene på s. 434–435. Videre kan du skrive inn <code>?t.test</code> i R-konsollen i RStudio for å lese mer om hvilke argumenter vi kan bruke i <code>t.test()</code>-funksjonen. Der ser vi at argumentene <code>paired</code>, <code>var.equal</code> og <code>conf.level</code> som utgangspunkt allerede er satt til <code>FALSE</code>, <code>FALSE</code> og <code>0.95</code> henholdsvis, så det hadde vi strengt tatt ikke trengt å spesifisere i funksjonskallet over.</p>
-<p>Vi kan enkelt kjøre den samme testen under antakelsen om like varianser ved å sette <code>var.equal = TRUE</code>:</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="inferens-om-to-populasjoner.html#cb69-1" tabindex="-1"></a><span class="co"># Ser at det er to kolonner, «Direct» og «Broker». Alternativhypotesen på s.433 spesifiserer at</span></span>
-<span id="cb69-2"><a href="inferens-om-to-populasjoner.html#cb69-2" tabindex="-1"></a><span class="co"># differansen i forventninger er *større* enn null, signifikansnivået skal være 5%. Antar først </span></span>
-<span id="cb69-3"><a href="inferens-om-to-populasjoner.html#cb69-3" tabindex="-1"></a><span class="co"># ulik varians og at vi ikke skal gjøre en paret test:</span></span>
-<span id="cb69-4"><a href="inferens-om-to-populasjoner.html#cb69-4" tabindex="-1"></a><span class="fu">t.test</span>(funds<span class="sc">$</span>Direct, funds<span class="sc">$</span>Broker,</span>
-<span id="cb69-5"><a href="inferens-om-to-populasjoner.html#cb69-5" tabindex="-1"></a>       <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>,</span>
-<span id="cb69-6"><a href="inferens-om-to-populasjoner.html#cb69-6" tabindex="-1"></a>       <span class="at">paired =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb69-7"><a href="inferens-om-to-populasjoner.html#cb69-7" tabindex="-1"></a>       <span class="at">var.equal =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb69-8"><a href="inferens-om-to-populasjoner.html#cb69-8" tabindex="-1"></a>       <span class="at">conf.level =</span> <span class="fl">0.95</span>) </span></code></pre></div>
+<p>Som i forrige delkapittel viser vi for hver test først hvordan den gjøres manuelt, steg for steg med en kritisk verdi, og deretter hvordan R kan utføre hele testen direkte fra dataene.</p>
+</div>
+<div id="to-utvalgs-t-test" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> To-utvalgs t-test<a href="inferens-om-to-populasjoner.html#to-utvalgs-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Når vi vil sammenligne forventningene i to <em>uavhengige</em> grupper, tester vi <span class="math inline">\(H_0: \mu_1 = \mu_2\)</span>, altså at differansen <span class="math inline">\(\mu_1 - \mu_2\)</span> er null. Testobservatoren er differansen mellom de to utvalgsgjennomsnittene, delt på standardfeilen til denne differansen:</p>
+<p><span class="math display">\[T = \frac{\overline{X}_1 - \overline{X}_2}{SE},\]</span></p>
+<p>og den er t-fordelt når <span class="math inline">\(H_0\)</span> er sann. Dersom vi antar at de to populasjonene har <em>lik</em> varians, slår vi sammen (pooler) de to utvalgsvariansene til et felles estimat <span class="math inline">\(s_p^2\)</span>, og</p>
+<p><span class="math display">\[SE = s_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}, \qquad s_p^2 = \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2},\]</span></p>
+<p>med <span class="math inline">\(n_1 + n_2 - 2\)</span> frihetsgrader. Antar vi <em>ikke</em> lik varians, bruker vi i stedet <span class="math inline">\(SE = \sqrt{s_1^2/n_1 + s_2^2/n_2}\)</span>. Dette kalles Welchs test, og er det R gjør som standard. Intuisjonen er den samme som før: ligger de to gjennomsnittene mange standardfeil fra hverandre, taler det mot at populasjonene har samme forventning.</p>
+<p><strong>Eksempel.</strong> En nettbutikk tester to versjoner (A og B) av forsiden, og måler ordreverdien (i kr) til kundene som ser hver versjon. Gir versjon B høyere gjennomsnittlig ordreverdi?</p>
+<ol style="list-style-type: decimal">
+<li><strong>Spørsmål:</strong> Er den forventede ordreverdien høyere for versjon B enn for versjon A?</li>
+<li><strong>Hypoteser og signifikansnivå:</strong> <span class="math inline">\(H_0: \mu_B = \mu_A\)</span> mot <span class="math inline">\(H_A: \mu_B &gt; \mu_A\)</span> (ensidig). En Type I-feil ville være å rulle ut versjon B i troen på at den er bedre, uten at den egentlig er det. Konsekvensen er begrenset, så vi velger <span class="math inline">\(\alpha = 5\,\%\)</span>.</li>
+<li><strong>Data:</strong> 50 kunder ser hver versjon. Vi simulerer ordreverdiene:</li>
+</ol>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="inferens-om-to-populasjoner.html#cb66-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb66-2"><a href="inferens-om-to-populasjoner.html#cb66-2" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">480</span>, <span class="at">sd =</span> <span class="dv">110</span>)</span>
+<span id="cb66-3"><a href="inferens-om-to-populasjoner.html#cb66-3" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">530</span>, <span class="at">sd =</span> <span class="dv">110</span>)</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>Testobservator:</strong> Vi antar lik varians i de to gruppene og bruker den poolede testobservatoren. Vi lar R regne:</li>
+</ol>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="inferens-om-to-populasjoner.html#cb67-1" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="fu">length</span>(B)</span>
+<span id="cb67-2"><a href="inferens-om-to-populasjoner.html#cb67-2" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="fu">length</span>(A)</span>
+<span id="cb67-3"><a href="inferens-om-to-populasjoner.html#cb67-3" tabindex="-1"></a>s_p <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(((n1 <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">*</span><span class="fu">var</span>(B) <span class="sc">+</span> (n2 <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">*</span><span class="fu">var</span>(A))<span class="sc">/</span>(n1 <span class="sc">+</span> n2 <span class="sc">-</span> <span class="dv">2</span>))</span>
+<span id="cb67-4"><a href="inferens-om-to-populasjoner.html#cb67-4" tabindex="-1"></a></span>
+<span id="cb67-5"><a href="inferens-om-to-populasjoner.html#cb67-5" tabindex="-1"></a>T_obs <span class="ot">&lt;-</span> (<span class="fu">mean</span>(B) <span class="sc">-</span> <span class="fu">mean</span>(A))<span class="sc">/</span>(s_p<span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>n1 <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n2))</span>
+<span id="cb67-6"><a href="inferens-om-to-populasjoner.html#cb67-6" tabindex="-1"></a>T_obs</span></code></pre></div>
+<pre><code>## [1] 2.611099</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li><strong>Kritisk verdi og konklusjon:</strong> Testobservatoren er t-fordelt med <span class="math inline">\(n_1 + n_2 - 2 = 98\)</span> frihetsgrader. Kritisk verdi for en ensidig test på 5 %-nivå er 95-prosentilen <span class="math inline">\(t_{0.95,\,98}\)</span> (se <a href="relevante-r-testing.html#relevante-r-testing">3.6</a>):</li>
+</ol>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="inferens-om-to-populasjoner.html#cb69-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.95</span>, <span class="at">df =</span> n1 <span class="sc">+</span> n2 <span class="sc">-</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 1.660551</code></pre>
+<p>Testobservatoren (2.61) er større enn den kritiske verdien (1.66), så vi forkaster <span class="math inline">\(H_0\)</span>: versjon B ser ut til å gi høyere ordreverdi.</p>
+<p>Over gjorde vi testen manuelt. <strong>I R</strong> gjør <code>t.test()</code> hele jobben direkte fra dataene. Vi setter <code>var.equal = TRUE</code> fordi vi antok lik varians (uten det argumentet gjør R en Welch-test som <em>ikke</em> antar lik varians):</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="inferens-om-to-populasjoner.html#cb71-1" tabindex="-1"></a><span class="fu">t.test</span>(B, A, <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
-## data:  funds$Direct and funds$Broker
-## t = 2.2872, df = 98, p-value = 0.01217
+## data:  B and A
+## t = 2.6111, df = 98, p-value = 0.005221
 ## alternative hypothesis: true difference in means is greater than 0
 ## 95 percent confidence interval:
-##  0.7967156       Inf
+##  18.87795      Inf
 ## sample estimates:
 ## mean of x mean of y 
-##    6.6312    3.7232</code></pre>
-<p>Resultatet bli akkurat det samme. Siden testens <span class="math inline">\(p\)</span>-verdi er mindre enn 5%, kan vi forkaste nullhypotesen og slå fast at forskjellen i gjennomsnitt er statistisk signifikant.</p>
-<p>I kapittel 13-3 leser vi om matchede par. Datasettet i eksempel 13.1 har like mange observasjoner i de to populasjonene, så vi kan tenke oss at målingene er gjort sekvensielt i tid, slik at vi kan matche dem, og heller se om <em>gjennomsittet av differansene</em> er signifikant forskjellig fra null. Enkelt:</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="inferens-om-to-populasjoner.html#cb71-1" tabindex="-1"></a><span class="co"># Ser at det er to kolonner, «Direct» og «Broker». Alternativhypotesen på s.433 spesifiserer at</span></span>
-<span id="cb71-2"><a href="inferens-om-to-populasjoner.html#cb71-2" tabindex="-1"></a><span class="co"># differansen i forventninger er *større* enn null, signifikansnivået skal være 5%. Antar først </span></span>
-<span id="cb71-3"><a href="inferens-om-to-populasjoner.html#cb71-3" tabindex="-1"></a><span class="co"># ulik varians og at vi ikke skal gjøre en paret test:</span></span>
-<span id="cb71-4"><a href="inferens-om-to-populasjoner.html#cb71-4" tabindex="-1"></a><span class="fu">t.test</span>(funds<span class="sc">$</span>Direct, funds<span class="sc">$</span>Broker,</span>
-<span id="cb71-5"><a href="inferens-om-to-populasjoner.html#cb71-5" tabindex="-1"></a>       <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>,</span>
-<span id="cb71-6"><a href="inferens-om-to-populasjoner.html#cb71-6" tabindex="-1"></a>       <span class="at">paired =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb71-7"><a href="inferens-om-to-populasjoner.html#cb71-7" tabindex="-1"></a>       <span class="at">conf.level =</span> <span class="fl">0.95</span>) </span></code></pre></div>
+##  542.9059  491.0493</code></pre>
+<p>Se på <strong>p-verdien</strong>: den er 0.005, altså under 0.05, så vi forkaster <span class="math inline">\(H_0\)</span>. Merk at <code>t.test()</code> alltid ser på differansen mellom <em>første</em> og <em>andre</em> argument, så rekkefølgen (<code>B, A</code>) avgjør hva <code>alternative = "greater"</code> betyr.</p>
+</div>
+<div id="t-test-for-matchede-par" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> t-test for matchede par<a href="inferens-om-to-populasjoner.html#t-test-for-matchede-par" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Noen ganger er de to utvalgene <em>ikke</em> uavhengige, men naturlig <em>paret</em>: vi måler den samme enheten to ganger (for eksempel før og etter et tiltak), eller vi matcher enheter parvis. Da ville en vanlig to-utvalgs t-test kaste bort informasjonen som ligger i paringen. I stedet ser vi på <em>differansen</em> innenfor hvert par, <span class="math inline">\(d_i = x_i - y_i\)</span>, og gjør en helt vanlig ett-utvalgs t-test på differansene: <span class="math inline">\(H_0: \mu_d = 0\)</span>. Testobservatoren er</p>
+<p><span class="math display">\[T = \frac{\overline{d}}{s_d/\sqrt{n}},\]</span></p>
+<p>t-fordelt med <span class="math inline">\(n-1\)</span> frihetsgrader, der <span class="math inline">\(n\)</span> er antall par. Nøkkelspørsmålet er alltid: er de to måltallene paret (avhengige) eller uavhengige? Er de paret, bruker vi den parede testen.</p>
+<p><strong>Eksempel.</strong> En butikkjede bygger om 12 av butikkene sine og vil vite om ombyggingen økte ukesomsetningen. For hver butikk har vi omsetningen (i 1000 kr) <em>før</em> og <em>etter</em> ombyggingen. Siden det er de <em>samme</em> butikkene som måles to ganger, er dataene paret.</p>
+<ol style="list-style-type: decimal">
+<li><strong>Spørsmål:</strong> Økte den forventede omsetningen etter ombyggingen?</li>
+<li><strong>Hypoteser og signifikansnivå:</strong> La $d = $ etter <span class="math inline">\(-\)</span> før. <span class="math inline">\(H_0: \mu_d = 0\)</span> mot <span class="math inline">\(H_A: \mu_d &gt; 0\)</span> (ensidig). En Type I-feil ville være å tro at ombyggingen virket, og bygge om alle butikkene, uten at den egentlig hjelper. Vi velger <span class="math inline">\(\alpha = 5\,\%\)</span>.</li>
+<li><strong>Data:</strong> (simulert, én verdi før og én etter for hver av de 12 butikkene):</li>
+</ol>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="inferens-om-to-populasjoner.html#cb73-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb73-2"><a href="inferens-om-to-populasjoner.html#cb73-2" tabindex="-1"></a>for_ombygging   <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">12</span>, <span class="at">mean =</span> <span class="dv">200</span>, <span class="at">sd =</span> <span class="dv">50</span>)</span>
+<span id="cb73-3"><a href="inferens-om-to-populasjoner.html#cb73-3" tabindex="-1"></a>etter_ombygging <span class="ot">&lt;-</span> for_ombygging <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">12</span>, <span class="at">mean =</span> <span class="dv">15</span>, <span class="at">sd =</span> <span class="dv">18</span>)</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>Testobservator:</strong> Vi regner ut de parvise differansene og gjør en ett-utvalgs t-test på dem:</li>
+</ol>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="inferens-om-to-populasjoner.html#cb74-1" tabindex="-1"></a>d     <span class="ot">&lt;-</span> etter_ombygging <span class="sc">-</span> for_ombygging</span>
+<span id="cb74-2"><a href="inferens-om-to-populasjoner.html#cb74-2" tabindex="-1"></a>T_obs <span class="ot">&lt;-</span> <span class="fu">mean</span>(d)<span class="sc">/</span>(<span class="fu">sd</span>(d)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(d)))</span>
+<span id="cb74-3"><a href="inferens-om-to-populasjoner.html#cb74-3" tabindex="-1"></a>T_obs</span></code></pre></div>
+<pre><code>## [1] 2.665354</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li><strong>Kritisk verdi og konklusjon:</strong> Differansene gir <span class="math inline">\(n - 1 = 11\)</span> frihetsgrader. Kritisk verdi for en ensidig test på 5 %-nivå er <span class="math inline">\(t_{0.95,\,11}\)</span> (se <a href="relevante-r-testing.html#relevante-r-testing">3.6</a>):</li>
+</ol>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="inferens-om-to-populasjoner.html#cb76-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="fu">length</span>(d) <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 1.795885</code></pre>
+<p>Testobservatoren (2.67) er større enn den kritiske verdien (1.80), så vi forkaster <span class="math inline">\(H_0\)</span>: ombyggingen ser ut til å ha økt omsetningen.</p>
+<p>Over gjorde vi testen manuelt på differansene. <strong>I R</strong> setter vi bare <code>paired = TRUE</code> i <code>t.test()</code>, så gjør den nøyaktig dette direkte fra de to seriene:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="inferens-om-to-populasjoner.html#cb78-1" tabindex="-1"></a><span class="fu">t.test</span>(etter_ombygging, for_ombygging, <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Paired t-test
 ## 
-## data:  funds$Direct and funds$Broker
-## t = 2.5178, df = 49, p-value = 0.007563
+## data:  etter_ombygging and for_ombygging
+## t = 2.6654, df = 11, p-value = 0.01099
 ## alternative hypothesis: true mean difference is greater than 0
 ## 95 percent confidence interval:
-##  0.9716497       Inf
+##  5.075764      Inf
 ## sample estimates:
 ## mean difference 
-##           2.908</code></pre>
-<p>Da ser vi at <span class="math inline">\(p\)</span>-verdien ble enda mindre. I eksemplene 13.4 og 13.5 kan du prøve selv. Pass på at du kan gjøre beregningene manuelt også, der du regner ut gjennomsnitt, testobservator, kritisk verdi osv, slik at du forstår hva som foregår.</p>
-<p>Kapittel <strong>13-2</strong> omhandler forskjellen mellom observasjonsdata og eksperimentelle data. Det er i grunn ganske viktig å sette seg inn i den forskjellen fordi det ofte har betydning for tolkningen vår av statistiske resultater. Det er et eksplisitt krav for å lykkes i MET4 at du er i stand til å sette resultatene inn i en fornuftig kontekst.</p>
-<p>I kapittel <strong>13-4</strong> kan vi lese om varianstesten. Eksempel 13.7 ser slik ut i R:</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="inferens-om-to-populasjoner.html#cb73-1" tabindex="-1"></a>bottle <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;Xm13-07.xlsx&quot;</span>)</span>
-<span id="cb73-2"><a href="inferens-om-to-populasjoner.html#cb73-2" tabindex="-1"></a><span class="fu">var.test</span>(bottle<span class="sc">$</span><span class="st">`</span><span class="at">Machine 1</span><span class="st">`</span>, bottle<span class="sc">$</span><span class="st">`</span><span class="at">Machine 2</span><span class="st">`</span>,</span>
-<span id="cb73-3"><a href="inferens-om-to-populasjoner.html#cb73-3" tabindex="-1"></a>         <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>)</span></code></pre></div>
+##        15.55973</code></pre>
+<p><strong>p-verdien</strong> er 0.011, under 0.05, så vi forkaster <span class="math inline">\(H_0\)</span>. Hadde vi (feilaktig) brukt en vanlig to-utvalgs t-test her, ville vi kastet bort styrken som ligger i at de samme butikkene sammenlignes med seg selv.</p>
+</div>
+<div id="sammenligning-av-to-andeler" class="section level3 hasAnchor" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> Sammenligning av to andeler<a href="inferens-om-to-populasjoner.html#sammenligning-av-to-andeler" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Vil vi sammenligne to <em>andeler</em>, for eksempel konverteringsraten for to annonser, tester vi <span class="math inline">\(H_0: p_1 = p_2\)</span>. Under nullhypotesen er de to andelene like, så vi slår sammen (pooler) dataene til ett felles estimat <span class="math inline">\(\widehat{p} = (x_1 + x_2)/(n_1 + n_2)\)</span>, der <span class="math inline">\(x_1\)</span> og <span class="math inline">\(x_2\)</span> er antall «suksesser» i de to gruppene. Testobservatoren er</p>
+<p><span class="math display">\[Z = \frac{\widehat{p}_1 - \widehat{p}_2}{\sqrt{\widehat{p}(1-\widehat{p})\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}},\]</span></p>
+<p>som er tilnærmet standardnormalfordelt når <span class="math inline">\(H_0\)</span> er sann.</p>
+<p><strong>Eksempel.</strong> Et selskap kjører to annonsekampanjer, A og B, og vil vite om B gir høyere konverteringsrate (andelen som handler). Av 500 som så kampanje A, handlet 45; av 500 som så kampanje B, handlet 68.</p>
+<ol style="list-style-type: decimal">
+<li><strong>Spørsmål:</strong> Er den sanne konverteringsraten høyere for B enn for A?</li>
+<li><strong>Hypoteser og signifikansnivå:</strong> <span class="math inline">\(H_0: p_A = p_B\)</span> mot <span class="math inline">\(H_A: p_B &gt; p_A\)</span> (ensidig). En Type I-feil ville være å satse videre på kampanje B i troen på at den er bedre, uten at den egentlig er det. Vi velger <span class="math inline">\(\alpha = 5\,\%\)</span>.</li>
+<li><strong>Data:</strong> <span class="math inline">\(\widehat{p}_A = 45/500 = 0.09\)</span> og <span class="math inline">\(\widehat{p}_B = 68/500 = 0.136\)</span>.</li>
+<li><strong>Testobservator:</strong> Under <span class="math inline">\(H_0\)</span> pooler vi andelene: <span class="math inline">\(\widehat{p} = (45 + 68)/(500 + 500) = 0.113\)</span>. Regnet ut manuelt i R:</li>
+</ol>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="inferens-om-to-populasjoner.html#cb80-1" tabindex="-1"></a>xA <span class="ot">&lt;-</span> <span class="dv">45</span>; nA <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb80-2"><a href="inferens-om-to-populasjoner.html#cb80-2" tabindex="-1"></a>xB <span class="ot">&lt;-</span> <span class="dv">68</span>; nB <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb80-3"><a href="inferens-om-to-populasjoner.html#cb80-3" tabindex="-1"></a>p.pool <span class="ot">&lt;-</span> (xA <span class="sc">+</span> xB)<span class="sc">/</span>(nA <span class="sc">+</span> nB)</span>
+<span id="cb80-4"><a href="inferens-om-to-populasjoner.html#cb80-4" tabindex="-1"></a></span>
+<span id="cb80-5"><a href="inferens-om-to-populasjoner.html#cb80-5" tabindex="-1"></a>Z <span class="ot">&lt;-</span> (xB<span class="sc">/</span>nB <span class="sc">-</span> xA<span class="sc">/</span>nA)<span class="sc">/</span><span class="fu">sqrt</span>(p.pool<span class="sc">*</span>(<span class="dv">1</span> <span class="sc">-</span> p.pool)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">/</span>nA <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>nB))</span>
+<span id="cb80-6"><a href="inferens-om-to-populasjoner.html#cb80-6" tabindex="-1"></a>Z</span></code></pre></div>
+<pre><code>## [1] 2.297348</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li><strong>Kritisk verdi og konklusjon:</strong> For en ensidig test på 5 %-nivå er den kritiske verdien <span class="math inline">\(z_{0.95}\)</span> (se <a href="relevante-r-testing.html#relevante-r-testing">3.6</a>):</li>
+</ol>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="inferens-om-to-populasjoner.html#cb82-1" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>)</span></code></pre></div>
+<pre><code>## [1] 1.644854</code></pre>
+<p>Siden testobservatoren (2.30) er større enn den kritiske verdien (1.645), forkaster vi <span class="math inline">\(H_0\)</span>: kampanje B ser ut til å ha høyere konverteringsrate.</p>
+<p>Over gjorde vi testen manuelt. <strong>I R</strong> kan vi bruke <code>prop.test()</code> med <em>vektorer</em> av antall suksesser og antall forsøk:</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="inferens-om-to-populasjoner.html#cb84-1" tabindex="-1"></a><span class="fu">prop.test</span>(<span class="fu">c</span>(xB, xA), <span class="fu">c</span>(nB, nA), <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>, <span class="at">correct =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## 
+##  2-sample test for equality of proportions without continuity correction
+## 
+## data:  c(xB, xA) out of c(nB, nA)
+## X-squared = 5.2778, df = 1, p-value = 0.0108
+## alternative hypothesis: greater
+## 95 percent confidence interval:
+##  0.01315198 1.00000000
+## sample estimates:
+## prop 1 prop 2 
+##  0.136  0.090</code></pre>
+<p><strong>p-verdien</strong> er 0.011, under 0.05, så vi forkaster <span class="math inline">\(H_0\)</span>. (Igjen er <code>X-squared</code> lik <span class="math inline">\(Z^2\)</span>, og <code>correct = FALSE</code> gir samme test som håndregningen.)</p>
+</div>
+<div id="sammenligning-av-to-standardavvik" class="section level3 hasAnchor" number="3.3.5">
+<h3><span class="header-section-number">3.3.5</span> Sammenligning av to standardavvik<a href="inferens-om-to-populasjoner.html#sammenligning-av-to-standardavvik" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Endelig kan vi sammenligne <em>spredningen</em> i to populasjoner, altså teste <span class="math inline">\(H_0: \sigma_1 = \sigma_2\)</span>. Her bruker vi <em>forholdet</em> mellom de to utvalgsvariansene som testobservator:</p>
+<p><span class="math display">\[F = \frac{s_1^2}{s_2^2},\]</span></p>
+<p>som under <span class="math inline">\(H_0\)</span> følger en <strong>F-fordeling</strong> med <span class="math inline">\((n_1 - 1, n_2 - 1)\)</span> frihetsgrader. Er de to variansene like, ligger <span class="math inline">\(F\)</span> nær 1; er <span class="math inline">\(s_1^2\)</span> mye større enn <span class="math inline">\(s_2^2\)</span>, blir <span class="math inline">\(F\)</span> stor. Som kji-kvadratfordelingen er F-fordelingen asymmetrisk og lever bare på positive verdier.</p>
+<p><strong>Eksempel.</strong> En investor vil vite om det ene av to fond har høyere risiko, målt ved standardavviket til den månedlige avkastningen, enn det andre. Vi har 30 månedlige avkastninger (i prosent) fra hvert fond.</p>
+<ol style="list-style-type: decimal">
+<li><strong>Spørsmål:</strong> Er standardavviket i avkastning større for fond 1 enn for fond 2?</li>
+<li><strong>Hypoteser og signifikansnivå:</strong> <span class="math inline">\(H_0: \sigma_1 = \sigma_2\)</span> mot <span class="math inline">\(H_A: \sigma_1 &gt; \sigma_2\)</span> (ensidig). En Type I-feil ville være å velge bort fond 1 som «for risikofylt» uten grunnlag. Vi velger <span class="math inline">\(\alpha = 5\,\%\)</span>.</li>
+<li><strong>Data:</strong> (simulert):</li>
+</ol>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="inferens-om-to-populasjoner.html#cb86-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
+<span id="cb86-2"><a href="inferens-om-to-populasjoner.html#cb86-2" tabindex="-1"></a>fond1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="fl">0.8</span>, <span class="at">sd =</span> <span class="fl">5.5</span>)</span>
+<span id="cb86-3"><a href="inferens-om-to-populasjoner.html#cb86-3" tabindex="-1"></a>fond2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="fl">0.9</span>, <span class="at">sd =</span> <span class="fl">3.6</span>)</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>Testobservator:</strong> <span class="math inline">\(F = s_1^2/s_2^2\)</span>:</li>
+</ol>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="inferens-om-to-populasjoner.html#cb87-1" tabindex="-1"></a>F_obs <span class="ot">&lt;-</span> <span class="fu">var</span>(fond1)<span class="sc">/</span><span class="fu">var</span>(fond2)</span>
+<span id="cb87-2"><a href="inferens-om-to-populasjoner.html#cb87-2" tabindex="-1"></a>F_obs</span></code></pre></div>
+<pre><code>## [1] 2.443238</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li><strong>Kritisk verdi og konklusjon:</strong> <span class="math inline">\(F\)</span> er F-fordelt med <span class="math inline">\((n_1 - 1, n_2 - 1) = (29, 29)\)</span> frihetsgrader. Kritisk verdi for en ensidig test på 5 %-nivå er 95-prosentilen i F-fordelingen (se <a href="relevante-r-testing.html#relevante-r-testing">3.6</a>):</li>
+</ol>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="inferens-om-to-populasjoner.html#cb89-1" tabindex="-1"></a><span class="fu">qf</span>(<span class="fl">0.95</span>, <span class="at">df1 =</span> <span class="dv">29</span>, <span class="at">df2 =</span> <span class="dv">29</span>)</span></code></pre></div>
+<pre><code>## [1] 1.860811</code></pre>
+<p>Testobservatoren (2.44) er større enn den kritiske verdien (1.86), så vi forkaster <span class="math inline">\(H_0\)</span>: fond 1 ser ut til å ha høyere risiko enn fond 2.</p>
+<p>Over gjorde vi testen manuelt. <strong>I R</strong> gjør <code>var.test()</code> hele jobben direkte fra dataene:</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="inferens-om-to-populasjoner.html#cb91-1" tabindex="-1"></a><span class="fu">var.test</span>(fond1, fond2, <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  F test to compare two variances
 ## 
-## data:  bottle$`Machine 1` and bottle$`Machine 2`
-## F = 1.3988, num df = 24, denom df = 24, p-value = 0.2085
+## data:  fond1 and fond2
+## F = 2.4432, num df = 29, denom df = 29, p-value = 0.009461
 ## alternative hypothesis: true ratio of variances is greater than 1
 ## 95 percent confidence interval:
-##  0.7051295       Inf
+##  1.312996      Inf
 ## sample estimates:
 ## ratio of variances 
-##           1.398807</code></pre>
-<p>Til slutt har vi test for to andeler i kapittel <strong>13-5</strong>. De setter opp to varianter, en der vi sjekker om differansen mellom to andeler er <em>like</em> (<span class="math inline">\(p_1 - p_2 = 0\)</span>), som er det vi har dett på i forelesning, men det går selvsagt like fint å sette opp en nullhypotese der differansen mellom andelene er lik et bestemt tall <span class="math inline">\(D\)</span>.</p>
-<p>Det finnes ingen ferdig prosedyre for denne testen i R, men vi kan sette den opp likevel ved å regne ut testobservatoren fra datasettet. Vi ser på eksempel 13.9, der vi får oppgitt salget av en del forskjellige varenummer, og vi ønsker å finne ut om andelen «9077» er større i Supermarked 1 enn i Supermarked 2:</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="inferens-om-to-populasjoner.html#cb75-1" tabindex="-1"></a><span class="co"># Laster inn data. Her er det to utvalg med forskjellig antall observasjoner, så jeg </span></span>
-<span id="cb75-2"><a href="inferens-om-to-populasjoner.html#cb75-2" tabindex="-1"></a><span class="co"># velger å lese inn de to kolonnene hver for seg:</span></span>
-<span id="cb75-3"><a href="inferens-om-to-populasjoner.html#cb75-3" tabindex="-1"></a>soap1 <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;Xm13-09.xlsx&quot;</span>, <span class="at">range =</span> <span class="fu">cell_cols</span>(<span class="st">&quot;A&quot;</span>))</span>
-<span id="cb75-4"><a href="inferens-om-to-populasjoner.html#cb75-4" tabindex="-1"></a>soap2 <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;Xm13-09.xlsx&quot;</span>, <span class="at">range =</span> <span class="fu">cell_cols</span>(<span class="st">&quot;B&quot;</span>))</span>
-<span id="cb75-5"><a href="inferens-om-to-populasjoner.html#cb75-5" tabindex="-1"></a></span>
-<span id="cb75-6"><a href="inferens-om-to-populasjoner.html#cb75-6" tabindex="-1"></a><span class="co"># Hvor stor andel utgjør «9077» i de to kolonnene?</span></span>
-<span id="cb75-7"><a href="inferens-om-to-populasjoner.html#cb75-7" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(soap1 <span class="sc">==</span> <span class="dv">9077</span>)</span>
-<span id="cb75-8"><a href="inferens-om-to-populasjoner.html#cb75-8" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">mean</span>(soap2 <span class="sc">==</span> <span class="dv">9077</span>)</span>
-<span id="cb75-9"><a href="inferens-om-to-populasjoner.html#cb75-9" tabindex="-1"></a></span>
-<span id="cb75-10"><a href="inferens-om-to-populasjoner.html#cb75-10" tabindex="-1"></a><span class="co"># De to utvalgsstørrelsene:</span></span>
-<span id="cb75-11"><a href="inferens-om-to-populasjoner.html#cb75-11" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="fu">nrow</span>(soap1)</span>
-<span id="cb75-12"><a href="inferens-om-to-populasjoner.html#cb75-12" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="fu">nrow</span>(soap2)</span>
-<span id="cb75-13"><a href="inferens-om-to-populasjoner.html#cb75-13" tabindex="-1"></a></span>
-<span id="cb75-14"><a href="inferens-om-to-populasjoner.html#cb75-14" tabindex="-1"></a><span class="co"># Felles estimat for p under nullhypotesen:</span></span>
-<span id="cb75-15"><a href="inferens-om-to-populasjoner.html#cb75-15" tabindex="-1"></a>p <span class="ot">&lt;-</span> (n1<span class="sc">*</span>p1 <span class="sc">+</span> n2<span class="sc">*</span>p2)<span class="sc">/</span>(n1 <span class="sc">+</span> n2)</span>
-<span id="cb75-16"><a href="inferens-om-to-populasjoner.html#cb75-16" tabindex="-1"></a></span>
-<span id="cb75-17"><a href="inferens-om-to-populasjoner.html#cb75-17" tabindex="-1"></a><span class="co"># Testobservatoren:</span></span>
-<span id="cb75-18"><a href="inferens-om-to-populasjoner.html#cb75-18" tabindex="-1"></a>z <span class="ot">&lt;-</span> (p1 <span class="sc">-</span> p2)<span class="sc">/</span><span class="fu">sqrt</span>(p <span class="sc">*</span> (<span class="dv">1</span><span class="sc">-</span>p)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">/</span>n1 <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n2))</span>
-<span id="cb75-19"><a href="inferens-om-to-populasjoner.html#cb75-19" tabindex="-1"></a></span>
-<span id="cb75-20"><a href="inferens-om-to-populasjoner.html#cb75-20" tabindex="-1"></a><span class="co"># Kritisk verdi på 5% nivå for en ensidig test:</span></span>
-<span id="cb75-21"><a href="inferens-om-to-populasjoner.html#cb75-21" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>)</span></code></pre></div>
-<pre><code>## [1] 1.644854</code></pre>
-<p>Siden <span class="math inline">\(z = 2.9\)</span> forkaster vi nullhypotesen om at det er lik andel «9077» i de to populasjonene.</p>
+##           2.443238</code></pre>
+<p><strong>p-verdien</strong> er 0.009, under 0.05, så vi forkaster <span class="math inline">\(H_0\)</span>. Utskriften gir også selve <span class="math inline">\(F\)</span>-verdien og et konfidensintervall for forholdet mellom variansene.</p>
+</div>
+<div id="kontrollsprsmal-4" class="section level3 hasAnchor" number="3.3.6">
+<h3><span class="header-section-number">3.3.6</span> Kontrollspørsmål<a href="inferens-om-to-populasjoner.html#kontrollsprsmal-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Når bruker vi en to-utvalgs t-test, og når en paret t-test?</li>
+<li>Hva er forskjellen på å anta lik og ulik varians i en to-utvalgs t-test, og hva gjør R som standard?</li>
+<li>Hvorfor slår vi sammen (pooler) de to andelene under <span class="math inline">\(H_0\)</span> når vi sammenligner to andeler?</li>
+<li>Hvilken fordeling bruker vi når vi sammenligner to standardavvik, og hvordan ser testobservatoren ut?</li>
+</ol>
 </div>
 </div>
             </section>
