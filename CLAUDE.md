@@ -113,6 +113,7 @@ Andre faste valg (bruk venstre, unngå høyre):
 | estimat | | den konkrete tallverdien en estimator gir på et datasett |
 | standardfeil | | *estimert* standardavvik til en estimator – ikke synonymt med standardavvik |
 | samplingfordeling | utvalgsfordeling | |
+| spredningsplott | spredningsdiagram | besluttet; begge fantes i teksten |
 
 Utvalgsstandardavviket skrives med **liten `s`** (matcher forelesningsvideoen; besluttet). Åpne
 inkonsekvenser å rydde:

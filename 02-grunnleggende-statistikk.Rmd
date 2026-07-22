@@ -45,7 +45,7 @@ Et alternativ som (i likhet med medianen) er robust mot ekstremverdier, er å br
 
 ### Sammenheng mellom to variabler
 
-Har vi målt to variabler for de samme observasjonene (for eksempel høyde og vekt), vil vi ofte vite om de henger sammen. Grafisk gjør vi det med et **spredningsdiagram**, og numerisk med **korrelasjonskoeffisienten** $r$. Den forteller oss hvor nær punktene ligger en rett linje, og har tre egenskaper det er verdt å merke seg:
+Har vi målt to variabler for de samme observasjonene (for eksempel høyde og vekt), vil vi ofte vite om de henger sammen. Grafisk gjør vi det med et **spredningsplott**, og numerisk med **korrelasjonskoeffisienten** $r$. Den forteller oss hvor nær punktene ligger en rett linje, og har tre egenskaper det er verdt å merke seg:
 
 - $r$ ligger alltid mellom $-1$ og $1$.
 - Fortegnet forteller om samvariasjonen er positiv (begge øker sammen) eller negativ (den ene øker når den andre synker).
