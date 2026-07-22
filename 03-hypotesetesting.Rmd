@@ -33,7 +33,7 @@ Logikken er den samme som i en rettssak: den tiltalte antas uskyldig ($H_0$) hel
 En hypotesetest kan settes opp i fem steg, og de samme fem stegene gjelder for *alle* statistiske hypotesetester, uansett om vi tester en forventning, en andel, en forskjell mellom to grupper eller noe annet. De konkrete regnestykkene i steg 4 og 5 varierer fra test til test, men framgangsmåten er den samme. Vi følger stegene med et konkret eksempel: *har partiet Venstre oppslutning over sperregrensen på 4 %?*
 
 1. **Formuler spørsmålet.** Hva vil vi finne ut? Her: ligger den sanne oppslutningen $p$ over 4 %?
-2. **Sett opp hypotesene og velg signifikansnivå.** Vi skriver spørsmålet som to hypoteser om populasjonsstørrelsen, og bestemmer på forhånd hvor sterkt beviset må være. Her: $H_0: p = 0.04$ mot $H_A: p > 0.04$, med signifikansnivå $\alpha = 5\,\%$.
+2. **Sett opp hypotesene og velg signifikansnivå.** Vi skriver spørsmålet som to hypoteser om populasjonsstørrelsen, og bestemmer på forhånd hvor sterkt beviset må være for at vi skal forkaste $H_0$. Dette er **signifikansnivået** $\alpha$, og valget er ingen ren formalitet: vi må veie hvor alvorlig det er å forkaste en sann $H_0$ (en Type I-feil) mot at et for strengt nivå gjør det vanskeligere å fange opp en effekt som faktisk finnes. Vi ser nærmere på denne avveiningen i neste avsnitt. Her velger vi det vanlige nivået $\alpha = 5\,\%$, og setter opp $H_0: p = 0.04$ mot $H_A: p > 0.04$.
 3. **Samle data.** Vi trekker et utvalg fra populasjonen. Vi spør 1000 tilfeldig valgte velgere, og 55 av dem sier de vil stemme partiet, altså en observert oppslutning på $\widehat{p} = 55/1000 = 0.055$.
 4. **Beregn testobservatoren.** Vi oppsummerer dataene i én tallstørrelse, en **testobservator**, som tallfester hvor mye beviset taler mot $H_0$. For en andel er den (vi kommer tilbake til formelen i neste delkapittel)
 $$Z = \frac{\widehat{p} - p_0}{\sqrt{p_0(1-p_0)/n}} = \frac{0.055 - 0.04}{\sqrt{0.04 \cdot 0.96/1000}} \approx 2.42.$$
@@ -42,10 +42,33 @@ Legg merke til *hvordan* testobservatoren måler avviket mellom dataene og nullh
 
 Steg 5 er kjernen, og «overrasket» har en presis betydning: er $H_0$ sann, følger testobservatoren en kjent fordeling (en samplingfordeling), og vi kan regne ut hvor sannsynlig det er å få en verdi som er *minst så ekstrem* som den vi observerte. Er den sannsynligheten liten, betyr det nettopp at vi er *overrasket*: dataene er da vanskelige å forene med $H_0$.
 
-Det finnes to likeverdige måter å ta beslutningen på i steg 5, og de gir alltid samme konklusjon:
+Det finnes to likeverdige måter å ta beslutningen i steg 5 på, og de gir alltid samme konklusjon. Begge tar utgangspunkt i fordelingen til testobservatoren under $H_0$, som i Venstre-eksempelet er standardnormalfordelingen.
 
-- **p-verdien:** regn ut sannsynligheten for en testobservator minst så ekstrem som den observerte, gitt $H_0$, og forkast dersom denne er liten.
-- **Forkastningsområdet:** finn på forhånd de mest ekstreme verdiene testobservatoren kan ta (forkastningsområdet), og forkast dersom den observerte verdien lander der. Grensen kalles den **kritiske verdien**.
+**Forkastningsområdet** er de verdiene av testobservatoren som skal få oss til å forkaste. Det velges direkte ut fra fordelingen og signifikansnivået: vi legger det i den halen (eller de halene) av fordelingen som svarer til $H_A$, og gjør det akkurat stort nok til at sannsynligheten for å havne der er $\alpha$ når $H_0$ er sann. Grensen kalles den **kritiske verdien**. I Venstre-eksempelet er $H_A$ ensidig ($p > p_0$), så hele forkastningsområdet ligger i høyre hale, og den kritiske verdien er 95-prosentilen i standardnormalfordelingen, $z_{0.95} = 1.645$. Vi forkaster dersom $Z > 1.645$, og siden den observerte verdien $Z = 2.42$ ligger godt innenfor, forkaster vi (Figur \@ref(fig:forkastning)).
+
+**p-verdien** snur på det: i stedet for en fast grense regner vi ut hvor sannsynlig en testobservator minst så ekstrem som den observerte er under $H_0$. Det er arealet til høyre for $Z = 2.42$ i figuren, altså omtrent 0.008. Vi forkaster dersom p-verdien er mindre enn $\alpha$. De to metodene er to sider av samme sak: den observerte verdien ligger i forkastningsområdet nettopp når p-verdien er mindre enn $\alpha$.
+
+```{r forkastning, echo = FALSE, message = FALSE, fig.width = 6.5, fig.height = 3.3, fig.cap = "Fordelingen til testobservatoren under $H_0$ (standardnormalfordelingen) i Venstre-eksempelet. Forkastningsområdet på 5 % er skyggelagt, med den kritiske verdien 1.645 som grense. Den observerte testobservatoren $Z = 2.42$ faller innenfor forkastningsområdet, så vi forkaster."}
+library(ggplot2)
+x <- seq(-3.5, 3.5, length.out = 500)
+kurve <- data.frame(x = x, tetthet = dnorm(x))
+zkrit <- qnorm(0.95)
+zobs  <- 2.42
+
+ggplot(kurve, aes(x, tetthet)) +
+  geom_area(data = subset(kurve, x >= zkrit), fill = "grey75") +
+  geom_line(linewidth = 0.7) +
+  geom_vline(xintercept = zkrit, linetype = "dashed") +
+  geom_segment(aes(x = zobs, xend = zobs, y = 0, yend = dnorm(zobs)),
+               colour = "firebrick", linewidth = 0.9) +
+  annotate("text", x = 2.55, y = 0.075, label = "Forkastnings-\nområde (5 %)", size = 3) +
+  annotate("text", x = 0.95, y = 0.30, label = "kritisk verdi\n1.645", size = 3) +
+  annotate("segment", x = 1.15, xend = zkrit, y = 0.27, yend = 0.20,
+           arrow = arrow(length = unit(0.15, "cm"))) +
+  annotate("text", x = 2.95, y = 0.16, label = "observert\nZ = 2.42", colour = "firebrick", size = 3) +
+  labs(x = expression(paste("Testobservator ", Z, " under ", H[0])), y = "Tetthet") +
+  theme_classic()
+```
 
 ### Signifikansnivå og de to feiltypene
 
