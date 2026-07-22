@@ -272,17 +272,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Hvis du ikke tar BED4 dette semesteret, så går det helt fint også. Dataøvingen står fint på egne bein, og du kan uansett komme tilbake til disse resultatene hvis du for eksempel skal ta BED4 på et senere tidspunkt.</p>
 <p>Du har kanskje lagt merke til at R-kodingen i tidsrekkemodulen har en litt forskjellig stil fra det vi har gjort tidligere i kurset. I denne øvingen vil derfor størsteparten av koden blir oppgitt i oppgaveteksten. Din oppgave blir å kjøre koden, få ut figurer og resultater, samt å kommentere og tolke resultatene.</p>
 <p>Vi starter med å laste inn noen pakker som vi kommer til å trenge. Som vanlig må du installere pakkene først dersom du ikke har gjort det allerede:</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="dataving-4.html#cb353-1" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
-<span id="cb353-2"><a href="dataving-4.html#cb353-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="dataving-4.html#cb354-1" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb354-2"><a href="dataving-4.html#cb354-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
 <div id="oppgave-1-last-inn-og-se-pa-datasettet" class="section level3 hasAnchor" number="7.4.1">
 <h3><span class="header-section-number">7.4.1</span> Oppgave 1: Last inn og se på datasettet<a href="dataving-4.html#oppgave-1-last-inn-og-se-pa-datasettet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Denne gang er datasettet pakket inn i en såkalt <code>.Rdata</code>-fil. Det er et enkelt filformat for å lagre R-objekter. Last ned <a href="datasett/p_da.Rdata">p_da.Rdata</a>, og last datasettet inn i R ved å kjøre følgende kommando (der du selvsagt har satt arbeidsmappen til der du har lagt datafilen):</p>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="dataving-4.html#cb354-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;p_DA.Rdata&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="dataving-4.html#cb355-1" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;p_DA.Rdata&quot;</span>)</span></code></pre></div>
 <p>Du skal nå få to tidsrekker i minnet: <code>n03</code> og <code>no5</code>, som i figuren under:</p>
 <p><img src="bilder/environ.png" alt="" width="800" /></p>
 <p>Disse to tidsrekkene inneholder strømprisen i to prisområder i Norge hver time fra 1. januar 2022 til og med 21. september 2022. Tidsrekken <code>no3</code> inneholder prisen for Midt-Norge (NO3) og <code>no5</code> inneholder prisen for Vest-Norge (NO5).</p>
 <p>Vi konsentrerer oss om NO3 i første omgang, og kikker raskt på datasettet ved å plotte tidsrekken direkte med <code>autoplot()</code>-funksjonen som vi finner i <code>forecast</code>-pakken:</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="dataving-4.html#cb355-1" tabindex="-1"></a><span class="fu">autoplot</span>(no3)</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="dataving-4.html#cb356-1" tabindex="-1"></a><span class="fu">autoplot</span>(no3)</span></code></pre></div>
 <p><img src="met4_files/figure-html/unnamed-chunk-292-1.png" alt="" width="672" /></p>
 <p>På <span class="math inline">\(x\)</span>-aksen har vi antall dager siden 1. januar 2022. Skriv en kort kommentar der du peker på noen viktige karakteristikker ved denne tidsrekken. Du må gjerne bruke <code>xlim</code>-argumentet i <code>plot()</code>-funksjonen for å zoome inn og se på mindre tidsperioder. Ser tidsrekken ut til å være stasjonær?</p>
 </div>
@@ -290,18 +290,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">7.4.2</span> Oppgave 2: Gjem bort den siste dagen slik at vi kan sjekke prediksjonene våre<a href="dataving-4.html#oppgave-2-gjem-bort-den-siste-dagen-slik-at-vi-kan-sjekke-prediksjonene-vare" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For å kunne gjøre en vurdering av hvor gode prediksjonene våre er, deler vi nå datasettet vårt i to, der vi tar ut de siste 24 timene som vi kan bruke til å evaluere prediksjonene. Vi kaller disse to delene <code>no3_train</code>, som er den lange delen som vi skal bruke til å estimere en modell (<em>trene</em> en modell), og <code>no3_test</code> som er de siste 24 timene som vi skal bruke til å teste etterpå om modellen duger.</p>
 <p>Vi bruker funksjonen <code>window()</code> til å hente ut deler av tidsrekken, der vi må spesifisere start- og sluttverdier som vektorer med to elementer; en for dag og en for time. Det er 264 dager i datasettet vårt, så da får vi:</p>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="dataving-4.html#cb356-1" tabindex="-1"></a>no3_train <span class="ot">&lt;-</span> <span class="fu">window</span>(no3, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>), <span class="at">end =</span> <span class="fu">c</span>(<span class="dv">263</span>, <span class="dv">23</span>))</span>
-<span id="cb356-2"><a href="dataving-4.html#cb356-2" tabindex="-1"></a>no3_test  <span class="ot">&lt;-</span> <span class="fu">window</span>(no3, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">264</span>, <span class="dv">0</span>), <span class="at">end =</span> <span class="fu">c</span>(<span class="dv">264</span>, <span class="dv">23</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="dataving-4.html#cb357-1" tabindex="-1"></a>no3_train <span class="ot">&lt;-</span> <span class="fu">window</span>(no3, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>), <span class="at">end =</span> <span class="fu">c</span>(<span class="dv">263</span>, <span class="dv">23</span>))</span>
+<span id="cb357-2"><a href="dataving-4.html#cb357-2" tabindex="-1"></a>no3_test  <span class="ot">&lt;-</span> <span class="fu">window</span>(no3, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">264</span>, <span class="dv">0</span>), <span class="at">end =</span> <span class="fu">c</span>(<span class="dv">264</span>, <span class="dv">23</span>))</span></code></pre></div>
 <p>Du kan nå dobbelsjekke at du har fått ut en enkelt dag i <code>no3_test</code> ved å kjøre <code>autoplot(no3_test)</code>.</p>
 </div>
 <div id="oppgave-3-hent-ut-sesong-og-trend" class="section level3 hasAnchor" number="7.4.3">
 <h3><span class="header-section-number">7.4.3</span> Oppgave 3: Hent ut sesong og trend<a href="dataving-4.html#oppgave-3-hent-ut-sesong-og-trend" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Vi har lært at et første steg i tidsrekkeanalyse er å hente ut eventuelle sesong og trendkomponenter. Vi har også sett at det er en enkel funksjon i R som kan gjøre dette for oss, nemlig <code>stl()</code>, slik vi så i <a href="trend-og-sesong.html#trend-og-sesong">seksjonen om trend og sesong</a>.</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="dataving-4.html#cb357-1" tabindex="-1"></a>dekomponert <span class="ot">&lt;-</span> <span class="fu">stl</span>(no3_train, <span class="at">s.window =</span> <span class="st">&quot;periodic&quot;</span>)</span>
-<span id="cb357-2"><a href="dataving-4.html#cb357-2" tabindex="-1"></a><span class="fu">autoplot</span>(dekomponert)</span></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="dataving-4.html#cb358-1" tabindex="-1"></a>dekomponert <span class="ot">&lt;-</span> <span class="fu">stl</span>(no3_train, <span class="at">s.window =</span> <span class="st">&quot;periodic&quot;</span>)</span>
+<span id="cb358-2"><a href="dataving-4.html#cb358-2" tabindex="-1"></a><span class="fu">autoplot</span>(dekomponert)</span></code></pre></div>
 <p><img src="met4_files/figure-html/unnamed-chunk-294-1.png" alt="" width="672" /></p>
 <p>Det var ikke så lett å se detaljer i sesongkomponenten i dette plottet, så vi zoomer inn på en mindre del av x-aksen:</p>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="dataving-4.html#cb358-1" tabindex="-1"></a><span class="fu">autoplot</span>(dekomponert) <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">245</span>, <span class="dv">260</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="dataving-4.html#cb359-1" tabindex="-1"></a><span class="fu">autoplot</span>(dekomponert) <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">245</span>, <span class="dv">260</span>)</span></code></pre></div>
 <p><img src="met4_files/figure-html/unnamed-chunk-295-1.png" alt="" width="672" /></p>
 <p>Gi en kort beskrivelse av de ulike komponentene i tidsrekken.</p>
 </div>
@@ -316,33 +316,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Legg sammen prediksjonene av residualene, trend- og sesongkomponenten for å lage en prediksjon av prisserien.</li>
 </ol>
 <p>Vi kunne godt satt oss ned for å programmere disse stegene hver for seg. Heldigvis har noen gjort dette før oss, gjennom funksjonen <code>forecast()</code> i <code>forecast</code>-pakken. For å lage en prognose må vi sende inn den dekomponerte tidsrekken, sammen med en spesifikasjon av hvilken type statistisk tidsrekkemodell vi ønsker å tilpasse til residualtidsrekken (vi velger ARIMA, for det er den modellen vi har lært om), og hvor mange steg frem vi ønsker å predikere. Vi kan også legge til signifikansnivået for et prediksjonsintervall som vi vil ha på 95%:</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="dataving-4.html#cb359-1" tabindex="-1"></a>prognose <span class="ot">&lt;-</span> <span class="fu">forecast</span>(dekomponert, <span class="at">method =</span> <span class="st">&quot;arima&quot;</span>, <span class="at">h =</span> <span class="dv">24</span>, <span class="at">level =</span> <span class="dv">95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="dataving-4.html#cb360-1" tabindex="-1"></a>prognose <span class="ot">&lt;-</span> <span class="fu">forecast</span>(dekomponert, <span class="at">method =</span> <span class="st">&quot;arima&quot;</span>, <span class="at">h =</span> <span class="dv">24</span>, <span class="at">level =</span> <span class="dv">95</span>)</span></code></pre></div>
 <p>Vi kan visualisere resultatet ved hjelp av <code>autoplot()</code>. For å kunne se noe fornuftig i plottet så tar vi bare med de 100 siste observerte tidsstegene i tillegg til de 24 prediksjonene:</p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="dataving-4.html#cb360-1" tabindex="-1"></a><span class="fu">autoplot</span>(prognose, <span class="at">include =</span> <span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="dataving-4.html#cb361-1" tabindex="-1"></a><span class="fu">autoplot</span>(prognose, <span class="at">include =</span> <span class="dv">100</span>)</span></code></pre></div>
 <p><img src="met4_files/figure-html/unnamed-chunk-297-1.png" alt="" width="672" /></p>
 <p>Gi en kommentar til dette plottet.</p>
 </div>
 <div id="oppgave-5-sammenlign-prediksjonene-med-de-faktiske-observasjonene" class="section level3 hasAnchor" number="7.4.5">
 <h3><span class="header-section-number">7.4.5</span> Oppgave 5: Sammenlign prediksjonene med de faktiske observasjonene<a href="dataving-4.html#oppgave-5-sammenlign-prediksjonene-med-de-faktiske-observasjonene" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Vi kan nå finne frem igjen <code>no3_test</code>, som er en tidsrekke som inneholder de faktiske observasjonene for dagen der vi har gjort prediksjoner. La oss sammenligne. En måte å visualisere dette på er å hente ut prediksjonene fra <code>prognose</code>-objektet (de ligger under <code>$mean</code>), og sette det sammen med de faktiske observasjonene (som vi har lagret i <code>no3_test</code>). Vi kan også hente ut prediksjonsintervallene, og sette alt inn i en data frame:</p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="dataving-4.html#cb361-1" tabindex="-1"></a><span class="co"># Setter prediksjoner, intervaller og observasjoner inn i samme data frame.  </span></span>
-<span id="cb361-2"><a href="dataving-4.html#cb361-2" tabindex="-1"></a>prediksjoner <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb361-3"><a href="dataving-4.html#cb361-3" tabindex="-1"></a>  <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">24</span>,                            <span class="co"># Timer i døgnet for x-aksen</span></span>
-<span id="cb361-4"><a href="dataving-4.html#cb361-4" tabindex="-1"></a>  <span class="at">prediksjon =</span> prognose<span class="sc">$</span>mean,          <span class="co"># Predikerte priser</span></span>
-<span id="cb361-5"><a href="dataving-4.html#cb361-5" tabindex="-1"></a>  <span class="at">nedre =</span> prognose<span class="sc">$</span>lower[,<span class="dv">1</span>],          <span class="co"># Nedre og øvre prediksjonsintervaller</span></span>
-<span id="cb361-6"><a href="dataving-4.html#cb361-6" tabindex="-1"></a>  <span class="at">ovre =</span> prognose<span class="sc">$</span>upper[,<span class="dv">1</span>],</span>
-<span id="cb361-7"><a href="dataving-4.html#cb361-7" tabindex="-1"></a>  <span class="at">observert =</span> no3_test                 <span class="co"># De faktiske observasjonene</span></span>
-<span id="cb361-8"><a href="dataving-4.html#cb361-8" tabindex="-1"></a>)</span>
-<span id="cb361-9"><a href="dataving-4.html#cb361-9" tabindex="-1"></a></span>
-<span id="cb361-10"><a href="dataving-4.html#cb361-10" tabindex="-1"></a><span class="co"># Lager plott</span></span>
-<span id="cb361-11"><a href="dataving-4.html#cb361-11" tabindex="-1"></a><span class="fu">ggplot</span>(prediksjoner) <span class="sc">+</span></span>
-<span id="cb361-12"><a href="dataving-4.html#cb361-12" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> prediksjon), <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span>    <span class="co"># Prediksjoner</span></span>
-<span id="cb361-13"><a href="dataving-4.html#cb361-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> nedre), <span class="at">colour =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span>          <span class="co"># Nedre grense</span></span>
-<span id="cb361-14"><a href="dataving-4.html#cb361-14" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> ovre), <span class="at">colour =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span>           <span class="co"># Øvre grense</span></span>
-<span id="cb361-15"><a href="dataving-4.html#cb361-15" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> observert), <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span>         <span class="co"># Observert</span></span>
-<span id="cb361-16"><a href="dataving-4.html#cb361-16" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
-<span id="cb361-17"><a href="dataving-4.html#cb361-17" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;24 timers prognose av strømpris&quot;</span>) <span class="sc">+</span></span>
-<span id="cb361-18"><a href="dataving-4.html#cb361-18" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="dataving-4.html#cb362-1" tabindex="-1"></a><span class="co"># Setter prediksjoner, intervaller og observasjoner inn i samme data frame.  </span></span>
+<span id="cb362-2"><a href="dataving-4.html#cb362-2" tabindex="-1"></a>prediksjoner <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb362-3"><a href="dataving-4.html#cb362-3" tabindex="-1"></a>  <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">24</span>,                            <span class="co"># Timer i døgnet for x-aksen</span></span>
+<span id="cb362-4"><a href="dataving-4.html#cb362-4" tabindex="-1"></a>  <span class="at">prediksjon =</span> prognose<span class="sc">$</span>mean,          <span class="co"># Predikerte priser</span></span>
+<span id="cb362-5"><a href="dataving-4.html#cb362-5" tabindex="-1"></a>  <span class="at">nedre =</span> prognose<span class="sc">$</span>lower[,<span class="dv">1</span>],          <span class="co"># Nedre og øvre prediksjonsintervaller</span></span>
+<span id="cb362-6"><a href="dataving-4.html#cb362-6" tabindex="-1"></a>  <span class="at">ovre =</span> prognose<span class="sc">$</span>upper[,<span class="dv">1</span>],</span>
+<span id="cb362-7"><a href="dataving-4.html#cb362-7" tabindex="-1"></a>  <span class="at">observert =</span> no3_test                 <span class="co"># De faktiske observasjonene</span></span>
+<span id="cb362-8"><a href="dataving-4.html#cb362-8" tabindex="-1"></a>)</span>
+<span id="cb362-9"><a href="dataving-4.html#cb362-9" tabindex="-1"></a></span>
+<span id="cb362-10"><a href="dataving-4.html#cb362-10" tabindex="-1"></a><span class="co"># Lager plott</span></span>
+<span id="cb362-11"><a href="dataving-4.html#cb362-11" tabindex="-1"></a><span class="fu">ggplot</span>(prediksjoner) <span class="sc">+</span></span>
+<span id="cb362-12"><a href="dataving-4.html#cb362-12" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> prediksjon), <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span>    <span class="co"># Prediksjoner</span></span>
+<span id="cb362-13"><a href="dataving-4.html#cb362-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> nedre), <span class="at">colour =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span>          <span class="co"># Nedre grense</span></span>
+<span id="cb362-14"><a href="dataving-4.html#cb362-14" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> ovre), <span class="at">colour =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span>           <span class="co"># Øvre grense</span></span>
+<span id="cb362-15"><a href="dataving-4.html#cb362-15" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> observert), <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span>         <span class="co"># Observert</span></span>
+<span id="cb362-16"><a href="dataving-4.html#cb362-16" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb362-17"><a href="dataving-4.html#cb362-17" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;24 timers prognose av strømpris&quot;</span>) <span class="sc">+</span></span>
+<span id="cb362-18"><a href="dataving-4.html#cb362-18" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="met4_files/figure-html/unnamed-chunk-298-1.png" alt="" width="672" /></p>
 <p>I dette plottet er prediksjonene av strømprisen vist som en stiplet linje, mens de prisene som faktisk ble observert er vist som en tykk heltrukken linje. Kommenter plottet.</p>
 </div>
@@ -382,8 +382,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="oppgave-7-lagre-prediksjonene-i-en-excel-fil." class="section level3 hasAnchor" number="7.4.7">
 <h3><span class="header-section-number">7.4.7</span> Oppgave 7: Lagre prediksjonene i en excel-fil.<a href="dataving-4.html#oppgave-7-lagre-prediksjonene-i-en-excel-fil." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Hvis du tar BED4 dette semesteret (eller skal ta BED4 på et senere tidspunkt) så trenger du nå å eksportere disse prediksjonene til en Excel-fil. En pakke som kan gjøre dette er <code>writexl</code> (som du, igjen, er nødt til å installere før bruk: <code>install.packages("writexl")</code>). Hvis du har lagret prediksjonene i en data frame som heter <code>prediksjoner2</code>, så kan du skrive den ut i en Excel-fil på følgende måte:</p>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="dataving-4.html#cb363-1" tabindex="-1"></a><span class="fu">library</span>(writexl)</span>
-<span id="cb363-2"><a href="dataving-4.html#cb363-2" tabindex="-1"></a><span class="fu">write_xlsx</span>(prediksjoner2, <span class="st">&quot;no3_prediksjoner.xlsx&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="dataving-4.html#cb364-1" tabindex="-1"></a><span class="fu">library</span>(writexl)</span>
+<span id="cb364-2"><a href="dataving-4.html#cb364-2" tabindex="-1"></a><span class="fu">write_xlsx</span>(prediksjoner2, <span class="st">&quot;no3_prediksjoner.xlsx&quot;</span>)</span></code></pre></div>
 <p>Du skal nå ha en Excel-fil med prediksjonene dine i filen <code>no3_prediksjoner.xlsx</code> i arbeidsmappen din.</p>
 </div>
 <div id="oppgave-8-gjr-det-samme-for-no5" class="section level3 hasAnchor" number="7.4.8">
@@ -391,14 +391,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Du kan nå gjenta øvelsen over for å få ut samme type prediksjoner for det andre prisområdet. Tidsrekken finner du i <code>no5</code> og prediksjonsplottet ser slik ut:</p>
 <p><img src="met4_files/figure-html/unnamed-chunk-302-1.png" alt="" width="672" /></p>
 <p>Data framen med prediksjonene skal se slik ut:</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="dataving-4.html#cb364-1" tabindex="-1"></a>prediksjoner3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb364-2"><a href="dataving-4.html#cb364-2" tabindex="-1"></a>  <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">24</span>,                            <span class="co"># Timer i døgnet for x-aksen</span></span>
-<span id="cb364-3"><a href="dataving-4.html#cb364-3" tabindex="-1"></a>  <span class="at">prediksjon =</span> prognose3<span class="sc">$</span>mean,          <span class="co"># Predikerte priser</span></span>
-<span id="cb364-4"><a href="dataving-4.html#cb364-4" tabindex="-1"></a>  <span class="at">nedre =</span> prognose3<span class="sc">$</span>lower[,<span class="dv">1</span>],          <span class="co"># Nedre og øvre prediksjonsintervaller</span></span>
-<span id="cb364-5"><a href="dataving-4.html#cb364-5" tabindex="-1"></a>  <span class="at">ovre =</span> prognose3<span class="sc">$</span>upper[,<span class="dv">1</span>]</span>
-<span id="cb364-6"><a href="dataving-4.html#cb364-6" tabindex="-1"></a>)</span>
-<span id="cb364-7"><a href="dataving-4.html#cb364-7" tabindex="-1"></a></span>
-<span id="cb364-8"><a href="dataving-4.html#cb364-8" tabindex="-1"></a>prediksjoner3</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="dataving-4.html#cb365-1" tabindex="-1"></a>prediksjoner3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb365-2"><a href="dataving-4.html#cb365-2" tabindex="-1"></a>  <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">24</span>,                            <span class="co"># Timer i døgnet for x-aksen</span></span>
+<span id="cb365-3"><a href="dataving-4.html#cb365-3" tabindex="-1"></a>  <span class="at">prediksjon =</span> prognose3<span class="sc">$</span>mean,          <span class="co"># Predikerte priser</span></span>
+<span id="cb365-4"><a href="dataving-4.html#cb365-4" tabindex="-1"></a>  <span class="at">nedre =</span> prognose3<span class="sc">$</span>lower[,<span class="dv">1</span>],          <span class="co"># Nedre og øvre prediksjonsintervaller</span></span>
+<span id="cb365-5"><a href="dataving-4.html#cb365-5" tabindex="-1"></a>  <span class="at">ovre =</span> prognose3<span class="sc">$</span>upper[,<span class="dv">1</span>]</span>
+<span id="cb365-6"><a href="dataving-4.html#cb365-6" tabindex="-1"></a>)</span>
+<span id="cb365-7"><a href="dataving-4.html#cb365-7" tabindex="-1"></a></span>
+<span id="cb365-8"><a href="dataving-4.html#cb365-8" tabindex="-1"></a>prediksjoner3</span></code></pre></div>
 <pre><code>##     x prediksjon    nedre     ovre
 ## 1   1   346.3622 310.5934 382.1310
 ## 2   2   338.6796 286.6895 390.6698
@@ -425,7 +425,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 23 23   390.6720 241.3325 540.0115
 ## 24 24   368.3594 215.4343 521.2845</code></pre>
 <p>Du lagrer den som en Excel-fil slik:</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="dataving-4.html#cb366-1" tabindex="-1"></a><span class="fu">write_xlsx</span>(prediksjoner3, <span class="st">&quot;no5_prediksjoner.xlsx&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="dataving-4.html#cb367-1" tabindex="-1"></a><span class="fu">write_xlsx</span>(prediksjoner3, <span class="st">&quot;no5_prediksjoner.xlsx&quot;</span>)</span></code></pre></div>
 <p>Du kan laste ned de ferdige Excel-filene her for å kontrollere at du har fått det til: <a href="no3_prediksjoner.xlsx"><code>no3_prediksjoner.xlsx</code></a> og <a href="no5_prediksjoner.xlsx"><code>no5_prediksjoner.xlsx</code></a>.</p>
 </div>
 </div>

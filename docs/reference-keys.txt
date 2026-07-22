@@ -2,6 +2,7 @@ fig:rstudio1
 fig:rstudiorun
 fig:hist-avkastning
 fig:boks-avkastning
+fig:forkastning
 fig:churn
 eq:withb
 eq:withoutb
