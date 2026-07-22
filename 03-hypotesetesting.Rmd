@@ -48,7 +48,7 @@ Det finnes to likeverdige måter å ta beslutningen i steg 5 på, og de gir allt
 
 **p-verdien** snur på det: i stedet for en fast grense regner vi ut hvor sannsynlig en testobservator minst så ekstrem som den observerte er under $H_0$. Det er arealet til høyre for $Z = 2.42$ i figuren, altså omtrent 0.008. Vi forkaster dersom p-verdien er mindre enn $\alpha$. De to metodene er to sider av samme sak: den observerte verdien ligger i forkastningsområdet nettopp når p-verdien er mindre enn $\alpha$.
 
-```{r forkastning, echo = FALSE, message = FALSE, fig.width = 6.5, fig.height = 3.3, fig.cap = "Fordelingen til testobservatoren under $H_0$ (standardnormalfordelingen) i Venstre-eksempelet. Forkastningsområdet på 5 % er skyggelagt, med den kritiske verdien 1.645 som grense. Den observerte testobservatoren $Z = 2.42$ faller innenfor forkastningsområdet, så vi forkaster."}
+```{r forkastning, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 6.5, fig.height = 3.3, fig.cap = "Fordelingen til testobservatoren under $H_0$ (standardnormalfordelingen) i Venstre-eksempelet. Forkastningsområdet på 5 % er skyggelagt, med den kritiske verdien 1.645 som grense. Den observerte testobservatoren $Z = 2.42$ faller innenfor forkastningsområdet, så vi forkaster."}
 library(ggplot2)
 x <- seq(-3.5, 3.5, length.out = 500)
 kurve <- data.frame(x = x, tetthet = dnorm(x))
@@ -59,13 +59,17 @@ ggplot(kurve, aes(x, tetthet)) +
   geom_area(data = subset(kurve, x >= zkrit), fill = "grey75") +
   geom_line(linewidth = 0.7) +
   geom_vline(xintercept = zkrit, linetype = "dashed") +
-  geom_segment(aes(x = zobs, xend = zobs, y = 0, yend = dnorm(zobs)),
-               colour = "firebrick", linewidth = 0.9) +
-  annotate("text", x = 2.55, y = 0.075, label = "Forkastnings-\nområde (5 %)", size = 3) +
-  annotate("text", x = 0.95, y = 0.30, label = "kritisk verdi\n1.645", size = 3) +
-  annotate("segment", x = 1.15, xend = zkrit, y = 0.27, yend = 0.20,
+  annotate("segment", x = zobs, xend = zobs, y = 0, yend = dnorm(zobs),
+           colour = "firebrick", linewidth = 0.9) +
+  annotate("text", x = 2.35, y = 0.17, label = "Forkastnings-\nområde (5 %)", size = 3) +
+  annotate("text", x = 0.55, y = 0.11, label = "kritisk verdi\n1.645", size = 3) +
+  annotate("segment", x = 0.85, xend = zkrit, y = 0.085, yend = 0.006,
            arrow = arrow(length = unit(0.15, "cm"))) +
-  annotate("text", x = 2.95, y = 0.16, label = "observert\nZ = 2.42", colour = "firebrick", size = 3) +
+  annotate("text", x = 3.15, y = 0.12, label = "observert\nZ = 2.42", colour = "firebrick", size = 3) +
+  annotate("segment", x = 2.95, xend = zobs, y = 0.09, yend = 0.006,
+           colour = "firebrick", arrow = arrow(length = unit(0.15, "cm"))) +
+  scale_x_continuous(expand = expansion(mult = c(0.02, 0.10))) +
+  coord_cartesian(clip = "off") +
   labs(x = expression(paste("Testobservator ", Z, " under ", H[0])), y = "Tetthet") +
   theme_classic()
 ```
