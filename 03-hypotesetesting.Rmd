@@ -313,15 +313,21 @@ Som i forrige delkapittel viser vi for hver test først hvordan den gjøres manu
 
 ### To-utvalgs t-test
 
-Når vi vil sammenligne forventningene i to *uavhengige* grupper, tester vi $H_0: \mu_1 = \mu_2$, altså at differansen $\mu_1 - \mu_2$ er null. Testobservatoren er differansen mellom de to utvalgsgjennomsnittene, delt på standardfeilen til denne differansen:
+Når vi vil sammenligne forventningene i to *uavhengige* grupper, tester vi $H_0: \mu_1 = \mu_2$, altså at differansen $\mu_1 - \mu_2$ er null. Testobservatoren er differansen mellom de to utvalgsgjennomsnittene, målt i antall standardfeil:
 
 $$T = \frac{\overline{X}_1 - \overline{X}_2}{SE},$$
 
-og den er t-fordelt når $H_0$ er sann. Dersom vi antar at de to populasjonene har *lik* varians, slår vi sammen (pooler) de to utvalgsvariansene til et felles estimat $s_p^2$, og
+der $SE$ er standardfeilen til differansen $\overline{X}_1 - \overline{X}_2$. Når $H_0$ er sann, er $T$ t-fordelt, men *hvordan* vi regner ut $SE$, og *hvor mange frihetsgrader* t-fordelingen har, avhenger av om vi antar at de to populasjonene har lik varians.
 
-$$SE = s_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}, \qquad s_p^2 = \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2},$$
+Antar vi **lik varians**, estimerer vi den felles variansen ved å slå sammen (poole) de to utvalgsvariansene,
 
-med $n_1 + n_2 - 2$ frihetsgrader. Antar vi *ikke* lik varians, bruker vi i stedet $SE = \sqrt{s_1^2/n_1 + s_2^2/n_2}$. Dette kalles Welchs test, og er det R gjør som standard. Intuisjonen er den samme som før: ligger de to gjennomsnittene mange standardfeil fra hverandre, taler det mot at populasjonene har samme forventning.
+$$s_p^2 = \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2},$$
+
+og setter $SE = s_p\sqrt{1/n_1 + 1/n_2}$. Testobservatoren $T$ er da t-fordelt med $n_1 + n_2 - 2$ frihetsgrader.
+
+Antar vi **ulik varians**, bruker vi i stedet $SE = \sqrt{s_1^2/n_1 + s_2^2/n_2}$, og $T$ er tilnærmet t-fordelt med et frihetsgradstall som regnes ut fra dataene. Dette kalles Welchs test, og er det R gjør som standard.
+
+Intuisjonen er den samme som i ett-utvalgstesten: ligger de to gjennomsnittene mange standardfeil fra hverandre, taler det mot at populasjonene har samme forventning.
 
 **Eksempel.** En nettbutikk tester to versjoner (A og B) av forsiden, og måler ordreverdien (i kr) til kundene som ser hver versjon. Gir versjon B høyere gjennomsnittlig ordreverdi?
 
