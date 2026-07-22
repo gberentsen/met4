@@ -271,153 +271,201 @@ p-verdien er 0.013, altså under $\alpha = 0.05$, så konklusjonen er den samme:
 
 <div style='padding:74.64% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7780048/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
 
-### Kommentarer
+### Hvilke sammenligninger kan vi gjøre?
 
-Vi har gått gjennom kapittel **13**, som i all hovedsak handler om å sammenligne to gjennomsnitt (som vi kan gjøre på tre forskjellige måter), to varianser og to andeler. Her følger noen kontrollspørsmål som du kan tenke over, og bruke som utgangspunkt for diskusjon i f.eks. kollokviegrupper:
+Ofte er vi ikke ute etter én populasjon, men vil *sammenligne to*: er avkastningen høyere i det ene fondet enn i det andre? Solgte vi mer etter en ombygging enn før? Framgangsmåten er den samme femstegsoppskriften som før, og igjen er det bare testobservatoren og fordelingen dens som skifter. De fire sammenligningene vi ser på, er:
 
-- Hva er nullhypotesen når vi skal gjennomføre en t-test for to populasjoner?
-- ... og hvilke antagelser må vi gjøre?
-- Hvordan ser testobservatoren ut for en to-utvalgs t-test, og kan du gi en intuitiv forklaring for hvorfor den ser ut som den gjør?
-- Når kan vi bruke matchede par, og hva er hensikten?
-- Hvilken testobservator brukes for sammenligning av to varianser, og hvilken fordeling har den under nullhypotesen?
-- Kan du gi en intuitiv forklaring for hvorfor den ser ut som den gjør?
-- Hvilken test brukes for å teste om to andeler er like, og hva må du anta?
+- to **forventninger** fra *uavhengige* utvalg (to-utvalgs t-test),
+- to forventninger fra *matchede par* (paret t-test),
+- to **andeler**, og
+- to **standardavvik**.
 
-Videre bør du sjekke at du kan utføre **3** typer $t$-tester, test for like varianser og test for like andeler både for hånd (relevant for skoleeksamen) og i R (relevant til hjemmeeksamen og datalabber).
+Som i forrige delkapittel viser vi for hver test først hvordan den gjøres manuelt, steg for steg med en kritisk verdi, og deretter hvordan R kan utføre hele testen direkte fra dataene.
 
-Den enkleste måten å gjøre $t$-tester i R på er å bruke funksjonen `t.test()`. Kikk på eksempel 13.1 i lærebokens 11. utgave, der vi har observert årlige avkastninger til to aksjefond som er kjøpt henholdsvis med og uten megler. 
+### To-utvalgs t-test
 
-```{r, eval = F}
-# Leser inn datasettet
-library(readxl)
-funds <- read_xlsx("Xm13-01.xlsx")
+Når vi vil sammenligne forventningene i to *uavhengige* grupper, tester vi $H_0: \mu_1 = \mu_2$, altså at differansen $\mu_1 - \mu_2$ er null. Testobservatoren er differansen mellom de to utvalgsgjennomsnittene, delt på standardfeilen til denne differansen:
 
-# Ser at det er to kolonner, «Direct» og «Broker». Alternativhypotesen på s.433 spesifiserer at
-# differansen i forventninger er *større* enn null, signifikansnivået skal være 5%. Antar først 
-# ulik varians og at vi ikke skal gjøre en paret test:
-t.test(funds$Direct, funds$Broker,
-       alternative = "greater",
-       paired = FALSE,
-       var.equal = FALSE,
-       conf.level = 0.95) 
-```
+$$T = \frac{\overline{X}_1 - \overline{X}_2}{SE},$$
 
-```{r, echo = F}
-# Leser inn datasettet
-library(readxl)
-funds <- read_xlsx("datasett/Xm13-01.xlsx")
+og den er t-fordelt når $H_0$ er sann. Dersom vi antar at de to populasjonene har *lik* varians, slår vi sammen (pooler) de to utvalgsvariansene til et felles estimat $s_p^2$, og
 
-# Ser at det er to kolonner, «Direct» og «Broker». Alternativhypotesen på s.433 spesifiserer at
-# differansen i forventninger er *større* enn null, signifikansnivået skal være 5%. Antar først 
-# ulik varians og at vi ikke skal gjøre en paret test:
-t.test(funds$Direct, funds$Broker,
-       alternative = "greater",
-       paired = FALSE,
-       var.equal = FALSE,
-       conf.level = 0.95) 
-```
+$$SE = s_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}, \qquad s_p^2 = \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2},$$
 
-Du kan så sjekke at du får ut de samme tallene på s. 434--435. Videre kan du skrive inn `?t.test` i R-konsollen i RStudio for å lese mer om hvilke argumenter vi kan bruke i `t.test()`-funksjonen. Der ser vi at argumentene `paired`, `var.equal` og `conf.level` som utgangspunkt allerede er satt til `FALSE`, `FALSE` og `0.95` henholdsvis, så det hadde vi strengt tatt ikke trengt å spesifisere i funksjonskallet over.
+med $n_1 + n_2 - 2$ frihetsgrader. Antar vi *ikke* lik varians, bruker vi i stedet $SE = \sqrt{s_1^2/n_1 + s_2^2/n_2}$. Dette kalles Welchs test, og er det R gjør som standard. Intuisjonen er den samme som før: ligger de to gjennomsnittene mange standardfeil fra hverandre, taler det mot at populasjonene har samme forventning.
 
-Vi kan enkelt kjøre den samme testen under antakelsen om like varianser ved å sette `var.equal = TRUE`:
+**Eksempel.** En nettbutikk tester to versjoner (A og B) av forsiden, og måler ordreverdien (i kr) til kundene som ser hver versjon. Gir versjon B høyere gjennomsnittlig ordreverdi?
+
+1. **Spørsmål:** Er den forventede ordreverdien høyere for versjon B enn for versjon A?
+2. **Hypoteser og signifikansnivå:** $H_0: \mu_B = \mu_A$ mot $H_A: \mu_B > \mu_A$ (ensidig). En Type I-feil ville være å rulle ut versjon B i troen på at den er bedre, uten at den egentlig er det. Konsekvensen er begrenset, så vi velger $\alpha = 5\,\%$.
+3. **Data:** 50 kunder ser hver versjon. Vi simulerer ordreverdiene:
 
 ```{r}
-# Ser at det er to kolonner, «Direct» og «Broker». Alternativhypotesen på s.433 spesifiserer at
-# differansen i forventninger er *større* enn null, signifikansnivået skal være 5%. Antar først 
-# ulik varians og at vi ikke skal gjøre en paret test:
-t.test(funds$Direct, funds$Broker,
-       alternative = "greater",
-       paired = FALSE,
-       var.equal = TRUE,
-       conf.level = 0.95) 
+set.seed(1)
+A <- rnorm(50, mean = 480, sd = 110)
+B <- rnorm(50, mean = 530, sd = 110)
 ```
 
-Resultatet bli akkurat det samme. Siden testens $p$-verdi er mindre enn 5%, kan vi forkaste nullhypotesen og slå fast at forskjellen i gjennomsnitt er statistisk signifikant.
-
-I kapittel 13-3 leser vi om matchede par. Datasettet i eksempel 13.1 har like mange observasjoner  i de to populasjonene, så vi kan tenke oss at målingene er gjort sekvensielt i tid, slik at vi kan matche dem, og heller se om *gjennomsittet av differansene* er signifikant forskjellig fra null. Enkelt:
+4. **Testobservator:** Vi antar lik varians i de to gruppene og bruker den poolede testobservatoren. Vi lar R regne:
 
 ```{r}
-# Ser at det er to kolonner, «Direct» og «Broker». Alternativhypotesen på s.433 spesifiserer at
-# differansen i forventninger er *større* enn null, signifikansnivået skal være 5%. Antar først 
-# ulik varians og at vi ikke skal gjøre en paret test:
-t.test(funds$Direct, funds$Broker,
-       alternative = "greater",
-       paired = TRUE,
-       conf.level = 0.95) 
+n1 <- length(B)
+n2 <- length(A)
+s_p <- sqrt(((n1 - 1)*var(B) + (n2 - 1)*var(A))/(n1 + n2 - 2))
+
+T_obs <- (mean(B) - mean(A))/(s_p*sqrt(1/n1 + 1/n2))
+T_obs
 ```
 
-Da ser vi at $p$-verdien ble enda mindre. I eksemplene 13.4 og 13.5 kan du prøve selv. Pass på at du kan gjøre beregningene manuelt også, der du regner ut gjennomsnitt, testobservator, kritisk verdi osv, slik at du forstår hva som foregår. 
+5. **Kritisk verdi og konklusjon:** Testobservatoren er t-fordelt med $n_1 + n_2 - 2 = 98$ frihetsgrader. Kritisk verdi for en ensidig test på 5 %-nivå er 95-prosentilen $t_{0.95,\,98}$ (se \@ref(relevante-r-testing)):
 
-Kapittel **13-2** omhandler forskjellen mellom observasjonsdata og eksperimentelle data. Det er i grunn ganske viktig å sette seg inn i den forskjellen fordi det ofte har betydning for tolkningen vår av statistiske resultater. Det er et eksplisitt krav for å lykkes i MET4 at du er i stand til å sette resultatene inn i en fornuftig kontekst.
-
-I kapittel **13-4** kan vi lese om varianstesten. Eksempel 13.7 ser slik ut i R:
-
-```{r, eval = F}
-bottle <- read_xlsx("Xm13-07.xlsx")
-var.test(bottle$`Machine 1`, bottle$`Machine 2`,
-         alternative = "greater")
+```{r}
+qt(0.95, df = n1 + n2 - 2)
 ```
 
-```{r, echo = F}
-bottle <- read_xlsx("datasett/Xm13-07.xlsx")
-var.test(bottle$`Machine 1`, bottle$`Machine 2`,
-         alternative = "greater")
+Testobservatoren (2.61) er større enn den kritiske verdien (1.66), så vi forkaster $H_0$: versjon B ser ut til å gi høyere ordreverdi.
+
+Over gjorde vi testen manuelt. **I R** gjør `t.test()` hele jobben direkte fra dataene. Vi setter `var.equal = TRUE` fordi vi antok lik varians (uten det argumentet gjør R en Welch-test som *ikke* antar lik varians):
+
+```{r}
+t.test(B, A, alternative = "greater", var.equal = TRUE)
 ```
 
+Se på **p-verdien**: den er 0.005, altså under 0.05, så vi forkaster $H_0$. Merk at `t.test()` alltid ser på differansen mellom *første* og *andre* argument, så rekkefølgen (`B, A`) avgjør hva `alternative = "greater"` betyr.
 
-Til slutt har vi test for to andeler i kapittel **13-5**. De setter opp to varianter, en der vi sjekker om differansen mellom to andeler er *like* ($p_1 - p_2 = 0$), som er det vi har dett på i forelesning, men det går selvsagt like fint å sette opp en nullhypotese der differansen mellom andelene er lik et bestemt tall $D$. 
+### t-test for matchede par
 
-Det finnes ingen ferdig prosedyre for denne testen i R, men vi kan sette den opp likevel ved å regne ut testobservatoren fra datasettet. Vi ser på eksempel 13.9, der vi får oppgitt salget av en del forskjellige varenummer, og vi ønsker å finne ut om andelen «9077» er større i Supermarked 1 enn i Supermarked 2:
+Noen ganger er de to utvalgene *ikke* uavhengige, men naturlig *paret*: vi måler den samme enheten to ganger (for eksempel før og etter et tiltak), eller vi matcher enheter parvis. Da ville en vanlig to-utvalgs t-test kaste bort informasjonen som ligger i paringen. I stedet ser vi på *differansen* innenfor hvert par, $d_i = x_i - y_i$, og gjør en helt vanlig ett-utvalgs t-test på differansene: $H_0: \mu_d = 0$. Testobservatoren er
 
-```{r, eval = F}
-# Laster inn data. Her er det to utvalg med forskjellig antall observasjoner, så jeg 
-# velger å lese inn de to kolonnene hver for seg:
-soap1 <- read_xlsx("Xm13-09.xlsx", range = cell_cols("A"))
-soap2 <- read_xlsx("Xm13-09.xlsx", range = cell_cols("B"))
+$$T = \frac{\overline{d}}{s_d/\sqrt{n}},$$
 
-# Hvor stor andel utgjør «9077» i de to kolonnene?
-p1 <- mean(soap1 == 9077)
-p2 <- mean(soap2 == 9077)
+t-fordelt med $n-1$ frihetsgrader, der $n$ er antall par. Nøkkelspørsmålet er alltid: er de to måltallene paret (avhengige) eller uavhengige? Er de paret, bruker vi den parede testen.
 
-# De to utvalgsstørrelsene:
-n1 <- nrow(soap1)
-n2 <- nrow(soap2)
+**Eksempel.** En butikkjede bygger om 12 av butikkene sine og vil vite om ombyggingen økte ukesomsetningen. For hver butikk har vi omsetningen (i 1000 kr) *før* og *etter* ombyggingen. Siden det er de *samme* butikkene som måles to ganger, er dataene paret.
 
-# Felles estimat for p under nullhypotesen:
-p <- (n1*p1 + n2*p2)/(n1 + n2)
+1. **Spørsmål:** Økte den forventede omsetningen etter ombyggingen?
+2. **Hypoteser og signifikansnivå:** La $d = $ etter $-$ før. $H_0: \mu_d = 0$ mot $H_A: \mu_d > 0$ (ensidig). En Type I-feil ville være å tro at ombyggingen virket, og bygge om alle butikkene, uten at den egentlig hjelper. Vi velger $\alpha = 5\,\%$.
+3. **Data:** (simulert, én verdi før og én etter for hver av de 12 butikkene):
 
-# Testobservatoren:
-z <- (p1 - p2)/sqrt(p * (1-p)*(1/n1 + 1/n2))
+```{r}
+set.seed(1)
+for_ombygging   <- rnorm(12, mean = 200, sd = 50)
+etter_ombygging <- for_ombygging + rnorm(12, mean = 15, sd = 18)
+```
 
-# Kritisk verdi på 5% nivå for en ensidig test:
+4. **Testobservator:** Vi regner ut de parvise differansene og gjør en ett-utvalgs t-test på dem:
+
+```{r}
+d     <- etter_ombygging - for_ombygging
+T_obs <- mean(d)/(sd(d)/sqrt(length(d)))
+T_obs
+```
+
+5. **Kritisk verdi og konklusjon:** Differansene gir $n - 1 = 11$ frihetsgrader. Kritisk verdi for en ensidig test på 5 %-nivå er $t_{0.95,\,11}$ (se \@ref(relevante-r-testing)):
+
+```{r}
+qt(0.95, df = length(d) - 1)
+```
+
+Testobservatoren (2.67) er større enn den kritiske verdien (1.80), så vi forkaster $H_0$: ombyggingen ser ut til å ha økt omsetningen.
+
+Over gjorde vi testen manuelt på differansene. **I R** setter vi bare `paired = TRUE` i `t.test()`, så gjør den nøyaktig dette direkte fra de to seriene:
+
+```{r}
+t.test(etter_ombygging, for_ombygging, paired = TRUE, alternative = "greater")
+```
+
+**p-verdien** er 0.011, under 0.05, så vi forkaster $H_0$. Hadde vi (feilaktig) brukt en vanlig to-utvalgs t-test her, ville vi kastet bort styrken som ligger i at de samme butikkene sammenlignes med seg selv.
+
+### Sammenligning av to andeler
+
+Vil vi sammenligne to *andeler*, for eksempel konverteringsraten for to annonser, tester vi $H_0: p_1 = p_2$. Under nullhypotesen er de to andelene like, så vi slår sammen (pooler) dataene til ett felles estimat $\widehat{p} = (x_1 + x_2)/(n_1 + n_2)$, der $x_1$ og $x_2$ er antall «suksesser» i de to gruppene. Testobservatoren er
+
+$$Z = \frac{\widehat{p}_1 - \widehat{p}_2}{\sqrt{\widehat{p}(1-\widehat{p})\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}},$$
+
+som er tilnærmet standardnormalfordelt når $H_0$ er sann.
+
+**Eksempel.** Et selskap kjører to annonsekampanjer, A og B, og vil vite om B gir høyere konverteringsrate (andelen som handler). Av 500 som så kampanje A, handlet 45; av 500 som så kampanje B, handlet 68.
+
+1. **Spørsmål:** Er den sanne konverteringsraten høyere for B enn for A?
+2. **Hypoteser og signifikansnivå:** $H_0: p_A = p_B$ mot $H_A: p_B > p_A$ (ensidig). En Type I-feil ville være å satse videre på kampanje B i troen på at den er bedre, uten at den egentlig er det. Vi velger $\alpha = 5\,\%$.
+3. **Data:** $\widehat{p}_A = 45/500 = 0.09$ og $\widehat{p}_B = 68/500 = 0.136$.
+4. **Testobservator:** Under $H_0$ pooler vi andelene: $\widehat{p} = (45 + 68)/(500 + 500) = 0.113$. Regnet ut manuelt i R:
+
+```{r}
+xA <- 45; nA <- 500
+xB <- 68; nB <- 500
+p.pool <- (xA + xB)/(nA + nB)
+
+Z <- (xB/nB - xA/nA)/sqrt(p.pool*(1 - p.pool)*(1/nA + 1/nB))
+Z
+```
+
+5. **Kritisk verdi og konklusjon:** For en ensidig test på 5 %-nivå er den kritiske verdien $z_{0.95}$ (se \@ref(relevante-r-testing)):
+
+```{r}
 qnorm(0.95)
 ```
 
-```{r, echo = F}
-# Laster inn data. Her er det to utvalg med forskjellig antall observasjoner, så jeg 
-# velger å lese inn de to kolonnene hver for seg:
-soap1 <- read_xlsx("datasett/Xm13-09.xlsx", range = cell_cols("A"))
-soap2 <- read_xlsx("datasett/Xm13-09.xlsx", range = cell_cols("B"))
+Siden testobservatoren (2.30) er større enn den kritiske verdien (1.645), forkaster vi $H_0$: kampanje B ser ut til å ha høyere konverteringsrate.
 
-# Hvor stor andel utgjør «9077» i de to kolonnene?
-p1 <- mean(soap1 == 9077)
-p2 <- mean(soap2 == 9077)
+Over gjorde vi testen manuelt. **I R** kan vi bruke `prop.test()` med *vektorer* av antall suksesser og antall forsøk:
 
-# De to utvalgsstørrelsene:
-n1 <- nrow(soap1)
-n2 <- nrow(soap2)
-
-# Felles estimat for p under nullhypotesen:
-p <- (n1*p1 + n2*p2)/(n1 + n2)
-
-# Testobservatoren:
-z <- (p1 - p2)/sqrt(p * (1-p)*(1/n1 + 1/n2))
-
-# Kritisk verdi på 5% nivå for en ensidig test:
-qnorm(0.95)
+```{r}
+prop.test(c(xB, xA), c(nB, nA), alternative = "greater", correct = FALSE)
 ```
 
-Siden $z = `r format(z, digits = 3)`$ forkaster vi nullhypotesen om at det er lik andel «9077» i de to populasjonene.
+**p-verdien** er 0.011, under 0.05, så vi forkaster $H_0$. (Igjen er `X-squared` lik $Z^2$, og `correct = FALSE` gir samme test som håndregningen.)
+
+### Sammenligning av to standardavvik
+
+Endelig kan vi sammenligne *spredningen* i to populasjoner, altså teste $H_0: \sigma_1 = \sigma_2$. Her bruker vi *forholdet* mellom de to utvalgsvariansene som testobservator:
+
+$$F = \frac{s_1^2}{s_2^2},$$
+
+som under $H_0$ følger en **F-fordeling** med $(n_1 - 1, n_2 - 1)$ frihetsgrader. Er de to variansene like, ligger $F$ nær 1; er $s_1^2$ mye større enn $s_2^2$, blir $F$ stor. Som kji-kvadratfordelingen er F-fordelingen asymmetrisk og lever bare på positive verdier.
+
+**Eksempel.** En investor vil vite om det ene av to fond har høyere risiko, målt ved standardavviket til den månedlige avkastningen, enn det andre. Vi har 30 månedlige avkastninger (i prosent) fra hvert fond.
+
+1. **Spørsmål:** Er standardavviket i avkastning større for fond 1 enn for fond 2?
+2. **Hypoteser og signifikansnivå:** $H_0: \sigma_1 = \sigma_2$ mot $H_A: \sigma_1 > \sigma_2$ (ensidig). En Type I-feil ville være å velge bort fond 1 som «for risikofylt» uten grunnlag. Vi velger $\alpha = 5\,\%$.
+3. **Data:** (simulert):
+
+```{r}
+set.seed(2)
+fond1 <- rnorm(30, mean = 0.8, sd = 5.5)
+fond2 <- rnorm(30, mean = 0.9, sd = 3.6)
+```
+
+4. **Testobservator:** $F = s_1^2/s_2^2$:
+
+```{r}
+F_obs <- var(fond1)/var(fond2)
+F_obs
+```
+
+5. **Kritisk verdi og konklusjon:** $F$ er F-fordelt med $(n_1 - 1, n_2 - 1) = (29, 29)$ frihetsgrader. Kritisk verdi for en ensidig test på 5 %-nivå er 95-prosentilen i F-fordelingen (se \@ref(relevante-r-testing)):
+
+```{r}
+qf(0.95, df1 = 29, df2 = 29)
+```
+
+Testobservatoren (2.44) er større enn den kritiske verdien (1.86), så vi forkaster $H_0$: fond 1 ser ut til å ha høyere risiko enn fond 2.
+
+Over gjorde vi testen manuelt. **I R** gjør `var.test()` hele jobben direkte fra dataene:
+
+```{r}
+var.test(fond1, fond2, alternative = "greater")
+```
+
+**p-verdien** er 0.009, under 0.05, så vi forkaster $H_0$. Utskriften gir også selve $F$-verdien og et konfidensintervall for forholdet mellom variansene.
+
+### Kontrollspørsmål
+
+1. Når bruker vi en to-utvalgs t-test, og når en paret t-test?
+2. Hva er forskjellen på å anta lik og ulik varians i en to-utvalgs t-test, og hva gjør R som standard?
+3. Hvorfor slår vi sammen (pooler) de to andelene under $H_0$ når vi sammenligner to andeler?
+4. Hvilken fordeling bruker vi når vi sammenligner to standardavvik, og hvordan ser testobservatoren ut?
 
 ## Kjikvadrattester
 
@@ -458,6 +506,7 @@ Vi kan regne ut hvor mange observasjoner vi forventer å se for hver kombinasjon
 
 ```{r, eval = F}
 # Leser inn data
+library(readxl)
 mba <- read_xlsx("Xm15-02.xlsx")
 
 # Kikker på datasettet
@@ -466,6 +515,7 @@ mba
 
 ```{r, echo = F}
 # Leser inn data
+library(readxl)
 mba <- read_xlsx("datasett/Xm15-02.xlsx")
 
 # Kikker på datasettet
