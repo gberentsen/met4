@@ -293,7 +293,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Eksempel.</strong> En nettbutikk tester to versjoner (A og B) av forsiden, og måler ordreverdien (i kr) til kundene som ser hver versjon. Gir versjon B høyere gjennomsnittlig ordreverdi?</p>
 <ol style="list-style-type: decimal">
 <li><strong>Spørsmål:</strong> Er den forventede ordreverdien høyere for versjon B enn for versjon A?</li>
-<li><strong>Hypoteser og signifikansnivå:</strong> <span class="math inline">\(H_0: \mu_B = \mu_A\)</span> mot <span class="math inline">\(H_A: \mu_B &gt; \mu_A\)</span> (ensidig). En Type I-feil ville være å rulle ut versjon B i troen på at den er bedre, uten at den egentlig er det. Konsekvensen er begrenset, så vi velger <span class="math inline">\(\alpha = 5\,\%\)</span>.</li>
+<li><strong>Hypoteser og signifikansnivå:</strong> <span class="math inline">\(H_0: \mu_B = \mu_A\)</span> mot <span class="math inline">\(H_A: \mu_B &gt; \mu_A\)</span> (ensidig). En Type I-feil ville være å rulle ut versjon B i troen på at den er bedre, uten at den egentlig er det. En slik feil har liten konsekvens (i verste fall bytter vi til en side som ikke er noe bedre enn den gamle), så her tillater vi oss et mildere krav og velger <span class="math inline">\(\alpha = 10\,\%\)</span>.</li>
 <li><strong>Data:</strong> 50 kunder ser hver versjon. Vi simulerer ordreverdiene:</li>
 </ol>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="inferens-om-to-populasjoner.html#cb66-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
@@ -310,25 +310,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb67-6"><a href="inferens-om-to-populasjoner.html#cb67-6" tabindex="-1"></a>T_obs</span></code></pre></div>
 <pre><code>## [1] 2.611099</code></pre>
 <ol start="5" style="list-style-type: decimal">
-<li><strong>Kritisk verdi og konklusjon:</strong> Testobservatoren er t-fordelt med <span class="math inline">\(n_1 + n_2 - 2 = 98\)</span> frihetsgrader. Kritisk verdi for en ensidig test på 5 %-nivå er 95-prosentilen <span class="math inline">\(t_{0.95,\,98}\)</span> (se <a href="relevante-r-testing.html#relevante-r-testing">3.6</a>):</li>
+<li><strong>Kritisk verdi og konklusjon:</strong> Testobservatoren er t-fordelt med <span class="math inline">\(n_1 + n_2 - 2 = 98\)</span> frihetsgrader. Kritisk verdi for en ensidig test på 10 %-nivå er 90-prosentilen <span class="math inline">\(t_{0.90,\,98}\)</span> (se <a href="relevante-r-testing.html#relevante-r-testing">3.6</a>):</li>
 </ol>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="inferens-om-to-populasjoner.html#cb69-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.95</span>, <span class="at">df =</span> n1 <span class="sc">+</span> n2 <span class="sc">-</span> <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 1.660551</code></pre>
-<p>Testobservatoren (2.61) er større enn den kritiske verdien (1.66), så vi forkaster <span class="math inline">\(H_0\)</span>: versjon B ser ut til å gi høyere ordreverdi.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="inferens-om-to-populasjoner.html#cb69-1" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.90</span>, <span class="at">df =</span> n1 <span class="sc">+</span> n2 <span class="sc">-</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 1.29025</code></pre>
+<p>Testobservatoren (2.61) er større enn den kritiske verdien (1.29), så vi forkaster <span class="math inline">\(H_0\)</span>: versjon B ser ut til å gi høyere ordreverdi.</p>
 <p>Over gjorde vi testen manuelt. <strong>I R</strong> gjør <code>t.test()</code> hele jobben direkte fra dataene. Vi setter <code>var.equal = TRUE</code> fordi vi antok lik varians (uten det argumentet gjør R en Welch-test som <em>ikke</em> antar lik varians):</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="inferens-om-to-populasjoner.html#cb71-1" tabindex="-1"></a><span class="fu">t.test</span>(B, A, <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="inferens-om-to-populasjoner.html#cb71-1" tabindex="-1"></a><span class="fu">t.test</span>(B, A, <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>, <span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">conf.level =</span> <span class="fl">0.90</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
 ## data:  B and A
 ## t = 2.6111, df = 98, p-value = 0.005221
 ## alternative hypothesis: true difference in means is greater than 0
-## 95 percent confidence interval:
-##  18.87795      Inf
+## 90 percent confidence interval:
+##  26.23215      Inf
 ## sample estimates:
 ## mean of x mean of y 
 ##  542.9059  491.0493</code></pre>
-<p>Se på <strong>p-verdien</strong>: den er 0.005, altså under 0.05, så vi forkaster <span class="math inline">\(H_0\)</span>. Merk at <code>t.test()</code> alltid ser på differansen mellom <em>første</em> og <em>andre</em> argument, så rekkefølgen (<code>B, A</code>) avgjør hva <code>alternative = "greater"</code> betyr.</p>
+<p>Se på <strong>p-verdien</strong>: den er 0.005, godt under signifikansnivået på 0.10, så vi forkaster <span class="math inline">\(H_0\)</span>. Merk at <code>t.test()</code> alltid ser på differansen mellom <em>første</em> og <em>andre</em> argument, så rekkefølgen (<code>B, A</code>) avgjør hva <code>alternative = "greater"</code> betyr.</p>
 </div>
 <div id="t-test-for-matchede-par" class="section level3 hasAnchor" number="3.3.3">
 <h3><span class="header-section-number">3.3.3</span> t-test for matchede par<a href="inferens-om-to-populasjoner.html#t-test-for-matchede-par" class="anchor-section" aria-label="Anchor link to header"></a></h3>
