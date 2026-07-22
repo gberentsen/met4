@@ -145,7 +145,7 @@ Oppdateres løpende. Holdes kort – vokser den forbi ~10 linjer, flytt den ut a
 |---|---|
 | 01 Introduksjon til R | språkvasket; `summarise()` lagt til i pipe-seksjonen |
 | 02 Grunnleggende statistikk | teoritekst skrevet for 2.1 og 2.2; Kommentarer integrert i hovedtekst; lærebok-henvisninger fjernet; egne (simulerte) eksempler; utvalg/populasjon-distinksjon innført |
-| 03 Hypotesetesting | 3.1 «Generelt om hypotesetesting» skrevet som egen teori (basert på forelesningsnotatene, lærebok-ref fjernet); 3.2–3.4 har fortsatt `### Kommentarer`-struktur med lærebok-ref |
+| 03 Hypotesetesting | 3.1–3.4 skrevet som egen teori (femstegsmal, eksempler i økonomi/finans, lærebok-ref fjernet); 3.4 Kjikvadrattester dekker goodness-of-fit (to selskaper) og uavhengighet; Oppgaver ryddet til Teorioppgaver/Nøtter/R-oppgaver med eksamensoppgaver (24v, 25v) og simuleringsoppgave; Relevante R-kommandoer harmonisert med eksemplene |
 | 04–09 | ikke gjennomgått; lærebok-henvisninger gjenstår |
 
 Åpne punkter:
@@ -158,7 +158,7 @@ Oppdateres løpende. Holdes kort – vokser den forbi ~10 linjer, flytt den ut a
   seksjons-/eksempelnumre). Skal fjernes som i modul 2.
 - Formelarket sier «empirisk standardavvik»; kurset går over til «utvalgsstandardavvik» (se Terminologi).
 - Videoforelesningene bruker `<iframe>` med hardkodet `width="640" height="388"` (ikke responsive, flyter utenfor på mobil). Bør pakkes i en responsiv wrapper. Gjelder alle moduler.
-- Tre-kategori oppgavestruktur (Teorioppgaver/Nøtter/R-oppgaver, se Struktur) er innført i modul 2; anvend samme struktur på oppgavene i modul 3–6.
+- Tre-kategori oppgavestruktur (Teorioppgaver/Nøtter/R-oppgaver, se Struktur) er innført i modul 2 og 3; anvend samme struktur på oppgavene i modul 4–6.
 
 ## Git
 

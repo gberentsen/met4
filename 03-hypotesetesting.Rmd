@@ -612,9 +612,7 @@ Testobservatoren (`X-squared` $\approx 71.8$) er mange ganger større enn den kr
 
 ## Oppgaver
 
-### Standard oppgaver
-
-Introduksjon til hypotesetesting
+### Teorioppgaver
 
 1. For hvert av scenarioene i a og b, gjør følgende:
    -	Sett opp relevant nullhypotese og alternativhypotese (hint: nullhypotese avhenger av hvor ‘bevisbyrden’ bør ligge)
@@ -683,7 +681,7 @@ Introduksjon til hypotesetesting
 </details>
 
 
-4. Annta at vi har følgende hypoteser og informasjon om dataene: $H_0: \mu = 50$ mot $H_A: \mu > 50$. $\sigma = 10$, $n = 40$, $\alpha = 0.05$.
+4. Anta at vi har følgende hypoteser og informasjon om dataene: $H_0: \mu = 50$ mot $H_A: \mu > 50$. $\sigma = 10$, $n = 40$, $\alpha = 0.05$.
 
    Bestem $\beta$, altså sannsynligheten for en type-II feil, under antagelsen at $\mu = 55$. 
 
@@ -1102,9 +1100,202 @@ chisq.test(f)
 
 </details>
 
-16. [Individuell eksamen V21, oppgave 1 a - c:](tidligere-eksamensoppgaver/skole-21-v.pdf)
+16. *(Eksamen vår 2024.)* En analytiker deler de månedlige avkastningene til S&P 500-indeksen i to grupper: måneder klassifisert som *normal risiko* og måneder klassifisert som *høy risiko*. Utvalgene er oppsummert slik:
+
+    | Gruppe | Gjennomsnitt | Standardavvik $s$ | Antall $n$ |
+    |:---|:---:|:---:|:---:|
+    | Normal risiko | 5.52 | 4.83 | 231 |
+    | Høy risiko | 0.68 | 8.60 | 162 |
+
+    a. Test på 5 %-nivå om variansen i avkastning er den samme i de to gruppene.
+
+    b. Test på 5 %-nivå om den forventede avkastningen er den samme i de to gruppene. Bruk resultatet fra a til å avgjøre hvilken variant av to-utvalgs t-testen du skal bruke.
+
 <details><summary>Løsning</summary>
-[Løsningsforslag](tidligere-eksamensoppgaver/skole-21-v-fasit.pdf)
+
+>a. Vi tester $H_0: \sigma_1^2 = \sigma_2^2$ mot $H_A: \sigma_1^2 \neq \sigma_2^2$ (tosidig). Vi setter den største variansen i telleren, altså høy-risiko-gruppen:
+>
+>$$F = \frac{s_1^2}{s_2^2} = \frac{8.60^2}{4.83^2} = 3.17.$$
+>
+>Forkastningsområdet i øvre hale er $F > F_{0.025,\,161,\,230} = 1.33$ (fra `qf(0.975, df1 = 161, df2 = 230)`). Siden $3.17 > 1.33$ forkaster vi $H_0$: variansene er *forskjellige*.
+
+>b. Fordi a viste ulik varians, bruker vi varianten med ulik varians (Welch). Vi tester $H_0: \mu_1 - \mu_2 = 0$ mot $H_A: \mu_1 - \mu_2 \neq 0$:
+>
+>$$T = \frac{\overline{x}_1 - \overline{x}_2}{\sqrt{s_1^2/n_1 + s_2^2/n_2}} = \frac{0.68 - 5.52}{\sqrt{8.60^2/162 + 4.83^2/231}} = -6.48.$$
+>
+>Utvalgene er store, så den kritiske verdien er tilnærmet $z_{0.025} = 1.96$. Siden $|-6.48| = 6.48 > 1.96$ forkaster vi $H_0$: den forventede avkastningen er forskjellig i de to gruppene (og lavest i høy-risiko-månedene).
+
+</details>
+
+17. *(Eksamen vår 2025.)* I et atferdseksperiment skal deltakerne rapportere om de gjettet riktig i et terningspill, der en riktig gjetning gir en liten belønning (det er ingen kontroll av om de snakker sant). En *kontrollgruppe* får ingen ekstra informasjon, mens en *tillitsgruppe* først får lese en tekst som understreker at forskerne stoler på dem. Av 400 i tillitsgruppen rapporterte 116 en riktig gjetning, mot 181 av 400 i kontrollgruppen. Kan vi konkludere med at «tillits-teksten» reduserer andelen som rapporterer en (mistenkelig ofte) riktig gjetning? Bruk 1 %-signifikansnivå.
+
+<details><summary>Løsning</summary>
+
+>La $p_1$ og $p_2$ være andelene som rapporterer riktig gjetning i henholdsvis tillitsgruppen og kontrollgruppen. Vi tester $H_0: p_1 = p_2$ mot det ensidige alternativet $H_A: p_1 < p_2$. Estimatene er $\widehat{p}_1 = 116/400 = 0.29$ og $\widehat{p}_2 = 181/400 = 0.4525$, og den poolede andelen er $\widehat{p} = (116 + 181)/(400 + 400) = 0.371$. Testobservatoren er
+>
+>$$Z = \frac{\widehat{p}_1 - \widehat{p}_2}{\sqrt{\widehat{p}(1-\widehat{p})(1/n_1 + 1/n_2)}} = \frac{0.29 - 0.4525}{\sqrt{0.371(1-0.371)(1/400 + 1/400)}} = -4.76.$$
+>
+>Forkastningsområdet er $Z < z_{0.01} = -2.33$ (fra `qnorm(0.01)`). Siden $-4.76 < -2.33$ forkaster vi $H_0$: tillits-teksten ser ut til å redusere andelen som rapporterer en riktig gjetning. En naturlig tolkning er at teksten fikk færre til å jukse.
+
+</details>
+
+### Nøtter
+
+Nøtt 1. En analytiker leter etter en «markedsslående» handelsstrategi og tester 20 forskjellige strategier, hver mot $H_0:$ *strategien gir ingen meravkastning*, på 5 %-nivå. Anta at *alle* de 20 strategiene i virkeligheten er verdiløse (alle nullhypotesene er sanne), og at testene er uavhengige.
+
+a. Hva er sannsynligheten for at *minst én* av strategiene blir «signifikant» og altså feilaktig utropt til en vinner?
+
+b. Analytikeren presenterer stolt den ene strategien som ble signifikant. Hvorfor bør vi være skeptiske?
+
+c. Anta at vi vil holde sannsynligheten for *minst én* Type I-feil på tvers av alle 20 testene nede på 5 %. Hvor lavt må vi da sette signifikansnivået for hver enkelt test? (Dette kalles en Bonferroni-korreksjon.)
+
+<details><summary>Løsning</summary>
+
+>a. Hver test forkaster med sannsynlighet $\alpha = 0.05$ når $H_0$ er sann, så den *beholder* $H_0$ med sannsynlighet $0.95$. Siden testene er uavhengige, er sannsynligheten for at *ingen* av dem blir signifikant $0.95^{20}$, og dermed
+>$$P(\text{minst én signifikant}) = 1 - 0.95^{20} = 0.64.$$
+>Det er altså mer sannsynlig enn ikke at vi får minst ett «funn», selv om alt vi tester er ren støy.
+
+>b. Nettopp fordi et signifikant funn er så sannsynlig når vi tester mange hypoteser, sier ett signifikant resultat plukket ut blant 20 nesten ingenting. Dette er fallgruven *multippel testing*: jo flere tester, jo lettere er det å finne noe «signifikant» ved ren flaks. Vi burde fått vite hvor mange strategier som ble testet, og helst sett strategien bekreftet på nye, uavhengige data.
+
+>c. Vil vi at $P(\text{minst én Type I-feil}) \leq 0.05$, kan vi (litt konservativt) dele signifikansnivået på antall tester: $\alpha^* = 0.05/20 = 0.0025$. Da kreves mye sterkere bevis i hver enkelt test, og prisen er lavere styrke.
+
+</details>
+
+Nøtt 2. En randomisert studie undersøker om det å vinne i et skattefradrags-lotteri påvirker hvor mange timer folk jobber per uke. På et lite tilfeldig utvalg gir en to-utvalgs t-test testobservator $T = 1.44$, som *ikke* er signifikant på 5 %-nivå. Forskerne gjentar så nøyaktig samme test på hele populasjonen, som er omtrent 3000 ganger så stor. Den estimerte forskjellen mellom vinnere og ikke-vinnere er praktisk talt den samme, cirka 3.35 timer i uken.
+
+a. Testobservatoren for et gjennomsnitt (eller en differanse) kan skrives som effekt delt på en standardfeil, og standardfeilen krymper proporsjonalt med $1/\sqrt{n}$. Hvis forskjellen og standardavvikene er uendret, hva blir omtrent den nye testobservatoren når $n$ blir 3000 ganger større?
+
+b. Den nye p-verdien er forsvinnende liten. Betyr det at effekten er «viktigere» i den store studien enn i den lille?
+
+c. Hva er lærdommen om forholdet mellom statistisk signifikans og *praktisk* (økonomisk) betydning?
+
+<details><summary>Løsning</summary>
+
+>a. Siden standardfeilen er proporsjonal med $1/\sqrt{n}$, vokser testobservatoren proporsjonalt med $\sqrt{n}$ når effekten holdes fast. Å gjøre $n$ 3000 ganger større ganger testobservatoren med $\sqrt{3000} \approx 55$:
+>$$T_{\text{ny}} \approx 1.44 \cdot \sqrt{3000} \approx 79.$$
+>En slik verdi gir en p-verdi som i praksis er null.
+
+>b. Nei. Den estimerte effekten er den samme (cirka 3.35 timer); det eneste som har endret seg, er at vi er mye *sikrere* på at den ikke er null. En liten p-verdi betyr «svært lite forenlig med at effekten er nøyaktig null», ikke «stor effekt».
+
+>c. Med et stort nok utvalg blir selv en ubetydelig forskjell statistisk signifikant. Statistisk signifikans svarer på om en effekt finnes, ikke på om den er stor nok til å bety noe. En forskjell på 3.35 timer (nær 10 % av en normal arbeidsuke) er økonomisk betydelig i seg selv, uansett p-verdi, og *det* er vurderingen som teller for beslutninger. Statistisk signifikans og praktisk betydning er to forskjellige spørsmål.
+
+</details>
+
+Nøtt 3. En analytiker har regnet ut et 95 %-konfidensintervall for den forventede månedlige avkastningen $\mu$ til et fond, og får $[0.3\,\%,\ 1.7\,\%]$. Uten å regne ut noen testobservator skal du svare på følgende:
+
+a. Kan vi forkaste $H_0: \mu = 0$ mot $H_A: \mu \neq 0$ på 5 %-nivå?
+
+b. Kan vi forkaste $H_0: \mu = 2\,\%$ mot $H_A: \mu \neq 2\,\%$ på 5 %-nivå?
+
+c. Forklar den generelle regelen som knytter et $(1-\alpha)$-konfidensintervall til en tosidig test på nivå $\alpha$.
+
+<details><summary>Løsning</summary>
+
+>a. Verdien $0$ ligger *utenfor* intervallet $[0.3\,\%, 1.7\,\%]$, så vi forkaster $H_0: \mu = 0$. Dataene er ikke forenlige med at den forventede avkastningen er null.
+
+>b. Verdien $2\,\%$ ligger også utenfor intervallet, så vi forkaster $H_0: \mu = 2\,\%$ på samme måte.
+
+>c. Regelen er en *dualitet*: et $(1-\alpha)$-konfidensintervall består nettopp av alle verdiene $\mu_0$ som *ikke* ville blitt forkastet av en tosidig test på nivå $\alpha$. Ligger $\mu_0$ innenfor intervallet, beholder vi $H_0: \mu = \mu_0$; ligger den utenfor, forkaster vi. Et konfidensintervall er derfor en kompakt oppsummering av *alle* tosidige tester på én gang.
+
+</details>
+
+Nøtt 4. To forskere vil teste den samme effekten, $H_0: \mu = 0$ mot $H_A: \mu > 0$, der den sanne verdien i virkeligheten er $\mu = 0.5$ (målt i antall populasjonsstandardavvik, så $\sigma = 1$). Forsker A samler $n = 10$ observasjoner, forsker B samler $n = 100$. Begge bruker 5 %-nivå. For enkelhets skyld antar vi $\sigma$ kjent, så testobservatoren er $Z = \overline{X}/(1/\sqrt{n})$ og vi forkaster når $Z > 1.645$.
+
+a. Vis at forsker A forkaster $H_0$ dersom $\overline{X} > 1.645/\sqrt{n}$, og finn denne grensen for $n = 10$ og $n = 100$.
+
+b. Styrken er sannsynligheten for å forkaste $H_0$ når $H_A$ er sann. Regn ut styrken til hver av de to testene når $\mu = 0.5$. *Tips:* $P(\overline{X} > k) = P\!\left(Z > (k - 0.5)\sqrt{n}\right)$ når $\mu = 0.5$.
+
+c. Forsker A får et ikke-signifikant resultat og konkluderer med at «effekten er null». Hva er galt med denne slutningen?
+
+<details><summary>Løsning</summary>
+
+>a. Vi forkaster når $Z = \overline{X}\sqrt{n} > 1.645$, altså når $\overline{X} > 1.645/\sqrt{n}$. For $n = 10$ er grensen $1.645/\sqrt{10} = 0.520$; for $n = 100$ er den $1.645/\sqrt{100} = 0.165$.
+
+>b. Styrken er $P(\overline{X} > 1.645/\sqrt{n}\ \text{når}\ \mu = 0.5)$. Vi standardiserer med den sanne forventningen $0.5$:
+>$$\text{styrke} = P\!\left(Z > \frac{1.645/\sqrt{n} - 0.5}{1/\sqrt{n}}\right) = P\!\left(Z > 1.645 - 0.5\sqrt{n}\right).$$
+>For $n = 10$: $P(Z > 1.645 - 1.58) = P(Z > 0.06) \approx 0.47$. For $n = 100$: $P(Z > 1.645 - 5) = P(Z > -3.36) \approx 1.00$. Med bare 10 observasjoner oppdager forsker A en reell effekt mindre enn halvparten av gangene.
+
+>c. Forsker A har en test med lav styrke: selv om effekten er reell ($\mu = 0.5$), forkaster testen bare cirka 47 % av gangene. Et ikke-signifikant resultat betyr da bare at dataene var for få til å påvise effekten, ikke at den er null. «Vi fant ingen effekt» er ikke det samme som «det finnes ingen effekt», og en test beviser aldri $H_0$.
+
+</details>
+
+### R-oppgaver
+
+Her bruker vi R til å utføre testene fra dette kapittelet i praksis. Vi bruker eksempeldatasettet [testdata.xls](datasett/testdata.xls), som har de numeriske kolonnene `X1` og `X2`.
+
+**Oppgave 1.** Les inn datasettet og gjør deg kjent med det:
+
+```{r, eval = FALSE}
+library(readxl)
+testdata <- read_excel("testdata.xls")
+```
+
+a. Test på 5 %-nivå om den forventede verdien til `X1` er lik 100, mot det tosidige alternativet. Bruk `t.test()`. Hva blir konklusjonen?
+
+b. Test på 5 %-nivå om `X1` og `X2` har samme forventning. Se på **p-verdien** i utskriften og konkluder.
+
+c. Kjør testen i b på nytt, men med `alternative = "greater"`. Hva tester du nå, og hvordan endrer p-verdien seg?
+
+<details><summary>Hint</summary>
+
+`t.test(testdata$X1, mu = 100)` for a, `t.test(testdata$X1, testdata$X2)` for b. Husk at `t.test()` alltid ser på differansen mellom *første* og *andre* argument, se \@ref(relevante-r-testing).
+
+</details>
+
+**Oppgave 2.** Denne oppgaven demonstrerer hva signifikansnivået $\alpha$ *betyr* i praksis: at vi over mange gjentakelser forkaster en sann $H_0$ i en andel $\alpha$ av tilfellene. Vi later som vi gjentar den samme testen veldig mange ganger i en situasjon der $H_0$ er sann *med vilje*, og teller hvor ofte vi (feilaktig) forkaster.
+
+Vi tester $H_0: \mu = 0$ mot $H_A: \mu \neq 0$ på 5 %-nivå, og trekker hver gang $n = 30$ observasjoner fra en fordeling der forventningen faktisk *er* 0 (så $H_0$ er sann). Følgende kode gjør dette 5000 ganger og lagrer p-verdien hver gang:
+
+```{r, eval = FALSE}
+set.seed(1)
+M <- 5000                       # antall gjentakelser
+p_verdier <- rep(NA, M)
+for (i in 1:M) {
+    x <- rnorm(30, mean = 0, sd = 1)   # H0 er sann: forventning = 0
+    p_verdier[i] <- t.test(x, mu = 0)$p.value
+}
+```
+
+a. Regn ut andelen av de 5000 testene som forkastet $H_0$ på 5 %-nivå, altså andelen p-verdier under 0.05: `mean(p_verdier < 0.05)`. Hva forventer du å få, og hva forteller det deg om betydningen av $\alpha$?
+
+b. Gjenta med `< 0.01` i stedet. Stemmer det med et signifikansnivå på 1 %?
+
+c. Lag et histogram av p-verdiene med `hist(p_verdier)`. Fordelingen skal være tilnærmet *jevn* (flat) mellom 0 og 1. Kan du forklare intuitivt hvorfor p-verdien er jevnt fordelt når $H_0$ er sann?
+
+<details><summary>Svar</summary>
+
+>a. Andelen er cirka 0.05. Det er selve definisjonen på signifikansnivået: når $H_0$ er sann, forkaster vi ved ren tilfeldighet i en andel $\alpha = 5\,\%$ av tilfellene. Vi *kontrollerer* altså Type I-feilraten ved å velge $\alpha$, akkurat som Neyman og Pearson påpekte (se Avsnitt \@ref(generelt-om-hypotesetesting), delen om de to feiltypene).
+
+>b. Nå er andelen cirka 0.01, i tråd med et strengere signifikansnivå. Jo lavere $\alpha$, jo sjeldnere forkaster vi en sann $H_0$.
+
+>c. Når $H_0$ er sann, er p-verdien like sannsynlig å havne hvor som helst mellom 0 og 1: andelen tester med p-verdi under en hvilken som helst grense $c$ er nettopp $c$ (det er derfor andelen under 0.05 blir 0.05, og andelen under 0.01 blir 0.01). En jevn fordeling er akkurat det denne egenskapen krever.
+
+</details>
+
+**Oppgave 3.** En butikkjede vil vite om det er en sammenheng mellom hvilken av tre butikker en kunde handler i, og om kunden bruker et lojalitetskort. Et tilfeldig utvalg på 500 kjøp er krysstabulert slik:
+
+|          | Butikk A | Butikk B | Butikk C |
+|:---------|:--------:|:--------:|:--------:|
+| **Kort** | 90       | 60       | 70       |
+| **Ikke** | 60       | 100      | 20       |
+
+a. Legg tabellen inn i R som en matrise (se \@ref(relevante-r-testing) for oppskrift med `matrix()`), og bruk `chisq.test()` til å teste $H_0:$ *butikk og kortbruk er uavhengige* mot $H_A:$ *de henger sammen*.
+
+b. Se på **p-verdien** og konkluder på 5 %-nivå.
+
+c. Kjør `chisq.test(...)$expected` for å hente ut de forventede celletallene. Er alle større enn 5, slik tilnærmingen krever?
+
+<details><summary>Hint</summary>
+
+```{r, eval = FALSE}
+tabell <- matrix(c(90, 60, 70,
+                   60, 100, 20),
+                 nrow = 2, byrow = TRUE,
+                 dimnames = list(c("Kort", "Ikke"),
+                                 c("Butikk A", "Butikk B", "Butikk C")))
+chisq.test(tabell)
+```
+
 </details>
 
 
@@ -1114,7 +1305,7 @@ Under følger en liste over hvilke oppgaver du skal klare i R fra denne modulen.
 
 ### Antakelser om datasett {-}
 
-Di kan gjøre de samme antakelsene om datasettet som i [den tilsvarende oversikten i forrige modul](#relevant-r-grunnleggende): Datasettene er inneholdt i Excel-filer (`.xls` eller `xslx`) eller `.csv`-filer, som kolonner av variabler, med variabelnavn i første rad.
+Du kan gjøre de samme antakelsene om datasettet som i [den tilsvarende oversikten i forrige modul](#relevant-r-grunnleggende): Datasettene er inneholdt i Excel-filer (`.xls` eller `xslx`) eller `.csv`-filer, som kolonner av variabler, med variabelnavn i første rad.
 
 ### $t$-tester {-}
 
@@ -1228,31 +1419,30 @@ Z <- (p_hatt - p_null)/sqrt(p_null*(1-p_null)/n)
 p1_hatt <- mean(testdata$A1)
 p2_hatt <- mean(testdata$A2)
 
-n1 <- length(testdata$X1)
-n2 <- length(testdata$X2)
+n1 <- length(testdata$A1)
+n2 <- length(testdata$A2)
 
 p_hatt <- mean(c(testdata$A1, testdata$A2))        # <- Regner ut felles p_hatt
 
 Z <- (p1_hatt - p2_hatt)/sqrt((1/n1 + 1/n2)*p_hatt*(1-p_hatt))
 ```
 
-Testobservatorene må da sammenlingnes med relevant kvantil i normalfordelingen, som du enten finner i tabell i læreboken eller ved å bruke funksjonen `qnorm()` med ønsket kvantil som argument.
+Testobservatorene må da sammenlignes med relevant kvantil i normalfordelingen, som du finner ved å bruke funksjonen `qnorm()` med ønsket kvantil som argument.
 
 ### Kjikvadrattester for goodness-of-fit {-}
 
 Hvis vi skal teste for goodness-of-fit for en fordeling kan vi raskt regne ut testobservatoren direkte. Vi bruker eksempelet fra forelesningsvideoen:
 
 ```{r, eval = FALSE}
-p0 <- c(0.45, 0.40, 0.15)  # Fordeling under H0
-f  <- c(102, 82, 16)       # Observerte frekvenser
-e  <- p0*sum(f)            # Forv. frekv. under H0
+f  <- c(102, 82, 16)       # observerte frekvenser
+p0 <- c(0.45, 0.40, 0.15)  # fordeling under H0
+e  <- sum(f)*p0            # forventede frekvenser under H0
 
-T  <- sum((f - e)^2/e)     # Testobservator
-
-c  <- qchisq(.95, df = 2)  # Kritisk verdi
+chikvadrat <- sum((f - e)^2/e)   # testobservator
+kritisk    <- qchisq(0.95, df = 2)  # kritisk verdi (k - 1 = 2 frihetsgrader)
 
 # Forkast H0?
-T > c
+chikvadrat > kritisk
 ```
 
 Alternativt så kan vi bruke `chisq.test()`-funksjonen direkte. Pass på å bruke riktige argumentnavn (`x = ` og `p = `) når du skal gjøre goodness-of-fit:
@@ -1260,17 +1450,6 @@ Alternativt så kan vi bruke `chisq.test()`-funksjonen direkte. Pass på å bruk
 ```{r, eval = FALSE}
 # Eventuelt direkte
 chisq.test(x = f, p = p0)
-```
-
-Dersom du skal teste for uavhengighet så kan du anta at datasettet kommer som en ferdig kontingenstabell, med den ene gruppeinndelingen langs kolonnene, og den andre gruppeinndelingen langs radene. En slik tabell kan du sende rett inn i `chisq.test()`-funksjonen for å gjøre en test for uavhengighet:
-
-```{r, eval = FALSE}
-# Test for uavhengighet
-immigration <-
-  read_xls("immigration-wide.xls",
-           range = "B2:E12",
-           col_names = c("many", "some", "few", "none"))
-chisq.test(immigration)
 ```
 
 ### Kjikvadrattester for uavhengighet {-}
@@ -1398,11 +1577,11 @@ og du forkaster dersom testobservatoren er større enn dette tallet.
 #### Kritiske verdier i F-fordelingen {-}
 F-fordelingen trenger vi når vi skal teste om to varianser er like. Skal du gjøre denne testen manuelt er det lurt å sette den største variansen i telleren av testobservatoren
 
-$$F = \frac{S_{1}^2}{S_{2}^2}.$$
+$$F = \frac{s_{1}^2}{s_{2}^2}.$$
 
   Uavhengig om det er en ensidig eller tosidig test, trenger vi da bare å sjekke om testobservatoren overstiger den kritiske verdien i den øvre halen i F-fordelingen.
 
-Har vi brukt $30$ observasjoner til å regne ut $S_{1}^2$ og $25$ observasjoner til å regne ut $S_{1}^2$ blir kritisk verdi i en to-sidig test der $H_A: \sigma_{1}^2 \neq \sigma_{2}^2$ :
+Har vi brukt $30$ observasjoner til å regne ut $s_{1}^2$ og $25$ observasjoner til å regne ut $s_{2}^2$ blir kritisk verdi i en to-sidig test der $H_A: \sigma_{1}^2 \neq \sigma_{2}^2$ :
 
 ```{r, eval = TRUE}
 # Kritisk verdi, 5% nivå, tosidig test
@@ -1418,7 +1597,7 @@ qf(1 - 0.05, df1 = 30 - 1, df2 = 25 - 1)
 
 ```
 
-Husk: Du kan definere hva som er $S_{1}^2$ og $S_{2}^2$, og med strategien over definerer du alltid $S_{1}^2$ til være den av variansene som er størst.
+Husk: Du kan definere hva som er $s_{1}^2$ og $s_{2}^2$, og med strategien over definerer du alltid $s_{1}^2$ til være den av variansene som er størst.
 
 
 
