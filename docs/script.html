@@ -218,7 +218,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="datavinger.html"><a href="datavinger.html"><i class="fa fa-check"></i><b>7</b> Dataøvinger</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="dataving-1.html"><a href="dataving-1.html"><i class="fa fa-check"></i><b>7.1</b> Dataøving 1</a></li>
+<li class="chapter" data-level="7.1" data-path="dataving-1---grunnleggende-statistikk.html"><a href="dataving-1---grunnleggende-statistikk.html"><i class="fa fa-check"></i><b>7.1</b> Dataøving 1 - Grunnleggende statistikk</a></li>
 <li class="chapter" data-level="7.2" data-path="dataving-2.html"><a href="dataving-2.html"><i class="fa fa-check"></i><b>7.2</b> Dataøving 2</a></li>
 <li class="chapter" data-level="7.3" data-path="dataving-3.html"><a href="dataving-3.html"><i class="fa fa-check"></i><b>7.3</b> Dataøving 3</a></li>
 <li class="chapter" data-level="7.4" data-path="dataving-4.html"><a href="dataving-4.html"><i class="fa fa-check"></i><b>7.4</b> Dataøving 4</a></li>
@@ -273,6 +273,23 @@ Løsning
 </summary>
 <p>Når vi åpner RStudio ved å dobbeltklikke på skriptfilen, så blir arbeidsstien satt automatisk til mappen der skriptfilen ligger. Dette er veldig nyttig når vi kommer tilbake og skal jobbe videre med prosjektet vårt.</p>
 </details>
+<p>Det lønner seg å venne seg til å skrive ryddig kode fra starten. To enkle grep hjelper mye: bruk <code>#</code> til å skrive korte kommentarer som forklarer <em>hva</em> koden gjør, og gi variablene informative navn med litt luft (mellomrom og linjeskift) mellom kodebitene. Sammenlign disse to måtene å regne ut et konfidensintervall på. Først en lite lesbar variant:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="script.html#cb16-1" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">7</span>);m<span class="ot">&lt;-</span><span class="fu">mean</span>(x);s<span class="ot">&lt;-</span><span class="fu">sd</span>(x);n<span class="ot">&lt;-</span><span class="fu">length</span>(x)</span>
+<span id="cb16-2"><a href="script.html#cb16-2" tabindex="-1"></a>l<span class="ot">&lt;-</span>m<span class="sc">-</span><span class="fu">qt</span>(<span class="fl">0.975</span>,n<span class="dv">-1</span>)<span class="sc">*</span>s<span class="sc">/</span><span class="fu">sqrt</span>(n);u<span class="ot">&lt;-</span>m<span class="sc">+</span><span class="fu">qt</span>(<span class="fl">0.975</span>,n<span class="dv">-1</span>)<span class="sc">*</span>s<span class="sc">/</span><span class="fu">sqrt</span>(n)</span></code></pre></div>
+<p>og så den samme utregningen skrevet ryddig:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="script.html#cb17-1" tabindex="-1"></a><span class="co"># Data</span></span>
+<span id="cb17-2"><a href="script.html#cb17-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">7</span>)</span>
+<span id="cb17-3"><a href="script.html#cb17-3" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="script.html#cb17-4" tabindex="-1"></a><span class="co"># Byggeklosser</span></span>
+<span id="cb17-5"><a href="script.html#cb17-5" tabindex="-1"></a>n     <span class="ot">&lt;-</span> <span class="fu">length</span>(x)              <span class="co"># antall observasjoner</span></span>
+<span id="cb17-6"><a href="script.html#cb17-6" tabindex="-1"></a>snitt <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)                <span class="co"># gjennomsnitt</span></span>
+<span id="cb17-7"><a href="script.html#cb17-7" tabindex="-1"></a>s     <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)                  <span class="co"># standardavvik</span></span>
+<span id="cb17-8"><a href="script.html#cb17-8" tabindex="-1"></a>tkrit <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)  <span class="co"># kritisk verdi fra t-fordelingen</span></span>
+<span id="cb17-9"><a href="script.html#cb17-9" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="script.html#cb17-10" tabindex="-1"></a><span class="co"># 95 %-konfidensintervall</span></span>
+<span id="cb17-11"><a href="script.html#cb17-11" tabindex="-1"></a>nedre <span class="ot">&lt;-</span> snitt <span class="sc">-</span> tkrit <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb17-12"><a href="script.html#cb17-12" tabindex="-1"></a>ovre  <span class="ot">&lt;-</span> snitt <span class="sc">+</span> tkrit <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span></code></pre></div>
+<p>Begge gir nøyaktig samme resultat, men den nederste er lett å lese og lett å rette hvis noe er feil. Dårlige vaner kan være vonde å vende, så prøv å skrive pen kode allerede fra første datalab.</p>
 </div>
             </section>
 

@@ -218,7 +218,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="datavinger.html"><a href="datavinger.html"><i class="fa fa-check"></i><b>7</b> Dataøvinger</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="dataving-1.html"><a href="dataving-1.html"><i class="fa fa-check"></i><b>7.1</b> Dataøving 1</a></li>
+<li class="chapter" data-level="7.1" data-path="dataving-1---grunnleggende-statistikk.html"><a href="dataving-1---grunnleggende-statistikk.html"><i class="fa fa-check"></i><b>7.1</b> Dataøving 1 - Grunnleggende statistikk</a></li>
 <li class="chapter" data-level="7.2" data-path="dataving-2.html"><a href="dataving-2.html"><i class="fa fa-check"></i><b>7.2</b> Dataøving 2</a></li>
 <li class="chapter" data-level="7.3" data-path="dataving-3.html"><a href="dataving-3.html"><i class="fa fa-check"></i><b>7.3</b> Dataøving 3</a></li>
 <li class="chapter" data-level="7.4" data-path="dataving-4.html"><a href="dataving-4.html"><i class="fa fa-check"></i><b>7.4</b> Dataøving 4</a></li>
@@ -268,14 +268,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Det antas at du har kontroll på hvilken mappesti R bruker, og at du kan forandre den dersom nødvendig.</p>
 <p>I denne modulen kan du anta at alle datasett består av <span class="math inline">\(p\)</span> kolonner (variabler) med variabelnavn og <span class="math inline">\(n\)</span> rader (observasjoner). Datasettene blir gitt enten som Excel-filer (<code>.xls</code> eller <code>.xlsx</code>) eller som <code>.csv</code>-filer. Dersom du ønsker å prøve på kommandoene selv, kan du laste ned følgende eksempelfiler: <a href="datasett/data.xls">data.xls</a>, <a href="datasett/data.xlsx">data.xlsx</a>, <a href="datasett/data.csv">data.csv</a>.</p>
 <p>Excel-filer kan leses inn i R ved hjelp av <code>read_excel()</code> som ligger i <code>readxl</code>-pakken:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="relevant-r-grunnleggende.html#cb36-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb36-2"><a href="relevant-r-grunnleggende.html#cb36-2" tabindex="-1"></a></span>
-<span id="cb36-3"><a href="relevant-r-grunnleggende.html#cb36-3" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data.xls&quot;</span>)</span>
-<span id="cb36-4"><a href="relevant-r-grunnleggende.html#cb36-4" tabindex="-1"></a><span class="co"># ...eller dersom det er en .xlsx-fil:</span></span>
-<span id="cb36-5"><a href="relevant-r-grunnleggende.html#cb36-5" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data.xlsx&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="relevant-r-grunnleggende.html#cb40-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb40-2"><a href="relevant-r-grunnleggende.html#cb40-2" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="relevant-r-grunnleggende.html#cb40-3" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data.xls&quot;</span>)</span>
+<span id="cb40-4"><a href="relevant-r-grunnleggende.html#cb40-4" tabindex="-1"></a><span class="co"># ...eller dersom det er en .xlsx-fil:</span></span>
+<span id="cb40-5"><a href="relevant-r-grunnleggende.html#cb40-5" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data.xlsx&quot;</span>)</span></code></pre></div>
 <p><code>.csv</code>-filer kan lastes inn i R ved hjelp av <code>read_csv()</code> som ligger i <code>readr</code>-pakken:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="relevant-r-grunnleggende.html#cb37-1" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb37-2"><a href="relevant-r-grunnleggende.html#cb37-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="relevant-r-grunnleggende.html#cb41-1" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb41-2"><a href="relevant-r-grunnleggende.html#cb41-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data.csv&quot;</span>)</span></code></pre></div>
 <p>“csv” er en forkortelse for “comma separated values”, og grunnen til det kan du se ved å åpne opp <code>data.csv</code> i en ren tekst-editor. Da ser du at verdiene på rekken er separert med et komma. Av og til har disse filene litt andre formater, så vi må kunne håndtere følgende varianter:</p>
 <ul>
 <li>Dersom det ikke er komma som er brukt til å separere verdiene (det kan du alltid sjekke ved å se på filen i en tekst-editor), så kan du bruke funksjonen <code>read_delim</code> i stedet for <code>read_csv</code>, og bruke et argument for å spesifisere hvilket tegn som er brukt. Dersom det for eksempel er brukt semikolon “;”, kan du lese datasettet ved å bruke <code>read_delim("data.csv", delim = ";")</code>.</li>
@@ -286,24 +286,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="numerisk-deskriptiv-statistikk" class="section level3 unnumbered hasAnchor">
 <h3>Numerisk deskriptiv statistikk<a href="relevant-r-grunnleggende.html#numerisk-deskriptiv-statistikk" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Vi bruker eksempeldatasettene <a href="datasett/data_survey.csv">data_survey.csv</a> og <a href="datasett/data_fishermen_mercury.csv">data_fishermen_mercury.csv</a> som eksempler. Du skal kunne bruke følgende funksjoner for å regne ut numerisk deskriptiv statistikk:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="relevant-r-grunnleggende.html#cb38-1" tabindex="-1"></a>survey    <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_survey.csv&quot;</span>)</span>
-<span id="cb38-2"><a href="relevant-r-grunnleggende.html#cb38-2" tabindex="-1"></a>fishermen <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_fishermen_mercury.csv&quot;</span>)</span>
-<span id="cb38-3"><a href="relevant-r-grunnleggende.html#cb38-3" tabindex="-1"></a></span>
-<span id="cb38-4"><a href="relevant-r-grunnleggende.html#cb38-4" tabindex="-1"></a><span class="fu">mean</span>(survey<span class="sc">$</span>age)                          <span class="co"># Gjennomsnitt</span></span>
-<span id="cb38-5"><a href="relevant-r-grunnleggende.html#cb38-5" tabindex="-1"></a><span class="fu">median</span>(survey<span class="sc">$</span>age)                        <span class="co"># Median</span></span>
-<span id="cb38-6"><a href="relevant-r-grunnleggende.html#cb38-6" tabindex="-1"></a></span>
-<span id="cb38-7"><a href="relevant-r-grunnleggende.html#cb38-7" tabindex="-1"></a><span class="fu">table</span>(survey<span class="sc">$</span>party)                       <span class="co"># Kan lese av typetallet manuelt.</span></span>
-<span id="cb38-8"><a href="relevant-r-grunnleggende.html#cb38-8" tabindex="-1"></a><span class="fu">which.max</span>(<span class="fu">table</span>(survey<span class="sc">$</span>party))            <span class="co"># Eller bruke funksjonen which.max()</span></span>
-<span id="cb38-9"><a href="relevant-r-grunnleggende.html#cb38-9" tabindex="-1"></a></span>
-<span id="cb38-10"><a href="relevant-r-grunnleggende.html#cb38-10" tabindex="-1"></a><span class="fu">sd</span>(fishermen<span class="sc">$</span>total_mercury)               <span class="co"># Standardavvik</span></span>
-<span id="cb38-11"><a href="relevant-r-grunnleggende.html#cb38-11" tabindex="-1"></a><span class="fu">quantile</span>(fishermen<span class="sc">$</span>total_mercury, <span class="fl">0.20</span>)   <span class="co"># Kvantiler</span></span>
-<span id="cb38-12"><a href="relevant-r-grunnleggende.html#cb38-12" tabindex="-1"></a><span class="fu">quantile</span>(fishermen<span class="sc">$</span>total_mercury)         <span class="co"># Kvartilene</span></span>
-<span id="cb38-13"><a href="relevant-r-grunnleggende.html#cb38-13" tabindex="-1"></a></span>
-<span id="cb38-14"><a href="relevant-r-grunnleggende.html#cb38-14" tabindex="-1"></a><span class="fu">cor</span>(fishermen<span class="sc">$</span>height, fishermen<span class="sc">$</span>weight)   <span class="co"># Korrelasjonskoeffisient</span></span>
-<span id="cb38-15"><a href="relevant-r-grunnleggende.html#cb38-15" tabindex="-1"></a><span class="fu">table</span>(survey<span class="sc">$</span>religious)                   <span class="co"># Frekvenstabell </span></span>
-<span id="cb38-16"><a href="relevant-r-grunnleggende.html#cb38-16" tabindex="-1"></a>survey <span class="sc">%&gt;%</span>                                <span class="co"># Krysstabell av to variabler (krever</span></span>
-<span id="cb38-17"><a href="relevant-r-grunnleggende.html#cb38-17" tabindex="-1"></a>  <span class="fu">select</span>(party, religious) <span class="sc">%&gt;%</span>            <span class="co"># pipe-operatoren og select()-funks.  </span></span>
-<span id="cb38-18"><a href="relevant-r-grunnleggende.html#cb38-18" tabindex="-1"></a>  table                                   <span class="co"># fra dplyr-pakken)</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="relevant-r-grunnleggende.html#cb42-1" tabindex="-1"></a>survey    <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_survey.csv&quot;</span>)</span>
+<span id="cb42-2"><a href="relevant-r-grunnleggende.html#cb42-2" tabindex="-1"></a>fishermen <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_fishermen_mercury.csv&quot;</span>)</span>
+<span id="cb42-3"><a href="relevant-r-grunnleggende.html#cb42-3" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="relevant-r-grunnleggende.html#cb42-4" tabindex="-1"></a><span class="fu">mean</span>(survey<span class="sc">$</span>age)                          <span class="co"># Gjennomsnitt</span></span>
+<span id="cb42-5"><a href="relevant-r-grunnleggende.html#cb42-5" tabindex="-1"></a><span class="fu">median</span>(survey<span class="sc">$</span>age)                        <span class="co"># Median</span></span>
+<span id="cb42-6"><a href="relevant-r-grunnleggende.html#cb42-6" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="relevant-r-grunnleggende.html#cb42-7" tabindex="-1"></a><span class="fu">table</span>(survey<span class="sc">$</span>party)                       <span class="co"># Kan lese av typetallet manuelt.</span></span>
+<span id="cb42-8"><a href="relevant-r-grunnleggende.html#cb42-8" tabindex="-1"></a><span class="fu">which.max</span>(<span class="fu">table</span>(survey<span class="sc">$</span>party))            <span class="co"># Eller bruke funksjonen which.max()</span></span>
+<span id="cb42-9"><a href="relevant-r-grunnleggende.html#cb42-9" tabindex="-1"></a></span>
+<span id="cb42-10"><a href="relevant-r-grunnleggende.html#cb42-10" tabindex="-1"></a><span class="fu">sd</span>(fishermen<span class="sc">$</span>total_mercury)               <span class="co"># Standardavvik</span></span>
+<span id="cb42-11"><a href="relevant-r-grunnleggende.html#cb42-11" tabindex="-1"></a><span class="fu">quantile</span>(fishermen<span class="sc">$</span>total_mercury, <span class="fl">0.20</span>)   <span class="co"># Kvantiler</span></span>
+<span id="cb42-12"><a href="relevant-r-grunnleggende.html#cb42-12" tabindex="-1"></a><span class="fu">quantile</span>(fishermen<span class="sc">$</span>total_mercury)         <span class="co"># Kvartilene</span></span>
+<span id="cb42-13"><a href="relevant-r-grunnleggende.html#cb42-13" tabindex="-1"></a></span>
+<span id="cb42-14"><a href="relevant-r-grunnleggende.html#cb42-14" tabindex="-1"></a><span class="fu">cor</span>(fishermen<span class="sc">$</span>height, fishermen<span class="sc">$</span>weight)   <span class="co"># Korrelasjonskoeffisient</span></span>
+<span id="cb42-15"><a href="relevant-r-grunnleggende.html#cb42-15" tabindex="-1"></a><span class="fu">table</span>(survey<span class="sc">$</span>religious)                   <span class="co"># Frekvenstabell </span></span>
+<span id="cb42-16"><a href="relevant-r-grunnleggende.html#cb42-16" tabindex="-1"></a>survey <span class="sc">%&gt;%</span>                                <span class="co"># Krysstabell av to variabler (krever</span></span>
+<span id="cb42-17"><a href="relevant-r-grunnleggende.html#cb42-17" tabindex="-1"></a>  <span class="fu">select</span>(party, religious) <span class="sc">%&gt;%</span>            <span class="co"># pipe-operatoren og select()-funks.  </span></span>
+<span id="cb42-18"><a href="relevant-r-grunnleggende.html#cb42-18" tabindex="-1"></a>  table                                   <span class="co"># fra dplyr-pakken)</span></span></code></pre></div>
 </div>
 <div id="kjente-fordelinger-kvantiler-og-sannsynligheter" class="section level3 unnumbered hasAnchor">
 <h3>Kjente fordelinger: kvantiler og sannsynligheter<a href="relevant-r-grunnleggende.html#kjente-fordelinger-kvantiler-og-sannsynligheter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -313,57 +313,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>p...()</code> gir en <strong>sannsynlighet</strong>: andelen av fordelingen som ligger <em>under</em> en gitt verdi (arealet til venstre).</li>
 </ul>
 <p>De fire fordelingene vi møter i kurset, har hvert sitt funksjonspar:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="relevant-r-grunnleggende.html#cb39-1" tabindex="-1"></a><span class="co"># KVANTILER (persentiler): hvilken verdi har denne andelen under seg?</span></span>
-<span id="cb39-2"><a href="relevant-r-grunnleggende.html#cb39-2" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>)                 <span class="co"># 97,5-persentilen i standardnormalfordelingen (ca. 1,96)</span></span>
-<span id="cb39-3"><a href="relevant-r-grunnleggende.html#cb39-3" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="dv">24</span>)           <span class="co"># 97,5-persentilen i t-fordelingen med 24 frihetsgrader</span></span>
-<span id="cb39-4"><a href="relevant-r-grunnleggende.html#cb39-4" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">5</span>)         <span class="co"># 95-persentilen i kji-kvadratfordelingen med 5 frihetsgrader</span></span>
-<span id="cb39-5"><a href="relevant-r-grunnleggende.html#cb39-5" tabindex="-1"></a><span class="fu">qf</span>(<span class="fl">0.95</span>, <span class="at">df1 =</span> <span class="dv">3</span>, <span class="at">df2 =</span> <span class="dv">20</span>)  <span class="co"># 95-persentilen i F-fordelingen</span></span>
-<span id="cb39-6"><a href="relevant-r-grunnleggende.html#cb39-6" tabindex="-1"></a></span>
-<span id="cb39-7"><a href="relevant-r-grunnleggende.html#cb39-7" tabindex="-1"></a><span class="co"># SANNSYNLIGHETER: hvor stor andel ligger under denne verdien?</span></span>
-<span id="cb39-8"><a href="relevant-r-grunnleggende.html#cb39-8" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.96</span>)                  <span class="co"># P(Z &lt; 1,96) i standardnormalfordelingen (ca. 0,975)</span></span>
-<span id="cb39-9"><a href="relevant-r-grunnleggende.html#cb39-9" tabindex="-1"></a><span class="fu">pt</span>(<span class="fl">2.0</span>, <span class="at">df =</span> <span class="dv">24</span>)             <span class="co"># P(T &lt; 2,0) i t-fordelingen med 24 frihetsgrader</span></span>
-<span id="cb39-10"><a href="relevant-r-grunnleggende.html#cb39-10" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="fl">11.07</span>, <span class="at">df =</span> <span class="dv">5</span>)        <span class="co"># P(X &lt; 11,07) i kji-kvadratfordelingen</span></span>
-<span id="cb39-11"><a href="relevant-r-grunnleggende.html#cb39-11" tabindex="-1"></a><span class="fu">pf</span>(<span class="fl">3.10</span>, <span class="at">df1 =</span> <span class="dv">3</span>, <span class="at">df2 =</span> <span class="dv">20</span>)  <span class="co"># P(X &lt; 3,10) i F-fordelingen</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="relevant-r-grunnleggende.html#cb43-1" tabindex="-1"></a><span class="co"># KVANTILER (persentiler): hvilken verdi har denne andelen under seg?</span></span>
+<span id="cb43-2"><a href="relevant-r-grunnleggende.html#cb43-2" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>)                 <span class="co"># 97,5-persentilen i standardnormalfordelingen (ca. 1,96)</span></span>
+<span id="cb43-3"><a href="relevant-r-grunnleggende.html#cb43-3" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="dv">24</span>)           <span class="co"># 97,5-persentilen i t-fordelingen med 24 frihetsgrader</span></span>
+<span id="cb43-4"><a href="relevant-r-grunnleggende.html#cb43-4" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">5</span>)         <span class="co"># 95-persentilen i kji-kvadratfordelingen med 5 frihetsgrader</span></span>
+<span id="cb43-5"><a href="relevant-r-grunnleggende.html#cb43-5" tabindex="-1"></a><span class="fu">qf</span>(<span class="fl">0.95</span>, <span class="at">df1 =</span> <span class="dv">3</span>, <span class="at">df2 =</span> <span class="dv">20</span>)  <span class="co"># 95-persentilen i F-fordelingen</span></span>
+<span id="cb43-6"><a href="relevant-r-grunnleggende.html#cb43-6" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="relevant-r-grunnleggende.html#cb43-7" tabindex="-1"></a><span class="co"># SANNSYNLIGHETER: hvor stor andel ligger under denne verdien?</span></span>
+<span id="cb43-8"><a href="relevant-r-grunnleggende.html#cb43-8" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.96</span>)                  <span class="co"># P(Z &lt; 1,96) i standardnormalfordelingen (ca. 0,975)</span></span>
+<span id="cb43-9"><a href="relevant-r-grunnleggende.html#cb43-9" tabindex="-1"></a><span class="fu">pt</span>(<span class="fl">2.0</span>, <span class="at">df =</span> <span class="dv">24</span>)             <span class="co"># P(T &lt; 2,0) i t-fordelingen med 24 frihetsgrader</span></span>
+<span id="cb43-10"><a href="relevant-r-grunnleggende.html#cb43-10" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="fl">11.07</span>, <span class="at">df =</span> <span class="dv">5</span>)        <span class="co"># P(X &lt; 11,07) i kji-kvadratfordelingen</span></span>
+<span id="cb43-11"><a href="relevant-r-grunnleggende.html#cb43-11" tabindex="-1"></a><span class="fu">pf</span>(<span class="fl">3.10</span>, <span class="at">df1 =</span> <span class="dv">3</span>, <span class="at">df2 =</span> <span class="dv">20</span>)  <span class="co"># P(X &lt; 3,10) i F-fordelingen</span></span></code></pre></div>
 <p>Legg merke til at <code>q...()</code> og <code>p...()</code> er motsatte operasjoner: <code>qnorm(0.975)</code> gir 1,96, og <code>pnorm(1.96)</code> gir 0,975 tilbake. Vil du ha sannsynligheten <em>over</em> en verdi (arealet til høyre), tar du <code>1 - p...()</code>, for eksempel <code>1 - pnorm(1.96)</code>.</p>
 </div>
 <div id="grafisk-deskriptiv-statistikk-med-ggplot2" class="section level3 unnumbered hasAnchor">
 <h3>Grafisk deskriptiv statistikk med <code>ggplot2</code><a href="relevant-r-grunnleggende.html#grafisk-deskriptiv-statistikk-med-ggplot2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Du skal kunne lage følgende plott ved hjelp av <code>ggplot2</code>-pakken;</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="relevant-r-grunnleggende.html#cb40-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb40-2"><a href="relevant-r-grunnleggende.html#cb40-2" tabindex="-1"></a></span>
-<span id="cb40-3"><a href="relevant-r-grunnleggende.html#cb40-3" tabindex="-1"></a><span class="co"># Boksplott</span></span>
-<span id="cb40-4"><a href="relevant-r-grunnleggende.html#cb40-4" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
-<span id="cb40-5"><a href="relevant-r-grunnleggende.html#cb40-5" tabindex="-1"></a>  ggplot <span class="sc">+</span></span>
-<span id="cb40-6"><a href="relevant-r-grunnleggende.html#cb40-6" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> total_mercury)) </span>
-<span id="cb40-7"><a href="relevant-r-grunnleggende.html#cb40-7" tabindex="-1"></a></span>
-<span id="cb40-8"><a href="relevant-r-grunnleggende.html#cb40-8" tabindex="-1"></a><span class="co"># Deler opp i grupper basert på en annen variabel</span></span>
-<span id="cb40-9"><a href="relevant-r-grunnleggende.html#cb40-9" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
-<span id="cb40-10"><a href="relevant-r-grunnleggende.html#cb40-10" tabindex="-1"></a>  ggplot <span class="sc">+</span></span>
-<span id="cb40-11"><a href="relevant-r-grunnleggende.html#cb40-11" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> total_mercury, <span class="at">x =</span> <span class="fu">as.factor</span>(fisherman))) </span>
-<span id="cb40-12"><a href="relevant-r-grunnleggende.html#cb40-12" tabindex="-1"></a></span>
-<span id="cb40-13"><a href="relevant-r-grunnleggende.html#cb40-13" tabindex="-1"></a><span class="co"># Søylediagram</span></span>
-<span id="cb40-14"><a href="relevant-r-grunnleggende.html#cb40-14" tabindex="-1"></a>survey <span class="sc">%&gt;%</span> </span>
-<span id="cb40-15"><a href="relevant-r-grunnleggende.html#cb40-15" tabindex="-1"></a>  ggplot <span class="sc">+</span></span>
-<span id="cb40-16"><a href="relevant-r-grunnleggende.html#cb40-16" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(religious)))</span>
-<span id="cb40-17"><a href="relevant-r-grunnleggende.html#cb40-17" tabindex="-1"></a></span>
-<span id="cb40-18"><a href="relevant-r-grunnleggende.html#cb40-18" tabindex="-1"></a><span class="co"># Histogram</span></span>
-<span id="cb40-19"><a href="relevant-r-grunnleggende.html#cb40-19" tabindex="-1"></a>survey <span class="sc">%&gt;%</span> </span>
-<span id="cb40-20"><a href="relevant-r-grunnleggende.html#cb40-20" tabindex="-1"></a>  ggplot <span class="sc">+</span> </span>
-<span id="cb40-21"><a href="relevant-r-grunnleggende.html#cb40-21" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> age))</span>
-<span id="cb40-22"><a href="relevant-r-grunnleggende.html#cb40-22" tabindex="-1"></a></span>
-<span id="cb40-23"><a href="relevant-r-grunnleggende.html#cb40-23" tabindex="-1"></a><span class="co"># Spredningsplott</span></span>
-<span id="cb40-24"><a href="relevant-r-grunnleggende.html#cb40-24" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
-<span id="cb40-25"><a href="relevant-r-grunnleggende.html#cb40-25" tabindex="-1"></a>  ggplot <span class="sc">+</span> </span>
-<span id="cb40-26"><a href="relevant-r-grunnleggende.html#cb40-26" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> weight))</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="relevant-r-grunnleggende.html#cb44-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb44-2"><a href="relevant-r-grunnleggende.html#cb44-2" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="relevant-r-grunnleggende.html#cb44-3" tabindex="-1"></a><span class="co"># Boksplott</span></span>
+<span id="cb44-4"><a href="relevant-r-grunnleggende.html#cb44-4" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
+<span id="cb44-5"><a href="relevant-r-grunnleggende.html#cb44-5" tabindex="-1"></a>  ggplot <span class="sc">+</span></span>
+<span id="cb44-6"><a href="relevant-r-grunnleggende.html#cb44-6" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> total_mercury)) </span>
+<span id="cb44-7"><a href="relevant-r-grunnleggende.html#cb44-7" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="relevant-r-grunnleggende.html#cb44-8" tabindex="-1"></a><span class="co"># Deler opp i grupper basert på en annen variabel</span></span>
+<span id="cb44-9"><a href="relevant-r-grunnleggende.html#cb44-9" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
+<span id="cb44-10"><a href="relevant-r-grunnleggende.html#cb44-10" tabindex="-1"></a>  ggplot <span class="sc">+</span></span>
+<span id="cb44-11"><a href="relevant-r-grunnleggende.html#cb44-11" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> total_mercury, <span class="at">x =</span> <span class="fu">as.factor</span>(fisherman))) </span>
+<span id="cb44-12"><a href="relevant-r-grunnleggende.html#cb44-12" tabindex="-1"></a></span>
+<span id="cb44-13"><a href="relevant-r-grunnleggende.html#cb44-13" tabindex="-1"></a><span class="co"># Søylediagram</span></span>
+<span id="cb44-14"><a href="relevant-r-grunnleggende.html#cb44-14" tabindex="-1"></a>survey <span class="sc">%&gt;%</span> </span>
+<span id="cb44-15"><a href="relevant-r-grunnleggende.html#cb44-15" tabindex="-1"></a>  ggplot <span class="sc">+</span></span>
+<span id="cb44-16"><a href="relevant-r-grunnleggende.html#cb44-16" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(religious)))</span>
+<span id="cb44-17"><a href="relevant-r-grunnleggende.html#cb44-17" tabindex="-1"></a></span>
+<span id="cb44-18"><a href="relevant-r-grunnleggende.html#cb44-18" tabindex="-1"></a><span class="co"># Histogram</span></span>
+<span id="cb44-19"><a href="relevant-r-grunnleggende.html#cb44-19" tabindex="-1"></a>survey <span class="sc">%&gt;%</span> </span>
+<span id="cb44-20"><a href="relevant-r-grunnleggende.html#cb44-20" tabindex="-1"></a>  ggplot <span class="sc">+</span> </span>
+<span id="cb44-21"><a href="relevant-r-grunnleggende.html#cb44-21" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> age))</span>
+<span id="cb44-22"><a href="relevant-r-grunnleggende.html#cb44-22" tabindex="-1"></a></span>
+<span id="cb44-23"><a href="relevant-r-grunnleggende.html#cb44-23" tabindex="-1"></a><span class="co"># Spredningsplott</span></span>
+<span id="cb44-24"><a href="relevant-r-grunnleggende.html#cb44-24" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
+<span id="cb44-25"><a href="relevant-r-grunnleggende.html#cb44-25" tabindex="-1"></a>  ggplot <span class="sc">+</span> </span>
+<span id="cb44-26"><a href="relevant-r-grunnleggende.html#cb44-26" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> weight))</span></code></pre></div>
 <p>Du skal kunne grunnleggende bearbeiding av <code>ggplot</code>-figurer:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="relevant-r-grunnleggende.html#cb41-1" tabindex="-1"></a><span class="co"># En bearbeidet variant</span></span>
-<span id="cb41-2"><a href="relevant-r-grunnleggende.html#cb41-2" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
-<span id="cb41-3"><a href="relevant-r-grunnleggende.html#cb41-3" tabindex="-1"></a>  ggplot <span class="sc">+</span> </span>
-<span id="cb41-4"><a href="relevant-r-grunnleggende.html#cb41-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> weight)) <span class="sc">+</span>          <span class="co"># Dette er selve figuren</span></span>
-<span id="cb41-5"><a href="relevant-r-grunnleggende.html#cb41-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Høyde&quot;</span>) <span class="sc">+</span>                                    <span class="co"># Tittel x-akse</span></span>
-<span id="cb41-6"><a href="relevant-r-grunnleggende.html#cb41-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Vekt&quot;</span>) <span class="sc">+</span>                                     <span class="co"># Tittel y-akse</span></span>
-<span id="cb41-7"><a href="relevant-r-grunnleggende.html#cb41-7" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Sammenheng mellom høyde og vekt&quot;</span>) <span class="sc">+</span>       <span class="co"># Tittel plott</span></span>
-<span id="cb41-8"><a href="relevant-r-grunnleggende.html#cb41-8" tabindex="-1"></a>  <span class="fu">theme_classic</span>()                                    <span class="co"># Ryddig layout</span></span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="relevant-r-grunnleggende.html#cb45-1" tabindex="-1"></a><span class="co"># En bearbeidet variant</span></span>
+<span id="cb45-2"><a href="relevant-r-grunnleggende.html#cb45-2" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
+<span id="cb45-3"><a href="relevant-r-grunnleggende.html#cb45-3" tabindex="-1"></a>  ggplot <span class="sc">+</span> </span>
+<span id="cb45-4"><a href="relevant-r-grunnleggende.html#cb45-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> weight)) <span class="sc">+</span>          <span class="co"># Dette er selve figuren</span></span>
+<span id="cb45-5"><a href="relevant-r-grunnleggende.html#cb45-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Høyde&quot;</span>) <span class="sc">+</span>                                    <span class="co"># Tittel x-akse</span></span>
+<span id="cb45-6"><a href="relevant-r-grunnleggende.html#cb45-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Vekt&quot;</span>) <span class="sc">+</span>                                     <span class="co"># Tittel y-akse</span></span>
+<span id="cb45-7"><a href="relevant-r-grunnleggende.html#cb45-7" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Sammenheng mellom høyde og vekt&quot;</span>) <span class="sc">+</span>       <span class="co"># Tittel plott</span></span>
+<span id="cb45-8"><a href="relevant-r-grunnleggende.html#cb45-8" tabindex="-1"></a>  <span class="fu">theme_classic</span>()                                    <span class="co"># Ryddig layout</span></span></code></pre></div>
 
 </div>
 </div>

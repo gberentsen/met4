@@ -218,7 +218,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="datavinger.html"><a href="datavinger.html"><i class="fa fa-check"></i><b>7</b> Dataøvinger</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="dataving-1.html"><a href="dataving-1.html"><i class="fa fa-check"></i><b>7.1</b> Dataøving 1</a></li>
+<li class="chapter" data-level="7.1" data-path="dataving-1---grunnleggende-statistikk.html"><a href="dataving-1---grunnleggende-statistikk.html"><i class="fa fa-check"></i><b>7.1</b> Dataøving 1 - Grunnleggende statistikk</a></li>
 <li class="chapter" data-level="7.2" data-path="dataving-2.html"><a href="dataving-2.html"><i class="fa fa-check"></i><b>7.2</b> Dataøving 2</a></li>
 <li class="chapter" data-level="7.3" data-path="dataving-3.html"><a href="dataving-3.html"><i class="fa fa-check"></i><b>7.3</b> Dataøving 3</a></li>
 <li class="chapter" data-level="7.4" data-path="dataving-4.html"><a href="dataving-4.html"><i class="fa fa-check"></i><b>7.4</b> Dataøving 4</a></li>
@@ -371,20 +371,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Begrepene i dette delkapittelet bygger videre på sannsynlighetsregningen fra MET2: fordelinger, stokastiske variabler, forventning og varians. Ligger dette langt bak i bevisstheten, kan det være lurt å friske det opp.</p>
 <p>Vi kan lage et <em>punktestimat</em> av en forventningsverdi ved å ta gjennomsnittet av observasjonene. Men et enkelt tall sier ingenting om hvor sikkert anslaget er, og derfor er vi ofte mer interessert i et <strong>konfidensintervall</strong>: et helt intervall av rimelige verdier, der bredden forteller oss hvor presist estimatet er.</p>
 <p>La oss se et eksempel. Tenk deg at vi vil anslå den forventede vekten til laksen i en stor oppdrettsmerd. Vi kan ikke veie all fisken, så vi trekker et tilfeldig <strong>utvalg</strong> på 25 laks og veier dem. Vi simulerer et slikt utvalg:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="utvalg-og-estimering.html#cb29-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb29-2"><a href="utvalg-og-estimering.html#cb29-2" tabindex="-1"></a><span class="co"># Vekten (i kg) til 25 tilfeldig valgte laks</span></span>
-<span id="cb29-3"><a href="utvalg-og-estimering.html#cb29-3" tabindex="-1"></a>vekt <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">25</span>, <span class="at">mean =</span> <span class="fl">5.2</span>, <span class="at">sd =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="utvalg-og-estimering.html#cb33-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb33-2"><a href="utvalg-og-estimering.html#cb33-2" tabindex="-1"></a><span class="co"># Vekten (i kg) til 25 tilfeldig valgte laks</span></span>
+<span id="cb33-3"><a href="utvalg-og-estimering.html#cb33-3" tabindex="-1"></a>vekt <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">25</span>, <span class="at">mean =</span> <span class="fl">5.2</span>, <span class="at">sd =</span> <span class="fl">0.8</span>)</span></code></pre></div>
 <p>Punktestimatet vårt for den forventede vekten er rett og slett utvalgsgjennomsnittet. I praksis kjenner vi ikke det sanne standardavviket i populasjonen, så vi må estimere det med utvalgsstandardavviket <span class="math inline">\(s\)</span>. Denne ekstra usikkerheten gjør at vi bruker <strong>t-fordelingen</strong> i stedet for normalfordelingen når vi finner den kritiske verdien. For et 95 %-konfidensintervall henter vi verdien fra t-fordelingen med <span class="math inline">\(n - 1\)</span> frihetsgrader ved hjelp av <code>qt()</code>:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="utvalg-og-estimering.html#cb30-1" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">mean</span>(vekt)              <span class="co"># utvalgsgjennomsnittet, vårt punktestimat</span></span>
-<span id="cb30-2"><a href="utvalg-og-estimering.html#cb30-2" tabindex="-1"></a>s        <span class="ot">&lt;-</span> <span class="fu">sd</span>(vekt)                <span class="co"># utvalgsstandardavviket (vi kjenner ikke det sanne)</span></span>
-<span id="cb30-3"><a href="utvalg-og-estimering.html#cb30-3" tabindex="-1"></a>n        <span class="ot">&lt;-</span> <span class="fu">length</span>(vekt)            <span class="co"># antall observasjoner</span></span>
-<span id="cb30-4"><a href="utvalg-og-estimering.html#cb30-4" tabindex="-1"></a>t_krit   <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)   <span class="co"># kritisk verdi fra t-fordelingen</span></span>
-<span id="cb30-5"><a href="utvalg-og-estimering.html#cb30-5" tabindex="-1"></a></span>
-<span id="cb30-6"><a href="utvalg-og-estimering.html#cb30-6" tabindex="-1"></a><span class="co"># Nedre og øvre grense i konfidensintervallet (LCL og UCL):</span></span>
-<span id="cb30-7"><a href="utvalg-og-estimering.html#cb30-7" tabindex="-1"></a>LCL <span class="ot">&lt;-</span> gj.snitt <span class="sc">-</span> t_krit <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
-<span id="cb30-8"><a href="utvalg-og-estimering.html#cb30-8" tabindex="-1"></a>UCL <span class="ot">&lt;-</span> gj.snitt <span class="sc">+</span> t_krit <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
-<span id="cb30-9"><a href="utvalg-og-estimering.html#cb30-9" tabindex="-1"></a></span>
-<span id="cb30-10"><a href="utvalg-og-estimering.html#cb30-10" tabindex="-1"></a><span class="fu">c</span>(LCL, gj.snitt, UCL)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="utvalg-og-estimering.html#cb34-1" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">mean</span>(vekt)              <span class="co"># utvalgsgjennomsnittet, vårt punktestimat</span></span>
+<span id="cb34-2"><a href="utvalg-og-estimering.html#cb34-2" tabindex="-1"></a>s        <span class="ot">&lt;-</span> <span class="fu">sd</span>(vekt)                <span class="co"># utvalgsstandardavviket (vi kjenner ikke det sanne)</span></span>
+<span id="cb34-3"><a href="utvalg-og-estimering.html#cb34-3" tabindex="-1"></a>n        <span class="ot">&lt;-</span> <span class="fu">length</span>(vekt)            <span class="co"># antall observasjoner</span></span>
+<span id="cb34-4"><a href="utvalg-og-estimering.html#cb34-4" tabindex="-1"></a>t_krit   <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)   <span class="co"># kritisk verdi fra t-fordelingen</span></span>
+<span id="cb34-5"><a href="utvalg-og-estimering.html#cb34-5" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="utvalg-og-estimering.html#cb34-6" tabindex="-1"></a><span class="co"># Nedre og øvre grense i konfidensintervallet (LCL og UCL):</span></span>
+<span id="cb34-7"><a href="utvalg-og-estimering.html#cb34-7" tabindex="-1"></a>LCL <span class="ot">&lt;-</span> gj.snitt <span class="sc">-</span> t_krit <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb34-8"><a href="utvalg-og-estimering.html#cb34-8" tabindex="-1"></a>UCL <span class="ot">&lt;-</span> gj.snitt <span class="sc">+</span> t_krit <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb34-9"><a href="utvalg-og-estimering.html#cb34-9" tabindex="-1"></a></span>
+<span id="cb34-10"><a href="utvalg-og-estimering.html#cb34-10" tabindex="-1"></a><span class="fu">c</span>(LCL, gj.snitt, UCL)</span></code></pre></div>
 <pre><code>## [1] 5.021184 5.334932 5.648680</code></pre>
 <p>Den kritiske verdien <code>qt(0.975, df = 24)</code> er omtrent 2,06, altså litt større enn 1,96 fra normalfordelingen. Det gjør intervallet en tanke bredere, og det er rimelig: vi betaler en liten pris i presisjon fordi vi måtte estimere standardavviket i stedet for å kjenne det på forhånd.</p>
 <p>Selve <em>fortolkningen</em> av et konfidensintervall er lett å misforstå, og verdt å bruke litt tid på. Hovedpoenget er:</p>
@@ -413,16 +413,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ekstra-ving-i-r" class="section level3 hasAnchor" number="2.2.11">
 <h3><span class="header-section-number">2.2.11</span> Ekstra øving i R<a href="utvalg-og-estimering.html#ekstra-ving-i-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Som demonstrert i forelesningen kan vi i R simulere standard normalfordelte observasjoner (dvs normalfordelte observasjoner med <span class="math inline">\(\mu = 0\)</span> og <span class="math inline">\(\sigma^2 = 1\)</span>) med kommandoen <code>rnorm(n)</code>, der <code>n</code> er antallet observasjoner vi ønsker. For eksempel kan vi kjøre følgende kode for å generere 10 observasjoner (du vil helt sikkert få andre verdier):</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="utvalg-og-estimering.html#cb32-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb32-2"><a href="utvalg-og-estimering.html#cb32-2" tabindex="-1"></a><span class="fu">rnorm</span>(n)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="utvalg-og-estimering.html#cb36-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb36-2"><a href="utvalg-og-estimering.html#cb36-2" tabindex="-1"></a><span class="fu">rnorm</span>(n)</span></code></pre></div>
 <pre><code>##  [1] -0.05612874 -0.15579551 -1.47075238 -0.47815006  0.41794156  1.35867955
 ##  [7] -0.10278773  0.38767161 -0.05380504 -1.37705956</code></pre>
 <p>Ved å skrive <code>mean(rnorm(n))</code> i stedet regner vi ut gjennomsnittet av observasjonene direkte.</p>
 <p>La oss gjøre dette 100 ganger og notere ned gjennomsnittet hver gang. I stedet for å gjøre det manuelt, kan vi skrive et lite program som gjør dette for oss ved å bruke en for-løkke. Det er ikke nødvendig (eller pensum) å forstå akkurat hvordan dette fungerer, men dersom du kjører følgende linjer vil du få en ny vektor <code>gj.snitt</code> som inneholder 100 slike gjennomsnitt:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="utvalg-og-estimering.html#cb34-1" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
-<span id="cb34-2"><a href="utvalg-og-estimering.html#cb34-2" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
-<span id="cb34-3"><a href="utvalg-og-estimering.html#cb34-3" tabindex="-1"></a>    gj.snitt[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(n))</span>
-<span id="cb34-4"><a href="utvalg-og-estimering.html#cb34-4" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="utvalg-og-estimering.html#cb38-1" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb38-2"><a href="utvalg-og-estimering.html#cb38-2" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb38-3"><a href="utvalg-og-estimering.html#cb38-3" tabindex="-1"></a>    gj.snitt[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(n))</span>
+<span id="cb38-4"><a href="utvalg-og-estimering.html#cb38-4" tabindex="-1"></a>}</span></code></pre></div>
 <p>Skriv ut denne vektoren og kontroller at det ser korrekt ut. Vi husker at funksjonen <code>sd()</code> regner ut standardavviket til en vektor. Hvilket tall forventer du å få ut dersom du nå kjører <code>sd(gj.snitt)</code> i konsollen? Stemmer det?</p>
 <details>
 <summary>
@@ -435,10 +435,10 @@ Hint
 <summary>
 Hint
 </summary>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="utvalg-og-estimering.html#cb35-1" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">1000</span>)            <span class="co"># Lager en tom vektor med 1000 plasser</span></span>
-<span id="cb35-2"><a href="utvalg-og-estimering.html#cb35-2" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) {                   <span class="co"># Fyller hver plass med et gjennomsnitt av</span></span>
-<span id="cb35-3"><a href="utvalg-og-estimering.html#cb35-3" tabindex="-1"></a>    gj.snitt[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(n))    <span class="co"># 10 standard normalfordelte observasjoner.</span></span>
-<span id="cb35-4"><a href="utvalg-og-estimering.html#cb35-4" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="utvalg-og-estimering.html#cb39-1" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">1000</span>)            <span class="co"># Lager en tom vektor med 1000 plasser</span></span>
+<span id="cb39-2"><a href="utvalg-og-estimering.html#cb39-2" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) {                   <span class="co"># Fyller hver plass med et gjennomsnitt av</span></span>
+<span id="cb39-3"><a href="utvalg-og-estimering.html#cb39-3" tabindex="-1"></a>    gj.snitt[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(n))    <span class="co"># 10 standard normalfordelte observasjoner.</span></span>
+<span id="cb39-4"><a href="utvalg-og-estimering.html#cb39-4" tabindex="-1"></a>}</span></code></pre></div>
 </details>
 <p>Prøv å forklare.</p>
 <details>

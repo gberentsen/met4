@@ -218,7 +218,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="datavinger.html"><a href="datavinger.html"><i class="fa fa-check"></i><b>7</b> Dataøvinger</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="dataving-1.html"><a href="dataving-1.html"><i class="fa fa-check"></i><b>7.1</b> Dataøving 1</a></li>
+<li class="chapter" data-level="7.1" data-path="dataving-1---grunnleggende-statistikk.html"><a href="dataving-1---grunnleggende-statistikk.html"><i class="fa fa-check"></i><b>7.1</b> Dataøving 1 - Grunnleggende statistikk</a></li>
 <li class="chapter" data-level="7.2" data-path="dataving-2.html"><a href="dataving-2.html"><i class="fa fa-check"></i><b>7.2</b> Dataøving 2</a></li>
 <li class="chapter" data-level="7.3" data-path="dataving-3.html"><a href="dataving-3.html"><i class="fa fa-check"></i><b>7.3</b> Dataøving 3</a></li>
 <li class="chapter" data-level="7.4" data-path="dataving-4.html"><a href="dataving-4.html"><i class="fa fa-check"></i><b>7.4</b> Dataøving 4</a></li>
@@ -265,6 +265,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <iframe src="https://player.vimeo.com/video/638313293?h=a3e60f8e49" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
 </iframe>
 <p>I denne videoen snakker vi litt om forskjellen mellom <em>programmeringsspråket R</em> og <em>programmet</em> RStudio. Vi åpner opp Rstudio og rusler gjennom det grafiske grensesnittet.</p>
+<p>Under følger en skriftlig oversikt for deg som vil ha det i tillegg til videoen. Første gang du åpner RStudio ser du tre vinduer. Et fjerde vindu åpner du med å klikke på <strong>File</strong> i menyen, så <strong>New File</strong>, og så <strong>R Script</strong>. Figur <a href="en-gjennomgang-av-rstudio.html#fig:rstudio1">1.1</a> viser en oversikt over de fire vinduene. Det er viktig at du forstår forskjellen på de to vinduene til venstre.</p>
+<div class="figure"><span style="display:block;" id="fig:rstudio1"></span>
+<img src="bilder/Rstudio1.PNG" alt="Oversikt over vinduene i RStudio." width="590" />
+<p class="caption">
+Figur 1.1: Oversikt over vinduene i RStudio.
+</p>
+</div>
+<p>Nederste vindu til venstre (b) viser R-konsollen, og det er her alle utregninger blir gjennomført. I dette vinduet kan du for eksempel skrive:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="en-gjennomgang-av-rstudio.html#cb1-1" tabindex="-1"></a>(<span class="dv">3</span><span class="sc">*</span><span class="dv">5</span> <span class="sc">-</span> <span class="dv">3</span><span class="sc">/</span><span class="dv">4</span>)<span class="sc">*</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 57</code></pre>
+<p>Her er <code>(3*5 - 3/4)*(2 + 2)</code> en kommando, og det er R som finner ut hva du mener og gir deg svaret <code>57</code> i retur. R tillater alle de vanlige matteoperasjonene som gange, deling, pluss og minus (<code>*, /, +, -</code>).</p>
+<p>Det øverste vinduet til venstre (a) viser en <code>.R</code>-fil (et <em>skript</em>). En <code>.R</code>-fil fungerer som et manuskript med R-kommandoer, og kan lagres slik at du senere kan se hvilke kommandoer du har brukt og fortsette der du slapp. Når du vil at R skal utføre en kommando du har skrevet i <code>.R</code>-filen, markerer du linjen (eller lar pekeren stå i den) og trykker <strong>Ctrl + Enter</strong> (<strong>Cmd + Enter</strong> på Mac):</p>
+<div class="figure"><span style="display:block;" id="fig:rstudiorun"></span>
+<img src="bilder/Rstudiorun.PNG" alt="Utførelse av kommandoer du har skrevet i R-filen. Marker eller la pekeren stå i linjen du vil kjøre og trykk **Ctrl + Enter** (**Cmd + Enter** på Mac)." width="238" />
+<p class="caption">
+Figur 1.2: Utførelse av kommandoer du har skrevet i R-filen. Marker eller la pekeren stå i linjen du vil kjøre og trykk <strong>Ctrl + Enter</strong> (<strong>Cmd + Enter</strong> på Mac).
+</p>
+</div>
+<p>Vinduet nederst til høyre (d) viser blant annet figurer du lager og hjelpetekst. Vinduet øverst til høyre (c) gir deg en oversikt over hvilke objekter du har laget, og er spesielt nyttig hvis du vil ta en nærmere titt på et datasett du har lest inn.</p>
+<p>Det er viktig at du forstår forskjellen på de to vinduene til venstre, altså <code>.R</code>-filen og konsollen. R-kode du vil ta vare på, og som er en essensiell del av analysen, skriver og lagrer du i <code>.R</code>-filen, mens små eksperimenter og undersøkelser du ikke trenger senere kan du gjøre direkte i konsollen.</p>
+<p>For de av dere som er glad i hurtigtaster finnes det en oversikt i RStudio som kommer opp dersom du trykker <strong>Alt + Shift + K</strong> (<strong>Option + Shift + K</strong> på Mac). Hurtigtasten du kommer til å bruke desidert mest er <strong>Ctrl + Enter</strong> for å kjøre kode fra R-skriptet ditt i konsollen (på Mac erstatter du <strong>Ctrl</strong> med <strong>Cmd</strong> overalt).</p>
 </div>
             </section>
 

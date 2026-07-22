@@ -218,7 +218,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="datavinger.html"><a href="datavinger.html"><i class="fa fa-check"></i><b>7</b> Dataøvinger</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="dataving-1.html"><a href="dataving-1.html"><i class="fa fa-check"></i><b>7.1</b> Dataøving 1</a></li>
+<li class="chapter" data-level="7.1" data-path="dataving-1---grunnleggende-statistikk.html"><a href="dataving-1---grunnleggende-statistikk.html"><i class="fa fa-check"></i><b>7.1</b> Dataøving 1 - Grunnleggende statistikk</a></li>
 <li class="chapter" data-level="7.2" data-path="dataving-2.html"><a href="dataving-2.html"><i class="fa fa-check"></i><b>7.2</b> Dataøving 2</a></li>
 <li class="chapter" data-level="7.3" data-path="dataving-3.html"><a href="dataving-3.html"><i class="fa fa-check"></i><b>7.3</b> Dataøving 3</a></li>
 <li class="chapter" data-level="7.4" data-path="dataving-4.html"><a href="dataving-4.html"><i class="fa fa-check"></i><b>7.4</b> Dataøving 4</a></li>
@@ -900,8 +900,8 @@ Løsning
 <p>Forkastelsesområdet er <span class="math inline">\(\chi^2 &gt; \chi^2_{\alpha, (r - 1)(s - 1)} = \chi^2_{0.05, 2} = 5.99\)</span>. Siden <span class="math inline">\(\chi^2 = 5.0378 &lt; 5.99\)</span> forkaster vi <em>ikke</em> <span class="math inline">\(H_0\)</span> på 5 % signifikansnivå.</p>
 <p>I R ville vi gjort følgende:</p>
 </blockquote>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="oppgaver.html#cb82-1" tabindex="-1"></a>f <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">268</span>, <span class="dv">216</span>, <span class="dv">164</span>, <span class="dv">15</span>, <span class="dv">17</span>, <span class="dv">20</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> T)</span>
-<span id="cb82-2"><a href="oppgaver.html#cb82-2" tabindex="-1"></a><span class="fu">chisq.test</span>(f)</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="oppgaver.html#cb86-1" tabindex="-1"></a>f <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">268</span>, <span class="dv">216</span>, <span class="dv">164</span>, <span class="dv">15</span>, <span class="dv">17</span>, <span class="dv">20</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> T)</span>
+<span id="cb86-2"><a href="oppgaver.html#cb86-2" tabindex="-1"></a><span class="fu">chisq.test</span>(f)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 

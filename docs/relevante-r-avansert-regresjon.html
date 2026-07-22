@@ -218,7 +218,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="datavinger.html"><a href="datavinger.html"><i class="fa fa-check"></i><b>7</b> Dataøvinger</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="dataving-1.html"><a href="dataving-1.html"><i class="fa fa-check"></i><b>7.1</b> Dataøving 1</a></li>
+<li class="chapter" data-level="7.1" data-path="dataving-1---grunnleggende-statistikk.html"><a href="dataving-1---grunnleggende-statistikk.html"><i class="fa fa-check"></i><b>7.1</b> Dataøving 1 - Grunnleggende statistikk</a></li>
 <li class="chapter" data-level="7.2" data-path="dataving-2.html"><a href="dataving-2.html"><i class="fa fa-check"></i><b>7.2</b> Dataøving 2</a></li>
 <li class="chapter" data-level="7.3" data-path="dataving-3.html"><a href="dataving-3.html"><i class="fa fa-check"></i><b>7.3</b> Dataøving 3</a></li>
 <li class="chapter" data-level="7.4" data-path="dataving-4.html"><a href="dataving-4.html"><i class="fa fa-check"></i><b>7.4</b> Dataøving 4</a></li>
@@ -271,31 +271,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>Tilpasse en logistisk regresjonsmodell<a href="relevante-r-avansert-regresjon.html#tilpasse-en-logistisk-regresjonsmodell" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Dersom vi ønsker å foklare variasjon i en <em>binær</em> variabel ved hjelp av en eller flere forklaringsvariabler. Vi kan bruke det samme datasettet som tilvarende seksjon i forrige modul: <a href="datasett/data-reg.xlsx">data-reg.xsls</a>. I dette datasettet har vi en binær variabel i <code>x3</code>, samt to kontinuerlige variabler <code>x1</code> og <code>x2</code>.</p>
 <p>Du må kunne lese inn datasettet, estimere en logistisk regresjonsmodell, og skrive ut resultatet på følgende måte:</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="relevante-r-avansert-regresjon.html#cb282-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&quot;datasett/data-reg.xlsx&quot;</span>)</span>
-<span id="cb282-2"><a href="relevante-r-avansert-regresjon.html#cb282-2" tabindex="-1"></a></span>
-<span id="cb282-3"><a href="relevante-r-avansert-regresjon.html#cb282-3" tabindex="-1"></a>model_logistisk <span class="ot">&lt;-</span> <span class="fu">glm</span>(x3 <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">data =</span> df,</span>
-<span id="cb282-4"><a href="relevante-r-avansert-regresjon.html#cb282-4" tabindex="-1"></a>              <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
-<span id="cb282-5"><a href="relevante-r-avansert-regresjon.html#cb282-5" tabindex="-1"></a><span class="fu">summary</span>(model_logistisk)</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="relevante-r-avansert-regresjon.html#cb286-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&quot;datasett/data-reg.xlsx&quot;</span>)</span>
+<span id="cb286-2"><a href="relevante-r-avansert-regresjon.html#cb286-2" tabindex="-1"></a></span>
+<span id="cb286-3"><a href="relevante-r-avansert-regresjon.html#cb286-3" tabindex="-1"></a>model_logistisk <span class="ot">&lt;-</span> <span class="fu">glm</span>(x3 <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">data =</span> df,</span>
+<span id="cb286-4"><a href="relevante-r-avansert-regresjon.html#cb286-4" tabindex="-1"></a>              <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb286-5"><a href="relevante-r-avansert-regresjon.html#cb286-5" tabindex="-1"></a><span class="fu">summary</span>(model_logistisk)</span></code></pre></div>
 <p>Dersom du skal bruke logistisk regresjon til å predikere verdien av den binære responsvariabelen for nye “individer” må du først være i stand til å dele opp datasettet i et testsett og et treningssett. Det holder å kunne gjøre en enkel splitt basert på rekkenummer. Her utgjør treningsdatasettet de første 70 observasjonene og testdatasettet resten:</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="relevante-r-avansert-regresjon.html#cb283-1" tabindex="-1"></a>treningssett     <span class="ot">&lt;-</span> df[<span class="dv">1</span><span class="sc">:</span><span class="dv">70</span>, ]</span>
-<span id="cb283-2"><a href="relevante-r-avansert-regresjon.html#cb283-2" tabindex="-1"></a>testsett         <span class="ot">&lt;-</span> df[<span class="dv">71</span><span class="sc">:</span><span class="fu">nrow</span>(df), ]</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="relevante-r-avansert-regresjon.html#cb287-1" tabindex="-1"></a>treningssett     <span class="ot">&lt;-</span> df[<span class="dv">1</span><span class="sc">:</span><span class="dv">70</span>, ]</span>
+<span id="cb287-2"><a href="relevante-r-avansert-regresjon.html#cb287-2" tabindex="-1"></a>testsett         <span class="ot">&lt;-</span> df[<span class="dv">71</span><span class="sc">:</span><span class="fu">nrow</span>(df), ]</span></code></pre></div>
 <p>Du vil da estimere modellen ved å bruke treningsdatasettet:</p>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="relevante-r-avansert-regresjon.html#cb284-1" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(x3 <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">data =</span> treningssett,</span>
-<span id="cb284-2"><a href="relevante-r-avansert-regresjon.html#cb284-2" tabindex="-1"></a>              <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="relevante-r-avansert-regresjon.html#cb288-1" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(x3 <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">data =</span> treningssett,</span>
+<span id="cb288-2"><a href="relevante-r-avansert-regresjon.html#cb288-2" tabindex="-1"></a>              <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>)</span></code></pre></div>
 <p>og du kan teste prediksjonsevnen ved å predikere utfallet i observasjonene i testdatasettet ved p bruke <code>predict()</code>:</p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="relevante-r-avansert-regresjon.html#cb285-1" tabindex="-1"></a>predikert <span class="ot">&lt;-</span> <span class="fu">predict</span>(model1, <span class="at">newdata =</span> testsett, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="relevante-r-avansert-regresjon.html#cb289-1" tabindex="-1"></a>predikert <span class="ot">&lt;-</span> <span class="fu">predict</span>(model1, <span class="at">newdata =</span> testsett, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
 <p>Resultatet blir en data frame med predikerte sannsynligheter for at verdien av <code>x3</code> for den aktuelle observasjonen er lik 1. Du kan oversette sannsynlighetene til 0 eller 1 ved å velge en terskelverdi. Vi kan for eksempel velge at vi predikerer at <code>x3</code> tar verdien 1 dersom den predikerte sannsynligheten for 1 er større enn 0.5 på følgende måte:</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="relevante-r-avansert-regresjon.html#cb286-1" tabindex="-1"></a>sann              <span class="ot">&lt;-</span> df<span class="sc">$</span>x3                           <span class="co"># Den sanne verdien i testdataene</span></span>
-<span id="cb286-2"><a href="relevante-r-avansert-regresjon.html#cb286-2" tabindex="-1"></a>pred_test         <span class="ot">&lt;-</span> <span class="fu">predict</span>(model1, </span>
-<span id="cb286-3"><a href="relevante-r-avansert-regresjon.html#cb286-3" tabindex="-1"></a>                             <span class="at">newdata =</span> testsett, </span>
-<span id="cb286-4"><a href="relevante-r-avansert-regresjon.html#cb286-4" tabindex="-1"></a>                             <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)      <span class="co"># Predikert sannsynlighet</span></span>
-<span id="cb286-5"><a href="relevante-r-avansert-regresjon.html#cb286-5" tabindex="-1"></a>klassifisering    <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(pred_test <span class="sc">&gt;</span> <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>)   <span class="co"># Klassifisering av kundene</span></span>
-<span id="cb286-6"><a href="relevante-r-avansert-regresjon.html#cb286-6" tabindex="-1"></a><span class="fu">table</span>(sann, klassifisering)                          <span class="co"># Kontigenstabell</span></span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="relevante-r-avansert-regresjon.html#cb290-1" tabindex="-1"></a>sann              <span class="ot">&lt;-</span> df<span class="sc">$</span>x3                           <span class="co"># Den sanne verdien i testdataene</span></span>
+<span id="cb290-2"><a href="relevante-r-avansert-regresjon.html#cb290-2" tabindex="-1"></a>pred_test         <span class="ot">&lt;-</span> <span class="fu">predict</span>(model1, </span>
+<span id="cb290-3"><a href="relevante-r-avansert-regresjon.html#cb290-3" tabindex="-1"></a>                             <span class="at">newdata =</span> testsett, </span>
+<span id="cb290-4"><a href="relevante-r-avansert-regresjon.html#cb290-4" tabindex="-1"></a>                             <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)      <span class="co"># Predikert sannsynlighet</span></span>
+<span id="cb290-5"><a href="relevante-r-avansert-regresjon.html#cb290-5" tabindex="-1"></a>klassifisering    <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(pred_test <span class="sc">&gt;</span> <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>)   <span class="co"># Klassifisering av kundene</span></span>
+<span id="cb290-6"><a href="relevante-r-avansert-regresjon.html#cb290-6" tabindex="-1"></a><span class="fu">table</span>(sann, klassifisering)                          <span class="co"># Kontigenstabell</span></span></code></pre></div>
 <p>Det kan i flere sammenhenger være nyttig med en normalisert kontigenstabell, med andeler istedet for antall i hver celle. Da kan man bruke funksjonen <code>prop.table()</code> på følgene måte:</p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="relevante-r-avansert-regresjon.html#cb287-1" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># Hvis du vil bruke pipe-operatoren</span></span>
-<span id="cb287-2"><a href="relevante-r-avansert-regresjon.html#cb287-2" tabindex="-1"></a></span>
-<span id="cb287-3"><a href="relevante-r-avansert-regresjon.html#cb287-3" tabindex="-1"></a><span class="fu">table</span>(sann, klassifisering) <span class="sc">%&gt;%</span> </span>
-<span id="cb287-4"><a href="relevante-r-avansert-regresjon.html#cb287-4" tabindex="-1"></a>  prop.table</span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="relevante-r-avansert-regresjon.html#cb291-1" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># Hvis du vil bruke pipe-operatoren</span></span>
+<span id="cb291-2"><a href="relevante-r-avansert-regresjon.html#cb291-2" tabindex="-1"></a></span>
+<span id="cb291-3"><a href="relevante-r-avansert-regresjon.html#cb291-3" tabindex="-1"></a><span class="fu">table</span>(sann, klassifisering) <span class="sc">%&gt;%</span> </span>
+<span id="cb291-4"><a href="relevante-r-avansert-regresjon.html#cb291-4" tabindex="-1"></a>  prop.table</span></code></pre></div>
 <p>Et par ekstra bemerkninger:
 - Du kan predikere responsvariabel for nye kombinasjoner av forklaringsvariablene ved å lage en data frame som du sender inn i <code>newdata</code>-argumentet til <code>predict()</code>-funksjonen på akkurat samme måte som for <a href="relevante-r-regresjon.html#relevante-r-regresjon">vanlig regresjon</a>.</p>
 </div>
@@ -303,75 +303,75 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>Trene en kNN-modell<a href="relevante-r-avansert-regresjon.html#trene-en-knn-modell" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Logistisk regresjon kan brukes både til statistisk inferens (vi bruker modellen til å forstå sammenhenger mellom respons- og forklaringsvariablene) og til prediksjon. Dersom vi først og fremst er interessert i prediksjon kan vi også bruke kNN, som kan gi bedre resultater.</p>
 <p>Vi antar at vi har med oss datasettet og oppsplittingen i treningssett og testsett fra seksjonen over. Du må kunne trene en kNN-modell, evaluere den på testsettet, og predikere status på nye individer.</p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="relevante-r-avansert-regresjon.html#cb288-1" tabindex="-1"></a><span class="co"># Pass på at caret-pakken er installert</span></span>
-<span id="cb288-2"><a href="relevante-r-avansert-regresjon.html#cb288-2" tabindex="-1"></a><span class="fu">library</span>(caret)    </span>
-<span id="cb288-3"><a href="relevante-r-avansert-regresjon.html#cb288-3" tabindex="-1"></a></span>
-<span id="cb288-4"><a href="relevante-r-avansert-regresjon.html#cb288-4" tabindex="-1"></a><span class="co"># Hvis vi vil sette k selv</span></span>
-<span id="cb288-5"><a href="relevante-r-avansert-regresjon.html#cb288-5" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">train</span>(x3 <span class="sc">~</span> x1 <span class="sc">+</span> x2,</span>
-<span id="cb288-6"><a href="relevante-r-avansert-regresjon.html#cb288-6" tabindex="-1"></a>                <span class="at">data =</span> treningssett,</span>
-<span id="cb288-7"><a href="relevante-r-avansert-regresjon.html#cb288-7" tabindex="-1"></a>                <span class="at">method =</span> <span class="st">&quot;knn&quot;</span>,</span>
-<span id="cb288-8"><a href="relevante-r-avansert-regresjon.html#cb288-8" tabindex="-1"></a>                <span class="at">tuneGrid =</span> <span class="fu">data.frame</span>(<span class="at">k =</span> <span class="dv">50</span>))</span>
-<span id="cb288-9"><a href="relevante-r-avansert-regresjon.html#cb288-9" tabindex="-1"></a></span>
-<span id="cb288-10"><a href="relevante-r-avansert-regresjon.html#cb288-10" tabindex="-1"></a></span>
-<span id="cb288-11"><a href="relevante-r-avansert-regresjon.html#cb288-11" tabindex="-1"></a><span class="co"># R-kode dersom vi vil velge k automatisk med kryssvalidering</span></span>
-<span id="cb288-12"><a href="relevante-r-avansert-regresjon.html#cb288-12" tabindex="-1"></a>trControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method  =</span> <span class="st">&quot;cv&quot;</span>, <span class="co"># 5-fold kryssvalidering</span></span>
-<span id="cb288-13"><a href="relevante-r-avansert-regresjon.html#cb288-13" tabindex="-1"></a>                          <span class="at">number  =</span> <span class="dv">5</span>)</span>
-<span id="cb288-14"><a href="relevante-r-avansert-regresjon.html#cb288-14" tabindex="-1"></a></span>
-<span id="cb288-15"><a href="relevante-r-avansert-regresjon.html#cb288-15" tabindex="-1"></a><span class="co"># Tilpasser modellen</span></span>
-<span id="cb288-16"><a href="relevante-r-avansert-regresjon.html#cb288-16" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">train</span>(x3 <span class="sc">~</span> x1 <span class="sc">+</span> x2,</span>
-<span id="cb288-17"><a href="relevante-r-avansert-regresjon.html#cb288-17" tabindex="-1"></a>                <span class="at">data =</span> treningssett,</span>
-<span id="cb288-18"><a href="relevante-r-avansert-regresjon.html#cb288-18" tabindex="-1"></a>                <span class="at">method =</span> <span class="st">&quot;knn&quot;</span>,</span>
-<span id="cb288-19"><a href="relevante-r-avansert-regresjon.html#cb288-19" tabindex="-1"></a>                <span class="at">trControl  =</span> trControl,</span>
-<span id="cb288-20"><a href="relevante-r-avansert-regresjon.html#cb288-20" tabindex="-1"></a>                <span class="at">metric     =</span> <span class="st">&quot;Accuracy&quot;</span>)</span>
-<span id="cb288-21"><a href="relevante-r-avansert-regresjon.html#cb288-21" tabindex="-1"></a></span>
-<span id="cb288-22"><a href="relevante-r-avansert-regresjon.html#cb288-22" tabindex="-1"></a><span class="co"># Hvilken k valgte kryssvalideringen?</span></span>
-<span id="cb288-23"><a href="relevante-r-avansert-regresjon.html#cb288-23" tabindex="-1"></a>k <span class="ot">&lt;-</span> model3<span class="sc">$</span>finalModel<span class="sc">$</span>k</span>
-<span id="cb288-24"><a href="relevante-r-avansert-regresjon.html#cb288-24" tabindex="-1"></a>k</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="relevante-r-avansert-regresjon.html#cb292-1" tabindex="-1"></a><span class="co"># Pass på at caret-pakken er installert</span></span>
+<span id="cb292-2"><a href="relevante-r-avansert-regresjon.html#cb292-2" tabindex="-1"></a><span class="fu">library</span>(caret)    </span>
+<span id="cb292-3"><a href="relevante-r-avansert-regresjon.html#cb292-3" tabindex="-1"></a></span>
+<span id="cb292-4"><a href="relevante-r-avansert-regresjon.html#cb292-4" tabindex="-1"></a><span class="co"># Hvis vi vil sette k selv</span></span>
+<span id="cb292-5"><a href="relevante-r-avansert-regresjon.html#cb292-5" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">train</span>(x3 <span class="sc">~</span> x1 <span class="sc">+</span> x2,</span>
+<span id="cb292-6"><a href="relevante-r-avansert-regresjon.html#cb292-6" tabindex="-1"></a>                <span class="at">data =</span> treningssett,</span>
+<span id="cb292-7"><a href="relevante-r-avansert-regresjon.html#cb292-7" tabindex="-1"></a>                <span class="at">method =</span> <span class="st">&quot;knn&quot;</span>,</span>
+<span id="cb292-8"><a href="relevante-r-avansert-regresjon.html#cb292-8" tabindex="-1"></a>                <span class="at">tuneGrid =</span> <span class="fu">data.frame</span>(<span class="at">k =</span> <span class="dv">50</span>))</span>
+<span id="cb292-9"><a href="relevante-r-avansert-regresjon.html#cb292-9" tabindex="-1"></a></span>
+<span id="cb292-10"><a href="relevante-r-avansert-regresjon.html#cb292-10" tabindex="-1"></a></span>
+<span id="cb292-11"><a href="relevante-r-avansert-regresjon.html#cb292-11" tabindex="-1"></a><span class="co"># R-kode dersom vi vil velge k automatisk med kryssvalidering</span></span>
+<span id="cb292-12"><a href="relevante-r-avansert-regresjon.html#cb292-12" tabindex="-1"></a>trControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method  =</span> <span class="st">&quot;cv&quot;</span>, <span class="co"># 5-fold kryssvalidering</span></span>
+<span id="cb292-13"><a href="relevante-r-avansert-regresjon.html#cb292-13" tabindex="-1"></a>                          <span class="at">number  =</span> <span class="dv">5</span>)</span>
+<span id="cb292-14"><a href="relevante-r-avansert-regresjon.html#cb292-14" tabindex="-1"></a></span>
+<span id="cb292-15"><a href="relevante-r-avansert-regresjon.html#cb292-15" tabindex="-1"></a><span class="co"># Tilpasser modellen</span></span>
+<span id="cb292-16"><a href="relevante-r-avansert-regresjon.html#cb292-16" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">train</span>(x3 <span class="sc">~</span> x1 <span class="sc">+</span> x2,</span>
+<span id="cb292-17"><a href="relevante-r-avansert-regresjon.html#cb292-17" tabindex="-1"></a>                <span class="at">data =</span> treningssett,</span>
+<span id="cb292-18"><a href="relevante-r-avansert-regresjon.html#cb292-18" tabindex="-1"></a>                <span class="at">method =</span> <span class="st">&quot;knn&quot;</span>,</span>
+<span id="cb292-19"><a href="relevante-r-avansert-regresjon.html#cb292-19" tabindex="-1"></a>                <span class="at">trControl  =</span> trControl,</span>
+<span id="cb292-20"><a href="relevante-r-avansert-regresjon.html#cb292-20" tabindex="-1"></a>                <span class="at">metric     =</span> <span class="st">&quot;Accuracy&quot;</span>)</span>
+<span id="cb292-21"><a href="relevante-r-avansert-regresjon.html#cb292-21" tabindex="-1"></a></span>
+<span id="cb292-22"><a href="relevante-r-avansert-regresjon.html#cb292-22" tabindex="-1"></a><span class="co"># Hvilken k valgte kryssvalideringen?</span></span>
+<span id="cb292-23"><a href="relevante-r-avansert-regresjon.html#cb292-23" tabindex="-1"></a>k <span class="ot">&lt;-</span> model3<span class="sc">$</span>finalModel<span class="sc">$</span>k</span>
+<span id="cb292-24"><a href="relevante-r-avansert-regresjon.html#cb292-24" tabindex="-1"></a>k</span></code></pre></div>
 <p><code>predict()</code>-funksjonen kan så brukes til å klassifisere et nytt datasett direkte, for eksempel testsettet:</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="relevante-r-avansert-regresjon.html#cb289-1" tabindex="-1"></a>klassifisering_knn <span class="ot">&lt;-</span> <span class="fu">predict</span>(model3, <span class="at">newdata =</span> testsett)</span>
-<span id="cb289-2"><a href="relevante-r-avansert-regresjon.html#cb289-2" tabindex="-1"></a><span class="fu">table</span>(sann, klassifisering_knn)</span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="relevante-r-avansert-regresjon.html#cb293-1" tabindex="-1"></a>klassifisering_knn <span class="ot">&lt;-</span> <span class="fu">predict</span>(model3, <span class="at">newdata =</span> testsett)</span>
+<span id="cb293-2"><a href="relevante-r-avansert-regresjon.html#cb293-2" tabindex="-1"></a><span class="fu">table</span>(sann, klassifisering_knn)</span></code></pre></div>
 </div>
 <div id="paneldata-1" class="section level3 unnumbered hasAnchor">
 <h3>Paneldata<a href="relevante-r-avansert-regresjon.html#paneldata-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Skriptfilen som følger denne modulen gir et greit sammendrag for hvilke R-kommandoer som er relevanter for å estimere paneldatamodeller. Datasettet som brukes her er <a href="datasett/panel_liten.csv">panel_liten.csv</a>.</p>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="relevante-r-avansert-regresjon.html#cb290-1" tabindex="-1"></a><span class="fu">library</span>(readr)    <span class="co"># Lese inn csv-filer</span></span>
-<span id="cb290-2"><a href="relevante-r-avansert-regresjon.html#cb290-2" tabindex="-1"></a><span class="fu">library</span>(plm)      <span class="co"># Paneldata</span></span>
-<span id="cb290-3"><a href="relevante-r-avansert-regresjon.html#cb290-3" tabindex="-1"></a><span class="fu">library</span>(fixest)   <span class="co"># Faste effekter (effektiv, og håndterer så mange faste effekter vi vil)</span></span>
-<span id="cb290-4"><a href="relevante-r-avansert-regresjon.html#cb290-4" tabindex="-1"></a></span>
-<span id="cb290-5"><a href="relevante-r-avansert-regresjon.html#cb290-5" tabindex="-1"></a><span class="co"># Innlesning av data: OBS! Linken i videoen fungerer ikke så du må laste ned</span></span>
-<span id="cb290-6"><a href="relevante-r-avansert-regresjon.html#cb290-6" tabindex="-1"></a><span class="co"># panel_liten.csv fra modulen selv og så lese inn på vanlig måte:</span></span>
-<span id="cb290-7"><a href="relevante-r-avansert-regresjon.html#cb290-7" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;panel_liten.csv&quot;</span>)</span>
-<span id="cb290-8"><a href="relevante-r-avansert-regresjon.html#cb290-8" tabindex="-1"></a></span>
-<span id="cb290-9"><a href="relevante-r-avansert-regresjon.html#cb290-9" tabindex="-1"></a></span>
-<span id="cb290-10"><a href="relevante-r-avansert-regresjon.html#cb290-10" tabindex="-1"></a><span class="co"># Oversetter til panel data frame med metadata for kolonner som skal brukes som</span></span>
-<span id="cb290-11"><a href="relevante-r-avansert-regresjon.html#cb290-11" tabindex="-1"></a><span class="co"># faste effekter.</span></span>
-<span id="cb290-12"><a href="relevante-r-avansert-regresjon.html#cb290-12" tabindex="-1"></a>p.df <span class="ot">&lt;-</span> <span class="fu">pdata.frame</span>(df,</span>
-<span id="cb290-13"><a href="relevante-r-avansert-regresjon.html#cb290-13" tabindex="-1"></a>                    <span class="at">index =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span> ,<span class="st">&quot;year&quot;</span>))</span>
-<span id="cb290-14"><a href="relevante-r-avansert-regresjon.html#cb290-14" tabindex="-1"></a></span>
-<span id="cb290-15"><a href="relevante-r-avansert-regresjon.html#cb290-15" tabindex="-1"></a></span>
-<span id="cb290-16"><a href="relevante-r-avansert-regresjon.html#cb290-16" tabindex="-1"></a><span class="co"># Faste effekter med utskrift av sammendrag</span></span>
-<span id="cb290-17"><a href="relevante-r-avansert-regresjon.html#cb290-17" tabindex="-1"></a>reg.fe <span class="ot">&lt;-</span> <span class="fu">plm</span>(lnwg <span class="sc">~</span> lnhr,</span>
-<span id="cb290-18"><a href="relevante-r-avansert-regresjon.html#cb290-18" tabindex="-1"></a>              <span class="at">data =</span> p.df,</span>
-<span id="cb290-19"><a href="relevante-r-avansert-regresjon.html#cb290-19" tabindex="-1"></a>              <span class="at">model =</span> <span class="st">&quot;within&quot;</span>)</span>
-<span id="cb290-20"><a href="relevante-r-avansert-regresjon.html#cb290-20" tabindex="-1"></a><span class="fu">summary</span>(reg.fe)</span>
-<span id="cb290-21"><a href="relevante-r-avansert-regresjon.html#cb290-21" tabindex="-1"></a><span class="fu">fixef</span>(reg.fe)</span>
-<span id="cb290-22"><a href="relevante-r-avansert-regresjon.html#cb290-22" tabindex="-1"></a></span>
-<span id="cb290-23"><a href="relevante-r-avansert-regresjon.html#cb290-23" tabindex="-1"></a><span class="co"># Tilfeldige effekter med utskrift av sammendrag</span></span>
-<span id="cb290-24"><a href="relevante-r-avansert-regresjon.html#cb290-24" tabindex="-1"></a>reg.re <span class="ot">&lt;-</span> <span class="fu">plm</span>(lnwg <span class="sc">~</span> lnhr,</span>
-<span id="cb290-25"><a href="relevante-r-avansert-regresjon.html#cb290-25" tabindex="-1"></a>              <span class="at">data =</span> p.df,</span>
-<span id="cb290-26"><a href="relevante-r-avansert-regresjon.html#cb290-26" tabindex="-1"></a>              <span class="at">model =</span> <span class="st">&quot;random&quot;</span>)</span>
-<span id="cb290-27"><a href="relevante-r-avansert-regresjon.html#cb290-27" tabindex="-1"></a><span class="fu">summary</span>(reg.re)</span>
-<span id="cb290-28"><a href="relevante-r-avansert-regresjon.html#cb290-28" tabindex="-1"></a></span>
-<span id="cb290-29"><a href="relevante-r-avansert-regresjon.html#cb290-29" tabindex="-1"></a></span>
-<span id="cb290-30"><a href="relevante-r-avansert-regresjon.html#cb290-30" tabindex="-1"></a><span class="co"># Hausmann-test</span></span>
-<span id="cb290-31"><a href="relevante-r-avansert-regresjon.html#cb290-31" tabindex="-1"></a><span class="fu">phtest</span>(reg.fe, reg.re)</span>
-<span id="cb290-32"><a href="relevante-r-avansert-regresjon.html#cb290-32" tabindex="-1"></a></span>
-<span id="cb290-33"><a href="relevante-r-avansert-regresjon.html#cb290-33" tabindex="-1"></a><span class="co"># Faste effekter (særlig ved mer enn én dimensjon), samt utskrift av sammendrag</span></span>
-<span id="cb290-34"><a href="relevante-r-avansert-regresjon.html#cb290-34" tabindex="-1"></a>fe_model <span class="ot">&lt;-</span> <span class="fu">feols</span>(</span>
-<span id="cb290-35"><a href="relevante-r-avansert-regresjon.html#cb290-35" tabindex="-1"></a>  lnwg <span class="sc">~</span> lnhr <span class="sc">|</span> id <span class="sc">+</span> year, <span class="co"># her er id og year individ- og årsfaste effekter</span></span>
-<span id="cb290-36"><a href="relevante-r-avansert-regresjon.html#cb290-36" tabindex="-1"></a>  <span class="at">data =</span> df</span>
-<span id="cb290-37"><a href="relevante-r-avansert-regresjon.html#cb290-37" tabindex="-1"></a>)</span>
-<span id="cb290-38"><a href="relevante-r-avansert-regresjon.html#cb290-38" tabindex="-1"></a><span class="fu">etable</span>(fe_model) <span class="co"># vis resultat</span></span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="relevante-r-avansert-regresjon.html#cb294-1" tabindex="-1"></a><span class="fu">library</span>(readr)    <span class="co"># Lese inn csv-filer</span></span>
+<span id="cb294-2"><a href="relevante-r-avansert-regresjon.html#cb294-2" tabindex="-1"></a><span class="fu">library</span>(plm)      <span class="co"># Paneldata</span></span>
+<span id="cb294-3"><a href="relevante-r-avansert-regresjon.html#cb294-3" tabindex="-1"></a><span class="fu">library</span>(fixest)   <span class="co"># Faste effekter (effektiv, og håndterer så mange faste effekter vi vil)</span></span>
+<span id="cb294-4"><a href="relevante-r-avansert-regresjon.html#cb294-4" tabindex="-1"></a></span>
+<span id="cb294-5"><a href="relevante-r-avansert-regresjon.html#cb294-5" tabindex="-1"></a><span class="co"># Innlesning av data: OBS! Linken i videoen fungerer ikke så du må laste ned</span></span>
+<span id="cb294-6"><a href="relevante-r-avansert-regresjon.html#cb294-6" tabindex="-1"></a><span class="co"># panel_liten.csv fra modulen selv og så lese inn på vanlig måte:</span></span>
+<span id="cb294-7"><a href="relevante-r-avansert-regresjon.html#cb294-7" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;panel_liten.csv&quot;</span>)</span>
+<span id="cb294-8"><a href="relevante-r-avansert-regresjon.html#cb294-8" tabindex="-1"></a></span>
+<span id="cb294-9"><a href="relevante-r-avansert-regresjon.html#cb294-9" tabindex="-1"></a></span>
+<span id="cb294-10"><a href="relevante-r-avansert-regresjon.html#cb294-10" tabindex="-1"></a><span class="co"># Oversetter til panel data frame med metadata for kolonner som skal brukes som</span></span>
+<span id="cb294-11"><a href="relevante-r-avansert-regresjon.html#cb294-11" tabindex="-1"></a><span class="co"># faste effekter.</span></span>
+<span id="cb294-12"><a href="relevante-r-avansert-regresjon.html#cb294-12" tabindex="-1"></a>p.df <span class="ot">&lt;-</span> <span class="fu">pdata.frame</span>(df,</span>
+<span id="cb294-13"><a href="relevante-r-avansert-regresjon.html#cb294-13" tabindex="-1"></a>                    <span class="at">index =</span> <span class="fu">c</span>(<span class="st">&quot;id&quot;</span> ,<span class="st">&quot;year&quot;</span>))</span>
+<span id="cb294-14"><a href="relevante-r-avansert-regresjon.html#cb294-14" tabindex="-1"></a></span>
+<span id="cb294-15"><a href="relevante-r-avansert-regresjon.html#cb294-15" tabindex="-1"></a></span>
+<span id="cb294-16"><a href="relevante-r-avansert-regresjon.html#cb294-16" tabindex="-1"></a><span class="co"># Faste effekter med utskrift av sammendrag</span></span>
+<span id="cb294-17"><a href="relevante-r-avansert-regresjon.html#cb294-17" tabindex="-1"></a>reg.fe <span class="ot">&lt;-</span> <span class="fu">plm</span>(lnwg <span class="sc">~</span> lnhr,</span>
+<span id="cb294-18"><a href="relevante-r-avansert-regresjon.html#cb294-18" tabindex="-1"></a>              <span class="at">data =</span> p.df,</span>
+<span id="cb294-19"><a href="relevante-r-avansert-regresjon.html#cb294-19" tabindex="-1"></a>              <span class="at">model =</span> <span class="st">&quot;within&quot;</span>)</span>
+<span id="cb294-20"><a href="relevante-r-avansert-regresjon.html#cb294-20" tabindex="-1"></a><span class="fu">summary</span>(reg.fe)</span>
+<span id="cb294-21"><a href="relevante-r-avansert-regresjon.html#cb294-21" tabindex="-1"></a><span class="fu">fixef</span>(reg.fe)</span>
+<span id="cb294-22"><a href="relevante-r-avansert-regresjon.html#cb294-22" tabindex="-1"></a></span>
+<span id="cb294-23"><a href="relevante-r-avansert-regresjon.html#cb294-23" tabindex="-1"></a><span class="co"># Tilfeldige effekter med utskrift av sammendrag</span></span>
+<span id="cb294-24"><a href="relevante-r-avansert-regresjon.html#cb294-24" tabindex="-1"></a>reg.re <span class="ot">&lt;-</span> <span class="fu">plm</span>(lnwg <span class="sc">~</span> lnhr,</span>
+<span id="cb294-25"><a href="relevante-r-avansert-regresjon.html#cb294-25" tabindex="-1"></a>              <span class="at">data =</span> p.df,</span>
+<span id="cb294-26"><a href="relevante-r-avansert-regresjon.html#cb294-26" tabindex="-1"></a>              <span class="at">model =</span> <span class="st">&quot;random&quot;</span>)</span>
+<span id="cb294-27"><a href="relevante-r-avansert-regresjon.html#cb294-27" tabindex="-1"></a><span class="fu">summary</span>(reg.re)</span>
+<span id="cb294-28"><a href="relevante-r-avansert-regresjon.html#cb294-28" tabindex="-1"></a></span>
+<span id="cb294-29"><a href="relevante-r-avansert-regresjon.html#cb294-29" tabindex="-1"></a></span>
+<span id="cb294-30"><a href="relevante-r-avansert-regresjon.html#cb294-30" tabindex="-1"></a><span class="co"># Hausmann-test</span></span>
+<span id="cb294-31"><a href="relevante-r-avansert-regresjon.html#cb294-31" tabindex="-1"></a><span class="fu">phtest</span>(reg.fe, reg.re)</span>
+<span id="cb294-32"><a href="relevante-r-avansert-regresjon.html#cb294-32" tabindex="-1"></a></span>
+<span id="cb294-33"><a href="relevante-r-avansert-regresjon.html#cb294-33" tabindex="-1"></a><span class="co"># Faste effekter (særlig ved mer enn én dimensjon), samt utskrift av sammendrag</span></span>
+<span id="cb294-34"><a href="relevante-r-avansert-regresjon.html#cb294-34" tabindex="-1"></a>fe_model <span class="ot">&lt;-</span> <span class="fu">feols</span>(</span>
+<span id="cb294-35"><a href="relevante-r-avansert-regresjon.html#cb294-35" tabindex="-1"></a>  lnwg <span class="sc">~</span> lnhr <span class="sc">|</span> id <span class="sc">+</span> year, <span class="co"># her er id og year individ- og årsfaste effekter</span></span>
+<span id="cb294-36"><a href="relevante-r-avansert-regresjon.html#cb294-36" tabindex="-1"></a>  <span class="at">data =</span> df</span>
+<span id="cb294-37"><a href="relevante-r-avansert-regresjon.html#cb294-37" tabindex="-1"></a>)</span>
+<span id="cb294-38"><a href="relevante-r-avansert-regresjon.html#cb294-38" tabindex="-1"></a><span class="fu">etable</span>(fe_model) <span class="co"># vis resultat</span></span></code></pre></div>
 
 </div>
 </div>

@@ -1,3 +1,5 @@
+fig:rstudio1
+fig:rstudiorun
 fig:hist-avkastning
 fig:boks-avkastning
 fig:churn
@@ -7,9 +9,6 @@ eq:timemean
 fig:did-figur
 tab:knn
 tab:knnfasit
-fig:rstudio1
-fig:rstudiorun
-fig:dokumentasjon
 introduksjon-til-r
 en-gjennomgang-av-rstudio
 enkle-beregninger-og-variabler
@@ -138,15 +137,7 @@ oppgaver-om-paneldata
 oppgaver-om-kausal-identifikasjon
 relevante-r-avansert-regresjon
 datavinger
-dataving-1
-innledning-1
-om-r-og-rstudio
-installere-r-og-rstudio
-vinduene-i-rstudio-og-det-a-jobbe-med-r
-funksjoner-dokumentasjon-og-r-pakker
-skriv-pen-r-kode
-oppgave-1-interaktiv-velse
-oppgave-2-innlesning-av-data-og-deskriptiv-statistikk-i-r
+dataving-1---grunnleggende-statistikk
 dataving-2
 interaktiv-velse
 data-til-datavelsen
@@ -155,7 +146,7 @@ oppgave-1-2
 oppgave-2-2
 oppgave-3-1
 dataving-3
-oppgave-1-interaktiv-velse-1
+oppgave-1-interaktiv-velse
 oppgave-2-regresjonsanalyse
 dataving-4
 oppgave-1-last-inn-og-se-pa-datasettet
@@ -167,7 +158,7 @@ oppgave-6-lag-prediksjoner-for-neste-dag
 oppgave-7-lagre-prediksjonene-i-en-excel-fil.
 oppgave-8-gjr-det-samme-for-no5
 dataving-5
-oppgave-1-interaktiv-velse-2
+oppgave-1-interaktiv-velse-1
 oppgave-2---maskinlring-logistisk-regresjon-og-k-nrmeste-naboer
 oppgave-3-paneldata-iskaffe-og-varme-dager
 oppgave-4-kausal-identifikasjon-lskatt-og-trafikkddsfall

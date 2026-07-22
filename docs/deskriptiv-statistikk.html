@@ -218,7 +218,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="datavinger.html"><a href="datavinger.html"><i class="fa fa-check"></i><b>7</b> Dataøvinger</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="dataving-1.html"><a href="dataving-1.html"><i class="fa fa-check"></i><b>7.1</b> Dataøving 1</a></li>
+<li class="chapter" data-level="7.1" data-path="dataving-1---grunnleggende-statistikk.html"><a href="dataving-1---grunnleggende-statistikk.html"><i class="fa fa-check"></i><b>7.1</b> Dataøving 1 - Grunnleggende statistikk</a></li>
 <li class="chapter" data-level="7.2" data-path="dataving-2.html"><a href="dataving-2.html"><i class="fa fa-check"></i><b>7.2</b> Dataøving 2</a></li>
 <li class="chapter" data-level="7.3" data-path="dataving-3.html"><a href="dataving-3.html"><i class="fa fa-check"></i><b>7.3</b> Dataøving 3</a></li>
 <li class="chapter" data-level="7.4" data-path="dataving-4.html"><a href="dataving-4.html"><i class="fa fa-check"></i><b>7.4</b> Dataøving 4</a></li>
@@ -307,30 +307,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="et-eksempel-i-r" class="section level3 hasAnchor" number="2.1.5">
 <h3><span class="header-section-number">2.1.5</span> Et eksempel i R<a href="deskriptiv-statistikk.html#et-eksempel-i-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>La oss se hvordan vi kan beskrive et datasett i praksis. Tenk deg den daglige avkastningen (i prosent) til to ulike investeringsstrategier (en <em>forsiktig</em> og en <em>offensiv</em>) over 1000 handledager. Her simulerer vi tallene selv, slik at du kan kjøre koden og få nøyaktig de samme resultatene:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="deskriptiv-statistikk.html#cb24-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb24-2"><a href="deskriptiv-statistikk.html#cb24-2" tabindex="-1"></a>avkastning <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb24-3"><a href="deskriptiv-statistikk.html#cb24-3" tabindex="-1"></a>  <span class="at">forsiktig =</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="fl">0.10</span>, <span class="at">sd =</span> <span class="fl">0.4</span>),</span>
-<span id="cb24-4"><a href="deskriptiv-statistikk.html#cb24-4" tabindex="-1"></a>  <span class="at">offensiv  =</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="fl">0.10</span>, <span class="at">sd =</span> <span class="fl">1.6</span>)</span>
-<span id="cb24-5"><a href="deskriptiv-statistikk.html#cb24-5" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="deskriptiv-statistikk.html#cb28-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb28-2"><a href="deskriptiv-statistikk.html#cb28-2" tabindex="-1"></a>avkastning <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb28-3"><a href="deskriptiv-statistikk.html#cb28-3" tabindex="-1"></a>  <span class="at">forsiktig =</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="fl">0.10</span>, <span class="at">sd =</span> <span class="fl">0.4</span>),</span>
+<span id="cb28-4"><a href="deskriptiv-statistikk.html#cb28-4" tabindex="-1"></a>  <span class="at">offensiv  =</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="fl">0.10</span>, <span class="at">sd =</span> <span class="fl">1.6</span>)</span>
+<span id="cb28-5"><a href="deskriptiv-statistikk.html#cb28-5" tabindex="-1"></a>)</span></code></pre></div>
 <p>Vi regner ut de sentrale målene fra teorien over for hver strategi. Her bruker vi <code>summarise()</code> fra <code>dplyr</code>, som vi ble kjent med i forrige modul:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="deskriptiv-statistikk.html#cb25-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb25-2"><a href="deskriptiv-statistikk.html#cb25-2" tabindex="-1"></a>avkastning <span class="sc">%&gt;%</span></span>
-<span id="cb25-3"><a href="deskriptiv-statistikk.html#cb25-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb25-4"><a href="deskriptiv-statistikk.html#cb25-4" tabindex="-1"></a>    <span class="at">snitt_forsiktig =</span> <span class="fu">mean</span>(forsiktig),</span>
-<span id="cb25-5"><a href="deskriptiv-statistikk.html#cb25-5" tabindex="-1"></a>    <span class="at">sd_forsiktig    =</span> <span class="fu">sd</span>(forsiktig),</span>
-<span id="cb25-6"><a href="deskriptiv-statistikk.html#cb25-6" tabindex="-1"></a>    <span class="at">snitt_offensiv  =</span> <span class="fu">mean</span>(offensiv),</span>
-<span id="cb25-7"><a href="deskriptiv-statistikk.html#cb25-7" tabindex="-1"></a>    <span class="at">sd_offensiv     =</span> <span class="fu">sd</span>(offensiv)</span>
-<span id="cb25-8"><a href="deskriptiv-statistikk.html#cb25-8" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="deskriptiv-statistikk.html#cb29-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb29-2"><a href="deskriptiv-statistikk.html#cb29-2" tabindex="-1"></a>avkastning <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="deskriptiv-statistikk.html#cb29-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb29-4"><a href="deskriptiv-statistikk.html#cb29-4" tabindex="-1"></a>    <span class="at">snitt_forsiktig =</span> <span class="fu">mean</span>(forsiktig),</span>
+<span id="cb29-5"><a href="deskriptiv-statistikk.html#cb29-5" tabindex="-1"></a>    <span class="at">sd_forsiktig    =</span> <span class="fu">sd</span>(forsiktig),</span>
+<span id="cb29-6"><a href="deskriptiv-statistikk.html#cb29-6" tabindex="-1"></a>    <span class="at">snitt_offensiv  =</span> <span class="fu">mean</span>(offensiv),</span>
+<span id="cb29-7"><a href="deskriptiv-statistikk.html#cb29-7" tabindex="-1"></a>    <span class="at">sd_offensiv     =</span> <span class="fu">sd</span>(offensiv)</span>
+<span id="cb29-8"><a href="deskriptiv-statistikk.html#cb29-8" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>##   snitt_forsiktig sd_forsiktig snitt_offensiv sd_offensiv
 ## 1      0.08967023    0.4010085     0.09149121    1.577698</code></pre>
 <p>De to strategiene har praktisk talt samme gjennomsnittlige daglige avkastning (rundt 0,09 %), men legg merke til hvor forskjellige <em>standardavvikene</em> er. Det illustrerer et hovedpoeng fra teorien: gjennomsnittet alene forteller ikke hele historien. Spredningen er vel så viktig. Det kommer enda tydeligere fram i et histogram for hver strategi:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="deskriptiv-statistikk.html#cb27-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb27-2"><a href="deskriptiv-statistikk.html#cb27-2" tabindex="-1"></a><span class="fu">ggplot</span>(avkastning, <span class="fu">aes</span>(<span class="at">x =</span> forsiktig)) <span class="sc">+</span></span>
-<span id="cb27-3"><a href="deskriptiv-statistikk.html#cb27-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb27-4"><a href="deskriptiv-statistikk.html#cb27-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Daglig avkastning (%)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Antall dager&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Forsiktig strategi&quot;</span>)</span>
-<span id="cb27-5"><a href="deskriptiv-statistikk.html#cb27-5" tabindex="-1"></a><span class="fu">ggplot</span>(avkastning, <span class="fu">aes</span>(<span class="at">x =</span> offensiv)) <span class="sc">+</span></span>
-<span id="cb27-6"><a href="deskriptiv-statistikk.html#cb27-6" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb27-7"><a href="deskriptiv-statistikk.html#cb27-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Daglig avkastning (%)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Antall dager&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Offensiv strategi&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="deskriptiv-statistikk.html#cb31-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb31-2"><a href="deskriptiv-statistikk.html#cb31-2" tabindex="-1"></a><span class="fu">ggplot</span>(avkastning, <span class="fu">aes</span>(<span class="at">x =</span> forsiktig)) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="deskriptiv-statistikk.html#cb31-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb31-4"><a href="deskriptiv-statistikk.html#cb31-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Daglig avkastning (%)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Antall dager&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Forsiktig strategi&quot;</span>)</span>
+<span id="cb31-5"><a href="deskriptiv-statistikk.html#cb31-5" tabindex="-1"></a><span class="fu">ggplot</span>(avkastning, <span class="fu">aes</span>(<span class="at">x =</span> offensiv)) <span class="sc">+</span></span>
+<span id="cb31-6"><a href="deskriptiv-statistikk.html#cb31-6" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb31-7"><a href="deskriptiv-statistikk.html#cb31-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Daglig avkastning (%)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Antall dager&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Offensiv strategi&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:hist-avkastning"></span>
 <img src="met4_files/figure-html/hist-avkastning-1.png" alt="Daglig avkastning for to strategier med samme gjennomsnitt, men ulik spredning." width="672" /><img src="met4_files/figure-html/hist-avkastning-2.png" alt="Daglig avkastning for to strategier med samme gjennomsnitt, men ulik spredning." width="672" />
 <p class="caption">
@@ -339,9 +339,9 @@ Figur 2.1: Daglig avkastning for to strategier med samme gjennomsnitt, men ulik 
 </div>
 <p>Den offensive strategien har en langt bredere fordeling (større svingninger, og dermed høyere risiko) selv om den i snitt gir like mye som den forsiktige.</p>
 <p>Et <strong>boksplott</strong> oppsummerer mye av den samme informasjonen enda mer kompakt, og egner seg godt til å sammenlikne de to strategiene side om side. Her bruker vi den innebygde funksjonen <code>boxplot()</code>, som tar en data.frame med to kolonner og tegner én boks for hver:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="deskriptiv-statistikk.html#cb28-1" tabindex="-1"></a><span class="fu">boxplot</span>(avkastning,</span>
-<span id="cb28-2"><a href="deskriptiv-statistikk.html#cb28-2" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">&quot;Daglig avkastning (%)&quot;</span>,</span>
-<span id="cb28-3"><a href="deskriptiv-statistikk.html#cb28-3" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Fordeling av daglig avkastning per strategi&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="deskriptiv-statistikk.html#cb32-1" tabindex="-1"></a><span class="fu">boxplot</span>(avkastning,</span>
+<span id="cb32-2"><a href="deskriptiv-statistikk.html#cb32-2" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">&quot;Daglig avkastning (%)&quot;</span>,</span>
+<span id="cb32-3"><a href="deskriptiv-statistikk.html#cb32-3" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Fordeling av daglig avkastning per strategi&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:boks-avkastning"></span>
 <img src="met4_files/figure-html/boks-avkastning-1.png" alt="Boksplott av daglig avkastning for de to strategiene." width="672" />
 <p class="caption">
