@@ -41,10 +41,10 @@ samplingfordelingen-til-en-andel
 gode-estimatorer
 konfidensintervall
 kontrollsprsmal-1
-ekstra-ving-i-r
 oppgaverdeskriptiv
-standard-oppgaver
+teorioppgaver
 ntter
+r-oppgaver
 relevant-r-grunnleggende
 hypotesetesting
 generelt-om-hypotesetesting
@@ -56,7 +56,7 @@ kommentarer-2
 kjikvadrattester
 kommentarer-3
 oppgaver
-standard-oppgaver-1
+standard-oppgaver
 relevante-r-testing
 regresjon
 enkel-regresjon
