@@ -210,7 +210,7 @@ som er tilnærmet standardnormalfordelt når $H_0$ er sann. Legg merke til at vi
 **Eksempel.** En bank hevder at høyst 5 % av forbrukslånene deres blir misligholdt. En tilsynsmyndighet vil undersøke om den sanne misligholdsandelen er høyere.
 
 1. **Spørsmål:** Er den sanne misligholdsandelen $p$ større enn 0.05?
-2. **Hypoteser og signifikansnivå:** $H_0: p = 0.05$ mot $H_A: p > 0.05$ (ensidig). En Type I-feil ville her være å konkludere med at banken bryter kravet når den egentlig oppfyller det, noe som kan utløse unødvendige tilsynstiltak. Vi velger på forhånd et signifikansnivå på $\alpha = 5\,\%$.
+2. **Hypoteser og signifikansnivå:** $H_0: p = 0.05$ mot $H_A: p > 0.05$ (ensidig). En Type I-feil ville her være å konkludere med at banken bryter kravet når den egentlig oppfyller det, noe som kan utløse unødvendige tilsynstiltak mot en bank som følger reglene. Fordi en slik feilaktig anklage er alvorlig, krever vi sterke bevis og setter et strengt signifikansnivå, $\alpha = 1\,\%$.
 3. **Data:** Tilsynet trekker 400 tilfeldige lån og finner at 30 av dem er misligholdt. Den observerte andelen er $\widehat{p} = 30/400 = 0.075$.
 4. **Testobservator:** Under $H_0$ er $p_0 = 0.05$, så
 
@@ -225,13 +225,13 @@ n      <- 400
 (p.hatt - p0)/sqrt(p0*(1 - p0)/n)
 ```
 
-5. **Kritisk verdi og konklusjon:** Testobservatoren er tilnærmet standardnormalfordelt. For en ensidig test på 5 %-nivå er den kritiske verdien $z_{0.95}$ (se \@ref(relevante-r-testing)):
+5. **Kritisk verdi og konklusjon:** Testobservatoren er tilnærmet standardnormalfordelt. For en ensidig test på 1 %-nivå er den kritiske verdien $z_{0.99}$ (se \@ref(relevante-r-testing)):
 
 ```{r}
-qnorm(0.95)
+qnorm(0.99)
 ```
 
-Siden testobservatoren (2.29) er større enn den kritiske verdien (1.645), forkaster vi $H_0$: misligholdsandelen ser ut til å være høyere enn 5 %.
+Her er testobservatoren (2.29) *mindre* enn den kritiske verdien (2.33), så den lander *ikke* i forkastningsområdet, og vi kan **ikke** forkaste $H_0$ på 1 %-nivå. Bevisene peker riktignok mot en høyere misligholdsandel, men de er ikke sterke nok til å møte det strenge kravet vi satte. (Med et vanlig 5 %-nivå ville vi forkastet, siden $2.29 > 1.645$. Nettopp derfor må nivået velges *før* testen, ut fra konsekvensene.)
 
 Over gjorde vi testen manuelt. **I R** kan vi bruke `prop.test()` direkte, med antall misligholdte lån, antall lån, verdien under $H_0$ og retningen på testen:
 
@@ -239,7 +239,7 @@ Over gjorde vi testen manuelt. **I R** kan vi bruke `prop.test()` direkte, med a
 prop.test(30, 400, p = 0.05, alternative = "greater", correct = FALSE)
 ```
 
-Igjen er det **p-verdien** du skal se på. Den er 0.011, altså under $\alpha = 0.05$, så vi forkaster $H_0$. (`prop.test()` rapporterer en `X-squared`-verdi som rett og slett er $Z^2$. Vi bruker `correct = FALSE` for å få nøyaktig samme test som den vi regnet ut for hånd.)
+Igjen er det **p-verdien** du skal se på. Den er 0.011, altså *større* enn $\alpha = 0.01$, så vi forkaster ikke $H_0$. (`prop.test()` rapporterer en `X-squared`-verdi som rett og slett er $Z^2$. Vi bruker `correct = FALSE` for å få nøyaktig samme test som den vi regnet ut for hånd.)
 
 ### Inferens om et standardavvik
 
@@ -379,7 +379,7 @@ t-fordelt med $n-1$ frihetsgrader, der $n$ er antall par. Nøkkelspørsmålet er
 **Eksempel.** En butikkjede bygger om 12 av butikkene sine og vil vite om ombyggingen økte ukesomsetningen. For hver butikk har vi omsetningen (i 1000 kr) *før* og *etter* ombyggingen. Siden det er de *samme* butikkene som måles to ganger, er dataene paret.
 
 1. **Spørsmål:** Økte den forventede omsetningen etter ombyggingen?
-2. **Hypoteser og signifikansnivå:** La $d = $ etter $-$ før. $H_0: \mu_d = 0$ mot $H_A: \mu_d > 0$ (ensidig). En Type I-feil ville være å tro at ombyggingen virket, og bygge om alle butikkene, uten at den egentlig hjelper. Vi velger $\alpha = 5\,\%$.
+2. **Hypoteser og signifikansnivå:** La $d = $ etter $-$ før. $H_0: \mu_d = 0$ mot $H_A: \mu_d > 0$ (ensidig). En Type I-feil ville være å konkludere med at ombyggingen økte omsetningen når den egentlig ikke gjorde det, og dermed anbefale den på sviktende grunnlag. Konsekvensen er verken ubetydelig eller dramatisk, så vi velger det vanlige nivået $\alpha = 5\,\%$.
 3. **Data:** (simulert, én verdi før og én etter for hver av de 12 butikkene):
 
 ```{r}
@@ -466,7 +466,7 @@ som er tilnærmet standardnormalfordelt når $H_0$ er sann.
 **Eksempel.** Et selskap kjører to annonsekampanjer, A og B, og vil vite om B gir høyere konverteringsrate (andelen som handler). Av 500 som så kampanje A, handlet 45; av 500 som så kampanje B, handlet 68.
 
 1. **Spørsmål:** Er den sanne konverteringsraten høyere for B enn for A?
-2. **Hypoteser og signifikansnivå:** $H_0: p_A = p_B$ mot $H_A: p_B > p_A$ (ensidig). En Type I-feil ville være å satse videre på kampanje B i troen på at den er bedre, uten at den egentlig er det. Vi velger $\alpha = 5\,\%$.
+2. **Hypoteser og signifikansnivå:** $H_0: p_A = p_B$ mot $H_A: p_B > p_A$ (ensidig). En Type I-feil ville være å satse videre på kampanje B i troen på at den er bedre, uten at den egentlig er det. En slik feil koster lite (i verste fall fortsetter vi med en kampanje som ikke er dårligere), så vi tillater et mildere nivå, $\alpha = 10\,\%$.
 3. **Data:** $\widehat{p}_A = 45/500 = 0.09$ og $\widehat{p}_B = 68/500 = 0.136$.
 4. **Testobservator:** Under $H_0$ pooler vi andelene: $\widehat{p} = (45 + 68)/(500 + 500) = 0.113$. Regnet ut manuelt i R:
 
@@ -479,13 +479,13 @@ Z <- (xB/nB - xA/nA)/sqrt(p.pool*(1 - p.pool)*(1/nA + 1/nB))
 Z
 ```
 
-5. **Kritisk verdi og konklusjon:** For en ensidig test på 5 %-nivå er den kritiske verdien $z_{0.95}$ (se \@ref(relevante-r-testing)):
+5. **Kritisk verdi og konklusjon:** For en ensidig test på 10 %-nivå er den kritiske verdien $z_{0.90}$ (se \@ref(relevante-r-testing)):
 
 ```{r}
-qnorm(0.95)
+qnorm(0.90)
 ```
 
-Siden testobservatoren (2.30) er større enn den kritiske verdien (1.645), forkaster vi $H_0$: kampanje B ser ut til å ha høyere konverteringsrate.
+Siden testobservatoren (2.30) er større enn den kritiske verdien (1.28), forkaster vi $H_0$: kampanje B ser ut til å ha høyere konverteringsrate.
 
 Over gjorde vi testen manuelt. **I R** kan vi bruke `prop.test()` med *vektorer* av antall suksesser og antall forsøk:
 
@@ -493,7 +493,7 @@ Over gjorde vi testen manuelt. **I R** kan vi bruke `prop.test()` med *vektorer*
 prop.test(c(xB, xA), c(nB, nA), alternative = "greater", correct = FALSE)
 ```
 
-**p-verdien** er 0.011, under 0.05, så vi forkaster $H_0$. (Igjen er `X-squared` lik $Z^2$, og `correct = FALSE` gir samme test som håndregningen.)
+**p-verdien** er 0.011, under $\alpha = 0.10$, så vi forkaster $H_0$. (Igjen er `X-squared` lik $Z^2$, og `correct = FALSE` gir samme test som håndregningen.)
 
 ### Kontrollspørsmål
 
