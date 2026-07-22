@@ -306,8 +306,8 @@ Ofte er vi ikke ute etter én populasjon, men vil *sammenligne to*: er avkastnin
 
 - to **forventninger** fra *uavhengige* utvalg (to-utvalgs t-test),
 - to forventninger fra *matchede par* (paret t-test),
-- to **andeler**, og
-- to **standardavvik**.
+- to **varianser**, og
+- to **andeler**.
 
 Som i forrige delkapittel viser vi for hver test først hvordan den gjøres manuelt, steg for steg med en kritisk verdi, og deretter hvordan R kan utføre hele testen direkte fra dataene.
 
@@ -406,47 +406,7 @@ t.test(etter_ombygging, for_ombygging, paired = TRUE, alternative = "greater")
 
 **p-verdien** er 0.011, under 0.05, så vi forkaster $H_0$. Hadde vi (feilaktig) brukt en vanlig to-utvalgs t-test her, ville vi kastet bort styrken som ligger i at de samme butikkene sammenlignes med seg selv.
 
-### Sammenligning av to andeler
-
-Vil vi sammenligne to *andeler*, for eksempel konverteringsraten for to annonser, tester vi $H_0: p_1 = p_2$. Under nullhypotesen er de to andelene like, så vi slår sammen (pooler) dataene til ett felles estimat $\widehat{p} = (x_1 + x_2)/(n_1 + n_2)$, der $x_1$ og $x_2$ er antall «suksesser» i de to gruppene. Testobservatoren er
-
-$$Z = \frac{\widehat{p}_1 - \widehat{p}_2}{\sqrt{\widehat{p}(1-\widehat{p})\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}},$$
-
-som er tilnærmet standardnormalfordelt når $H_0$ er sann.
-
-**Eksempel.** Et selskap kjører to annonsekampanjer, A og B, og vil vite om B gir høyere konverteringsrate (andelen som handler). Av 500 som så kampanje A, handlet 45; av 500 som så kampanje B, handlet 68.
-
-1. **Spørsmål:** Er den sanne konverteringsraten høyere for B enn for A?
-2. **Hypoteser og signifikansnivå:** $H_0: p_A = p_B$ mot $H_A: p_B > p_A$ (ensidig). En Type I-feil ville være å satse videre på kampanje B i troen på at den er bedre, uten at den egentlig er det. Vi velger $\alpha = 5\,\%$.
-3. **Data:** $\widehat{p}_A = 45/500 = 0.09$ og $\widehat{p}_B = 68/500 = 0.136$.
-4. **Testobservator:** Under $H_0$ pooler vi andelene: $\widehat{p} = (45 + 68)/(500 + 500) = 0.113$. Regnet ut manuelt i R:
-
-```{r}
-xA <- 45; nA <- 500
-xB <- 68; nB <- 500
-p.pool <- (xA + xB)/(nA + nB)
-
-Z <- (xB/nB - xA/nA)/sqrt(p.pool*(1 - p.pool)*(1/nA + 1/nB))
-Z
-```
-
-5. **Kritisk verdi og konklusjon:** For en ensidig test på 5 %-nivå er den kritiske verdien $z_{0.95}$ (se \@ref(relevante-r-testing)):
-
-```{r}
-qnorm(0.95)
-```
-
-Siden testobservatoren (2.30) er større enn den kritiske verdien (1.645), forkaster vi $H_0$: kampanje B ser ut til å ha høyere konverteringsrate.
-
-Over gjorde vi testen manuelt. **I R** kan vi bruke `prop.test()` med *vektorer* av antall suksesser og antall forsøk:
-
-```{r}
-prop.test(c(xB, xA), c(nB, nA), alternative = "greater", correct = FALSE)
-```
-
-**p-verdien** er 0.011, under 0.05, så vi forkaster $H_0$. (Igjen er `X-squared` lik $Z^2$, og `correct = FALSE` gir samme test som håndregningen.)
-
-### Sammenligning av to standardavvik
+### Sammenligning av to varianser
 
 Endelig kan vi sammenligne *spredningen* i to populasjoner, altså teste $H_0: \sigma_1 = \sigma_2$. Her bruker vi *forholdet* mellom de to utvalgsvariansene som testobservator:
 
@@ -489,12 +449,52 @@ var.test(fond1, fond2, alternative = "greater")
 
 **p-verdien** er 0.009, under 0.05, så vi forkaster $H_0$. Utskriften gir også selve $F$-verdien og et konfidensintervall for forholdet mellom variansene.
 
+### Sammenligning av to andeler
+
+Vil vi sammenligne to *andeler*, for eksempel konverteringsraten for to annonser, tester vi $H_0: p_1 = p_2$. Under nullhypotesen er de to andelene like, så vi slår sammen (pooler) dataene til ett felles estimat $\widehat{p} = (x_1 + x_2)/(n_1 + n_2)$, der $x_1$ og $x_2$ er antall «suksesser» i de to gruppene. Testobservatoren er
+
+$$Z = \frac{\widehat{p}_1 - \widehat{p}_2}{\sqrt{\widehat{p}(1-\widehat{p})\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}},$$
+
+som er tilnærmet standardnormalfordelt når $H_0$ er sann.
+
+**Eksempel.** Et selskap kjører to annonsekampanjer, A og B, og vil vite om B gir høyere konverteringsrate (andelen som handler). Av 500 som så kampanje A, handlet 45; av 500 som så kampanje B, handlet 68.
+
+1. **Spørsmål:** Er den sanne konverteringsraten høyere for B enn for A?
+2. **Hypoteser og signifikansnivå:** $H_0: p_A = p_B$ mot $H_A: p_B > p_A$ (ensidig). En Type I-feil ville være å satse videre på kampanje B i troen på at den er bedre, uten at den egentlig er det. Vi velger $\alpha = 5\,\%$.
+3. **Data:** $\widehat{p}_A = 45/500 = 0.09$ og $\widehat{p}_B = 68/500 = 0.136$.
+4. **Testobservator:** Under $H_0$ pooler vi andelene: $\widehat{p} = (45 + 68)/(500 + 500) = 0.113$. Regnet ut manuelt i R:
+
+```{r}
+xA <- 45; nA <- 500
+xB <- 68; nB <- 500
+p.pool <- (xA + xB)/(nA + nB)
+
+Z <- (xB/nB - xA/nA)/sqrt(p.pool*(1 - p.pool)*(1/nA + 1/nB))
+Z
+```
+
+5. **Kritisk verdi og konklusjon:** For en ensidig test på 5 %-nivå er den kritiske verdien $z_{0.95}$ (se \@ref(relevante-r-testing)):
+
+```{r}
+qnorm(0.95)
+```
+
+Siden testobservatoren (2.30) er større enn den kritiske verdien (1.645), forkaster vi $H_0$: kampanje B ser ut til å ha høyere konverteringsrate.
+
+Over gjorde vi testen manuelt. **I R** kan vi bruke `prop.test()` med *vektorer* av antall suksesser og antall forsøk:
+
+```{r}
+prop.test(c(xB, xA), c(nB, nA), alternative = "greater", correct = FALSE)
+```
+
+**p-verdien** er 0.011, under 0.05, så vi forkaster $H_0$. (Igjen er `X-squared` lik $Z^2$, og `correct = FALSE` gir samme test som håndregningen.)
+
 ### Kontrollspørsmål
 
 1. Når bruker vi en to-utvalgs t-test, og når en paret t-test?
 2. Hva er forskjellen på å anta lik og ulik varians i en to-utvalgs t-test, og hva gjør R som standard?
-3. Hvorfor slår vi sammen (pooler) de to andelene under $H_0$ når vi sammenligner to andeler?
-4. Hvilken fordeling bruker vi når vi sammenligner to standardavvik, og hvordan ser testobservatoren ut?
+3. Hvilken fordeling bruker vi når vi sammenligner to varianser, og hvordan ser testobservatoren ut?
+4. Hvorfor slår vi sammen (pooler) de to andelene under $H_0$ når vi sammenligner to andeler?
 
 ## Kjikvadrattester
 
