@@ -33,10 +33,12 @@ Logikken er den samme som i en rettssak: den tiltalte antas uskyldig ($H_0$) hel
 En hypotesetest kan settes opp i fem steg, og de samme fem stegene gjelder for *alle* statistiske hypotesetester, uansett om vi tester en forventning, en andel, en forskjell mellom to grupper eller noe annet. De konkrete regnestykkene i steg 4 og 5 varierer fra test til test, men framgangsmåten er den samme. Vi følger stegene med et konkret eksempel: *har partiet Venstre oppslutning over sperregrensen på 4 %?*
 
 1. **Formuler spørsmålet.** Hva vil vi finne ut? Her: ligger den sanne oppslutningen $p$ over 4 %?
-2. **Oversett til $H_0$ og $H_A$.** Vi skriver spørsmålet som to hypoteser om populasjonsstørrelsen, og noterer hvilke antakelser vi gjør om populasjonen. Her: $H_0: p = 0.04$ mot $H_A: p > 0.04$.
-3. **Samle data.** Vi trekker et utvalg fra populasjonen, for eksempel ved å spørre 1000 tilfeldig valgte velgere hva de vil stemme.
-4. **Beregn testobservatoren.** Vi oppsummerer dataene i én tallstørrelse, en **testobservator**, som tallfester hvor mye beviset taler mot $H_0$. Poenget med en testobservator er at vi kjenner **fordelingen dens når $H_0$ er sann**.
-5. **Vurder signifikans og konkluder.** Vi spør hvor overraskende testobservatoren er dersom $H_0$ er sann. Er vi tilstrekkelig overrasket, forkaster vi $H_0$.
+2. **Sett opp hypotesene og velg signifikansnivå.** Vi skriver spørsmålet som to hypoteser om populasjonsstørrelsen, og bestemmer på forhånd hvor sterkt beviset må være. Her: $H_0: p = 0.04$ mot $H_A: p > 0.04$, med signifikansnivå $\alpha = 5\,\%$.
+3. **Samle data.** Vi trekker et utvalg fra populasjonen. Vi spør 1000 tilfeldig valgte velgere, og 55 av dem sier de vil stemme partiet, altså en observert oppslutning på $\widehat{p} = 55/1000 = 0.055$.
+4. **Beregn testobservatoren.** Vi oppsummerer dataene i én tallstørrelse, en **testobservator**, som tallfester hvor mye beviset taler mot $H_0$. For en andel er den (vi kommer tilbake til formelen i neste delkapittel)
+$$Z = \frac{\widehat{p} - p_0}{\sqrt{p_0(1-p_0)/n}} = \frac{0.055 - 0.04}{\sqrt{0.04 \cdot 0.96/1000}} \approx 2.42.$$
+Poenget med en testobservator er at vi kjenner **fordelingen dens når $H_0$ er sann**: her er $Z$ da en trekning fra standardnormalfordelingen.
+5. **Vurder signifikans og konkluder.** Vi spør hvor overraskende testobservatoren er dersom $H_0$ er sann. En verdi på 2.42 eller større har bare sannsynlighet omtrent 0.008 under standardnormalfordelingen. Det er mindre enn signifikansnivået på 5 %, så vi er tilstrekkelig overrasket: vi forkaster $H_0$ og konkluderer med at partiet ser ut til å ligge over sperregrensen.
 
 Steg 5 er kjernen, og «overrasket» har en presis betydning: er $H_0$ sann, følger testobservatoren en kjent fordeling (en samplingfordeling), og vi kan regne ut hvor sannsynlig det er å få en verdi som er *minst så ekstrem* som den vi observerte. Er den sannsynligheten liten, betyr det nettopp at vi er *overrasket*: dataene er da vanskelige å forene med $H_0$.
 
@@ -66,7 +68,7 @@ De to feiltypene trekker i hver sin retning: krymper vi forkastningsområdet (la
 
 **p-verdien** er sannsynligheten for å observere en testobservator som er *minst så ekstrem* som den vi faktisk fikk, gitt at $H_0$ er sann. En liten p-verdi betyr at dataene er svært overraskende under $H_0$, og teller som bevis *mot* $H_0$. Beslutningsregelen er enkel: vi **forkaster $H_0$ dersom $p \leq \alpha$**.
 
-I Venstre-eksempelet, dersom testobservatoren ga en p-verdi på 0.0006, ville vi ved $\alpha = 0.01$ forkastet $H_0$ og konkludert med at resultatet tyder på oppslutning over sperregrensen.
+I Venstre-eksempelet over ga testobservatoren en p-verdi på omtrent 0.008. Siden den er mindre enn signifikansnivået vi valgte ($\alpha = 0.05$), forkaster vi $H_0$, og konkluderer med at resultatet tyder på oppslutning over sperregrensen.
 
 p-verdien er lett å mistolke, så merk deg hva den *ikke* er:
 
