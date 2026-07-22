@@ -862,12 +862,15 @@ P(\overline{X}_1 - \overline{X}_2 > 0) &= P\left(\frac{\overline{X}_1 - \overlin
 
 Her bruker vi R til å utforske teorien fra dette kapittelet i praksis.
 
-**Oppgave 1.** Som demonstrert i forelesningen kan vi i R simulere standard normalfordelte observasjoner (altså normalfordelte observasjoner med $\mu = 0$ og $\sigma^2 = 1$) med kommandoen `rnorm(n)`, der `n` er antallet observasjoner vi ønsker. For eksempel kan vi kjøre følgende kode for å generere 10 observasjoner (du vil helt sikkert få andre verdier):
+**Oppgave 1.** Som demonstrert i forelesningen kan vi i R simulere standard normalfordelte observasjoner (altså normalfordelte observasjoner med $\mu = 0$ og $\sigma^2 = 1$) med kommandoen `rnorm(n)`, der `n` er antallet observasjoner vi ønsker. For eksempel kan vi generere 10 observasjoner slik:
 
 ```{r}
+set.seed(1)   # gjør de tilfeldige tallene reproduserbare
 n <- 10
 rnorm(n)
 ```
+
+Legg merke til `set.seed(1)` på første linje. `rnorm()` trekker *tilfeldige* tall, så uten `set.seed()` ville du fått en ny rekke hver gang du kjørte koden. `set.seed()` fikserer utgangspunktet til tilfeldighetsgeneratoren i R, slik at du får nøyaktig den samme «tilfeldige» rekken hver gang (og de samme tallene som vises her). Tallet inni, her `1`, er bare et vilkårlig valgt startpunkt.
 
 Ved å skrive `mean(rnorm(n))` i stedet regner vi ut gjennomsnittet av observasjonene direkte.
 
