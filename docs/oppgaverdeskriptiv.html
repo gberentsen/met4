@@ -314,7 +314,7 @@ Løsning
 <blockquote>
 <ol style="list-style-type: lower-alpha">
 <li>Nominale data: =, ≠</li>
-<li>Intervalldata: =, ≠, &lt;, &gt;, +, -</li>
+<li>Forholdsdata: =, ≠, &lt;, &gt;, +, -, *, /</li>
 <li>Ordinale data: =, ≠, &lt;, &gt;</li>
 </ol>
 </blockquote>
@@ -376,14 +376,14 @@ Løsning
 Løsning
 </summary>
 <blockquote>
-<p>Kvartilene kan fortelle oss noe om nivået og variasjonen i poengsummene til studentene som har tatt de to kursene. Vi ser at kurs nummer 1 har en symmetrisk fordeling med en median som er høyere enn kurs nummer 2. På en annen side har poengfordelingen til kurs nummer 2 en lengre høyre hale hvor tredje kvantilen tilsier at hele 25 % vil få 270 poeng eller mer. Det tilsvarende tallet for kurs nummer én er 250. Samlet sett er det kanskje “tryggere” med kurs nummer 1, mens det potensielle læringsutbytte har “større tak” i kurs nummer to.</p>
+<p>Kvartilene kan fortelle oss noe om nivået og variasjonen i poengsummene til studentene som har tatt de to kursene. Vi ser at kurs nummer 1 har en symmetrisk fordeling med en median som er høyere enn kurs nummer 2. På en annen side har poengfordelingen til kurs nummer 2 en lengre høyre hale hvor tredje kvartilen tilsier at hele 25 % vil få 270 poeng eller mer. Det tilsvarende tallet for kurs nummer én er 250. Samlet sett er det kanskje “tryggere” med kurs nummer 1, mens det potensielle læringsutbytte har “større tak” i kurs nummer to.</p>
 </blockquote>
 </details>
 <ol start="6" style="list-style-type: decimal">
 <li>MET4 ble et år rettet av to sensorer og et boxplot av poengene de ga sine respektive kandidater var som følger:</li>
 </ol>
 <p><img src="met4_files/figure-html/unnamed-chunk-33-1.png" alt="" width="672" /></p>
-<p>Hva kan du si karakterfordelingen til de to sensorene?</p>
+<p>Hva kan du si om karakterfordelingen til de to sensorene?</p>
 <details>
 <summary>
 Løsning
@@ -430,7 +430,7 @@ Løsning
 Løsning
 </summary>
 <blockquote>
-<p>Datasett a: <span class="math inline">\(r_2 = 0.81\)</span>, Datasett b: <span class="math inline">\(r_1 = -0.37\)</span>, Dasett c: <span class="math inline">\(r_4 = -0.96\)</span>, Datasett d: <span class="math inline">\(r_3 = -0.02\)</span></p>
+<p>Datasett a: <span class="math inline">\(r_2 = 0.81\)</span>, Datasett b: <span class="math inline">\(r_1 = -0.37\)</span>, Datasett c: <span class="math inline">\(r_4 = -0.96\)</span>, Datasett d: <span class="math inline">\(r_3 = -0.02\)</span></p>
 </blockquote>
 <blockquote>
 <p>Datasett d er et eksempel på at korrelasjonen mellom to variabler kan være svært nær 0, selv om det er en tydelig (ikke-lineær) sammenheng mellom dem. Det som skjer når vi regner ut <span class="math inline">\(r\)</span> i dette tilfellet er at den negative avhengigheten vi ser til venstre i figuren kanselleres av den positive avhengigheten til høyre i figuren.</p>
@@ -481,7 +481,7 @@ Løsning
 <li>Populasjonen er alle de aktuelle maskindelene som lages av fabrikanten.</li>
 <li>Utvalget er de 1000 delene som ble trukket fra en stor produksjon.</li>
 <li>Parameteren er andelen defekte maskindeler i alle de aktuelle maskindelene som produseres. 15% er den påståtte parameter.</li>
-<li>Estimatoren er andelen defekte maskindeler i utvalget. 12% er den observerte estimatoren.</li>
+<li>Estimatoren er andelen defekte maskindeler i utvalget. 12% er det observerte estimatet.</li>
 <li>Vi kan estimere at andelen defekte maskindeler i populasjonen er 12%. Ved å bruke statistisk inferens kan vi undersøke om vi har nok statistisk bevis til å avvise påstanden om at den sanne andelen defekte maskindeler er 15%.</li>
 </ol>
 </blockquote>
@@ -518,13 +518,13 @@ Løsning
 </summary>
 <blockquote>
 <ol style="list-style-type: lower-alpha">
-<li><span class="math inline">\(P(X_1 = 1) = P(X_2 = 6) = 1/6\)</span></li>
+<li><span class="math inline">\(P(X_1 = 1) = P(X_1 = 6) = 1/6\)</span></li>
 <li>Det er bare en måte at gjennomsnittet av to kast kan bli <span class="math inline">\(1\)</span> og det er at begge kastene blir <span class="math inline">\(1\)</span>: <span class="math inline">\(P(\overline{X} = 1) = P(X_1 = 1, X_2 = 1) = P(X_1 = 1)P(X_2 = 1) = 1/36\)</span>, og tilsvarende for <span class="math inline">\(P(\overline{X} = 6)\)</span>.</li>
 <li>Det er bare en måte at gjennomsnittet av 5 kast kan bli <span class="math inline">\(1\)</span> og det er at alle fem kastene blir <span class="math inline">\(1\)</span>:<span class="math inline">\(P(\overline{X} = 1) = P(X_1 = 1)P(X_2 = 1)P(X_3 = 1)P(X_4 = 1)P(X_5 = 1) = 0.00013\)</span>, og tilsvarende for <span class="math inline">\(P(\overline{X} = 6)\)</span>.</li>
 </ol>
 </blockquote>
 <blockquote>
-<p>Denne oppgaven illustrerer hvordan gjennomsnittet, uavhengig av fordelingen til <span class="math inline">\(X\)</span> som i dette tilfellet er uniformt fordelt på <span class="math inline">\({1,2,3,4,5,6}\)</span>, er normalfordelt <span class="math inline">\(\overline{X}\sim N(\mu, \sigma^2/n)\)</span> og beveger seg mot forventningen til <span class="math inline">\(X\)</span> (som i dette tilfellet er <span class="math inline">\(\mu = 3.5\)</span>). Det at variansen til gjennomsnittet <span class="math inline">\(\sigma^2/n\)</span> blir mindre når <span class="math inline">\(n\)</span> øker ser vi er svært logisk her: Det er værre for gjennomsnittet til terningkastene å oppnå “ekstreme” verdier som <span class="math inline">\(\overline{X} = 1\)</span> eller <span class="math inline">\(\overline{X} = 6\)</span> siden dette innebærer at alle kastene må enten være 1 eller 6. Derimot er det en hel rekke kombinasjoner av kast som gir et gjennomsnitt nær <span class="math inline">\(3.5\)</span>, så slike verdier av gjennomsnittet er mye mer sannsynlig.</p>
+<p>Denne oppgaven illustrerer hvordan gjennomsnittet, uavhengig av fordelingen til <span class="math inline">\(X\)</span> som i dette tilfellet er uniformt fordelt på <span class="math inline">\({1,2,3,4,5,6}\)</span>, for store <span class="math inline">\(n\)</span> er tilnærmet normalfordelt <span class="math inline">\(\overline{X}\sim N(\mu, \sigma^2/n)\)</span> og beveger seg mot forventningen til <span class="math inline">\(X\)</span> (som i dette tilfellet er <span class="math inline">\(\mu = 3.5\)</span>). Det at variansen til gjennomsnittet <span class="math inline">\(\sigma^2/n\)</span> blir mindre når <span class="math inline">\(n\)</span> øker ser vi er svært logisk her: Det er verre for gjennomsnittet til terningkastene å oppnå “ekstreme” verdier som <span class="math inline">\(\overline{X} = 1\)</span> eller <span class="math inline">\(\overline{X} = 6\)</span> siden dette innebærer at alle kastene må enten være 1 eller 6. Derimot er det en hel rekke kombinasjoner av kast som gir et gjennomsnitt nær <span class="math inline">\(3.5\)</span>, så slike verdier av gjennomsnittet er mye mer sannsynlig.</p>
 </blockquote>
 <blockquote>
 <p>Under ser du et histogram over gjennomsnittene dersom vi gjentar terningkasteksperimentet med henholdsvis <span class="math inline">\(n=1,2, 5\)</span> kast 2000 ganger. Allerede for <span class="math inline">\(n=5\)</span> ser vi at de fleste gjennomsnitt ligger nær det sanne gjennomsnittet på 3.5.</p>
@@ -909,7 +909,7 @@ Løsning
 Løsning
 </summary>
 <blockquote>
-<p>Vi vet da at <span class="math inline">\(\overline{X}_1 - \overline{X}_2 &gt; 0\)</span> og utnytter at denne størrelsen er normalfordelt:
+<p>Vi ser på hendelsen <span class="math inline">\(\overline{X}_1 - \overline{X}_2 &gt; 0\)</span> og utnytter at differansen <span class="math inline">\(\overline{X}_1 - \overline{X}_2\)</span> er normalfordelt:
 <span class="math display">\[\begin{equation*}
 \begin{split}
 P(\overline{X}_1 - \overline{X}_2 &gt; 0) &amp;= P\left(\frac{\overline{X}_1 - \overline{X}_2 - (40 - 38)}{\sqrt{\frac{6^2}{25} + \frac{8^2}{25}}} &gt; \frac{0 - (40 - 38)}{\sqrt{\frac{6^2}{25} + \frac{8^2}{25}}} \right)\\

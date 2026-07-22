@@ -24,6 +24,7 @@ ki-og-programmering
 r-ekstra
 grunnleggende-statistikk
 deskriptiv-statistikk
+variabeltyper-og-maleniva
 sentraltendens
 spredning
 sammenheng-mellom-to-variabler

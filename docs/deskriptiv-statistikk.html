@@ -270,10 +270,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p><em>Videovinduet inneholder flere videoer. Bruk nedtrekksmenyen øverst i vinduet for å få en oversikt over alle videoene i dette delkapittelet og bytte mellom dem.</em></p>
 <p>Deskriptiv statistikk har to hovedformål. Det første er å <strong>bli kjent med et datasett</strong>: før vi setter i gang med mer avansert analyse, vil vi danne oss et bilde av hva slags tall vi har foran oss, om det finnes åpenbare feil eller ekstremverdier, og hvilke mønstre som umiddelbart trer frem. Det andre formålet er å <strong>presentere resultater</strong> slik at de er lette å forstå for andre. Et viktig poeng er at deskriptiv statistikk verken generaliserer fra utvalget til en større populasjon eller tester årsakssammenhenger. Vi lar rett og slett dataene fortelle sin egen historie. Selve slutningen fra utvalg til populasjon kommer vi tilbake til i neste delkapittel.</p>
+</div>
+<div id="variabeltyper-og-maleniva" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Variabeltyper og målenivå<a href="deskriptiv-statistikk.html#variabeltyper-og-maleniva" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Før vi beskriver et datasett, er det nyttig å vite <em>hva slags</em> variabler vi har med å gjøre, for det avgjør hvilke regnestykker og figurer som gir mening. Vi skiller grovt mellom to hovedtyper:</p>
+<ul>
+<li><strong>Kategoriske variabler</strong> deler observasjonene inn i grupper. Eksempler er kjønn, parti, bostedsfylke eller karakter (A til F). Vi kan telle hvor mange som havner i hver kategori, men det gir sjelden mening å regne ut et «gjennomsnitt» av dem.</li>
+<li><strong>Numeriske (kvantitative) variabler</strong> er tall vi faktisk kan regne med, som alder, inntekt, høyde eller antall barn.</li>
+</ul>
+<p>Innenfor disse to typene er det vanlig å skille mellom fire <strong>målenivåer</strong>, etter hvor mye informasjon verdiene bærer:</p>
+<ul>
+<li><strong>Nominalnivå</strong> (kategorisk): rene merkelapper uten naturlig rekkefølge, for eksempel parti eller sivilstand. Det eneste vi kan gjøre, er å avgjøre om to verdier er <em>like</em> eller <em>ulike</em> (<span class="math inline">\(=\)</span>, <span class="math inline">\(\neq\)</span>). En kategorisk variabel med bare to mulige verdier (ja/nei) kalles <em>dikotom</em>.</li>
+<li><strong>Ordinalnivå</strong> (kategorisk): kategorier med en naturlig <em>rangering</em>, men uten at avstanden mellom trinnene er veldefinert. Svaralternativene fra «svært misfornøyd» til «svært fornøyd» er ordinale: vi vet at «fornøyd» er bedre enn «misfornøyd» (<span class="math inline">\(&lt;\)</span>, <span class="math inline">\(&gt;\)</span>), men ikke <em>hvor mye</em> bedre.</li>
+<li><strong>Intervallnivå</strong> (numerisk): tall der <em>avstandene</em> er meningsfulle, men der nullpunktet er vilkårlig. Temperatur i Celsius er det klassiske eksempelet: forskjellen mellom 10 og 20 grader er like stor som mellom 20 og 30, men 0 °C betyr ikke «ingen temperatur», og 20 °C er <em>ikke</em> dobbelt så varmt som 10 °C. Vi kan legge til og trekke fra (<span class="math inline">\(+\)</span>, <span class="math inline">\(-\)</span>), men forholdstall gir ikke mening.</li>
+<li><strong>Forholdsnivå</strong> (numerisk): som intervallnivå, men med et ekte nullpunkt, slik at også <em>forholdstall</em> gir mening. Inntekt, vekt, tidsbruk og antall er forholdsdata: 0 kr betyr ingen inntekt, og 100 000 kr er dobbelt så mye som 50 000 kr. Her er alle de vanlige regneoperasjonene tillatt (<span class="math inline">\(=, \neq, &lt;, &gt;, +, -, \times, /\)</span>).</li>
+</ul>
+<p>Nivåene bygger på hverandre: hvert nivå tillater alt det forrige gjør, pluss litt mer. Målenivået styrer også hvilke beskrivende mål som gir mening. For en nominal variabel er <em>typetallet</em> det eneste fornuftige sentralmålet; for ordinaldata kan vi i tillegg bruke <em>medianen</em>; og først for intervall- og forholdsdata er <em>gjennomsnittet</em> meningsfullt.</p>
 <p>Når vi beskriver en tallvariabel numerisk, er det særlig to spørsmål vi stiller: <em>hvor ligger tyngdepunktet i dataene</em>, og <em>hvor spredt er de rundt dette tyngdepunktet</em>? Har vi to variabler, kommer et tredje spørsmål til: <em>henger de sammen</em>?</p>
 </div>
-<div id="sentraltendens" class="section level3 hasAnchor" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> Sentraltendens<a href="deskriptiv-statistikk.html#sentraltendens" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="sentraltendens" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Sentraltendens<a href="deskriptiv-statistikk.html#sentraltendens" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Tyngdepunktet, eller sentraltendensen, kan måles på flere måter:</p>
 <ul>
 <li><strong>Gjennomsnittet</strong> <span class="math inline">\(\overline{X} = \frac{1}{n}\sum_{i=1}^n X_i\)</span> er summen av alle verdiene delt på antallet. Dette er det vanligste målet, men det trekkes lett i retning av ekstremverdier.</li>
@@ -282,15 +298,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Hvorfor bry seg med mer enn gjennomsnittet? Fordi medianen er langt mer <strong>robust</strong> mot ekstremverdier. Tenk deg lønningene på en liten arbeidsplass med ti ansatte, der én av dem tilfeldigvis er konsernsjefen. Gjennomsnittslønnen kan da bli misvisende høy og gi et helt feilaktig bilde av hva en «typisk» ansatt tjener, mens medianen er upåvirket av hvor ekstremt høy den ene lønnen er. Nettopp derfor rapporteres for eksempel medianinntekt, og ikke gjennomsnittsinntekt, i mange sammenhenger.</p>
 </div>
-<div id="spredning" class="section level3 hasAnchor" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> Spredning<a href="deskriptiv-statistikk.html#spredning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="spredning" class="section level3 hasAnchor" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Spredning<a href="deskriptiv-statistikk.html#spredning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To datasett kan ha nøyaktig samme gjennomsnitt og likevel se helt forskjellige ut, fordi verdiene er ulikt spredt. Det vanligste spredningsmålet er <strong>standardavviket</strong></p>
 <p><span class="math display">\[s = \sqrt{\frac{1}{n-1}\sum_{i=1}^n (X_i - \overline{X})^2},\]</span></p>
 <p>som grovt sagt måler hvor langt observasjonene i gjennomsnitt ligger fra <span class="math inline">\(\overline{X}\)</span>. Kvadratet <span class="math inline">\(s^2\)</span> kalles <strong>variansen</strong>. Standardavviket har samme måleenhet som dataene selv (kroner, centimeter, …) og er derfor lettest å tolke.</p>
 <p>Et alternativ som (i likhet med medianen) er robust mot ekstremverdier, er å bruke <strong>prosentiler</strong>. Den <span class="math inline">\(p\)</span>-te prosentilen er den verdien som har <span class="math inline">\(p\)</span> % av observasjonene under seg. De tre kvartilene (25-, 50- og 75-prosentilene) deler dataene i fire like store deler, og avstanden mellom øvre og nedre kvartil kalles <strong>interkvartilbredden</strong> (IQR). Et boksplott er en effektiv grafisk fremstilling av nettopp disse størrelsene.</p>
 </div>
-<div id="sammenheng-mellom-to-variabler" class="section level3 hasAnchor" number="2.1.3">
-<h3><span class="header-section-number">2.1.3</span> Sammenheng mellom to variabler<a href="deskriptiv-statistikk.html#sammenheng-mellom-to-variabler" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="sammenheng-mellom-to-variabler" class="section level3 hasAnchor" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> Sammenheng mellom to variabler<a href="deskriptiv-statistikk.html#sammenheng-mellom-to-variabler" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Har vi målt to variabler for de samme observasjonene (for eksempel høyde og vekt), vil vi ofte vite om de henger sammen. Grafisk gjør vi det med et <strong>spredningsplott</strong>, og numerisk med <strong>korrelasjonskoeffisienten</strong> <span class="math inline">\(r\)</span>. Den forteller oss hvor nær punktene ligger en rett linje, og har tre egenskaper det er verdt å merke seg:</p>
 <ul>
 <li><span class="math inline">\(r\)</span> ligger alltid mellom <span class="math inline">\(-1\)</span> og <span class="math inline">\(1\)</span>.</li>
@@ -299,13 +315,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Her lurer en klassisk felle: <strong>at <span class="math inline">\(r = 0\)</span> betyr ikke at variablene er uavhengige.</strong> Korrelasjonskoeffisienten fanger bare opp <em>lineære</em> sammenhenger. To variabler kan ha en tydelig, men krum, sammenheng (for eksempel U-formet) og likevel ha korrelasjon null. Det motsatte holder derimot alltid: er to variabler uavhengige, er de også ukorrelerte.</p>
 </div>
-<div id="a-presentere-data" class="section level3 hasAnchor" number="2.1.4">
-<h3><span class="header-section-number">2.1.4</span> Å presentere data<a href="deskriptiv-statistikk.html#a-presentere-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="a-presentere-data" class="section level3 hasAnchor" number="2.1.5">
+<h3><span class="header-section-number">2.1.5</span> Å presentere data<a href="deskriptiv-statistikk.html#a-presentere-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Deskriptiv statistikk handler like mye om å <em>presentere</em> tall som om å regne dem ut. Dette er en ferdighet det er verdt å ta på alvor: evnen til å lage en overbevisende tabell eller figur kan være direkte avgjørende for gjennomslagskraften din, enten du legger fram resultater for en sjef, en kunde eller en eksamenssensor.</p>
 <p>Et av de mest berømte eksemplene på god deskriptiv statistikk er Charles Minards figur fra 1869 over Napoleons felttog mot Moskva, som vi ser nærmere på i videoforelesningen. På ett enkelt bilde klarer den å formidle tid, antall soldater, geografisk posisjon og temperatur samtidig, et forbilledlig eksempel på hvor mye informasjon en gjennomtenkt figur kan bære. I forelesningen ser vi også på noen <em>grelle</em> eksempler på det motsatte: hvordan grafiske virkemidler kan brukes til å gi skjeve og misvisende fremstillinger.</p>
 </div>
-<div id="et-eksempel-i-r" class="section level3 hasAnchor" number="2.1.5">
-<h3><span class="header-section-number">2.1.5</span> Et eksempel i R<a href="deskriptiv-statistikk.html#et-eksempel-i-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="et-eksempel-i-r" class="section level3 hasAnchor" number="2.1.6">
+<h3><span class="header-section-number">2.1.6</span> Et eksempel i R<a href="deskriptiv-statistikk.html#et-eksempel-i-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>La oss se hvordan vi kan beskrive et datasett i praksis. Tenk deg den daglige avkastningen (i prosent) til to ulike investeringsstrategier (en <em>forsiktig</em> og en <em>offensiv</em>) over 1000 handledager. Her simulerer vi tallene selv, slik at du kan kjøre koden og få nøyaktig de samme resultatene:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="deskriptiv-statistikk.html#cb28-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb28-2"><a href="deskriptiv-statistikk.html#cb28-2" tabindex="-1"></a>avkastning <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
@@ -350,8 +366,8 @@ Figur 2.2: Boksplott av daglig avkastning for de to strategiene.
 </div>
 <p>Slik leser vi figuren (jf. spredningsmålene i avsnittet om spredning): streken inne i boksen er medianen, selve boksen dekker interkvartilbredden fra nedre til øvre kvartil, og «værhårene» strekker seg ut til de mest ekstreme observasjonene som ikke regnes som uteliggere. Punktene utenfor værhårene er nettopp uteliggere. Igjen ser vi at de to strategiene har omtrent samme midtpunkt, men at den offensive har en mye høyere boks og lengre værhår, altså langt større spredning.</p>
 </div>
-<div id="kontrollsprsmal" class="section level3 hasAnchor" number="2.1.6">
-<h3><span class="header-section-number">2.1.6</span> Kontrollspørsmål<a href="deskriptiv-statistikk.html#kontrollsprsmal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="kontrollsprsmal" class="section level3 hasAnchor" number="2.1.7">
+<h3><span class="header-section-number">2.1.7</span> Kontrollspørsmål<a href="deskriptiv-statistikk.html#kontrollsprsmal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Her er noen kontrollspørsmål som du kan prøve deg på:</p>
 <ol style="list-style-type: decimal">
 <li>Hva er forskjellen på deskriptiv statistikk og statistisk inferens?</li>
