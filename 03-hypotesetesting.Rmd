@@ -1581,6 +1581,25 @@ chisq.test(krysstabell)
 ```
 og vi ser at vi får en soleklar forkastning. Dette er også logisk gitt hva vi faktisk tester her.
 
+#### Når dataene er en ferdig krysstabell {-}
+
+Ofte kommer dataene allerede som en ferdig tabell med *antall* (slik som i flere av oppgavene og på eksamen), ikke som et råmateriale vi må krysstabulere selv. Da lager vi tabellen direkte med `matrix()`. Vi fyller inn tallene rad for rad med `byrow = TRUE`, oppgir antall rader med `nrow`, og kan gi rad- og kolonnenavn med `dimnames`:
+
+```{r}
+tabell <- matrix(c(30, 45, 25,      # rad 1
+                   50, 20, 35),     # rad 2
+                 nrow = 2, byrow = TRUE,
+                 dimnames = list(c("Gruppe A", "Gruppe B"),
+                                 c("Lav", "Middels", "Høy")))
+tabell
+```
+
+Denne matrisen sender vi rett inn i `chisq.test()`, akkurat som krysstabellen over:
+
+```{r}
+chisq.test(tabell)
+```
+
 ### Kritiske verdier i R {-}
 
 Som vi har sett over baserer tester i R seg stort sett på en eller annen datainput. Som output får du både testobservator og p-verdi. Hvis du allikevel av en eller annen grunn (f.eks. på eksamen) trenger å finne en kritisk verdi i en fordeling, så kan det være nyttig å vite hvordan man gjør dette i R.
