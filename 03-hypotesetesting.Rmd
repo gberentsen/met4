@@ -741,33 +741,7 @@ Alle de forventede antallene er godt over 5 (det minste er omtrent 87), så tiln
 </details>
 
 
-4. Anta at vi har følgende hypoteser og informasjon om dataene: $H_0: \mu = 50$ mot $H_A: \mu > 50$. Utvalgsstandardavviket er $s = 10$, $n = 40$ og signifikansnivået $\alpha = 0.05$.
-
-   Bestem $\beta$, altså sannsynligheten for en type II-feil, dersom den sanne (men ukjente) verdien av $\mu$ i virkeligheten er $55$.
-
-<details><summary>Løsning</summary>
-
->En type II-feil er å *beholde* $H_0$ selv om $H_A$ er sann. For å regne ut sannsynligheten for den, holder det ikke å vite at $H_A$ er sann; vi må vite *hvor* sann den er, altså en konkret verdi for $\mu$. Her regner vi ut $\beta$ dersom den sanne verdien er $\mu = 55$. Det gjør vi i tre steg.
->
->**Steg 1: Når forkaster vi?** Vi kjenner ikke $\sigma$, så vi bruker en t-test med $n - 1 = 39$ frihetsgrader. Vi forkaster $H_0$ når testobservatoren er stor nok:
->$$T = \frac{\overline{X} - 50}{s/\sqrt{n}} > t_{0.05,\,39} = 1.685.$$
->Løser vi dette ut for $\overline{X}$, svarer det til å forkaste når utvalgsgjennomsnittet er over en grense:
->$$\overline{X} > 50 + 1.685\cdot\frac{10}{\sqrt{40}} = 52.66.$$
->
->**Steg 2: Hvor sannsynlig er det å *ikke* forkaste, dersom sann $\mu = 55$?** En type II-feil skjer nettopp når vi *ikke* forkaster, altså når $\overline{X} < 52.66$. Vi regner ut hvor sannsynlig det er *gitt at den sanne forventningen er 55*. Fra sentralgrenseteoremet er $\overline{X}$ tilnærmet normalfordelt med forventning $55$ (den sanne verdien) og standardavvik $s/\sqrt{n} = 10/\sqrt{40}$:
->\begin{equation*}
-\begin{split}
-\beta &= P(\overline{X} < 52.66 \quad\text{gitt at } \mu = 55)\\
-&= P\left(\frac{\overline{X} - 55}{10/\sqrt{40}} < \frac{52.66 - 55}{10/\sqrt{40}}\right)\\
-&= P(Z < -1.48) = 0.07.
-\end{split}
-\end{equation*}
->
->**Steg 3: Tolkning.** Det er altså cirka 7 % sannsynlighet for å overse effekten når den faktisk finnes (sann $\mu = 55$). **Styrken** til testen er $1 - \beta = 0.93$: gjentok vi testen mange ganger med sann $\mu = 55$, ville vi korrekt forkastet $H_0$ i omtrent 93 % av tilfellene. Legg merke til at $\beta$ avhenger av *hvor* sann $H_A$ er: jo lenger den sanne $\mu$ ligger fra $50$, jo lettere er effekten å oppdage, og jo mindre blir $\beta$.
-
-</details>
-
-5.  En leder frykter at den gjennomsnittlige tiden ansatte daglig bruker på sosiale medier overstiger 45 minutter. For å teste denne mistanken plukker han ut et tilfeldig utvalg på 15 personer og spør om tid brukt på sosiale medier etter en tilfeldig arbeidsdag. Resultatene (i minutter) er:
+4.  En leder frykter at den gjennomsnittlige tiden ansatte daglig bruker på sosiale medier overstiger 45 minutter. For å teste denne mistanken plukker han ut et tilfeldig utvalg på 15 personer og spør om tid brukt på sosiale medier etter en tilfeldig arbeidsdag. Resultatene (i minutter) er:
 
           70, 96, 58, 88, 34, 42, 34, 56, 68, 46, 26, 18, 22, 60, 84
 
@@ -787,7 +761,7 @@ Alle de forventede antallene er godt over 5 (det minste er omtrent 87), så tiln
 
 </details>
 
-6. Gjennomsnitt og standardavvik i et utvalg på $n=100$ er $\overline{x} = 20$ og $s = 2$.
+5. Gjennomsnitt og standardavvik i et utvalg på $n=100$ er $\overline{x} = 20$ og $s = 2$.
 
     a. Finn 95 % konfidensintervall av gjennomsnitt ($\mu$) i populasjonen.
 
@@ -818,7 +792,7 @@ Alle de forventede antallene er godt over 5 (det minste er omtrent 87), så tiln
 
 </details>
 
-7. Et flyselskap har historisk landet presis (i rute) 92 % av flyreisene sine. Etter at selskapet innførte et nytt system for logistikk og ruteplanlegging, vil de undersøke om punktligheten har blitt bedre. I et tilfeldig utvalg på 165 flyreiser etter innføringen ble 156 vurdert som presise. Kan vi konkludere på 5 % signifikansnivå at andelen presise flyreiser har økt?
+6. Et flyselskap har historisk landet presis (i rute) 92 % av flyreisene sine. Etter at selskapet innførte et nytt system for logistikk og ruteplanlegging, vil de undersøke om punktligheten har blitt bedre. I et tilfeldig utvalg på 165 flyreiser etter innføringen ble 156 vurdert som presise. Kan vi konkludere på 5 % signifikansnivå at andelen presise flyreiser har økt?
 
 <details><summary>Løsning</summary>
 
@@ -834,7 +808,7 @@ Alle de forventede antallene er godt over 5 (det minste er omtrent 87), så tiln
 
 </details>
 
-8. Vi har følgende informasjon fra to tilfeldige utvalg fra to ulike normalfordelte populasjoner: $\overline{x}_1 = 400$, $s_1 = 130$, $n_1 = 130$, $\overline{x}_2 = 390$, $s_2 = 50$, $n_2 = 130$. 
+7. Vi har følgende informasjon fra to tilfeldige utvalg fra to ulike normalfordelte populasjoner: $\overline{x}_1 = 400$, $s_1 = 130$, $n_1 = 130$, $\overline{x}_2 = 390$, $s_2 = 50$, $n_2 = 130$. 
 
  a.	Kan vi hevde på et 5 % signifikansnivå at $\mu_1$ er større enn $\mu_2$? Det oppgis at
     
@@ -881,7 +855,7 @@ e.  Få observasjoner representerer større usikkerhet om differansen $\overline
 
 </details>
 
-9. Et nystartet firma har utviklet to løsninger for automatisk registrering av av antall lus på oppdrettslaks. Metode A er litt dyrere enn metode B, men firmaet mener Metode A en den raskeste metoden. For å teste ut denne hypotesen blir begge metodene brukt til å registrere lus på 11 basseng av ulik størrelse og med forskjellig antall fisk. Antall minutter hver metode tar blir registrert for hvert basseng. 
+8. Et nystartet firma har utviklet to løsninger for automatisk registrering av av antall lus på oppdrettslaks. Metode A er litt dyrere enn metode B, men firmaet mener Metode A en den raskeste metoden. For å teste ut denne hypotesen blir begge metodene brukt til å registrere lus på 11 basseng av ulik størrelse og med forskjellig antall fisk. Antall minutter hver metode tar blir registrert for hvert basseng. 
 
     a. Under er det gitt en R-utskrift fra en to-utvalgs t-test. Still opp nullhypotesen og den alternative hypotesen i samsvar med R-utskriften. Bruk også utskriften til å formulere en konklusjon for en test med 5% signifikansnivå.
 
@@ -935,7 +909,7 @@ c. Hvilke av de to foregående testene bør en bruke i dette tilfellet?
 
 </details>
 
-10. Vi har følgende informasjon fra to tilfeldige utvalg fra to ulike normalfordelte populasjoner: $s_{1}^2 = 1400$,	$n_1 = 60$,		$s_{2}^2 = 700$,	$n_2 = 60$.
+9. Vi har følgende informasjon fra to tilfeldige utvalg fra to ulike normalfordelte populasjoner: $s_{1}^2 = 1400$,	$n_1 = 60$,		$s_{2}^2 = 700$,	$n_2 = 60$.
 
     a.	Kan vi hevde at de to utvalgene har ulik varians? Bruk 5 % signifikansnivå.
 
@@ -961,7 +935,7 @@ c. Hvilke av de to foregående testene bør en bruke i dette tilfellet?
 
 </details>
 
-11. En bedrift som har en dyr leieavtale av en parkeringsplass vurderer innkjøp av elektroniske sparkesykler. Tanken er at de som bor nær bedriften da kan benytte seg av disse istedenfor å kjøre bil. I et prøveprosjekt får bedriften leid en rekke sparkesykler i 20 arbeidsdager og antall biler på parkeringsplassen blir registrert daglig. Den samme registreringen blir gjort de 20 påfølgende arbeidsdagene når sparkesyklene ikke er tilgjengelig. En ansatt som er ansvarlig for prøveprosjektet bruker R til å utføre to tester basert på data fra disse to  registreringene. 
+10. En bedrift som har en dyr leieavtale av en parkeringsplass vurderer innkjøp av elektroniske sparkesykler. Tanken er at de som bor nær bedriften da kan benytte seg av disse istedenfor å kjøre bil. I et prøveprosjekt får bedriften leid en rekke sparkesykler i 20 arbeidsdager og antall biler på parkeringsplassen blir registrert daglig. Den samme registreringen blir gjort de 20 påfølgende arbeidsdagene når sparkesyklene ikke er tilgjengelig. En ansatt som er ansvarlig for prøveprosjektet bruker R til å utføre to tester basert på data fra disse to  registreringene. 
 
   a. Formuler null- og alternativhypotesen til den første testen. Hvorfor utfører den ansatte denne testen?
     
@@ -1000,7 +974,7 @@ t.test(uten_sparkesykkel, med_sparkesykkel, var.equal = TRUE, alternative = "gre
 > Tips: Variabelnavnet som står først ("uten_sparkesykkel") indikerer hva som er første verdi i differansene $\mu_1 - \mu_2$ (i hypotesene) og $\overline{x}_1 - \overline{x}_2$ (i testobservatoren) i testen R utfører.
 </details>
 
-12. Vi har følgende informasjon om fra to tilfeldige utvalg fra to populasjoner: I utvalg 1 har $x_1 = 100$ av $n_1 = 200$ individer et spesielt kjennetegn, mens i utvalg 2 er det det tilsvarende tallet $x_2 = 90$ av $n_2 = 200$. 
+11. Vi har følgende informasjon om fra to tilfeldige utvalg fra to populasjoner: I utvalg 1 har $x_1 = 100$ av $n_1 = 200$ individer et spesielt kjennetegn, mens i utvalg 2 er det det tilsvarende tallet $x_2 = 90$ av $n_2 = 200$. 
 
 a. Utfør en test for å undersøke om de to populasjonene har ulik andel av kjennetegnet. Bruk 5 % signifikansnivå.
 
@@ -1036,7 +1010,7 @@ c. Gjenta a., denne gangen med $x_1 = 190$ og $x_2 = 180$. Fastslå effekten på
 <!-- pval = 2*(1 - pnorm(z)) -->
 </details>
 
-13. En kredittutsteder gir kundene en rating basert på blant annet gjeld, formue og tidligere betalingsanmerkninger. Tanken er at en lav rating medfører høyere sannsynlighet mislighold av lånet sitt. For å sjekke om ratingen gir en reell indikasjon på mislighold, blir det registrert antall mislighold i et utvalg med rating under 800, og i et utvalg med rating 800 eller høyere.  
+12. En kredittutsteder gir kundene en rating basert på blant annet gjeld, formue og tidligere betalingsanmerkninger. Tanken er at en lav rating medfører høyere sannsynlighet mislighold av lånet sitt. For å sjekke om ratingen gir en reell indikasjon på mislighold, blir det registrert antall mislighold i et utvalg med rating under 800, og i et utvalg med rating 800 eller høyere.  
 
 |                  | Rating < 800 | Rating > 800 |
 |:-----------------|:------------:|:------------:|
@@ -1064,7 +1038,7 @@ Kan vi konkludere med at personer med rating lavere enn 800 har høyere sannsynl
 
 </details>
 
-14. *(Eksamen vår 2024.)* En analytiker deler de månedlige avkastningene til S&P 500-indeksen i to grupper: måneder klassifisert som *normal risiko* og måneder klassifisert som *høy risiko*. Utvalgene er oppsummert slik:
+13. *(Eksamen vår 2024.)* En analytiker deler de månedlige avkastningene til S&P 500-indeksen i to grupper: måneder klassifisert som *normal risiko* og måneder klassifisert som *høy risiko*. Utvalgene er oppsummert slik:
 
     | Gruppe        | Gjennomsnitt | Standardavvik $s$ | Antall $n$ |
     |:--------------|:------------:|:-----------------:|:----------:|
@@ -1091,7 +1065,7 @@ Kan vi konkludere med at personer med rating lavere enn 800 har høyere sannsynl
 
 </details>
 
-15. *(Eksamen vår 2025.)* I et atferdseksperiment skal deltakerne rapportere om de gjettet riktig i et terningspill, der en riktig gjetning gir en liten belønning (det er ingen kontroll av om de snakker sant). En *kontrollgruppe* får ingen ekstra informasjon, mens en *tillitsgruppe* først får lese en tekst som understreker at forskerne stoler på dem. Av 400 i tillitsgruppen rapporterte 116 en riktig gjetning, mot 181 av 400 i kontrollgruppen. Kan vi konkludere med at «tillits-teksten» reduserer andelen som rapporterer en (mistenkelig ofte) riktig gjetning? Bruk 1 %-signifikansnivå.
+14. *(Eksamen vår 2025.)* I et atferdseksperiment skal deltakerne rapportere om de gjettet riktig i et terningspill, der en riktig gjetning gir en liten belønning (det er ingen kontroll av om de snakker sant). En *kontrollgruppe* får ingen ekstra informasjon, mens en *tillitsgruppe* først får lese en tekst som understreker at forskerne stoler på dem. Av 400 i tillitsgruppen rapporterte 116 en riktig gjetning, mot 181 av 400 i kontrollgruppen. Kan vi konkludere med at «tillits-teksten» reduserer andelen som rapporterer en (mistenkelig ofte) riktig gjetning? Bruk 1 %-signifikansnivå.
 
 <details><summary>Løsning</summary>
 
@@ -1103,7 +1077,7 @@ Kan vi konkludere med at personer med rating lavere enn 800 har høyere sannsynl
 
 </details>
 
-16. En nettbutikk vil undersøke om antall bestillinger fordeler seg jevnt over ukedagene (mandag til fredag), eller om noen dager er travlere enn andre. I en tilfeldig valgt uke registreres antall bestillinger per dag:
+15. En nettbutikk vil undersøke om antall bestillinger fordeler seg jevnt over ukedagene (mandag til fredag), eller om noen dager er travlere enn andre. I en tilfeldig valgt uke registreres antall bestillinger per dag:
 
 | Dag          | Man | Tir | Ons | Tor | Fre |
 |:-------------|:---:|:---:|:---:|:---:|:---:|
@@ -1128,7 +1102,7 @@ Test på 5 %-signifikansnivå om bestillingene fordeler seg jevnt over de fem uk
 
 </details>
 
-17. Et produksjonsselskap har mulighet til å bruke tre forskjellige kjemikalier for å fremstille det samme produktet. Lederen ved produksjonsselskapet ønsker å undersøke hvorvidt det er forskjell på hvor mange mangelfulle produkter som blir produsert når en varierer bruken av type kjemikalier. Hun gjør et tilfeldig utvalg på 700 produkter og klassifiserer dem som enten tilfredsstillende eller mangelfull. Funnene er oppsummert i tabellen nedenfor:
+16. Et produksjonsselskap har mulighet til å bruke tre forskjellige kjemikalier for å fremstille det samme produktet. Lederen ved produksjonsselskapet ønsker å undersøke hvorvidt det er forskjell på hvor mange mangelfulle produkter som blir produsert når en varierer bruken av type kjemikalier. Hun gjør et tilfeldig utvalg på 700 produkter og klassifiserer dem som enten tilfredsstillende eller mangelfull. Funnene er oppsummert i tabellen nedenfor:
 
 | Klassifisering    | Kjemikalie 1 | Kjemikalie 2 | Kjemikalie 3 | Sum |
 |:------------------|:------------:|:------------:|:------------:|:---:|
@@ -1252,6 +1226,34 @@ c. Forsker A får et ikke-signifikant resultat og konkluderer med at «effekten 
 >Venstresiden er nå per definisjon en standard normalfordelt variabel $Z$ (vi har standardisert $\overline{X}$ med den sanne forventningen og standardavviket). På høyresiden har vi bare ganget ut: $\dfrac{1.645/\sqrt{n}}{1/\sqrt{n}} = 1.645$ og $\dfrac{0.5}{1/\sqrt{n}} = 0.5\sqrt{n}$. For $n = 10$: $P(Z > 1.645 - 1.58) = P(Z > 0.06) \approx 0.47$. For $n = 100$: $P(Z > 1.645 - 5) = P(Z > -3.36) \approx 1.00$. Med bare 10 observasjoner oppdager forsker A en reell effekt mindre enn halvparten av gangene.
 
 >c. Forsker A har en test med lav styrke: selv om effekten er reell ($\mu = 0.5$), forkaster testen bare cirka 47 % av gangene. Et ikke-signifikant resultat betyr da bare at dataene var for få til å påvise effekten, ikke at den er null. «Vi fant ingen effekt» er ikke det samme som «det finnes ingen effekt», og en test beviser aldri $H_0$.
+
+</details>
+
+Nøtt 5. Anta at vi har følgende hypoteser og informasjon om dataene: $H_0: \mu = 50$ mot $H_A: \mu > 50$. Utvalgsstandardavviket er $s = 10$, $n = 40$ og signifikansnivået $\alpha = 0.05$.
+
+Bestem $\beta$, altså sannsynligheten for en type II-feil, dersom den sanne (men ukjente) verdien av $\mu$ i virkeligheten er $55$.
+
+<details><summary>Løsning</summary>
+
+>En type II-feil er å *beholde* $H_0$ selv om $H_A$ er sann. For å regne ut sannsynligheten for den, holder det ikke å vite at $H_A$ er sann; vi må vite *hvor* sann den er, altså en konkret verdi for $\mu$. Her regner vi ut $\beta$ dersom den sanne verdien er $\mu = 55$. Det gjør vi i tre steg.
+>
+>**Steg 1: Når forkaster vi?** Vi kjenner ikke $\sigma$, så vi bruker en t-test med $n - 1 = 39$ frihetsgrader. Vi forkaster $H_0$ når testobservatoren er stor nok:
+>$$T = \frac{\overline{X} - 50}{s/\sqrt{n}} > t_{0.05,\,39} = 1.685.$$
+>Løser vi dette ut for $\overline{X}$, svarer det til å forkaste når utvalgsgjennomsnittet er over en grense:
+>$$\overline{X} > 50 + 1.685\cdot\frac{10}{\sqrt{40}} = 52.66.$$
+>
+>**Steg 2: Hvor sannsynlig er det å *ikke* forkaste, dersom sann $\mu = 55$?** En type II-feil skjer nettopp når vi *ikke* forkaster, altså når $\overline{X} < 52.66$. Vi regner ut hvor sannsynlig det er *gitt at den sanne forventningen er 55*. Fra sentralgrenseteoremet er $\overline{X}$ tilnærmet normalfordelt med forventning $55$ (den sanne verdien) og standardavvik $s/\sqrt{n} = 10/\sqrt{40}$:
+>\begin{equation*}
+\begin{split}
+\beta &= P(\overline{X} < 52.66 \quad\text{gitt at } \mu = 55)\\
+&= P\left(\frac{\overline{X} - 55}{10/\sqrt{40}} < \frac{52.66 - 55}{10/\sqrt{40}}\right)\\
+&= P(Z < -1.48) = 0.07.
+\end{split}
+\end{equation*}
+>
+>Her bruker vi *normalfordelingen*, ikke t-fordelingen, til å regne ut denne sannsynligheten. Grunnen er at en helt eksakt styrkeberegning når $\sigma$ er ukjent, krever den såkalte *ikke-sentrale* t-fordelingen, som ligger utenfor pensum. I stedet bruker vi normaltilnærmingen fra sentralgrenseteoremet: med $s$ som anslag på $\sigma$ og $n = 40$ observasjoner er den god nok. (For så store utvalg ligger t-fordelingen uansett svært nær normalfordelingen, jf. at $t_{0.05,\,39} = 1.685$ er nesten lik $z_{0.05} = 1.645$.)
+>
+>**Steg 3: Tolkning.** Det er altså cirka 7 % sannsynlighet for å overse effekten når den faktisk finnes (sann $\mu = 55$). **Styrken** til testen er $1 - \beta = 0.93$: gjentok vi testen mange ganger med sann $\mu = 55$, ville vi korrekt forkastet $H_0$ i omtrent 93 % av tilfellene. Legg merke til at $\beta$ avhenger av *hvor* sann $H_A$ er: jo lenger den sanne $\mu$ ligger fra $50$, jo lettere er effekten å oppdage, og jo mindre blir $\beta$.
 
 </details>
 
