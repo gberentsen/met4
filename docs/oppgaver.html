@@ -603,7 +603,7 @@ Løsning
 </blockquote>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
-<li>La <span class="math inline">\(\mu_1\)</span> og <span class="math inline">\(\mu_2\)</span> være forventet antall biler på henholdsvis dager der sparkesykler <em>ikke</em> er tilgjengelig og dager der sparkesykler er tilgjengelig. Utskriften viser en en-sidig, to-utvalgs t-test av hypotesen <span class="math inline">\(H_0: \mu_1 - \mu_2 = 0\)</span> mot <span class="math inline">\(H_A: \mu_1 - \mu_2 &gt; 0\)</span>. <span class="math inline">\(H_A\)</span> er altså om det forventes ferre biler på dager med sparkesykler enn på dager uten sparkesykler.</li>
+<li>La <span class="math inline">\(\mu_1\)</span> og <span class="math inline">\(\mu_2\)</span> være forventet antall biler på henholdsvis dager der sparkesykler <em>ikke</em> er tilgjengelig og dager der sparkesykler er tilgjengelig. Utskriften viser en ensidig, to-utvalgs t-test av hypotesen <span class="math inline">\(H_0: \mu_1 = \mu_2\)</span> mot <span class="math inline">\(H_A: \mu_1 &gt; \mu_2\)</span>. <span class="math inline">\(H_A\)</span> sier altså at det forventes færre biler på dager med sparkesykler enn på dager uten sparkesykler.</li>
 </ol>
 <p>“Two sample t-test” betyr at vi har antatt lik varians (ellers ville det stått “Welch two sample t-test”), og testobservatoren er derfor gitt ved:</p>
 <p><span class="math display">\[T = \frac{\overline{x}_1 - \overline{x}_2 - 0}{\sqrt{s^2_{P}(1/n_1 + 1/n_2)}}\]</span></p>
@@ -626,7 +626,7 @@ Løsning
 </summary>
 <blockquote>
 <ol style="list-style-type: lower-alpha">
-<li>Vi skal her teste hypotsen <span class="math inline">\(H_0: p_1 - p_2 = 0\)</span> mot <span class="math inline">\(H_A: p_1 - p_2 \neq 0\)</span>. Med <span class="math inline">\(\hat{p_1} = 100/200 = 0.5\)</span>, <span class="math inline">\(\hat{p}_2 = 90/200 = 0.45\)</span> og <span class="math inline">\(\hat{p} = (100 + 90)/(200 + 200) = 0.475\)</span> er testobservatoren er gitt ved</li>
+<li>Vi skal her teste hypotesen <span class="math inline">\(H_0: p_1 = p_2\)</span> mot <span class="math inline">\(H_A: p_1 \neq p_2\)</span>. Med <span class="math inline">\(\hat{p_1} = 100/200 = 0.5\)</span>, <span class="math inline">\(\hat{p}_2 = 90/200 = 0.45\)</span> og <span class="math inline">\(\hat{p} = (100 + 90)/(200 + 200) = 0.475\)</span> er testobservatoren er gitt ved</li>
 </ol>
 </blockquote>
 <blockquote>
@@ -657,19 +657,19 @@ Løsning
 <table>
 <thead>
 <tr class="header">
-<th></th>
+<th align="left"></th>
 <th align="center">Rating &lt; 800</th>
 <th align="center">Rating &gt; 800</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Utvalgsstørrelse</td>
+<td align="left">Utvalgsstørrelse</td>
 <td align="center">612</td>
 <td align="center">854</td>
 </tr>
 <tr class="even">
-<td>Mislighold</td>
+<td align="left">Mislighold</td>
 <td align="center">14</td>
 <td align="center">9</td>
 </tr>
@@ -681,7 +681,7 @@ Løsning
 Løsning
 </summary>
 <blockquote>
-<p>La <span class="math inline">\(p_1\)</span> være sannsynlighet for mislighold for de med rating under 800 og la <span class="math inline">\(p_2\)</span> være den samme sannsynligheten for de med rating over 800. Vi skal da teste <span class="math inline">\(H_0: p_1 - p_2 = 0\)</span> mot det ensidige alternativet <span class="math inline">\(H_A: p_1 - p_2 &gt; 0\)</span>. Med <span class="math inline">\(\hat{p_1} = 14/612 = 0.0229\)</span>, <span class="math inline">\(\hat{p}_2 = 0.0105\)</span>, og <span class="math inline">\(\hat{p}=(14 + 9)/(612 + 854)=0.0157\)</span> er testobservatoren gitt ved</p>
+<p>La <span class="math inline">\(p_1\)</span> være sannsynlighet for mislighold for de med rating under 800 og la <span class="math inline">\(p_2\)</span> være den samme sannsynligheten for de med rating over 800. Vi skal da teste <span class="math inline">\(H_0: p_1 = p_2\)</span> mot det ensidige alternativet <span class="math inline">\(H_A: p_1 &gt; p_2\)</span>. Med <span class="math inline">\(\hat{p_1} = 14/612 = 0.0229\)</span>, <span class="math inline">\(\hat{p}_2 = 0.0105\)</span>, og <span class="math inline">\(\hat{p}=(14 + 9)/(612 + 854)=0.0157\)</span> er testobservatoren gitt ved</p>
 <p><span class="math display">\[Z =  \frac{\hat{p}_1 - \hat{p}_2}{\sqrt{\hat{p}(1-\hat{p})(1/n_1 + 1/n_2)}} = \frac{0.0229 - 0.0105}{\sqrt{0.0157(1-0.0157)(1/612 + 1/854)}}=1.874\]</span></p>
 <p>Forkastningsområdet er gitt ved <span class="math inline">\(Z &gt; z_\alpha = 1.645\)</span>, og siden 1.874 &gt; 1.645 forkaster vi <span class="math inline">\(H_0\)</span>. Det er grunn til å tro at personer med rating lavere enn 800 har større sannsynlighet for mislighold.</p>
 </blockquote>
@@ -695,233 +695,6 @@ Løsning
 <!-- z = (p1 - p2)/sqrt(p*(1-p)*(1/n1 + 1/n2)) -->
 </details>
 <ol start="14" style="list-style-type: decimal">
-<li>To konkurrerende selskaper, A og B, dominerer et marked for et bestemt produkt og har historisk sett hatt markedsandeler på hhv. 40 % og 50 % (altså 10 % til andre markeder). Selskap A gjennomfører så en markedsføringskampanje. For å avgjøre kampanjens effekt trekker et markedsanalyseselskap et tilfeldig utvalg av 300 kunder som spørres om deres produkt preferanse:</li>
-</ol>
-<table>
-<thead>
-<tr class="header">
-<th align="center">Foretrukket selskap</th>
-<th align="center">A</th>
-<th align="center">B</th>
-<th align="center">andre</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">Frekvens</td>
-<td align="center">140</td>
-<td align="center">142</td>
-<td align="center">18</td>
-</tr>
-</tbody>
-</table>
-<p>Har markedsandelene endret seg?</p>
-<details>
-<summary>
-Løsning
-</summary>
-<blockquote>
-<p>Vi skal her test <span class="math inline">\(H_0: p_1 = 0.4, p_2 = 0.5, p_3 = 0.1\)</span> mot <span class="math inline">\(H_A:\)</span> minst to sannsynligheter er forskjellige. Utregning av testobservator blir da som følger:</p>
-</blockquote>
-<table>
-<thead>
-<tr class="header">
-<th align="center">Foretrukket selskap</th>
-<th align="center"><span class="math inline">\(f_i\)</span></th>
-<th align="center"><span class="math inline">\(e_i\)</span></th>
-<th align="center"><span class="math inline">\((f_i - e_i)^2/e_i\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">A</td>
-<td align="center">140</td>
-<td align="center"><span class="math inline">\(300\times 0.4 = 120\)</span></td>
-<td align="center">3.3333</td>
-</tr>
-<tr class="even">
-<td align="center">B</td>
-<td align="center">142</td>
-<td align="center"><span class="math inline">\(300\times 0.5 = 150\)</span></td>
-<td align="center">0.4266</td>
-</tr>
-<tr class="odd">
-<td align="center">andre</td>
-<td align="center">18</td>
-<td align="center"><span class="math inline">\(300\times 0.1 = 30\)</span></td>
-<td align="center">4.8000</td>
-</tr>
-<tr class="even">
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>Forkastelsesområdet er <span class="math inline">\(\chi^2 &gt; \chi^2_{\alpha, k - 1} = \chi^2_{0.05, 2} = 5.99\)</span>. Siden <span class="math inline">\(\chi^2 = 8.564 &gt; 5.99\)</span> forkaster vi <span class="math inline">\(H_0\)</span> på 5 % signifikansnivå.</p>
-</blockquote>
-<!-- n=300 -->
-<!-- p1=0.4 -->
-<!-- p2 = 0.5 -->
-<!-- p3 = 0.1 -->
-<!-- f1 = 140 -->
-<!-- f2 = 142 -->
-<!-- f3 = 18 -->
-<!-- f = c(f1,f2,f3) -->
-<!-- p = c(p1, p2, p3)     -->
-<!-- e = n*p -->
-<!-- s = (f - e)^2/e -->
-<!-- chi = sum(s) -->
-<!-- q = qchisq(0.95, 2) -->
-</details>
-<ol start="15" style="list-style-type: decimal">
-<li>Et produksjonsselskap har mulighet til å bruke tre forskjellige kjemikalier for å fremstille det samme produktet. Lederen ved produksjonsselskapet ønsker å undersøke hvorvidt det er forskjell på hvor mange mangelfulle produkter som blir produsert når en varierer bruken av type kjemikalier. Hun gjør et tilfeldig utvalg på 700 produkter og klassifiserer dem som enten tilfredsstillende eller mangelfull. Funnene er oppsummert i tabellen nedenfor:</li>
-</ol>
-<table>
-<colgroup>
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">Klassifisering/kjemikalie</th>
-<th align="center">Kjemikalie 1</th>
-<th align="center">Kjemikalie 2</th>
-<th align="center">Kjemikalie 3</th>
-<th align="center">sum</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">Tilfredstillende</td>
-<td align="center">268</td>
-<td align="center">216</td>
-<td align="center">164</td>
-<td align="center">648</td>
-</tr>
-<tr class="even">
-<td align="center">Mangelfull</td>
-<td align="center">15</td>
-<td align="center">17</td>
-<td align="center">20</td>
-<td align="center">52</td>
-</tr>
-<tr class="odd">
-<td align="center">sum</td>
-<td align="center">283</td>
-<td align="center">233</td>
-<td align="center">184</td>
-<td align="center">700</td>
-</tr>
-</tbody>
-</table>
-<p>Utfør en test for å avgjøre om det er en sammenheng mellom mangelfulle produkter og kjemikalie brukt under produksjon.</p>
-<details>
-<summary>
-Løsning
-</summary>
-<blockquote>
-<p>Vi skal altså teste <span class="math inline">\(H_0:\)</span> <em>De to variablene klassfisering og kjemikalie er uavhengige</em> mot <span class="math inline">\(H_A:\)</span> <em>Variablene klassifisering og kjemikalie er avhengige</em>. Vi begynner med å regne ut de forventede frekvensene ved bruk av formelen <span class="math inline">\(e_{ij} = f_{i.}f_{.j}/n\)</span>:</p>
-</blockquote>
-<table>
-<colgroup>
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">klas./kjem.</th>
-<th align="center">Kjem 1</th>
-<th align="center">Kjem 2</th>
-<th align="center">Kjem 3</th>
-<th align="center"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">Tilfreds.</td>
-<td align="center"><span class="math inline">\(e_{11} = 648\times 283/700 = 262.0\)</span></td>
-<td align="center"><span class="math inline">\(e_{12} = 648\times 233/700 = 215.7\)</span></td>
-<td align="center"><span class="math inline">\(e_{13} = 648\times 184/700 = 170.3\)</span></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">Mangel.</td>
-<td align="center"><span class="math inline">\(e_{21} = 52\times 283/700 = 21.0\)</span></td>
-<td align="center"><span class="math inline">\(e_{22} = 52\times 233/700 = 17.3\)</span></td>
-<td align="center"><span class="math inline">\(e_{23} = 52\times 184/700 = 13.7\)</span></td>
-<td align="center"></td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>Så regner vi ut hvert element <span class="math inline">\((f_{ij} - e_{ij})^2/e_{ij}\)</span> som skal inn i summen til test observatoren:</p>
-</blockquote>
-<table>
-<thead>
-<tr class="header">
-<th align="center">klas./kjem.</th>
-<th align="center">Kjem 1</th>
-<th align="center">Kjem 2</th>
-<th align="center">Kjem 3</th>
-<th align="center"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">Tilfreds.</td>
-<td align="center"><span class="math inline">\((268 - 262.0)^2/262 = 0.1384\)</span></td>
-<td align="center">0.0004</td>
-<td align="center">0.2353</td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center">Mangel.</td>
-<td align="center">1.7255</td>
-<td align="center">0.0055</td>
-<td align="center">2.9327</td>
-<td align="center"></td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>Testobservatoren er da gitt ved</p>
-</blockquote>
-<p><span class="math display">\[\chi^2 = \sum_{i = 1}^2\sum_{j = 1}^3(f_{ij} - e_{ij})^2/e_{ij} = 0.1385 + 0.0004 + 0.2352 + 1.7255 + 0.0055 + 2.9327 = 5.0378\]</span></p>
-<blockquote>
-<p>Forkastelsesområdet er <span class="math inline">\(\chi^2 &gt; \chi^2_{\alpha, (r - 1)(s - 1)} = \chi^2_{0.05, 2} = 5.99\)</span>. Siden <span class="math inline">\(\chi^2 = 5.0378 &lt; 5.99\)</span> forkaster vi <em>ikke</em> <span class="math inline">\(H_0\)</span> på 5 % signifikansnivå.</p>
-<p>I R ville vi gjort følgende:</p>
-</blockquote>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="oppgaver.html#cb112-1" tabindex="-1"></a>f <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">268</span>, <span class="dv">216</span>, <span class="dv">164</span>, <span class="dv">15</span>, <span class="dv">17</span>, <span class="dv">20</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> T)</span>
-<span id="cb112-2"><a href="oppgaver.html#cb112-2" tabindex="-1"></a><span class="fu">chisq.test</span>(f)</span></code></pre></div>
-<pre><code>## 
-##  Pearson&#39;s Chi-squared test
-## 
-## data:  f
-## X-squared = 5.038, df = 2, p-value = 0.08054</code></pre>
-<!-- n = 700 -->
-<!-- f = matrix(c(268, 216, 164, 15, 17, 20), nrow = 2, ncol = 3, byrow = T) -->
-<!-- for(i in 1:2){ -->
-<!-- for(j in 1:3){ -->
-<!-- e[i,j] = rowSums(f)[i]*colSums(f)[j]/n -->
-<!-- } -->
-<!-- } -->
-<!-- chi = matrix(NA, nrow = 2, ncol = 3) -->
-<!-- for(i in 1:2){ -->
-<!-- for(j in 1:3){ -->
-<!-- chi[i,j] = (f[i,j] - e[i,j])^2/e[i,j] -->
-<!-- sum(chi) -->
-<!-- chisq.test(f) #OK -->
-</details>
-<ol start="16" style="list-style-type: decimal">
 <li><p><em>(Eksamen vår 2024.)</em> En analytiker deler de månedlige avkastningene til S&amp;P 500-indeksen i to grupper: måneder klassifisert som <em>normal risiko</em> og måneder klassifisert som <em>høy risiko</em>. Utvalgene er oppsummert slik:</p>
 <table>
 <thead>
@@ -965,13 +738,13 @@ Løsning
 </blockquote>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
-<li>Fordi a viste ulik varians, bruker vi varianten med ulik varians (Welch). Vi tester <span class="math inline">\(H_0: \mu_1 - \mu_2 = 0\)</span> mot <span class="math inline">\(H_A: \mu_1 - \mu_2 \neq 0\)</span>:</li>
+<li>Fordi a viste ulik varians, bruker vi varianten med ulik varians (Welch). Vi tester <span class="math inline">\(H_0: \mu_1 = \mu_2\)</span> mot <span class="math inline">\(H_A: \mu_1 \neq \mu_2\)</span>:</li>
 </ol>
 <p><span class="math display">\[T = \frac{\overline{x}_1 - \overline{x}_2}{\sqrt{s_1^2/n_1 + s_2^2/n_2}} = \frac{0.68 - 5.52}{\sqrt{8.60^2/162 + 4.83^2/231}} = -6.48.\]</span></p>
 <p>Utvalgene er store, så den kritiske verdien er tilnærmet <span class="math inline">\(z_{0.025} = 1.96\)</span>. Siden <span class="math inline">\(|-6.48| = 6.48 &gt; 1.96\)</span> forkaster vi <span class="math inline">\(H_0\)</span>: den forventede avkastningen er forskjellig i de to gruppene (og lavest i høy-risiko-månedene).</p>
 </blockquote>
 </details>
-<ol start="17" style="list-style-type: decimal">
+<ol start="15" style="list-style-type: decimal">
 <li><em>(Eksamen vår 2025.)</em> I et atferdseksperiment skal deltakerne rapportere om de gjettet riktig i et terningspill, der en riktig gjetning gir en liten belønning (det er ingen kontroll av om de snakker sant). En <em>kontrollgruppe</em> får ingen ekstra informasjon, mens en <em>tillitsgruppe</em> først får lese en tekst som understreker at forskerne stoler på dem. Av 400 i tillitsgruppen rapporterte 116 en riktig gjetning, mot 181 av 400 i kontrollgruppen. Kan vi konkludere med at «tillits-teksten» reduserer andelen som rapporterer en (mistenkelig ofte) riktig gjetning? Bruk 1 %-signifikansnivå.</li>
 </ol>
 <details>
@@ -983,6 +756,209 @@ Løsning
 <p><span class="math display">\[Z = \frac{\widehat{p}_1 - \widehat{p}_2}{\sqrt{\widehat{p}(1-\widehat{p})(1/n_1 + 1/n_2)}} = \frac{0.29 - 0.4525}{\sqrt{0.371(1-0.371)(1/400 + 1/400)}} = -4.76.\]</span></p>
 <p>Forkastningsområdet er <span class="math inline">\(Z &lt; z_{0.01} = -2.33\)</span> (fra <code>qnorm(0.01)</code>). Siden <span class="math inline">\(-4.76 &lt; -2.33\)</span> forkaster vi <span class="math inline">\(H_0\)</span>: tillits-teksten ser ut til å redusere andelen som rapporterer en riktig gjetning. En naturlig tolkning er at teksten fikk færre til å jukse.</p>
 </blockquote>
+</details>
+<ol start="16" style="list-style-type: decimal">
+<li>En nettbutikk vil undersøke om antall bestillinger fordeler seg jevnt over ukedagene (mandag til fredag), eller om noen dager er travlere enn andre. I en tilfeldig valgt uke registreres antall bestillinger per dag:</li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Dag</th>
+<th align="center">Man</th>
+<th align="center">Tir</th>
+<th align="center">Ons</th>
+<th align="center">Tor</th>
+<th align="center">Fre</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bestillinger</td>
+<td align="center">95</td>
+<td align="center">110</td>
+<td align="center">100</td>
+<td align="center">130</td>
+<td align="center">165</td>
+</tr>
+</tbody>
+</table>
+<p>Test på 5 %-signifikansnivå om bestillingene fordeler seg jevnt over de fem ukedagene.</p>
+<details>
+<summary>
+Løsning
+</summary>
+<blockquote>
+<p>Er bestillingene jevnt fordelt, er sannsynligheten den samme for hver dag, altså <span class="math inline">\(p_i = 1/5\)</span> for alle fem dagene. Vi tester <span class="math inline">\(H_0: p_1 = p_2 = \cdots = p_5 = 1/5\)</span> mot <span class="math inline">\(H_A:\)</span> minst én av andelene er forskjellig, på 5 %-nivå. Med totalt <span class="math inline">\(n = 600\)</span> bestillinger er det forventede antallet per dag <span class="math inline">\(e_i = 600 \cdot 1/5 = 120\)</span>. Testobservatoren regnes ut slik:</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Dag</th>
+<th align="center"><span class="math inline">\(f_i\)</span></th>
+<th align="center"><span class="math inline">\(e_i\)</span></th>
+<th align="center"><span class="math inline">\((f_i - e_i)^2/e_i\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Man</td>
+<td align="center">95</td>
+<td align="center">120</td>
+<td align="center">5.208</td>
+</tr>
+<tr class="even">
+<td align="left">Tir</td>
+<td align="center">110</td>
+<td align="center">120</td>
+<td align="center">0.833</td>
+</tr>
+<tr class="odd">
+<td align="left">Ons</td>
+<td align="center">100</td>
+<td align="center">120</td>
+<td align="center">3.333</td>
+</tr>
+<tr class="even">
+<td align="left">Tor</td>
+<td align="center">130</td>
+<td align="center">120</td>
+<td align="center">0.833</td>
+</tr>
+<tr class="odd">
+<td align="left">Fre</td>
+<td align="center">165</td>
+<td align="center">120</td>
+<td align="center">16.875</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Sum</strong></td>
+<td align="center">600</td>
+<td align="center">600</td>
+<td align="center"><span class="math inline">\(\chi^2 = 27.08\)</span></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Testobservatoren er kji-kvadratfordelt med <span class="math inline">\(k - 1 = 4\)</span> frihetsgrader, og forkastningsområdet er <span class="math inline">\(\chi^2 &gt; \chi^2_{0.05,\,4} = 9.49\)</span>. Siden <span class="math inline">\(27.08 &gt; 9.49\)</span> forkaster vi <span class="math inline">\(H_0\)</span>: bestillingene fordeler seg <em>ikke</em> jevnt over ukedagene. Det største bidraget kommer fra fredag (165 mot 120 forventet), så fredag ser ut til å være spesielt travel.</p>
+</blockquote>
+</details>
+<ol start="17" style="list-style-type: decimal">
+<li>Et produksjonsselskap har mulighet til å bruke tre forskjellige kjemikalier for å fremstille det samme produktet. Lederen ved produksjonsselskapet ønsker å undersøke hvorvidt det er forskjell på hvor mange mangelfulle produkter som blir produsert når en varierer bruken av type kjemikalier. Hun gjør et tilfeldig utvalg på 700 produkter og klassifiserer dem som enten tilfredsstillende eller mangelfull. Funnene er oppsummert i tabellen nedenfor:</li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Klassifisering</th>
+<th align="center">Kjemikalie 1</th>
+<th align="center">Kjemikalie 2</th>
+<th align="center">Kjemikalie 3</th>
+<th align="center">Sum</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Tilfredsstillende</td>
+<td align="center">268</td>
+<td align="center">216</td>
+<td align="center">164</td>
+<td align="center">648</td>
+</tr>
+<tr class="even">
+<td align="left">Mangelfull</td>
+<td align="center">15</td>
+<td align="center">17</td>
+<td align="center">20</td>
+<td align="center">52</td>
+</tr>
+<tr class="odd">
+<td align="left">Sum</td>
+<td align="center">283</td>
+<td align="center">233</td>
+<td align="center">184</td>
+<td align="center">700</td>
+</tr>
+</tbody>
+</table>
+<p>Utfør en test for å avgjøre om det er en sammenheng mellom mangelfulle produkter og kjemikalie brukt under produksjonen. Bruk 5 % signifikansnivå.</p>
+<details>
+<summary>
+Løsning
+</summary>
+<blockquote>
+<p>Vi skal altså teste <span class="math inline">\(H_0:\)</span> <em>de to kjennetegnene klassifisering og kjemikalie er uavhengige</em> mot <span class="math inline">\(H_A:\)</span> <em>de er avhengige</em>. Vi begynner med å regne ut de forventede frekvensene ved bruk av formelen <span class="math inline">\(e_{ij} = f_{i\cdot}f_{\cdot j}/n\)</span>:</p>
+</blockquote>
+<table>
+<colgroup>
+<col width="11%" />
+<col width="29%" />
+<col width="29%" />
+<col width="29%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">klas./kjem.</th>
+<th align="center">Kjem 1</th>
+<th align="center">Kjem 2</th>
+<th align="center">Kjem 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Tilfreds.</td>
+<td align="center"><span class="math inline">\(e_{11} = 648\cdot 283/700 = 262.0\)</span></td>
+<td align="center"><span class="math inline">\(e_{12} = 648\cdot 233/700 = 215.7\)</span></td>
+<td align="center"><span class="math inline">\(e_{13} = 648\cdot 184/700 = 170.3\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Mangel.</td>
+<td align="center"><span class="math inline">\(e_{21} = 52\cdot 283/700 = 21.0\)</span></td>
+<td align="center"><span class="math inline">\(e_{22} = 52\cdot 233/700 = 17.3\)</span></td>
+<td align="center"><span class="math inline">\(e_{23} = 52\cdot 184/700 = 13.7\)</span></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Så regner vi ut hvert ledd <span class="math inline">\((f_{ij} - e_{ij})^2/e_{ij}\)</span> som skal inn i summen til testobservatoren:</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th align="left">klas./kjem.</th>
+<th align="center">Kjem 1</th>
+<th align="center">Kjem 2</th>
+<th align="center">Kjem 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Tilfreds.</td>
+<td align="center"><span class="math inline">\((268 - 262.0)^2/262 = 0.1384\)</span></td>
+<td align="center">0.0004</td>
+<td align="center">0.2353</td>
+</tr>
+<tr class="even">
+<td align="left">Mangel.</td>
+<td align="center">1.7255</td>
+<td align="center">0.0055</td>
+<td align="center">2.9327</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Testobservatoren er da gitt ved</p>
+</blockquote>
+<p><span class="math display">\[\chi^2 = \sum_{i=1}^2\sum_{j=1}^3 (f_{ij} - e_{ij})^2/e_{ij} = 0.1385 + 0.0004 + 0.2352 + 1.7255 + 0.0055 + 2.9327 = 5.0378.\]</span></p>
+<blockquote>
+<p>Forkastningsområdet er <span class="math inline">\(\chi^2 &gt; \chi^2_{\alpha,\,(r-1)(s-1)} = \chi^2_{0.05,\,2} = 5.99\)</span>. Siden <span class="math inline">\(\chi^2 = 5.0378 &lt; 5.99\)</span> forkaster vi <em>ikke</em> <span class="math inline">\(H_0\)</span> på 5 %-signifikansnivå.</p>
+<p>I R ville vi gjort følgende:</p>
+</blockquote>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="oppgaver.html#cb112-1" tabindex="-1"></a>f <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">268</span>, <span class="dv">216</span>, <span class="dv">164</span>, <span class="dv">15</span>, <span class="dv">17</span>, <span class="dv">20</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> T)</span>
+<span id="cb112-2"><a href="oppgaver.html#cb112-2" tabindex="-1"></a><span class="fu">chisq.test</span>(f)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test
+## 
+## data:  f
+## X-squared = 5.038, df = 2, p-value = 0.08054</code></pre>
 </details>
 </div>
 <div id="ntter-1" class="section level3 hasAnchor" number="3.5.2">
