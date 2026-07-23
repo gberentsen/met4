@@ -1239,7 +1239,7 @@ c. Forsker A får et ikke-signifikant resultat og konkluderer med at «effekten 
 
 <details><summary>Løsning</summary>
 
->a. Vi forkaster når $Z = \overline{X}\sqrt{n} > 1.645$, altså når $\overline{X} > 1.645/\sqrt{n}$. For $n = 10$ er grensen $1.645/\sqrt{10} = 0.520$; for $n = 100$ er den $1.645/\sqrt{100} = 0.165$.
+>a. Vi forkaster når $Z > 1.645$. Skriver vi ut testobservatoren, er $Z = \dfrac{\overline{X}}{1/\sqrt{n}} = \overline{X}\sqrt{n}$, så vilkåret $Z > 1.645$ blir $\overline{X}\sqrt{n} > 1.645$, altså $\overline{X} > 1.645/\sqrt{n}$. For $n = 10$ er grensen $1.645/\sqrt{10} = 0.520$; for $n = 100$ er den $1.645/\sqrt{100} = 0.165$.
 
 >b. Styrken er $P(\overline{X} > 1.645/\sqrt{n}\ \text{når}\ \mu = 0.5)$. Vi standardiserer med den sanne forventningen $0.5$:
 >$$\text{styrke} = P\!\left(Z > \frac{1.645/\sqrt{n} - 0.5}{1/\sqrt{n}}\right) = P\!\left(Z > 1.645 - 0.5\sqrt{n}\right).$$
