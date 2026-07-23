@@ -35,6 +35,7 @@ et-eksempel-i-r
 kontrollsprsmal
 utvalg-og-estimering
 populasjon-parameter-og-estimator
+hva-er-et-tilfeldig-utvalg
 populasjonen-som-sannsynlighetsmodell
 forventning-varians
 utvalgsstrrelser-og-populasjonsstrrelser
