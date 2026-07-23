@@ -313,11 +313,13 @@ Som i forrige delkapittel viser vi for hver test først hvordan den gjøres manu
 
 ### To-utvalgs t-test
 
-Når vi vil sammenligne forventningene i to *uavhengige* grupper, tester vi $H_0: \mu_1 = \mu_2$, altså at differansen $\mu_1 - \mu_2$ er null. Testobservatoren er differansen mellom de to utvalgsgjennomsnittene, målt i antall standardfeil:
+Når vi vil sammenligne forventningene i to *uavhengige* grupper, tester vi $H_0: \mu_1 = \mu_2$ (altså at differansen $\mu_1 - \mu_2$ er null) mot et av alternativene $H_A: \mu_1 \neq \mu_2$ (tosidig), $H_A: \mu_1 > \mu_2$ eller $H_A: \mu_1 < \mu_2$ (ensidig). Testobservatoren er differansen mellom de to utvalgsgjennomsnittene, målt i antall standardfeil:
 
 $$T = \frac{\overline{X}_1 - \overline{X}_2}{SE},$$
 
 der $SE$ er standardfeilen til differansen $\overline{X}_1 - \overline{X}_2$. Når $H_0$ er sann, er $T$ t-fordelt, men *hvordan* vi regner ut $SE$, og *hvor mange frihetsgrader* t-fordelingen har, avhenger av om vi antar at de to populasjonene har lik varians.
+
+Her er $s_1^2$ og $s_2^2$ de to *utvalgsvariansene* og $n_1$ og $n_2$ de to *utvalgsstørrelsene* (antall observasjoner i hver gruppe).
 
 Antar vi **lik varians**, estimerer vi den felles variansen ved å slå sammen (poole) de to utvalgsvariansene,
 
@@ -372,11 +374,11 @@ Se på **p-verdien**: den er 0.005, godt under signifikansnivået på 0.10, så 
 
 Noen ganger er de to utvalgene *ikke* uavhengige, men naturlig *paret*: vi måler den samme enheten to ganger (for eksempel før og etter et tiltak), eller vi matcher enheter parvis. Da ville en vanlig to-utvalgs t-test kaste bort informasjonen som ligger i paringen. Tenk deg at en butikkjede måler omsetningen i hver butikk før og etter en ombygging. Butikkene er svært ulike i utgangspunktet, noen store og noen små, så variasjonen i omsetning *mellom* butikkene er stor. En to-utvalgs t-test behandler «før» og «etter» som to uavhengige grupper, og da drukner den lille, systematiske endringen vi er ute etter, i den store variasjonen mellom butikkene.
 
-Løsningen er å se på *differansen* innenfor hvert par, $d_i = x_i - y_i$. Da sammenligner vi hver butikk med seg selv, forskjellene i størrelse mellom butikkene faller bort, og bare selve effekten (pluss litt måletilfeldighet) blir igjen. På differansene gjør vi så en helt vanlig ett-utvalgs t-test: $H_0: \mu_d = 0$, med testobservator
+Løsningen er å se på *differansen* innenfor hvert par. La $x_{i1}$ og $x_{i2}$ være de to måltallene for par nummer $i$ (for eksempel omsetningen i butikk $i$ før og etter ombyggingen), og se på differansen $d_i = x_{i1} - x_{i2}$. Da sammenligner vi hver butikk med seg selv: forskjellene i størrelse mellom butikkene faller bort, og bare selve effekten (pluss litt måletilfeldighet) blir igjen. På differansene $d_1, \ldots, d_n$ gjør vi så en helt vanlig ett-utvalgs t-test. Kaller vi den forventede differansen $\mu_d$ (som er det samme som $\mu_1 - \mu_2$), tester vi $H_0: \mu_d = 0$, med testobservator
 
 $$T = \frac{\overline{d}}{s_d/\sqrt{n}},$$
 
-t-fordelt med $n-1$ frihetsgrader, der $n$ er antall par. Nøkkelspørsmålet er alltid: er de to måltallene paret (avhengige) eller uavhengige? Er de paret, bruker vi den parede testen.
+t-fordelt med $n-1$ frihetsgrader. Her er $n$ antall par, $\overline{d}$ gjennomsnittet av differansene og $s_d$ utvalgsstandardavviket deres. Nøkkelspørsmålet er alltid: er de to måltallene paret (avhengige) eller uavhengige? Er de paret, bruker vi den parede testen.
 
 **Eksempel.** En butikkjede bygger om 12 av butikkene sine og vil vite om ombyggingen økte ukesomsetningen. For hver butikk har vi omsetningen (i 1000 kr) *før* og *etter* ombyggingen. Siden det er de *samme* butikkene som måles to ganger, er dataene paret.
 
@@ -416,16 +418,18 @@ t.test(etter_ombygging, for_ombygging, paired = TRUE, alternative = "greater")
 
 ### Sammenligning av to varianser
 
-Endelig kan vi sammenligne *spredningen* i to populasjoner, altså teste $H_0: \sigma_1 = \sigma_2$. Her bruker vi *forholdet* mellom de to utvalgsvariansene som testobservator:
+Endelig kan vi sammenligne *spredningen* i to populasjoner, altså teste $H_0: \sigma_1^2 = \sigma_2^2$ (like varianser). Her bruker vi *forholdet* mellom de to utvalgsvariansene som testobservator:
 
 $$F = \frac{s_1^2}{s_2^2},$$
 
 som under $H_0$ følger en **F-fordeling** med $(n_1 - 1, n_2 - 1)$ frihetsgrader. Er de to variansene like, ligger $F$ nær 1; er $s_1^2$ mye større enn $s_2^2$, blir $F$ stor. Som kji-kvadratfordelingen er F-fordelingen asymmetrisk og lever bare på positive verdier.
 
+Et nyttig triks er å alltid sette den *største* utvalgsvariansen i telleren. Da blir $F > 1$, og vi trenger bare å sammenligne med den kritiske verdien i *høyre* hale av F-fordelingen, uansett om testen er ensidig eller tosidig (se \@ref(relevante-r-testing)).
+
 **Eksempel.** En investor vil vite om det ene av to fond har høyere risiko, målt ved standardavviket til den månedlige avkastningen, enn det andre. Vi har 30 månedlige avkastninger (i prosent) fra hvert fond.
 
 1. **Spørsmål:** Er standardavviket i avkastning større for fond 1 enn for fond 2?
-2. **Hypoteser og signifikansnivå:** $H_0: \sigma_1 = \sigma_2$ mot $H_A: \sigma_1 > \sigma_2$ (ensidig). En Type I-feil ville være å velge bort fond 1 som «for risikofylt» uten grunnlag. Vi velger $\alpha = 5\,\%$.
+2. **Hypoteser og signifikansnivå:** $H_0: \sigma_1^2 = \sigma_2^2$ mot $H_A: \sigma_1^2 > \sigma_2^2$ (ensidig); dette er det samme som å teste om standardavviket $\sigma_1$ er større enn $\sigma_2$. En Type I-feil ville være å velge bort fond 1 som «for risikofylt» uten grunnlag. Vi velger $\alpha = 5\,\%$.
 3. **Data:** (simulert):
 
 ```{r}
@@ -434,7 +438,7 @@ fond1 <- rnorm(30, mean = 0.8, sd = 5.5)
 fond2 <- rnorm(30, mean = 0.9, sd = 3.6)
 ```
 
-4. **Testobservator:** $F = s_1^2/s_2^2$:
+4. **Testobservator:** $F = s_1^2/s_2^2$. Her har fond 1 den største utvalgsvariansen, så vi setter den i telleren (jf. trikset over) og trenger bare å se på høyre hale:
 
 ```{r}
 F_obs <- var(fond1)/var(fond2)
@@ -459,7 +463,7 @@ var.test(fond1, fond2, alternative = "greater")
 
 ### Sammenligning av to andeler
 
-Vil vi sammenligne to *andeler*, for eksempel konverteringsraten for to annonser, tester vi $H_0: p_1 = p_2$. Under nullhypotesen er de to andelene like, så vi slår sammen (pooler) dataene til ett felles estimat $\widehat{p} = (x_1 + x_2)/(n_1 + n_2)$, der $x_1$ og $x_2$ er antall «suksesser» i de to gruppene. Testobservatoren er
+Vil vi sammenligne to *andeler*, for eksempel konverteringsraten (andelen av dem som ser en annonse som faktisk handler) for to ulike annonser, tester vi $H_0: p_1 = p_2$. Under nullhypotesen er de to andelene like, så vi slår sammen (pooler) dataene til ett felles estimat $\widehat{p} = (x_1 + x_2)/(n_1 + n_2)$, der $x_1$ og $x_2$ er antall «suksesser» i de to gruppene. Testobservatoren er
 
 $$Z = \frac{\widehat{p}_1 - \widehat{p}_2}{\sqrt{\widehat{p}(1-\widehat{p})\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}},$$
 
