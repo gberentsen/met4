@@ -1062,9 +1062,15 @@ Løsning
 </blockquote>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
-<li>Styrken er <span class="math inline">\(P(\overline{X} &gt; 1.645/\sqrt{n}\ \text{når}\ \mu = 0.5)\)</span>. Vi standardiserer med den sanne forventningen <span class="math inline">\(0.5\)</span>:
-<span class="math display">\[\text{styrke} = P\!\left(Z &gt; \frac{1.645/\sqrt{n} - 0.5}{1/\sqrt{n}}\right) = P\!\left(Z &gt; 1.645 - 0.5\sqrt{n}\right).\]</span>
-For <span class="math inline">\(n = 10\)</span>: <span class="math inline">\(P(Z &gt; 1.645 - 1.58) = P(Z &gt; 0.06) \approx 0.47\)</span>. For <span class="math inline">\(n = 100\)</span>: <span class="math inline">\(P(Z &gt; 1.645 - 5) = P(Z &gt; -3.36) \approx 1.00\)</span>. Med bare 10 observasjoner oppdager forsker A en reell effekt mindre enn halvparten av gangene.</li>
+<li>Styrken er sannsynligheten for å havne i forkastningsområdet, altså <span class="math inline">\(P(\overline{X} &gt; 1.645/\sqrt{n})\)</span>, men nå regnet ut i den <em>sanne</em> situasjonen der <span class="math inline">\(\mu = 0.5\)</span>. Da er <span class="math inline">\(\overline{X}\)</span> normalfordelt med forventning <span class="math inline">\(0.5\)</span> og standardavvik <span class="math inline">\(1/\sqrt{n}\)</span> (siden <span class="math inline">\(\sigma = 1\)</span>). For å kunne slå opp i standardnormalfordelingen trekker vi fra forventningen <span class="math inline">\(0.5\)</span> og deler på standardavviket <span class="math inline">\(1/\sqrt{n}\)</span> på <em>begge</em> sider av ulikheten inne i sannsynligheten:
+<span class="math display">\[\begin{equation*}
+\begin{split}
+\text{styrke} &amp;= P\!\left(\overline{X} &gt; \frac{1.645}{\sqrt{n}}\right)\\
+&amp;= P\!\left(\underbrace{\frac{\overline{X} - 0.5}{1/\sqrt{n}}}_{=\,Z} &gt; \frac{1.645/\sqrt{n} - 0.5}{1/\sqrt{n}}\right)\\
+&amp;= P\!\left(Z &gt; 1.645 - 0.5\sqrt{n}\right).
+\end{split}
+\end{equation*}\]</span>
+Venstresiden er nå per definisjon en standard normalfordelt variabel <span class="math inline">\(Z\)</span> (vi har standardisert <span class="math inline">\(\overline{X}\)</span> med den sanne forventningen og standardavviket). På høyresiden har vi bare ganget ut: <span class="math inline">\(\dfrac{1.645/\sqrt{n}}{1/\sqrt{n}} = 1.645\)</span> og <span class="math inline">\(\dfrac{0.5}{1/\sqrt{n}} = 0.5\sqrt{n}\)</span>. For <span class="math inline">\(n = 10\)</span>: <span class="math inline">\(P(Z &gt; 1.645 - 1.58) = P(Z &gt; 0.06) \approx 0.47\)</span>. For <span class="math inline">\(n = 100\)</span>: <span class="math inline">\(P(Z &gt; 1.645 - 5) = P(Z &gt; -3.36) \approx 1.00\)</span>. Med bare 10 observasjoner oppdager forsker A en reell effekt mindre enn halvparten av gangene.</li>
 </ol>
 </blockquote>
 <blockquote>
