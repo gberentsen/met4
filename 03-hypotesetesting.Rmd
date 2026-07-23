@@ -327,7 +327,11 @@ $$s_p^2 = \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2},$$
 
 og setter $SE = s_p\sqrt{1/n_1 + 1/n_2}$. Testobservatoren $T$ er da t-fordelt med $n_1 + n_2 - 2$ frihetsgrader.
 
-Antar vi **ulik varians**, bruker vi i stedet $SE = \sqrt{s_1^2/n_1 + s_2^2/n_2}$, og $T$ er tilnærmet t-fordelt med et frihetsgradstall som regnes ut fra dataene. Dette kalles Welchs test, og er det R gjør som standard.
+Antar vi **ulik varians**, bruker vi i stedet $SE = \sqrt{s_1^2/n_1 + s_2^2/n_2}$, og $T$ er tilnærmet t-fordelt med et frihetsgradstall $\nu$ som regnes ut fra dataene med Welch-Satterthwaite-formelen
+
+$$\nu = \frac{\left(s_1^2/n_1 + s_2^2/n_2\right)^2}{\left(s_1^2/n_1\right)^2/(n_1-1) + \left(s_2^2/n_2\right)^2/(n_2-1)}.$$
+
+Dette kalles Welchs test, og er det R gjør som standard. I praksis lar vi som regel R regne ut $\nu$ (den blir sjelden et helt tall).
 
 Intuisjonen er den samme som i ett-utvalgstesten: ligger de to gjennomsnittene mange standardfeil fra hverandre, taler det mot at populasjonene har samme forventning.
 
@@ -763,27 +767,23 @@ Alle de forventede antallene er godt over 5 (det minste er omtrent 87), så tiln
 
 </details>
 
-5.  En leder frykter at den gjennomsnittlige tiden ansatte daglig bruker på sosiale medier overstiger 45 minutter. For å teste denne mistanken, plukker han ut et tilfeldig utvalg på 15 personer, og spør om tid brukt på sosiale medier etter en tilfeldig arbeidsdag. Resultatene er oppsummert nedenfor. 
+5.  En leder frykter at den gjennomsnittlige tiden ansatte daglig bruker på sosiale medier overstiger 45 minutter. For å teste denne mistanken plukker han ut et tilfeldig utvalg på 15 personer og spør om tid brukt på sosiale medier etter en tilfeldig arbeidsdag. Resultatene (i minutter) er:
 
           70, 96, 58, 88, 34, 42, 34, 56, 68, 46, 26, 18, 22, 60, 84
 
-    a. Hvis samlingen av tider er normalfordelt med standardavvik på 20 minutter, kan lederen hevde at mistanken hans stemmer på et 1 % signifikans-nivå?
+    a. Anta at tidene er tilnærmet normalfordelt. Kan lederen hevde at mistanken hans stemmer på et 1 %-signifikansnivå?
 
     b. Tror du observasjonene over er et representativt utvalg? Hva kunne lederen gjort annerledes?
 
 <details><summary>Løsning</summary>
 
->   a. Lederen ønsker altså å teste $H_0: \mu = 45$ mot alternativ hypotesen $H_A: \mu > 45$. Testobservatoren er da gitt ved 
+>   a. Lederen ønsker å teste $H_0: \mu = 45$ mot $H_A: \mu > 45$. Vi kjenner ikke det sanne standardavviket, så vi bruker en t-test med $n - 1 = 14$ frihetsgrader. Fra de 15 observasjonene regner vi ut utvalgsgjennomsnittet $\overline{x} = 53.47$ og utvalgsstandardavviket $s = 24.55$ (i R: `mean()` og `sd()`). Testobservatoren er
 >
->$$Z = \frac{\overline{X} - \mu_0}{\sigma/\sqrt{n}} = \frac{53.46 - 45}{20/\sqrt{15}} = 1.64$$ 
+>$$T = \frac{\overline{x} - \mu_0}{s/\sqrt{n}} = \frac{53.47 - 45}{24.55/\sqrt{15}} = 1.34.$$
 >
->Sannsynligheten for å observerer noe minst like ekstremt og til fordel for $H_A$ (p-verdien) er da
+>p-verdien er $P(T > 1.34) \approx 0.10$ (i R: `1 - pt(1.34, df = 14)`), altså langt over 0.01. Alternativt er den kritiske verdien $t_{0.01,\,14} = 2.62$, og siden $1.34 < 2.62$ kan vi ikke forkaste. Lederen kan altså ikke trekke denne konklusjonen på 1 %-signifikansnivå.
 >
->$$P-verdi = P(Z > 1.645) \approx 0.05 > 0.01$$.
->
-> Lederen kan altså ikke trekke denne konklusjonen på 1 % signifikansnivå. For å forkaste null hypotesen på et 1 % signifikansnivå, måtte vi hatt p-verdi lavere enn 1 %. 
->
->   b. Dersom lederen spør ansatte fjes til fjes er det nærliggende å tro at de ansatte vil underdrive sin bruk av sosiale medier. En anonym spørreundersøkelse ville nok gitt et mer representativt utvalg.
+>   b. Dersom lederen spør ansatte ansikt til ansikt, er det nærliggende å tro at de vil underdrive sin bruk av sosiale medier. En anonym spørreundersøkelse ville nok gitt et mer representativt utvalg.
 
 </details>
 
@@ -818,17 +818,19 @@ Alle de forventede antallene er godt over 5 (det minste er omtrent 87), så tiln
 
 </details>
 
-7. Med sterkt fall i flyreiser og passasjerer på grunn av koronakrisen var det i samme periode sannsynlig med færre forsinkelser i flytrafikken. Før krisen hevdet et flyselskap at de landet presist 92 % av flyreisene. I et tilfeldig utvalg flyreiser hos det samme selskapet under krisen ble 156 av 165 vurdert til å være presise. Kan vi konkludere på 5 % signifikansnivå at det er færre forsinkelser under koronakrisen? 
-
+7. Et flyselskap har historisk landet presis (i rute) 92 % av flyreisene sine. Etter at selskapet innførte et nytt system for logistikk og ruteplanlegging, vil de undersøke om punktligheten har blitt bedre. I et tilfeldig utvalg på 165 flyreiser etter innføringen ble 156 vurdert som presise. Kan vi konkludere på 5 % signifikansnivå at andelen presise flyreiser har økt?
 
 <details><summary>Løsning</summary>
->La $p$ være den sanne andelen av flyreiser som kommer presist under krisen. Vi skal da teste $H_0: p = 0.92$ mot $H_A: p > 0.92$. Vårt estimat på $p$ er $\hat{p}=156/165 \approx 0.945$ og testobservatoren er gitt ved
 
->$$z = \frac{\hat{p} - p_0}{\sqrt{p_0(1 - p_0)/n}} = \frac{0.945 - 0.92}{\sqrt{0.92(1 - 0.92)/165}} \approx 1.18$$
->Dersom vi bruker kritisk verdi ville forkastningsområdet vært $z > 1.645$ og siden $z < 1.645$ kan vi altså ikke forkaste $H_0$. Alternativt kan vi regne ut p-verdien som er "sannsynligheten for det vi har observert eller noe enda mer til fordel for $H_A$. En enda mer positiv verdi enn 1.18 ville vært til fordel for $H_A$, derfor er 
-
->$$p-verdi = P(Z >  1.18) = = 1 - P(Z < 1.18) \approx 0.12$$
->og vi kan derfor *ikke* forkaste $H_0$ siden p-verdien *ikke* er mindre enn 0.05. TIPS: $P(Z<1.18) =$ `pnorm(1.18)` i R.
+>La $p$ være den sanne andelen presise flyreiser etter innføringen av det nye systemet. Vi tester $H_0: p = 0.92$ mot $H_A: p > 0.92$. Estimatet er $\hat{p} = 156/165 \approx 0.945$, og testobservatoren er
+>
+>$$z = \frac{\hat{p} - p_0}{\sqrt{p_0(1 - p_0)/n}} = \frac{0.945 - 0.92}{\sqrt{0.92(1 - 0.92)/165}} \approx 1.18.$$
+>
+>Forkastningsområdet er $z > 1.645$, og siden $z < 1.645$ kan vi ikke forkaste $H_0$. Alternativt regner vi ut p-verdien, sannsynligheten for å observere noe minst så positivt som 1.18 til fordel for $H_A$:
+>
+>$$\text{p-verdi} = P(Z > 1.18) = 1 - P(Z < 1.18) \approx 0.12,$$
+>
+>og vi kan derfor *ikke* forkaste $H_0$, siden p-verdien ikke er mindre enn 0.05. (I R: $P(Z < 1.18)$ = `pnorm(1.18)`.)
 
 </details>
 
@@ -848,7 +850,7 @@ Alle de forventede antallene er godt over 5 (det minste er omtrent 87), så tiln
 	  
 <details><summary>Løsning</summary>
 
-a. Vi skal altså teste $H_0: \mu_1 - \mu_2 = 0$ mot $H_A: \mu_1 - \mu_2 > 0$. Siden variansene i utvalget er såpass ulike antar vi at vi må bruke varianten av testen med ulik varians. Testobservatoren er da gitt ved
+a. Vi skal altså teste $H_0: \mu_1 = \mu_2$ mot $H_A: \mu_1 > \mu_2$. Siden variansene i utvalget er såpass ulike antar vi at vi må bruke varianten av testen med ulik varians. Testobservatoren er da gitt ved
 
 $$T = \frac{\overline{x}_1 - \overline{x}_2 - 0}{\sqrt{\frac{s^2_{1}}{n_1} + \frac{s^2_{2}}{n_2}}}=\frac{400 - 390}{\sqrt{\frac{130^2}{130} + \frac{50^2}{130}}} = 0.82$$
 Antall frihetsgrader oppgis til å være $v \approx 166$. Vi forkaster $H_0$ dersom $T > t_{0.05, 166} = 1.654$, og siden dette *ikke* er tilfelle her kan vi *ikke* forkaste $H_0$ ved 5 % signifikansnivå. 
@@ -916,11 +918,11 @@ c. Hvilke av de to foregående testene bør en bruke i dette tilfellet?
 
 <details><summary>Løsning</summary>
 
->a. La $\mu_1$ og $\mu_2$ være forventet tid til registrering av lus i et basseng for hhv metode B og metode A. Da er R-utskriften en test av $H_0: \mu_1 - \mu_2 = 0$ mot det enside alternativet $H_A: \mu_1-\mu_2 > 0$. Fra utskriften ser vi at $p-value= 0.06164 > 0.05$, altså kan vi ikke forkaste $H_0$ ved $5\%$ signifikansnivå.
+>a. La $\mu_1$ og $\mu_2$ være forventet tid til registrering av lus i et basseng for hhv. metode B og metode A. Da er R-utskriften en test av $H_0: \mu_1 = \mu_2$ mot det ensidige alternativet $H_A: \mu_1 > \mu_2$. Fra utskriften ser vi at $p\text{-value} = 0.06164 > 0.05$, altså kan vi ikke forkaste $H_0$ ved $5\,\%$ signifikansnivå.
 >
-Praktisk tolkning: Vi kan ikke konkludere med at det er noe forskjell i tiden de to metodene bruker.
+>Praktisk tolkning: Vi kan ikke konkludere med at det er noen forskjell i tiden de to metodene bruker.
 >
->b.I en paret t-test baserer vil testen på de parvise differansene $d_i = x_i - y_i$, der $x_i$ og $y_i$ er tiden hhv metode B og A bruker på å registrere lus i basseng nr. i. Utskriften viser en test av $H_0: \mu_d = 0$ mot det ensidige alternativet $H_A: \mu_d > 0$. Testobservatoren er da gitt ved
+>b. I en paret t-test baserer testen seg på de parvise differansene $d_i = x_{i1} - x_{i2}$, der $x_{i1}$ og $x_{i2}$ er tiden hhv. metode B og metode A bruker på å registrere lus i basseng nr. $i$. Utskriften viser en test av $H_0: \mu_d = 0$ mot det ensidige alternativet $H_A: \mu_d > 0$. Testobservatoren er da gitt ved
 >
 > $$T=\frac{\overline{d}-0}{s_d/\sqrt{n}}$$ 
 >
