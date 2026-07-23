@@ -78,10 +78,10 @@ ggplot(kurve, aes(x, tetthet)) +
 
 Hvor overrasket må vi være før vi forkaster? Her må vi ta stilling til at en test kan gå galt på to måter:
 
-| Vår avgjørelse | $H_0$ er sann | $H_0$ er usann |
-|:---|:---|:---|
-| **Forkaster $H_0$** | Type I-feil | Riktig |
-| **Beholder $H_0$** | Riktig | Type II-feil |
+| Vår avgjørelse      | $H_0$ er sann | $H_0$ er usann |
+|:--------------------|:-------------:|:--------------:|
+| **Forkaster $H_0$** | Type I-feil   | Riktig         |
+| **Beholder $H_0$**  | Riktig        | Type II-feil   |
 
 En **Type I-feil** er å forkaste en sann nullhypotese (dømme en uskyldig). En **Type II-feil** er å beholde en usann nullhypotese (frikjenne en skyldig).
 
@@ -1268,9 +1268,9 @@ library(readxl)
 testdata <- read_excel("testdata.xls")
 ```
 
-a. Test på 5 %-nivå om den forventede verdien til `X1` er lik 100, mot det tosidige alternativet. Bruk `t.test()`. Hva blir konklusjonen?
+a. Test på 5 %-nivå om populasjonsgjennomsnittet til `X1` er lik 100, mot det tosidige alternativet. Bruk `t.test()`. Hva blir konklusjonen?
 
-b. Test på 5 %-nivå om `X1` og `X2` har samme forventning. Se på **p-verdien** i utskriften og konkluder.
+b. Test på 5 %-nivå om `X1` og `X2` har samme populasjonsgjennomsnitt. Se på **p-verdien** i utskriften og konkluder.
 
 c. Kjør testen i b på nytt, men med `alternative = "greater"`. Hva tester du nå, og hvordan endrer p-verdien seg?
 
