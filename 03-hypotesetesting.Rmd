@@ -1462,20 +1462,6 @@ t.test(verdi ~ gruppe, data = df)
 
 **Viktig:** Når du bruker `~`-syntaksen, bestemmes rekkefølgen av *nivårekkefølgen* til den kategoriske variabelen (alfabetisk som standard). Det betyr at R ser på differansen mellom det *første* nivået og det *andre* nivået. Dersom nivåene er `"No"` og `"Yes"`, vil R teste differansen `No - Yes`, fordi `"No"` kommer før `"Yes"` alfabetisk. Utskriften fra `t.test()` vil alltid vise dette eksplisitt, for eksempel: `"alternative hypothesis: true difference in means between group No and group Yes is less than 0"`. For ensidige tester må du derfor tilpasse `alternative`-argumentet til denne rekkefølgen: Dersom du ønsker å teste om gruppe `"Yes"` har *høyere* gjennomsnitt enn gruppe `"No"`, tester du om differansen `No - Yes` er *negativ*, altså bruker du `alternative = "less"`. Tilsvarende, hvis du tror at `"No"` har høyest gjennomsnitt, bruker du `alternative = "greater"`.
 
-#### Ulike utvalgsstørrelser {-}
-
-Videre kan vi tenke oss tilfeller der observasjonsvektorene ikke er like lange, og for eksempel kommer i en excel-fil slik som [denne](datasett/ulik-lengde.xlsx) der den ene kolonnen inneholder flere tall enn den andre. Det gjør ingenting. Vi kan lese inn datasettet på vanlig måte, og legger merke til at de "tomme" plassene i tabellen blir fylt med `NA`. Vi kan kjøre $t$-testene på vanlig måte.
-```{r, eval = FALSE}
-testdata2 <- readxl::read_excel("ulik-lengde.xlsx")
-testdata2
-t.test(testdata2$X1, testdata2$X2)
-```
-```{r, echo = FALSE}
-testdata2 <- readxl::read_excel("datasett/ulik-lengde.xlsx")
-testdata2
-t.test(testdata2$X1, testdata2$X2)
-```
-
 #### Kritiske verdier i t-fordelingen {-}
 
 Trenger du en kritisk verdi manuelt, bruker du `qt()`. Dersom du tester $H_0: \mu = \mu_0$ mot $H_A: \mu < \mu_0$ på 5 %-nivå med $40$ observasjoner:
