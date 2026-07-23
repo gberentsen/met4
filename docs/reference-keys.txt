@@ -82,6 +82,10 @@ teorioppgaver-1
 ntter-1
 r-oppgaver-1
 relevante-r-testing
+t-tester
+tester-for-andeler
+varianstester
+kjikvadrattester-1
 regresjon
 enkel-regresjon
 kommentarer
