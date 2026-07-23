@@ -665,9 +665,10 @@ Alle de forventede antallene er godt over 5 (det minste er omtrent 87), så tiln
 ### Teorioppgaver
 
 1. For hvert av scenarioene i a og b, gjør følgende:
-   -	Sett opp relevant nullhypotese og alternativhypotese (hint: nullhypotese avhenger av hvor ‘bevisbyrden’ bør ligge)
-   -	Definer type I-og type II-feil. 
-   -	Diskuter konsekvensene av type I-feil og type II-feil i det aktuelle scenarioet. 
+   - Sett opp relevant nullhypotese og alternativhypotese (hint: nullhypotesen avhenger av hvor «bevisbyrden» bør ligge).
+   - Definer type I- og type II-feil.
+   - Diskuter konsekvensene av type I-feil og type II-feil i det aktuelle scenarioet.
+   - Diskuter hvilket signifikansnivå du ville valgt, og begrunn valget ut fra konsekvensene av de to feiltypene.
 
    a. En ny type medisin skal vurderes for kommersialisering. Du sitter i et vurderingspanel som skal vurdere om medisinen kan     bli godkjent eller ikke. 
 
@@ -675,82 +676,90 @@ Alle de forventede antallene er godt over 5 (det minste er omtrent 87), så tiln
 
 <details><summary>Løsning</summary>
 
-> a. $H_0$: Den nye medisinen er ikke trygg og effektiv. $H_A$: Den nye medisinen er trygg og effektiv. Type I-feil: Forkaste $H_0$ når $H_0$     er sann. Konsekvens: Risikerer at vi begynner å produsere en medisin som ikke er trygg og effektiv. Type II-feil: Forkaster *ikke* $H_0$     når $H_A$ er sann. Konsekvens: Vi lar være å produsere en medisin som faktisk er trygg og effektiv.
+> a. $H_0$: Den nye medisinen er ikke trygg og effektiv. $H_A$: Den nye medisinen er trygg og effektiv. Type I-feil: Forkaste $H_0$ når $H_0$ er sann. Konsekvens: Risikerer at vi begynner å produsere en medisin som ikke er trygg og effektiv. Type II-feil: Forkaster *ikke* $H_0$ når $H_A$ er sann. Konsekvens: Vi lar være å produsere en medisin som faktisk er trygg og effektiv.
 >
->Kommentar: Signifikansnivået ved produksjon av medisiner settes ofte lavt fordi konsekvensene av en type I-feil kan være svært alvorlige.
+>Signifikansnivå: En type I-feil (en utrygg medisin når markedet) er svært alvorlig, så vi bør kreve sterke bevis før vi forkaster $H_0$. Derfor settes signifikansnivået lavt, gjerne 1 % eller lavere.
 
 
-> b. $H_0$: Den mest risikable investeringen er mest lønnsom. $H_A$: Den mest risikable investeringen er ikke mest lønnsom. Type I-feil:          Forkaste $H_0$ når $H_0$ er sann. Konsekvens:Vi investerer i den minst risikable investeringen, som ikke er mest lønnsom. Type II-feil:      Forkaster *ikke* $H_0$ når $H_A$ er sann. Konsekvens: Vi investerer i den mest risikable investeringen, som ikke er mest lønnsom.
+> b. $H_0$: Den mest risikable investeringen er mest lønnsom. $H_A$: Den mest risikable investeringen er ikke mest lønnsom. Type I-feil: Forkaste $H_0$ når $H_0$ er sann. Konsekvens: Vi investerer i den minst risikable investeringen, som ikke er mest lønnsom. Type II-feil: Forkaster *ikke* $H_0$ når $H_A$ er sann. Konsekvens: Vi investerer i den mest risikable investeringen, som ikke er mest lønnsom.
+>
+>Signifikansnivå: Her er begge feiltypene omtrent like alvorlige (i begge tilfeller ender vi opp i en mindre lønnsom investering), og konsekvensene er rent økonomiske. Et vanlig nivå på 5 % er da et rimelig valg. Poenget er at valget bør begrunnes ut fra konsekvensene, ikke tas på autopilot.
 
 
 </details>
 
-2. Vi har følgende hypoteser og informasjon om dataene: $H_0: \mu = 150$ mot $H_A: \mu \neq 150$. $\sigma = 10$, $n =100$, $\overline{x} = 150$.
+2. Vi har følgende hypoteser og informasjon om dataene: $H_0: \mu = 150$ mot $H_A: \mu \neq 150$. Utvalgsstandardavviket er $s = 10$, $n = 100$ og $\overline{x} = 150$.
 
-   Bestem verdi av testobservator, forkastelsesområde dersom signifikansnivået er $\alpha = 0.05$, og p-verdi. Konkluder.
+   Bestem verdien av testobservatoren, forkastningsområdet dersom signifikansnivået er $\alpha = 0.05$, og p-verdien. Konkluder.
 
 <details><summary>Løsning</summary>
 
->Her er $\sigma$ kjent så vi kan bruke en z-observator. Forkastelsesområde $Z < -z_{0.025}=-1.96$ eller $Z> z_{0.025}=1.96$.
+>Vi kjenner ikke det sanne standardavviket $\sigma$, så vi bruker en t-observator med $n - 1 = 99$ frihetsgrader. Forkastningsområdet for en tosidig test på 5 %-nivå er $T < -t_{0.025,\,99} = -1.98$ eller $T > t_{0.025,\,99} = 1.98$.
 >
->$$Z = \frac{\overline{x} - \mu}{\sigma/\sqrt{n}} = \frac{150 - 150}{10/\sqrt{100}}=0$$
+>$$T = \frac{\overline{x} - \mu_0}{s/\sqrt{n}} = \frac{150 - 150}{10/\sqrt{100}} = 0.$$
 >
-> p-verdi$=2P(Z > 0) = 2\times0.5=1$. Vi kan ikke forkaste nullhypotesen $H_0: \mu = 150$. Faktisk er det ekstremt sannsynlig (p-verdi = 1) å observere det vi har observert dersom nullhypotesen er sann. 
+>**p-verdien i en tosidig test.** I en tosidig test teller *både* store positive og store negative verdier av $T$ som bevis mot $H_0$, fordi avvik i begge retninger er interessante. Vi spør derfor hvor sannsynlig det er å få en testobservator som er minst så *langt fra null* som den vi observerte, altså $|T| \geq |T_{obs}|$. Ved symmetri er dette to like store haler:
+>$$\text{p-verdi} = P(|T| \geq |T_{obs}|) = 2\,P(T \geq |T_{obs}|).$$
+>Her er $T_{obs} = 0$, så p-verdien blir $2\,P(T \geq 0) = 2 \times 0.5 = 1$. Vi kan altså ikke forkaste $H_0$. Faktisk finnes det ingen observasjon som er *mer* forenlig med $H_0: \mu = 150$ enn den vi fikk, siden utvalgsgjennomsnittet er nøyaktig 150. (I R finner du $P(T \geq t)$ med `1 - pt(t, df = 99)`.)
 
 </details>
 
-3. Vi har følgende hypoteser og informasjon om dataene: $H_0: \mu = 55$ mot $H_A: \mu > 55$.
-  $\sigma = 20$, $n = 25$, $\overline{x} = 67$.
+3. Vi har følgende hypoteser og informasjon om dataene: $H_0: \mu = 55$ mot $H_A: \mu > 55$. Utvalgsstandardavviket er $s = 20$, $n = 25$ og $\overline{x} = 67$.
 
-    a.	Regn ut testobservatoren $Z$.
+    a. Regn ut testobservatoren $T$.
 
-    b.	Regn ut p-verdi.
+    b. Regn ut p-verdien.
 
-    c. 	Regn ut p-verdi, denne gangen med $\overline{x}$ = 63.
+    c. Regn ut p-verdien, denne gangen med $\overline{x} = 63$.
 
-    d. 	Regn ut p-verdi, denne gangen med $\overline{x}$ = 59.
+    d. Regn ut p-verdien, denne gangen med $\overline{x} = 59$.
 
-    e. 	Fastslå hva som skjer med verdien av testobservatoren (Z) og p-verdien når $\overline{x}$ nærmer seg $55$ (verdien av $\mu$ under $H_0$). 
+    e. Fastslå hva som skjer med verdien av testobservatoren og p-verdien når $\overline{x}$ nærmer seg $55$ (verdien av $\mu$ under $H_0$).
 
 <details><summary>Løsning</summary>
 
-> a. $$Z = \frac{\overline{x} - \mu}{\sigma/\sqrt{n}} = \frac{67 - 55}{20/\sqrt{25}}=3$$
+>Vi kjenner ikke det sanne standardavviket $\sigma$, så vi bruker en t-observator med $n - 1 = 24$ frihetsgrader.
 >
-> b. $\text{p-verdi} = P(Z > 3.00) = 1 – P(Z<3) = 1 – 0.9987 = 0.0013$. Kommentar: Her kan du bruke `pnorm(3)` i R til å regne ut $P(Z<3)$.
+> a. $$T = \frac{\overline{x} - \mu_0}{s/\sqrt{n}} = \frac{67 - 55}{20/\sqrt{25}} = 3.$$
 >
-> c. Ny verdi av testobservator blir da $Z = 2$. 
-> $\text{p-verdi} = P(Z > 2.00) = 1 – 0.9772 = 0.0228$.
+> b. $\text{p-verdi} = P(T > 3) = 1 - P(T < 3) = 0.0031$. (I R: `1 - pt(3, df = 24)`.)
 >
-> d. Ny verdi av testobservator blir da $Z = 1$. 
-> $\text{p-verdi} = P(Z > 1.00) = 1 – 0.8413 = 0.1587$.
+> c. Ny testobservator: $T = (63 - 55)/(20/\sqrt{25}) = 2$.
+> $\text{p-verdi} = P(T > 2) = 0.0285$.
 >
-> e. Vi ser at testobservatoren minker og p-verdien øker når $\overline{x}$ nærmer seg $55$. 
+> d. Ny testobservator: $T = (59 - 55)/(20/\sqrt{25}) = 1$.
+> $\text{p-verdi} = P(T > 1) = 0.164$.
 >
->Forklaring: La $\mu_0 = 55$ være verdien av $\mu$ under $H_0$. Z-observatoren måler avviket mellom antagelsen under $H_0$ og dataene vi observerer og avtar derfor når vår observasjon av $\overline{x}$ nærmer seg $\mu_0$. P-verdien sier hvor sannsynlig det er å observere de dataene vi har dersom $H_0$ er sann og øker følgelig når $\overline{x}$ nærmer seg $\mu_0$.  
+> e. Vi ser at testobservatoren minker og p-verdien øker når $\overline{x}$ nærmer seg $55$.
+>
+>Forklaring: La $\mu_0 = 55$ være verdien av $\mu$ under $H_0$. Testobservatoren måler avviket mellom det $H_0$ påstår og det dataene viser, og avtar derfor når $\overline{x}$ nærmer seg $\mu_0$. P-verdien sier hvor sannsynlig det er å observere noe minst så ekstremt som det vi har, dersom $H_0$ er sann, og øker følgelig når $\overline{x}$ nærmer seg $\mu_0$.
 
 </details>
 
 
-4. Anta at vi har følgende hypoteser og informasjon om dataene: $H_0: \mu = 50$ mot $H_A: \mu > 50$. $\sigma = 10$, $n = 40$, $\alpha = 0.05$.
+4. Anta at vi har følgende hypoteser og informasjon om dataene: $H_0: \mu = 50$ mot $H_A: \mu > 50$. Utvalgsstandardavviket er $s = 10$, $n = 40$ og signifikansnivået $\alpha = 0.05$.
 
-   Bestem $\beta$, altså sannsynligheten for en type-II feil, under antagelsen at $\mu = 55$. 
+   Bestem $\beta$, altså sannsynligheten for en type II-feil, dersom den sanne (men ukjente) verdien av $\mu$ i virkeligheten er $55$.
 
 <details><summary>Løsning</summary>
 
-> Forkastningsområdet blir da
+>En type II-feil er å *beholde* $H_0$ selv om $H_A$ er sann. For å regne ut sannsynligheten for den, holder det ikke å vite at $H_A$ er sann; vi må vite *hvor* sann den er, altså en konkret verdi for $\mu$. Her regner vi ut $\beta$ dersom den sanne verdien er $\mu = 55$. Det gjør vi i tre steg.
 >
->$$Z = \frac{\overline{X} - 50}{10/\sqrt{40}} > Z_{0.05} = 1.645 $$
->dvs at vi forkaster $H_0$ når
-> $$\overline{X} > 50 + 1.645\times\frac{10}{\sqrt{40}}=52.6$$
->En type-II feil svarer til å *ikke* forkaste $H_0$ når $H_A$ er sann. For å regne på sannsynligheten for type-II feil må vi ikke bare anta at $H_A$ er sann, men være spesifike på hva verdien til $\mu$ er (i dette tilfellet 55). Vi lurer altså på hva sannsynligheten for at vi *ikke* er i forkastnings området ($\overline{X} < 52.6$) gitt at $\mu = 55$: 
-> \begin{equation*}
+>**Steg 1: Når forkaster vi?** Vi kjenner ikke $\sigma$, så vi bruker en t-test med $n - 1 = 39$ frihetsgrader. Vi forkaster $H_0$ når testobservatoren er stor nok:
+>$$T = \frac{\overline{X} - 50}{s/\sqrt{n}} > t_{0.05,\,39} = 1.685.$$
+>Løser vi dette ut for $\overline{X}$, svarer det til å forkaste når utvalgsgjennomsnittet er over en grense:
+>$$\overline{X} > 50 + 1.685\cdot\frac{10}{\sqrt{40}} = 52.66.$$
+>
+>**Steg 2: Hvor sannsynlig er det å *ikke* forkaste, dersom sann $\mu = 55$?** En type II-feil skjer nettopp når vi *ikke* forkaster, altså når $\overline{X} < 52.66$. Vi regner ut hvor sannsynlig det er *gitt at den sanne forventningen er 55*. Fra sentralgrenseteoremet er $\overline{X}$ tilnærmet normalfordelt med forventning $55$ (den sanne verdien) og standardavvik $s/\sqrt{n} = 10/\sqrt{40}$:
+>\begin{equation*}
 \begin{split}
-\beta &= P(\overline{X} < 52.6\quad\text{gitt at $\mu = 55$})\\
-&= P(\frac{\overline{X} - 55}{10/\sqrt{40}} < \frac{52.6 - 55}{10/\sqrt{40}})\\
-&=P(Z < -1.52) = 0.064
+\beta &= P(\overline{X} < 52.66 \quad\text{gitt at } \mu = 55)\\
+&= P\left(\frac{\overline{X} - 55}{10/\sqrt{40}} < \frac{52.66 - 55}{10/\sqrt{40}}\right)\\
+&= P(Z < -1.48) = 0.07.
 \end{split}
 \end{equation*}
-> Merk: Et begrep som ofte blir brukt om tester er *styrken* til testen $1-\beta$ som da er sannsynligheten for å forkaste $H_0$ når $H_A$ er sann. En god test har god (stor) styrke. Hadde vi gjentatt denne testen mange ganger ville vi ha forkastet $H_0$  i $(100 - 6.4)\% = 93.6\%$ av gangene dersom det faktisk er slik at sann $\mu$ er 55. 
+>
+>**Steg 3: Tolkning.** Det er altså cirka 7 % sannsynlighet for å overse effekten når den faktisk finnes (sann $\mu = 55$). **Styrken** til testen er $1 - \beta = 0.93$: gjentok vi testen mange ganger med sann $\mu = 55$, ville vi korrekt forkastet $H_0$ i omtrent 93 % av tilfellene. Legg merke til at $\beta$ avhenger av *hvor* sann $H_A$ er: jo lenger den sanne $\mu$ ligger fra $50$, jo lettere er effekten å oppdage, og jo mindre blir $\beta$.
 
 </details>
 
