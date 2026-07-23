@@ -3,6 +3,7 @@ fig:rstudiorun
 fig:hist-avkastning
 fig:boks-avkastning
 fig:forkastning
+fig:kjikvadrat-gof
 fig:churn
 eq:withb
 eq:withoutb

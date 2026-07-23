@@ -423,7 +423,7 @@ Løsning
 <span id="cb156-3"><a href="oppgaver-1.html#cb156-3" tabindex="-1"></a>  <span class="at">Overvekt =</span> <span class="fu">c</span>(<span class="dv">17</span>,  <span class="dv">5</span>, <span class="sc">-</span><span class="dv">1</span>,  <span class="dv">0</span>, <span class="dv">13</span>, <span class="dv">15</span>,  <span class="dv">5</span>,  <span class="dv">7</span>, <span class="sc">-</span><span class="dv">7</span>,  <span class="dv">7</span>,  <span class="dv">6</span>,  <span class="dv">7</span>,  <span class="dv">4</span>, <span class="dv">15</span>, <span class="sc">-</span><span class="dv">5</span>))</span>
 <span id="cb156-4"><a href="oppgaver-1.html#cb156-4" tabindex="-1"></a>  </span>
 <span id="cb156-5"><a href="oppgaver-1.html#cb156-5" tabindex="-1"></a><span class="fu">plot</span>(df_tv<span class="sc">$</span>TV_titting, df_tv<span class="sc">$</span>Overvekt, <span class="at">type =</span> <span class="st">&quot;p&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;TV-titting&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Overvekt&quot;</span>)</span></code></pre></div>
-<p><img src="met4_files/figure-html/unnamed-chunk-111-1.png" alt="" width="672" /></p>
+<p><img src="met4_files/figure-html/unnamed-chunk-112-1.png" alt="" width="672" /></p>
 <blockquote>
 <p>Plottet viser en ganske tydelig trend om at TV-titting og overvekt er relaterte. Dette kan vi undersøke nærmere.</p>
 </blockquote>
@@ -835,9 +835,9 @@ Løsning
 </ol>
 <p>Vi kan begynne med å plotte forholdet mellom de ulike variablene:</p>
 <div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="oppgaver-1.html#cb184-1" tabindex="-1"></a><span class="fu">pairs</span>(y <span class="sc">~</span> ., <span class="at">data =</span> df_colin1)</span></code></pre></div>
-<p><img src="met4_files/figure-html/unnamed-chunk-128-1.png" alt="" width="672" /></p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="oppgaver-1.html#cb185-1" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(df_colin1), <span class="at">method =</span> <span class="st">&quot;number&quot;</span>)</span></code></pre></div>
 <p><img src="met4_files/figure-html/unnamed-chunk-129-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="oppgaver-1.html#cb185-1" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(df_colin1), <span class="at">method =</span> <span class="st">&quot;number&quot;</span>)</span></code></pre></div>
+<p><img src="met4_files/figure-html/unnamed-chunk-130-1.png" alt="" width="672" /></p>
 <p>Her ser det ut som vi har et forhold mellom <span class="math inline">\((X_2, X_3)\)</span>. Videre ser det ut som at alle tre forklaringsvariable har en sammenheng med responsvariablen <span class="math inline">\(Y\)</span>.</p>
 <div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="oppgaver-1.html#cb186-1" tabindex="-1"></a>reg_colin1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> ., <span class="at">data =</span> df_colin1)</span>
 <span id="cb186-2"><a href="oppgaver-1.html#cb186-2" tabindex="-1"></a><span class="fu">stargazer</span>(reg_colin1, <span class="at">type =</span> <span class="st">&quot;text&quot;</span>)</span></code></pre></div>
@@ -890,9 +890,9 @@ og vi kan tenke oss at dette representerer det kausale forholdet mellom variable
 </ol>
 <p>Plott forholdet mellom de ulike variablene:</p>
 <div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="oppgaver-1.html#cb190-1" tabindex="-1"></a><span class="fu">pairs</span>(y <span class="sc">~</span> ., <span class="at">data =</span> df_colin2)</span></code></pre></div>
-<p><img src="met4_files/figure-html/unnamed-chunk-132-1.png" alt="" width="672" /></p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="oppgaver-1.html#cb191-1" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(df_colin2), <span class="at">method =</span> <span class="st">&quot;number&quot;</span>)</span></code></pre></div>
 <p><img src="met4_files/figure-html/unnamed-chunk-133-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="oppgaver-1.html#cb191-1" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(df_colin2), <span class="at">method =</span> <span class="st">&quot;number&quot;</span>)</span></code></pre></div>
+<p><img src="met4_files/figure-html/unnamed-chunk-134-1.png" alt="" width="672" /></p>
 <p>Her ser vi et tydelig forhold mellom parene <span class="math inline">\((X_3, X_4)\)</span>, <span class="math inline">\((X_4, X_5)\)</span>, <span class="math inline">\((X_3, X_5)\)</span> og <span class="math inline">\((X_2, X_5)\)</span>. Ellers ser det kun ut som det er et tydelig forhold mellom <span class="math inline">\(Y\)</span> og <span class="math inline">\(X_1, X_2\)</span>. Med så mange forhold kan det være snakk om multikolinearitet, som ikke er så lett å se utfra 2D-plott.</p>
 <div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="oppgaver-1.html#cb192-1" tabindex="-1"></a>reg_colin2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> ., <span class="at">data =</span> df_colin2)</span>
 <span id="cb192-2"><a href="oppgaver-1.html#cb192-2" tabindex="-1"></a><span class="fu">stargazer</span>(reg_colin2, <span class="at">type =</span> <span class="st">&quot;text&quot;</span>)</span></code></pre></div>

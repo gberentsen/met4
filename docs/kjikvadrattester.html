@@ -302,7 +302,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="kjikvadrattester.html#cb95-1" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 5.991465</code></pre>
-<p>Testobservatoren (8.18) er større enn den kritiske verdien (5.99), så vi forkaster <span class="math inline">\(H_0\)</span>: markedsandelene ser ut til å ha endret seg. Ser vi på leddene, kommer det meste av avviket fra «andre»-kategorien (16 observert mot 30 forventet), så det ser ut til at kampanjene har trukket kunder bort fra de andre selskapene.</p>
+<p>Testobservatoren (8.18) er større enn den kritiske verdien (5.99), så vi forkaster <span class="math inline">\(H_0\)</span> (Figur <a href="kjikvadrattester.html#fig:kjikvadrat-gof">3.2</a>): markedsandelene ser ut til å ha endret seg. Ser vi på leddene, kommer det meste av avviket fra «andre»-kategorien (16 observert mot 30 forventet), så det ser ut til at kampanjene har trukket kunder bort fra de andre selskapene.</p>
+<div class="figure"><span style="display:block;" id="fig:kjikvadrat-gof"></span>
+<img src="met4_files/figure-html/kjikvadrat-gof-1.png" alt="Fordelingen til testobservatoren under $H_0$ (kji-kvadrat med 2 frihetsgrader) i selskapseksempelet. Forkastningsområdet på 5 % er skyggelagt, med den kritiske verdien 5.99 som grense. Den observerte testobservatoren 8.18 faller innenfor forkastningsområdet, så vi forkaster." width="624" />
+<p class="caption">
+Figur 3.2: Fordelingen til testobservatoren under <span class="math inline">\(H_0\)</span> (kji-kvadrat med 2 frihetsgrader) i selskapseksempelet. Forkastningsområdet på 5 % er skyggelagt, med den kritiske verdien 5.99 som grense. Den observerte testobservatoren 8.18 faller innenfor forkastningsområdet, så vi forkaster.
+</p>
+</div>
 <p><strong>I R</strong> gjør <code>chisq.test()</code> hele jobben når vi gir den de observerte antallene og andelene under <span class="math inline">\(H_0\)</span>:</p>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="kjikvadrattester.html#cb97-1" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="at">x =</span> f, <span class="at">p =</span> p0)</span></code></pre></div>
 <pre><code>## 
@@ -314,75 +320,114 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="test-for-uavhengighet" class="section level3 hasAnchor" number="3.4.3">
 <h3><span class="header-section-number">3.4.3</span> Test for uavhengighet<a href="kjikvadrattester.html#test-for-uavhengighet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Ofte vil vi vite om to <em>kategoriske</em> kjennetegn henger sammen, for eksempel om holdning til innvandring henger sammen med politisk ståsted. Vi ordner da dataene i en <strong>krysstabell</strong> med <span class="math inline">\(r\)</span> rader og <span class="math inline">\(s\)</span> kolonner, og tester <span class="math inline">\(H_0\)</span>: de to kjennetegnene er <em>uavhengige</em>. Er de uavhengige, er sannsynligheten for en celle produktet av de to marginale sannsynlighetene, og det forventede antallet i celle <span class="math inline">\((i,j)\)</span> blir</p>
-<p><span class="math display">\[e_{ij} = \frac{(\text{radsum}_i)\cdot(\text{kolonnesum}_j)}{n}.\]</span></p>
-<p>Testobservatoren er den samme som før, <span class="math inline">\(\chi^2 = \sum (f_{ij} - e_{ij})^2/e_{ij}\)</span>, nå kji-kvadratfordelt med <span class="math inline">\((r-1)(s-1)\)</span> frihetsgrader.</p>
-<p><strong>Eksempel.</strong> I en spørreundersøkelse er respondentene delt inn etter politisk ståsted (venstre, sentrum, høyre) og etter hvor mange innvandrere de mener bør få bosette seg (mange, noen, få, ingen). Er de to kjennetegnene uavhengige? De observerte antallene (1000 respondenter) er:</p>
+<p>Ofte vil vi vite om to <em>kategoriske</em> kjennetegn henger sammen, for eksempel om holdning til innvandring henger sammen med politisk ståsted. Vi ordner da dataene i en <strong>krysstabell</strong> med <span class="math inline">\(r\)</span> rader og <span class="math inline">\(s\)</span> kolonner, der <span class="math inline">\(f_{ij}\)</span> er antallet observasjoner som havner i rad <span class="math inline">\(i\)</span> og kolonne <span class="math inline">\(j\)</span>:</p>
 <table>
+<colgroup>
+<col width="14%" />
+<col width="17%" />
+<col width="17%" />
+<col width="14%" />
+<col width="17%" />
+<col width="18%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left"></th>
-<th align="center">Mange</th>
-<th align="center">Noen</th>
-<th align="center">Få</th>
-<th align="center">Ingen</th>
+<th align="center">Kol. 1</th>
+<th align="center">Kol. 2</th>
+<th align="center"><span class="math inline">\(\cdots\)</span></th>
+<th align="center">Kol. <span class="math inline">\(s\)</span></th>
+<th align="center">Sum</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><strong>Venstre</strong></td>
-<td align="center">90</td>
-<td align="center">120</td>
-<td align="center">60</td>
-<td align="center">30</td>
+<td align="left"><strong>Rad 1</strong></td>
+<td align="center"><span class="math inline">\(f_{11}\)</span></td>
+<td align="center"><span class="math inline">\(f_{12}\)</span></td>
+<td align="center"><span class="math inline">\(\cdots\)</span></td>
+<td align="center"><span class="math inline">\(f_{1s}\)</span></td>
+<td align="center"><span class="math inline">\(f_{1\cdot}\)</span></td>
 </tr>
 <tr class="even">
-<td align="left"><strong>Sentrum</strong></td>
-<td align="center">80</td>
-<td align="center">160</td>
-<td align="center">120</td>
-<td align="center">40</td>
+<td align="left"><strong>Rad 2</strong></td>
+<td align="center"><span class="math inline">\(f_{21}\)</span></td>
+<td align="center"><span class="math inline">\(f_{22}\)</span></td>
+<td align="center"><span class="math inline">\(\cdots\)</span></td>
+<td align="center"><span class="math inline">\(f_{2s}\)</span></td>
+<td align="center"><span class="math inline">\(f_{2\cdot}\)</span></td>
 </tr>
 <tr class="odd">
-<td align="left"><strong>Høyre</strong></td>
-<td align="center">30</td>
-<td align="center">90</td>
-<td align="center">120</td>
-<td align="center">60</td>
+<td align="left"><span class="math inline">\(\vdots\)</span></td>
+<td align="center"><span class="math inline">\(\vdots\)</span></td>
+<td align="center"><span class="math inline">\(\vdots\)</span></td>
+<td align="center"><span class="math inline">\(\ddots\)</span></td>
+<td align="center"><span class="math inline">\(\vdots\)</span></td>
+<td align="center"><span class="math inline">\(\vdots\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Rad <span class="math inline">\(r\)</span></strong></td>
+<td align="center"><span class="math inline">\(f_{r1}\)</span></td>
+<td align="center"><span class="math inline">\(f_{r2}\)</span></td>
+<td align="center"><span class="math inline">\(\cdots\)</span></td>
+<td align="center"><span class="math inline">\(f_{rs}\)</span></td>
+<td align="center"><span class="math inline">\(f_{r\cdot}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Sum</strong></td>
+<td align="center"><span class="math inline">\(f_{\cdot 1}\)</span></td>
+<td align="center"><span class="math inline">\(f_{\cdot 2}\)</span></td>
+<td align="center"><span class="math inline">\(\cdots\)</span></td>
+<td align="center"><span class="math inline">\(f_{\cdot s}\)</span></td>
+<td align="center"><span class="math inline">\(n\)</span></td>
 </tr>
 </tbody>
 </table>
+<p>Her er <span class="math inline">\(f_{i\cdot}\)</span> radsummene, <span class="math inline">\(f_{\cdot j}\)</span> kolonnesummene og <span class="math inline">\(n\)</span> det totale antallet observasjoner. Vi tester <span class="math inline">\(H_0\)</span>: de to kjennetegnene er <em>uavhengige</em>, mot <span class="math inline">\(H_A\)</span>: de henger sammen.</p>
+<p>De forventede antallene bygger på <strong>produktregelen for uavhengige begivenheter</strong>: er to begivenheter <span class="math inline">\(A\)</span> og <span class="math inline">\(B\)</span> uavhengige, er sannsynligheten for at <em>begge</em> inntreffer produktet av sannsynlighetene, <span class="math inline">\(P(A \cap B) = P(A)\,P(B)\)</span>. Er de to kjennetegnene uavhengige, gjelder det samme for cellene: sannsynligheten for at en observasjon havner i rad <span class="math inline">\(i\)</span> <em>og</em> kolonne <span class="math inline">\(j\)</span> er produktet av rad-sannsynligheten og kolonne-sannsynligheten. Estimerer vi disse med rad- og kolonneandelene <span class="math inline">\(f_{i\cdot}/n\)</span> og <span class="math inline">\(f_{\cdot j}/n\)</span>, blir det forventede antallet i celle <span class="math inline">\((i,j)\)</span></p>
+<p><span class="math display">\[e_{ij} = n \cdot \frac{f_{i\cdot}}{n} \cdot \frac{f_{\cdot j}}{n} = \frac{f_{i\cdot}\, f_{\cdot j}}{n}.\]</span></p>
+<p>Testobservatoren er den samme som før, <span class="math inline">\(\chi^2 = \sum (f_{ij} - e_{ij})^2/e_{ij}\)</span>, nå kji-kvadratfordelt med <span class="math inline">\((r-1)(s-1)\)</span> frihetsgrader.</p>
+<p><strong>Eksempel.</strong> I en stor spørreundersøkelse er 30 568 respondenter plassert etter politisk ståsted på en skala fra 1 (venstre) til 11 (høyre), og etter hvor mange innvandrere de mener bør få slippe inn i landet (mange, noen, få, ingen). Henger de to kjennetegnene sammen? Dataene ligger i <a href="datasett/immigration-wide.xls">immigration-wide.xls</a>.</p>
 <ol style="list-style-type: decimal">
 <li><strong>Spørsmål:</strong> Er holdning til innvandring uavhengig av politisk ståsted?</li>
 <li><strong>Hypoteser og signifikansnivå:</strong> <span class="math inline">\(H_0\)</span>: de to kjennetegnene er uavhengige, mot <span class="math inline">\(H_A\)</span>: de henger sammen. En Type I-feil ville være å hevde at det finnes en sammenheng når det egentlig ikke gjør det. Vi velger <span class="math inline">\(\alpha = 5\,\%\)</span>.</li>
-<li><strong>Data:</strong> krysstabellen over. Vi legger den inn i R som en matrise:</li>
+<li><strong>Data:</strong> Vi leser inn krysstabellen. Den har 11 rader (politisk ståsted, 1-11) og 4 kolonner (holdning):</li>
 </ol>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="kjikvadrattester.html#cb99-1" tabindex="-1"></a>tabell <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">120</span>,  <span class="dv">60</span>, <span class="dv">30</span>,</span>
-<span id="cb99-2"><a href="kjikvadrattester.html#cb99-2" tabindex="-1"></a>                   <span class="dv">80</span>, <span class="dv">160</span>, <span class="dv">120</span>, <span class="dv">40</span>,</span>
-<span id="cb99-3"><a href="kjikvadrattester.html#cb99-3" tabindex="-1"></a>                   <span class="dv">30</span>,  <span class="dv">90</span>, <span class="dv">120</span>, <span class="dv">60</span>),</span>
-<span id="cb99-4"><a href="kjikvadrattester.html#cb99-4" tabindex="-1"></a>                 <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb99-5"><a href="kjikvadrattester.html#cb99-5" tabindex="-1"></a>                 <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Venstre&quot;</span>, <span class="st">&quot;Sentrum&quot;</span>, <span class="st">&quot;Høyre&quot;</span>),</span>
-<span id="cb99-6"><a href="kjikvadrattester.html#cb99-6" tabindex="-1"></a>                                 <span class="fu">c</span>(<span class="st">&quot;Mange&quot;</span>, <span class="st">&quot;Noen&quot;</span>, <span class="st">&quot;Få&quot;</span>, <span class="st">&quot;Ingen&quot;</span>)))</span>
-<span id="cb99-7"><a href="kjikvadrattester.html#cb99-7" tabindex="-1"></a>tabell</span></code></pre></div>
-<pre><code>##         Mange Noen  Få Ingen
-## Venstre    90  120  60    30
-## Sentrum    80  160 120    40
-## Høyre      30   90 120    60</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="kjikvadrattester.html#cb99-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb99-2"><a href="kjikvadrattester.html#cb99-2" tabindex="-1"></a>immigration <span class="ot">&lt;-</span> <span class="fu">read_xls</span>(<span class="st">&quot;immigration-wide.xls&quot;</span>,</span>
+<span id="cb99-3"><a href="kjikvadrattester.html#cb99-3" tabindex="-1"></a>                        <span class="at">range =</span> <span class="st">&quot;B2:E12&quot;</span>,</span>
+<span id="cb99-4"><a href="kjikvadrattester.html#cb99-4" tabindex="-1"></a>                        <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">&quot;many&quot;</span>, <span class="st">&quot;some&quot;</span>, <span class="st">&quot;few&quot;</span>, <span class="st">&quot;none&quot;</span>))</span>
+<span id="cb99-5"><a href="kjikvadrattester.html#cb99-5" tabindex="-1"></a><span class="fu">print</span>(immigration, <span class="at">n =</span> <span class="dv">11</span>)</span></code></pre></div>
+<pre><code>## Warning: package &#39;readxl&#39; was built under R version 4.3.3</code></pre>
+<pre><code>## # A tibble: 11 × 4
+##     many  some   few  none
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1   301   366   238   171
+##  2   167   220   143   107
+##  3   435   647   352   190
+##  4   724  1269   695   306
+##  5   515  1378   809   320
+##  6  1084  4087  3170  1599
+##  7   327  1354  1143   431
+##  8   327  1403  1276   482
+##  9   180   927  1009   473
+## 10    38   232   333   190
+## 11    84   329   371   366</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li><strong>Testobservator:</strong> Under uavhengighet er det forventede antallet radsum ganget med kolonnesum, delt på <span class="math inline">\(n\)</span>. I cellen «Venstre, Mange» forventer vi for eksempel <span class="math inline">\(300\cdot 200/1000 = 60\)</span>, mot 90 observerte. Å regne ut alle tolv cellene for hånd er tungvint, så vi lar <code>chisq.test()</code> gjøre det:</li>
+<li><strong>Testobservator:</strong> Å regne ut alle de <span class="math inline">\(11 \cdot 4 = 44\)</span> forventede celletallene for hånd er tungvint, så vi lar <code>chisq.test()</code> gjøre hele jobben:</li>
 </ol>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="kjikvadrattester.html#cb101-1" tabindex="-1"></a><span class="fu">chisq.test</span>(tabell)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="kjikvadrattester.html#cb102-1" tabindex="-1"></a><span class="fu">chisq.test</span>(immigration)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 
-## data:  tabell
-## X-squared = 71.83, df = 6, p-value = 1.722e-13</code></pre>
+## data:  immigration
+## X-squared = 1814.6, df = 30, p-value &lt; 2.2e-16</code></pre>
 <ol start="5" style="list-style-type: decimal">
-<li><strong>Kritisk verdi og konklusjon:</strong> Med <span class="math inline">\(r = 3\)</span> og <span class="math inline">\(s = 4\)</span> er testobservatoren kji-kvadratfordelt med <span class="math inline">\((r-1)(s-1) = 6\)</span> frihetsgrader. Kritisk verdi på 5 %-nivå er</li>
+<li><strong>Kritisk verdi og konklusjon:</strong> Med <span class="math inline">\(r = 11\)</span> og <span class="math inline">\(s = 4\)</span> er testobservatoren kji-kvadratfordelt med <span class="math inline">\((r-1)(s-1) = 30\)</span> frihetsgrader. Kritisk verdi på 5 %-nivå er</li>
 </ol>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="kjikvadrattester.html#cb103-1" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">6</span>)</span></code></pre></div>
-<pre><code>## [1] 12.59159</code></pre>
-<p>Testobservatoren (<code>X-squared</code> <span class="math inline">\(\approx 71.8\)</span>) er mange ganger større enn den kritiske verdien (12.59), og <strong>p-verdien</strong> er forsvinnende liten, så vi forkaster <span class="math inline">\(H_0\)</span>: holdning til innvandring henger klart sammen med politisk ståsted. (Sjekk gjerne med <code>chisq.test(tabell)$expected</code> at ingen forventede celletall er under 5, ellers er tilnærmingen upålitelig.)</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="kjikvadrattester.html#cb104-1" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">30</span>)</span></code></pre></div>
+<pre><code>## [1] 43.77297</code></pre>
+<p>Testobservatoren (<code>X-squared</code> <span class="math inline">\(\approx 1815\)</span>) er enormt mye større enn den kritiske verdien (43.8), og <strong>p-verdien</strong> er forsvinnende liten, så vi forkaster <span class="math inline">\(H_0\)</span>: holdning til innvandring henger klart sammen med politisk ståsted. (Sjekk gjerne med <code>chisq.test(immigration)$expected</code> at ingen forventede celletall er under 5, ellers er tilnærmingen upålitelig.)</p>
 </div>
 <div id="kontrollsprsmal-5" class="section level3 hasAnchor" number="3.4.4">
 <h3><span class="header-section-number">3.4.4</span> Kontrollspørsmål<a href="kjikvadrattester.html#kontrollsprsmal-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
