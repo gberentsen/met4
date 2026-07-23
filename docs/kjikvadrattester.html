@@ -398,7 +398,6 @@ Figur 3.2: Fordelingen til testobservatoren under <span class="math inline">\(H_
 <span id="cb99-3"><a href="kjikvadrattester.html#cb99-3" tabindex="-1"></a>                        <span class="at">range =</span> <span class="st">&quot;B2:E12&quot;</span>,</span>
 <span id="cb99-4"><a href="kjikvadrattester.html#cb99-4" tabindex="-1"></a>                        <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">&quot;many&quot;</span>, <span class="st">&quot;some&quot;</span>, <span class="st">&quot;few&quot;</span>, <span class="st">&quot;none&quot;</span>))</span>
 <span id="cb99-5"><a href="kjikvadrattester.html#cb99-5" tabindex="-1"></a><span class="fu">print</span>(immigration, <span class="at">n =</span> <span class="dv">11</span>)</span></code></pre></div>
-<pre><code>## Warning: package &#39;readxl&#39; was built under R version 4.3.3</code></pre>
 <pre><code>## # A tibble: 11 × 4
 ##     many  some   few  none
 ##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -416,7 +415,7 @@ Figur 3.2: Fordelingen til testobservatoren under <span class="math inline">\(H_
 <ol start="4" style="list-style-type: decimal">
 <li><strong>Testobservator:</strong> Å regne ut alle de <span class="math inline">\(11 \cdot 4 = 44\)</span> forventede celletallene for hånd er tungvint, så vi lar <code>chisq.test()</code> gjøre hele jobben:</li>
 </ol>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="kjikvadrattester.html#cb102-1" tabindex="-1"></a><span class="fu">chisq.test</span>(immigration)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="kjikvadrattester.html#cb101-1" tabindex="-1"></a><span class="fu">chisq.test</span>(immigration)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 
@@ -425,7 +424,7 @@ Figur 3.2: Fordelingen til testobservatoren under <span class="math inline">\(H_
 <ol start="5" style="list-style-type: decimal">
 <li><strong>Kritisk verdi og konklusjon:</strong> Med <span class="math inline">\(r = 11\)</span> og <span class="math inline">\(s = 4\)</span> er testobservatoren kji-kvadratfordelt med <span class="math inline">\((r-1)(s-1) = 30\)</span> frihetsgrader. Kritisk verdi på 5 %-nivå er</li>
 </ol>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="kjikvadrattester.html#cb104-1" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">30</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="kjikvadrattester.html#cb103-1" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">30</span>)</span></code></pre></div>
 <pre><code>## [1] 43.77297</code></pre>
 <p>Testobservatoren (<code>X-squared</code> <span class="math inline">\(\approx 1815\)</span>) er enormt mye større enn den kritiske verdien (43.8), og <strong>p-verdien</strong> er forsvinnende liten, så vi forkaster <span class="math inline">\(H_0\)</span>: holdning til innvandring henger klart sammen med politisk ståsted. (Sjekk gjerne med <code>chisq.test(immigration)$expected</code> at ingen forventede celletall er under 5, ellers er tilnærmingen upålitelig.)</p>
 </div>
