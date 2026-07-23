@@ -1481,29 +1481,44 @@ c(L, U)
 
 ### Tester for andeler
 
-Både for ett-utvalgs og to-utvalgs test for andeler kan vi fylle inn tall direkte i testobservatoren på denne måten (sett inn for de nødvendige verdiene):
+For tester på andeler bruker vi `prop.test()`, som tar antall "suksesser" og antall forsøk. I testdatasettet er `A1` og `A2` 0/1-kolonner, så antall suksesser er `sum(testdata$A1)` og antall forsøk `length(testdata$A1)`.
 
+#### Ett-utvalgs test for en andel {-}
+
+Tester om en andel er lik en bestemt verdi, her $H_0: p = 0.5$:
 ```{r}
+prop.test(sum(testdata$A1), length(testdata$A1), p = 0.5, correct = FALSE)
+```
+
+#### To-utvalgs test for to andeler {-}
+
+Sammenligner to andeler, $H_0: p_1 = p_2$:
+```{r}
+prop.test(c(sum(testdata$A1), sum(testdata$A2)),
+          c(length(testdata$A1), length(testdata$A2)), correct = FALSE)
+```
+
+Vi bruker `correct = FALSE` for å få nøyaktig samme test som Z-observatoren fra teorien (uten kontinuitetskorreksjon), og gjør testene ensidige med `alternative = "greater"` eller `"less"`. Utskriften rapporterer `X-squared`, som rett og slett er kvadratet av Z-observatoren.
+
+#### Regne ut Z-observatoren for hånd {-}
+
+Vil du heller regne ut Z-observatoren direkte (slik du gjør på en håndregning), fyller du tallene inn i formelen:
+```{r, eval = FALSE}
 # Ett-utvalgs test for andeler
 p_hatt <- mean(testdata$A1)
 p_null <- 0.5
-n      <- length(testdata$A1) 
-
-Z <- (p_hatt - p_null)/sqrt(p_null*(1-p_null)/n)   
+n      <- length(testdata$A1)
+Z <- (p_hatt - p_null)/sqrt(p_null*(1-p_null)/n)
 
 # To-utvalgs test for andeler
 p1_hatt <- mean(testdata$A1)
 p2_hatt <- mean(testdata$A2)
-
 n1 <- length(testdata$A1)
 n2 <- length(testdata$A2)
-
-p_hatt <- mean(c(testdata$A1, testdata$A2))        # <- Regner ut felles p_hatt
-
+p_hatt <- mean(c(testdata$A1, testdata$A2))   # felles p_hatt under H0
 Z <- (p1_hatt - p2_hatt)/sqrt((1/n1 + 1/n2)*p_hatt*(1-p_hatt))
 ```
-
-Testobservatorene må da sammenlignes med relevant kvantil i normalfordelingen.
+Testobservatoren sammenlignes så med relevant kvantil i normalfordelingen.
 
 #### Kritiske verdier i standardnormalfordelingen {-}
 
@@ -1520,6 +1535,8 @@ c(L, U)
 Alternativt er det bare å pugge tallene $1.64$ og $1.96$.
 
 ### Varianstester
+
+#### Ett-utvalgs varianstest {-}
 
 Varianstest for ett utvalg er ikke bygget inn i R som en egen funksjon. Da må vi gjøre den "semi-automatisk" og regne ut testobservatoren ved å bruke formelen direkte. Her tester vi om variansen til `X2`-kolonnen i testdatasettet er lik 10:
 
@@ -1539,13 +1556,6 @@ U <- qchisq(0.975, df = n - 1)
 
 Vi må så sammenligne verdien av testobservatoren `chikvadrat` med de kritiske verdiene `L` og `U`. Legg merke til at vi har brukt en funksjon i R (`qchisq()`) for å finne de aktuelle kvantilene i kjikvadratfordelingen.
 
-For to-utvalgs varianstest kan vi bruke funksjonen `var.test()`:
-
-```{r, eval = FALSE}
-var.test(testdata$X1, testdata$X2)
-```
-Vi kan også her gjøre ensidige tester ved å sette `alternative =`-argumentet til enten `"less"` eller `"greater"`.
-
 #### Kritiske verdier i $\chi^2$-fordelingen {-}
 
 $\chi^2$-fordelingen er ikke symmetrisk, så vi må være nøye med hvilken hale forkastningsområdet ligger i. Mot $H_A: \sigma^2 < \sigma_0^2$ forkaster vi i *nedre* hale:
@@ -1563,9 +1573,18 @@ U <- qchisq(1 - 0.05/2, df = 30)
 c(L, U)
 ```
 
+#### To-utvalgs varianstest {-}
+
+For å sammenligne variansene i to utvalg (F-testen) kan vi bruke funksjonen `var.test()`:
+
+```{r, eval = FALSE}
+var.test(testdata$X1, testdata$X2)
+```
+Vi kan også her gjøre ensidige tester ved å sette `alternative =`-argumentet til enten `"less"` eller `"greater"`.
+
 #### Kritiske verdier i F-fordelingen {-}
 
-For to-utvalgs varianstesten (F-testen) bruker vi F-fordelingen. Setter vi den største variansen i telleren, $F = s_1^2/s_2^2$, trenger vi bare øvre hale, uansett om testen er ensidig eller tosidig. Har vi $30$ observasjoner bak $s_1^2$ og $25$ bak $s_2^2$, er kritisk verdi for en tosidig test ($H_A: \sigma_1^2 \neq \sigma_2^2$):
+For to-utvalgs varianstesten bruker vi F-fordelingen. Setter vi den største variansen i telleren, $F = s_1^2/s_2^2$, trenger vi bare øvre hale, uansett om testen er ensidig eller tosidig. Har vi $30$ observasjoner bak $s_1^2$ og $25$ bak $s_2^2$, er kritisk verdi for en tosidig test ($H_A: \sigma_1^2 \neq \sigma_2^2$):
 ```{r, eval = TRUE}
 qf(1 - 0.05/2, df1 = 30 - 1, df2 = 25 - 1)
 ```
@@ -1579,60 +1598,30 @@ Husk: du kan selv velge hva som er $s_1^2$ og $s_2^2$, og med strategien over la
 
 #### Goodness-of-fit {-}
 
-Hvis vi skal teste for goodness-of-fit for en fordeling kan vi raskt regne ut testobservatoren direkte:
+For en goodness-of-fit-test bruker vi `chisq.test()`. Vi gir den de observerte frekvensene (`x = `) og sannsynlighetene under $H_0$ (`p = `). Pass på å bruke disse argumentnavnene:
 
-```{r, eval = FALSE}
+```{r}
 f  <- c(102, 82, 16)       # observerte frekvenser
 p0 <- c(0.45, 0.40, 0.15)  # fordeling under H0
-e  <- sum(f)*p0            # forventede frekvenser under H0
 
-chikvadrat <- sum((f - e)^2/e)   # testobservator
-kritisk    <- qchisq(0.95, df = 2)  # kritisk verdi (k - 1 = 2 frihetsgrader)
-
-# Forkast H0?
-chikvadrat > kritisk
-```
-
-Alternativt så kan vi bruke `chisq.test()`-funksjonen direkte. Pass på å bruke riktige argumentnavn (`x = ` og `p = `) når du skal gjøre goodness-of-fit:
-
-```{r, eval = FALSE}
-# Eventuelt direkte
 chisq.test(x = f, p = p0)
 ```
 
 #### Uavhengighet {-}
 
-```{r, echo = F, message=F}
+Har vi et rådatasett med to kategoriske variabler, lager vi en krysstabell med `table()` og sender den inn i `chisq.test()`:
+
+```{r, eval = FALSE, warning = FALSE}
+library(readxl)
 library(dplyr)
-library(readxl)
-violence <- read_excel("datasett/violence.xlsx")
-```
-
-Som eksempel kan vi ta oppgaven fra Dataøving 2. Vi starter med å lese inn dataene:
-
-```{r, eval = F, warning=F}
-# les inn data
-library(readxl)
 violence <- read_excel("violence.xlsx")
-```
-Vi bruker `select()` til å velge de to variablene vi er interessert i og funksjonen `table()` til å lage en krysstabell:
 
-```{r voldelig}
-violence_redusert <-
-  violence %>%
-  select(violent_treatment, experienced_violence)
-krysstabell <- table(violence_redusert)
-krysstabell
-
-```
-Det ser ut til at det er en klar sammenheng mellom faktisk og opplevd voldelighet ved at de fleste forsøkspersonene havner på diagonalen i krysstabellen over.
-
-Nå skal vi utføre en test av nullhypotesen $H_0$: faktisk og opplevd voldelighet er uavhengige kjennetegn, mot den alternative hypotesen $H_A:$ at de er avhengige kjennetegn. Dette er en chikvadrattest som kan utføres i R på følgende måte:
-
-```{r chisq}
+# Lag krysstabell av de to variablene, og kjør testen:
+krysstabell <- violence %>%
+  select(violent_treatment, experienced_violence) %>%
+  table()
 chisq.test(krysstabell)
 ```
-og vi ser at vi får en soleklar forkastning. Dette er også logisk gitt hva vi faktisk tester her.
 
 Ofte kommer dataene allerede som en ferdig tabell med *antall* (slik som i flere av oppgavene og på eksamen), ikke som et råmateriale vi må krysstabulere selv. Da lager vi tabellen direkte med `matrix()`. Vi fyller inn tallene rad for rad med `byrow = TRUE`, oppgir antall rader med `nrow`, og kan gi rad- og kolonnenavn med `dimnames`:
 
