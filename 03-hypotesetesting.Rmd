@@ -643,7 +643,15 @@ chisq.test(immigration)
 qchisq(0.95, df = 30)
 ```
 
-Testobservatoren (`X-squared` $\approx 1815$) er enormt mye større enn den kritiske verdien (43.8), og **p-verdien** er forsvinnende liten, så vi forkaster $H_0$: holdning til innvandring henger klart sammen med politisk ståsted. (Sjekk gjerne med `chisq.test(immigration)$expected` at ingen forventede celletall er under 5, ellers er tilnærmingen upålitelig.)
+Testobservatoren (`X-squared` $\approx 1815$) er enormt mye større enn den kritiske verdien (43.8), og **p-verdien** er forsvinnende liten, så vi forkaster $H_0$: holdning til innvandring henger klart sammen med politisk ståsted.
+
+Testen hviler på at ingen av de forventede celletallene er for små (under omtrent 5). Den forutsetningen kan vi sjekke ved å hente ut de forventede antallene direkte fra testen:
+
+```{r}
+chisq.test(immigration)$expected
+```
+
+Alle de forventede antallene er godt over 5 (det minste er omtrent 87), så tilnærmingen er pålitelig her.
 
 ### Kontrollspørsmål
 
