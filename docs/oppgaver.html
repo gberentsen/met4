@@ -267,9 +267,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>For hvert av scenarioene i a og b, gjør følgende:
 <ul>
-<li>Sett opp relevant nullhypotese og alternativhypotese (hint: nullhypotese avhenger av hvor ‘bevisbyrden’ bør ligge)</li>
-<li>Definer type I-og type II-feil.</li>
+<li>Sett opp relevant nullhypotese og alternativhypotese (hint: nullhypotesen avhenger av hvor «bevisbyrden» bør ligge).</li>
+<li>Definer type I- og type II-feil.</li>
 <li>Diskuter konsekvensene av type I-feil og type II-feil i det aktuelle scenarioet.</li>
+<li>Diskuter hvilket signifikansnivå du ville valgt, og begrunn valget ut fra konsekvensene av de to feiltypene.</li>
 </ul>
 <ol style="list-style-type: lower-alpha">
 <li><p>En ny type medisin skal vurderes for kommersialisering. Du sitter i et vurderingspanel som skal vurdere om medisinen kan bli godkjent eller ikke.</p></li>
@@ -284,37 +285,39 @@ Løsning
 <ol style="list-style-type: lower-alpha">
 <li><span class="math inline">\(H_0\)</span>: Den nye medisinen er ikke trygg og effektiv. <span class="math inline">\(H_A\)</span>: Den nye medisinen er trygg og effektiv. Type I-feil: Forkaste <span class="math inline">\(H_0\)</span> når <span class="math inline">\(H_0\)</span> er sann. Konsekvens: Risikerer at vi begynner å produsere en medisin som ikke er trygg og effektiv. Type II-feil: Forkaster <em>ikke</em> <span class="math inline">\(H_0\)</span> når <span class="math inline">\(H_A\)</span> er sann. Konsekvens: Vi lar være å produsere en medisin som faktisk er trygg og effektiv.</li>
 </ol>
-<p>Kommentar: Signifikansnivået ved produksjon av medisiner settes ofte lavt fordi konsekvensene av en type I-feil kan være svært alvorlige.</p>
+<p>Signifikansnivå: En type I-feil (en utrygg medisin når markedet) er svært alvorlig, så vi bør kreve sterke bevis før vi forkaster <span class="math inline">\(H_0\)</span>. Derfor settes signifikansnivået lavt, gjerne 1 % eller lavere.</p>
 </blockquote>
 <blockquote>
 <ol start="2" style="list-style-type: lower-alpha">
-<li><span class="math inline">\(H_0\)</span>: Den mest risikable investeringen er mest lønnsom. <span class="math inline">\(H_A\)</span>: Den mest risikable investeringen er ikke mest lønnsom. Type I-feil: Forkaste <span class="math inline">\(H_0\)</span> når <span class="math inline">\(H_0\)</span> er sann. Konsekvens:Vi investerer i den minst risikable investeringen, som ikke er mest lønnsom. Type II-feil: Forkaster <em>ikke</em> <span class="math inline">\(H_0\)</span> når <span class="math inline">\(H_A\)</span> er sann. Konsekvens: Vi investerer i den mest risikable investeringen, som ikke er mest lønnsom.</li>
+<li><span class="math inline">\(H_0\)</span>: Den mest risikable investeringen er mest lønnsom. <span class="math inline">\(H_A\)</span>: Den mest risikable investeringen er ikke mest lønnsom. Type I-feil: Forkaste <span class="math inline">\(H_0\)</span> når <span class="math inline">\(H_0\)</span> er sann. Konsekvens: Vi investerer i den minst risikable investeringen, som ikke er mest lønnsom. Type II-feil: Forkaster <em>ikke</em> <span class="math inline">\(H_0\)</span> når <span class="math inline">\(H_A\)</span> er sann. Konsekvens: Vi investerer i den mest risikable investeringen, som ikke er mest lønnsom.</li>
 </ol>
+<p>Signifikansnivå: Her er begge feiltypene omtrent like alvorlige (i begge tilfeller ender vi opp i en mindre lønnsom investering), og konsekvensene er rent økonomiske. Et vanlig nivå på 5 % er da et rimelig valg. Poenget er at valget bør begrunnes ut fra konsekvensene, ikke tas på autopilot.</p>
 </blockquote>
 </details>
 <ol start="2" style="list-style-type: decimal">
-<li><p>Vi har følgende hypoteser og informasjon om dataene: <span class="math inline">\(H_0: \mu = 150\)</span> mot <span class="math inline">\(H_A: \mu \neq 150\)</span>. <span class="math inline">\(\sigma = 10\)</span>, <span class="math inline">\(n =100\)</span>, <span class="math inline">\(\overline{x} = 150\)</span>.</p>
-<p>Bestem verdi av testobservator, forkastelsesområde dersom signifikansnivået er <span class="math inline">\(\alpha = 0.05\)</span>, og p-verdi. Konkluder.</p></li>
+<li><p>Vi har følgende hypoteser og informasjon om dataene: <span class="math inline">\(H_0: \mu = 150\)</span> mot <span class="math inline">\(H_A: \mu \neq 150\)</span>. Utvalgsstandardavviket er <span class="math inline">\(s = 10\)</span>, <span class="math inline">\(n = 100\)</span> og <span class="math inline">\(\overline{x} = 150\)</span>.</p>
+<p>Bestem verdien av testobservatoren, forkastningsområdet dersom signifikansnivået er <span class="math inline">\(\alpha = 0.05\)</span>, og p-verdien. Konkluder.</p></li>
 </ol>
 <details>
 <summary>
 Løsning
 </summary>
 <blockquote>
-<p>Her er <span class="math inline">\(\sigma\)</span> kjent så vi kan bruke en z-observator. Forkastelsesområde <span class="math inline">\(Z &lt; -z_{0.025}=-1.96\)</span> eller <span class="math inline">\(Z&gt; z_{0.025}=1.96\)</span>.</p>
-<p><span class="math display">\[Z = \frac{\overline{x} - \mu}{\sigma/\sqrt{n}} = \frac{150 - 150}{10/\sqrt{100}}=0\]</span></p>
-<p>p-verdi<span class="math inline">\(=2P(Z &gt; 0) = 2\times0.5=1\)</span>. Vi kan ikke forkaste nullhypotesen <span class="math inline">\(H_0: \mu = 150\)</span>. Faktisk er det ekstremt sannsynlig (p-verdi = 1) å observere det vi har observert dersom nullhypotesen er sann.</p>
+<p>Vi kjenner ikke det sanne standardavviket <span class="math inline">\(\sigma\)</span>, så vi bruker en t-observator med <span class="math inline">\(n - 1 = 99\)</span> frihetsgrader. Forkastningsområdet for en tosidig test på 5 %-nivå er <span class="math inline">\(T &lt; -t_{0.025,\,99} = -1.98\)</span> eller <span class="math inline">\(T &gt; t_{0.025,\,99} = 1.98\)</span>.</p>
+<p><span class="math display">\[T = \frac{\overline{x} - \mu_0}{s/\sqrt{n}} = \frac{150 - 150}{10/\sqrt{100}} = 0.\]</span></p>
+<p><strong>p-verdien i en tosidig test.</strong> I en tosidig test teller <em>både</em> store positive og store negative verdier av <span class="math inline">\(T\)</span> som bevis mot <span class="math inline">\(H_0\)</span>, fordi avvik i begge retninger er interessante. Vi spør derfor hvor sannsynlig det er å få en testobservator som er minst så <em>langt fra null</em> som den vi observerte, altså <span class="math inline">\(|T| \geq |T_{obs}|\)</span>. Ved symmetri er dette to like store haler:
+<span class="math display">\[\text{p-verdi} = P(|T| \geq |T_{obs}|) = 2\,P(T \geq |T_{obs}|).\]</span>
+Her er <span class="math inline">\(T_{obs} = 0\)</span>, så p-verdien blir <span class="math inline">\(2\,P(T \geq 0) = 2 \times 0.5 = 1\)</span>. Vi kan altså ikke forkaste <span class="math inline">\(H_0\)</span>. Faktisk finnes det ingen observasjon som er <em>mer</em> forenlig med <span class="math inline">\(H_0: \mu = 150\)</span> enn den vi fikk, siden utvalgsgjennomsnittet er nøyaktig 150. (I R finner du <span class="math inline">\(P(T \geq t)\)</span> med <code>1 - pt(t, df = 99)</code>.)</p>
 </blockquote>
 </details>
 <ol start="3" style="list-style-type: decimal">
-<li><p>Vi har følgende hypoteser og informasjon om dataene: <span class="math inline">\(H_0: \mu = 55\)</span> mot <span class="math inline">\(H_A: \mu &gt; 55\)</span>.
-<span class="math inline">\(\sigma = 20\)</span>, <span class="math inline">\(n = 25\)</span>, <span class="math inline">\(\overline{x} = 67\)</span>.</p>
+<li><p>Vi har følgende hypoteser og informasjon om dataene: <span class="math inline">\(H_0: \mu = 55\)</span> mot <span class="math inline">\(H_A: \mu &gt; 55\)</span>. Utvalgsstandardavviket er <span class="math inline">\(s = 20\)</span>, <span class="math inline">\(n = 25\)</span> og <span class="math inline">\(\overline{x} = 67\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Regn ut testobservatoren <span class="math inline">\(Z\)</span>.</p></li>
-<li><p>Regn ut p-verdi.</p></li>
-<li><p>Regn ut p-verdi, denne gangen med <span class="math inline">\(\overline{x}\)</span> = 63.</p></li>
-<li><p>Regn ut p-verdi, denne gangen med <span class="math inline">\(\overline{x}\)</span> = 59.</p></li>
-<li><p>Fastslå hva som skjer med verdien av testobservatoren (Z) og p-verdien når <span class="math inline">\(\overline{x}\)</span> nærmer seg <span class="math inline">\(55\)</span> (verdien av <span class="math inline">\(\mu\)</span> under <span class="math inline">\(H_0\)</span>).</p></li>
+<li><p>Regn ut testobservatoren <span class="math inline">\(T\)</span>.</p></li>
+<li><p>Regn ut p-verdien.</p></li>
+<li><p>Regn ut p-verdien, denne gangen med <span class="math inline">\(\overline{x} = 63\)</span>.</p></li>
+<li><p>Regn ut p-verdien, denne gangen med <span class="math inline">\(\overline{x} = 59\)</span>.</p></li>
+<li><p>Fastslå hva som skjer med verdien av testobservatoren og p-verdien når <span class="math inline">\(\overline{x}\)</span> nærmer seg <span class="math inline">\(55\)</span> (verdien av <span class="math inline">\(\mu\)</span> under <span class="math inline">\(H_0\)</span>).</p></li>
 </ol></li>
 </ol>
 <details>
@@ -322,40 +325,42 @@ Løsning
 Løsning
 </summary>
 <blockquote>
+<p>Vi kjenner ikke det sanne standardavviket <span class="math inline">\(\sigma\)</span>, så vi bruker en t-observator med <span class="math inline">\(n - 1 = 24\)</span> frihetsgrader.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p><span class="math display">\[Z = \frac{\overline{x} - \mu}{\sigma/\sqrt{n}} = \frac{67 - 55}{20/\sqrt{25}}=3\]</span></p></li>
-<li><p><span class="math inline">\(\text{p-verdi} = P(Z &gt; 3.00) = 1 – P(Z&lt;3) = 1 – 0.9987 = 0.0013\)</span>. Kommentar: Her kan du bruke <code>pnorm(3)</code> i R til å regne ut <span class="math inline">\(P(Z&lt;3)\)</span>.</p></li>
-<li><p>Ny verdi av testobservator blir da <span class="math inline">\(Z = 2\)</span>.
-<span class="math inline">\(\text{p-verdi} = P(Z &gt; 2.00) = 1 – 0.9772 = 0.0228\)</span>.</p></li>
-<li><p>Ny verdi av testobservator blir da <span class="math inline">\(Z = 1\)</span>.
-<span class="math inline">\(\text{p-verdi} = P(Z &gt; 1.00) = 1 – 0.8413 = 0.1587\)</span>.</p></li>
+<li><p><span class="math display">\[T = \frac{\overline{x} - \mu_0}{s/\sqrt{n}} = \frac{67 - 55}{20/\sqrt{25}} = 3.\]</span></p></li>
+<li><p><span class="math inline">\(\text{p-verdi} = P(T &gt; 3) = 1 - P(T &lt; 3) = 0.0031\)</span>. (I R: <code>1 - pt(3, df = 24)</code>.)</p></li>
+<li><p>Ny testobservator: <span class="math inline">\(T = (63 - 55)/(20/\sqrt{25}) = 2\)</span>.
+<span class="math inline">\(\text{p-verdi} = P(T &gt; 2) = 0.0285\)</span>.</p></li>
+<li><p>Ny testobservator: <span class="math inline">\(T = (59 - 55)/(20/\sqrt{25}) = 1\)</span>.
+<span class="math inline">\(\text{p-verdi} = P(T &gt; 1) = 0.164\)</span>.</p></li>
 <li><p>Vi ser at testobservatoren minker og p-verdien øker når <span class="math inline">\(\overline{x}\)</span> nærmer seg <span class="math inline">\(55\)</span>.</p></li>
 </ol>
-<p>Forklaring: La <span class="math inline">\(\mu_0 = 55\)</span> være verdien av <span class="math inline">\(\mu\)</span> under <span class="math inline">\(H_0\)</span>. Z-observatoren måler avviket mellom antagelsen under <span class="math inline">\(H_0\)</span> og dataene vi observerer og avtar derfor når vår observasjon av <span class="math inline">\(\overline{x}\)</span> nærmer seg <span class="math inline">\(\mu_0\)</span>. P-verdien sier hvor sannsynlig det er å observere de dataene vi har dersom <span class="math inline">\(H_0\)</span> er sann og øker følgelig når <span class="math inline">\(\overline{x}\)</span> nærmer seg <span class="math inline">\(\mu_0\)</span>.</p>
+<p>Forklaring: La <span class="math inline">\(\mu_0 = 55\)</span> være verdien av <span class="math inline">\(\mu\)</span> under <span class="math inline">\(H_0\)</span>. Testobservatoren måler avviket mellom det <span class="math inline">\(H_0\)</span> påstår og det dataene viser, og avtar derfor når <span class="math inline">\(\overline{x}\)</span> nærmer seg <span class="math inline">\(\mu_0\)</span>. P-verdien sier hvor sannsynlig det er å observere noe minst så ekstremt som det vi har, dersom <span class="math inline">\(H_0\)</span> er sann, og øker følgelig når <span class="math inline">\(\overline{x}\)</span> nærmer seg <span class="math inline">\(\mu_0\)</span>.</p>
 </blockquote>
 </details>
 <ol start="4" style="list-style-type: decimal">
-<li><p>Anta at vi har følgende hypoteser og informasjon om dataene: <span class="math inline">\(H_0: \mu = 50\)</span> mot <span class="math inline">\(H_A: \mu &gt; 50\)</span>. <span class="math inline">\(\sigma = 10\)</span>, <span class="math inline">\(n = 40\)</span>, <span class="math inline">\(\alpha = 0.05\)</span>.</p>
-<p>Bestem <span class="math inline">\(\beta\)</span>, altså sannsynligheten for en type-II feil, under antagelsen at <span class="math inline">\(\mu = 55\)</span>.</p></li>
+<li><p>Anta at vi har følgende hypoteser og informasjon om dataene: <span class="math inline">\(H_0: \mu = 50\)</span> mot <span class="math inline">\(H_A: \mu &gt; 50\)</span>. Utvalgsstandardavviket er <span class="math inline">\(s = 10\)</span>, <span class="math inline">\(n = 40\)</span> og signifikansnivået <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+<p>Bestem <span class="math inline">\(\beta\)</span>, altså sannsynligheten for en type II-feil, dersom den sanne (men ukjente) verdien av <span class="math inline">\(\mu\)</span> i virkeligheten er <span class="math inline">\(55\)</span>.</p></li>
 </ol>
 <details>
 <summary>
 Løsning
 </summary>
 <blockquote>
-<p>Forkastningsområdet blir da</p>
-<p><span class="math display">\[Z = \frac{\overline{X} - 50}{10/\sqrt{40}} &gt; Z_{0.05} = 1.645 \]</span>
-dvs at vi forkaster <span class="math inline">\(H_0\)</span> når
-<span class="math display">\[\overline{X} &gt; 50 + 1.645\times\frac{10}{\sqrt{40}}=52.6\]</span>
-En type-II feil svarer til å <em>ikke</em> forkaste <span class="math inline">\(H_0\)</span> når <span class="math inline">\(H_A\)</span> er sann. For å regne på sannsynligheten for type-II feil må vi ikke bare anta at <span class="math inline">\(H_A\)</span> er sann, men være spesifike på hva verdien til <span class="math inline">\(\mu\)</span> er (i dette tilfellet 55). Vi lurer altså på hva sannsynligheten for at vi <em>ikke</em> er i forkastnings området (<span class="math inline">\(\overline{X} &lt; 52.6\)</span>) gitt at <span class="math inline">\(\mu = 55\)</span>:
+<p>En type II-feil er å <em>beholde</em> <span class="math inline">\(H_0\)</span> selv om <span class="math inline">\(H_A\)</span> er sann. For å regne ut sannsynligheten for den, holder det ikke å vite at <span class="math inline">\(H_A\)</span> er sann; vi må vite <em>hvor</em> sann den er, altså en konkret verdi for <span class="math inline">\(\mu\)</span>. Her regner vi ut <span class="math inline">\(\beta\)</span> dersom den sanne verdien er <span class="math inline">\(\mu = 55\)</span>. Det gjør vi i tre steg.</p>
+<p><strong>Steg 1: Når forkaster vi?</strong> Vi kjenner ikke <span class="math inline">\(\sigma\)</span>, så vi bruker en t-test med <span class="math inline">\(n - 1 = 39\)</span> frihetsgrader. Vi forkaster <span class="math inline">\(H_0\)</span> når testobservatoren er stor nok:
+<span class="math display">\[T = \frac{\overline{X} - 50}{s/\sqrt{n}} &gt; t_{0.05,\,39} = 1.685.\]</span>
+Løser vi dette ut for <span class="math inline">\(\overline{X}\)</span>, svarer det til å forkaste når utvalgsgjennomsnittet er over en grense:
+<span class="math display">\[\overline{X} &gt; 50 + 1.685\cdot\frac{10}{\sqrt{40}} = 52.66.\]</span></p>
+<p><strong>Steg 2: Hvor sannsynlig er det å <em>ikke</em> forkaste, dersom sann <span class="math inline">\(\mu = 55\)</span>?</strong> En type II-feil skjer nettopp når vi <em>ikke</em> forkaster, altså når <span class="math inline">\(\overline{X} &lt; 52.66\)</span>. Vi regner ut hvor sannsynlig det er <em>gitt at den sanne forventningen er 55</em>. Fra sentralgrenseteoremet er <span class="math inline">\(\overline{X}\)</span> tilnærmet normalfordelt med forventning <span class="math inline">\(55\)</span> (den sanne verdien) og standardavvik <span class="math inline">\(s/\sqrt{n} = 10/\sqrt{40}\)</span>:
 <span class="math display">\[\begin{equation*}
 \begin{split}
-\beta &amp;= P(\overline{X} &lt; 52.6\quad\text{gitt at $\mu = 55$})\\
-&amp;= P(\frac{\overline{X} - 55}{10/\sqrt{40}} &lt; \frac{52.6 - 55}{10/\sqrt{40}})\\
-&amp;=P(Z &lt; -1.52) = 0.064
+\beta &amp;= P(\overline{X} &lt; 52.66 \quad\text{gitt at } \mu = 55)\\
+&amp;= P\left(\frac{\overline{X} - 55}{10/\sqrt{40}} &lt; \frac{52.66 - 55}{10/\sqrt{40}}\right)\\
+&amp;= P(Z &lt; -1.48) = 0.07.
 \end{split}
-\end{equation*}\]</span>
-Merk: Et begrep som ofte blir brukt om tester er <em>styrken</em> til testen <span class="math inline">\(1-\beta\)</span> som da er sannsynligheten for å forkaste <span class="math inline">\(H_0\)</span> når <span class="math inline">\(H_A\)</span> er sann. En god test har god (stor) styrke. Hadde vi gjentatt denne testen mange ganger ville vi ha forkastet <span class="math inline">\(H_0\)</span> i <span class="math inline">\((100 - 6.4)\% = 93.6\%\)</span> av gangene dersom det faktisk er slik at sann <span class="math inline">\(\mu\)</span> er 55.</p>
+\end{equation*}\]</span></p>
+<p><strong>Steg 3: Tolkning.</strong> Det er altså cirka 7 % sannsynlighet for å overse effekten når den faktisk finnes (sann <span class="math inline">\(\mu = 55\)</span>). <strong>Styrken</strong> til testen er <span class="math inline">\(1 - \beta = 0.93\)</span>: gjentok vi testen mange ganger med sann <span class="math inline">\(\mu = 55\)</span>, ville vi korrekt forkastet <span class="math inline">\(H_0\)</span> i omtrent 93 % av tilfellene. Legg merke til at <span class="math inline">\(\beta\)</span> avhenger av <em>hvor</em> sann <span class="math inline">\(H_A\)</span> er: jo lenger den sanne <span class="math inline">\(\mu\)</span> ligger fra <span class="math inline">\(50\)</span>, jo lettere er effekten å oppdage, og jo mindre blir <span class="math inline">\(\beta\)</span>.</p>
 </blockquote>
 </details>
 <ol start="5" style="list-style-type: decimal">
