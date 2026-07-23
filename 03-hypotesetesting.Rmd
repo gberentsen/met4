@@ -568,12 +568,12 @@ ggplot(kurve, aes(x, tetthet)) +
   geom_vline(xintercept = krit, linetype = "dashed") +
   annotate("segment", x = obs, xend = obs, y = 0, yend = dchisq(obs, df = 2),
            colour = "firebrick", linewidth = 0.9) +
-  annotate("text", x = 9.4, y = 0.055, label = "Forkastnings-\nområde (5 %)", size = 3) +
-  annotate("text", x = 3.0, y = 0.16, label = "kritisk verdi\n5.99", size = 3) +
-  annotate("segment", x = 3.4, xend = krit, y = 0.13, yend = 0.012,
+  annotate("text", x = 12.6, y = 0.045, label = "Forkastnings-\nområde (5 %)", size = 3) +
+  annotate("text", x = 4.6, y = 0.16, label = "kritisk verdi\n5.99", size = 3) +
+  annotate("segment", x = 4.9, xend = krit, y = 0.13, yend = 0.012,
            arrow = arrow(length = unit(0.15, "cm"))) +
-  annotate("text", x = 11.7, y = 0.10, label = "observert\nverdi 8.18", colour = "firebrick", size = 3) +
-  annotate("segment", x = 11.2, xend = obs, y = 0.078, yend = 0.008,
+  annotate("text", x = 9.6, y = 0.135, label = "observert\nverdi 8.18", colour = "firebrick", size = 3) +
+  annotate("segment", x = 9.2, xend = obs, y = 0.11, yend = 0.008,
            colour = "firebrick", arrow = arrow(length = unit(0.15, "cm"))) +
   scale_x_continuous(expand = expansion(mult = c(0.02, 0.05))) +
   coord_cartesian(clip = "off") +
@@ -623,7 +623,7 @@ immigration <- read_xls("immigration-wide.xls",
 print(immigration, n = 11)
 ```
 
-```{r, echo = FALSE, message = FALSE}
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
 library(readxl)
 immigration <- read_xls("datasett/immigration-wide.xls",
                         range = "B2:E12",
