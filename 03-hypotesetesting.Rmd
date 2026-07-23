@@ -1396,11 +1396,13 @@ Alle er godt over 5 (det minste er cirka 40), så tilnærmingen bak kji-kvadratt
 
 ## Relevante R-kommandoer {#relevante-r-testing}
 
-Under følger en liste over hvilke oppgaver du skal klare i R fra denne modulen. Vår policy  er at R-kommandoene under er *tilstrekkelige* for å løse oppgavene i datalabber og eksamen i MET4. Det er med andre ord ikke nødvendig å lære seg teknikker utover det som er listet opp eksplisitt i listen under. Eventuelle nye teknikker som trengs for å løse en bestemt oppgave vil bli oppgitt og forklart dersom det er nødvendig. Det antas i tillegg at du kan den grunnleggende R-syntaksen som er dekket under [Introduksjon til R].
+Under følger en liste over hvilke oppgaver du skal klare i R fra denne modulen. Vår policy er at R-kommandoene under er *tilstrekkelige* for å løse oppgavene i datalabber og eksamen i MET4. Det er med andre ord ikke nødvendig å lære seg teknikker utover det som er listet opp eksplisitt i listen under. Eventuelle nye teknikker som trengs for å løse en bestemt oppgave vil bli oppgitt og forklart dersom det er nødvendig. Det antas i tillegg at du kan den grunnleggende R-syntaksen som er dekket under [Introduksjon til R].
 
-### $t$-tester {-}
+Vi følger samme rekkefølge som i teorien: først tester for et gjennomsnitt og for differansen mellom to gjennomsnitt (t-tester), så tester for andeler, så varianstester, og til slutt kji-kvadrattester. De fleste testene kjører vi direkte med en ferdig funksjon (`t.test()`, `var.test()`, `chisq.test()` og så videre), som gir både testobservator og p-verdi. Trenger du i stedet en *kritisk verdi* (for eksempel på eksamen), finner du den med **kvantilfunksjonene** `qt()`, `qnorm()`, `qchisq()` og `qf()`. Under hver testtype viser vi begge deler. (Kvantil- og sannsynlighetsfunksjonene ble introdusert i modul 2, se Avsnitt \@ref(relevant-r-grunnleggende).)
 
-Du må kunne gjøre de ulike $t$-testene ved hjelp av `t.test()`-funksjonen. vi bruker eksempeldatasettet [testdata.xls](datasett/testdata.xls) som illustrasjon, som inneholder de to kolonnene `X1` og `X2`. I bunn og grunn handler det om å hente ut de relevante kolonnene i datasettet som vektorer, og så å sette argumentene i `t.test()`-funksjonen riktig.
+### t-tester
+
+Du må kunne gjøre de ulike $t$-testene ved hjelp av `t.test()`-funksjonen. Vi bruker eksempeldatasettet [testdata.xls](datasett/testdata.xls) som illustrasjon, som inneholder de to kolonnene `X1` og `X2`. I bunn og grunn handler det om å hente ut de relevante kolonnene i datasettet som vektorer, og så å sette argumentene i `t.test()`-funksjonen riktig.
 ```{r, echo = FALSE}
 testdata <- readxl::read_excel("datasett/testdata.xls")
 ```
@@ -1452,7 +1454,6 @@ t.test(verdi ~ gruppe, data = df)
 
 **Viktig:** Når du bruker `~`-syntaksen, bestemmes rekkefølgen av *nivårekkefølgen* til den kategoriske variabelen (alfabetisk som standard). Det betyr at R ser på differansen mellom det *første* nivået og det *andre* nivået. Dersom nivåene er `"No"` og `"Yes"`, vil R teste differansen `No - Yes`, fordi `"No"` kommer før `"Yes"` alfabetisk. Utskriften fra `t.test()` vil alltid vise dette eksplisitt, for eksempel: `"alternative hypothesis: true difference in means between group No and group Yes is less than 0"`. For ensidige tester må du derfor tilpasse `alternative`-argumentet til denne rekkefølgen: Dersom du ønsker å teste om gruppe `"Yes"` har *høyere* gjennomsnitt enn gruppe `"No"`, tester du om differansen `No - Yes` er *negativ*, altså bruker du `alternative = "less"`. Tilsvarende, hvis du tror at `"No"` har høyest gjennomsnitt, bruker du `alternative = "greater"`.
 
-
 #### Ulike utvalgsstørrelser {-}
 
 Videre kan vi tenke oss tilfeller der observasjonsvektorene ikke er like lange, og for eksempel kommer i en excel-fil slik som [denne](datasett/ulik-lengde.xlsx) der den ene kolonnen inneholder flere tall enn den andre. Det gjør ingenting. Vi kan lese inn datasettet på vanlig måte, og legger merke til at de "tomme" plassene i tabellen blir fylt med `NA`. Vi kan kjøre $t$-testene på vanlig måte.
@@ -1467,34 +1468,24 @@ testdata2
 t.test(testdata2$X1, testdata2$X2)
 ```
 
-### Varianstester {-}
+#### Kritiske verdier i t-fordelingen {-}
 
-Varianstest for ett uvalg er ikke bygget inn i R som en egen funksjon. Da må vi gjøre den "semi-automatisk" og regne ut testobservatoren ved å bruke formelen direkte. Her tester vi om variansen til `X2`-kolonnen i testdatasettet er lik 10:
-
-```{r}
-# Varianstest
-s <- sd(testdata$X2)
-sigma_0 <- 10
-n <- length(testdata$X2)
-
-# Testobservatoren
-T <- (n-1)*s^2/sigma_0^2
-
-# Kritiske verdier
-L <- qchisq(0.025, df = n - 1)
-U <- qchisq(0.975, df = n - 1)
+Trenger du en kritisk verdi manuelt, bruker du `qt()`. Dersom du tester $H_0: \mu = \mu_0$ mot $H_A: \mu < \mu_0$ på 5 %-nivå med $40$ observasjoner:
+```{r, eval = TRUE}
+qt(0.05, df = 40 - 1)
+```
+og du forkaster dersom testobservatoren $T$ er *mindre* enn dette tallet. Mot $H_A: \mu > \mu_0$ bruker du øvre kvantil:
+```{r, eval = TRUE}
+qt(1 - 0.05, df = 40 - 1)
+```
+og forkaster dersom $T$ er *større*. For en tosidig test ($H_A: \mu \neq \mu_0$) trenger du begge grensene, og forkaster dersom $T$ faller utenfor:
+```{r, eval = TRUE}
+L <- qt(0.05/2, df = 40 - 1)
+U <- qt(1 - 0.05/2, df = 40 - 1)
+c(L, U)
 ```
 
-Vi må så sammenligne verdien av testobservatoren `T` med de kritiske verdiene `L` og `U`. Legg merke til at vi har brukt en funksjon i R (`qchisq()`) for å finne de aktuelle kvantilene i kjikvadratfordelingen. 
-
-For to-utvalgs varianstest kan vi bruke funksjonen `var.test()`:
-
-```{r, eval = FALSE}
-var.test(testdata$X1, testdata$X2)
-```
-Vi kan også her gjøre ensidige tester ved å sette `alternative =`-argumentet til enten `"less"` eller `"greater"`.
-
-### Tester for andeler {-}
+### Tester for andeler
 
 Både for ett-utvalgs og to-utvalgs test for andeler kan vi fylle inn tall direkte i testobservatoren på denne måten (sett inn for de nødvendige verdiene):
 
@@ -1518,11 +1509,83 @@ p_hatt <- mean(c(testdata$A1, testdata$A2))        # <- Regner ut felles p_hatt
 Z <- (p1_hatt - p2_hatt)/sqrt((1/n1 + 1/n2)*p_hatt*(1-p_hatt))
 ```
 
-Testobservatorene må da sammenlignes med relevant kvantil i normalfordelingen, som du finner ved å bruke funksjonen `qnorm()` med ønsket kvantil som argument.
+Testobservatorene må da sammenlignes med relevant kvantil i normalfordelingen.
 
-### Kjikvadrattester for goodness-of-fit {-}
+#### Kritiske verdier i standardnormalfordelingen {-}
 
-Hvis vi skal teste for goodness-of-fit for en fordeling kan vi raskt regne ut testobservatoren direkte. Vi bruker eksempelet fra forelesningsvideoen:
+For andelstester finner du kritiske verdier i standardnormalfordelingen med `qnorm()`, helt likt som for t-fordelingen, bare uten frihetsgrader:
+```{r, eval = TRUE}
+qnorm(0.05)         # ensidig, H_A: p < p0
+qnorm(1 - 0.05)     # ensidig, H_A: p > p0
+
+# tosidig
+L <- qnorm(0.05/2)
+U <- qnorm(1 - 0.05/2)
+c(L, U)
+```
+Alternativt er det bare å pugge tallene $1.64$ og $1.96$.
+
+### Varianstester
+
+Varianstest for ett utvalg er ikke bygget inn i R som en egen funksjon. Da må vi gjøre den "semi-automatisk" og regne ut testobservatoren ved å bruke formelen direkte. Her tester vi om variansen til `X2`-kolonnen i testdatasettet er lik 10:
+
+```{r}
+# Varianstest
+s <- sd(testdata$X2)
+sigma_0 <- 10
+n <- length(testdata$X2)
+
+# Testobservatoren
+chikvadrat <- (n - 1)*s^2/sigma_0^2
+
+# Kritiske verdier (tosidig test)
+L <- qchisq(0.025, df = n - 1)
+U <- qchisq(0.975, df = n - 1)
+```
+
+Vi må så sammenligne verdien av testobservatoren `chikvadrat` med de kritiske verdiene `L` og `U`. Legg merke til at vi har brukt en funksjon i R (`qchisq()`) for å finne de aktuelle kvantilene i kjikvadratfordelingen.
+
+For to-utvalgs varianstest kan vi bruke funksjonen `var.test()`:
+
+```{r, eval = FALSE}
+var.test(testdata$X1, testdata$X2)
+```
+Vi kan også her gjøre ensidige tester ved å sette `alternative =`-argumentet til enten `"less"` eller `"greater"`.
+
+#### Kritiske verdier i $\chi^2$-fordelingen {-}
+
+$\chi^2$-fordelingen er ikke symmetrisk, så vi må være nøye med hvilken hale forkastningsområdet ligger i. Mot $H_A: \sigma^2 < \sigma_0^2$ forkaster vi i *nedre* hale:
+```{r, eval = TRUE}
+qchisq(0.05, df = 30)   # nedre hale, 30 frihetsgrader
+```
+Mot $H_A: \sigma^2 > \sigma_0^2$ forkaster vi i *øvre* hale:
+```{r, eval = TRUE}
+qchisq(1 - 0.05, df = 30)
+```
+For en tosidig test ($H_A: \sigma^2 \neq \sigma_0^2$) trenger vi begge grensene, og forkaster dersom testobservatoren havner utenfor:
+```{r, eval = TRUE}
+L <- qchisq(0.05/2, df = 30)
+U <- qchisq(1 - 0.05/2, df = 30)
+c(L, U)
+```
+
+#### Kritiske verdier i F-fordelingen {-}
+
+For to-utvalgs varianstesten (F-testen) bruker vi F-fordelingen. Setter vi den største variansen i telleren, $F = s_1^2/s_2^2$, trenger vi bare øvre hale, uansett om testen er ensidig eller tosidig. Har vi $30$ observasjoner bak $s_1^2$ og $25$ bak $s_2^2$, er kritisk verdi for en tosidig test ($H_A: \sigma_1^2 \neq \sigma_2^2$):
+```{r, eval = TRUE}
+qf(1 - 0.05/2, df1 = 30 - 1, df2 = 25 - 1)
+```
+og for en ensidig test ($H_A: \sigma_1^2 > \sigma_2^2$):
+```{r, eval = TRUE}
+qf(1 - 0.05, df1 = 30 - 1, df2 = 25 - 1)
+```
+Husk: du kan selv velge hva som er $s_1^2$ og $s_2^2$, og med strategien over lar du alltid $s_1^2$ være den største av de to variansene.
+
+### Kjikvadrattester
+
+#### Goodness-of-fit {-}
+
+Hvis vi skal teste for goodness-of-fit for en fordeling kan vi raskt regne ut testobservatoren direkte:
 
 ```{r, eval = FALSE}
 f  <- c(102, 82, 16)       # observerte frekvenser
@@ -1543,7 +1606,7 @@ Alternativt så kan vi bruke `chisq.test()`-funksjonen direkte. Pass på å bruk
 chisq.test(x = f, p = p0)
 ```
 
-### Kjikvadrattester for uavhengighet {-}
+#### Uavhengighet {-}
 
 ```{r, echo = F, message=F}
 library(dplyr)
@@ -1577,8 +1640,6 @@ chisq.test(krysstabell)
 ```
 og vi ser at vi får en soleklar forkastning. Dette er også logisk gitt hva vi faktisk tester her.
 
-#### Når dataene er en ferdig krysstabell {-}
-
 Ofte kommer dataene allerede som en ferdig tabell med *antall* (slik som i flere av oppgavene og på eksamen), ikke som et råmateriale vi må krysstabulere selv. Da lager vi tabellen direkte med `matrix()`. Vi fyller inn tallene rad for rad med `byrow = TRUE`, oppgir antall rader med `nrow`, og kan gi rad- og kolonnenavn med `dimnames`:
 
 ```{r}
@@ -1596,127 +1657,10 @@ Denne matrisen sender vi rett inn i `chisq.test()`, akkurat som krysstabellen ov
 chisq.test(tabell)
 ```
 
-### Kritiske verdier i R {-}
-
-Som vi har sett over baserer tester i R seg stort sett på en eller annen datainput. Som output får du både testobservator og p-verdi. Hvis du allikevel av en eller annen grunn (f.eks. på eksamen) trenger å finne en kritisk verdi i en fordeling, så kan det være nyttig å vite hvordan man gjør dette i R.
-
-De kritiske verdiene finner vi ved å bruke **kvantilfunksjonene** (`qnorm()`, `qt()`, `qchisq()`, `qf()`) til den respektive fordelingen. Vi ble kjent med disse, sammen med `p...()`-funksjonene for sannsynligheter, i modul 2 (se relevante R-kommandoer, Avsnitt \@ref(relevant-r-grunnleggende)). Her bruker vi dem til å finne kritiske verdier. Funksjonene har alltid et argument `p` og gir som output det tallet som har sannsynlighetsmasse `p` til venstre for seg. Du må derfor velge `p` ut fra signifikansnivå og om det er en ensidig/tosidig test.
-
-#### Kritiske verdier i T-fordelingen {-}
-
-Dersom du f.eks skal utføre en t-test for $H_0: \mu = \mu_0$ mot $H_A: \mu < \mu_0$, med signifikansnivå $\alpha = 0.05$ og har $40$ observasjoner er kritisk verdi:
-
-```{r, eval = TRUE}
-qt(0.05, df = 40 - 1)
-```
-og du forkaster da dersom din testobservator $T$ er mindre enn dette tallet.
-
-Hadde alternativ hypotesen vært $H_A: \mu > \mu_0$ ville kritisk verdi vært
-
-
-```{r, eval = TRUE}
-qt(1 - 0.05, df = 40 - 1)
-```
-og du forkaster dersom din testobservator $T$ er større enn dette tallet.
-
-For en to-sidig test ($H_A: \mu\neq \mu_0$) forkaster du dersom $T$ faller uten for intervallet:
-```{r, eval = TRUE}
-L <- qt(0.05/2, df = 40 - 1)
-U <- qt(1 - 0.05/2, df = 40 - 1)
-c(U,L)
-```
-
-#### Kritiske verdier i standardnormalfordelingen {-}
-Helt likt som for t-fordelingen bare at det ikke er noen frihetsgrader involvert:
-
-```{r, eval = TRUE}
-
-# Ensidig mu < mu0, alpha = 0.05
-qnorm(0.05)
-
-# Ensidig mu > mu0, alpha = 0.05
-qnorm(1 - 0.05)
-
-# Tosidig
-L <- qnorm(0.05/2)
-U <- qnorm(1 - 0.05/2)
-c(U,L)
-```
-
-Alternativt er det bare å pugge tallene $1.64$ og $1.96$.
-
 #### Kritiske verdier i $\chi^2$-fordelingen {-}
 
-$\chi^2$-fordelingen brukes i to ulike sammenhenger i MET4: varianstester og kjikvadrattester (goodness-of-fit og uavhengighet). For **kjikvadrattestene** er det kun den øvre halen som er relevant, fordi en stor testobservator betyr at de observerte frekvensene er langt fra de forventede. For **varianstester** kan vi derimot trenge nedre hale, øvre hale eller begge, avhengig av alternativhypotesen.
-
-**Varianstester:**
-
-Dersom du tester $H_0: \sigma^2 = \sigma_0^2$ mot $H_A: \sigma^2 < \sigma_0^2$ (variansen er *mindre* enn påstått), forkaster du i nedre hale:
+For kji-kvadrattestene (både goodness-of-fit og uavhengighet) forkaster vi *alltid* i øvre hale, fordi en stor testobservator betyr at de observerte antallene er langt fra de forventede. Med $2$ frihetsgrader (for eksempel $k = 3$ kategorier i en goodness-of-fit-test):
 ```{r, eval = TRUE}
-# Kritisk verdi, 5% nivå, ensidig test, nedre hale, 30 frihetsgrader
-qchisq(0.05, df = 30)
-```
-og du forkaster dersom testobservatoren er mindre enn dette tallet.
-
-Dersom du tester mot $H_A: \sigma^2 > \sigma_0^2$ (variansen er *større* enn påstått), forkaster du i øvre hale:
-```{r, eval = TRUE}
-# Kritisk verdi, 5% nivå, ensidig test, øvre hale, 30 frihetsgrader
-qchisq(1 - 0.05, df = 30)
-```
-og du forkaster dersom testobservatoren er større enn dette tallet.
-
-For en tosidig test ($H_A: \sigma^2 \neq \sigma_0^2$) trenger du begge grensene:
-```{r, eval = TRUE}
-# Kritisk verdi, 5% nivå, tosidig test, 30 frihetsgrader
-L <- qchisq(0.05/2, df = 30)
-U <- qchisq(1 - 0.05/2, df = 30)
-c(L, U)
-```
-og du forkaster nullhypotesen dersom testobservatoren havner utenfor dette intervallet.
-
-**Kjikvadrattester (goodness-of-fit og uavhengighet):**
-
-Her forkaster vi alltid i øvre hale, og trenger kun:
-```{r, eval = TRUE}
-# Kritisk verdi, 5% nivå, k = 3 kategorier (k - 1 frihetsgrader)
 qchisq(1 - 0.05, df = 2)
 ```
-og du forkaster dersom testobservatoren er større enn dette tallet.
-
-
-#### Kritiske verdier i F-fordelingen {-}
-F-fordelingen trenger vi når vi skal teste om to varianser er like. Skal du gjøre denne testen manuelt er det lurt å sette den største variansen i telleren av testobservatoren
-
-$$F = \frac{s_{1}^2}{s_{2}^2}.$$
-
-  Uavhengig om det er en ensidig eller tosidig test, trenger vi da bare å sjekke om testobservatoren overstiger den kritiske verdien i den øvre halen i F-fordelingen.
-
-Har vi brukt $30$ observasjoner til å regne ut $s_{1}^2$ og $25$ observasjoner til å regne ut $s_{2}^2$ blir kritisk verdi i en to-sidig test der $H_A: \sigma_{1}^2 \neq \sigma_{2}^2$ :
-
-```{r, eval = TRUE}
-# Kritisk verdi, 5% nivå, tosidig test
-
-qf(1 - 0.05/2, df1 = 30 - 1, df2 = 25 - 1)
-```
-Er det en ensidig test hvor $H_A: \sigma_{1}^2 > \sigma_{2}^2$ blir kritisk verdi:
-
-```{r, eval = TRUE}
-# Kritisk verdi, 5% nivå, ensidig test
-
-qf(1 - 0.05, df1 = 30 - 1, df2 = 25 - 1)
-
-```
-
-Husk: Du kan definere hva som er $s_{1}^2$ og $s_{2}^2$, og med strategien over definerer du alltid $s_{1}^2$ til være den av variansene som er størst.
-
-
-
-
-
-
-
-
-
-
-
-
+og du forkaster dersom testobservatoren er større enn dette tallet. For en uavhengighetstest er antall frihetsgrader $(r-1)(s-1)$.
