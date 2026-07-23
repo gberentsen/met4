@@ -1274,9 +1274,36 @@ b. Test på 5 %-nivå om `X1` og `X2` har samme forventning. Se på **p-verdien*
 
 c. Kjør testen i b på nytt, men med `alternative = "greater"`. Hva tester du nå, og hvordan endrer p-verdien seg?
 
-<details><summary>Hint</summary>
+<details><summary>Løsning</summary>
 
-`t.test(testdata$X1, mu = 100)` for a, `t.test(testdata$X1, testdata$X2)` for b. Husk at `t.test()` alltid ser på differansen mellom *første* og *andre* argument, se \@ref(relevante-r-testing).
+```{r, echo = FALSE, message = FALSE}
+library(readxl)
+testdata <- read_excel("datasett/testdata.xls")
+```
+
+**a)** Vi tester $H_0: \mu = 100$ mot $H_A: \mu \neq 100$ (tosidig):
+
+```{r}
+t.test(testdata$X1, mu = 100)
+```
+
+**p-verdien** er 0.88, altså langt over 0.05, så vi kan **ikke** forkaste $H_0$. Utvalgsgjennomsnittet (rundt 100.3) ligger så nær 100 at avviket lett kan skyldes tilfeldig variasjon.
+
+**b)** Vi tester $H_0: \mu_{X1} = \mu_{X2}$ mot $H_A: \mu_{X1} \neq \mu_{X2}$:
+
+```{r}
+t.test(testdata$X1, testdata$X2)
+```
+
+Her er p-verdien 0.27, fortsatt over 0.05, så vi kan ikke konkludere med at de to forventningene er forskjellige.
+
+**c)** Med `alternative = "greater"` tester vi det ensidige alternativet $H_A: \mu_{X1} > \mu_{X2}$, altså om `X1` har *høyere* forventning enn `X2`:
+
+```{r}
+t.test(testdata$X1, testdata$X2, alternative = "greater")
+```
+
+Nå er p-verdien 0.87. Grunnen er at utvalgsgjennomsnittet til `X1` faktisk er *lavere* enn `X2` sitt, så dataene peker stikk motsatt av $H_A$. Da blir det ingen bevis for at `X1` er størst, og p-verdien blir stor.
 
 </details>
 
@@ -1284,7 +1311,7 @@ c. Kjør testen i b på nytt, men med `alternative = "greater"`. Hva tester du n
 
 Vi tester $H_0: \mu = 0$ mot $H_A: \mu \neq 0$ på 5 %-nivå, og trekker hver gang $n = 30$ observasjoner fra en fordeling der forventningen faktisk *er* 0 (så $H_0$ er sann). Følgende kode gjør dette 5000 ganger og lagrer p-verdien hver gang:
 
-```{r, eval = FALSE}
+```{r}
 set.seed(1)
 M <- 5000                       # antall gjentakelser
 p_verdier <- rep(NA, M)
@@ -1300,13 +1327,31 @@ b. Gjenta med `< 0.01` i stedet. Stemmer det med et signifikansnivå på 1 %?
 
 c. Lag et histogram av p-verdiene med `hist(p_verdier)`. Fordelingen skal være tilnærmet *jevn* (flat) mellom 0 og 1. Kan du forklare intuitivt hvorfor p-verdien er jevnt fordelt når $H_0$ er sann?
 
-<details><summary>Svar</summary>
+<details><summary>Løsning</summary>
 
->a. Andelen er cirka 0.05. Det er selve definisjonen på signifikansnivået: når $H_0$ er sann, forkaster vi ved ren tilfeldighet i en andel $\alpha = 5\,\%$ av tilfellene. Vi *kontrollerer* altså Type I-feilraten ved å velge $\alpha$, akkurat som Neyman og Pearson påpekte (se Avsnitt \@ref(generelt-om-hypotesetesting), delen om de to feiltypene).
+**a)** Vi teller andelen p-verdier under 0.05:
 
->b. Nå er andelen cirka 0.01, i tråd med et strengere signifikansnivå. Jo lavere $\alpha$, jo sjeldnere forkaster vi en sann $H_0$.
+```{r}
+mean(p_verdier < 0.05)
+```
 
->c. Når $H_0$ er sann, er p-verdien like sannsynlig å havne hvor som helst mellom 0 og 1: andelen tester med p-verdi under en hvilken som helst grense $c$ er nettopp $c$ (det er derfor andelen under 0.05 blir 0.05, og andelen under 0.01 blir 0.01). En jevn fordeling er akkurat det denne egenskapen krever.
+Andelen er cirka 0.05. Det er selve definisjonen på signifikansnivået: når $H_0$ er sann, forkaster vi ved ren tilfeldighet i en andel $\alpha = 5\,\%$ av tilfellene. Vi *kontrollerer* altså Type I-feilraten ved å velge $\alpha$, akkurat som Neyman og Pearson påpekte (se Avsnitt \@ref(generelt-om-hypotesetesting), delen om de to feiltypene).
+
+**b)** Med grensen 0.01 i stedet:
+
+```{r}
+mean(p_verdier < 0.01)
+```
+
+Nå er andelen cirka 0.01, i tråd med et strengere signifikansnivå. Jo lavere $\alpha$, jo sjeldnere forkaster vi en sann $H_0$.
+
+**c)**
+
+```{r pverdi-hist, fig.width = 6, fig.height = 3.2}
+hist(p_verdier, breaks = 20, col = "grey85", main = "", xlab = "p-verdi")
+```
+
+Histogrammet er tilnærmet flatt. Når $H_0$ er sann, er p-verdien like sannsynlig å havne hvor som helst mellom 0 og 1: andelen tester med p-verdi under en hvilken som helst grense $c$ er nettopp $c$ (det er derfor andelen under 0.05 blir 0.05, og andelen under 0.01 blir 0.01). En jevn fordeling er akkurat det denne egenskapen krever.
 
 </details>
 
@@ -1323,9 +1368,11 @@ b. Se på **p-verdien** og konkluder på 5 %-nivå.
 
 c. Kjør `chisq.test(...)$expected` for å hente ut de forventede celletallene. Er alle større enn 5, slik tilnærmingen krever?
 
-<details><summary>Hint</summary>
+<details><summary>Løsning</summary>
 
-```{r, eval = FALSE}
+**a)** Vi legger tabellen inn som en matrise og kjører testen:
+
+```{r}
 tabell <- matrix(c(90, 60, 70,
                    60, 100, 20),
                  nrow = 2, byrow = TRUE,
@@ -1333,6 +1380,16 @@ tabell <- matrix(c(90, 60, 70,
                                  c("Butikk A", "Butikk B", "Butikk C")))
 chisq.test(tabell)
 ```
+
+**b)** Testobservatoren er `X-squared` $\approx 40$ med $(2-1)(3-1) = 2$ frihetsgrader, og **p-verdien** er cirka $2\cdot 10^{-9}$, altså langt under 0.05. Vi forkaster $H_0$: det er en klar sammenheng mellom hvilken butikk kunden handler i og om vedkommende bruker lojalitetskort.
+
+**c)** Vi henter ut de forventede celletallene:
+
+```{r}
+chisq.test(tabell)$expected
+```
+
+Alle er godt over 5 (det minste er cirka 40), så tilnærmingen bak kji-kvadrattesten er pålitelig her.
 
 </details>
 
