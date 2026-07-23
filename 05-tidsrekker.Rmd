@@ -1042,9 +1042,9 @@ d. $Y_t = u_1 + u_2 + \dots + u_t$
 
 Under følger en liste over hvilke oppgaver du skal klare i R fra denne modulen. Vår policy  er at R-kommandoene under er *tilstrekkelige* for å løse oppgavene i datalabber og eksamen i MET4. Det er med andre ord ikke nødvendig å lære seg teknikker utover det som er listet opp eksplisitt i listen under. Eventuelle nye teknikker som trengs for å løse en bestemt oppgave vil bli oppgitt og forklart dersom det er nødvendig. Det antas i tillegg at du kan den grunnleggende R-syntaksen som er dekket under [Introduksjon til R].
 
-### Antakelser om datasettet {-}
+### Tidsrekkedata {-}
 
-Du kan gjøre de samme antakelsene om datasettet som i [den tilsvarende oversikten i forrige modul](#relevante-r-regresjon): Datasettene er inneholdt i Excel-filer (`.xls` eller `xslx`) eller `.csv`-filer, som kolonner av variabler, med variabelnavn i første rad. I tillegg må vi i tidsrekkemodulen håndtere følgende:
+I tidsrekkemodulen må vi håndtere følgende når det gjelder datasettene:
 
 - Tidsrekkedata vil typisk ha en kolonne for dato eller tidspunkt, og en eller flere kolonner med tidsrekker nedover.
 - Vi må kunne hente ut en enkelt kolonne fra en data frame som en vektor, f.eks `pris <- equinor$Siste`.
