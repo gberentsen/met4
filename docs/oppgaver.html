@@ -339,31 +339,6 @@ Løsning
 </blockquote>
 </details>
 <ol start="4" style="list-style-type: decimal">
-<li><p>Anta at vi har følgende hypoteser og informasjon om dataene: <span class="math inline">\(H_0: \mu = 50\)</span> mot <span class="math inline">\(H_A: \mu &gt; 50\)</span>. Utvalgsstandardavviket er <span class="math inline">\(s = 10\)</span>, <span class="math inline">\(n = 40\)</span> og signifikansnivået <span class="math inline">\(\alpha = 0.05\)</span>.</p>
-<p>Bestem <span class="math inline">\(\beta\)</span>, altså sannsynligheten for en type II-feil, dersom den sanne (men ukjente) verdien av <span class="math inline">\(\mu\)</span> i virkeligheten er <span class="math inline">\(55\)</span>.</p></li>
-</ol>
-<details>
-<summary>
-Løsning
-</summary>
-<blockquote>
-<p>En type II-feil er å <em>beholde</em> <span class="math inline">\(H_0\)</span> selv om <span class="math inline">\(H_A\)</span> er sann. For å regne ut sannsynligheten for den, holder det ikke å vite at <span class="math inline">\(H_A\)</span> er sann; vi må vite <em>hvor</em> sann den er, altså en konkret verdi for <span class="math inline">\(\mu\)</span>. Her regner vi ut <span class="math inline">\(\beta\)</span> dersom den sanne verdien er <span class="math inline">\(\mu = 55\)</span>. Det gjør vi i tre steg.</p>
-<p><strong>Steg 1: Når forkaster vi?</strong> Vi kjenner ikke <span class="math inline">\(\sigma\)</span>, så vi bruker en t-test med <span class="math inline">\(n - 1 = 39\)</span> frihetsgrader. Vi forkaster <span class="math inline">\(H_0\)</span> når testobservatoren er stor nok:
-<span class="math display">\[T = \frac{\overline{X} - 50}{s/\sqrt{n}} &gt; t_{0.05,\,39} = 1.685.\]</span>
-Løser vi dette ut for <span class="math inline">\(\overline{X}\)</span>, svarer det til å forkaste når utvalgsgjennomsnittet er over en grense:
-<span class="math display">\[\overline{X} &gt; 50 + 1.685\cdot\frac{10}{\sqrt{40}} = 52.66.\]</span></p>
-<p><strong>Steg 2: Hvor sannsynlig er det å <em>ikke</em> forkaste, dersom sann <span class="math inline">\(\mu = 55\)</span>?</strong> En type II-feil skjer nettopp når vi <em>ikke</em> forkaster, altså når <span class="math inline">\(\overline{X} &lt; 52.66\)</span>. Vi regner ut hvor sannsynlig det er <em>gitt at den sanne forventningen er 55</em>. Fra sentralgrenseteoremet er <span class="math inline">\(\overline{X}\)</span> tilnærmet normalfordelt med forventning <span class="math inline">\(55\)</span> (den sanne verdien) og standardavvik <span class="math inline">\(s/\sqrt{n} = 10/\sqrt{40}\)</span>:
-<span class="math display">\[\begin{equation*}
-\begin{split}
-\beta &amp;= P(\overline{X} &lt; 52.66 \quad\text{gitt at } \mu = 55)\\
-&amp;= P\left(\frac{\overline{X} - 55}{10/\sqrt{40}} &lt; \frac{52.66 - 55}{10/\sqrt{40}}\right)\\
-&amp;= P(Z &lt; -1.48) = 0.07.
-\end{split}
-\end{equation*}\]</span></p>
-<p><strong>Steg 3: Tolkning.</strong> Det er altså cirka 7 % sannsynlighet for å overse effekten når den faktisk finnes (sann <span class="math inline">\(\mu = 55\)</span>). <strong>Styrken</strong> til testen er <span class="math inline">\(1 - \beta = 0.93\)</span>: gjentok vi testen mange ganger med sann <span class="math inline">\(\mu = 55\)</span>, ville vi korrekt forkastet <span class="math inline">\(H_0\)</span> i omtrent 93 % av tilfellene. Legg merke til at <span class="math inline">\(\beta\)</span> avhenger av <em>hvor</em> sann <span class="math inline">\(H_A\)</span> er: jo lenger den sanne <span class="math inline">\(\mu\)</span> ligger fra <span class="math inline">\(50\)</span>, jo lettere er effekten å oppdage, og jo mindre blir <span class="math inline">\(\beta\)</span>.</p>
-</blockquote>
-</details>
-<ol start="5" style="list-style-type: decimal">
 <li><p>En leder frykter at den gjennomsnittlige tiden ansatte daglig bruker på sosiale medier overstiger 45 minutter. For å teste denne mistanken plukker han ut et tilfeldig utvalg på 15 personer og spør om tid brukt på sosiale medier etter en tilfeldig arbeidsdag. Resultatene (i minutter) er:</p>
 <pre><code>  70, 96, 58, 88, 34, 42, 34, 56, 68, 46, 26, 18, 22, 60, 84</code></pre>
 <ol style="list-style-type: lower-alpha">
@@ -386,7 +361,7 @@ Løsning
 </ol>
 </blockquote>
 </details>
-<ol start="6" style="list-style-type: decimal">
+<ol start="5" style="list-style-type: decimal">
 <li><p>Gjennomsnitt og standardavvik i et utvalg på <span class="math inline">\(n=100\)</span> er <span class="math inline">\(\overline{x} = 20\)</span> og <span class="math inline">\(s = 2\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Finn 95 % konfidensintervall av gjennomsnitt (<span class="math inline">\(\mu\)</span>) i populasjonen.</p></li>
@@ -413,7 +388,7 @@ Løsning
 </ol>
 </blockquote>
 </details>
-<ol start="7" style="list-style-type: decimal">
+<ol start="6" style="list-style-type: decimal">
 <li>Et flyselskap har historisk landet presis (i rute) 92 % av flyreisene sine. Etter at selskapet innførte et nytt system for logistikk og ruteplanlegging, vil de undersøke om punktligheten har blitt bedre. I et tilfeldig utvalg på 165 flyreiser etter innføringen ble 156 vurdert som presise. Kan vi konkludere på 5 % signifikansnivå at andelen presise flyreiser har økt?</li>
 </ol>
 <details>
@@ -428,7 +403,7 @@ Løsning
 <p>og vi kan derfor <em>ikke</em> forkaste <span class="math inline">\(H_0\)</span>, siden p-verdien ikke er mindre enn 0.05. (I R: <span class="math inline">\(P(Z &lt; 1.18)\)</span> = <code>pnorm(1.18)</code>.)</p>
 </blockquote>
 </details>
-<ol start="8" style="list-style-type: decimal">
+<ol start="7" style="list-style-type: decimal">
 <li>Vi har følgende informasjon fra to tilfeldige utvalg fra to ulike normalfordelte populasjoner: <span class="math inline">\(\overline{x}_1 = 400\)</span>, <span class="math inline">\(s_1 = 130\)</span>, <span class="math inline">\(n_1 = 130\)</span>, <span class="math inline">\(\overline{x}_2 = 390\)</span>, <span class="math inline">\(s_2 = 50\)</span>, <span class="math inline">\(n_2 = 130\)</span>.</li>
 </ol>
 <ol style="list-style-type: lower-alpha">
@@ -473,7 +448,7 @@ Antall frihetsgrader oppgis til å være <span class="math inline">\(v \approx 2
 <!-- v <- (s1^2/n1 + s2^2/n2)^2/((s1^2/n1)^2/(n1 - 1) + (s2^2/n2)^2/(n2 - 1)) -->
 <!-- qt(0.95, v) -->
 </details>
-<ol start="9" style="list-style-type: decimal">
+<ol start="8" style="list-style-type: decimal">
 <li><p>Et nystartet firma har utviklet to løsninger for automatisk registrering av av antall lus på oppdrettslaks. Metode A er litt dyrere enn metode B, men firmaet mener Metode A en den raskeste metoden. For å teste ut denne hypotesen blir begge metodene brukt til å registrere lus på 11 basseng av ulik størrelse og med forskjellig antall fisk. Antall minutter hver metode tar blir registrert for hvert basseng.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Under er det gitt en R-utskrift fra en to-utvalgs t-test. Still opp nullhypotesen og den alternative hypotesen i samsvar med R-utskriften. Bruk også utskriften til å formulere en konklusjon for en test med 5% signifikansnivå.</li>
@@ -529,7 +504,7 @@ Løsning
 </ol>
 </blockquote>
 </details>
-<ol start="10" style="list-style-type: decimal">
+<ol start="9" style="list-style-type: decimal">
 <li><p>Vi har følgende informasjon fra to tilfeldige utvalg fra to ulike normalfordelte populasjoner: <span class="math inline">\(s_{1}^2 = 1400\)</span>, <span class="math inline">\(n_1 = 60\)</span>, <span class="math inline">\(s_{2}^2 = 700\)</span>, <span class="math inline">\(n_2 = 60\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Kan vi hevde at de to utvalgene har ulik varians? Bruk 5 % signifikansnivå.</p></li>
@@ -561,7 +536,7 @@ Løsning
 <!-- qf(0.975, 59, 59) -->
 <!-- qf(0.975, 29, 29) -->
 </details>
-<ol start="11" style="list-style-type: decimal">
+<ol start="10" style="list-style-type: decimal">
 <li>En bedrift som har en dyr leieavtale av en parkeringsplass vurderer innkjøp av elektroniske sparkesykler. Tanken er at de som bor nær bedriften da kan benytte seg av disse istedenfor å kjøre bil. I et prøveprosjekt får bedriften leid en rekke sparkesykler i 20 arbeidsdager og antall biler på parkeringsplassen blir registrert daglig. Den samme registreringen blir gjort de 20 påfølgende arbeidsdagene når sparkesyklene ikke er tilgjengelig. En ansatt som er ansvarlig for prøveprosjektet bruker R til å utføre to tester basert på data fra disse to registreringene.</li>
 </ol>
 <ol style="list-style-type: lower-alpha">
@@ -612,7 +587,7 @@ Løsning
 <p>Tips: Variabelnavnet som står først (“uten_sparkesykkel”) indikerer hva som er første verdi i differansene <span class="math inline">\(\mu_1 - \mu_2\)</span> (i hypotesene) og <span class="math inline">\(\overline{x}_1 - \overline{x}_2\)</span> (i testobservatoren) i testen R utfører.</p>
 </blockquote>
 </details>
-<ol start="12" style="list-style-type: decimal">
+<ol start="11" style="list-style-type: decimal">
 <li>Vi har følgende informasjon om fra to tilfeldige utvalg fra to populasjoner: I utvalg 1 har <span class="math inline">\(x_1 = 100\)</span> av <span class="math inline">\(n_1 = 200\)</span> individer et spesielt kjennetegn, mens i utvalg 2 er det det tilsvarende tallet <span class="math inline">\(x_2 = 90\)</span> av <span class="math inline">\(n_2 = 200\)</span>.</li>
 </ol>
 <ol style="list-style-type: lower-alpha">
@@ -651,7 +626,7 @@ Løsning
 <!-- z = (0.95 - 0.90)/sqrt(0.925*(1 - 0.925)*(1/200 + 1/200)) -->
 <!-- pval = 2*(1 - pnorm(z)) -->
 </details>
-<ol start="13" style="list-style-type: decimal">
+<ol start="12" style="list-style-type: decimal">
 <li>En kredittutsteder gir kundene en rating basert på blant annet gjeld, formue og tidligere betalingsanmerkninger. Tanken er at en lav rating medfører høyere sannsynlighet mislighold av lånet sitt. For å sjekke om ratingen gir en reell indikasjon på mislighold, blir det registrert antall mislighold i et utvalg med rating under 800, og i et utvalg med rating 800 eller høyere.</li>
 </ol>
 <table>
@@ -694,7 +669,7 @@ Løsning
 <!-- p = (x1 + x2)/(n1 + n2) -->
 <!-- z = (p1 - p2)/sqrt(p*(1-p)*(1/n1 + 1/n2)) -->
 </details>
-<ol start="14" style="list-style-type: decimal">
+<ol start="13" style="list-style-type: decimal">
 <li><p><em>(Eksamen vår 2024.)</em> En analytiker deler de månedlige avkastningene til S&amp;P 500-indeksen i to grupper: måneder klassifisert som <em>normal risiko</em> og måneder klassifisert som <em>høy risiko</em>. Utvalgene er oppsummert slik:</p>
 <table>
 <thead>
@@ -744,7 +719,7 @@ Løsning
 <p>Utvalgene er store, så den kritiske verdien er tilnærmet <span class="math inline">\(z_{0.025} = 1.96\)</span>. Siden <span class="math inline">\(|-6.48| = 6.48 &gt; 1.96\)</span> forkaster vi <span class="math inline">\(H_0\)</span>: den forventede avkastningen er forskjellig i de to gruppene (og lavest i høy-risiko-månedene).</p>
 </blockquote>
 </details>
-<ol start="15" style="list-style-type: decimal">
+<ol start="14" style="list-style-type: decimal">
 <li><em>(Eksamen vår 2025.)</em> I et atferdseksperiment skal deltakerne rapportere om de gjettet riktig i et terningspill, der en riktig gjetning gir en liten belønning (det er ingen kontroll av om de snakker sant). En <em>kontrollgruppe</em> får ingen ekstra informasjon, mens en <em>tillitsgruppe</em> først får lese en tekst som understreker at forskerne stoler på dem. Av 400 i tillitsgruppen rapporterte 116 en riktig gjetning, mot 181 av 400 i kontrollgruppen. Kan vi konkludere med at «tillits-teksten» reduserer andelen som rapporterer en (mistenkelig ofte) riktig gjetning? Bruk 1 %-signifikansnivå.</li>
 </ol>
 <details>
@@ -757,7 +732,7 @@ Løsning
 <p>Forkastningsområdet er <span class="math inline">\(Z &lt; z_{0.01} = -2.33\)</span> (fra <code>qnorm(0.01)</code>). Siden <span class="math inline">\(-4.76 &lt; -2.33\)</span> forkaster vi <span class="math inline">\(H_0\)</span>: tillits-teksten ser ut til å redusere andelen som rapporterer en riktig gjetning. En naturlig tolkning er at teksten fikk færre til å jukse.</p>
 </blockquote>
 </details>
-<ol start="16" style="list-style-type: decimal">
+<ol start="15" style="list-style-type: decimal">
 <li>En nettbutikk vil undersøke om antall bestillinger fordeler seg jevnt over ukedagene (mandag til fredag), eller om noen dager er travlere enn andre. I en tilfeldig valgt uke registreres antall bestillinger per dag:</li>
 </ol>
 <table>
@@ -842,7 +817,7 @@ Løsning
 <p>Testobservatoren er kji-kvadratfordelt med <span class="math inline">\(k - 1 = 4\)</span> frihetsgrader, og forkastningsområdet er <span class="math inline">\(\chi^2 &gt; \chi^2_{0.05,\,4} = 9.49\)</span>. Siden <span class="math inline">\(27.08 &gt; 9.49\)</span> forkaster vi <span class="math inline">\(H_0\)</span>: bestillingene fordeler seg <em>ikke</em> jevnt over ukedagene. Det største bidraget kommer fra fredag (165 mot 120 forventet), så fredag ser ut til å være spesielt travel.</p>
 </blockquote>
 </details>
-<ol start="17" style="list-style-type: decimal">
+<ol start="16" style="list-style-type: decimal">
 <li>Et produksjonsselskap har mulighet til å bruke tre forskjellige kjemikalier for å fremstille det samme produktet. Lederen ved produksjonsselskapet ønsker å undersøke hvorvidt det er forskjell på hvor mange mangelfulle produkter som blir produsert når en varierer bruken av type kjemikalier. Hun gjør et tilfeldig utvalg på 700 produkter og klassifiserer dem som enten tilfredsstillende eller mangelfull. Funnene er oppsummert i tabellen nedenfor:</li>
 </ol>
 <table>
@@ -1077,6 +1052,30 @@ Venstresiden er nå per definisjon en standard normalfordelt variabel <span clas
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Forsker A har en test med lav styrke: selv om effekten er reell (<span class="math inline">\(\mu = 0.5\)</span>), forkaster testen bare cirka 47 % av gangene. Et ikke-signifikant resultat betyr da bare at dataene var for få til å påvise effekten, ikke at den er null. «Vi fant ingen effekt» er ikke det samme som «det finnes ingen effekt», og en test beviser aldri <span class="math inline">\(H_0\)</span>.</li>
 </ol>
+</blockquote>
+</details>
+<p>Nøtt 5. Anta at vi har følgende hypoteser og informasjon om dataene: <span class="math inline">\(H_0: \mu = 50\)</span> mot <span class="math inline">\(H_A: \mu &gt; 50\)</span>. Utvalgsstandardavviket er <span class="math inline">\(s = 10\)</span>, <span class="math inline">\(n = 40\)</span> og signifikansnivået <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+<p>Bestem <span class="math inline">\(\beta\)</span>, altså sannsynligheten for en type II-feil, dersom den sanne (men ukjente) verdien av <span class="math inline">\(\mu\)</span> i virkeligheten er <span class="math inline">\(55\)</span>.</p>
+<details>
+<summary>
+Løsning
+</summary>
+<blockquote>
+<p>En type II-feil er å <em>beholde</em> <span class="math inline">\(H_0\)</span> selv om <span class="math inline">\(H_A\)</span> er sann. For å regne ut sannsynligheten for den, holder det ikke å vite at <span class="math inline">\(H_A\)</span> er sann; vi må vite <em>hvor</em> sann den er, altså en konkret verdi for <span class="math inline">\(\mu\)</span>. Her regner vi ut <span class="math inline">\(\beta\)</span> dersom den sanne verdien er <span class="math inline">\(\mu = 55\)</span>. Det gjør vi i tre steg.</p>
+<p><strong>Steg 1: Når forkaster vi?</strong> Vi kjenner ikke <span class="math inline">\(\sigma\)</span>, så vi bruker en t-test med <span class="math inline">\(n - 1 = 39\)</span> frihetsgrader. Vi forkaster <span class="math inline">\(H_0\)</span> når testobservatoren er stor nok:
+<span class="math display">\[T = \frac{\overline{X} - 50}{s/\sqrt{n}} &gt; t_{0.05,\,39} = 1.685.\]</span>
+Løser vi dette ut for <span class="math inline">\(\overline{X}\)</span>, svarer det til å forkaste når utvalgsgjennomsnittet er over en grense:
+<span class="math display">\[\overline{X} &gt; 50 + 1.685\cdot\frac{10}{\sqrt{40}} = 52.66.\]</span></p>
+<p><strong>Steg 2: Hvor sannsynlig er det å <em>ikke</em> forkaste, dersom sann <span class="math inline">\(\mu = 55\)</span>?</strong> En type II-feil skjer nettopp når vi <em>ikke</em> forkaster, altså når <span class="math inline">\(\overline{X} &lt; 52.66\)</span>. Vi regner ut hvor sannsynlig det er <em>gitt at den sanne forventningen er 55</em>. Fra sentralgrenseteoremet er <span class="math inline">\(\overline{X}\)</span> tilnærmet normalfordelt med forventning <span class="math inline">\(55\)</span> (den sanne verdien) og standardavvik <span class="math inline">\(s/\sqrt{n} = 10/\sqrt{40}\)</span>:
+<span class="math display">\[\begin{equation*}
+\begin{split}
+\beta &amp;= P(\overline{X} &lt; 52.66 \quad\text{gitt at } \mu = 55)\\
+&amp;= P\left(\frac{\overline{X} - 55}{10/\sqrt{40}} &lt; \frac{52.66 - 55}{10/\sqrt{40}}\right)\\
+&amp;= P(Z &lt; -1.48) = 0.07.
+\end{split}
+\end{equation*}\]</span></p>
+<p>Her bruker vi <em>normalfordelingen</em>, ikke t-fordelingen, til å regne ut denne sannsynligheten. Grunnen er at en helt eksakt styrkeberegning når <span class="math inline">\(\sigma\)</span> er ukjent, krever den såkalte <em>ikke-sentrale</em> t-fordelingen, som ligger utenfor pensum. I stedet bruker vi normaltilnærmingen fra sentralgrenseteoremet: med <span class="math inline">\(s\)</span> som anslag på <span class="math inline">\(\sigma\)</span> og <span class="math inline">\(n = 40\)</span> observasjoner er den god nok. (For så store utvalg ligger t-fordelingen uansett svært nær normalfordelingen, jf. at <span class="math inline">\(t_{0.05,\,39} = 1.685\)</span> er nesten lik <span class="math inline">\(z_{0.05} = 1.645\)</span>.)</p>
+<p><strong>Steg 3: Tolkning.</strong> Det er altså cirka 7 % sannsynlighet for å overse effekten når den faktisk finnes (sann <span class="math inline">\(\mu = 55\)</span>). <strong>Styrken</strong> til testen er <span class="math inline">\(1 - \beta = 0.93\)</span>: gjentok vi testen mange ganger med sann <span class="math inline">\(\mu = 55\)</span>, ville vi korrekt forkastet <span class="math inline">\(H_0\)</span> i omtrent 93 % av tilfellene. Legg merke til at <span class="math inline">\(\beta\)</span> avhenger av <em>hvor</em> sann <span class="math inline">\(H_A\)</span> er: jo lenger den sanne <span class="math inline">\(\mu\)</span> ligger fra <span class="math inline">\(50\)</span>, jo lettere er effekten å oppdage, og jo mindre blir <span class="math inline">\(\beta\)</span>.</p>
 </blockquote>
 </details>
 </div>
