@@ -364,10 +364,10 @@ Løser vi dette ut for <span class="math inline">\(\overline{X}\)</span>, svarer
 </blockquote>
 </details>
 <ol start="5" style="list-style-type: decimal">
-<li><p>En leder frykter at den gjennomsnittlige tiden ansatte daglig bruker på sosiale medier overstiger 45 minutter. For å teste denne mistanken, plukker han ut et tilfeldig utvalg på 15 personer, og spør om tid brukt på sosiale medier etter en tilfeldig arbeidsdag. Resultatene er oppsummert nedenfor.</p>
+<li><p>En leder frykter at den gjennomsnittlige tiden ansatte daglig bruker på sosiale medier overstiger 45 minutter. For å teste denne mistanken plukker han ut et tilfeldig utvalg på 15 personer og spør om tid brukt på sosiale medier etter en tilfeldig arbeidsdag. Resultatene (i minutter) er:</p>
 <pre><code>  70, 96, 58, 88, 34, 42, 34, 56, 68, 46, 26, 18, 22, 60, 84</code></pre>
 <ol style="list-style-type: lower-alpha">
-<li><p>Hvis samlingen av tider er normalfordelt med standardavvik på 20 minutter, kan lederen hevde at mistanken hans stemmer på et 1 % signifikans-nivå?</p></li>
+<li><p>Anta at tidene er tilnærmet normalfordelt. Kan lederen hevde at mistanken hans stemmer på et 1 %-signifikansnivå?</p></li>
 <li><p>Tror du observasjonene over er et representativt utvalg? Hva kunne lederen gjort annerledes?</p></li>
 </ol></li>
 </ol>
@@ -377,14 +377,12 @@ Løsning
 </summary>
 <blockquote>
 <ol style="list-style-type: lower-alpha">
-<li>Lederen ønsker altså å teste <span class="math inline">\(H_0: \mu = 45\)</span> mot alternativ hypotesen <span class="math inline">\(H_A: \mu &gt; 45\)</span>. Testobservatoren er da gitt ved</li>
+<li>Lederen ønsker å teste <span class="math inline">\(H_0: \mu = 45\)</span> mot <span class="math inline">\(H_A: \mu &gt; 45\)</span>. Vi kjenner ikke det sanne standardavviket, så vi bruker en t-test med <span class="math inline">\(n - 1 = 14\)</span> frihetsgrader. Fra de 15 observasjonene regner vi ut utvalgsgjennomsnittet <span class="math inline">\(\overline{x} = 53.47\)</span> og utvalgsstandardavviket <span class="math inline">\(s = 24.55\)</span> (i R: <code>mean()</code> og <code>sd()</code>). Testobservatoren er</li>
 </ol>
-<p><span class="math display">\[Z = \frac{\overline{X} - \mu_0}{\sigma/\sqrt{n}} = \frac{53.46 - 45}{20/\sqrt{15}} = 1.64\]</span></p>
-<p>Sannsynligheten for å observerer noe minst like ekstremt og til fordel for <span class="math inline">\(H_A\)</span> (p-verdien) er da</p>
-<p><span class="math display">\[P-verdi = P(Z &gt; 1.645) \approx 0.05 &gt; 0.01\]</span>.</p>
-<p>Lederen kan altså ikke trekke denne konklusjonen på 1 % signifikansnivå. For å forkaste null hypotesen på et 1 % signifikansnivå, måtte vi hatt p-verdi lavere enn 1 %.</p>
+<p><span class="math display">\[T = \frac{\overline{x} - \mu_0}{s/\sqrt{n}} = \frac{53.47 - 45}{24.55/\sqrt{15}} = 1.34.\]</span></p>
+<p>p-verdien er <span class="math inline">\(P(T &gt; 1.34) \approx 0.10\)</span> (i R: <code>1 - pt(1.34, df = 14)</code>), altså langt over 0.01. Alternativt er den kritiske verdien <span class="math inline">\(t_{0.01,\,14} = 2.62\)</span>, og siden <span class="math inline">\(1.34 &lt; 2.62\)</span> kan vi ikke forkaste. Lederen kan altså ikke trekke denne konklusjonen på 1 %-signifikansnivå.</p>
 <ol start="2" style="list-style-type: lower-alpha">
-<li>Dersom lederen spør ansatte fjes til fjes er det nærliggende å tro at de ansatte vil underdrive sin bruk av sosiale medier. En anonym spørreundersøkelse ville nok gitt et mer representativt utvalg.</li>
+<li>Dersom lederen spør ansatte ansikt til ansikt, er det nærliggende å tro at de vil underdrive sin bruk av sosiale medier. En anonym spørreundersøkelse ville nok gitt et mer representativt utvalg.</li>
 </ol>
 </blockquote>
 </details>
@@ -416,22 +414,18 @@ Løsning
 </blockquote>
 </details>
 <ol start="7" style="list-style-type: decimal">
-<li>Med sterkt fall i flyreiser og passasjerer på grunn av koronakrisen var det i samme periode sannsynlig med færre forsinkelser i flytrafikken. Før krisen hevdet et flyselskap at de landet presist 92 % av flyreisene. I et tilfeldig utvalg flyreiser hos det samme selskapet under krisen ble 156 av 165 vurdert til å være presise. Kan vi konkludere på 5 % signifikansnivå at det er færre forsinkelser under koronakrisen?</li>
+<li>Et flyselskap har historisk landet presis (i rute) 92 % av flyreisene sine. Etter at selskapet innførte et nytt system for logistikk og ruteplanlegging, vil de undersøke om punktligheten har blitt bedre. I et tilfeldig utvalg på 165 flyreiser etter innføringen ble 156 vurdert som presise. Kan vi konkludere på 5 % signifikansnivå at andelen presise flyreiser har økt?</li>
 </ol>
 <details>
 <summary>
 Løsning
 </summary>
 <blockquote>
-<p>La <span class="math inline">\(p\)</span> være den sanne andelen av flyreiser som kommer presist under krisen. Vi skal da teste <span class="math inline">\(H_0: p = 0.92\)</span> mot <span class="math inline">\(H_A: p &gt; 0.92\)</span>. Vårt estimat på <span class="math inline">\(p\)</span> er <span class="math inline">\(\hat{p}=156/165 \approx 0.945\)</span> og testobservatoren er gitt ved</p>
-</blockquote>
-<blockquote>
-<p><span class="math display">\[z = \frac{\hat{p} - p_0}{\sqrt{p_0(1 - p_0)/n}} = \frac{0.945 - 0.92}{\sqrt{0.92(1 - 0.92)/165}} \approx 1.18\]</span>
-Dersom vi bruker kritisk verdi ville forkastningsområdet vært <span class="math inline">\(z &gt; 1.645\)</span> og siden <span class="math inline">\(z &lt; 1.645\)</span> kan vi altså ikke forkaste <span class="math inline">\(H_0\)</span>. Alternativt kan vi regne ut p-verdien som er “sannsynligheten for det vi har observert eller noe enda mer til fordel for <span class="math inline">\(H_A\)</span>. En enda mer positiv verdi enn 1.18 ville vært til fordel for <span class="math inline">\(H_A\)</span>, derfor er</p>
-</blockquote>
-<blockquote>
-<p><span class="math display">\[p-verdi = P(Z &gt;  1.18) = = 1 - P(Z &lt; 1.18) \approx 0.12\]</span>
-og vi kan derfor <em>ikke</em> forkaste <span class="math inline">\(H_0\)</span> siden p-verdien <em>ikke</em> er mindre enn 0.05. TIPS: <span class="math inline">\(P(Z&lt;1.18) =\)</span> <code>pnorm(1.18)</code> i R.</p>
+<p>La <span class="math inline">\(p\)</span> være den sanne andelen presise flyreiser etter innføringen av det nye systemet. Vi tester <span class="math inline">\(H_0: p = 0.92\)</span> mot <span class="math inline">\(H_A: p &gt; 0.92\)</span>. Estimatet er <span class="math inline">\(\hat{p} = 156/165 \approx 0.945\)</span>, og testobservatoren er</p>
+<p><span class="math display">\[z = \frac{\hat{p} - p_0}{\sqrt{p_0(1 - p_0)/n}} = \frac{0.945 - 0.92}{\sqrt{0.92(1 - 0.92)/165}} \approx 1.18.\]</span></p>
+<p>Forkastningsområdet er <span class="math inline">\(z &gt; 1.645\)</span>, og siden <span class="math inline">\(z &lt; 1.645\)</span> kan vi ikke forkaste <span class="math inline">\(H_0\)</span>. Alternativt regner vi ut p-verdien, sannsynligheten for å observere noe minst så positivt som 1.18 til fordel for <span class="math inline">\(H_A\)</span>:</p>
+<p><span class="math display">\[\text{p-verdi} = P(Z &gt; 1.18) = 1 - P(Z &lt; 1.18) \approx 0.12,\]</span></p>
+<p>og vi kan derfor <em>ikke</em> forkaste <span class="math inline">\(H_0\)</span>, siden p-verdien ikke er mindre enn 0.05. (I R: <span class="math inline">\(P(Z &lt; 1.18)\)</span> = <code>pnorm(1.18)</code>.)</p>
 </blockquote>
 </details>
 <ol start="8" style="list-style-type: decimal">
@@ -452,7 +446,7 @@ og vi kan derfor <em>ikke</em> forkaste <span class="math inline">\(H_0\)</span>
 Løsning
 </summary>
 <ol style="list-style-type: lower-alpha">
-<li>Vi skal altså teste <span class="math inline">\(H_0: \mu_1 - \mu_2 = 0\)</span> mot <span class="math inline">\(H_A: \mu_1 - \mu_2 &gt; 0\)</span>. Siden variansene i utvalget er såpass ulike antar vi at vi må bruke varianten av testen med ulik varians. Testobservatoren er da gitt ved</li>
+<li>Vi skal altså teste <span class="math inline">\(H_0: \mu_1 = \mu_2\)</span> mot <span class="math inline">\(H_A: \mu_1 &gt; \mu_2\)</span>. Siden variansene i utvalget er såpass ulike antar vi at vi må bruke varianten av testen med ulik varians. Testobservatoren er da gitt ved</li>
 </ol>
 <p><span class="math display">\[T = \frac{\overline{x}_1 - \overline{x}_2 - 0}{\sqrt{\frac{s^2_{1}}{n_1} + \frac{s^2_{2}}{n_2}}}=\frac{400 - 390}{\sqrt{\frac{130^2}{130} + \frac{50^2}{130}}} = 0.82\]</span>
 Antall frihetsgrader oppgis til å være <span class="math inline">\(v \approx 166\)</span>. Vi forkaster <span class="math inline">\(H_0\)</span> dersom <span class="math inline">\(T &gt; t_{0.05, 166} = 1.654\)</span>, og siden dette <em>ikke</em> er tilfelle her kan vi <em>ikke</em> forkaste <span class="math inline">\(H_0\)</span> ved 5 % signifikansnivå.</p>
@@ -519,10 +513,12 @@ Løsning
 </summary>
 <blockquote>
 <ol style="list-style-type: lower-alpha">
-<li>La <span class="math inline">\(\mu_1\)</span> og <span class="math inline">\(\mu_2\)</span> være forventet tid til registrering av lus i et basseng for hhv metode B og metode A. Da er R-utskriften en test av <span class="math inline">\(H_0: \mu_1 - \mu_2 = 0\)</span> mot det enside alternativet <span class="math inline">\(H_A: \mu_1-\mu_2 &gt; 0\)</span>. Fra utskriften ser vi at <span class="math inline">\(p-value= 0.06164 &gt; 0.05\)</span>, altså kan vi ikke forkaste <span class="math inline">\(H_0\)</span> ved <span class="math inline">\(5\%\)</span> signifikansnivå.</li>
+<li>La <span class="math inline">\(\mu_1\)</span> og <span class="math inline">\(\mu_2\)</span> være forventet tid til registrering av lus i et basseng for hhv. metode B og metode A. Da er R-utskriften en test av <span class="math inline">\(H_0: \mu_1 = \mu_2\)</span> mot det ensidige alternativet <span class="math inline">\(H_A: \mu_1 &gt; \mu_2\)</span>. Fra utskriften ser vi at <span class="math inline">\(p\text{-value} = 0.06164 &gt; 0.05\)</span>, altså kan vi ikke forkaste <span class="math inline">\(H_0\)</span> ved <span class="math inline">\(5\,\%\)</span> signifikansnivå.</li>
 </ol>
-<p>Praktisk tolkning: Vi kan ikke konkludere med at det er noe forskjell i tiden de to metodene bruker.</p>
-<p>b.I en paret t-test baserer vil testen på de parvise differansene <span class="math inline">\(d_i = x_i - y_i\)</span>, der <span class="math inline">\(x_i\)</span> og <span class="math inline">\(y_i\)</span> er tiden hhv metode B og A bruker på å registrere lus i basseng nr. i. Utskriften viser en test av <span class="math inline">\(H_0: \mu_d = 0\)</span> mot det ensidige alternativet <span class="math inline">\(H_A: \mu_d &gt; 0\)</span>. Testobservatoren er da gitt ved</p>
+<p>Praktisk tolkning: Vi kan ikke konkludere med at det er noen forskjell i tiden de to metodene bruker.</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>I en paret t-test baserer testen seg på de parvise differansene <span class="math inline">\(d_i = x_{i1} - x_{i2}\)</span>, der <span class="math inline">\(x_{i1}\)</span> og <span class="math inline">\(x_{i2}\)</span> er tiden hhv. metode B og metode A bruker på å registrere lus i basseng nr. <span class="math inline">\(i\)</span>. Utskriften viser en test av <span class="math inline">\(H_0: \mu_d = 0\)</span> mot det ensidige alternativet <span class="math inline">\(H_A: \mu_d &gt; 0\)</span>. Testobservatoren er da gitt ved</li>
+</ol>
 <p><span class="math display">\[T=\frac{\overline{d}-0}{s_d/\sqrt{n}}\]</span></p>
 <p>Fra utskriften ser vi at <span class="math inline">\(p-value= 0.0001409 &lt; 0.05\)</span>, altså kan vi forkaste <span class="math inline">\(H_0\)</span> ved <span class="math inline">\(5\%\)</span> signifikansnivå.</p>
 <p>Praktisk tolkning: Det ser ut til at metode A er raskere enn metode B.</p>

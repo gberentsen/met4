@@ -289,7 +289,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Antar vi <strong>lik varians</strong>, estimerer vi den felles variansen ved å slå sammen (poole) de to utvalgsvariansene,</p>
 <p><span class="math display">\[s_p^2 = \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2},\]</span></p>
 <p>og setter <span class="math inline">\(SE = s_p\sqrt{1/n_1 + 1/n_2}\)</span>. Testobservatoren <span class="math inline">\(T\)</span> er da t-fordelt med <span class="math inline">\(n_1 + n_2 - 2\)</span> frihetsgrader.</p>
-<p>Antar vi <strong>ulik varians</strong>, bruker vi i stedet <span class="math inline">\(SE = \sqrt{s_1^2/n_1 + s_2^2/n_2}\)</span>, og <span class="math inline">\(T\)</span> er tilnærmet t-fordelt med et frihetsgradstall som regnes ut fra dataene. Dette kalles Welchs test, og er det R gjør som standard.</p>
+<p>Antar vi <strong>ulik varians</strong>, bruker vi i stedet <span class="math inline">\(SE = \sqrt{s_1^2/n_1 + s_2^2/n_2}\)</span>, og <span class="math inline">\(T\)</span> er tilnærmet t-fordelt med et frihetsgradstall <span class="math inline">\(\nu\)</span> som regnes ut fra dataene med Welch-Satterthwaite-formelen</p>
+<p><span class="math display">\[\nu = \frac{\left(s_1^2/n_1 + s_2^2/n_2\right)^2}{\left(s_1^2/n_1\right)^2/(n_1-1) + \left(s_2^2/n_2\right)^2/(n_2-1)}.\]</span></p>
+<p>Dette kalles Welchs test, og er det R gjør som standard. I praksis lar vi som regel R regne ut <span class="math inline">\(\nu\)</span> (den blir sjelden et helt tall).</p>
 <p>Intuisjonen er den samme som i ett-utvalgstesten: ligger de to gjennomsnittene mange standardfeil fra hverandre, taler det mot at populasjonene har samme forventning.</p>
 <p><strong>Eksempel.</strong> En nettbutikk tester to versjoner (A og B) av forsiden, og måler ordreverdien (i kr) til kundene som ser hver versjon. Gir versjon B høyere gjennomsnittlig ordreverdi?</p>
 <ol style="list-style-type: decimal">
