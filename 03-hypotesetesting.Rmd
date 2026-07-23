@@ -1241,9 +1241,15 @@ c. Forsker A får et ikke-signifikant resultat og konkluderer med at «effekten 
 
 >a. Vi forkaster når $Z > 1.645$. Skriver vi ut testobservatoren, er $Z = \dfrac{\overline{X}}{1/\sqrt{n}} = \overline{X}\sqrt{n}$, så vilkåret $Z > 1.645$ blir $\overline{X}\sqrt{n} > 1.645$, altså $\overline{X} > 1.645/\sqrt{n}$. For $n = 10$ er grensen $1.645/\sqrt{10} = 0.520$; for $n = 100$ er den $1.645/\sqrt{100} = 0.165$.
 
->b. Styrken er $P(\overline{X} > 1.645/\sqrt{n}\ \text{når}\ \mu = 0.5)$. Vi standardiserer med den sanne forventningen $0.5$:
->$$\text{styrke} = P\!\left(Z > \frac{1.645/\sqrt{n} - 0.5}{1/\sqrt{n}}\right) = P\!\left(Z > 1.645 - 0.5\sqrt{n}\right).$$
->For $n = 10$: $P(Z > 1.645 - 1.58) = P(Z > 0.06) \approx 0.47$. For $n = 100$: $P(Z > 1.645 - 5) = P(Z > -3.36) \approx 1.00$. Med bare 10 observasjoner oppdager forsker A en reell effekt mindre enn halvparten av gangene.
+>b. Styrken er sannsynligheten for å havne i forkastningsområdet, altså $P(\overline{X} > 1.645/\sqrt{n})$, men nå regnet ut i den *sanne* situasjonen der $\mu = 0.5$. Da er $\overline{X}$ normalfordelt med forventning $0.5$ og standardavvik $1/\sqrt{n}$ (siden $\sigma = 1$). For å kunne slå opp i standardnormalfordelingen trekker vi fra forventningen $0.5$ og deler på standardavviket $1/\sqrt{n}$ på *begge* sider av ulikheten inne i sannsynligheten:
+>\begin{equation*}
+\begin{split}
+\text{styrke} &= P\!\left(\overline{X} > \frac{1.645}{\sqrt{n}}\right)\\
+&= P\!\left(\underbrace{\frac{\overline{X} - 0.5}{1/\sqrt{n}}}_{=\,Z} > \frac{1.645/\sqrt{n} - 0.5}{1/\sqrt{n}}\right)\\
+&= P\!\left(Z > 1.645 - 0.5\sqrt{n}\right).
+\end{split}
+\end{equation*}
+>Venstresiden er nå per definisjon en standard normalfordelt variabel $Z$ (vi har standardisert $\overline{X}$ med den sanne forventningen og standardavviket). På høyresiden har vi bare ganget ut: $\dfrac{1.645/\sqrt{n}}{1/\sqrt{n}} = 1.645$ og $\dfrac{0.5}{1/\sqrt{n}} = 0.5\sqrt{n}$. For $n = 10$: $P(Z > 1.645 - 1.58) = P(Z > 0.06) \approx 0.47$. For $n = 100$: $P(Z > 1.645 - 5) = P(Z > -3.36) \approx 1.00$. Med bare 10 observasjoner oppdager forsker A en reell effekt mindre enn halvparten av gangene.
 
 >c. Forsker A har en test med lav styrke: selv om effekten er reell ($\mu = 0.5$), forkaster testen bare cirka 47 % av gangene. Et ikke-signifikant resultat betyr da bare at dataene var for få til å påvise effekten, ikke at den er null. «Vi fant ingen effekt» er ikke det samme som «det finnes ingen effekt», og en test beviser aldri $H_0$.
 
