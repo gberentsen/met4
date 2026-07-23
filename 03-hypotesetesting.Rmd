@@ -987,7 +987,7 @@ t.test(uten_sparkesykkel, med_sparkesykkel, var.equal = TRUE, alternative = "gre
 >
 > Tips: variabel navnet som står først i testen ("uten_sparkesykkel") indikerer hvilke av de to variansen som står i telleren av $\sigma^2_{1}/\sigma^2_{2}$ (i $H_0$) og $s^2_{1}/s^2_{2}$ (i testobservatoren) i testen R utfører.
 
-> b. La $\mu_1$ og $\mu_2$ være forventet antall biler på henholdsvis dager der sparkesykler *ikke* er tilgjengelig og dager der sparkesykler er tilgjengelig. Utskriften viser en en-sidig, to-utvalgs t-test av hypotesen $H_0: \mu_1 - \mu_2 = 0$ mot $H_A: \mu_1 - \mu_2 > 0$. $H_A$ er altså om det forventes ferre biler på dager med sparkesykler enn på dager uten sparkesykler. 
+> b. La $\mu_1$ og $\mu_2$ være forventet antall biler på henholdsvis dager der sparkesykler *ikke* er tilgjengelig og dager der sparkesykler er tilgjengelig. Utskriften viser en ensidig, to-utvalgs t-test av hypotesen $H_0: \mu_1 = \mu_2$ mot $H_A: \mu_1 > \mu_2$. $H_A$ sier altså at det forventes færre biler på dager med sparkesykler enn på dager uten sparkesykler.
 >
 >"Two sample t-test" betyr at vi har antatt lik varians (ellers ville det stått "Welch two sample t-test"), og testobservatoren er derfor gitt ved:
 >
@@ -1010,7 +1010,7 @@ c. Gjenta a., denne gangen med $x_1 = 190$ og $x_2 = 180$. Fastslå effekten på
 
 <details><summary>Løsning</summary>
 
->a. Vi skal her teste hypotsen $H_0: p_1 - p_2 = 0$ mot $H_A: p_1 - p_2 \neq 0$. Med $\hat{p_1} = 100/200 = 0.5$, $\hat{p}_2 = 90/200 = 0.45$ og $\hat{p} = (100 + 90)/(200 + 200) = 0.475$ er testobservatoren er gitt ved 
+>a. Vi skal her teste hypotesen $H_0: p_1 = p_2$ mot $H_A: p_1 \neq p_2$. Med $\hat{p_1} = 100/200 = 0.5$, $\hat{p}_2 = 90/200 = 0.45$ og $\hat{p} = (100 + 90)/(200 + 200) = 0.475$ er testobservatoren er gitt ved 
 
 >$$Z = \frac{\hat{p}_1 - \hat{p}_2}{\sqrt{\hat{p}(1-\hat{p})(1/n_1 + 1/n_2)}} = \frac{0.5 - 0.45}{\sqrt{0.475(1-0.475)(1/200 + 1/200)}}=1.00$$
 >
@@ -1038,16 +1038,16 @@ c. Gjenta a., denne gangen med $x_1 = 190$ og $x_2 = 180$. Fastslå effekten på
 
 13. En kredittutsteder gir kundene en rating basert på blant annet gjeld, formue og tidligere betalingsanmerkninger. Tanken er at en lav rating medfører høyere sannsynlighet mislighold av lånet sitt. For å sjekke om ratingen gir en reell indikasjon på mislighold, blir det registrert antall mislighold i et utvalg med rating under 800, og i et utvalg med rating 800 eller høyere.  
 
-|   | Rating < 800 | Rating  > 800 |
-|---|:---:|:---:|
-| Utvalgsstørrelse  |  612 | 854   |
-|  Mislighold | 14  | 9  | 
+|                  | Rating < 800 | Rating > 800 |
+|:-----------------|:------------:|:------------:|
+| Utvalgsstørrelse |          612 |          854 |
+| Mislighold       |           14 |            9 |
 
 Kan vi konkludere med at personer med rating lavere enn 800 har høyere sannsynlighet for mislighold av lånet sitt sammenlignet med de med rating over 800? Bruk 5 % signifikansnivå.
 
 <details><summary>Løsning</summary>
 
->La $p_1$ være sannsynlighet for mislighold for de med rating under 800 og la $p_2$ være den samme sannsynligheten for de med rating over 800. Vi skal da teste $H_0: p_1 - p_2 = 0$ mot det ensidige alternativet $H_A: p_1 - p_2 > 0$. Med $\hat{p_1} = 14/612 = 0.0229$, $\hat{p}_2 = 0.0105$, og $\hat{p}=(14 + 9)/(612 + 854)=0.0157$ er testobservatoren gitt ved
+>La $p_1$ være sannsynlighet for mislighold for de med rating under 800 og la $p_2$ være den samme sannsynligheten for de med rating over 800. Vi skal da teste $H_0: p_1 = p_2$ mot det ensidige alternativet $H_A: p_1 > p_2$. Med $\hat{p_1} = 14/612 = 0.0229$, $\hat{p}_2 = 0.0105$, og $\hat{p}=(14 + 9)/(612 + 854)=0.0157$ er testobservatoren gitt ved
 >
 >    $$Z =  \frac{\hat{p}_1 - \hat{p}_2}{\sqrt{\hat{p}(1-\hat{p})(1/n_1 + 1/n_2)}} = \frac{0.0229 - 0.0105}{\sqrt{0.0157(1-0.0157)(1/612 + 1/854)}}=1.874$$
 >
@@ -1064,109 +1064,12 @@ Kan vi konkludere med at personer med rating lavere enn 800 har høyere sannsynl
 
 </details>
 
-14. To konkurrerende selskaper, A og B, dominerer et marked for et bestemt produkt og har historisk sett hatt markedsandeler på hhv. 40 % og 50 % (altså 10 % til andre markeder). Selskap A gjennomfører så en markedsføringskampanje. For å avgjøre kampanjens effekt trekker et markedsanalyseselskap et tilfeldig utvalg av 300 kunder som spørres om deres produkt preferanse:  
+14. *(Eksamen vår 2024.)* En analytiker deler de månedlige avkastningene til S&P 500-indeksen i to grupper: måneder klassifisert som *normal risiko* og måneder klassifisert som *høy risiko*. Utvalgene er oppsummert slik:
 
-|Foretrukket selskap |  A | B  |andre|
-|:---:|:---:|:---:|:---:|
-|  Frekvens | 140  | 142  | 18 |
-
-Har markedsandelene endret seg?
-
-<details><summary>Løsning</summary>
-
->Vi skal her test $H_0: p_1 = 0.4, p_2 = 0.5, p_3 = 0.1$ mot $H_A:$ minst to sannsynligheter er forskjellige. Utregning av testobservator blir da som følger:
-
-|Foretrukket selskap |  $f_i$ | $e_i$  | $(f_i - e_i)^2/e_i$|
-|:---:|:---:|:---:|:---:|
-|  A | 140  | $300\times 0.4 = 120$   | 3.3333 |
-|  B | 142  | $300\times 0.5 = 150$   | 0.4266 |
-|  andre | 18  | $300\times 0.1 = 30$   | 4.8000 |
-|  \bf{totalt} | 300  | 300   | $\chi^2 = 8.564$ |
-
->Forkastelsesområdet er $\chi^2 > \chi^2_{\alpha, k - 1} = \chi^2_{0.05, 2} = 5.99$. Siden $\chi^2 = 8.564 > 5.99$ forkaster vi $H_0$ på 5 % signifikansnivå.
-
-
-<!-- n=300 -->
-<!-- p1=0.4 -->
-<!-- p2 = 0.5 -->
-<!-- p3 = 0.1 -->
-<!-- f1 = 140 -->
-<!-- f2 = 142 -->
-<!-- f3 = 18 -->
-<!-- f = c(f1,f2,f3) -->
-<!-- p = c(p1, p2, p3)     -->
-<!-- e = n*p -->
-<!-- s = (f - e)^2/e -->
-<!-- chi = sum(s) -->
-<!-- q = qchisq(0.95, 2) -->
-
-</details>
-
-15. Et produksjonsselskap har mulighet til å bruke tre forskjellige kjemikalier for å fremstille det samme produktet. Lederen ved produksjonsselskapet ønsker å undersøke hvorvidt det er forskjell på hvor mange mangelfulle produkter som blir produsert når en varierer bruken av type kjemikalier. Hun gjør et tilfeldig utvalg på 700 produkter og klassifiserer dem som enten tilfredsstillende eller mangelfull. Funnene er oppsummert i tabellen nedenfor:
-
-|Klassifisering/kjemikalie |  Kjemikalie 1 | Kjemikalie 2  | Kjemikalie 3 | sum |
-|:---:|:---:|:---:|:---:|:---:|
-|  Tilfredstillende | 268  |  216  | 164  | 648 |
-|  Mangelfull  |  15  | 17  | 20 | 52 |
-|  sum  |  283  | 233  | 184 | 700 |
-
-Utfør en test for å avgjøre om det er en sammenheng mellom mangelfulle produkter og kjemikalie brukt under produksjon. 
-
-
-
-<details><summary>Løsning</summary>
-
->Vi skal altså teste $H_0:$ *De to variablene klassfisering og kjemikalie er uavhengige* mot $H_A:$ *Variablene klassifisering og kjemikalie er avhengige*. Vi begynner med å regne ut de forventede frekvensene ved bruk av formelen $e_{ij} = f_{i.}f_{.j}/n$: 
-
-|klas./kjem. |  Kjem 1 | Kjem 2  | Kjem 3 |
-|:---:|:---:|:---:|:---:|:---:|
-|  Tilfreds. | $e_{11} = 648\times 283/700 = 262.0$  |  $e_{12} = 648\times 233/700 = 215.7$  | $e_{13} = 648\times 184/700 = 170.3$  |
-|  Mangel.  |  $e_{21} = 52\times 283/700 = 21.0$  | $e_{22} = 52\times 233/700 = 17.3$  | $e_{23} = 52\times 184/700 = 13.7$ |
-
->Så regner vi ut hvert element $(f_{ij} - e_{ij})^2/e_{ij}$ som skal inn i summen til test observatoren:
-
-|klas./kjem. |  Kjem 1 | Kjem 2  | Kjem 3 |
-|:---:|:---:|:---:|:---:|:---:|
-|  Tilfreds. | $(268 - 262.0)^2/262 = 0.1384$  | 0.0004    |  0.2353 |
-|  Mangel.  | 1.7255   |  0.0055 | 2.9327 |
-
-
->Testobservatoren er da gitt ved
-
-$$\chi^2 = \sum_{i = 1}^2\sum_{j = 1}^3(f_{ij} - e_{ij})^2/e_{ij} = 0.1385 + 0.0004 + 0.2352 + 1.7255 + 0.0055 + 2.9327 = 5.0378$$
-
->Forkastelsesområdet er $\chi^2 > \chi^2_{\alpha, (r - 1)(s - 1)} = \chi^2_{0.05, 2} = 5.99$. Siden $\chi^2 = 5.0378 < 5.99$ forkaster vi *ikke* $H_0$ på 5 % signifikansnivå. 
->
-> I R ville vi gjort følgende:
->
-```{r, }
-f = matrix(c(268, 216, 164, 15, 17, 20), nrow = 2, ncol = 3, byrow = T)
-chisq.test(f)
-```
-
-<!-- n = 700 -->
-<!-- f = matrix(c(268, 216, 164, 15, 17, 20), nrow = 2, ncol = 3, byrow = T) -->
-<!-- for(i in 1:2){ -->
-<!-- for(j in 1:3){ -->
-<!-- e[i,j] = rowSums(f)[i]*colSums(f)[j]/n -->
-<!-- } -->
-<!-- } -->
-
-<!-- chi = matrix(NA, nrow = 2, ncol = 3) -->
-<!-- for(i in 1:2){ -->
-<!-- for(j in 1:3){ -->
-<!-- chi[i,j] = (f[i,j] - e[i,j])^2/e[i,j] -->
-<!-- sum(chi) -->
-<!-- chisq.test(f) #OK -->
-
-</details>
-
-16. *(Eksamen vår 2024.)* En analytiker deler de månedlige avkastningene til S&P 500-indeksen i to grupper: måneder klassifisert som *normal risiko* og måneder klassifisert som *høy risiko*. Utvalgene er oppsummert slik:
-
-    | Gruppe | Gjennomsnitt | Standardavvik $s$ | Antall $n$ |
-    |:---|:---:|:---:|:---:|
-    | Normal risiko | 5.52 | 4.83 | 231 |
-    | Høy risiko | 0.68 | 8.60 | 162 |
+    | Gruppe        | Gjennomsnitt | Standardavvik $s$ | Antall $n$ |
+    |:--------------|:------------:|:-----------------:|:----------:|
+    | Normal risiko |         5.52 |              4.83 |        231 |
+    | Høy risiko    |         0.68 |              8.60 |        162 |
 
     a. Test på 5 %-nivå om variansen i avkastning er den samme i de to gruppene.
 
@@ -1180,7 +1083,7 @@ chisq.test(f)
 >
 >Forkastningsområdet i øvre hale er $F > F_{0.025,\,161,\,230} = 1.33$ (fra `qf(0.975, df1 = 161, df2 = 230)`). Siden $3.17 > 1.33$ forkaster vi $H_0$: variansene er *forskjellige*.
 
->b. Fordi a viste ulik varians, bruker vi varianten med ulik varians (Welch). Vi tester $H_0: \mu_1 - \mu_2 = 0$ mot $H_A: \mu_1 - \mu_2 \neq 0$:
+>b. Fordi a viste ulik varians, bruker vi varianten med ulik varians (Welch). Vi tester $H_0: \mu_1 = \mu_2$ mot $H_A: \mu_1 \neq \mu_2$:
 >
 >$$T = \frac{\overline{x}_1 - \overline{x}_2}{\sqrt{s_1^2/n_1 + s_2^2/n_2}} = \frac{0.68 - 5.52}{\sqrt{8.60^2/162 + 4.83^2/231}} = -6.48.$$
 >
@@ -1188,7 +1091,7 @@ chisq.test(f)
 
 </details>
 
-17. *(Eksamen vår 2025.)* I et atferdseksperiment skal deltakerne rapportere om de gjettet riktig i et terningspill, der en riktig gjetning gir en liten belønning (det er ingen kontroll av om de snakker sant). En *kontrollgruppe* får ingen ekstra informasjon, mens en *tillitsgruppe* først får lese en tekst som understreker at forskerne stoler på dem. Av 400 i tillitsgruppen rapporterte 116 en riktig gjetning, mot 181 av 400 i kontrollgruppen. Kan vi konkludere med at «tillits-teksten» reduserer andelen som rapporterer en (mistenkelig ofte) riktig gjetning? Bruk 1 %-signifikansnivå.
+15. *(Eksamen vår 2025.)* I et atferdseksperiment skal deltakerne rapportere om de gjettet riktig i et terningspill, der en riktig gjetning gir en liten belønning (det er ingen kontroll av om de snakker sant). En *kontrollgruppe* får ingen ekstra informasjon, mens en *tillitsgruppe* først får lese en tekst som understreker at forskerne stoler på dem. Av 400 i tillitsgruppen rapporterte 116 en riktig gjetning, mot 181 av 400 i kontrollgruppen. Kan vi konkludere med at «tillits-teksten» reduserer andelen som rapporterer en (mistenkelig ofte) riktig gjetning? Bruk 1 %-signifikansnivå.
 
 <details><summary>Løsning</summary>
 
@@ -1197,6 +1100,72 @@ chisq.test(f)
 >$$Z = \frac{\widehat{p}_1 - \widehat{p}_2}{\sqrt{\widehat{p}(1-\widehat{p})(1/n_1 + 1/n_2)}} = \frac{0.29 - 0.4525}{\sqrt{0.371(1-0.371)(1/400 + 1/400)}} = -4.76.$$
 >
 >Forkastningsområdet er $Z < z_{0.01} = -2.33$ (fra `qnorm(0.01)`). Siden $-4.76 < -2.33$ forkaster vi $H_0$: tillits-teksten ser ut til å redusere andelen som rapporterer en riktig gjetning. En naturlig tolkning er at teksten fikk færre til å jukse.
+
+</details>
+
+16. En nettbutikk vil undersøke om antall bestillinger fordeler seg jevnt over ukedagene (mandag til fredag), eller om noen dager er travlere enn andre. I en tilfeldig valgt uke registreres antall bestillinger per dag:
+
+| Dag          | Man | Tir | Ons | Tor | Fre |
+|:-------------|:---:|:---:|:---:|:---:|:---:|
+| Bestillinger |  95 | 110 | 100 | 130 | 165 |
+
+Test på 5 %-signifikansnivå om bestillingene fordeler seg jevnt over de fem ukedagene.
+
+<details><summary>Løsning</summary>
+
+>Er bestillingene jevnt fordelt, er sannsynligheten den samme for hver dag, altså $p_i = 1/5$ for alle fem dagene. Vi tester $H_0: p_1 = p_2 = \cdots = p_5 = 1/5$ mot $H_A:$ minst én av andelene er forskjellig, på 5 %-nivå. Med totalt $n = 600$ bestillinger er det forventede antallet per dag $e_i = 600 \cdot 1/5 = 120$. Testobservatoren regnes ut slik:
+
+| Dag     | $f_i$ | $e_i$ | $(f_i - e_i)^2/e_i$ |
+|:--------|:-----:|:-----:|:-------------------:|
+| Man     |    95 |   120 |               5.208 |
+| Tir     |   110 |   120 |               0.833 |
+| Ons     |   100 |   120 |               3.333 |
+| Tor     |   130 |   120 |               0.833 |
+| Fre     |   165 |   120 |              16.875 |
+| **Sum** |   600 |   600 |    $\chi^2 = 27.08$ |
+
+>Testobservatoren er kji-kvadratfordelt med $k - 1 = 4$ frihetsgrader, og forkastningsområdet er $\chi^2 > \chi^2_{0.05,\,4} = 9.49$. Siden $27.08 > 9.49$ forkaster vi $H_0$: bestillingene fordeler seg *ikke* jevnt over ukedagene. Det største bidraget kommer fra fredag (165 mot 120 forventet), så fredag ser ut til å være spesielt travel.
+
+</details>
+
+17. Et produksjonsselskap har mulighet til å bruke tre forskjellige kjemikalier for å fremstille det samme produktet. Lederen ved produksjonsselskapet ønsker å undersøke hvorvidt det er forskjell på hvor mange mangelfulle produkter som blir produsert når en varierer bruken av type kjemikalier. Hun gjør et tilfeldig utvalg på 700 produkter og klassifiserer dem som enten tilfredsstillende eller mangelfull. Funnene er oppsummert i tabellen nedenfor:
+
+| Klassifisering    | Kjemikalie 1 | Kjemikalie 2 | Kjemikalie 3 | Sum |
+|:------------------|:------------:|:------------:|:------------:|:---:|
+| Tilfredsstillende |          268 |          216 |          164 | 648 |
+| Mangelfull        |           15 |           17 |           20 |  52 |
+| Sum               |          283 |          233 |          184 | 700 |
+
+Utfør en test for å avgjøre om det er en sammenheng mellom mangelfulle produkter og kjemikalie brukt under produksjonen. Bruk 5 % signifikansnivå.
+
+<details><summary>Løsning</summary>
+
+>Vi skal altså teste $H_0:$ *de to kjennetegnene klassifisering og kjemikalie er uavhengige* mot $H_A:$ *de er avhengige*. Vi begynner med å regne ut de forventede frekvensene ved bruk av formelen $e_{ij} = f_{i\cdot}f_{\cdot j}/n$:
+
+| klas./kjem.  | Kjem 1                              | Kjem 2                              | Kjem 3                              |
+|:-------------|:-----------------------------------:|:-----------------------------------:|:-----------------------------------:|
+| Tilfreds.    | $e_{11} = 648\cdot 283/700 = 262.0$ | $e_{12} = 648\cdot 233/700 = 215.7$ | $e_{13} = 648\cdot 184/700 = 170.3$ |
+| Mangel.      | $e_{21} = 52\cdot 283/700 = 21.0$   | $e_{22} = 52\cdot 233/700 = 17.3$   | $e_{23} = 52\cdot 184/700 = 13.7$   |
+
+>Så regner vi ut hvert ledd $(f_{ij} - e_{ij})^2/e_{ij}$ som skal inn i summen til testobservatoren:
+
+| klas./kjem. | Kjem 1                         | Kjem 2 | Kjem 3 |
+|:------------|:------------------------------:|:------:|:------:|
+| Tilfreds.   | $(268 - 262.0)^2/262 = 0.1384$ | 0.0004 | 0.2353 |
+| Mangel.     | 1.7255                         | 0.0055 | 2.9327 |
+
+>Testobservatoren er da gitt ved
+
+$$\chi^2 = \sum_{i=1}^2\sum_{j=1}^3 (f_{ij} - e_{ij})^2/e_{ij} = 0.1385 + 0.0004 + 0.2352 + 1.7255 + 0.0055 + 2.9327 = 5.0378.$$
+
+>Forkastningsområdet er $\chi^2 > \chi^2_{\alpha,\,(r-1)(s-1)} = \chi^2_{0.05,\,2} = 5.99$. Siden $\chi^2 = 5.0378 < 5.99$ forkaster vi *ikke* $H_0$ på 5 %-signifikansnivå.
+>
+> I R ville vi gjort følgende:
+
+```{r, }
+f = matrix(c(268, 216, 164, 15, 17, 20), nrow = 2, ncol = 3, byrow = T)
+chisq.test(f)
+```
 
 </details>
 
