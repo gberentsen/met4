@@ -149,6 +149,14 @@ Populasjonen er hele mengden vi egentlig er interessert i, for eksempel alle nor
 
 Det helt sentrale poenget er dette: siden observasjonene i utvalget er tilfeldige, blir også estimatoren tilfeldig. Trekker vi et nytt utvalg, får vi et litt annet gjennomsnitt. Estimatoren er altså selv en stokastisk variabel med sin egen fordeling, og den fordelingen kaller vi en **samplingfordeling**. Nesten alt vi gjør senere i kurset, handler i bunn og grunn om å forstå samplingfordelinger.
 
+### Hva er et tilfeldig utvalg?
+
+Hele resonnementet over hviler på at utvalget er *tilfeldig*. Med et **tilfeldig utvalg** mener vi at enhetene trekkes fra populasjonen ved en form for loddtrekning: hver enhet har samme sjanse til å bli med, uavhengig av de andre. Det er nettopp dette som gjør at vi kan behandle observasjonene $X_1, \ldots, X_n$ som uavhengige trekninger fra den samme fordelingen, og hele inferensmaskineriet senere i kurset bygger på den forutsetningen.
+
+Det avgjørende ordet er *representativt*. Et tilfeldig utvalg speiler populasjonen, slik at et utvalgsgjennomsnitt blir et rimelig anslag på populasjonsgjennomsnittet. Trekker vi derimot utvalget skjevt, blir anslaget systematisk feil, og da hjelper det ikke å samle inn mer data. Vanlige fallgruver er *selvseleksjon* (bare de mest engasjerte svarer på en frivillig undersøkelse) og *bekvemmelighetsutvalg* (vi spør dem som er lettest å nå). Et berømt eksempel er magasinet *Literary Digest*, som i 1936 spådde feil vinner av det amerikanske presidentvalget: utvalget var på over to millioner personer, men trukket blant bil- og telefoneiere, som den gang var systematisk rikere enn velgerne flest. Utvalget var enormt, men skjevt, og et langt mindre, virkelig tilfeldig utvalg traff bedre.
+
+I praksis er et perfekt tilfeldig utvalg vanskelig å få til, men det er idealet vi strekker oss mot, og forutsetningen vi antar er (tilnærmet) oppfylt i regnestykkene under.
+
 ### Populasjonen som sannsynlighetsmodell
 
 Hittil har vi snakket om populasjonen som en konkret samling enheter: all fisken i en oppdrettsmerd, alle norske velgere. Da er en parameter som $\mu$ rett og slett gjennomsnittet regnet over samtlige enheter, og å trekke et utvalg betyr å plukke ut noen av dem tilfeldig.
