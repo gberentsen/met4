@@ -553,7 +553,33 @@ chikvadrat
 qchisq(0.95, df = 2)
 ```
 
-Testobservatoren (8.18) er større enn den kritiske verdien (5.99), så vi forkaster $H_0$: markedsandelene ser ut til å ha endret seg. Ser vi på leddene, kommer det meste av avviket fra «andre»-kategorien (16 observert mot 30 forventet), så det ser ut til at kampanjene har trukket kunder bort fra de andre selskapene.
+Testobservatoren (8.18) er større enn den kritiske verdien (5.99), så vi forkaster $H_0$ (Figur \@ref(fig:kjikvadrat-gof)): markedsandelene ser ut til å ha endret seg. Ser vi på leddene, kommer det meste av avviket fra «andre»-kategorien (16 observert mot 30 forventet), så det ser ut til at kampanjene har trukket kunder bort fra de andre selskapene.
+
+```{r kjikvadrat-gof, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 6.5, fig.height = 3.3, fig.cap = "Fordelingen til testobservatoren under $H_0$ (kji-kvadrat med 2 frihetsgrader) i selskapseksempelet. Forkastningsområdet på 5 % er skyggelagt, med den kritiske verdien 5.99 som grense. Den observerte testobservatoren 8.18 faller innenfor forkastningsområdet, så vi forkaster."}
+library(ggplot2)
+x <- seq(0, 16, length.out = 500)
+kurve <- data.frame(x = x, tetthet = dchisq(x, df = 2))
+krit <- qchisq(0.95, df = 2)
+obs  <- 8.18
+
+ggplot(kurve, aes(x, tetthet)) +
+  geom_area(data = subset(kurve, x >= krit), fill = "grey75") +
+  geom_line(linewidth = 0.7) +
+  geom_vline(xintercept = krit, linetype = "dashed") +
+  annotate("segment", x = obs, xend = obs, y = 0, yend = dchisq(obs, df = 2),
+           colour = "firebrick", linewidth = 0.9) +
+  annotate("text", x = 9.4, y = 0.055, label = "Forkastnings-\nområde (5 %)", size = 3) +
+  annotate("text", x = 3.0, y = 0.16, label = "kritisk verdi\n5.99", size = 3) +
+  annotate("segment", x = 3.4, xend = krit, y = 0.13, yend = 0.012,
+           arrow = arrow(length = unit(0.15, "cm"))) +
+  annotate("text", x = 11.7, y = 0.10, label = "observert\nverdi 8.18", colour = "firebrick", size = 3) +
+  annotate("segment", x = 11.2, xend = obs, y = 0.078, yend = 0.008,
+           colour = "firebrick", arrow = arrow(length = unit(0.15, "cm"))) +
+  scale_x_continuous(expand = expansion(mult = c(0.02, 0.05))) +
+  coord_cartesian(clip = "off") +
+  labs(x = expression(paste("Testobservator ", chi^2, " under ", H[0])), y = "Tetthet") +
+  theme_classic()
+```
 
 **I R** gjør `chisq.test()` hele jobben når vi gir den de observerte antallene og andelene under $H_0$:
 
@@ -565,47 +591,59 @@ Se på **p-verdien**: den er 0.017, altså under 0.05, så vi forkaster $H_0$, a
 
 ### Test for uavhengighet
 
-Ofte vil vi vite om to *kategoriske* kjennetegn henger sammen, for eksempel om holdning til innvandring henger sammen med politisk ståsted. Vi ordner da dataene i en **krysstabell** med $r$ rader og $s$ kolonner, og tester $H_0$: de to kjennetegnene er *uavhengige*. Er de uavhengige, er sannsynligheten for en celle produktet av de to marginale sannsynlighetene, og det forventede antallet i celle $(i,j)$ blir
+Ofte vil vi vite om to *kategoriske* kjennetegn henger sammen, for eksempel om holdning til innvandring henger sammen med politisk ståsted. Vi ordner da dataene i en **krysstabell** med $r$ rader og $s$ kolonner, der $f_{ij}$ er antallet observasjoner som havner i rad $i$ og kolonne $j$:
 
-$$e_{ij} = \frac{(\text{radsum}_i)\cdot(\text{kolonnesum}_j)}{n}.$$
+|            | Kol. 1        | Kol. 2        | $\cdots$   | Kol. $s$      | Sum            |
+|:-----------|:-------------:|:-------------:|:----------:|:-------------:|:--------------:|
+| **Rad 1**  | $f_{11}$      | $f_{12}$      | $\cdots$   | $f_{1s}$      | $f_{1\cdot}$   |
+| **Rad 2**  | $f_{21}$      | $f_{22}$      | $\cdots$   | $f_{2s}$      | $f_{2\cdot}$   |
+| $\vdots$   | $\vdots$      | $\vdots$      | $\ddots$   | $\vdots$      | $\vdots$       |
+| **Rad $r$**| $f_{r1}$      | $f_{r2}$      | $\cdots$   | $f_{rs}$      | $f_{r\cdot}$   |
+| **Sum**    | $f_{\cdot 1}$ | $f_{\cdot 2}$ | $\cdots$   | $f_{\cdot s}$ | $n$            |
+
+Her er $f_{i\cdot}$ radsummene, $f_{\cdot j}$ kolonnesummene og $n$ det totale antallet observasjoner. Vi tester $H_0$: de to kjennetegnene er *uavhengige*, mot $H_A$: de henger sammen.
+
+De forventede antallene bygger på **produktregelen for uavhengige begivenheter**: er to begivenheter $A$ og $B$ uavhengige, er sannsynligheten for at *begge* inntreffer produktet av sannsynlighetene, $P(A \cap B) = P(A)\,P(B)$. Er de to kjennetegnene uavhengige, gjelder det samme for cellene: sannsynligheten for at en observasjon havner i rad $i$ *og* kolonne $j$ er produktet av rad-sannsynligheten og kolonne-sannsynligheten. Estimerer vi disse med rad- og kolonneandelene $f_{i\cdot}/n$ og $f_{\cdot j}/n$, blir det forventede antallet i celle $(i,j)$
+
+$$e_{ij} = n \cdot \frac{f_{i\cdot}}{n} \cdot \frac{f_{\cdot j}}{n} = \frac{f_{i\cdot}\, f_{\cdot j}}{n}.$$
 
 Testobservatoren er den samme som før, $\chi^2 = \sum (f_{ij} - e_{ij})^2/e_{ij}$, nå kji-kvadratfordelt med $(r-1)(s-1)$ frihetsgrader.
 
-**Eksempel.** I en spørreundersøkelse er respondentene delt inn etter politisk ståsted (venstre, sentrum, høyre) og etter hvor mange innvandrere de mener bør få bosette seg (mange, noen, få, ingen). Er de to kjennetegnene uavhengige? De observerte antallene (1000 respondenter) er:
-
-|             | Mange | Noen | Få  | Ingen |
-|:------------|:-----:|:----:|:---:|:-----:|
-| **Venstre** | 90    | 120  | 60  | 30    |
-| **Sentrum** | 80    | 160  | 120 | 40    |
-| **Høyre**   | 30    | 90   | 120 | 60    |
+**Eksempel.** I en stor spørreundersøkelse er 30 568 respondenter plassert etter politisk ståsted på en skala fra 1 (venstre) til 11 (høyre), og etter hvor mange innvandrere de mener bør få slippe inn i landet (mange, noen, få, ingen). Henger de to kjennetegnene sammen? Dataene ligger i [immigration-wide.xls](datasett/immigration-wide.xls).
 
 1. **Spørsmål:** Er holdning til innvandring uavhengig av politisk ståsted?
 2. **Hypoteser og signifikansnivå:** $H_0$: de to kjennetegnene er uavhengige, mot $H_A$: de henger sammen. En Type I-feil ville være å hevde at det finnes en sammenheng når det egentlig ikke gjør det. Vi velger $\alpha = 5\,\%$.
-3. **Data:** krysstabellen over. Vi legger den inn i R som en matrise:
+3. **Data:** Vi leser inn krysstabellen. Den har 11 rader (politisk ståsted, 1-11) og 4 kolonner (holdning):
 
-```{r}
-tabell <- matrix(c(90, 120,  60, 30,
-                   80, 160, 120, 40,
-                   30,  90, 120, 60),
-                 nrow = 3, byrow = TRUE,
-                 dimnames = list(c("Venstre", "Sentrum", "Høyre"),
-                                 c("Mange", "Noen", "Få", "Ingen")))
-tabell
+```{r, eval = FALSE}
+library(readxl)
+immigration <- read_xls("immigration-wide.xls",
+                        range = "B2:E12",
+                        col_names = c("many", "some", "few", "none"))
+print(immigration, n = 11)
 ```
 
-4. **Testobservator:** Under uavhengighet er det forventede antallet radsum ganget med kolonnesum, delt på $n$. I cellen «Venstre, Mange» forventer vi for eksempel $300\cdot 200/1000 = 60$, mot 90 observerte. Å regne ut alle tolv cellene for hånd er tungvint, så vi lar `chisq.test()` gjøre det:
-
-```{r}
-chisq.test(tabell)
+```{r, echo = FALSE, message = FALSE}
+library(readxl)
+immigration <- read_xls("datasett/immigration-wide.xls",
+                        range = "B2:E12",
+                        col_names = c("many", "some", "few", "none"))
+print(immigration, n = 11)
 ```
 
-5. **Kritisk verdi og konklusjon:** Med $r = 3$ og $s = 4$ er testobservatoren kji-kvadratfordelt med $(r-1)(s-1) = 6$ frihetsgrader. Kritisk verdi på 5 %-nivå er
+4. **Testobservator:** Å regne ut alle de $11 \cdot 4 = 44$ forventede celletallene for hånd er tungvint, så vi lar `chisq.test()` gjøre hele jobben:
 
 ```{r}
-qchisq(0.95, df = 6)
+chisq.test(immigration)
 ```
 
-Testobservatoren (`X-squared` $\approx 71.8$) er mange ganger større enn den kritiske verdien (12.59), og **p-verdien** er forsvinnende liten, så vi forkaster $H_0$: holdning til innvandring henger klart sammen med politisk ståsted. (Sjekk gjerne med `chisq.test(tabell)$expected` at ingen forventede celletall er under 5, ellers er tilnærmingen upålitelig.)
+5. **Kritisk verdi og konklusjon:** Med $r = 11$ og $s = 4$ er testobservatoren kji-kvadratfordelt med $(r-1)(s-1) = 30$ frihetsgrader. Kritisk verdi på 5 %-nivå er
+
+```{r}
+qchisq(0.95, df = 30)
+```
+
+Testobservatoren (`X-squared` $\approx 1815$) er enormt mye større enn den kritiske verdien (43.8), og **p-verdien** er forsvinnende liten, så vi forkaster $H_0$: holdning til innvandring henger klart sammen med politisk ståsted. (Sjekk gjerne med `chisq.test(immigration)$expected` at ingen forventede celletall er under 5, ellers er tilnærmingen upålitelig.)
 
 ### Kontrollspørsmål
 
