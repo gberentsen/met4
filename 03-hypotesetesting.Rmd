@@ -1402,33 +1402,41 @@ Vi følger samme rekkefølge som i teorien: først tester for et gjennomsnitt og
 
 ### t-tester
 
-Du må kunne gjøre de ulike $t$-testene ved hjelp av `t.test()`-funksjonen. Vi bruker eksempeldatasettet [testdata.xls](datasett/testdata.xls) som illustrasjon, som inneholder de to kolonnene `X1` og `X2`. I bunn og grunn handler det om å hente ut de relevante kolonnene i datasettet som vektorer, og så å sette argumentene i `t.test()`-funksjonen riktig.
+Du må kunne gjøre de ulike $t$-testene ved hjelp av `t.test()`-funksjonen. Vi bruker eksempeldatasettet [testdata.xls](datasett/testdata.xls) som illustrasjon, som inneholder de to kolonnene `X1` og `X2`. I bunn og grunn handler det om å hente ut de relevante kolonnene som vektorer og sette argumentene i `t.test()` riktig.
 ```{r, echo = FALSE}
 testdata <- readxl::read_excel("datasett/testdata.xls")
 ```
+
+#### Ett-utvalgs t-test {-}
+
+Tester om forventningen til én variabel er lik en bestemt verdi. Her tester vi om forventningen til `X1` er 100:
 ```{r, eval = FALSE}
-# Tosidig, ett-utvalgs t-test for om forventningen til X1 er lik 100:
+# Tosidig:
 t.test(testdata$X1, mu = 100)
 
-# Samme testen, men ensidig med alternativhypotese om at mu > 100
+# Ensidig, H_A: mu > 100 (bytt "greater" med "less" for den andre retningen):
 t.test(testdata$X1, mu = 100, alternative = "greater")
+```
 
-# For å gjøre ensidig test den andre veien bytter du ut "greater" med "less".
+#### To-utvalgs t-test {-}
 
-# Vanlig to-utvalgs t-test for om forventningen til X1 og X2 er like:
+Sammenligner forventningene i to uavhengige grupper. Som standard gjør R en Welch-test (ulik varians); med `var.equal = TRUE` antar den lik varians:
+```{r, eval = FALSE}
+# Ulik varians (Welch, standard):
 t.test(testdata$X1, testdata$X2)
 
-# Vanlig to-utvalgs t-test der vi antar at variansen i de to populasjonene er like:
+# Lik varians:
 t.test(testdata$X1, testdata$X2, var.equal = TRUE)
+```
 
-# Parret to-utvalgs t-test, som bare gir mening dersom de to vektorene med
-# observasjoner er like lange, og dersom observasjonene er matchet opp slik at
-# første element i den første vektoren skal matches mot første element i den
-# andre vektoren etc.:
+#### Paret t-test {-}
+
+Brukes når observasjonene er *paret* (samme enhet målt to ganger, eller matchede par). De to vektorene må være like lange og matchet opp par for par, slik at første element i den ene svarer til første element i den andre:
+```{r, eval = FALSE}
 t.test(testdata$X1, testdata$X2, paired = TRUE)
 ```
 
-Vi kan bytte ut alternativhypotesen til ensidige tester over alt ved å sette `alternative = ` til ønskelig verdi.
+I alle tre tilfellene kan du gjøre testen ensidig ved å sette `alternative = "greater"` eller `alternative = "less"`.
 
 #### Ensidige to-utvalgs tester: Hvilken vei tester vi? {-}
 
