@@ -1092,19 +1092,60 @@ Løser vi dette ut for <span class="math inline">\(\overline{X}\)</span>, svarer
 </ol>
 <details>
 <summary>
-Hint
+Løsning
 </summary>
-<p><code>t.test(testdata$X1, mu = 100)</code> for a, <code>t.test(testdata$X1, testdata$X2)</code> for b. Husk at <code>t.test()</code> alltid ser på differansen mellom <em>første</em> og <em>andre</em> argument, se <a href="relevante-r-testing.html#relevante-r-testing">3.6</a>.</p>
+<p><strong>a)</strong> Vi tester <span class="math inline">\(H_0: \mu = 100\)</span> mot <span class="math inline">\(H_A: \mu \neq 100\)</span> (tosidig):</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="oppgaver.html#cb115-1" tabindex="-1"></a><span class="fu">t.test</span>(testdata<span class="sc">$</span>X1, <span class="at">mu =</span> <span class="dv">100</span>)</span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  testdata$X1
+## t = 0.15102, df = 24, p-value = 0.8812
+## alternative hypothesis: true mean is not equal to 100
+## 95 percent confidence interval:
+##   96.55472 103.98928
+## sample estimates:
+## mean of x 
+##   100.272</code></pre>
+<p><strong>p-verdien</strong> er 0.88, altså langt over 0.05, så vi kan <strong>ikke</strong> forkaste <span class="math inline">\(H_0\)</span>. Utvalgsgjennomsnittet (rundt 100.3) ligger så nær 100 at avviket lett kan skyldes tilfeldig variasjon.</p>
+<p><strong>b)</strong> Vi tester <span class="math inline">\(H_0: \mu_{X1} = \mu_{X2}\)</span> mot <span class="math inline">\(H_A: \mu_{X1} \neq \mu_{X2}\)</span>:</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="oppgaver.html#cb117-1" tabindex="-1"></a><span class="fu">t.test</span>(testdata<span class="sc">$</span>X1, testdata<span class="sc">$</span>X2)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  testdata$X1 and testdata$X2
+## t = -1.1264, df = 47.433, p-value = 0.2657
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -7.587982  2.139982
+## sample estimates:
+## mean of x mean of y 
+##   100.272   102.996</code></pre>
+<p>Her er p-verdien 0.27, fortsatt over 0.05, så vi kan ikke konkludere med at de to forventningene er forskjellige.</p>
+<p><strong>c)</strong> Med <code>alternative = "greater"</code> tester vi det ensidige alternativet <span class="math inline">\(H_A: \mu_{X1} &gt; \mu_{X2}\)</span>, altså om <code>X1</code> har <em>høyere</em> forventning enn <code>X2</code>:</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="oppgaver.html#cb119-1" tabindex="-1"></a><span class="fu">t.test</span>(testdata<span class="sc">$</span>X1, testdata<span class="sc">$</span>X2, <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  testdata$X1 and testdata$X2
+## t = -1.1264, df = 47.433, p-value = 0.8672
+## alternative hypothesis: true difference in means is greater than 0
+## 95 percent confidence interval:
+##  -6.781121       Inf
+## sample estimates:
+## mean of x mean of y 
+##   100.272   102.996</code></pre>
+<p>Nå er p-verdien 0.87. Grunnen er at utvalgsgjennomsnittet til <code>X1</code> faktisk er <em>lavere</em> enn <code>X2</code> sitt, så dataene peker stikk motsatt av <span class="math inline">\(H_A\)</span>. Da blir det ingen bevis for at <code>X1</code> er størst, og p-verdien blir stor.</p>
 </details>
 <p><strong>Oppgave 2.</strong> Denne oppgaven demonstrerer hva signifikansnivået <span class="math inline">\(\alpha\)</span> <em>betyr</em> i praksis: at vi over mange gjentakelser forkaster en sann <span class="math inline">\(H_0\)</span> i en andel <span class="math inline">\(\alpha\)</span> av tilfellene. Vi later som vi gjentar den samme testen veldig mange ganger i en situasjon der <span class="math inline">\(H_0\)</span> er sann <em>med vilje</em>, og teller hvor ofte vi (feilaktig) forkaster.</p>
 <p>Vi tester <span class="math inline">\(H_0: \mu = 0\)</span> mot <span class="math inline">\(H_A: \mu \neq 0\)</span> på 5 %-nivå, og trekker hver gang <span class="math inline">\(n = 30\)</span> observasjoner fra en fordeling der forventningen faktisk <em>er</em> 0 (så <span class="math inline">\(H_0\)</span> er sann). Følgende kode gjør dette 5000 ganger og lagrer p-verdien hver gang:</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="oppgaver.html#cb115-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb115-2"><a href="oppgaver.html#cb115-2" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="dv">5000</span>                       <span class="co"># antall gjentakelser</span></span>
-<span id="cb115-3"><a href="oppgaver.html#cb115-3" tabindex="-1"></a>p_verdier <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, M)</span>
-<span id="cb115-4"><a href="oppgaver.html#cb115-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
-<span id="cb115-5"><a href="oppgaver.html#cb115-5" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)   <span class="co"># H0 er sann: forventning = 0</span></span>
-<span id="cb115-6"><a href="oppgaver.html#cb115-6" tabindex="-1"></a>    p_verdier[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x, <span class="at">mu =</span> <span class="dv">0</span>)<span class="sc">$</span>p.value</span>
-<span id="cb115-7"><a href="oppgaver.html#cb115-7" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="oppgaver.html#cb121-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb121-2"><a href="oppgaver.html#cb121-2" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="dv">5000</span>                       <span class="co"># antall gjentakelser</span></span>
+<span id="cb121-3"><a href="oppgaver.html#cb121-3" tabindex="-1"></a>p_verdier <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, M)</span>
+<span id="cb121-4"><a href="oppgaver.html#cb121-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
+<span id="cb121-5"><a href="oppgaver.html#cb121-5" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)   <span class="co"># H0 er sann: forventning = 0</span></span>
+<span id="cb121-6"><a href="oppgaver.html#cb121-6" tabindex="-1"></a>    p_verdier[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x, <span class="at">mu =</span> <span class="dv">0</span>)<span class="sc">$</span>p.value</span>
+<span id="cb121-7"><a href="oppgaver.html#cb121-7" tabindex="-1"></a>}</span></code></pre></div>
 <ol style="list-style-type: lower-alpha">
 <li><p>Regn ut andelen av de 5000 testene som forkastet <span class="math inline">\(H_0\)</span> på 5 %-nivå, altså andelen p-verdier under 0.05: <code>mean(p_verdier &lt; 0.05)</code>. Hva forventer du å få, og hva forteller det deg om betydningen av <span class="math inline">\(\alpha\)</span>?</p></li>
 <li><p>Gjenta med <code>&lt; 0.01</code> i stedet. Stemmer det med et signifikansnivå på 1 %?</p></li>
@@ -1112,23 +1153,20 @@ Hint
 </ol>
 <details>
 <summary>
-Svar
+Løsning
 </summary>
-<blockquote>
-<ol style="list-style-type: lower-alpha">
-<li>Andelen er cirka 0.05. Det er selve definisjonen på signifikansnivået: når <span class="math inline">\(H_0\)</span> er sann, forkaster vi ved ren tilfeldighet i en andel <span class="math inline">\(\alpha = 5\,\%\)</span> av tilfellene. Vi <em>kontrollerer</em> altså Type I-feilraten ved å velge <span class="math inline">\(\alpha\)</span>, akkurat som Neyman og Pearson påpekte (se Avsnitt <a href="generelt-om-hypotesetesting.html#generelt-om-hypotesetesting">3.1</a>, delen om de to feiltypene).</li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Nå er andelen cirka 0.01, i tråd med et strengere signifikansnivå. Jo lavere <span class="math inline">\(\alpha\)</span>, jo sjeldnere forkaster vi en sann <span class="math inline">\(H_0\)</span>.</li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="3" style="list-style-type: lower-alpha">
-<li>Når <span class="math inline">\(H_0\)</span> er sann, er p-verdien like sannsynlig å havne hvor som helst mellom 0 og 1: andelen tester med p-verdi under en hvilken som helst grense <span class="math inline">\(c\)</span> er nettopp <span class="math inline">\(c\)</span> (det er derfor andelen under 0.05 blir 0.05, og andelen under 0.01 blir 0.01). En jevn fordeling er akkurat det denne egenskapen krever.</li>
-</ol>
-</blockquote>
+<p><strong>a)</strong> Vi teller andelen p-verdier under 0.05:</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="oppgaver.html#cb122-1" tabindex="-1"></a><span class="fu">mean</span>(p_verdier <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0508</code></pre>
+<p>Andelen er cirka 0.05. Det er selve definisjonen på signifikansnivået: når <span class="math inline">\(H_0\)</span> er sann, forkaster vi ved ren tilfeldighet i en andel <span class="math inline">\(\alpha = 5\,\%\)</span> av tilfellene. Vi <em>kontrollerer</em> altså Type I-feilraten ved å velge <span class="math inline">\(\alpha\)</span>, akkurat som Neyman og Pearson påpekte (se Avsnitt <a href="generelt-om-hypotesetesting.html#generelt-om-hypotesetesting">3.1</a>, delen om de to feiltypene).</p>
+<p><strong>b)</strong> Med grensen 0.01 i stedet:</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="oppgaver.html#cb124-1" tabindex="-1"></a><span class="fu">mean</span>(p_verdier <span class="sc">&lt;</span> <span class="fl">0.01</span>)</span></code></pre></div>
+<pre><code>## [1] 0.01</code></pre>
+<p>Nå er andelen cirka 0.01, i tråd med et strengere signifikansnivå. Jo lavere <span class="math inline">\(\alpha\)</span>, jo sjeldnere forkaster vi en sann <span class="math inline">\(H_0\)</span>.</p>
+<p><strong>c)</strong></p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="oppgaver.html#cb126-1" tabindex="-1"></a><span class="fu">hist</span>(p_verdier, <span class="at">breaks =</span> <span class="dv">20</span>, <span class="at">col =</span> <span class="st">&quot;grey85&quot;</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;p-verdi&quot;</span>)</span></code></pre></div>
+<p><img src="met4_files/figure-html/pverdi-hist-1.png" alt="" width="576" /></p>
+<p>Histogrammet er tilnærmet flatt. Når <span class="math inline">\(H_0\)</span> er sann, er p-verdien like sannsynlig å havne hvor som helst mellom 0 og 1: andelen tester med p-verdi under en hvilken som helst grense <span class="math inline">\(c\)</span> er nettopp <span class="math inline">\(c\)</span> (det er derfor andelen under 0.05 blir 0.05, og andelen under 0.01 blir 0.01). En jevn fordeling er akkurat det denne egenskapen krever.</p>
 </details>
 <p><strong>Oppgave 3.</strong> En butikkjede vil vite om det er en sammenheng mellom hvilken av tre butikker en kunde handler i, og om kunden bruker et lojalitetskort. Et tilfeldig utvalg på 500 kjøp er krysstabulert slik:</p>
 <table>
@@ -1162,14 +1200,27 @@ Svar
 </ol>
 <details>
 <summary>
-Hint
+Løsning
 </summary>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="oppgaver.html#cb116-1" tabindex="-1"></a>tabell <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">60</span>, <span class="dv">70</span>,</span>
-<span id="cb116-2"><a href="oppgaver.html#cb116-2" tabindex="-1"></a>                   <span class="dv">60</span>, <span class="dv">100</span>, <span class="dv">20</span>),</span>
-<span id="cb116-3"><a href="oppgaver.html#cb116-3" tabindex="-1"></a>                 <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb116-4"><a href="oppgaver.html#cb116-4" tabindex="-1"></a>                 <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Kort&quot;</span>, <span class="st">&quot;Ikke&quot;</span>),</span>
-<span id="cb116-5"><a href="oppgaver.html#cb116-5" tabindex="-1"></a>                                 <span class="fu">c</span>(<span class="st">&quot;Butikk A&quot;</span>, <span class="st">&quot;Butikk B&quot;</span>, <span class="st">&quot;Butikk C&quot;</span>)))</span>
-<span id="cb116-6"><a href="oppgaver.html#cb116-6" tabindex="-1"></a><span class="fu">chisq.test</span>(tabell)</span></code></pre></div>
+<p><strong>a)</strong> Vi legger tabellen inn som en matrise og kjører testen:</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="oppgaver.html#cb127-1" tabindex="-1"></a>tabell <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">60</span>, <span class="dv">70</span>,</span>
+<span id="cb127-2"><a href="oppgaver.html#cb127-2" tabindex="-1"></a>                   <span class="dv">60</span>, <span class="dv">100</span>, <span class="dv">20</span>),</span>
+<span id="cb127-3"><a href="oppgaver.html#cb127-3" tabindex="-1"></a>                 <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb127-4"><a href="oppgaver.html#cb127-4" tabindex="-1"></a>                 <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Kort&quot;</span>, <span class="st">&quot;Ikke&quot;</span>),</span>
+<span id="cb127-5"><a href="oppgaver.html#cb127-5" tabindex="-1"></a>                                 <span class="fu">c</span>(<span class="st">&quot;Butikk A&quot;</span>, <span class="st">&quot;Butikk B&quot;</span>, <span class="st">&quot;Butikk C&quot;</span>)))</span>
+<span id="cb127-6"><a href="oppgaver.html#cb127-6" tabindex="-1"></a><span class="fu">chisq.test</span>(tabell)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test
+## 
+## data:  tabell
+## X-squared = 40.18, df = 2, p-value = 1.884e-09</code></pre>
+<p><strong>b)</strong> Testobservatoren er <code>X-squared</code> <span class="math inline">\(\approx 40\)</span> med <span class="math inline">\((2-1)(3-1) = 2\)</span> frihetsgrader, og <strong>p-verdien</strong> er cirka <span class="math inline">\(2\cdot 10^{-9}\)</span>, altså langt under 0.05. Vi forkaster <span class="math inline">\(H_0\)</span>: det er en klar sammenheng mellom hvilken butikk kunden handler i og om vedkommende bruker lojalitetskort.</p>
+<p><strong>c)</strong> Vi henter ut de forventede celletallene:</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="oppgaver.html#cb129-1" tabindex="-1"></a><span class="fu">chisq.test</span>(tabell)<span class="sc">$</span>expected</span></code></pre></div>
+<pre><code>##      Butikk A Butikk B Butikk C
+## Kort     82.5       88     49.5
+## Ikke     67.5       72     40.5</code></pre>
+<p>Alle er godt over 5 (det minste er cirka 40), så tilnærmingen bak kji-kvadrattesten er pålitelig her.</p>
 </details>
 </div>
 </div>
