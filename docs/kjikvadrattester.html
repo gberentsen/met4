@@ -426,7 +426,22 @@ Figur 3.2: Fordelingen til testobservatoren under <span class="math inline">\(H_
 </ol>
 <div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="kjikvadrattester.html#cb103-1" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">30</span>)</span></code></pre></div>
 <pre><code>## [1] 43.77297</code></pre>
-<p>Testobservatoren (<code>X-squared</code> <span class="math inline">\(\approx 1815\)</span>) er enormt mye større enn den kritiske verdien (43.8), og <strong>p-verdien</strong> er forsvinnende liten, så vi forkaster <span class="math inline">\(H_0\)</span>: holdning til innvandring henger klart sammen med politisk ståsted. (Sjekk gjerne med <code>chisq.test(immigration)$expected</code> at ingen forventede celletall er under 5, ellers er tilnærmingen upålitelig.)</p>
+<p>Testobservatoren (<code>X-squared</code> <span class="math inline">\(\approx 1815\)</span>) er enormt mye større enn den kritiske verdien (43.8), og <strong>p-verdien</strong> er forsvinnende liten, så vi forkaster <span class="math inline">\(H_0\)</span>: holdning til innvandring henger klart sammen med politisk ståsted.</p>
+<p>Testen hviler på at ingen av de forventede celletallene er for små (under omtrent 5). Den forutsetningen kan vi sjekke ved å hente ut de forventede antallene direkte fra testen:</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="kjikvadrattester.html#cb105-1" tabindex="-1"></a><span class="fu">chisq.test</span>(immigration)<span class="sc">$</span>expected</span></code></pre></div>
+<pre><code>##            many      some       few       none
+##  [1,]  147.2073  429.8650  335.7748  163.15297
+##  [2,]   87.1478  254.4833  198.7812   96.58777
+##  [3,]  222.1790  648.7925  506.7828  246.24575
+##  [4,]  409.6083 1196.1112  934.3027  453.97769
+##  [5,]  413.4390 1207.2973  943.0404  458.22331
+##  [6,] 1359.8888 3971.0573 3101.8601 1507.19380
+##  [7,]  445.3157 1300.3814 1015.7500  493.55290
+##  [8,]  477.1924 1393.4656 1088.4596  528.88249
+##  [9,]  354.2004 1034.3126  807.9191  392.56788
+## [10,]  108.4901  316.8057  247.4623  120.24192
+## [11,]  157.3312  459.4282  358.8671  174.37353</code></pre>
+<p>Alle de forventede antallene er godt over 5 (det minste er omtrent 87), så tilnærmingen er pålitelig her.</p>
 </div>
 <div id="kontrollsprsmal-5" class="section level3 hasAnchor" number="3.4.4">
 <h3><span class="header-section-number">3.4.4</span> Kontrollspørsmål<a href="kjikvadrattester.html#kontrollsprsmal-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>

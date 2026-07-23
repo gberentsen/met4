@@ -899,8 +899,8 @@ Løsning
 <p>Forkastelsesområdet er <span class="math inline">\(\chi^2 &gt; \chi^2_{\alpha, (r - 1)(s - 1)} = \chi^2_{0.05, 2} = 5.99\)</span>. Siden <span class="math inline">\(\chi^2 = 5.0378 &lt; 5.99\)</span> forkaster vi <em>ikke</em> <span class="math inline">\(H_0\)</span> på 5 % signifikansnivå.</p>
 <p>I R ville vi gjort følgende:</p>
 </blockquote>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="oppgaver.html#cb110-1" tabindex="-1"></a>f <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">268</span>, <span class="dv">216</span>, <span class="dv">164</span>, <span class="dv">15</span>, <span class="dv">17</span>, <span class="dv">20</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> T)</span>
-<span id="cb110-2"><a href="oppgaver.html#cb110-2" tabindex="-1"></a><span class="fu">chisq.test</span>(f)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="oppgaver.html#cb112-1" tabindex="-1"></a>f <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">268</span>, <span class="dv">216</span>, <span class="dv">164</span>, <span class="dv">15</span>, <span class="dv">17</span>, <span class="dv">20</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> T)</span>
+<span id="cb112-2"><a href="oppgaver.html#cb112-2" tabindex="-1"></a><span class="fu">chisq.test</span>(f)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 
@@ -1101,8 +1101,8 @@ For <span class="math inline">\(n = 10\)</span>: <span class="math inline">\(P(Z
 <h3><span class="header-section-number">3.5.3</span> R-oppgaver<a href="oppgaver.html#r-oppgaver-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Her bruker vi R til å utføre testene fra dette kapittelet i praksis. Vi bruker eksempeldatasettet <a href="datasett/testdata.xls">testdata.xls</a>, som har de numeriske kolonnene <code>X1</code> og <code>X2</code>.</p>
 <p><strong>Oppgave 1.</strong> Les inn datasettet og gjør deg kjent med det:</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="oppgaver.html#cb112-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb112-2"><a href="oppgaver.html#cb112-2" tabindex="-1"></a>testdata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;testdata.xls&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="oppgaver.html#cb114-1" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb114-2"><a href="oppgaver.html#cb114-2" tabindex="-1"></a>testdata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;testdata.xls&quot;</span>)</span></code></pre></div>
 <ol style="list-style-type: lower-alpha">
 <li><p>Test på 5 %-nivå om den forventede verdien til <code>X1</code> er lik 100, mot det tosidige alternativet. Bruk <code>t.test()</code>. Hva blir konklusjonen?</p></li>
 <li><p>Test på 5 %-nivå om <code>X1</code> og <code>X2</code> har samme forventning. Se på <strong>p-verdien</strong> i utskriften og konkluder.</p></li>
@@ -1116,13 +1116,13 @@ Hint
 </details>
 <p><strong>Oppgave 2.</strong> Denne oppgaven demonstrerer hva signifikansnivået <span class="math inline">\(\alpha\)</span> <em>betyr</em> i praksis: at vi over mange gjentakelser forkaster en sann <span class="math inline">\(H_0\)</span> i en andel <span class="math inline">\(\alpha\)</span> av tilfellene. Vi later som vi gjentar den samme testen veldig mange ganger i en situasjon der <span class="math inline">\(H_0\)</span> er sann <em>med vilje</em>, og teller hvor ofte vi (feilaktig) forkaster.</p>
 <p>Vi tester <span class="math inline">\(H_0: \mu = 0\)</span> mot <span class="math inline">\(H_A: \mu \neq 0\)</span> på 5 %-nivå, og trekker hver gang <span class="math inline">\(n = 30\)</span> observasjoner fra en fordeling der forventningen faktisk <em>er</em> 0 (så <span class="math inline">\(H_0\)</span> er sann). Følgende kode gjør dette 5000 ganger og lagrer p-verdien hver gang:</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="oppgaver.html#cb113-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb113-2"><a href="oppgaver.html#cb113-2" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="dv">5000</span>                       <span class="co"># antall gjentakelser</span></span>
-<span id="cb113-3"><a href="oppgaver.html#cb113-3" tabindex="-1"></a>p_verdier <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, M)</span>
-<span id="cb113-4"><a href="oppgaver.html#cb113-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
-<span id="cb113-5"><a href="oppgaver.html#cb113-5" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)   <span class="co"># H0 er sann: forventning = 0</span></span>
-<span id="cb113-6"><a href="oppgaver.html#cb113-6" tabindex="-1"></a>    p_verdier[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x, <span class="at">mu =</span> <span class="dv">0</span>)<span class="sc">$</span>p.value</span>
-<span id="cb113-7"><a href="oppgaver.html#cb113-7" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="oppgaver.html#cb115-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb115-2"><a href="oppgaver.html#cb115-2" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="dv">5000</span>                       <span class="co"># antall gjentakelser</span></span>
+<span id="cb115-3"><a href="oppgaver.html#cb115-3" tabindex="-1"></a>p_verdier <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, M)</span>
+<span id="cb115-4"><a href="oppgaver.html#cb115-4" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
+<span id="cb115-5"><a href="oppgaver.html#cb115-5" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)   <span class="co"># H0 er sann: forventning = 0</span></span>
+<span id="cb115-6"><a href="oppgaver.html#cb115-6" tabindex="-1"></a>    p_verdier[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x, <span class="at">mu =</span> <span class="dv">0</span>)<span class="sc">$</span>p.value</span>
+<span id="cb115-7"><a href="oppgaver.html#cb115-7" tabindex="-1"></a>}</span></code></pre></div>
 <ol style="list-style-type: lower-alpha">
 <li><p>Regn ut andelen av de 5000 testene som forkastet <span class="math inline">\(H_0\)</span> på 5 %-nivå, altså andelen p-verdier under 0.05: <code>mean(p_verdier &lt; 0.05)</code>. Hva forventer du å få, og hva forteller det deg om betydningen av <span class="math inline">\(\alpha\)</span>?</p></li>
 <li><p>Gjenta med <code>&lt; 0.01</code> i stedet. Stemmer det med et signifikansnivå på 1 %?</p></li>
@@ -1182,12 +1182,12 @@ Svar
 <summary>
 Hint
 </summary>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="oppgaver.html#cb114-1" tabindex="-1"></a>tabell <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">60</span>, <span class="dv">70</span>,</span>
-<span id="cb114-2"><a href="oppgaver.html#cb114-2" tabindex="-1"></a>                   <span class="dv">60</span>, <span class="dv">100</span>, <span class="dv">20</span>),</span>
-<span id="cb114-3"><a href="oppgaver.html#cb114-3" tabindex="-1"></a>                 <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb114-4"><a href="oppgaver.html#cb114-4" tabindex="-1"></a>                 <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Kort&quot;</span>, <span class="st">&quot;Ikke&quot;</span>),</span>
-<span id="cb114-5"><a href="oppgaver.html#cb114-5" tabindex="-1"></a>                                 <span class="fu">c</span>(<span class="st">&quot;Butikk A&quot;</span>, <span class="st">&quot;Butikk B&quot;</span>, <span class="st">&quot;Butikk C&quot;</span>)))</span>
-<span id="cb114-6"><a href="oppgaver.html#cb114-6" tabindex="-1"></a><span class="fu">chisq.test</span>(tabell)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="oppgaver.html#cb116-1" tabindex="-1"></a>tabell <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">60</span>, <span class="dv">70</span>,</span>
+<span id="cb116-2"><a href="oppgaver.html#cb116-2" tabindex="-1"></a>                   <span class="dv">60</span>, <span class="dv">100</span>, <span class="dv">20</span>),</span>
+<span id="cb116-3"><a href="oppgaver.html#cb116-3" tabindex="-1"></a>                 <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb116-4"><a href="oppgaver.html#cb116-4" tabindex="-1"></a>                 <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Kort&quot;</span>, <span class="st">&quot;Ikke&quot;</span>),</span>
+<span id="cb116-5"><a href="oppgaver.html#cb116-5" tabindex="-1"></a>                                 <span class="fu">c</span>(<span class="st">&quot;Butikk A&quot;</span>, <span class="st">&quot;Butikk B&quot;</span>, <span class="st">&quot;Butikk C&quot;</span>)))</span>
+<span id="cb116-6"><a href="oppgaver.html#cb116-6" tabindex="-1"></a><span class="fu">chisq.test</span>(tabell)</span></code></pre></div>
 </details>
 </div>
 </div>
