@@ -1,6 +1,17 @@
 project:
   type: book
   output-dir: _book
+  render:
+    - index.qmd
+    - 01-intro-til-r.qmd
+    - 02-grunnleggende-statistikk.qmd
+    - 03-hypotesetesting.qmd
+    - 04-regresjon.qmd
+    - 05-tidsrekker.qmd
+    - 06-avansert-regresjon-og-maskinlaering.qmd
+    - 07-dataøvinger.qmd
+    - 08-seminaroppgaver.qmd
+    - 10-Eksamensoppgaver.qmd
 
 lang: nb
 
@@ -9,16 +20,32 @@ book:
   subtitle: "Høst 2026"
   author: "Geir Drage Berentsen, Håkon Otneim og Maren Holthe Hedne"
   description: "Hjemmesiden til kurset MET4 – Empiriske Metoder ved Norges Handelshøyskole."
+  search: true
+  page-footer:
+    left: "MET4 – Empiriske Metoder, NHH"
   chapters:
     - index.qmd
-    - 03-hypotesetesting.qmd
+    - part: "Moduler"
+      chapters:
+        - 01-intro-til-r.qmd
+        - 02-grunnleggende-statistikk.qmd
+        - 03-hypotesetesting.qmd
+        - 04-regresjon.qmd
+        - 05-tidsrekker.qmd
+        - 06-avansert-regresjon-og-maskinlaering.qmd
+    - part: "Oppgaver og eksamen"
+      chapters:
+        - 07-dataøvinger.qmd
+        - 08-seminaroppgaver.qmd
+        - 10-Eksamensoppgaver.qmd
 
 format:
   html:
     theme: cosmo
     toc: true
-    toc-depth: 4
+    toc-depth: 3
     code-copy: true
+    code-overflow: wrap
 
 execute:
   freeze: auto
