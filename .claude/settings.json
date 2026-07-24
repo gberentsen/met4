@@ -1,5 +1,6 @@
 {
   "permissions": {
+    "defaultMode": "acceptEdits",
     "allow": [
       "PowerShell(git status:*)",
       "PowerShell(git diff:*)",
