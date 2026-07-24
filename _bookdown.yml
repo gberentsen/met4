@@ -1,9 +1,0 @@
-book_filename: "met4"
-language:
-  ui:
-    chapter_name: " "
-  label:
-    tab: "Tabell "
-    fig: "Figur "
-delete_merged_file: true
-output_dir: "docs"
