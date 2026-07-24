@@ -1,0 +1,13 @@
+# Løsningsforslaget skal ikke publiseres, så den rendrede utgaven holdes utenfor
+# git. Kilden (kursgodkjenning-losningsforslag.qmd) er derimot sporet. Trenger du
+# HTML-en, bygg den selv:
+#
+#   quarto render kursgodkjenning-losningsforslag.qmd
+#
+kursgodkjenning-losningsforslag.html
+kursgodkjenning-losningsforslag_files/
+
+# Merk at kursgodkjenning.html og kursgodkjenning_files/ IKKE ignoreres. De ser ut
+# som byggeartefakter, men er byggeinput for boken: _quarto.yml lister dem under
+# resources: og kopierer dem til docs/kursgodkjenning/. Fjernes de fra git, bygger
+# ikke nettstedet riktig hos andre.

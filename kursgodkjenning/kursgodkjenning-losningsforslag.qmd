@@ -1,0 +1,506 @@
+---
+title: "MET4 – Obligatorisk kursgodkjenning"
+subtitle: "Løsningsforslag"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    theme: cosmo
+    code-fold: false
+    df-print: default
+engine: knitr
+lang: nb
+execute:
+  warning: false
+  message: false
+---
+
+::: {.callout-warning}
+## Ikke publiser før fristen
+
+Dette dokumentet inneholder fullstendige svar på alle 15 deloppgavene i kursgodkjenningen. Det er ikke lenket fra nettsiden og bygges ikke som en del av boken. Skal det deles med studentene, bør det være etter innleveringsfristen.
+:::
+
+Løsningsforslaget følger samme rekkefølge som oppgavesettet. For regneoppgavene er koden skrevet med `dplyr` og `ggplot2`, slik som i modul 1, men base R-varianten er tatt med der den er kortere. For tolkningsoppgavene er det ikke nok å oppgi riktig bokstav; her står begrunnelsen for hvorfor de andre alternativene er feil, siden det er der læringen ligger.
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+load("boliger.RData")
+
+glimpse(boliger)
+```
+
+## Oppgave 1 – Deskriptiv statistikk
+
+### Oppgave 1a
+
+Hvor mange boliger ligger i Bergenhus og leies ut møblert?
+
+```{r}
+boliger %>%
+  filter(bydel == "Bergenhus", mobelert == "Ja") %>%
+  summarise(antall = n())
+```
+
+I base R:
+
+```{r}
+sum(boliger$bydel == "Bergenhus" & boliger$mobelert == "Ja")
+```
+
+**Svar: 248.**
+
+Hele krysstabellen er verdt å se på med en gang, for den setter opp resten av oppgavesettet:
+
+```{r}
+table(boliger$bydel, boliger$mobelert)
+```
+
+248 av de 319 boligene i Bergenhus leies ut møblert, altså 78 prosent. I Fana er andelen 19 prosent. Møblering er med andre ord ikke jevnt fordelt over byen, og det er nettopp den skjevheten som gjør den enkle sammenligningen i oppgave 2c misvisende.
+
+### Oppgave 1b
+
+```{r}
+cor(boliger$pris, boliger$areal)
+```
+
+**Svar: 0,770.**
+
+Areal og pris henger sterkt sammen, som forventet. Men korrelasjonen er ikke 1, så areal alene forklarer ikke hele prisbildet. Kvadrerer vi den, får vi 0,59: areal forklarer om lag 59 prosent av variasjonen i pris når det er eneste forklaringsvariabel.
+
+### Oppgave 1c
+
+```{r}
+#| fig-height: 3.5
+ggplot(boliger, aes(x = bydel, y = pris)) +
+  geom_boxplot() +
+  labs(title = "Leiepris per bydel", x = "Bydel", y = "Kroner per måned")
+
+ggplot(boliger, aes(x = bydel, y = areal)) +
+  geom_boxplot() +
+  labs(title = "Areal per bydel", x = "Bydel", y = "Kvadratmeter")
+```
+
+**Riktig alternativ: b.** Fana og Åsane har høyere medianpris enn Bergenhus og Årstad, og en nærliggende forklaring er at boligene der er større.
+
+Det første boksplottet gir et resultat som strider mot intuisjonen: de sentrale bydelene har de *laveste* leieprisene. Det andre boksplottet forklarer hvorfor. Boligene i Fana og Åsane er vesentlig større, og størrelse slår tyngre ut på månedsleien enn beliggenhet gjør.
+
+Poenget er ikke at sentral beliggenhet er verdiløst. Poenget er at figuren ikke måler beliggenhet alene. Den måler beliggenhet og størrelse samtidig, og de to trekker i hver sin retning. Vil vi vite hva beliggenheten er verdt, må vi sammenligne boliger av samme størrelse, og det er nøyaktig det regresjonen i oppgave 3b gjør. Der er alle tre bydelskoeffisientene negative i forhold til Bergenhus, altså: for en gitt størrelse er sentrum dyrest.
+
+Hvorfor de andre alternativene er feil:
+
+- **a)** er den intuitive forventningen, men figuren viser det motsatte. Bergenhus har den laveste medianprisen av de fire.
+- **c)** Boksene ligger tydelig forskjøvet i forhold til hverandre, så bydel henger klart sammen med pris. Spørsmålet er hva sammenhengen skyldes.
+- **d)** setter opp en motsetning som ikke finnes. At bydelene har ulikt prisnivå utelukker ikke at areal betyr noe, og korrelasjonen på 0,77 fra 1b viser at det gjør det.
+
+### Oppgave 1d
+
+```{r}
+boliger %>%
+  group_by(bydel) %>%
+  summarise(median_pris = median(pris))
+```
+
+```{r}
+boliger %>%
+  group_by(bydel) %>%
+  summarise(median_pris = median(pris)) %>%
+  summarise(spenn = max(median_pris) - min(median_pris))
+```
+
+I base R:
+
+```{r}
+medianer <- tapply(boliger$pris, boliger$bydel, median)
+max(medianer) - min(medianer)
+```
+
+**Svar: 2 425 kroner.**
+
+Fana ligger høyest med 19 595 kroner, Bergenhus lavest med 17 170. Spennet bør settes opp mot spredningen innad i bydelene:
+
+```{r}
+sd(boliger$pris)
+```
+
+Standardavviket til pris er nesten 5 000 kroner, altså dobbelt så stort som hele forskjellen mellom den dyreste og den billigste bydelen. To tilfeldig valgte boliger i samme bydel skiller seg typisk mer fra hverandre enn to bydeler gjør i gjennomsnitt. Det er en nyttig påminnelse om at en signifikant gruppeforskjell ikke er det samme som en stor gruppeforskjell.
+
+## Oppgave 2 – Hypotesetesting
+
+### Oppgave 2a
+
+$$H_0: \sigma^2_{\text{møblert}} = \sigma^2_{\text{umøblert}} \qquad \text{mot} \qquad H_A: \sigma^2_{\text{møblert}} \neq \sigma^2_{\text{umøblert}}$$
+
+`var.test()` tar formelsyntaks på samme måte som `t.test()`, så vi slipper å plukke ut to vektorer først:
+
+```{r}
+test <- var.test(pris ~ mobelert, data = boliger)
+test
+```
+
+Oppgaven ber om ett tall, ikke hele utskriften. Når testen først ligger i en variabel, henter vi ut komponenten vi vil ha med `$`:
+
+```{r}
+test$p.value
+```
+
+**Svar: p = 0,2875.**
+
+Det samme kan skrives i én linje, `var.test(pris ~ mobelert, data = boliger)$p.value`, og den framgangsmåten bruker vi igjen i 2c og 2e, der det er `$statistic` vi er ute etter. Vil du se hvilke komponenter en test inneholder, gir `names(test)` deg hele lista.
+
+Testobservatoren er $F = 1{,}11$, altså nær 1, som er akkurat det vi venter når de to variansene er like. Konfidensintervallet for forholdet mellom variansene dekker 1 med god margin.
+
+### Oppgave 2b
+
+**Riktig alternativ: b.** Vi forkaster ikke $H_0$ om like varianser, så vi kan bruke den poolede t-testen, altså `var.equal = TRUE`.
+
+Merk at dette er et sted der R sitt standardvalg går den andre veien. `t.test()` bruker Welch-korreksjonen med mindre du sier noe annet, så her må du aktivt overstyre den.
+
+Hvorfor de andre alternativene er feil:
+
+- **a)** p-verdien er 0,29, altså langt over alle vanlige signifikansnivå. Vi forkaster ikke.
+- **c)** er den klassiske fellen. En stor p-verdi betyr at dataene er *forenlige* med $H_0$, ikke at $H_0$ er bevist. Vi mangler grunnlag for å forkaste, og det er noe annet enn å ha vist at hypotesen er sann. En hypotesetest kan aldri bevise en nullhypotese.
+- **d)** `var.test()` tester nettopp forholdet mellom to varianser. Det er t-testen som handler om gjennomsnitt.
+
+I praksis spiller valget liten rolle her, nettopp fordi variansene er like. Det ser du av at de to variantene gir nesten samme svar i 2c. Men resonnementet er poenget: du sjekker forutsetningen før du bruker testen.
+
+### Oppgave 2c
+
+$$H_0: \mu_{\text{møblert}} = \mu_{\text{umøblert}} \qquad \text{mot} \qquad H_A: \mu_{\text{møblert}} \neq \mu_{\text{umøblert}}$$
+
+Vi bruker `var.equal = TRUE`, i tråd med konklusjonen i 2b:
+
+```{r}
+test <- t.test(pris ~ mobelert, data = boliger, var.equal = TRUE)
+test
+```
+
+Testobservatoren står på linjen som begynner med `t = `, så du kan lese den rett av utskriften. Skal den hentes ut programmatisk, er komponenten `$statistic`:
+
+```{r}
+test$statistic
+```
+
+**Svar: t = 7,32.**
+
+Welch-varianten gir $t = 7{,}35$ og samme konklusjon:
+
+```{r}
+t.test(pris ~ mobelert, data = boliger)$statistic
+```
+
+Umøblerte boliger leies ut for 19 201 kroner i snitt, møblerte for 16 848. Differansen er 2 353 kroner, og med $p = 5{,}6 \cdot 10^{-13}$ er den klart signifikant.
+
+Legg merke til **retningen**. De møblerte boligene er de billigste. Det er stikk i strid med det selskapet forventet, og forklaringen kommer i oppgave 3.
+
+### Oppgave 2d
+
+$$H_0: \mu_{\text{møblert}} = \mu_{\text{umøblert}} \qquad \text{mot} \qquad H_A: \mu_{\text{møblert}} > \mu_{\text{umøblert}}$$
+
+Det avgjørende her er **hvilken vei R regner differansen**. Med formelsyntaks bestemmes det av nivårekkefølgen i den kategoriske variabelen:
+
+```{r}
+levels(boliger$mobelert)
+```
+
+`"Nei"` kommer først, så `t.test()` ser på differansen `Nei - Ja`. Selskapets hypotese er at de møblerte er *dyrere*, altså at `Nei - Ja` er *negativ*. Det gir `alternative = "less"`:
+
+```{r}
+test <- t.test(pris ~ mobelert, data = boliger,
+               var.equal = TRUE, alternative = "less")
+test
+```
+
+```{r}
+test$p.value
+```
+
+**Svar: p = 1,00.**
+
+Legg merke til at utskriften skriver ut hypotesen eksplisitt: `true difference in means between group Nei and group Ja is less than 0`. Det er verdt å lese hver gang du gjør en ensidig test, for det er den enkleste måten å oppdage at du har snudd retningen.
+
+Resultatet fortjener et øyeblikks ettertanke. p-verdien er så nær 1 som det går an å komme. Selskapets hypotese får ikke bare svak støtte, den får ingen støtte overhodet, fordi dataene peker stikk motsatt vei.
+
+To lærdommer:
+
+**En ensidig test er blind for effekter i motsatt retning.** Den kan aldri forkaste $H_0$ til fordel for noe den ikke leter etter. Det er prisen du betaler for den økte styrken en ensidig test gir i den retningen du faktisk tester.
+
+**Du kan ikke snu alternativhypotesen nå.** Fristelsen er åpenbar: dataene peker den andre veien, så hvorfor ikke teste `alternative = "greater"` i stedet og få $p = 2{,}8 \cdot 10^{-13}$? Fordi du da velger hypotese etter å ha sett resultatet. p-verdien er sannsynligheten for å se noe minst så ekstremt *gitt at hypotesen var bestemt på forhånd*, og den tolkningen faller sammen i det du lar dataene bestemme hva du tester. Dette er samme fallgruve som fisking blant mange tester, beskrevet i modul 3.
+
+Den ærlige framgangsmåten er den vi allerede har brukt: den tosidige testen i 2c, som ikke tar stilling til retning på forhånd, og som derfor fanger opp at forskjellen går motsatt vei av det selskapet trodde.
+
+### Oppgave 2e
+
+**Riktig alternativ: b.** Møblerte boliger i utvalget har lavere leie, men testen sier ikke at møbleringen er årsaken.
+
+Dette er kjernen i hele oppgavesettet. T-testen sammenligner to grupper slik de faktisk er, og de to gruppene skiller seg fra hverandre på mer enn møblering:
+
+```{r}
+boliger %>%
+  group_by(mobelert) %>%
+  summarise(
+    antall = n(),
+    snitt_areal = mean(areal),
+    snitt_pris = mean(pris)
+  )
+```
+
+Møblerte boliger er i snitt 51 kvadratmeter, umøblerte 77. Når vi sammenligner leieprisen mellom gruppene, sammenligner vi samtidig små boliger med store, og størrelsesforskjellen dominerer fullstendig. Testen er korrekt utført og svarer riktig på spørsmålet «leies møblerte boliger ut billigere enn umøblerte?». Den svarer bare ikke på spørsmålet selskapet egentlig har, som er «hva er møbleringen verdt?».
+
+Hvorfor de andre alternativene er feil:
+
+- **a)** leser en gruppeforskjell som en årsakssammenheng. Det er dette skillet mellom korrelasjon og kausalitet som er hele poenget med oppgave 3.
+- **c)** blander statistisk og økonomisk signifikans. p-verdien sier hvor sikre vi er på at det finnes en forskjell, ikke hvor stor den er. Med $n = 900$ blir selv små forskjeller signifikante. Om 2 353 kroner er mye, er et faglig spørsmål om utleiemarkedet.
+- **d)** To-utvalgs t-test krever ikke like store grupper. Ulik gruppestørrelse håndteres i formelen for standardfeilen til differansen.
+
+### Oppgave 2f
+
+$H_0$: bydel og møblering er uavhengige. $H_A$: de er ikke uavhengige.
+
+`chisq.test()` tar ikke formelsyntaks. Den vil ha en ferdig krysstabell, som vi lager med `table()`:
+
+```{r}
+krysstabell <- table(boliger$bydel, boliger$mobelert)
+krysstabell
+```
+
+```{r}
+test <- chisq.test(krysstabell)
+test
+```
+
+Som i 2a og 2c henter vi ut det enkelte tallet med `$`. Testobservatoren står i `$statistic`:
+
+```{r}
+test$statistic
+```
+
+**Svar: $\chi^2 = 217{,}74$** med 3 frihetsgrader.
+
+Merk at `chisq.test()` ikke har `estimate` eller `conf.int`, slik `t.test()` har. Til gjengjeld har den `$expected`, de forventede frekvensene under $H_0$, som er nyttige for å se *hvor* avviket ligger:
+
+```{r}
+round(test$expected, 1)
+```
+
+Bergenhus har 248 møblerte boliger der uavhengighet ville tilsi 146. Det er det største enkeltbidraget til testobservatoren.
+
+p-verdien er forsvinnende liten, så vi forkaster $H_0$ klart. Andelen møblerte boliger varierer sterkt mellom bydelene:
+
+```{r}
+round(100 * prop.table(krysstabell, margin = 1), 1)
+```
+
+78 prosent i Bergenhus mot 19 prosent i Fana. Testen bekrefter formelt det oppgave 1a antydet, og den forklarer hvorfor sammenligningen i 2c ikke kan tolkes som møbleringens verdi: gruppene «møblert» og «umøblert» er i praksis også grupper av «sentrum» og «utenfor sentrum», og dermed av «liten» og «stor».
+
+## Oppgave 3 – Regresjon
+
+### Oppgave 3a
+
+```{r}
+modell_enkel <- lm(pris ~ mobelert, data = boliger)
+summary(modell_enkel)
+```
+
+**Svar: koeffisienten for `mobelertJa` er −2 353.**
+
+Modellen sier at møblerte boliger i snitt leies ut for 2 353 kroner mindre per måned enn umøblerte.
+
+Legg merke til at dette er nøyaktig den samme differansen som t-testen i 2c ga, og at konstantleddet på 19 201 er gjennomsnittsprisen for umøblerte boliger. Det er ingen tilfeldighet: en regresjon med én todelt forklaringsvariabel *er* den samme sammenligningen av to gruppegjennomsnitt, bare skrevet som en modell. Det er verdt å merke seg, fordi det betyr at den arver alle svakhetene fra 2c.
+
+### Oppgave 3b
+
+```{r}
+modell <- lm(pris ~ mobelert + areal + soverom + bydel + byggeaar + balkong,
+             data = boliger)
+summary(modell)
+```
+
+**Svar: koeffisienten for `mobelertJa` er +1 905.**
+
+Fortegnet har snudd. Med standardfeil 233 og p-verdi under $10^{-15}$ er effekten ikke bare positiv, men svært presist estimert.
+
+Tolkningen er: sammenligner vi to boliger med **samme** areal, samme antall soverom, i samme bydel, med samme byggeår og samme balkongstatus, leies den møblerte ut for nesten 1 900 kroner mer i måneden. Det er dette selskapet ville vite.
+
+Legg merke til at bydelskoeffisientene også bekrefter tolkningen fra 1c: med areal holdt fast er alle tre de andre bydelene 1 900 til 3 500 kroner billigere enn Bergenhus. Sentrum *er* dyrest per kvadratmeter, det var bare skjult av at sentrumsboligene er små.
+
+Modellen forklarer 69 prosent av variasjonen i pris:
+
+```{r}
+summary(modell)$adj.r.squared
+```
+
+### Oppgave 3c
+
+**Riktig alternativ: b.** Møblerte boliger er systematisk mindre enn umøblerte, og i den enkle modellen måler møblert-koeffisienten både møbleringen og størrelsesforskjellen.
+
+Dette er en **utelatt variabel**. For at en utelatt variabel skal forstyrre en koeffisient, må to ting gjelde samtidig, og begge gjør det her:
+
+1. Den utelatte variabelen må henge sammen med forklaringsvariabelen. Areal henger sammen med møblering: 51 mot 77 kvadratmeter.
+2. Den må henge sammen med responsvariabelen. Areal henger sammen med pris: korrelasjon 0,77 fra 1b.
+
+Utelater vi areal, blir størrelseseffekten liggende igjen i møblert-koeffisienten. Her er den utelatte effekten sterk nok til å ikke bare svekke, men å snu fortegnet:
+
+```{r}
+tibble(
+  spesifikasjon = c("pris ~ mobelert", "pris ~ mobelert + areal + ..."),
+  koeffisient = round(c(coef(modell_enkel)["mobelertJa"], coef(modell)["mobelertJa"]), 1)
+)
+```
+
+Den generelle lærdommen: en koeffisient betyr ingenting uten at du vet hva som er holdt fast. «Møblerte boliger er billigere» og «møblering er verdt 1 900 kroner» er begge riktige utsagn om de samme dataene. De svarer bare på ulike spørsmål.
+
+Hvorfor de andre alternativene er feil:
+
+- **a)** Begge modellene bruker de samme 900 observasjonene. Det er hvilke variabler som er med, ikke hvor mange rader, som skiller dem.
+- **c)** Det motsatte er tilfellet. Var areal og møblering ukorrelerte, ville koeffisienten vært omtrent den samme i begge modellene. Det er nettopp fordi de henger tett sammen at utelatelsen får konsekvenser.
+- **d)** Seks forklaringsvariabler og 900 observasjoner er ikke overtilpasning. Og den enkle modellen er ikke «feil», den svarer på et annet spørsmål.
+
+### Oppgave 3d
+
+```{r}
+nye
+```
+
+```{r}
+prediksjoner <- predict(modell, newdata = nye)
+
+nye %>%
+  mutate(predikert_pris = round(prediksjoner)) %>%
+  select(id, areal, bydel, mobelert, predikert_pris) %>%
+  arrange(desc(predikert_pris))
+```
+
+```{r}
+max(prediksjoner)
+```
+
+**Svar: 25 644 kroner.**
+
+Den dyreste er bolig 905: 110 kvadratmeter i Åsane. Det er verdt å stoppe ved, for Åsane har den *laveste* bydelskoeffisienten i modellen, altså det svakeste prisnivået når alt annet holdes fast. Likevel blir boligen dyrest. Differansen opp til nummer to, bolig 903 i Fana, er 3 116 kroner, og den kan dekomponeres helt:
+
+| Kilde | Bidrag |
+|---|---|
+| 15 kvadratmeter mer, à 178 kr | +2 666 |
+| Ett soverom mer | +737 |
+| Åsane i stedet for Fana | −375 |
+| 8 år nyere, à 11 kr | +88 |
+| **Sum** | **+3 116** |
+
+Arealet alene veier nesten sju ganger så tungt som bydelsulempen. Det er samme lærdom som i 1c, sett fra prediksjonssiden: bydelskoeffisienten forteller deg hva beliggenheten er verdt *for en gitt boligstørrelse*, og den kan fint bli overdøvet av at boligene faktisk er ulike store.
+
+Kort sagt: en enkelt koeffisient forteller deg lite om utfallet før du vet hvilke verdier variablene faktisk har.
+
+## Oppgave 4 – Utfordring
+
+### Oppgave 4a
+
+```{r}
+modell_interaksjon <- lm(pris ~ mobelert * bydel + areal + soverom + byggeaar + balkong,
+                         data = boliger)
+summary(modell_interaksjon)
+```
+
+**Svar: koeffisienten `mobelertJa` er 2 976.**
+
+#### Hvilket nivå er referansen? {.unnumbered}
+
+Dette er nøkkelen til å lese tabellen riktig. Når en kategorisk variabel går inn i en regresjon, lager R en dummyvariabel for alle nivåene *unntatt ett*. Det nivået som utelates er **referansen**, og alle de andre koeffisientene måles i forhold til den. R velger alltid det *første* nivået:
+
+```{r}
+levels(boliger$bydel)
+levels(boliger$mobelert)
+```
+
+`"Bergenhus"` er første nivå i `bydel`, og `"Nei"` er første nivå i `mobelert`. Derfor finnes det ingen koeffisient som heter `bydelBergenhus` eller `mobelertNei` i utskriften: de er bakt inn i konstantleddet. Og derfor er `mobelertJa` nettopp møbleringspremien *i Bergenhus*.
+
+Du kan se det samme direkte i kodingen R bruker, der raden med bare nuller er referansen:
+
+```{r}
+contrasts(boliger$bydel)
+```
+
+Vil du heller ha et annet referansenivå, for eksempel fordi Åsane er mer naturlig å sammenligne mot, bytter du med `relevel()`. Da endres tallene i tabellen, men modellen er den samme:
+
+```{r}
+boliger_omkodet <- boliger %>%
+  mutate(bydel = relevel(bydel, ref = "Åsane"))
+
+coef(lm(pris ~ mobelert * bydel + areal + soverom + byggeaar + balkong,
+        data = boliger_omkodet))["mobelertJa"]
+```
+
+Nå er `mobelertJa` premien i Åsane, 1 628 kroner, i stedet for i Bergenhus. Samme modell, samme prediksjoner, bare et annet utgangspunkt å måle fra.
+
+#### Hente ut koeffisienten {.unnumbered}
+
+Som for testene henter vi ut enkeltverdier i stedet for å lese hele utskriften. For en regresjonsmodell er det `coef()` som gir koeffisientvektoren:
+
+```{r}
+coef(modell_interaksjon)
+```
+
+Vil du vite hva de heter, uten tallene:
+
+```{r}
+names(coef(modell_interaksjon))
+```
+
+Så plukker du ut den du vil ha med navn, som er tryggere enn å telle plasser:
+
+```{r}
+coef(modell_interaksjon)["mobelertJa"]
+```
+
+Trenger du også standardfeil og p-verdi, ligger de i koeffisienttabellen fra `summary()`, som er en vanlig matrise du kan indeksere i:
+
+```{r}
+summary(modell_interaksjon)$coefficients["mobelertJa", ]
+```
+
+### Oppgave 4b
+
+**Riktig alternativ: b.** Møbleringspremien er størst i Bergenhus, rundt 3 000 kroner, og lavere i de tre andre bydelene. Alle tre interaksjonsleddene er signifikante på 5 prosent nivå.
+
+Slik leser du modellen. Premien i en bydel er `mobelertJa` pluss det tilhørende interaksjonsleddet:
+
+```{r}
+koef <- coef(modell_interaksjon)
+
+tibble(
+  bydel = levels(boliger$bydel),
+  premie = round(c(
+    koef["mobelertJa"],
+    koef["mobelertJa"] + koef["mobelertJa:bydelÅrstad"],
+    koef["mobelertJa"] + koef["mobelertJa:bydelFana"],
+    koef["mobelertJa"] + koef["mobelertJa:bydelÅsane"]
+  ))
+)
+```
+
+Mistanken til selskapet får altså støtte i dataene: møblering er verdt nesten tre ganger så mye i sentrum som i Årstad. En rimelig forklaring er at leietakerne i sentrum, studenter og folk i kortere leieforhold, flytter oftere og i mindre grad eier egne møbler.
+
+Merk samtidig at koeffisienten på 1 905 fra oppgave 3b nå framstår som et **gjennomsnitt** av fire ulike premier, veid etter hvor mange møblerte boliger som finnes i hver bydel. Den var ikke gal, men den skjulte en reell variasjon.
+
+Hvorfor de andre alternativene er feil:
+
+- **a)** Da måtte alle interaksjonsleddene vært nær null og ikke-signifikante. De er mellom −1 349 og −1 890, med p-verdier fra 0,0004 til 0,029.
+- **c)** Interaksjonen er mellom `mobelert` og `bydel`, ikke mellom areal og bydel. Leddene heter `mobelertJa:bydel...`.
+- **d)** Et negativt interaksjonsledd betyr *mindre* effekt, ikke *ingen* effekt. Premien i Årstad er 2 976 − 1 890 = 1 086 kroner, altså fortsatt klart positiv. Å lese et negativt interaksjonsledd som at effekten forsvinner er en vanlig feil.
+
+## Oppsummering
+
+De 15 deloppgavene henger sammen som ett argument, og det er verdt å se det samlet:
+
+| Trinn | Hva vi fant | Hva det er verdt |
+|---|---|---|
+| 2c | Møblerte boliger leies ut 2 353 kr **billigere** ($p < 10^{-12}$) | Korrekt beskrivelse av utvalget |
+| 3a | Samme tall som regresjonskoeffisient: −2 353 | Samme sammenligning, skrevet som modell |
+| 3b | Med areal og øvrige kjennetegn kontrollert: **+1 905 kr** | Svaret på selskapets faktiske spørsmål |
+| 4a | Premien varierer: 2 976 kr i sentrum, 1 086 kr i Årstad | Effekten er ikke den samme overalt |
+
+Alle fire tallene er riktig regnet ut fra de samme dataene. Forskjellen ligger i hva som holdes fast. Det er derfor spørsmålet «hva er koeffisienten?» aldri kan besvares uten å svare på «i hvilken modell?» først.
+
+Den generelle lærdommen tar du med videre til modul 6 og til eksamen: når du skal tolke en koeffisient, spør alltid hvilke variabler som er utelatt, og om noen av dem henger sammen med både forklaringsvariabelen og responsvariabelen. Gjør de det, måler koeffisienten din noe annet enn du tror.

@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="nb" xml:lang="nb"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>MET4 – Obligatorisk kursgodkjenning</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="kursgodkjenning_files/libs/clipboard/clipboard.min.js"></script>
+<script src="kursgodkjenning_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="kursgodkjenning_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="kursgodkjenning_files/libs/quarto-html/popper.min.js"></script>
+<script src="kursgodkjenning_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="kursgodkjenning_files/libs/quarto-html/anchor.min.js"></script>
+<link href="kursgodkjenning_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="kursgodkjenning_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="kursgodkjenning_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="kursgodkjenning_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="kursgodkjenning_files/libs/bootstrap/bootstrap-67270d1595a62d14f123c043d4fb2f18.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="kursgodkjenning_files/libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="kursgodkjenning_files/libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script type="module" src="kursgodkjenning_files/libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="kursgodkjenning_files/libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Innholdsfortegnelse</h2>
+   
+  <ul>
+  <li><a href="#dataene" id="toc-dataene" class="nav-link active" data-scroll-target="#dataene">Dataene</a></li>
+  <li><a href="#oppgave-1-deskriptiv-statistikk" id="toc-oppgave-1-deskriptiv-statistikk" class="nav-link" data-scroll-target="#oppgave-1-deskriptiv-statistikk">Oppgave 1 – Deskriptiv statistikk</a>
+  <ul class="collapse">
+  <li><a href="#oppgave-1a" id="toc-oppgave-1a" class="nav-link" data-scroll-target="#oppgave-1a">Oppgave 1a</a></li>
+  <li><a href="#oppgave-1b" id="toc-oppgave-1b" class="nav-link" data-scroll-target="#oppgave-1b">Oppgave 1b</a></li>
+  <li><a href="#oppgave-1c" id="toc-oppgave-1c" class="nav-link" data-scroll-target="#oppgave-1c">Oppgave 1c</a></li>
+  <li><a href="#oppgave-1d" id="toc-oppgave-1d" class="nav-link" data-scroll-target="#oppgave-1d">Oppgave 1d</a></li>
+  </ul></li>
+  <li><a href="#oppgave-2-hypotesetesting" id="toc-oppgave-2-hypotesetesting" class="nav-link" data-scroll-target="#oppgave-2-hypotesetesting">Oppgave 2 – Hypotesetesting</a>
+  <ul class="collapse">
+  <li><a href="#oppgave-2a" id="toc-oppgave-2a" class="nav-link" data-scroll-target="#oppgave-2a">Oppgave 2a</a></li>
+  <li><a href="#oppgave-2b" id="toc-oppgave-2b" class="nav-link" data-scroll-target="#oppgave-2b">Oppgave 2b</a></li>
+  <li><a href="#oppgave-2c" id="toc-oppgave-2c" class="nav-link" data-scroll-target="#oppgave-2c">Oppgave 2c</a></li>
+  <li><a href="#oppgave-2d" id="toc-oppgave-2d" class="nav-link" data-scroll-target="#oppgave-2d">Oppgave 2d</a></li>
+  <li><a href="#oppgave-2e" id="toc-oppgave-2e" class="nav-link" data-scroll-target="#oppgave-2e">Oppgave 2e</a></li>
+  <li><a href="#oppgave-2f" id="toc-oppgave-2f" class="nav-link" data-scroll-target="#oppgave-2f">Oppgave 2f</a></li>
+  </ul></li>
+  <li><a href="#oppgave-3-regresjon" id="toc-oppgave-3-regresjon" class="nav-link" data-scroll-target="#oppgave-3-regresjon">Oppgave 3 – Regresjon</a>
+  <ul class="collapse">
+  <li><a href="#oppgave-3a" id="toc-oppgave-3a" class="nav-link" data-scroll-target="#oppgave-3a">Oppgave 3a</a></li>
+  <li><a href="#oppgave-3b" id="toc-oppgave-3b" class="nav-link" data-scroll-target="#oppgave-3b">Oppgave 3b</a></li>
+  <li><a href="#oppgave-3c" id="toc-oppgave-3c" class="nav-link" data-scroll-target="#oppgave-3c">Oppgave 3c</a></li>
+  <li><a href="#oppgave-3d" id="toc-oppgave-3d" class="nav-link" data-scroll-target="#oppgave-3d">Oppgave 3d</a></li>
+  </ul></li>
+  <li><a href="#oppgave-4-utfordring" id="toc-oppgave-4-utfordring" class="nav-link" data-scroll-target="#oppgave-4-utfordring">Oppgave 4 – Utfordring</a>
+  <ul class="collapse">
+  <li><a href="#oppgave-4a" id="toc-oppgave-4a" class="nav-link" data-scroll-target="#oppgave-4a">Oppgave 4a</a></li>
+  <li><a href="#oppgave-4b" id="toc-oppgave-4b" class="nav-link" data-scroll-target="#oppgave-4b">Oppgave 4b</a></li>
+  </ul></li>
+  <li><a href="#fullføring" id="toc-fullføring" class="nav-link" data-scroll-target="#fullføring">Fullføring</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">MET4 – Obligatorisk kursgodkjenning</h1>
+<p class="subtitle lead">Dataanalyse med R, basert på modul 1–4</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Viktig</span>Regler for kursgodkjenningen
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Dette er en <strong>individuell</strong> obligatorisk oppgave. Du skal løse den selv.</li>
+<li>Oppgavene løses i R-vinduene under. <strong>R kjører rett i nettleseren</strong>, så du trenger ikke installere noe.</li>
+<li>Hver oppgave <strong>rettes automatisk</strong>: skriv koden din, trykk <strong>Run</strong>, og du får umiddelbart vite om svaret er riktig.</li>
+<li>Det er 16 deloppgaver fordelt på fire hovedoppgaver. Du kan bruke nettsiden, notatene dine og hjelpesidene i R fritt.</li>
+<li>Når alle oppgavene er grønne, fyller du inn <strong>kandidatnummeret</strong> ditt nederst og får en <strong>fullføringskode</strong>. Last den opp i Canvas innen fristen. (Frist: <strong>se Canvas</strong>.)</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Slik bruker du kodevinduene
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Første gang du kjører en kodecelle, laster nettleseren ned R. Det tar noen sekunder, men skjer bare én gang. Skriv koden din, trykk <strong>Run</strong> (eller <code>Shift+Enter</code>), så rettes svaret. Du kan prøve så mange ganger du vil, og trykke <strong>Show hints</strong> hvis du står fast.</p>
+<p>To typer oppgaver går igjen:</p>
+<ul>
+<li><strong>Regneoppgaver.</strong> Sørg for at den <strong>siste linjen</strong> i cellen regner ut selve svaret, altså tallet. Skriver du <code>t.test(...)</code> får du hele utskriften; skal du levere p-verdien, må siste linje være <code>t.test(...)$p.value</code>. Ender du opp med en tabell på én rad og én kolonne, slik <code>summarise()</code> gir deg, godtas den også.</li>
+<li><strong>Tolkningsoppgaver.</strong> Her svarer du med bokstaven til det alternativet du mener er riktig, som en tekststreng: skriv <code>"b"</code> på siste linje. Du får en forklaring uansett hva du svarer.</li>
+</ul>
+<p>Noen celler er merket <strong>Utforsk</strong>. De rettes ikke og teller ikke med i fremdriften; de er der for at du skal lage figuren eller utskriften du trenger for å svare på tolkningsoppgaven rett etter.</p>
+<p><code>dplyr</code> og <code>ggplot2</code> er ferdig lastet i alle cellene, så du kan bruke <code>%&gt;%</code>, <code>filter()</code>, <code>group_by()</code>, <code>summarise()</code> og <code>ggplot()</code> som du gjorde i modul 1. Base R fungerer like godt; rettingen bryr seg bare om svaret.</p>
+</div>
+</div>
+<section id="dataene" class="level2">
+<h2 class="anchored" data-anchor-id="dataene">Dataene</h2>
+<p>Du skal analysere annonser for utleieboliger i Bergen. Et eiendomsselskap vurderer om det lønner seg å møblere boligene de leier ut, og har hentet inn data om 900 utleieannonser.</p>
+<p>Datasettet <code>boliger</code> er allerede lastet inn i hver oppgavecelle, sammen med pakkene du trenger:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"boliger.RData"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Filen inneholder også datasettet <code>nye</code>, som er fem boliger selskapet skal legge ut for utleie, og som du bruker i oppgave 3d.</p>
+<table class="table-striped caption-top table">
+<caption>Beskrivelse av variablene i datasettet <code>boliger</code>.</caption>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variabelnavn</th>
+<th>Beskrivelse</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>id</code></td>
+<td>Unik identifikator for annonsen</td>
+</tr>
+<tr class="even">
+<td><code>pris</code></td>
+<td>Månedsleie i kroner</td>
+</tr>
+<tr class="odd">
+<td><code>areal</code></td>
+<td>Boligens areal i kvadratmeter</td>
+</tr>
+<tr class="even">
+<td><code>soverom</code></td>
+<td>Antall soverom (1–4)</td>
+</tr>
+<tr class="odd">
+<td><code>bydel</code></td>
+<td>Bydel: <code>"Bergenhus"</code> (sentrum), <code>"Årstad"</code>, <code>"Fana"</code> eller <code>"Åsane"</code></td>
+</tr>
+<tr class="even">
+<td><code>mobelert</code></td>
+<td><code>"Ja"</code> = leies ut møblert, <code>"Nei"</code> = umøblert</td>
+</tr>
+<tr class="odd">
+<td><code>balkong</code></td>
+<td><code>"Ja"</code> = har balkong, <code>"Nei"</code> = har ikke</td>
+</tr>
+<tr class="even">
+<td><code>byggeaar</code></td>
+<td>Byggeår</td>
+</tr>
+<tr class="odd">
+<td><code>avstand</code></td>
+<td>Kjøreavstand til sentrum i kilometer</td>
+</tr>
+</tbody>
+</table>
+<p>Merk at dataene er simulerte. De er laget for å ligne på et reelt utleiemarked, men de beskriver ikke faktiske leiepriser i Bergen.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>Vil du jobbe lokalt i RStudio?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Du trenger det ikke, alt kan løses i nettleseren. Men vil du heller sitte i RStudio, laste inn dataene i ditt eget miljø og utforske dem fritt, kan du laste ned datasettet:</p>
+<p><a href="boliger.RData"><strong>boliger.RData</strong></a></p>
+<p>Legg filen i arbeidsmappen din og les den inn på samme måte som over. Du trenger <code>dplyr</code> og <code>ggplot2</code> installert lokalt (<code>install.packages(c("dplyr", "ggplot2"))</code>), se avsnittet om pakker i modul 1.</p>
+<p>Svarene blir identiske, siden det er nøyaktig samme fil. Husk at selve innleveringen uansett skjer her på siden: oppgavene må være grønne her for at fullføringskoden skal dukke opp.</p>
+</div>
+</div>
+</section>
+<section id="oppgave-1-deskriptiv-statistikk" class="level2">
+<h2 class="anchored" data-anchor-id="oppgave-1-deskriptiv-statistikk">Oppgave 1 – Deskriptiv statistikk</h2>
+<section id="oppgave-1a" class="level3">
+<h3 class="anchored" data-anchor-id="oppgave-1a">Oppgave 1a</h3>
+<p>Hvor mange av boligene i utvalget ligger i <strong>Bergenhus</strong> og leies ut <strong>møblert</strong>? La siste linje gi antallet.</p>
+<div class="cell" data-exercise="ex1a" data-setup="true">
+<script type="exercise-setup-ex1a-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgxYSIsInNldHVwIjp0cnVlfSwiY29kZSI6ImxpYnJhcnkoZHBseXIpXG5saWJyYXJ5KGdncGxvdDIpXG5sb2FkKFwiYm9saWdlci5SRGF0YVwiKSJ9
+</script>
+</div>
+<div class="cell" data-exercise="ex1a">
+<div>
+<div id="webr-2" class="exercise-cell">
+
+</div>
+<script type="webr-2-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgxYSJ9LCJjb2RlIjoiIyBUZWxsIG9wcCBib2xpZ2VuZSBzb20gYsOlZGUgbGlnZ2VyIGkgQmVyZ2VuaHVzIG9nIGxlaWVzIHV0IG3DuGJsZXJ0OiJ9
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="ex1a" data-check="true">
+<script type="exercise-check-ex1a-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4MWEifSwiY29kZSI6InZlcmRpIDwtIC5yZXN1bHRcbmlmIChpcy5kYXRhLmZyYW1lKHZlcmRpKSAmJiBucm93KHZlcmRpKSA9PSAxICYmIG5jb2wodmVyZGkpID09IDEpIHZlcmRpIDwtIHZlcmRpW1sxXV1cbnZlcmRpIDwtIHN1cHByZXNzV2FybmluZ3ModHJ5Q2F0Y2goYXMubnVtZXJpYyh2ZXJkaSksIGVycm9yID0gZnVuY3Rpb24oZSkgTkFfcmVhbF8pKVxuaWYgKGxlbmd0aCh2ZXJkaSkgIT0gMSB8fCBpcy5uYSh2ZXJkaSkpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIlN2YXJldCBiw7hyIHbDpnJlIGV0dCBlbmtlbHQgdGFsbCwgYWx0c8OlIGFudGFsbCBib2xpZ2VyLlwiLCB0eXBlID0gXCJ3YXJuaW5nXCIpXG59IGVsc2UgaWYgKGFicyh2ZXJkaSAtIDI0OCkgPCAwLjUpIHtcbiAgbGlzdChjb3JyZWN0ID0gVFJVRSwgbWVzc2FnZSA9IFwiUmlrdGlnISAyNDggYXYgZGUgMzE5IGJvbGlnZW5lIGkgQmVyZ2VuaHVzIGxlaWVzIHV0IG3DuGJsZXJ0LiBMZWdnIG1lcmtlIHRpbCBhdCBtw7hibGVyaW5nIGVyIGxhbmd0IHZhbmxpZ2VyZSBpIHNlbnRydW0gZW5uIGkgZGUgYW5kcmUgYnlkZWxlbmUuIERldCBibGlyIHZpa3RpZyBzZW5lcmUuXCIsIHR5cGUgPSBcInN1Y2Nlc3NcIilcbn0gZWxzZSBpZiAoYWJzKHZlcmRpIC0gMzE5KSA8IDAuNSkge1xuICBsaXN0KGNvcnJlY3QgPSBGQUxTRSwgbWVzc2FnZSA9IFwiRHUgaGFyIHRlbHQgYWxsZSBib2xpZ2VuZSBpIEJlcmdlbmh1cy4gRHUgc2thbCB0ZWxsZSBkZW0gc29tIGkgdGlsbGVnZyBlciBtw7hibGVydCwgYWx0c8OlIGJlZ2dlIGJldGluZ2Vsc2VuZSBzYW10aWRpZy5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0gZWxzZSBpZiAoYWJzKHZlcmRpIC0gNDEzKSA8IDAuNSkge1xuICBsaXN0KGNvcnJlY3QgPSBGQUxTRSwgbWVzc2FnZSA9IFwiRHUgaGFyIHRlbHQgYWxsZSBtw7hibGVydGUgYm9saWdlciBpIGhlbGUgdXR2YWxnZXQuIER1IHNrYWwgYmFyZSBoYSBkZW0gc29tIGxpZ2dlciBpIEJlcmdlbmh1cy5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0gZWxzZSB7XG4gIGxpc3QoY29ycmVjdCA9IEZBTFNFLCBtZXNzYWdlID0gXCJJa2tlIGhlbHQuIEtvbWJpbmVyIGRlIHRvIGJldGluZ2Vsc2VuZSBtZWQgJiBvZyBzdW1tZXIgb3BwOiBzdW0oYm9saWdlciRieWRlbCA9PSBcXFwiQmVyZ2VuaHVzXFxcIiAmIGJvbGlnZXIkbW9iZWxlcnQgPT0gXFxcIkphXFxcIikuXCIsIHR5cGUgPSBcImVycm9yXCIpXG59In0=
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex1a">
+<p>Med <code>filter()</code> fra modul 1 kan du sette flere kriterier samtidig ved å skille dem med komma, og <code>n()</code> inne i <code>summarise()</code> teller radene som er igjen. Vil du heller bruke base R, gir <code>boliger$bydel == "Bergenhus"</code> en vektor av <code>TRUE</code>/<code>FALSE</code>, to slike kan kombineres med <code>&amp;</code>, og <code>sum()</code> teller antallet <code>TRUE</code>. En tredje vei er <code>table(boliger$bydel, boliger$mobelert)</code>, som gir hele krysstabellen på én gang.</p>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex1a">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>boliger <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(bydel <span class="sc">==</span> <span class="st">"Bergenhus"</span>, mobelert <span class="sc">==</span> <span class="st">"Ja"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">antall =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Eller i base R:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(boliger<span class="sc">$</span>bydel <span class="sc">==</span> <span class="st">"Bergenhus"</span> <span class="sc">&amp;</span> boliger<span class="sc">$</span>mobelert <span class="sc">==</span> <span class="st">"Ja"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="oppgave-1b" class="level3">
+<h3 class="anchored" data-anchor-id="oppgave-1b">Oppgave 1b</h3>
+<p>Regn ut <strong>korrelasjonen</strong> mellom <code>pris</code> og <code>areal</code>.</p>
+<div class="cell" data-exercise="ex1b" data-setup="true">
+<script type="exercise-setup-ex1b-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgxYiIsInNldHVwIjp0cnVlfSwiY29kZSI6ImxpYnJhcnkoZHBseXIpXG5saWJyYXJ5KGdncGxvdDIpXG5sb2FkKFwiYm9saWdlci5SRGF0YVwiKSJ9
+</script>
+</div>
+<div class="cell" data-exercise="ex1b">
+<div>
+<div id="webr-5" class="exercise-cell">
+
+</div>
+<script type="webr-5-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgxYiJ9LCJjb2RlIjoiIyBSZWduIHV0IGtvcnJlbGFzam9uZW4gbWVsbG9tIHByaXMgb2cgYXJlYWw6In0=
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="ex1b" data-check="true">
+<script type="exercise-check-ex1b-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4MWIifSwiY29kZSI6InZlcmRpIDwtIC5yZXN1bHRcbmlmIChpcy5kYXRhLmZyYW1lKHZlcmRpKSAmJiBucm93KHZlcmRpKSA9PSAxICYmIG5jb2wodmVyZGkpID09IDEpIHZlcmRpIDwtIHZlcmRpW1sxXV1cbnZlcmRpIDwtIHN1cHByZXNzV2FybmluZ3ModHJ5Q2F0Y2goYXMubnVtZXJpYyh2ZXJkaSksIGVycm9yID0gZnVuY3Rpb24oZSkgTkFfcmVhbF8pKVxuaWYgKGxlbmd0aCh2ZXJkaSkgIT0gMSB8fCBpcy5uYSh2ZXJkaSkpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIlN2YXJldCBiw7hyIHbDpnJlIGV0dCBlbmtlbHQgdGFsbCBtZWxsb20gLTEgb2cgMS5cIiwgdHlwZSA9IFwid2FybmluZ1wiKVxufSBlbHNlIGlmIChhYnModmVyZGkgLSAwLjc2OTcpIDwgMC4wMDIpIHtcbiAgbGlzdChjb3JyZWN0ID0gVFJVRSwgbWVzc2FnZSA9IFwiUmlrdGlnISBLb3JyZWxhc2pvbmVuIGVyIGNhLiAwLDc3LiBBcmVhbCBvZyBwcmlzIGhlbmdlciBzdGVya3Qgc2FtbWVuLCBzb20gZm9ydmVudGV0OiBzdMO4cnJlIGJvbGlnZXIga29zdGVyIG1lci4gTWVyayBhdCBrb3JyZWxhc2pvbmVuIGlra2UgZXIgMSwgc8OlIGFyZWFsIGZvcmtsYXJlciBpa2tlIGFsdC5cIiwgdHlwZSA9IFwic3VjY2Vzc1wiKVxufSBlbHNlIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIklra2UgaGVsdC4gQnJ1ayBjb3IoYm9saWdlciRwcmlzLCBib2xpZ2VyJGFyZWFsKS4gRsOlciBkdSBOQSwgc2pla2sgYXQgZHUgaGFyIHNrcmV2ZXQgdmFyaWFiZWxuYXZuZW5lIHJpa3RpZy5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0ifQ==
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex1b">
+<p><code>cor(x, y)</code> regner ut korrelasjonen mellom to vektorer.</p>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex1b">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(boliger<span class="sc">$</span>pris, boliger<span class="sc">$</span>areal)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="oppgave-1c" class="level3">
+<h3 class="anchored" data-anchor-id="oppgave-1c">Oppgave 1c</h3>
+<p>Kjør cellen under for å lage to boksplott: leiepris per bydel, og areal per bydel.</p>
+<p><strong>Utforsk (denne cellen rettes ikke):</strong></p>
+<div class="cell">
+<div>
+<div id="webr-7" class="exercise-cell">
+
+</div>
+<script type="webr-7-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGlicmFyeShnZ3Bsb3QyKVxubG9hZChcImJvbGlnZXIuUkRhdGFcIilcblxuZ2dwbG90KGJvbGlnZXIsIGFlcyh4ID0gYnlkZWwsIHkgPSBwcmlzKSkgK1xuICBnZW9tX2JveHBsb3QoKSArXG4gIGxhYnModGl0bGUgPSBcIkxlaWVwcmlzIHBlciBieWRlbFwiLCB4ID0gXCJCeWRlbFwiLCB5ID0gXCJLcm9uZXIgcGVyIG3DpW5lZFwiKVxuXG5nZ3Bsb3QoYm9saWdlciwgYWVzKHggPSBieWRlbCwgeSA9IGFyZWFsKSkgK1xuICBnZW9tX2JveHBsb3QoKSArXG4gIGxhYnModGl0bGUgPSBcIkFyZWFsIHBlciBieWRlbFwiLCB4ID0gXCJCeWRlbFwiLCB5ID0gXCJLdmFkcmF0bWV0ZXJcIikifQ==
+</script>
+</div>
+</div>
+<p>Hvilken påstand er best i tråd med det de to figurene viser?</p>
+<p><strong>a)</strong> Bergenhus har de høyeste leieprisene, noe som er forventet siden bydelen ligger mest sentralt.</p>
+<p><strong>b)</strong> Fana og Åsane har høyere medianpris enn Bergenhus og Årstad, og en nærliggende forklaring er at boligene der er større.</p>
+<p><strong>c)</strong> Bydel har ingen betydning for hva en bolig koster.</p>
+<p><strong>d)</strong> Prisforskjellene mellom bydelene er så store at areal ikke kan ha noe å si for prisen.</p>
+<div class="cell" data-exercise="ex1c" data-setup="true">
+<script type="exercise-setup-ex1c-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgxYyIsInNldHVwIjp0cnVlfSwiY29kZSI6ImxpYnJhcnkoZHBseXIpXG5saWJyYXJ5KGdncGxvdDIpXG5sb2FkKFwiYm9saWdlci5SRGF0YVwiKSJ9
+</script>
+</div>
+<div class="cell" data-exercise="ex1c">
+<div>
+<div id="webr-9" class="exercise-cell">
+
+</div>
+<script type="webr-9-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgxYyJ9LCJjb2RlIjoiIyBTa3JpdiBib2tzdGF2ZW4gdGlsIGFsdGVybmF0aXZldCBkdSBtZW5lciBlciByaWt0aWcsIGYuZWtzLiBcImFcIiJ9
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="ex1c" data-check="true">
+<script type="exercise-check-ex1c-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4MWMifSwiY29kZSI6InN2YXIgPC0gaWYgKGlzLmNoYXJhY3RlcigucmVzdWx0KSAmJiBsZW5ndGgoLnJlc3VsdCkgPT0gMSkgdG9sb3dlcih0cmltd3MoLnJlc3VsdCkpIGVsc2UgXCJcIlxuaWYgKHN2YXIgPT0gXCJiXCIpIHtcbiAgbGlzdChjb3JyZWN0ID0gVFJVRSwgbWVzc2FnZSA9IFwiUmlrdGlnISBEZXQgZXIgZGUgcGVyaWZlcmUgYnlkZWxlbmUgc29tIGhhciBkZSBow7h5ZXN0ZSBsZWllcHJpc2VuZSwgb2cgYXYgZGV0IGFuZHJlIGJva3NwbG90dGV0IHNlciBkdSBodm9yZm9yOiBib2xpZ2VuZSBpIEZhbmEgb2cgw4VzYW5lIGVyIHZlc2VudGxpZyBzdMO4cnJlLiBTZW50cmFsIGJlbGlnZ2VuaGV0IHRyZWtrZXIgcHJpc2VuIG9wcCwgbWVuIGhlciBtw6VsZXIgdmkgaWtrZSBiZWxpZ2dlbmhldCBhbGVuZSwgdmkgbcOlbGVyIGJlbGlnZ2VuaGV0IG9nIHN0w7hycmVsc2Ugc2FtdGlkaWcuXCIsIHR5cGUgPSBcInN1Y2Nlc3NcIilcbn0gZWxzZSBpZiAoc3ZhciA9PSBcImFcIikge1xuICBsaXN0KGNvcnJlY3QgPSBGQUxTRSwgbWVzc2FnZSA9IFwiRGV0dGUgZXIgZGVuIGludHVpdGl2ZSBmb3J2ZW50bmluZ2VuLCBtZW4gZmlndXJlbiB2aXNlciBkZXQgbW90c2F0dGU6IEJlcmdlbmh1cyBoYXIgYmxhbnQgZGUgbGF2ZXN0ZSBtZWRpYW5wcmlzZW5lLiBTZSBww6UgZGV0IGFuZHJlIGJva3NwbG90dGV0IGZvciDDpSBmaW5uZSBmb3JrbGFyaW5nZW4uXCIsIHR5cGUgPSBcImVycm9yXCIpXG59IGVsc2UgaWYgKHN2YXIgPT0gXCJjXCIpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIkJva3NlbmUgbGlnZ2VyIHR5ZGVsaWcgZm9yc2tqw7h2ZXQgaSBmb3Job2xkIHRpbCBodmVyYW5kcmUsIHPDpSBieWRlbCBoZW5nZXIga2xhcnQgc2FtbWVuIG1lZCBwcmlzLiBTcMO4cnNtw6VsZXQgZXIgaHZhIGRlbiBzYW1tZW5oZW5nZW4gc2t5bGRlcy5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0gZWxzZSBpZiAoc3ZhciA9PSBcImRcIikge1xuICBsaXN0KGNvcnJlY3QgPSBGQUxTRSwgbWVzc2FnZSA9IFwiSGVyIHRyZWtrZXMgZW4gbW90c2V0bmluZyBzb20gaWtrZSBmaW5uZXMuIEF0IGJ5ZGVsZW5lIGhhciB1bGlrdCBwcmlzbml2w6UgdXRlbHVra2VyIGlra2UgYXQgYXJlYWwgYmV0eXIgbm9lOyBpIG9wcGdhdmUgMWIgZmFudCBkdSBlbiBrb3JyZWxhc2pvbiBww6UgMCw3NyBtZWxsb20gYXJlYWwgb2cgcHJpcy5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0gZWxzZSB7XG4gIGxpc3QoY29ycmVjdCA9IEZBTFNFLCBtZXNzYWdlID0gXCJTdmFyIG1lZCBib2tzdGF2ZW4gdGlsIGFsdGVybmF0aXZldCBzb20gZW4gdGVrc3RzdHJlbmcsIGYuZWtzLiBcXFwiYlxcXCIsIHDDpSBzaXN0ZSBsaW5qZS5cIiwgdHlwZSA9IFwid2FybmluZ1wiKVxufSJ9
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex1c">
+<p>Sammenlign de to figurene. Bydelen med høyest medianpris: er den også bydelen med de største boligene?</p>
+</div>
+</section>
+<section id="oppgave-1d" class="level3">
+<h3 class="anchored" data-anchor-id="oppgave-1d">Oppgave 1d</h3>
+<p>Regn ut <strong>medianprisen i hver bydel</strong>, og la svaret bli <strong>differansen mellom den høyeste og den laveste</strong> av de fire medianene.</p>
+<div class="cell" data-exercise="ex1d" data-setup="true">
+<script type="exercise-setup-ex1d-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgxZCIsInNldHVwIjp0cnVlfSwiY29kZSI6ImxpYnJhcnkoZHBseXIpXG5saWJyYXJ5KGdncGxvdDIpXG5sb2FkKFwiYm9saWdlci5SRGF0YVwiKSJ9
+</script>
+</div>
+<div class="cell" data-exercise="ex1d">
+<div>
+<div id="webr-12" class="exercise-cell">
+
+</div>
+<script type="webr-12-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgxZCJ9LCJjb2RlIjoiIyBGaW5uIG1lZGlhbnByaXNlbiBwZXIgYnlkZWwsIG9nIHJlZ24gdXQgc3Blbm5ldCBtZWxsb20gaMO4eWVzdGUgb2cgbGF2ZXN0ZToifQ==
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="ex1d" data-check="true">
+<script type="exercise-check-ex1d-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4MWQifSwiY29kZSI6InZlcmRpIDwtIC5yZXN1bHRcbmlmIChpcy5kYXRhLmZyYW1lKHZlcmRpKSAmJiBucm93KHZlcmRpKSA9PSAxICYmIG5jb2wodmVyZGkpID09IDEpIHZlcmRpIDwtIHZlcmRpW1sxXV1cbnZlcmRpIDwtIHN1cHByZXNzV2FybmluZ3ModHJ5Q2F0Y2goYXMubnVtZXJpYyh2ZXJkaSksIGVycm9yID0gZnVuY3Rpb24oZSkgTkFfcmVhbF8pKVxuaWYgKGxlbmd0aCh2ZXJkaSkgIT0gMSB8fCBpcy5uYSh2ZXJkaSkpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIlN2YXJldCBiw7hyIHbDpnJlIGV0dCBlbmtlbHQgdGFsbDogZGlmZmVyYW5zZW4gbWVsbG9tIGRlbiBow7h5ZXN0ZSBvZyBkZW4gbGF2ZXN0ZSBtZWRpYW5wcmlzZW4uXCIsIHR5cGUgPSBcIndhcm5pbmdcIilcbn0gZWxzZSBpZiAoYWJzKHZlcmRpIC0gMjQyNSkgPCAxKSB7XG4gIGxpc3QoY29ycmVjdCA9IFRSVUUsIG1lc3NhZ2UgPSBcIlJpa3RpZyEgU3Blbm5ldCBlciAyIDQyNSBrcm9uZXI6IEZhbmEgaGFyIGjDuHllc3QgbWVkaWFuIG1lZCAxOSA1OTUga3JvbmVyIG9nIEJlcmdlbmh1cyBsYXZlc3QgbWVkIDE3IDE3MC4gVGlsIHNhbW1lbmxpZ25pbmcgZXIgc3RhbmRhcmRhdnZpa2V0IHRpbCBwcmlzIG5lc3RlbiA1IDAwMCBrcm9uZXIsIHPDpSBmb3Jza2plbGxlbiBtZWxsb20gYnlkZWxlbmUgZXIgYmVza2plZGVuIHNhbW1lbmxpZ25ldCBtZWQgdmFyaWFzam9uZW4gaW5uYWQgaSBodmVyIGJ5ZGVsLlwiLCB0eXBlID0gXCJzdWNjZXNzXCIpXG59IGVsc2UgaWYgKGFicyh2ZXJkaSAtIDIxODQpIDwgMSkge1xuICBsaXN0KGNvcnJlY3QgPSBGQUxTRSwgbWVzc2FnZSA9IFwiRHUgaGFyIHJlZ25ldCBww6UgZ2plbm5vbXNuaXR0IGkgc3RlZGV0IGZvciBtZWRpYW4uIE9wcGdhdmVuIGJlciBvbSBtZWRpYW5wcmlzZW4gaSBodmVyIGJ5ZGVsLlwiLCB0eXBlID0gXCJlcnJvclwiKVxufSBlbHNlIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIklra2UgaGVsdC4gdGFwcGx5KGJvbGlnZXIkcHJpcywgYm9saWdlciRieWRlbCwgbWVkaWFuKSBnaXIgZGVnIGRlIGZpcmUgbWVkaWFuZW5lLiBEZXJldHRlciB0YXIgZHUgbWF4KC4uLikgLSBtaW4oLi4uKSBhdiBkZW0uXCIsIHR5cGUgPSBcImVycm9yXCIpXG59In0=
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex1d">
+<p>Dette er <code>group_by()</code> og <code>summarise()</code> fra modul 1: del dataene inn i grupper, og regn ut ett tall per gruppe. Du står igjen med fire medianer, og på dem kan du bruke <code>max()</code> og <code>min()</code>, enten i en ny <code>summarise()</code> eller direkte.</p>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex1d">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>boliger <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bydel) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">median_pris =</span> <span class="fu">median</span>(pris)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">spenn =</span> <span class="fu">max</span>(median_pris) <span class="sc">-</span> <span class="fu">min</span>(median_pris))</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Eller i base R:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>medianer <span class="ot">&lt;-</span> <span class="fu">tapply</span>(boliger<span class="sc">$</span>pris, boliger<span class="sc">$</span>bydel, median)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(medianer) <span class="sc">-</span> <span class="fu">min</span>(medianer)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="oppgave-2-hypotesetesting" class="level2">
+<h2 class="anchored" data-anchor-id="oppgave-2-hypotesetesting">Oppgave 2 – Hypotesetesting</h2>
+<p>Selskapet vil vite om møblerte boliger leies ut til en annen pris enn umøblerte. I denne oppgaven sammenligner vi de to gruppene direkte.</p>
+<section id="oppgave-2a" class="level3">
+<h3 class="anchored" data-anchor-id="oppgave-2a">Oppgave 2a</h3>
+<p>Før vi sammenligner gjennomsnittene, må vi vite om vi kan anta lik varians i de to gruppene. Utfør en <strong>F-test for like varianser</strong> i <code>pris</code> mellom møblerte og umøblerte boliger, og la svaret bli <strong>p-verdien</strong>.</p>
+<div class="cell" data-exercise="ex2a" data-setup="true">
+<script type="exercise-setup-ex2a-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgyYSIsInNldHVwIjp0cnVlfSwiY29kZSI6ImxpYnJhcnkoZHBseXIpXG5saWJyYXJ5KGdncGxvdDIpXG5sb2FkKFwiYm9saWdlci5SRGF0YVwiKSJ9
+</script>
+</div>
+<div class="cell" data-exercise="ex2a">
+<div>
+<div id="webr-15" class="exercise-cell">
+
+</div>
+<script type="webr-15-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgyYSJ9LCJjb2RlIjoiIyBVdGbDuHIgRi10ZXN0ZW4gZm9yIGxpa2UgdmFyaWFuc2VyIG9nIGxhIHNpc3RlIGxpbmplIGdpIHAtdmVyZGllbjoifQ==
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="ex2a" data-check="true">
+<script type="exercise-check-ex2a-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4MmEifSwiY29kZSI6InZlcmRpIDwtIC5yZXN1bHRcbmlmIChpcy5kYXRhLmZyYW1lKHZlcmRpKSAmJiBucm93KHZlcmRpKSA9PSAxICYmIG5jb2wodmVyZGkpID09IDEpIHZlcmRpIDwtIHZlcmRpW1sxXV1cbnZlcmRpIDwtIHN1cHByZXNzV2FybmluZ3ModHJ5Q2F0Y2goYXMubnVtZXJpYyh2ZXJkaSksIGVycm9yID0gZnVuY3Rpb24oZSkgTkFfcmVhbF8pKVxuaWYgKGxlbmd0aCh2ZXJkaSkgIT0gMSB8fCBpcy5uYSh2ZXJkaSkpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIlN2YXJldCBiw7hyIHbDpnJlIGV0dCBlbmtlbHQgdGFsbCAocC12ZXJkaWVuKS4gSGVudCBkZW4gdXQgbWVkICRwLnZhbHVlLlwiLCB0eXBlID0gXCJ3YXJuaW5nXCIpXG59IGVsc2UgaWYgKGFicyh2ZXJkaSAtIDAuMjg3NSkgPCAwLjAwMikge1xuICBsaXN0KGNvcnJlY3QgPSBUUlVFLCBtZXNzYWdlID0gXCJSaWt0aWchIHAtdmVyZGllbiBlciBjYS4gMCwyOS4gVGVzdG9ic2VydmF0b3JlbiBlciBGID0gMSwxMSwgYWx0c8OlIG7DpnIgMSwgc29tIGVyIGFra3VyYXQgZGV0IHZpIHZlbnRlciBuw6VyIHZhcmlhbnNlbmUgZXIgbGlrZS4gSHZhIGRldHRlIGJldHlyIGZvciB2YWxnZXQgYXYgdC10ZXN0LCBzdmFyZXIgZHUgcMOlIGkgMmIuXCIsIHR5cGUgPSBcInN1Y2Nlc3NcIilcbn0gZWxzZSB7XG4gIGxpc3QoY29ycmVjdCA9IEZBTFNFLCBtZXNzYWdlID0gXCJJa2tlIGhlbHQuIEYtdGVzdGVuIGZvciB0byB2YXJpYW5zZXIgZXIgdmFyLnRlc3QoKS4gU2tyaXYgdmFyLnRlc3QocHJpcyB+IG1vYmVsZXJ0LCBkYXRhID0gYm9saWdlcikkcC52YWx1ZS5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0ifQ==
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex2a">
+<p><code>var.test()</code> tester <span class="math inline">\(H_0: \sigma_1^2 = \sigma_2^2\)</span>. Formelsyntaksen <code>pris ~ mobelert</code> betyr «pris gruppert etter møblering», og fungerer på samme måte som i <code>t.test()</code>.</p>
+<p>Kjører du bare <code>var.test(pris ~ mobelert, data = boliger)</code>, får du hele utskriften, men oppgaven ber om ett tall. Lagre testen i en variabel og hent ut komponenten du vil ha med <code>$</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">var.test</span>(pris <span class="sc">~</span> mobelert, <span class="at">data =</span> boliger)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span>p.value</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Du kan også hekte <code>$p.value</code> rett på funksjonskallet. Samme framgangsmåte gjelder for <code>t.test()</code> og <code>chisq.test()</code> senere i settet, der du trenger <code>$statistic</code>.</p>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex2a">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">var.test</span>(pris <span class="sc">~</span> mobelert, <span class="at">data =</span> boliger)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span>p.value</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Eller i én linje:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(pris <span class="sc">~</span> mobelert, <span class="at">data =</span> boliger)<span class="sc">$</span>p.value</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="oppgave-2b" class="level3">
+<h3 class="anchored" data-anchor-id="oppgave-2b">Oppgave 2b</h3>
+<p>Hva følger av resultatet i 2a for valget av t-test?</p>
+<p><strong>a)</strong> Variansene er signifikant forskjellige, så vi må bruke Welch-testen, altså <code>var.equal = FALSE</code>.</p>
+<p><strong>b)</strong> Vi forkaster ikke <span class="math inline">\(H_0\)</span> om like varianser, så vi kan bruke den poolede t-testen, altså <code>var.equal = TRUE</code>.</p>
+<p><strong>c)</strong> Den høye p-verdien viser at variansene er nøyaktig like i de to gruppene.</p>
+<p><strong>d)</strong> F-testen sier ingenting om varianser, bare om gjennomsnitt, så den er irrelevant her.</p>
+<div class="cell" data-exercise="ex2b">
+<div>
+<div id="webr-17" class="exercise-cell">
+
+</div>
+<script type="webr-17-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgyYiJ9LCJjb2RlIjoiIyBTa3JpdiBib2tzdGF2ZW4gdGlsIGFsdGVybmF0aXZldCBkdSBtZW5lciBlciByaWt0aWcsIGYuZWtzLiBcImFcIiJ9
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="ex2b" data-check="true">
+<script type="exercise-check-ex2b-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4MmIifSwiY29kZSI6InN2YXIgPC0gaWYgKGlzLmNoYXJhY3RlcigucmVzdWx0KSAmJiBsZW5ndGgoLnJlc3VsdCkgPT0gMSkgdG9sb3dlcih0cmltd3MoLnJlc3VsdCkpIGVsc2UgXCJcIlxuaWYgKHN2YXIgPT0gXCJiXCIpIHtcbiAgbGlzdChjb3JyZWN0ID0gVFJVRSwgbWVzc2FnZSA9IFwiUmlrdGlnISBwLXZlcmRpZW4gcMOlIDAsMjkgZ2lyIGluZ2VuIGdydW5uIHRpbCDDpSBmb3JrYXN0ZSBhbnRha2Vsc2VuIG9tIGxpa2UgdmFyaWFuc2VyLCBzw6Ugdmkga2FuIGJydWtlIGRlbiBwb29sZWRlIHQtdGVzdGVuLiBNZXJrIGF0IHZhci5lcXVhbCA9IEZBTFNFIGVyIHN0YW5kYXJkdmFsZ2V0IGkgUiwgc8OlIGhlciBtw6UgZHUgb3ZlcnN0eXJlIGRldC5cIiwgdHlwZSA9IFwic3VjY2Vzc1wiKVxufSBlbHNlIGlmIChzdmFyID09IFwiYVwiKSB7XG4gIGxpc3QoY29ycmVjdCA9IEZBTFNFLCBtZXNzYWdlID0gXCJTZSBww6UgcC12ZXJkaWVuIGlnamVuLiAwLDI5IGVyIGxhbmd0IG92ZXIgYWxsZSB2YW5saWdlIHNpZ25pZmlrYW5zbml2w6UsIHPDpSB2aSBmb3JrYXN0ZXIgaWtrZSBIMCBvbSBsaWtlIHZhcmlhbnNlci5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0gZWxzZSBpZiAoc3ZhciA9PSBcImNcIikge1xuICBsaXN0KGNvcnJlY3QgPSBGQUxTRSwgbWVzc2FnZSA9IFwiRGV0dGUgZXIgZW4gdmFubGlnIGZlbGxlLiBFbiBzdG9yIHAtdmVyZGkgYmV0eXIgYXQgZGF0YWVuZSBlciBmb3JlbmxpZ2UgbWVkIEgwLCBpa2tlIGF0IEgwIGVyIGJldmlzdC4gVmkgbWFuZ2xlciBncnVubmxhZyBmb3Igw6UgZm9ya2FzdGUgYW50YWtlbHNlbiwgb2cgZGV0IGVyIG5vZSBhbm5ldCBlbm4gw6UgaGEgdmlzdCBhdCBkZW4gZXIgc2Fubi5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0gZWxzZSBpZiAoc3ZhciA9PSBcImRcIikge1xuICBsaXN0KGNvcnJlY3QgPSBGQUxTRSwgbWVzc2FnZSA9IFwiRi10ZXN0ZW4gaSB2YXIudGVzdCgpIHRlc3RlciBuZXR0b3BwIGZvcmhvbGRldCBtZWxsb20gdG8gdmFyaWFuc2VyLiBEZXQgZXIgdC10ZXN0ZW4gc29tIGhhbmRsZXIgb20gZ2plbm5vbXNuaXR0LlwiLCB0eXBlID0gXCJlcnJvclwiKVxufSBlbHNlIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIlN2YXIgbWVkIGJva3N0YXZlbiB0aWwgYWx0ZXJuYXRpdmV0IHNvbSBlbiB0ZWtzdHN0cmVuZywgZi5la3MuIFxcXCJiXFxcIiwgcMOlIHNpc3RlIGxpbmplLlwiLCB0eXBlID0gXCJ3YXJuaW5nXCIpXG59In0=
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex2b">
+<p>Nullhypotesen i <code>var.test()</code> er at de to variansene er like. Hva gjør du med en nullhypotese når p-verdien er 0,29, og hva slags t-test tillater det deg å bruke?</p>
+</div>
+</section>
+<section id="oppgave-2c" class="level3">
+<h3 class="anchored" data-anchor-id="oppgave-2c">Oppgave 2c</h3>
+<p>Utfør en <strong>tosidig to-utvalgs t-test</strong> av om gjennomsnittlig <code>pris</code> er forskjellig for møblerte og umøblerte boliger. Bruk varianten du kom fram til i 2b. La svaret bli <strong>testobservatoren <span class="math inline">\(t\)</span></strong>.</p>
+<div class="cell" data-exercise="ex2c" data-setup="true">
+<script type="exercise-setup-ex2c-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgyYyIsInNldHVwIjp0cnVlfSwiY29kZSI6ImxpYnJhcnkoZHBseXIpXG5saWJyYXJ5KGdncGxvdDIpXG5sb2FkKFwiYm9saWdlci5SRGF0YVwiKSJ9
+</script>
+</div>
+<div class="cell" data-exercise="ex2c">
+<div>
+<div id="webr-20" class="exercise-cell">
+
+</div>
+<script type="webr-20-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgyYyJ9LCJjb2RlIjoiIyBVdGbDuHIgdC10ZXN0ZW4gb2cgbGEgc2lzdGUgbGluamUgZ2kgdGVzdG9ic2VydmF0b3JlbjoifQ==
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="ex2c" data-check="true">
+<script type="exercise-check-ex2c-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4MmMifSwiY29kZSI6InZlcmRpIDwtIC5yZXN1bHRcbmlmIChpcy5kYXRhLmZyYW1lKHZlcmRpKSAmJiBucm93KHZlcmRpKSA9PSAxICYmIG5jb2wodmVyZGkpID09IDEpIHZlcmRpIDwtIHZlcmRpW1sxXV1cbnZlcmRpIDwtIHN1cHByZXNzV2FybmluZ3ModHJ5Q2F0Y2goYXMubnVtZXJpYyh2ZXJkaSksIGVycm9yID0gZnVuY3Rpb24oZSkgTkFfcmVhbF8pKVxuaWYgKGxlbmd0aCh2ZXJkaSkgIT0gMSB8fCBpcy5uYSh2ZXJkaSkpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIlN2YXJldCBiw7hyIHbDpnJlIGV0dCBlbmtlbHQgdGFsbCAodGVzdG9ic2VydmF0b3JlbikuIEhlbnQgZGVuIHV0IG1lZCAkc3RhdGlzdGljLlwiLCB0eXBlID0gXCJ3YXJuaW5nXCIpXG59IGVsc2UgaWYgKGFicyhhYnModmVyZGkpIC0gNy4zMTY3KSA8IDAuMDEpIHtcbiAgbGlzdChjb3JyZWN0ID0gVFJVRSwgbWVzc2FnZSA9IFwiUmlrdGlnISB0ID0gNywzMiBtZWQgcC12ZXJkaSA1LDZlLTEzLiBVbcO4YmxlcnRlIGJvbGlnZXIga29zdGVyIGkgc25pdHQgMTkgMjAxIGtyb25lciwgbcO4YmxlcnRlIDE2IDg0OCwgYWx0c8OlIDIgMzUzIGtyb25lciBtaW5kcmUuIEZvcnNramVsbGVuIGVyIGtsYXJ0IHNpZ25pZmlrYW50LCBtZW4gbGVnZyBtZXJrZSB0aWwgcmV0bmluZ2VuOiBkZSBtw7hibGVydGUgZXIgYmlsbGlnc3QuIEh2YSBkZXQgYmV0eXIsIHN2YXJlciBkdSBww6UgaSAyZS5cIiwgdHlwZSA9IFwic3VjY2Vzc1wiKVxufSBlbHNlIGlmIChhYnMoYWJzKHZlcmRpKSAtIDcuMzQ3MikgPCAwLjAxKSB7XG4gIGxpc3QoY29ycmVjdCA9IFRSVUUsIG1lc3NhZ2UgPSBcIkdvZGtqZW50LiBEdSBoYXIgYnJ1a3QgV2VsY2gtdGVzdGVuICh0ID0gNywzNSksIHNvbSBlciBzdGFuZGFyZHZhbGdldCBpIFIuIEdpdHQgRi10ZXN0ZW4gaSAyYSBrdW5uZSBkdSBicnVrdCBkZW4gcG9vbGVkZSB2YXJpYW50ZW4gKHZhci5lcXVhbCA9IFRSVUUpLCBzb20gZ2lyIHQgPSA3LDMyLiBIZXIgZXIgZGUgdG8gbmVzdGVuIGlkZW50aXNrZSwgbmV0dG9wcCBmb3JkaSB2YXJpYW5zZW5lIGVyIGxpa2UuIExlZ2cgbWVya2UgdGlsIHJldG5pbmdlbjogZGUgbcO4YmxlcnRlIGJvbGlnZW5lIGVyIGRlIGJpbGxpZ3N0ZS4gSHZhIGRldCBiZXR5ciwgc3ZhcmVyIGR1IHDDpSBpIDJlLlwiLCB0eXBlID0gXCJzdWNjZXNzXCIpXG59IGVsc2UgaWYgKGFicyhhYnModmVyZGkpIC0gMjM1My40KSA8IDUpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIkR1IGhhciByZWduZXQgdXQgZGlmZmVyYW5zZW4gbWVsbG9tIGdqZW5ub21zbml0dGVuZSwgaWtrZSB0ZXN0b2JzZXJ2YXRvcmVuLiBUZXN0b2JzZXJ2YXRvcmVuIGVyIGRpZmZlcmFuc2VuIGRlbHQgcMOlIHN0YW5kYXJkZmVpbGVuIHRpbCBkaWZmZXJhbnNlbiwgb2cgZHUgaGVudGVyIGRlbiB1dCBtZWQgJHN0YXRpc3RpYy5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0gZWxzZSB7XG4gIGxpc3QoY29ycmVjdCA9IEZBTFNFLCBtZXNzYWdlID0gXCJJa2tlIGhlbHQuIFNrcml2IHQudGVzdChwcmlzIH4gbW9iZWxlcnQsIGRhdGEgPSBib2xpZ2VyLCB2YXIuZXF1YWwgPSBUUlVFKSRzdGF0aXN0aWMuIFBhc3MgcMOlIGF0IHRlc3RlbiBlciB0b3NpZGlnLCBzb20gZXIgc3RhbmRhcmQuXCIsIHR5cGUgPSBcImVycm9yXCIpXG59In0=
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex2c">
+<p><code>t.test(pris ~ mobelert, data = boliger, var.equal = TRUE)</code> utfører testen. Kjører du den uten mer, får du hele utskriften, og der står testobservatoren på linjen som begynner med <code>t =</code>. Du kan lese tallet derfra og skrive det inn selv.</p>
+<p>Vil du heller hente det ut programmatisk, slik du gjorde med p-verdien i 2a, er komponenten <code>$statistic</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">t.test</span>(pris <span class="sc">~</span> mobelert, <span class="at">data =</span> boliger, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span>statistic</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Fortegnet avhenger av hvilken gruppe R setter først, og spiller ingen rolle her; begge fortegn godtas.</p>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex2c">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(pris <span class="sc">~</span> mobelert, <span class="at">data =</span> boliger, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>statistic</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="oppgave-2d" class="level3">
+<h3 class="anchored" data-anchor-id="oppgave-2d">Oppgave 2d</h3>
+<p>Testen i 2c var tosidig: den spør bare om det finnes en forskjell, uten å ta stilling til retningen. Men selskapet har en klar formening. De tror at møblering gir <strong>høyere</strong> leie, og det er den eneste retningen som er relevant for beslutningen deres: er premien null eller negativ, møblerer de ikke.</p>
+<p>Gjennomfør derfor testen på nytt som en <strong>ensidig</strong> test av selskapets hypotese:</p>
+<p><span class="math display">\[H_0: \mu_{\text{møblert}} = \mu_{\text{umøblert}} \qquad \text{mot} \qquad H_A: \mu_{\text{møblert}} &gt; \mu_{\text{umøblert}}\]</span></p>
+<p>La svaret bli <strong>p-verdien</strong>. Vær nøye med retningen: <code>mobelert</code> har nivåene <code>"Nei"</code> og <code>"Ja"</code> i den rekkefølgen.</p>
+<div class="cell" data-exercise="ex2d" data-setup="true">
+<script type="exercise-setup-ex2d-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgyZCIsInNldHVwIjp0cnVlfSwiY29kZSI6ImxpYnJhcnkoZHBseXIpXG5saWJyYXJ5KGdncGxvdDIpXG5sb2FkKFwiYm9saWdlci5SRGF0YVwiKSJ9
+</script>
+</div>
+<div class="cell" data-exercise="ex2d">
+<div>
+<div id="webr-23" class="exercise-cell">
+
+</div>
+<script type="webr-23-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgyZCJ9LCJjb2RlIjoiIyBVdGbDuHIgZGVuIGVuc2lkaWdlIHRlc3RlbiBvZyBsYSBzaXN0ZSBsaW5qZSBnaSBwLXZlcmRpZW46In0=
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="ex2d" data-check="true">
+<script type="exercise-check-ex2d-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4MmQifSwiY29kZSI6InZlcmRpIDwtIC5yZXN1bHRcbmlmIChpcy5kYXRhLmZyYW1lKHZlcmRpKSAmJiBucm93KHZlcmRpKSA9PSAxICYmIG5jb2wodmVyZGkpID09IDEpIHZlcmRpIDwtIHZlcmRpW1sxXV1cbnZlcmRpIDwtIHN1cHByZXNzV2FybmluZ3ModHJ5Q2F0Y2goYXMubnVtZXJpYyh2ZXJkaSksIGVycm9yID0gZnVuY3Rpb24oZSkgTkFfcmVhbF8pKVxuaWYgKGxlbmd0aCh2ZXJkaSkgIT0gMSB8fCBpcy5uYSh2ZXJkaSkpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIlN2YXJldCBiw7hyIHbDpnJlIGV0dCBlbmtlbHQgdGFsbCAocC12ZXJkaWVuKS4gSGVudCBkZW4gdXQgbWVkICRwLnZhbHVlLlwiLCB0eXBlID0gXCJ3YXJuaW5nXCIpXG59IGVsc2UgaWYgKGFicyh2ZXJkaSAtIDEpIDwgMC4wMDEpIHtcbiAgbGlzdChjb3JyZWN0ID0gVFJVRSwgbWVzc2FnZSA9IFwiUmlrdGlnLCBvZyBzdmFyZXQgZXIgdmVyZHQgw6Ugc3RvcHBlIHZlZDogcC12ZXJkaWVuIGVyIDEsMDAuIFNlbHNrYXBldHMgaHlwb3Rlc2UgZsOlciBpa2tlIGJhcmUgc3ZhayBzdMO4dHRlLCBkZW4gZsOlciBpbmdlbiBzdMO4dHRlIG92ZXJob2RldCwgZm9yZGkgZGF0YWVuZSBwZWtlciBzdGlrayBtb3RzYXR0IHZlaS4gTWVyayB0byB0aW5nLiBFbiBlbnNpZGlnIHRlc3QgZXIgcGVyIGtvbnN0cnVrc2pvbiBibGluZCBmb3IgZWZmZWt0ZXIgaSBkZW4gYW5kcmUgcmV0bmluZ2VuOiBkZW4ga2FuIGFsZHJpIGZvcmthc3RlIEgwIHRpbCBmb3JkZWwgZm9yIG5vZSBkZW4gaWtrZSBzZXIgZXR0ZXIuIE9nIG7DpSBzb20gZHUgaGFyIHNldHQgZGF0YWVuZSwga2FuIGR1IGlra2Ugc251IGFsdGVybmF0aXZoeXBvdGVzZW4gb2cgdGVzdGUgcMOlIG55dHQuIERhIHZlbGdlciBkdSBoeXBvdGVzZSBldHRlciByZXN1bHRhdCwgb2cgcC12ZXJkaWVuIG1pc3RlciBzaW4gYmV0eWRuaW5nLlwiLCB0eXBlID0gXCJzdWNjZXNzXCIpXG59IGVsc2UgaWYgKGFicyh2ZXJkaSAtIDIuODE3ZS0xMykgPCAxZS0xNCkge1xuICBsaXN0KGNvcnJlY3QgPSBGQUxTRSwgbWVzc2FnZSA9IFwiRHUgaGFyIHRlc3RldCBpIG1vdHNhdHQgcmV0bmluZyBhdiBzZWxza2FwZXRzIGh5cG90ZXNlLiBEZXR0ZSBlciBkZW4gdmFubGlnc3RlIGZlbGxlbiBtZWQgZm9ybWVsc3ludGFrczogbml2w6VlbmUgaSBtb2JlbGVydCBlciBcXFwiTmVpXFxcIiBmw7hyc3Qgb2cgXFxcIkphXFxcIiBzaXN0LCBzw6UgUiBzZXIgcMOlIGRpZmZlcmFuc2VuIE5laSBtaW51cyBKYS4gU2thbCBkdSB0ZXN0ZSBhdCBtw7hibGVydGUgZXIgRFlSRVJFLCBtw6UgZGVuIGRpZmZlcmFuc2VuIHbDpnJlIE5FR0FUSVYsIGFsdHPDpSBhbHRlcm5hdGl2ZSA9IFxcXCJsZXNzXFxcIi5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0gZWxzZSBpZiAoYWJzKHZlcmRpIC0gNS42MzNlLTEzKSA8IDFlLTE0KSB7XG4gIGxpc3QoY29ycmVjdCA9IEZBTFNFLCBtZXNzYWdlID0gXCJEZXR0ZSBlciBwLXZlcmRpZW4gZnJhIGRlbiB0b3NpZGlnZSB0ZXN0ZW4gaSAyYy4gT3BwZ2F2ZW4gYmVyIG9tIGVuIGVuc2lkaWcgdGVzdCwgc29tIGR1IGbDpXIgbWVkIGFsdGVybmF0aXZlLWFyZ3VtZW50ZXQuXCIsIHR5cGUgPSBcImVycm9yXCIpXG59IGVsc2UgaWYgKGFicyh2ZXJkaSAtIDAuNSkgPCAwLjAwMSkge1xuICBsaXN0KGNvcnJlY3QgPSBGQUxTRSwgbWVzc2FnZSA9IFwiRHUgZXIgbsOmciB0YW5rZW4sIG1lbiBpa2tlIHRhbGxldC4gSGFsdmVyIGdqZXJuZSBlbiB0b3NpZGlnIHAtdmVyZGkgZm9yIGjDpW5kIGJhcmUgbsOlciB0ZXN0b2JzZXJ2YXRvcmVuIHBla2VyIGkgYWx0ZXJuYXRpdmh5cG90ZXNlbnMgcmV0bmluZy4gSGVyIGdqw7hyIGRlbiBpa2tlIGRldCwgb2cgZGEgYmxpciBkZW4gZW5zaWRpZ2UgcC12ZXJkaWVuIG5lc3RlbiAxLCBpa2tlIDAsNS4gQnJ1ayBhbHRlcm5hdGl2ZS1hcmd1bWVudGV0IGkgdC50ZXN0KCkgb2cgbGEgUiBnasO4cmUgam9iYmVuLlwiLCB0eXBlID0gXCJlcnJvclwiKVxufSBlbHNlIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIklra2UgaGVsdC4gQnJ1ayB0LnRlc3QocHJpcyB+IG1vYmVsZXJ0LCBkYXRhID0gYm9saWdlciwgdmFyLmVxdWFsID0gVFJVRSwgYWx0ZXJuYXRpdmUgPSAuLi4pJHAudmFsdWUsIG9nIHRlbmsgbsO4eWUgZ2plbm5vbSBodmlsa2VuIHZlaSBSIHJlZ25lciBkaWZmZXJhbnNlbi5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0ifQ==
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex2d">
+<p>Du styrer retningen med <code>alternative</code>-argumentet, som kan være <code>"less"</code> eller <code>"greater"</code>.</p>
+<p>Nøkkelen er hvilken vei R regner differansen. Med formelsyntaks bestemmes det av nivårekkefølgen i den kategoriske variabelen, og <code>mobelert</code> har <code>"Nei"</code> før <code>"Ja"</code>. R ser altså på <code>Nei - Ja</code>. Skal du teste at de møblerte er <em>dyrere</em>, må <code>Nei - Ja</code> være <em>negativ</em>.</p>
+<p>Sjekk alltid utskriften: <code>t.test()</code> skriver eksplisitt ut hva den tester, for eksempel <code>"alternative hypothesis: true difference in means between group Nei and group Ja is less than 0"</code>.</p>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex2d">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">t.test</span>(pris <span class="sc">~</span> mobelert, <span class="at">data =</span> boliger,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">"less"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span>p.value</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="oppgave-2e" class="level3">
+<h3 class="anchored" data-anchor-id="oppgave-2e">Oppgave 2e</h3>
+<p>Testen i 2c viser at møblerte boliger i utvalget har klart lavere leie enn umøblerte. Hvilken konklusjon er den riktige?</p>
+<p><strong>a)</strong> Testen viser at det å møblere en bolig gjør den billigere å leie ut.</p>
+<p><strong>b)</strong> Møblerte boliger i utvalget har lavere leie, men testen sier ikke at møbleringen er årsaken. Møblerte og umøblerte boliger kan skille seg fra hverandre på andre måter som også påvirker prisen.</p>
+<p><strong>c)</strong> Fordi p-verdien er ekstremt liten, er forskjellen på 2 353 kroner også økonomisk stor.</p>
+<p><strong>d)</strong> Testen er ikke gyldig, siden de to gruppene ikke er like store.</p>
+<div class="cell" data-exercise="ex2e">
+<div>
+<div id="webr-25" class="exercise-cell">
+
+</div>
+<script type="webr-25-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgyZSJ9LCJjb2RlIjoiIyBTa3JpdiBib2tzdGF2ZW4gdGlsIGFsdGVybmF0aXZldCBkdSBtZW5lciBlciByaWt0aWcsIGYuZWtzLiBcImFcIiJ9
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="ex2e" data-check="true">
+<script type="exercise-check-ex2e-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4MmUifSwiY29kZSI6InN2YXIgPC0gaWYgKGlzLmNoYXJhY3RlcigucmVzdWx0KSAmJiBsZW5ndGgoLnJlc3VsdCkgPT0gMSkgdG9sb3dlcih0cmltd3MoLnJlc3VsdCkpIGVsc2UgXCJcIlxuaWYgKHN2YXIgPT0gXCJiXCIpIHtcbiAgbGlzdChjb3JyZWN0ID0gVFJVRSwgbWVzc2FnZSA9IFwiUmlrdGlnISBEZXR0ZSBlciBramVybmVuIGkgaGVsZSBvcHBnYXZlc2V0dGV0LiBJIG9wcGdhdmUgMWEgZmFudCBkdSBhdCBtw7hibGVyaW5nIGVyIGxhbmd0IHZhbmxpZ2VyZSBpIEJlcmdlbmh1cywgb2cgaSAxYyBhdCBib2xpZ2VuZSBkZXIgZXIgc23DpS4gTcO4YmxlcnRlIGJvbGlnZXIgZXIgYWx0c8OlIHN5c3RlbWF0aXNrIG1pbmRyZSBlbm4gdW3DuGJsZXJ0ZSwgb2cgdC10ZXN0ZW4gc2FtbWVubGlnbmVyIGRlIHRvIGdydXBwZW5lIHV0ZW4gw6UgdGEgaGVuc3luIHRpbCBkZXQuIEkgb3BwZ2F2ZSAzIGtvbnRyb2xsZXJlciB2aSBmb3IgYXJlYWwuXCIsIHR5cGUgPSBcInN1Y2Nlc3NcIilcbn0gZWxzZSBpZiAoc3ZhciA9PSBcImFcIikge1xuICBsaXN0KGNvcnJlY3QgPSBGQUxTRSwgbWVzc2FnZSA9IFwiSGVyIHRvbGtlcyBlbiBncnVwcGVmb3Jza2plbGwgc29tIGVuIMOlcnNha3NzYW1tZW5oZW5nLiBUZXN0ZW4gc2FtbWVubGlnbmVyIHRvIGdydXBwZXIgc2xpayBkZSBlciwgb2cgZ3J1cHBlbmUga2FuIHNraWxsZSBzZWcgZnJhIGh2ZXJhbmRyZSBww6UgZmxlcmUgbcOldGVyIGVubiBiYXJlIG3DuGJsZXJpbmcuIFRlbmsgcMOlIGh2YSBkdSBmYW50IGkgb3BwZ2F2ZSAxYSBvZyAxYy5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0gZWxzZSBpZiAoc3ZhciA9PSBcImNcIikge1xuICBsaXN0KGNvcnJlY3QgPSBGQUxTRSwgbWVzc2FnZSA9IFwicC12ZXJkaWVuIHNpZXIgaHZvciBzaWtyZSB2aSBlciBww6UgYXQgZGV0IGZpbm5lcyBlbiBmb3Jza2plbGwsIGlra2UgaHZvciBzdG9yIGRlbiBlci4gTWVkIG4gPSA5MDAgYmxpciBzZWx2IHNtw6UgZm9yc2tqZWxsZXIgc2lnbmlmaWthbnRlLiBPbSAyIDM1MyBrcm9uZXIgZXIgw7hrb25vbWlzayBteWUsIGVyIGV0IGZhZ2xpZyBzcMO4cnNtw6VsIG9tIHV0bGVpZW1hcmtlZGV0LCBpa2tlIGV0IHN0YXRpc3Rpc2sgZXQuXCIsIHR5cGUgPSBcImVycm9yXCIpXG59IGVsc2UgaWYgKHN2YXIgPT0gXCJkXCIpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIlRvLXV0dmFsZ3MgdC10ZXN0IGtyZXZlciBpa2tlIGxpa2Ugc3RvcmUgZ3J1cHBlci4gVWxpayBncnVwcGVzdMO4cnJlbHNlIGjDpW5kdGVyZXMgaSBmb3JtZWxlbiBmb3Igc3RhbmRhcmRmZWlsZW4uXCIsIHR5cGUgPSBcImVycm9yXCIpXG59IGVsc2Uge1xuICBsaXN0KGNvcnJlY3QgPSBGQUxTRSwgbWVzc2FnZSA9IFwiU3ZhciBtZWQgYm9rc3RhdmVuIHRpbCBhbHRlcm5hdGl2ZXQgc29tIGVuIHRla3N0c3RyZW5nLCBmLmVrcy4gXFxcImJcXFwiLCBww6Ugc2lzdGUgbGluamUuXCIsIHR5cGUgPSBcIndhcm5pbmdcIilcbn0ifQ==
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex2e">
+<p>Se tilbake på oppgave 1a og 1c. Hvor ligger de møblerte boligene, og hvor store er boligene der?</p>
+</div>
+</section>
+<section id="oppgave-2f" class="level3">
+<h3 class="anchored" data-anchor-id="oppgave-2f">Oppgave 2f</h3>
+<p>Selskapet lurer også på om møblering er like vanlig i alle bydeler. Lag en krysstabell over <code>bydel</code> og <code>mobelert</code>, og utfør en <strong>kjikvadrattest for uavhengighet</strong>. La svaret bli <strong>testobservatoren <span class="math inline">\(\chi^2\)</span></strong>.</p>
+<div class="cell" data-exercise="ex2f" data-setup="true">
+<script type="exercise-setup-ex2f-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgyZiIsInNldHVwIjp0cnVlfSwiY29kZSI6ImxpYnJhcnkoZHBseXIpXG5saWJyYXJ5KGdncGxvdDIpXG5sb2FkKFwiYm9saWdlci5SRGF0YVwiKSJ9
+</script>
+</div>
+<div class="cell" data-exercise="ex2f">
+<div>
+<div id="webr-28" class="exercise-cell">
+
+</div>
+<script type="webr-28-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgyZiJ9LCJjb2RlIjoiIyBMYWcga3J5c3N0YWJlbGxlbiwgdXRmw7hyIHRlc3Rlbiwgb2cgbGEgc2lzdGUgbGluamUgZ2kgdGVzdG9ic2VydmF0b3JlbjoifQ==
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="ex2f" data-check="true">
+<script type="exercise-check-ex2f-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4MmYifSwiY29kZSI6InZlcmRpIDwtIC5yZXN1bHRcbmlmIChpcy5kYXRhLmZyYW1lKHZlcmRpKSAmJiBucm93KHZlcmRpKSA9PSAxICYmIG5jb2wodmVyZGkpID09IDEpIHZlcmRpIDwtIHZlcmRpW1sxXV1cbnZlcmRpIDwtIHN1cHByZXNzV2FybmluZ3ModHJ5Q2F0Y2goYXMubnVtZXJpYyh2ZXJkaSksIGVycm9yID0gZnVuY3Rpb24oZSkgTkFfcmVhbF8pKVxuaWYgKGxlbmd0aCh2ZXJkaSkgIT0gMSB8fCBpcy5uYSh2ZXJkaSkpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIlN2YXJldCBiw7hyIHbDpnJlIGV0dCBlbmtlbHQgdGFsbCAodGVzdG9ic2VydmF0b3JlbikuIEhlbnQgZGVuIHV0IG1lZCAkc3RhdGlzdGljLlwiLCB0eXBlID0gXCJ3YXJuaW5nXCIpXG59IGVsc2UgaWYgKGFicyh2ZXJkaSAtIDIxNy43NDM2KSA8IDAuMDUpIHtcbiAgbGlzdChjb3JyZWN0ID0gVFJVRSwgbWVzc2FnZSA9IFwiUmlrdGlnISBDaGkta3ZhZHJhdCBlciAyMTcsNyBtZWQgMyBmcmloZXRzZ3JhZGVyLCBvZyBwLXZlcmRpZW4gZXIgZm9yc3Zpbm5lbmRlIGxpdGVuLiBNw7hibGVyaW5nIG9nIGJ5ZGVsIGVyIGFsdHPDpSBzdGVya3QgYXZoZW5naWdlIGF2IGh2ZXJhbmRyZTogNzggcHJvc2VudCBhdiBib2xpZ2VuZSBpIEJlcmdlbmh1cyBlciBtw7hibGVydCwgbW90IDE5IHByb3NlbnQgaSBGYW5hLiBEZXQgZXIgbmV0dG9wcCBkZW5uZSBza2pldmhldGVuIHNvbSBnasO4ciBkZW4gZW5rbGUgc2FtbWVubGlnbmluZ2VuIGkgMmMgbWlzdmlzZW5kZS5cIiwgdHlwZSA9IFwic3VjY2Vzc1wiKVxufSBlbHNlIGlmIChhYnModmVyZGkgLSAzKSA8IDAuMDAxKSB7XG4gIGxpc3QoY29ycmVjdCA9IEZBTFNFLCBtZXNzYWdlID0gXCJEdSBoYXIgaGVudGV0IHV0IGFudGFsbCBmcmloZXRzZ3JhZGVyICgkcGFyYW1ldGVyKSwgaWtrZSB0ZXN0b2JzZXJ2YXRvcmVuLiBCcnVrICRzdGF0aXN0aWMuXCIsIHR5cGUgPSBcImVycm9yXCIpXG59IGVsc2Uge1xuICBsaXN0KGNvcnJlY3QgPSBGQUxTRSwgbWVzc2FnZSA9IFwiSWtrZSBoZWx0LiBMYWcgZsO4cnN0IGtyeXNzdGFiZWxsZW4gbWVkIHRhYmxlKGJvbGlnZXIkYnlkZWwsIGJvbGlnZXIkbW9iZWxlcnQpLCBvZyBzZW5kIGRlbiBpbm4gaSBjaGlzcS50ZXN0KCkuIEhlbnQgdGVzdG9ic2VydmF0b3JlbiBtZWQgJHN0YXRpc3RpYy5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0ifQ==
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex2f">
+<p><code>chisq.test(table(boliger$bydel, boliger$mobelert))</code> gir hele testen. Testobservatoren hentes ut med <code>$statistic</code>.</p>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex2f">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="fu">table</span>(boliger<span class="sc">$</span>bydel, boliger<span class="sc">$</span>mobelert))<span class="sc">$</span>statistic</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="oppgave-3-regresjon" class="level2">
+<h2 class="anchored" data-anchor-id="oppgave-3-regresjon">Oppgave 3 – Regresjon</h2>
+<p>Nå skal vi forsøke å isolere hva møbleringen faktisk er verdt.</p>
+<section id="oppgave-3a" class="level3">
+<h3 class="anchored" data-anchor-id="oppgave-3a">Oppgave 3a</h3>
+<p>Tilpass en <strong>enkel lineær regresjon</strong> med <code>pris</code> som responsvariabel og <code>mobelert</code> som eneste forklaringsvariabel. La svaret bli <strong>koeffisienten for møblering</strong>.</p>
+<div class="cell" data-exercise="ex3a" data-setup="true">
+<script type="exercise-setup-ex3a-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgzYSIsInNldHVwIjp0cnVlfSwiY29kZSI6ImxpYnJhcnkoZHBseXIpXG5saWJyYXJ5KGdncGxvdDIpXG5sb2FkKFwiYm9saWdlci5SRGF0YVwiKSJ9
+</script>
+</div>
+<div class="cell" data-exercise="ex3a">
+<div>
+<div id="webr-31" class="exercise-cell">
+
+</div>
+<script type="webr-31-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgzYSJ9LCJjb2RlIjoiIyBUaWxwYXNzIG1vZGVsbGVuIG9nIGxhIHNpc3RlIGxpbmplIGdpIGtvZWZmaXNpZW50ZW4gZm9yIG1vYmVsZXJ0OiJ9
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="ex3a" data-check="true">
+<script type="exercise-check-ex3a-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4M2EifSwiY29kZSI6InZlcmRpIDwtIC5yZXN1bHRcbmlmIChpcy5kYXRhLmZyYW1lKHZlcmRpKSAmJiBucm93KHZlcmRpKSA9PSAxICYmIG5jb2wodmVyZGkpID09IDEpIHZlcmRpIDwtIHZlcmRpW1sxXV1cbnZlcmRpIDwtIHN1cHByZXNzV2FybmluZ3ModHJ5Q2F0Y2goYXMubnVtZXJpYyh2ZXJkaSksIGVycm9yID0gZnVuY3Rpb24oZSkgTkFfcmVhbF8pKVxuaWYgKGxlbmd0aCh2ZXJkaSkgIT0gMSB8fCBpcy5uYSh2ZXJkaSkpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIlN2YXJldCBiw7hyIHbDpnJlIGV0dCBlbmtlbHQgdGFsbDoga29lZmZpc2llbnRlbiBmb3IgbW9iZWxlcnRKYS5cIiwgdHlwZSA9IFwid2FybmluZ1wiKVxufSBlbHNlIGlmIChhYnModmVyZGkgLSAoLTIzNTMuMzg3KSkgPCAxKSB7XG4gIGxpc3QoY29ycmVjdCA9IFRSVUUsIG1lc3NhZ2UgPSBcIlJpa3RpZyEgS29lZmZpc2llbnRlbiBlciAtMiAzNTMuIE1vZGVsbGVuIHNpZXIgYXQgbcO4YmxlcnRlIGJvbGlnZXIgaSBzbml0dCBsZWllcyB1dCBmb3IgMiAzNTMga3JvbmVyIG1pbmRyZSBwZXIgbcOlbmVkLiBMZWdnIG1lcmtlIHRpbCBhdCBkZXR0ZSBlciBuw7h5YWt0aWcgZGlmZmVyYW5zZW4gbWVsbG9tIGdydXBwZWdqZW5ub21zbml0dGVuZSBmcmEgMmM6IGVuIHJlZ3Jlc2pvbiBtZWQgYmFyZSBlbiB0b2RlbHQgZm9ya2xhcmluZ3N2YXJpYWJlbCBlciBkZW4gc2FtbWUgc2FtbWVubGlnbmluZ2VuLCBza3JldmV0IHNvbSBlbiBtb2RlbGwuXCIsIHR5cGUgPSBcInN1Y2Nlc3NcIilcbn0gZWxzZSBpZiAoYWJzKHZlcmRpIC0gMTkyMDEuMikgPCA1KSB7XG4gIGxpc3QoY29ycmVjdCA9IEZBTFNFLCBtZXNzYWdlID0gXCJEdSBoYXIgaGVudGV0IHV0IGtvbnN0YW50bGVkZGV0LCBzb20gZXIgZ2plbm5vbXNuaXR0c3ByaXNlbiBmb3IgdW3DuGJsZXJ0ZSBib2xpZ2VyLiBEdSBza2FsIGhhIGRlbiBhbmRyZSBrb2VmZmlzaWVudGVuLCBtb2JlbGVydEphLlwiLCB0eXBlID0gXCJlcnJvclwiKVxufSBlbHNlIGlmIChhYnModmVyZGkgLSAyMzUzLjM4NykgPCAxKSB7XG4gIGxpc3QoY29ycmVjdCA9IEZBTFNFLCBtZXNzYWdlID0gXCJSaWt0aWcgdGFsbHZlcmRpLCBtZW4gZmVpbCBmb3J0ZWduLiBNw7hibGVydGUgYm9saWdlciBlciBiaWxsaWdlcmUgaSBkZW5uZSBtb2RlbGxlbiwgc8OlIGtvZWZmaXNpZW50ZW4gZXIgbmVnYXRpdi5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0gZWxzZSB7XG4gIGxpc3QoY29ycmVjdCA9IEZBTFNFLCBtZXNzYWdlID0gXCJJa2tlIGhlbHQuIFRpbHBhc3MgbW9kZWxsZW4gbWVkIGxtKHByaXMgfiBtb2JlbGVydCwgZGF0YSA9IGJvbGlnZXIpIG9nIGhlbnQgdXQga29lZmZpc2llbnRlbiwgZm9yIGVrc2VtcGVsIG1lZCBjb2VmKG1vZGVsbClbMl0uXCIsIHR5cGUgPSBcImVycm9yXCIpXG59In0=
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex3a">
+<p><code>lm(pris ~ mobelert, data = boliger)</code> tilpasser modellen. <code>coef()</code> gir deg koeffisientene, og du plukker ut nummer to med <code>[2]</code>. Siden <code>mobelert</code> har nivåene <code>"Nei"</code> og <code>"Ja"</code>, er <code>"Nei"</code> referansen, og koeffisienten heter <code>mobelertJa</code>.</p>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex3a">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>modell <span class="ot">&lt;-</span> <span class="fu">lm</span>(pris <span class="sc">~</span> mobelert, <span class="at">data =</span> boliger)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(modell)[<span class="dv">2</span>]</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="oppgave-3b" class="level3">
+<h3 class="anchored" data-anchor-id="oppgave-3b">Oppgave 3b</h3>
+<p>Utvid modellen slik at den kontrollerer for boligens egenskaper. Tilpass</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pris <span class="sc">~</span> mobelert <span class="sc">+</span> areal <span class="sc">+</span> soverom <span class="sc">+</span> bydel <span class="sc">+</span> byggeaar <span class="sc">+</span> balkong</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<p>og la svaret bli <strong>koeffisienten for møblering</strong> i denne modellen.</p>
+<div class="cell" data-exercise="ex3b" data-setup="true">
+<script type="exercise-setup-ex3b-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgzYiIsInNldHVwIjp0cnVlfSwiY29kZSI6ImxpYnJhcnkoZHBseXIpXG5saWJyYXJ5KGdncGxvdDIpXG5sb2FkKFwiYm9saWdlci5SRGF0YVwiKSJ9
+</script>
+</div>
+<div class="cell" data-exercise="ex3b">
+<div>
+<div id="webr-34" class="exercise-cell">
+
+</div>
+<script type="webr-34-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgzYiJ9LCJjb2RlIjoiIyBUaWxwYXNzIGRlbiBtdWx0aXBsZSBtb2RlbGxlbiBvZyBsYSBzaXN0ZSBsaW5qZSBnaSBrb2VmZmlzaWVudGVuIGZvciBtb2JlbGVydDoifQ==
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="ex3b" data-check="true">
+<script type="exercise-check-ex3b-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4M2IifSwiY29kZSI6InZlcmRpIDwtIC5yZXN1bHRcbmlmIChpcy5kYXRhLmZyYW1lKHZlcmRpKSAmJiBucm93KHZlcmRpKSA9PSAxICYmIG5jb2wodmVyZGkpID09IDEpIHZlcmRpIDwtIHZlcmRpW1sxXV1cbnZlcmRpIDwtIHN1cHByZXNzV2FybmluZ3ModHJ5Q2F0Y2goYXMubnVtZXJpYyh2ZXJkaSksIGVycm9yID0gZnVuY3Rpb24oZSkgTkFfcmVhbF8pKVxuaWYgKGxlbmd0aCh2ZXJkaSkgIT0gMSB8fCBpcy5uYSh2ZXJkaSkpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIlN2YXJldCBiw7hyIHbDpnJlIGV0dCBlbmtlbHQgdGFsbDoga29lZmZpc2llbnRlbiBmb3IgbW9iZWxlcnRKYS5cIiwgdHlwZSA9IFwid2FybmluZ1wiKVxufSBlbHNlIGlmIChhYnModmVyZGkgLSAxOTA1LjI0KSA8IDEpIHtcbiAgbGlzdChjb3JyZWN0ID0gVFJVRSwgbWVzc2FnZSA9IFwiUmlrdGlnISBLb2VmZmlzaWVudGVuIGVyIG7DpSArMSA5MDUsIG1lZCBzdGFuZGFyZGZlaWwgMjMzIG9nIHAtdmVyZGkgdW5kZXIgMWUtMTUuIE7DpXIgdmkgc2FtbWVubGlnbmVyIGJvbGlnZXIgbWVkIHNhbW1lIGFyZWFsLCBhbnRhbGwgc292ZXJvbSwgYnlkZWwsIGJ5Z2dlw6VyIG9nIGJhbGtvbmcsIGxlaWVzIGRlIG3DuGJsZXJ0ZSB1dCBmb3IgbmVzdGVuIDEgOTAwIGtyb25lciBtZXIgcGVyIG3DpW5lZC4gRm9ydGVnbmV0IGhhciBzbnVkZCBmcmEgb3BwZ2F2ZSAzYS4gSHZvcmZvciwgc3ZhcmVyIGR1IHDDpSBpIDNjLlwiLCB0eXBlID0gXCJzdWNjZXNzXCIpXG59IGVsc2UgaWYgKGFicyh2ZXJkaSAtICgtMjM1My4zODcpKSA8IDEpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIkRldHRlIGVyIGtvZWZmaXNpZW50ZW4gZnJhIGRlbiBlbmtsZSBtb2RlbGxlbiBpIDNhLiBTamVrayBhdCBkdSBmYWt0aXNrIGhhciBsYWd0IHRpbCBhbGxlIGRlIGZlbSBrb250cm9sbHZhcmlhYmxlbmUgaSBmb3JtZWxlbi5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0gZWxzZSB7XG4gIGxpc3QoY29ycmVjdCA9IEZBTFNFLCBtZXNzYWdlID0gXCJJa2tlIGhlbHQuIEJydWsgbG0ocHJpcyB+IG1vYmVsZXJ0ICsgYXJlYWwgKyBzb3Zlcm9tICsgYnlkZWwgKyBieWdnZWFhciArIGJhbGtvbmcsIGRhdGEgPSBib2xpZ2VyKSBvZyBoZW50IHV0IGtvZWZmaXNpZW50ZW4gc29tIGhldGVyIG1vYmVsZXJ0SmEuXCIsIHR5cGUgPSBcImVycm9yXCIpXG59In0=
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex3b">
+<p>Formelen skrives med <code>+</code> mellom forklaringsvariablene. <code>coef(modell)["mobelertJa"]</code> henter ut akkurat den koeffisienten du er ute etter, uansett hvilken plass den har i rekken.</p>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex3b">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>modell <span class="ot">&lt;-</span> <span class="fu">lm</span>(pris <span class="sc">~</span> mobelert <span class="sc">+</span> areal <span class="sc">+</span> soverom <span class="sc">+</span> bydel <span class="sc">+</span> byggeaar <span class="sc">+</span> balkong, <span class="at">data =</span> boliger)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(modell)[<span class="st">"mobelertJa"</span>]</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="oppgave-3c" class="level3">
+<h3 class="anchored" data-anchor-id="oppgave-3c">Oppgave 3c</h3>
+<p>I 3a var koeffisienten for møblering -2 353. I 3b er den +1 905. Hva er den beste forklaringen på at fortegnet snudde?</p>
+<p><strong>a)</strong> Fortegnet snudde fordi den multiple modellen bruker flere observasjoner enn den enkle.</p>
+<p><strong>b)</strong> Møblerte boliger er systematisk mindre enn umøblerte, i snitt 51 mot 77 kvadratmeter. I den enkle modellen måler møblert-koeffisienten både møbleringen og størrelsesforskjellen, og størrelsen dominerer. Når areal holdes fast, isolerer koeffisienten selve møbleringen.</p>
+<p><strong>c)</strong> Fortegnet snudde fordi areal og møblering er ukorrelerte, slik at de to modellene måler helt ulike ting.</p>
+<p><strong>d)</strong> Den enkle modellen er den riktige. Den multiple modellen er overtilpasset og bør forkastes.</p>
+<div class="cell" data-exercise="ex3c" data-setup="true">
+<script type="exercise-setup-ex3c-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgzYyIsInNldHVwIjp0cnVlfSwiY29kZSI6ImxpYnJhcnkoZHBseXIpXG5saWJyYXJ5KGdncGxvdDIpXG5sb2FkKFwiYm9saWdlci5SRGF0YVwiKSJ9
+</script>
+</div>
+<div class="cell" data-exercise="ex3c">
+<div>
+<div id="webr-37" class="exercise-cell">
+
+</div>
+<script type="webr-37-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgzYyJ9LCJjb2RlIjoiIyBTa3JpdiBib2tzdGF2ZW4gdGlsIGFsdGVybmF0aXZldCBkdSBtZW5lciBlciByaWt0aWcsIGYuZWtzLiBcImFcIiJ9
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="ex3c" data-check="true">
+<script type="exercise-check-ex3c-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4M2MifSwiY29kZSI6InN2YXIgPC0gaWYgKGlzLmNoYXJhY3RlcigucmVzdWx0KSAmJiBsZW5ndGgoLnJlc3VsdCkgPT0gMSkgdG9sb3dlcih0cmltd3MoLnJlc3VsdCkpIGVsc2UgXCJcIlxuaWYgKHN2YXIgPT0gXCJiXCIpIHtcbiAgbGlzdChjb3JyZWN0ID0gVFJVRSwgbWVzc2FnZSA9IFwiUmlrdGlnISBEZXR0ZSBlciBlbiB1dGVsYXR0IHZhcmlhYmVsLiBBcmVhbCBoZW5nZXIgc2FtbWVuIG1lZCBiw6VkZSBtw7hibGVyaW5nIChtw7hibGVydGUgYm9saWdlciBlciBzbcOlKSBvZyBwcmlzIChzdG9yZSBib2xpZ2VyIGVyIGR5cmUpLiBVdGVsYXRlciB2aSBhcmVhbCwgYmxpciBzdMO4cnJlbHNlc2VmZmVrdGVuIGxpZ2dlbmRlIGlnamVuIGkgbcO4YmxlcnQta29lZmZpc2llbnRlbiwgb2cgZGVuIGVyIHN0ZXJrIG5vayB0aWwgw6Ugc251IGZvcnRlZ25ldC4gTWVkIGFyZWFsIGkgbW9kZWxsZW4gc2FtbWVubGlnbmVyIHZpIGJvbGlnZXIgYXYgc2FtbWUgc3TDuHJyZWxzZSwgb2cgZGEga29tbWVyIG3DuGJsZXJpbmdzcHJlbWllbiBmcmFtLlwiLCB0eXBlID0gXCJzdWNjZXNzXCIpXG59IGVsc2UgaWYgKHN2YXIgPT0gXCJhXCIpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIkJlZ2dlIG1vZGVsbGVuZSBicnVrZXIgZGUgc2FtbWUgOTAwIG9ic2VydmFzam9uZW5lLiBEZXQgZXIgaHZpbGtlIHZhcmlhYmxlciBzb20gZXIgbWVkLCBpa2tlIGh2b3IgbWFuZ2UgcmFkZXIsIHNvbSBza2lsbGVyIGRlbS5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0gZWxzZSBpZiAoc3ZhciA9PSBcImNcIikge1xuICBsaXN0KGNvcnJlY3QgPSBGQUxTRSwgbWVzc2FnZSA9IFwiRGV0IG1vdHNhdHRlIGVyIHRpbGZlbGxldC4gTmV0dG9wcCBmb3JkaSBhcmVhbCBvZyBtw7hibGVyaW5nIGhlbmdlciB0ZXR0IHNhbW1lbiwgZm9yc3R5cnJlciBhcmVhbCBtw6VsaW5nZW4gYXYgbcO4YmxlcmluZ3NlZmZla3RlbiBuw6VyIGRlbiB1dGVsYXRlcy4gVmFyIGRlIHVrb3JyZWxlcnRlLCB2aWxsZSBrb2VmZmlzaWVudGVuIHbDpnJ0IG9tdHJlbnQgZGVuIHNhbW1lIGkgYmVnZ2UgbW9kZWxsZW5lLlwiLCB0eXBlID0gXCJlcnJvclwiKVxufSBlbHNlIGlmIChzdmFyID09IFwiZFwiKSB7XG4gIGxpc3QoY29ycmVjdCA9IEZBTFNFLCBtZXNzYWdlID0gXCJFbiBtb2RlbGwgbWVkIHNla3MgZm9ya2xhcmluZ3N2YXJpYWJsZXIgb2cgOTAwIG9ic2VydmFzam9uZXIgZXIgaWtrZSBvdmVydGlscGFzc2V0LiBPZyBkZW4gZW5rbGUgbW9kZWxsZW4gc3ZhcmVyIHDDpSBldCBhbm5ldCBzcMO4cnNtw6VsOiBkZW4gc2FtbWVubGlnbmVyIG3DuGJsZXJ0ZSBvZyB1bcO4YmxlcnRlIGJvbGlnZXIgc2xpayBkZSBmYWt0aXNrIGVyLCBpa2tlIGJvbGlnZXIgc29tIGVsbGVycyBlciBsaWtlLlwiLCB0eXBlID0gXCJlcnJvclwiKVxufSBlbHNlIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIlN2YXIgbWVkIGJva3N0YXZlbiB0aWwgYWx0ZXJuYXRpdmV0IHNvbSBlbiB0ZWtzdHN0cmVuZywgZi5la3MuIFxcXCJiXFxcIiwgcMOlIHNpc3RlIGxpbmplLlwiLCB0eXBlID0gXCJ3YXJuaW5nXCIpXG59In0=
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex3c">
+<p>Kjør <code>boliger %&gt;% group_by(mobelert) %&gt;% summarise(snitt_areal = mean(areal))</code> i en av cellene over. Hvor store er de møblerte boligene sammenlignet med de umøblerte, og hvordan påvirker det en sammenligning som ikke tar hensyn til areal?</p>
+</div>
+</section>
+<section id="oppgave-3d" class="level3">
+<h3 class="anchored" data-anchor-id="oppgave-3d">Oppgave 3d</h3>
+<p>Selskapet skal legge ut fem nye boliger for utleie. De ligger i datasettet <code>nye</code>. Bruk modellen fra 3b til å <strong>predikere leieprisen</strong> for alle fem, og la svaret bli <strong>den høyeste predikerte prisen</strong>.</p>
+<div class="cell" data-exercise="ex3d" data-setup="true">
+<script type="exercise-setup-ex3d-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgzZCIsInNldHVwIjp0cnVlfSwiY29kZSI6ImxpYnJhcnkoZHBseXIpXG5saWJyYXJ5KGdncGxvdDIpXG5sb2FkKFwiYm9saWdlci5SRGF0YVwiKSJ9
+</script>
+</div>
+<div class="cell" data-exercise="ex3d">
+<div>
+<div id="webr-40" class="exercise-cell">
+
+</div>
+<script type="webr-40-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXgzZCJ9LCJjb2RlIjoiIyBUaWxwYXNzIG1vZGVsbGVuIGZyYSAzYiwgcHJlZGlrZXIgZm9yIGRhdGFzZXR0ZXQgbnllLCBvZyBsYSBzaXN0ZSBsaW5qZSBnaSBkZW4gaMO4eWVzdGUgcHJpc2VuOiJ9
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="ex3d" data-check="true">
+<script type="exercise-check-ex3d-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4M2QifSwiY29kZSI6InZlcmRpIDwtIC5yZXN1bHRcbmlmIChpcy5kYXRhLmZyYW1lKHZlcmRpKSAmJiBucm93KHZlcmRpKSA9PSAxICYmIG5jb2wodmVyZGkpID09IDEpIHZlcmRpIDwtIHZlcmRpW1sxXV1cbnZlcmRpIDwtIHN1cHByZXNzV2FybmluZ3ModHJ5Q2F0Y2goYXMubnVtZXJpYyh2ZXJkaSksIGVycm9yID0gZnVuY3Rpb24oZSkgTkFfcmVhbF8pKVxuaWYgKGxlbmd0aCh2ZXJkaSkgIT0gMSB8fCBpcy5uYSh2ZXJkaSkpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIlN2YXJldCBiw7hyIHbDpnJlIGV0dCBlbmtlbHQgdGFsbDogZGVuIGjDuHllc3RlIGF2IGRlIGZlbSBwcmVkaWtlcnRlIHByaXNlbmUuXCIsIHR5cGUgPSBcIndhcm5pbmdcIilcbn0gZWxzZSBpZiAoYWJzKHZlcmRpIC0gMjU2NDQuMDUpIDwgNSkge1xuICBsaXN0KGNvcnJlY3QgPSBUUlVFLCBtZXNzYWdlID0gXCJSaWt0aWchIERlbiBow7h5ZXN0ZSBwcmVkaWtlcnRlIGxlaWVuIGVyIGNhLiAyNSA2NDQga3JvbmVyLCBmb3IgYm9saWcgOTA1OiAxMTAga3ZhZHJhdG1ldGVyIGkgw4VzYW5lLiBTZWx2IG9tIMOFc2FuZSBoYXIgZXQgbGF2ZXJlIHByaXNuaXbDpSBlbm4gZGUgYW5kcmUgYnlkZWxlbmUgbsOlciB2aSBob2xkZXIgYWx0IGFubmV0IGZhc3QsIHZlaWVyIGFyZWFsZXQgdHVuZ3Qgbm9rIHRpbCDDpSBnasO4cmUgZGVubmUgYm9saWdlbiBkeXJlc3QuXCIsIHR5cGUgPSBcInN1Y2Nlc3NcIilcbn0gZWxzZSBpZiAoYWJzKHZlcmRpIC0gMjI1MjguMikgPCA1KSB7XG4gIGxpc3QoY29ycmVjdCA9IEZBTFNFLCBtZXNzYWdlID0gXCJEdSBoYXIgZnVubmV0IGRlbiBuZXN0IGjDuHllc3RlIChib2xpZyA5MDMpLiBTamVrayBhdCBkdSB0YXIgbWF4KCkgb3ZlciBhbGxlIGZlbSBwcmVkaWtzam9uZW5lLlwiLCB0eXBlID0gXCJlcnJvclwiKVxufSBlbHNlIGlmIChhYnModmVyZGkgLSAxNTgzNC40KSA8IDUpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIkR1IGhhciB0YXR0IGRlbiBmw7hyc3RlIHByZWRpa3Nqb25lbiBpIHN0ZWRldCBmb3IgZGVuIGjDuHllc3RlLiBCcnVrIG1heCgpIHDDpSBoZWxlIHZla3RvcmVuIGF2IHByZWRpa3Nqb25lci5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0gZWxzZSB7XG4gIGxpc3QoY29ycmVjdCA9IEZBTFNFLCBtZXNzYWdlID0gXCJJa2tlIGhlbHQuIEJydWsgcHJlZGljdChtb2RlbGwsIG5ld2RhdGEgPSBueWUpIGZvciDDpSBmw6UgZGUgZmVtIHByZWRpa3Nqb25lbmUsIG9nIG1heCgpIHDDpSByZXN1bHRhdGV0LiBQYXNzIHDDpSBhdCBtb2RlbGxlbiBlciBuw7h5YWt0aWcgZGVuIGZyYSAzYi5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0ifQ==
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex3d">
+<p><code>predict(modell, newdata = nye)</code> gir en vektor med fem prediksjoner, én per bolig. <code>max()</code> plukker ut den største. Skriv <code>nye</code> i en celle først hvis du vil se hvilke boliger det er snakk om.</p>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex3d">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>modell <span class="ot">&lt;-</span> <span class="fu">lm</span>(pris <span class="sc">~</span> mobelert <span class="sc">+</span> areal <span class="sc">+</span> soverom <span class="sc">+</span> bydel <span class="sc">+</span> byggeaar <span class="sc">+</span> balkong, <span class="at">data =</span> boliger)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">predict</span>(modell, <span class="at">newdata =</span> nye))</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="oppgave-4-utfordring" class="level2">
+<h2 class="anchored" data-anchor-id="oppgave-4-utfordring">Oppgave 4 – Utfordring</h2>
+<p>Denne siste oppgaven er tøffere, og bygger på alt det foregående.</p>
+<section id="oppgave-4a" class="level3">
+<h3 class="anchored" data-anchor-id="oppgave-4a">Oppgave 4a</h3>
+<p>Selskapet mistenker at møblering er verdt mer i sentrum, der studenter og pendlere flytter oftere, enn i bydelene lenger ut. For å teste det trenger vi en modell der møbleringseffekten får lov til å variere mellom bydelene. Det får vi med et <strong>interaksjonsledd</strong>, som skrives <code>mobelert * bydel</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pris <span class="sc">~</span> mobelert <span class="sc">*</span> bydel <span class="sc">+</span> areal <span class="sc">+</span> soverom <span class="sc">+</span> byggeaar <span class="sc">+</span> balkong</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Tilpass modellen, og la svaret bli <strong>koeffisienten <code>mobelertJa</code></strong>. Siden <code>"Bergenhus"</code> er referansenivået for <code>bydel</code>, er dette møbleringspremien i Bergenhus.</p>
+<div class="cell" data-exercise="ex4a" data-setup="true">
+<script type="exercise-setup-ex4a-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXg0YSIsInNldHVwIjp0cnVlfSwiY29kZSI6ImxpYnJhcnkoZHBseXIpXG5saWJyYXJ5KGdncGxvdDIpXG5sb2FkKFwiYm9saWdlci5SRGF0YVwiKSJ9
+</script>
+</div>
+<div class="cell" data-exercise="ex4a">
+<div>
+<div id="webr-43" class="exercise-cell">
+
+</div>
+<script type="webr-43-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXg0YSJ9LCJjb2RlIjoiIyBUaWxwYXNzIGludGVyYWtzam9uc21vZGVsbGVuIG9nIGxhIHNpc3RlIGxpbmplIGdpIGtvZWZmaXNpZW50ZW4gbW9iZWxlcnRKYToifQ==
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="ex4a" data-check="true">
+<script type="exercise-check-ex4a-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4NGEifSwiY29kZSI6InZlcmRpIDwtIC5yZXN1bHRcbmlmIChpcy5kYXRhLmZyYW1lKHZlcmRpKSAmJiBucm93KHZlcmRpKSA9PSAxICYmIG5jb2wodmVyZGkpID09IDEpIHZlcmRpIDwtIHZlcmRpW1sxXV1cbnZlcmRpIDwtIHN1cHByZXNzV2FybmluZ3ModHJ5Q2F0Y2goYXMubnVtZXJpYyh2ZXJkaSksIGVycm9yID0gZnVuY3Rpb24oZSkgTkFfcmVhbF8pKVxuaWYgKGxlbmd0aCh2ZXJkaSkgIT0gMSB8fCBpcy5uYSh2ZXJkaSkpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIlN2YXJldCBiw7hyIHbDpnJlIGV0dCBlbmtlbHQgdGFsbDoga29lZmZpc2llbnRlbiBtb2JlbGVydEphLlwiLCB0eXBlID0gXCJ3YXJuaW5nXCIpXG59IGVsc2UgaWYgKGFicyh2ZXJkaSAtIDI5NzYuMDkpIDwgMSkge1xuICBsaXN0KGNvcnJlY3QgPSBUUlVFLCBtZXNzYWdlID0gXCJSaWt0aWchIE3DuGJsZXJpbmdzcHJlbWllbiBpIEJlcmdlbmh1cyBlciAyIDk3NiBrcm9uZXIuIERlIHRyZSBpbnRlcmFrc2pvbnNsZWRkZW5lIGVyIGFsbGUgbmVnYXRpdmUsIG1lbGxvbSAtMSAzNDkgb2cgLTEgODkwLCBzw6UgcHJlbWllbiBlciBsYXZlcmUgaSBkZSBhbmRyZSBieWRlbGVuZS4gSSDDhXJzdGFkIGVyIGRlbiBmb3IgZWtzZW1wZWwgMiA5NzYgLSAxIDg5MCA9IDEgMDg2IGtyb25lci4gTWlzdGFua2VuIHRpbCBzZWxza2FwZXQgZsOlciBhbHRzw6Ugc3TDuHR0ZSBpIGRhdGFlbmUuXCIsIHR5cGUgPSBcInN1Y2Nlc3NcIilcbn0gZWxzZSBpZiAoYWJzKHZlcmRpIC0gMTkwNS4yNCkgPCAxKSB7XG4gIGxpc3QoY29ycmVjdCA9IEZBTFNFLCBtZXNzYWdlID0gXCJEZXR0ZSBlciBrb2VmZmlzaWVudGVuIGZyYSBtb2RlbGxlbiBpIDNiLCB1dGVuIGludGVyYWtzam9uLiBTamVrayBhdCBkdSBoYXIgYnJ1a3QgbW9iZWxlcnQgKiBieWRlbCBvZyBpa2tlIG1vYmVsZXJ0ICsgYnlkZWwuXCIsIHR5cGUgPSBcImVycm9yXCIpXG59IGVsc2Uge1xuICBsaXN0KGNvcnJlY3QgPSBGQUxTRSwgbWVzc2FnZSA9IFwiSWtrZSBoZWx0LiBTa3JpdiBsbShwcmlzIH4gbW9iZWxlcnQgKiBieWRlbCArIGFyZWFsICsgc292ZXJvbSArIGJ5Z2dlYWFyICsgYmFsa29uZywgZGF0YSA9IGJvbGlnZXIpIG9nIGhlbnQgdXQgY29lZihtb2RlbGwpW1xcXCJtb2JlbGVydEphXFxcIl0uXCIsIHR5cGUgPSBcImVycm9yXCIpXG59In0=
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex4a">
+<p><code>mobelert * bydel</code> er kortform for <code>mobelert + bydel + mobelert:bydel</code>, altså begge hovedeffektene pluss samspillet. Du får hele bildet med <code>summary(modell)</code>, og henter ut den ene koeffisienten med <code>coef(modell)["mobelertJa"]</code>.</p>
+</div>
+<div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex4a">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>modell <span class="ot">&lt;-</span> <span class="fu">lm</span>(pris <span class="sc">~</span> mobelert <span class="sc">*</span> bydel <span class="sc">+</span> areal <span class="sc">+</span> soverom <span class="sc">+</span> byggeaar <span class="sc">+</span> balkong, <span class="at">data =</span> boliger)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(modell)[<span class="st">"mobelertJa"</span>]</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="oppgave-4b" class="level3">
+<h3 class="anchored" data-anchor-id="oppgave-4b">Oppgave 4b</h3>
+<p>Kjør <code>summary()</code> på modellen fra 4a i cellen under, og se på de tre interaksjonsleddene nederst i koeffisienttabellen.</p>
+<p><strong>Utforsk (denne cellen rettes ikke):</strong></p>
+<div class="cell">
+<div>
+<div id="webr-45" class="exercise-cell">
+
+</div>
+<script type="webr-45-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibG9hZChcImJvbGlnZXIuUkRhdGFcIilcblxubW9kZWxsIDwtIGxtKHByaXMgfiBtb2JlbGVydCAqIGJ5ZGVsICsgYXJlYWwgKyBzb3Zlcm9tICsgYnlnZ2VhYXIgKyBiYWxrb25nLFxuICAgICAgICAgICAgIGRhdGEgPSBib2xpZ2VyKVxuc3VtbWFyeShtb2RlbGwpIn0=
+</script>
+</div>
+</div>
+<p>Hvilken påstand er riktig?</p>
+<p><strong>a)</strong> Møbleringspremien er den samme i alle fire bydelene.</p>
+<p><strong>b)</strong> Møbleringspremien er størst i Bergenhus, rundt 3 000 kroner, og lavere i de tre andre bydelene. Alle tre interaksjonsleddene er signifikante på 5 prosent nivå.</p>
+<p><strong>c)</strong> Interaksjonsleddene viser at areal påvirker prisen ulikt fra bydel til bydel.</p>
+<p><strong>d)</strong> Siden interaksjonsleddene er negative, er møblering verdiløst utenfor Bergenhus.</p>
+<div class="cell" data-exercise="ex4b" data-setup="true">
+<script type="exercise-setup-ex4b-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXg0YiIsInNldHVwIjp0cnVlfSwiY29kZSI6ImxpYnJhcnkoZHBseXIpXG5saWJyYXJ5KGdncGxvdDIpXG5sb2FkKFwiYm9saWdlci5SRGF0YVwiKSJ9
+</script>
+</div>
+<div class="cell" data-exercise="ex4b">
+<div>
+<div id="webr-47" class="exercise-cell">
+
+</div>
+<script type="webr-47-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXg0YiJ9LCJjb2RlIjoiIyBTa3JpdiBib2tzdGF2ZW4gdGlsIGFsdGVybmF0aXZldCBkdSBtZW5lciBlciByaWt0aWcsIGYuZWtzLiBcImFcIiJ9
+</script>
+</div>
+</div>
+<div class="cell" data-exercise="ex4b" data-check="true">
+<script type="exercise-check-ex4b-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImV4NGIifSwiY29kZSI6InN2YXIgPC0gaWYgKGlzLmNoYXJhY3RlcigucmVzdWx0KSAmJiBsZW5ndGgoLnJlc3VsdCkgPT0gMSkgdG9sb3dlcih0cmltd3MoLnJlc3VsdCkpIGVsc2UgXCJcIlxuaWYgKHN2YXIgPT0gXCJiXCIpIHtcbiAgbGlzdChjb3JyZWN0ID0gVFJVRSwgbWVzc2FnZSA9IFwiUmlrdGlnLCBvZyBtZWQgZGV0IGVyIGR1IGZlcmRpZy4gUHJlbWllbiBpIEJlcmdlbmh1cyBlciAyIDk3NiBrcm9uZXIsIG9nIGRlIHRyZSBpbnRlcmFrc2pvbnNsZWRkZW5lIGVyIC0xIDg5MCAocCA9IDAsMDAwNCksIC0xIDQ5NSAocCA9IDAsMDE3KSBvZyAtMSAzNDkgKHAgPSAwLDAyOSksIGFsdHPDpSBhbGxlIHNpZ25pZmlrYW50ZSBww6UgNSBwcm9zZW50IG5pdsOlLiBNw7hibGVyaW5nIGVyIHZlcmR0IG1lc3QgZGVyIGJvbGlnZW5lIGVyIHNtw6Ugb2cgZmx5dHRlZnJla3ZlbnNlbiBow7h5LlwiLCB0eXBlID0gXCJzdWNjZXNzXCIpXG59IGVsc2UgaWYgKHN2YXIgPT0gXCJhXCIpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIkRhIHZpbGxlIGFsbGUgaW50ZXJha3Nqb25zbGVkZGVuZSB2w6ZydCBuw6ZyIG51bGwgb2cgaWtrZS1zaWduaWZpa2FudGUuIFNlIHDDpSBFc3RpbWF0ZS1rb2xvbm5lbiBvZyBwLXZlcmRpZW5lIGZvciBkZSB0cmUgbGVkZGVuZSBzb20gaGFyIGtvbG9uIGkgbmF2bmV0LlwiLCB0eXBlID0gXCJlcnJvclwiKVxufSBlbHNlIGlmIChzdmFyID09IFwiY1wiKSB7XG4gIGxpc3QoY29ycmVjdCA9IEZBTFNFLCBtZXNzYWdlID0gXCJJbnRlcmFrc2pvbmVuIGVyIG1lbGxvbSBtb2JlbGVydCBvZyBieWRlbCwgaWtrZSBtZWxsb20gYXJlYWwgb2cgYnlkZWwuIExlZGRlbmUgaGV0ZXIgbW9iZWxlcnRKYTpieWRlbC4uLiwgb2cgZGUgc2llciBodm9yZGFuIG3DuGJsZXJpbmdzcHJlbWllbiB2YXJpZXJlciBtZWxsb20gYnlkZWxlbmUuXCIsIHR5cGUgPSBcImVycm9yXCIpXG59IGVsc2UgaWYgKHN2YXIgPT0gXCJkXCIpIHtcbiAgbGlzdChjb3JyZWN0ID0gRkFMU0UsIG1lc3NhZ2UgPSBcIkludGVyYWtzam9uc2xlZGRlbmUgdHJla2tlciBwcmVtaWVuIG5lZCwgbWVuIGlra2UgaGVsdCB0aWwgbnVsbC4gSSDDhXJzdGFkIGVyIGRlbiAyIDk3NiAtIDEgODkwID0gMSAwODYga3JvbmVyLCBhbHRzw6UgZm9ydHNhdHQgcG9zaXRpdi4gRXQgbmVnYXRpdnQgaW50ZXJha3Nqb25zbGVkZCBiZXR5ciBtaW5kcmUgZWZmZWt0LCBpa2tlIGluZ2VuIGVmZmVrdC5cIiwgdHlwZSA9IFwiZXJyb3JcIilcbn0gZWxzZSB7XG4gIGxpc3QoY29ycmVjdCA9IEZBTFNFLCBtZXNzYWdlID0gXCJTdmFyIG1lZCBib2tzdGF2ZW4gdGlsIGFsdGVybmF0aXZldCBzb20gZW4gdGVrc3RzdHJlbmcsIGYuZWtzLiBcXFwiYlxcXCIsIHDDpSBzaXN0ZSBsaW5qZS5cIiwgdHlwZSA9IFwid2FybmluZ1wiKVxufSJ9
+</script>
+</div>
+<div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex4b">
+<p>Interaksjonsleddene er de tre radene med kolon i navnet, for eksempel <code>mobelertJa:bydelÅrstad</code>. Møbleringspremien i Årstad er <code>mobelertJa</code> pluss <code>mobelertJa:bydelÅrstad</code>.</p>
+</div>
+</section>
+</section>
+<section id="fullføring" class="level2">
+<h2 class="anchored" data-anchor-id="fullføring">Fullføring</h2>
+<p>Oversikten under oppdateres automatisk etter hvert som oppgavene blir grønne, så du ser hvilke som gjenstår. Når <strong>alle 16</strong> er løst, skriver du inn kandidatnummeret ditt, så dukker fullføringskoden opp.</p>
+<p>Merk at fremdriften ligger i nettleserens minne. Laster du siden på nytt, nullstilles den, og oppgavene må kjøres om igjen. Det tar bare noen sekunder når koden din allerede står i cellene, men det kan være greit å ta kursgodkjenningen i én økt.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb20" data-startfrom="933" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 932;"><span id="cb20-933"><a href="#cb20-933" aria-hidden="true" tabindex="-1"></a><span class="co">// Leser av hvilke oppgaver som er løst. Oppgavelista utledes fra sidens egen</span></span>
+<span id="cb20-934"><a href="#cb20-934" aria-hidden="true" tabindex="-1"></a><span class="co">// DOM, i dokumentrekkefølge, slik at den holder seg i takt om oppgaver legges</span></span>
+<span id="cb20-935"><a href="#cb20-935" aria-hidden="true" tabindex="-1"></a><span class="co">// til eller fjernes. Generatoren yielder bare når noe faktisk har endret seg,</span></span>
+<span id="cb20-936"><a href="#cb20-936" aria-hidden="true" tabindex="-1"></a><span class="co">// så visningen under ikke tegnes på nytt hvert halvsekund.</span></span>
+<span id="cb20-937"><a href="#cb20-937" aria-hidden="true" tabindex="-1"></a>oppgaveSignatur <span class="op">=</span> {</span>
+<span id="cb20-938"><a href="#cb20-938" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> forrige <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb20-939"><a href="#cb20-939" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (<span class="kw">true</span>) {</span>
+<span id="cb20-940"><a href="#cb20-940" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> alle <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb20-941"><a href="#cb20-941" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (<span class="kw">const</span> el <span class="kw">of</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelectorAll</span>(<span class="st">"[data-exercise]"</span>)) {</span>
+<span id="cb20-942"><a href="#cb20-942" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> id <span class="op">=</span> el<span class="op">.</span><span class="fu">getAttribute</span>(<span class="st">"data-exercise"</span>)<span class="op">;</span></span>
+<span id="cb20-943"><a href="#cb20-943" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (id <span class="op">&amp;&amp;</span> <span class="op">!</span>alle<span class="op">.</span><span class="fu">includes</span>(id)) alle<span class="op">.</span><span class="fu">push</span>(id)<span class="op">;</span></span>
+<span id="cb20-944"><a href="#cb20-944" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb20-945"><a href="#cb20-945" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> loste <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb20-946"><a href="#cb20-946" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (<span class="kw">const</span> g <span class="kw">of</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelectorAll</span>(<span class="st">".exercise-grade.alert-success"</span>)) {</span>
+<span id="cb20-947"><a href="#cb20-947" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> wrap <span class="op">=</span> g<span class="op">.</span><span class="fu">closest</span>(<span class="st">"[data-exercise]"</span>)<span class="op">;</span></span>
+<span id="cb20-948"><a href="#cb20-948" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> id <span class="op">=</span> wrap <span class="op">&amp;&amp;</span> wrap<span class="op">.</span><span class="fu">getAttribute</span>(<span class="st">"data-exercise"</span>)<span class="op">;</span></span>
+<span id="cb20-949"><a href="#cb20-949" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (id <span class="op">&amp;&amp;</span> <span class="op">!</span>loste<span class="op">.</span><span class="fu">includes</span>(id)) loste<span class="op">.</span><span class="fu">push</span>(id)<span class="op">;</span></span>
+<span id="cb20-950"><a href="#cb20-950" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb20-951"><a href="#cb20-951" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> signatur <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>({ alle<span class="op">,</span> loste })<span class="op">;</span></span>
+<span id="cb20-952"><a href="#cb20-952" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (signatur <span class="op">!==</span> forrige) {</span>
+<span id="cb20-953"><a href="#cb20-953" aria-hidden="true" tabindex="-1"></a>      forrige <span class="op">=</span> signatur<span class="op">;</span></span>
+<span id="cb20-954"><a href="#cb20-954" aria-hidden="true" tabindex="-1"></a>      <span class="kw">yield</span> signatur<span class="op">;</span></span>
+<span id="cb20-955"><a href="#cb20-955" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb20-956"><a href="#cb20-956" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> <span class="kw">new</span> <span class="bu">Promise</span>((r) <span class="kw">=&gt;</span> <span class="pp">setTimeout</span>(r<span class="op">,</span> <span class="dv">400</span>))<span class="op">;</span></span>
+<span id="cb20-957"><a href="#cb20-957" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-958"><a href="#cb20-958" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb21" data-startfrom="963" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 962;"><span id="cb21-963"><a href="#cb21-963" aria-hidden="true" tabindex="-1"></a>status <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(oppgaveSignatur)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb22" data-startfrom="968" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 967;"><span id="cb22-968"><a href="#cb22-968" aria-hidden="true" tabindex="-1"></a>antallRiktige <span class="op">=</span> status<span class="op">.</span><span class="at">loste</span><span class="op">.</span><span class="at">length</span></span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb23" data-startfrom="973" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 972;"><span id="cb23-973"><a href="#cb23-973" aria-hidden="true" tabindex="-1"></a>totalOppgaver <span class="op">=</span> <span class="dv">16</span></span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb24" data-startfrom="978" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 977;"><span id="cb24-978"><a href="#cb24-978" aria-hidden="true" tabindex="-1"></a>fremdrift <span class="op">=</span> {</span>
+<span id="cb24-979"><a href="#cb24-979" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> ferdig <span class="op">=</span> antallRiktige <span class="op">&gt;=</span> totalOppgaver<span class="op">;</span></span>
+<span id="cb24-980"><a href="#cb24-980" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> farge <span class="op">=</span> ferdig <span class="op">?</span> <span class="st">"#22aa66"</span> <span class="op">:</span> <span class="st">"#666"</span><span class="op">;</span></span>
+<span id="cb24-981"><a href="#cb24-981" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> lost <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>(status<span class="op">.</span><span class="at">loste</span>)<span class="op">;</span></span>
+<span id="cb24-982"><a href="#cb24-982" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-983"><a href="#cb24-983" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Grupper etter hovedoppgave: ex2c -&gt; "2"</span></span>
+<span id="cb24-984"><a href="#cb24-984" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> grupper <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()<span class="op">;</span></span>
+<span id="cb24-985"><a href="#cb24-985" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">const</span> id <span class="kw">of</span> status<span class="op">.</span><span class="at">alle</span>) {</span>
+<span id="cb24-986"><a href="#cb24-986" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> merke <span class="op">=</span> id<span class="op">.</span><span class="fu">replace</span>(<span class="ss">/</span><span class="sc">^</span><span class="ss">ex/</span><span class="op">,</span> <span class="st">""</span>)<span class="op">;</span></span>
+<span id="cb24-987"><a href="#cb24-987" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> hoved <span class="op">=</span> merke<span class="op">.</span><span class="fu">charAt</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb24-988"><a href="#cb24-988" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span>grupper<span class="op">.</span><span class="fu">has</span>(hoved)) grupper<span class="op">.</span><span class="fu">set</span>(hoved<span class="op">,</span> [])<span class="op">;</span></span>
+<span id="cb24-989"><a href="#cb24-989" aria-hidden="true" tabindex="-1"></a>    grupper<span class="op">.</span><span class="fu">get</span>(hoved)<span class="op">.</span><span class="fu">push</span>({ merke<span class="op">,</span> <span class="dt">ok</span><span class="op">:</span> lost<span class="op">.</span><span class="fu">has</span>(id) })<span class="op">;</span></span>
+<span id="cb24-990"><a href="#cb24-990" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb24-991"><a href="#cb24-991" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-992"><a href="#cb24-992" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> brikke <span class="op">=</span> (b) <span class="kw">=&gt;</span> <span class="fu">html</span><span class="vs">`&lt;span</span></span>
+<span id="cb24-993"><a href="#cb24-993" aria-hidden="true" tabindex="-1"></a><span class="vs">    title=</span><span class="sc">${</span>b<span class="op">.</span><span class="at">ok</span> <span class="op">?</span> <span class="st">"Oppgave "</span> <span class="op">+</span> b<span class="op">.</span><span class="at">merke</span> <span class="op">+</span> <span class="st">" er riktig"</span> <span class="op">:</span> <span class="st">"Oppgave "</span> <span class="op">+</span> b<span class="op">.</span><span class="at">merke</span> <span class="op">+</span> <span class="st">" gjenstår"</span><span class="sc">}</span></span>
+<span id="cb24-994"><a href="#cb24-994" aria-hidden="true" tabindex="-1"></a><span class="vs">    style="display:inline-flex;align-items:center;gap:0.3em;</span></span>
+<span id="cb24-995"><a href="#cb24-995" aria-hidden="true" tabindex="-1"></a><span class="vs">           padding:0.2em 0.6em;border-radius:999px;font-size:0.95em;</span></span>
+<span id="cb24-996"><a href="#cb24-996" aria-hidden="true" tabindex="-1"></a><span class="vs">           font-variant-numeric:tabular-nums;</span></span>
+<span id="cb24-997"><a href="#cb24-997" aria-hidden="true" tabindex="-1"></a><span class="vs">           border:1px solid </span><span class="sc">${</span>b<span class="op">.</span><span class="at">ok</span> <span class="op">?</span> <span class="st">"#22aa66"</span> <span class="op">:</span> <span class="st">"#ccc"</span><span class="sc">}</span><span class="vs">;</span></span>
+<span id="cb24-998"><a href="#cb24-998" aria-hidden="true" tabindex="-1"></a><span class="vs">           background:</span><span class="sc">${</span>b<span class="op">.</span><span class="at">ok</span> <span class="op">?</span> <span class="st">"#eafbf1"</span> <span class="op">:</span> <span class="st">"transparent"</span><span class="sc">}</span><span class="vs">;</span></span>
+<span id="cb24-999"><a href="#cb24-999" aria-hidden="true" tabindex="-1"></a><span class="vs">           color:</span><span class="sc">${</span>b<span class="op">.</span><span class="at">ok</span> <span class="op">?</span> <span class="st">"#177a49"</span> <span class="op">:</span> <span class="st">"#888"</span><span class="sc">}</span><span class="vs">"&gt;</span></span>
+<span id="cb24-1000"><a href="#cb24-1000" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>b<span class="op">.</span><span class="at">ok</span> <span class="op">?</span> <span class="st">"✓"</span> <span class="op">:</span> <span class="st">"○"</span><span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>b<span class="op">.</span><span class="at">merke</span><span class="sc">}</span></span>
+<span id="cb24-1001"><a href="#cb24-1001" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/span&gt;`</span><span class="op">;</span></span>
+<span id="cb24-1002"><a href="#cb24-1002" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-1003"><a href="#cb24-1003" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> rader <span class="op">=</span> [<span class="op">...</span>grupper<span class="op">.</span><span class="fu">entries</span>()]<span class="op">.</span><span class="fu">map</span>(</span>
+<span id="cb24-1004"><a href="#cb24-1004" aria-hidden="true" tabindex="-1"></a>    ([hoved<span class="op">,</span> brikker]) <span class="kw">=&gt;</span> <span class="fu">html</span><span class="vs">`&lt;div style="display:flex;align-items:baseline;</span></span>
+<span id="cb24-1005"><a href="#cb24-1005" aria-hidden="true" tabindex="-1"></a><span class="vs">                                           gap:0.5em;margin:0.35em 0;flex-wrap:wrap"&gt;</span></span>
+<span id="cb24-1006"><a href="#cb24-1006" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;span style="color:#888;font-size:0.9em;min-width:6.5em"&gt;Oppgave </span><span class="sc">${</span>hoved<span class="sc">}</span><span class="vs">&lt;/span&gt;</span></span>
+<span id="cb24-1007"><a href="#cb24-1007" aria-hidden="true" tabindex="-1"></a><span class="vs">      </span><span class="sc">${</span>brikker<span class="op">.</span><span class="fu">map</span>(brikke)<span class="sc">}</span></span>
+<span id="cb24-1008"><a href="#cb24-1008" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;`</span></span>
+<span id="cb24-1009"><a href="#cb24-1009" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb24-1010"><a href="#cb24-1010" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-1011"><a href="#cb24-1011" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div style="margin:0.8em 0"&gt;</span></span>
+<span id="cb24-1012"><a href="#cb24-1012" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div style="font-size:1.15em;margin-bottom:0.5em"&gt;</span></span>
+<span id="cb24-1013"><a href="#cb24-1013" aria-hidden="true" tabindex="-1"></a><span class="vs">      Fremdrift: &lt;strong style="color:</span><span class="sc">${</span>farge<span class="sc">}</span><span class="vs">"&gt;</span><span class="sc">${</span>antallRiktige<span class="sc">}</span><span class="vs"> av </span><span class="sc">${</span>totalOppgaver<span class="sc">}</span><span class="vs">&lt;/strong&gt;</span></span>
+<span id="cb24-1014"><a href="#cb24-1014" aria-hidden="true" tabindex="-1"></a><span class="vs">      oppgaver riktige </span><span class="sc">${</span>ferdig <span class="op">?</span> <span class="st">"🎉"</span> <span class="op">:</span> <span class="st">""</span><span class="sc">}</span></span>
+<span id="cb24-1015"><a href="#cb24-1015" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb24-1016"><a href="#cb24-1016" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>rader<span class="sc">}</span></span>
+<span id="cb24-1017"><a href="#cb24-1017" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>ferdig</span>
+<span id="cb24-1018"><a href="#cb24-1018" aria-hidden="true" tabindex="-1"></a>      <span class="op">?</span> <span class="st">""</span></span>
+<span id="cb24-1019"><a href="#cb24-1019" aria-hidden="true" tabindex="-1"></a>      <span class="op">:</span> <span class="fu">html</span><span class="vs">`&lt;div style="color:#888;font-size:0.9em;margin-top:0.5em"&gt;</span></span>
+<span id="cb24-1020"><a href="#cb24-1020" aria-hidden="true" tabindex="-1"></a><span class="vs">          Gjenstår: </span><span class="sc">${</span>status<span class="op">.</span><span class="at">alle</span></span>
+<span id="cb24-1021"><a href="#cb24-1021" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span><span class="fu">filter</span>((id) <span class="kw">=&gt;</span> <span class="op">!</span>lost<span class="op">.</span><span class="fu">has</span>(id))</span>
+<span id="cb24-1022"><a href="#cb24-1022" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span><span class="fu">map</span>((id) <span class="kw">=&gt;</span> id<span class="op">.</span><span class="fu">replace</span>(<span class="ss">/</span><span class="sc">^</span><span class="ss">ex/</span><span class="op">,</span> <span class="st">""</span>))</span>
+<span id="cb24-1023"><a href="#cb24-1023" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span><span class="fu">join</span>(<span class="st">", "</span>)<span class="sc">}</span></span>
+<span id="cb24-1024"><a href="#cb24-1024" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/div&gt;`</span><span class="sc">}</span></span>
+<span id="cb24-1025"><a href="#cb24-1025" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb24-1026"><a href="#cb24-1026" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb25" data-startfrom="1031" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 1030;"><span id="cb25-1031"><a href="#cb25-1031" aria-hidden="true" tabindex="-1"></a>viewof kandidat <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">text</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Kandidatnummer:"</span><span class="op">,</span> <span class="dt">placeholder</span><span class="op">:</span> <span class="st">"f.eks. 42"</span><span class="op">,</span> <span class="dt">width</span><span class="op">:</span> <span class="dv">320</span>})</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-6" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb26" data-startfrom="1036" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 1035;"><span id="cb26-1036"><a href="#cb26-1036" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">lagKode</span>(k) {</span>
+<span id="cb26-1037"><a href="#cb26-1037" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> n <span class="op">=</span> <span class="pp">parseInt</span>(<span class="bu">String</span>(k)<span class="op">.</span><span class="fu">replace</span>(<span class="ss">/</span><span class="sc">\D</span><span class="ss">/g</span><span class="op">,</span> <span class="st">""</span>)<span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span></span>
+<span id="cb26-1038"><a href="#cb26-1038" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span>n) <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb26-1039"><a href="#cb26-1039" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> c <span class="op">=</span> (n <span class="op">*</span> <span class="dv">7919</span> <span class="op">+</span> <span class="dv">12345</span>) <span class="op">%</span> <span class="dv">100000</span><span class="op">;</span></span>
+<span id="cb26-1040"><a href="#cb26-1040" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"MET4-KG-"</span> <span class="op">+</span> n <span class="op">+</span> <span class="st">"-"</span> <span class="op">+</span> <span class="bu">String</span>(c)<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">5</span><span class="op">,</span> <span class="st">"0"</span>)<span class="op">;</span></span>
+<span id="cb26-1041"><a href="#cb26-1041" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-7" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb27" data-startfrom="1046" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 1045;"><span id="cb27-1046"><a href="#cb27-1046" aria-hidden="true" tabindex="-1"></a>resultat <span class="op">=</span> {</span>
+<span id="cb27-1047"><a href="#cb27-1047" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> alle <span class="op">=</span> antallRiktige <span class="op">&gt;=</span> totalOppgaver<span class="op">;</span></span>
+<span id="cb27-1048"><a href="#cb27-1048" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span>alle) {</span>
+<span id="cb27-1049"><a href="#cb27-1049" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div style="padding:1em;border:1px dashed #999;border-radius:8px;background:#fafafa"&gt;</span></span>
+<span id="cb27-1050"><a href="#cb27-1050" aria-hidden="true" tabindex="-1"></a><span class="vs">      Løs alle 16 oppgavene (grønt) for å låse opp fullføringskoden.</span></span>
+<span id="cb27-1051"><a href="#cb27-1051" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb27-1052"><a href="#cb27-1052" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb27-1053"><a href="#cb27-1053" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> kode <span class="op">=</span> kandidat <span class="op">?</span> <span class="fu">lagKode</span>(kandidat) <span class="op">:</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb27-1054"><a href="#cb27-1054" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> kode</span>
+<span id="cb27-1055"><a href="#cb27-1055" aria-hidden="true" tabindex="-1"></a>    <span class="op">?</span> <span class="fu">html</span><span class="vs">`&lt;div style="padding:1em;border:2px solid #22aa66;border-radius:8px;background:#eafbf1"&gt;</span></span>
+<span id="cb27-1056"><a href="#cb27-1056" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;strong&gt;🎉 Alle oppgavene er løst!&lt;/strong&gt;&lt;br&gt;</span></span>
+<span id="cb27-1057"><a href="#cb27-1057" aria-hidden="true" tabindex="-1"></a><span class="vs">        Din fullføringskode er:&lt;br&gt;</span></span>
+<span id="cb27-1058"><a href="#cb27-1058" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;code style="font-size:1.4em;user-select:all"&gt;</span><span class="sc">${</span>kode<span class="sc">}</span><span class="vs">&lt;/code&gt;&lt;br&gt;</span></span>
+<span id="cb27-1059"><a href="#cb27-1059" aria-hidden="true" tabindex="-1"></a><span class="vs">        Kopier koden til Canvas-innleveringen for å få kursgodkjenningen godkjent.</span></span>
+<span id="cb27-1060"><a href="#cb27-1060" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/div&gt;`</span></span>
+<span id="cb27-1061"><a href="#cb27-1061" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span> <span class="fu">html</span><span class="vs">`&lt;div style="padding:1em;border:1px solid #22aa66;border-radius:8px;background:#eafbf1"&gt;</span></span>
+<span id="cb27-1062"><a href="#cb27-1062" aria-hidden="true" tabindex="-1"></a><span class="vs">        Alt er riktig! Skriv inn kandidatnummeret ditt over for å få fullføringskoden.</span></span>
+<span id="cb27-1063"><a href="#cb27-1063" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb27-1064"><a href="#cb27-1064" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-8" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<script type="webr-data">
+eyJvcHRpb25zIjp7ImJhc2VVcmwiOiJodHRwczovL3dlYnIuci13YXNtLm9yZy92MC42LjAvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsiZXZhbHVhdGUiLCJrbml0ciIsImh0bWx0b29scyIsImRwbHlyIiwiZ2dwbG90MiJdLCJyZXBvcyI6W119LCJyZW5kZXJfZGYiOiJkZWZhdWx0In0=
+</script>
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC00NyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfNDc7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici00NyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzQ3ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItNDctY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici00Ny1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzQ3ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl80Nywge30pO1xuX3dlYnJfZmVlZGJhY2tfNDcgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzQ3LmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC00NSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfNDU7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici00NSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzQ1ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItNDUtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici00NS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV80NSA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfNDUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC00MyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfNDM7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici00MyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzQzID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItNDMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici00My1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzQzID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl80Mywge30pO1xuX3dlYnJfZmVlZGJhY2tfNDMgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzQzLmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC00MCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfNDA7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici00MCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzQwID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItNDAtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici00MC1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzQwID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl80MCwge30pO1xuX3dlYnJfZmVlZGJhY2tfNDAgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzQwLmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0zNyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMzc7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0zNyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzM3ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMzctY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici0zNy1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzM3ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8zNywge30pO1xuX3dlYnJfZmVlZGJhY2tfMzcgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzM3LmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0zNCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMzQ7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0zNCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzM0ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMzQtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici0zNC1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzM0ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8zNCwge30pO1xuX3dlYnJfZmVlZGJhY2tfMzQgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzM0LmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0zMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMzE7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0zMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzMxID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMzEtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici0zMS1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzMxID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8zMSwge30pO1xuX3dlYnJfZmVlZGJhY2tfMzEgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzMxLmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0yOCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMjg7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0yOCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzI4ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMjgtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici0yOC1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzI4ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8yOCwge30pO1xuX3dlYnJfZmVlZGJhY2tfMjggPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzI4LmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0yNSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMjU7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0yNSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzI1ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMjUtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici0yNS1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzI1ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8yNSwge30pO1xuX3dlYnJfZmVlZGJhY2tfMjUgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzI1LmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0yMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMjM7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0yMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzIzID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMjMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici0yMy1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzIzID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8yMywge30pO1xuX3dlYnJfZmVlZGJhY2tfMjMgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzIzLmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0yMCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMjA7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0yMCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzIwID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMjAtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici0yMC1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzIwID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8yMCwge30pO1xuX3dlYnJfZmVlZGJhY2tfMjAgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzIwLmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0xNyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMTc7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0xNyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzE3ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMTctY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici0xNy1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzE3ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8xNywge30pO1xuX3dlYnJfZmVlZGJhY2tfMTcgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzE3LmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0xNSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMTU7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0xNSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzE1ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMTUtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici0xNS1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzE1ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8xNSwge30pO1xuX3dlYnJfZmVlZGJhY2tfMTUgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzE1LmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0xMiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMTI7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0xMiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzEyID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMTItY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici0xMi1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzEyID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8xMiwge30pO1xuX3dlYnJfZmVlZGJhY2tfMTIgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzEyLmV2YWx1YXRvcik7XG4gIGNvbnN0IGZlZWRiYWNrID0gYXdhaXQgZ3JhZGVyLmdyYWRlRXhlcmNpc2UoKTtcbiAgaWYgKCFmZWVkYmFjaykgcmV0dXJuIGVtcHR5RmVlZGJhY2s7XG4gIHJldHVybiBmZWVkYmFjaztcbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC05IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV85O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItOSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzkgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici05LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcIndlYnItOS1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzkgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzksIHt9KTtcbl93ZWJyX2ZlZWRiYWNrXzkgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzkuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTciLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzc7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici03IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfNyA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTctY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici03LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzcgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzcsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC01IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV81O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItNSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzUgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcIndlYnItNS1jb250ZW50c1wiLFxuICAgICAgZW52aXI6IGBleGVyY2lzZS1lbnYtJHtibG9jay5hdHRyLmV4ZXJjaXNlfWAsXG4gICAgICBlcnJvcjogZmFsc2UsXG4gICAgICBjYXB0aW9uOiAnRXhlcmNpc2UnLFxuICAgIH0sXG4gICAgYmxvY2suYXR0clxuICApO1xuXG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxudmlld29mIF93ZWJyX3ZhbHVlXzUgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzUsIHt9KTtcbl93ZWJyX2ZlZWRiYWNrXzUgPSB7XG4gIGNvbnN0IHsgV2ViUkdyYWRlciB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3QgZW1wdHlGZWVkYmFjayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuXG4gIGNvbnN0IGdyYWRlciA9IG5ldyBXZWJSR3JhZGVyKF93ZWJyX3ZhbHVlXzUuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzI7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici0yIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfMiA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTItY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV4ZXJjaXNlIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oXG4gICAge1xuICAgICAgaWQ6IFwid2Vici0yLWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3dlYnJfdmFsdWVfMiA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfMiwge30pO1xuX3dlYnJfZmVlZGJhY2tfMiA9IHtcbiAgY29uc3QgeyBXZWJSR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFdlYlJHcmFkZXIoX3dlYnJfdmFsdWVfMi5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici1wcmVsdWRlIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoid2ViUk9qcyA9IHtcbiAgY29uc3QgeyBXZWJSLCBDaGFubmVsVHlwZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZS5XZWJSO1xuICBjb25zdCB7XG4gICAgV2ViUkV2YWx1YXRvcixcbiAgICBXZWJSRW52aXJvbm1lbnRNYW5hZ2VyLFxuICAgIHNldHVwUixcbiAgICBiNjREZWNvZGUsXG4gICAgY29sbGFwc2VQYXRoXG4gIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHN0YXR1c0NvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1zdGF0dXNcIik7XG4gIGNvbnN0IGluZGljYXRvckNvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGluZGljYXRvckNvbnRhaW5lci5jbGFzc0xpc3QucmVtb3ZlKFwiZC1ub25lXCIpO1xuXG4gIGxldCBzdGF0dXNUZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKVxuICBzdGF0dXNUZXh0LmNsYXNzTGlzdCA9IFwiZXhlcmNpc2UtbG9hZGluZy1kZXRhaWxzXCI7XG4gIHN0YXR1c1RleHQgPSBzdGF0dXNDb250YWluZXIuYXBwZW5kQ2hpbGQoc3RhdHVzVGV4dCk7XG4gIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgSW5pdGlhbGlzZWA7XG5cbiAgLy8gSG9pc3QgaW5kaWNhdG9yIG91dCBmcm9tIGZpbmFsIHNsaWRlIHdoZW4gcnVubmluZyB1bmRlciByZXZlYWxcbiAgY29uc3QgcmV2ZWFsU3RhdHVzID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgLmV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpZiAocmV2ZWFsU3RhdHVzKSB7XG4gICAgcmV2ZWFsU3RhdHVzLnJlbW92ZSgpO1xuICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsID4gLnNsaWRlc1wiKS5hcHBlbmRDaGlsZChyZXZlYWxTdGF0dXMpO1xuICB9XG5cbiAgLy8gTWFrZSBhbnkgcmV2ZWFsIHNsaWRlcyB3aXRoIGxpdmUgY2VsbHMgc2Nyb2xsYWJsZVxuICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKFwiLnJldmVhbCAuZXhlcmNpc2UtY2VsbFwiKS5mb3JFYWNoKChlbCkgPT4ge1xuICAgIGVsLmNsb3Nlc3QoJ3NlY3Rpb24uc2xpZGUnKS5jbGFzc0xpc3QuYWRkKFwic2Nyb2xsYWJsZVwiKTtcbiAgfSlcblxuICAvLyB3ZWJSIHN1cHBsZW1lbnRhbCBkYXRhIGFuZCBvcHRpb25zXG4gIGNvbnN0IGRhdGFDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItZGF0YVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGRhdGEgPSBKU09OLnBhcnNlKGI2NERlY29kZShkYXRhQ29udGVudCkpO1xuXG4gIC8vIEdyYWIgbGlzdCBvZiByZXNvdXJjZXMgdG8gYmUgZG93bmxvYWRlZFxuICBjb25zdCBmaWxlc0NvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwidmZzLWZpbGVcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBmaWxlcyA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGZpbGVzQ29udGVudCkpO1xuXG4gIC8vIEluaXRpYWxpc2Ugd2ViUiBhbmQgc2V0dXAgZm9yIFIgY29kZSBldmFsdWF0aW9uXG4gIGxldCB3ZWJSUHJvbWlzZSA9IChhc3luYyAod2ViUikgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgd2ViUmA7XG4gICAgYXdhaXQgd2ViUi5pbml0KCk7XG5cbiAgICAvLyBJbnN0YWxsIHByb3ZpZGVkIGxpc3Qgb2YgcGFja2FnZXNcbiAgICAvLyBFbnN1cmUgd2ViUiBkZWZhdWx0IHJlcG8gaXMgaW5jbHVkZWRcbiAgICBkYXRhLnBhY2thZ2VzLnJlcG9zLnB1c2goXCJodHRwczovL3JlcG8uci13YXNtLm9yZ1wiKVxuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIHdlYlIuZXZhbFJWb2lkKGBcbiAgICAgICAgd2Vicjo6aW5zdGFsbChwa2csIHJlcG9zID0gcmVwb3MpXG4gICAgICAgIGxpYnJhcnkocGtnLCBjaGFyYWN0ZXIub25seSA9IFRSVUUpXG4gICAgICBgLCB7IGVudjoge1xuICAgICAgICBwa2c6IHBrZyxcbiAgICAgICAgcmVwb3M6IGRhdGEucGFja2FnZXMucmVwb3MsXG4gICAgICB9fSk7XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgY29uc3QgYW5hbHlzaXMgPSBhd2FpdCB3ZWJSLkZTLmFuYWx5emVQYXRoKHBhdGgpO1xuICAgICAgICBpZiAoIWFuYWx5c2lzLmV4aXN0cykge1xuICAgICAgICAgIHRyeSB7XG4gICAgICAgICAgICBhd2FpdCB3ZWJSLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICAgIH0gY2F0Y2ggKGUpIHtcbiAgICAgICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvcjogXCIke2UubWVzc2FnZX1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHJldHVybiBhd2FpdCB3ZWJSLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluc3RhbGxpbmcgd2ViUiBzaGltc2A7XG4gICAgYXdhaXQgd2ViUi5ldmFsUlZvaWQoYHdlYnI6OnNoaW1faW5zdGFsbCgpYCk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFdlYlIgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUih3ZWJSLCBkYXRhKTtcblxuICAgIHN0YXR1c1RleHQucmVtb3ZlKCk7XG4gICAgaWYgKHN0YXR1c0NvbnRhaW5lci5jaGlsZHJlbi5sZW5ndGggPT0gMCkge1xuICAgICAgc3RhdHVzQ29udGFpbmVyLnBhcmVudE5vZGUucmVtb3ZlKCk7XG4gICAgfVxuICAgIHJldHVybiB3ZWJSO1xuICB9KShuZXcgV2ViUihkYXRhLm9wdGlvbnMpKTtcblxuICAvLyBLZWVwIHRyYWNrIG9mIGluaXRpYWwgT0pTIGJsb2NrIHJlbmRlclxuICBjb25zdCByZW5kZXJlZE9qcyA9IHt9O1xuXG4gIGNvbnN0IHByb2Nlc3MgPSBhc3luYyAoY29udGV4dCwgaW5wdXRzKSA9PiB7XG4gICAgY29uc3Qgd2ViUiA9IGF3YWl0IHdlYlJQcm9taXNlO1xuICAgIGNvbnN0IGV2YWx1YXRvciA9IG5ldyBXZWJSRXZhbHVhdG9yKHdlYlIsIGNvbnRleHQpXG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHJvY2VzcyxcbiAgICB3ZWJSUHJvbWlzZSxcbiAgICByZW5kZXJlZE9qcyxcbiAgfTtcbn1cbiJ9XX0=
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+WyJib2xpZ2VyLlJEYXRhIl0=
+</script>
+</section>
+
+</main>
+<!-- /main column -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ii8vIExlc2VyIGF2IGh2aWxrZSBvcHBnYXZlciBzb20gZXIgbMO4c3QuIE9wcGdhdmVsaXN0YSB1dGxlZGVzIGZyYSBzaWRlbnMgZWdlblxuLy8gRE9NLCBpIGRva3VtZW50cmVra2Vmw7hsZ2UsIHNsaWsgYXQgZGVuIGhvbGRlciBzZWcgaSB0YWt0IG9tIG9wcGdhdmVyIGxlZ2dlc1xuLy8gdGlsIGVsbGVyIGZqZXJuZXMuIEdlbmVyYXRvcmVuIHlpZWxkZXIgYmFyZSBuw6VyIG5vZSBmYWt0aXNrIGhhciBlbmRyZXQgc2VnLFxuLy8gc8OlIHZpc25pbmdlbiB1bmRlciBpa2tlIHRlZ25lcyBww6Ugbnl0dCBodmVydCBoYWx2c2VrdW5kLlxub3BwZ2F2ZVNpZ25hdHVyID0ge1xuICBsZXQgZm9ycmlnZSA9IG51bGw7XG4gIHdoaWxlICh0cnVlKSB7XG4gICAgY29uc3QgYWxsZSA9IFtdO1xuICAgIGZvciAoY29uc3QgZWwgb2YgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIltkYXRhLWV4ZXJjaXNlXVwiKSkge1xuICAgICAgY29uc3QgaWQgPSBlbC5nZXRBdHRyaWJ1dGUoXCJkYXRhLWV4ZXJjaXNlXCIpO1xuICAgICAgaWYgKGlkICYmICFhbGxlLmluY2x1ZGVzKGlkKSkgYWxsZS5wdXNoKGlkKTtcbiAgICB9XG4gICAgY29uc3QgbG9zdGUgPSBbXTtcbiAgICBmb3IgKGNvbnN0IGcgb2YgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIi5leGVyY2lzZS1ncmFkZS5hbGVydC1zdWNjZXNzXCIpKSB7XG4gICAgICBjb25zdCB3cmFwID0gZy5jbG9zZXN0KFwiW2RhdGEtZXhlcmNpc2VdXCIpO1xuICAgICAgY29uc3QgaWQgPSB3cmFwICYmIHdyYXAuZ2V0QXR0cmlidXRlKFwiZGF0YS1leGVyY2lzZVwiKTtcbiAgICAgIGlmIChpZCAmJiAhbG9zdGUuaW5jbHVkZXMoaWQpKSBsb3N0ZS5wdXNoKGlkKTtcbiAgICB9XG4gICAgY29uc3Qgc2lnbmF0dXIgPSBKU09OLnN0cmluZ2lmeSh7IGFsbGUsIGxvc3RlIH0pO1xuICAgIGlmIChzaWduYXR1ciAhPT0gZm9ycmlnZSkge1xuICAgICAgZm9ycmlnZSA9IHNpZ25hdHVyO1xuICAgICAgeWllbGQgc2lnbmF0dXI7XG4gICAgfVxuICAgIGF3YWl0IG5ldyBQcm9taXNlKChyKSA9PiBzZXRUaW1lb3V0KHIsIDQwMCkpO1xuICB9XG59XG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJzdGF0dXMgPSBKU09OLnBhcnNlKG9wcGdhdmVTaWduYXR1cilcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImFudGFsbFJpa3RpZ2UgPSBzdGF0dXMubG9zdGUubGVuZ3RoXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTQiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ0b3RhbE9wcGdhdmVyID0gMTZcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImZyZW1kcmlmdCA9IHtcbiAgY29uc3QgZmVyZGlnID0gYW50YWxsUmlrdGlnZSA+PSB0b3RhbE9wcGdhdmVyO1xuICBjb25zdCBmYXJnZSA9IGZlcmRpZyA/IFwiIzIyYWE2NlwiIDogXCIjNjY2XCI7XG4gIGNvbnN0IGxvc3QgPSBuZXcgU2V0KHN0YXR1cy5sb3N0ZSk7XG5cbiAgLy8gR3J1cHBlciBldHRlciBob3ZlZG9wcGdhdmU6IGV4MmMgLT4gXCIyXCJcbiAgY29uc3QgZ3J1cHBlciA9IG5ldyBNYXAoKTtcbiAgZm9yIChjb25zdCBpZCBvZiBzdGF0dXMuYWxsZSkge1xuICAgIGNvbnN0IG1lcmtlID0gaWQucmVwbGFjZSgvXmV4LywgXCJcIik7XG4gICAgY29uc3QgaG92ZWQgPSBtZXJrZS5jaGFyQXQoMCk7XG4gICAgaWYgKCFncnVwcGVyLmhhcyhob3ZlZCkpIGdydXBwZXIuc2V0KGhvdmVkLCBbXSk7XG4gICAgZ3J1cHBlci5nZXQoaG92ZWQpLnB1c2goeyBtZXJrZSwgb2s6IGxvc3QuaGFzKGlkKSB9KTtcbiAgfVxuXG4gIGNvbnN0IGJyaWtrZSA9IChiKSA9PiBodG1sYDxzcGFuXG4gICAgdGl0bGU9JHtiLm9rID8gXCJPcHBnYXZlIFwiICsgYi5tZXJrZSArIFwiIGVyIHJpa3RpZ1wiIDogXCJPcHBnYXZlIFwiICsgYi5tZXJrZSArIFwiIGdqZW5zdMOlclwifVxuICAgIHN0eWxlPVwiZGlzcGxheTppbmxpbmUtZmxleDthbGlnbi1pdGVtczpjZW50ZXI7Z2FwOjAuM2VtO1xuICAgICAgICAgICBwYWRkaW5nOjAuMmVtIDAuNmVtO2JvcmRlci1yYWRpdXM6OTk5cHg7Zm9udC1zaXplOjAuOTVlbTtcbiAgICAgICAgICAgZm9udC12YXJpYW50LW51bWVyaWM6dGFidWxhci1udW1zO1xuICAgICAgICAgICBib3JkZXI6MXB4IHNvbGlkICR7Yi5vayA/IFwiIzIyYWE2NlwiIDogXCIjY2NjXCJ9O1xuICAgICAgICAgICBiYWNrZ3JvdW5kOiR7Yi5vayA/IFwiI2VhZmJmMVwiIDogXCJ0cmFuc3BhcmVudFwifTtcbiAgICAgICAgICAgY29sb3I6JHtiLm9rID8gXCIjMTc3YTQ5XCIgOiBcIiM4ODhcIn1cIj5cbiAgICAke2Iub2sgPyBcIuKck1wiIDogXCLil4tcIn0gJHtiLm1lcmtlfVxuICA8L3NwYW4+YDtcblxuICBjb25zdCByYWRlciA9IFsuLi5ncnVwcGVyLmVudHJpZXMoKV0ubWFwKFxuICAgIChbaG92ZWQsIGJyaWtrZXJdKSA9PiBodG1sYDxkaXYgc3R5bGU9XCJkaXNwbGF5OmZsZXg7YWxpZ24taXRlbXM6YmFzZWxpbmU7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZ2FwOjAuNWVtO21hcmdpbjowLjM1ZW0gMDtmbGV4LXdyYXA6d3JhcFwiPlxuICAgICAgPHNwYW4gc3R5bGU9XCJjb2xvcjojODg4O2ZvbnQtc2l6ZTowLjllbTttaW4td2lkdGg6Ni41ZW1cIj5PcHBnYXZlICR7aG92ZWR9PC9zcGFuPlxuICAgICAgJHticmlra2VyLm1hcChicmlra2UpfVxuICAgIDwvZGl2PmBcbiAgKTtcblxuICByZXR1cm4gaHRtbGA8ZGl2IHN0eWxlPVwibWFyZ2luOjAuOGVtIDBcIj5cbiAgICA8ZGl2IHN0eWxlPVwiZm9udC1zaXplOjEuMTVlbTttYXJnaW4tYm90dG9tOjAuNWVtXCI+XG4gICAgICBGcmVtZHJpZnQ6IDxzdHJvbmcgc3R5bGU9XCJjb2xvcjoke2ZhcmdlfVwiPiR7YW50YWxsUmlrdGlnZX0gYXYgJHt0b3RhbE9wcGdhdmVyfTwvc3Ryb25nPlxuICAgICAgb3BwZ2F2ZXIgcmlrdGlnZSAke2ZlcmRpZyA/IFwi8J+OiVwiIDogXCJcIn1cbiAgICA8L2Rpdj5cbiAgICAke3JhZGVyfVxuICAgICR7ZmVyZGlnXG4gICAgICA/IFwiXCJcbiAgICAgIDogaHRtbGA8ZGl2IHN0eWxlPVwiY29sb3I6Izg4ODtmb250LXNpemU6MC45ZW07bWFyZ2luLXRvcDowLjVlbVwiPlxuICAgICAgICAgIEdqZW5zdMOlcjogJHtzdGF0dXMuYWxsZVxuICAgICAgICAgICAgLmZpbHRlcigoaWQpID0+ICFsb3N0LmhhcyhpZCkpXG4gICAgICAgICAgICAubWFwKChpZCkgPT4gaWQucmVwbGFjZSgvXmV4LywgXCJcIikpXG4gICAgICAgICAgICAuam9pbihcIiwgXCIpfVxuICAgICAgICA8L2Rpdj5gfVxuICA8L2Rpdj5gO1xufVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC02IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoidmlld29mIGthbmRpZGF0ID0gSW5wdXRzLnRleHQoe2xhYmVsOiBcIkthbmRpZGF0bnVtbWVyOlwiLCBwbGFjZWhvbGRlcjogXCJmLmVrcy4gNDJcIiwgd2lkdGg6IDMyMH0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTciLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJmdW5jdGlvbiBsYWdLb2RlKGspIHtcbiAgY29uc3QgbiA9IHBhcnNlSW50KFN0cmluZyhrKS5yZXBsYWNlKC9cXEQvZywgXCJcIiksIDEwKTtcbiAgaWYgKCFuKSByZXR1cm4gbnVsbDtcbiAgY29uc3QgYyA9IChuICogNzkxOSArIDEyMzQ1KSAlIDEwMDAwMDtcbiAgcmV0dXJuIFwiTUVUNC1LRy1cIiArIG4gKyBcIi1cIiArIFN0cmluZyhjKS5wYWRTdGFydCg1LCBcIjBcIik7XG59XG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTgiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJyZXN1bHRhdCA9IHtcbiAgY29uc3QgYWxsZSA9IGFudGFsbFJpa3RpZ2UgPj0gdG90YWxPcHBnYXZlcjtcbiAgaWYgKCFhbGxlKSB7XG4gICAgcmV0dXJuIGh0bWxgPGRpdiBzdHlsZT1cInBhZGRpbmc6MWVtO2JvcmRlcjoxcHggZGFzaGVkICM5OTk7Ym9yZGVyLXJhZGl1czo4cHg7YmFja2dyb3VuZDojZmFmYWZhXCI+XG4gICAgICBMw7hzIGFsbGUgMTYgb3BwZ2F2ZW5lIChncsO4bnQpIGZvciDDpSBsw6VzZSBvcHAgZnVsbGbDuHJpbmdza29kZW4uXG4gICAgPC9kaXY+YDtcbiAgfVxuICBjb25zdCBrb2RlID0ga2FuZGlkYXQgPyBsYWdLb2RlKGthbmRpZGF0KSA6IG51bGw7XG4gIHJldHVybiBrb2RlXG4gICAgPyBodG1sYDxkaXYgc3R5bGU9XCJwYWRkaW5nOjFlbTtib3JkZXI6MnB4IHNvbGlkICMyMmFhNjY7Ym9yZGVyLXJhZGl1czo4cHg7YmFja2dyb3VuZDojZWFmYmYxXCI+XG4gICAgICAgIDxzdHJvbmc+8J+OiSBBbGxlIG9wcGdhdmVuZSBlciBsw7hzdCE8L3N0cm9uZz48YnI+XG4gICAgICAgIERpbiBmdWxsZsO4cmluZ3Nrb2RlIGVyOjxicj5cbiAgICAgICAgPGNvZGUgc3R5bGU9XCJmb250LXNpemU6MS40ZW07dXNlci1zZWxlY3Q6YWxsXCI+JHtrb2RlfTwvY29kZT48YnI+XG4gICAgICAgIEtvcGllciBrb2RlbiB0aWwgQ2FudmFzLWlubmxldmVyaW5nZW4gZm9yIMOlIGbDpSBrdXJzZ29ka2plbm5pbmdlbiBnb2RramVudC5cbiAgICAgIDwvZGl2PmBcbiAgICA6IGh0bWxgPGRpdiBzdHlsZT1cInBhZGRpbmc6MWVtO2JvcmRlcjoxcHggc29saWQgIzIyYWE2Njtib3JkZXItcmFkaXVzOjhweDtiYWNrZ3JvdW5kOiNlYWZiZjFcIj5cbiAgICAgICAgQWx0IGVyIHJpa3RpZyEgU2tyaXYgaW5uIGthbmRpZGF0bnVtbWVyZXQgZGl0dCBvdmVyIGZvciDDpSBmw6UgZnVsbGbDuHJpbmdza29kZW4uXG4gICAgICA8L2Rpdj5gO1xufVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdrYW5kaWRhdCcpIn1dfQ==
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../..";
+window._ojs.paths.runtimeToRoot = "../../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopiert!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopiert!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

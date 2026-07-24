@@ -1,0 +1,1066 @@
+---
+title: "MET4 – Obligatorisk kursgodkjenning"
+subtitle: "Dataanalyse med R, basert på modul 1–4"
+format:
+  live-html:
+    toc: true
+    toc-depth: 3
+    theme: cosmo
+engine: knitr
+lang: nb
+resources:
+  - boliger.RData
+webr:
+  packages:
+    - dplyr
+    - ggplot2
+  resources:
+    - boliger.RData
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+::: {.callout-important}
+## Regler for kursgodkjenningen
+
+- Dette er en **individuell** obligatorisk oppgave. Du skal løse den selv.
+- Oppgavene løses i R-vinduene under. **R kjører rett i nettleseren**, så du trenger ikke installere noe.
+- Hver oppgave **rettes automatisk**: skriv koden din, trykk **Run**, og du får umiddelbart vite om svaret er riktig.
+- Det er 16 deloppgaver fordelt på fire hovedoppgaver. Du kan bruke nettsiden, notatene dine og hjelpesidene i R fritt.
+- Når alle oppgavene er grønne, fyller du inn **kandidatnummeret** ditt nederst og får en **fullføringskode**. Last den opp i Canvas innen fristen. (Frist: **se Canvas**.)
+:::
+
+::: {.callout-note}
+## Slik bruker du kodevinduene
+
+Første gang du kjører en kodecelle, laster nettleseren ned R. Det tar noen sekunder, men skjer bare én gang. Skriv koden din, trykk **Run** (eller `Shift+Enter`), så rettes svaret. Du kan prøve så mange ganger du vil, og trykke **Show hints** hvis du står fast.
+
+To typer oppgaver går igjen:
+
+- **Regneoppgaver.** Sørg for at den **siste linjen** i cellen regner ut selve svaret, altså tallet. Skriver du `t.test(...)` får du hele utskriften; skal du levere p-verdien, må siste linje være `t.test(...)$p.value`. Ender du opp med en tabell på én rad og én kolonne, slik `summarise()` gir deg, godtas den også.
+- **Tolkningsoppgaver.** Her svarer du med bokstaven til det alternativet du mener er riktig, som en tekststreng: skriv `"b"` på siste linje. Du får en forklaring uansett hva du svarer.
+
+Noen celler er merket **Utforsk**. De rettes ikke og teller ikke med i fremdriften; de er der for at du skal lage figuren eller utskriften du trenger for å svare på tolkningsoppgaven rett etter.
+
+`dplyr` og `ggplot2` er ferdig lastet i alle cellene, så du kan bruke `%>%`, `filter()`, `group_by()`, `summarise()` og `ggplot()` som du gjorde i modul 1. Base R fungerer like godt; rettingen bryr seg bare om svaret.
+:::
+
+## Dataene
+
+Du skal analysere annonser for utleieboliger i Bergen. Et eiendomsselskap vurderer om det lønner seg å møblere boligene de leier ut, og har hentet inn data om 900 utleieannonser.
+
+Datasettet `boliger` er allerede lastet inn i hver oppgavecelle, sammen med pakkene du trenger:
+
+```r
+library(dplyr)
+library(ggplot2)
+load("boliger.RData")
+```
+
+Filen inneholder også datasettet `nye`, som er fem boliger selskapet skal legge ut for utleie, og som du bruker i oppgave 3d.
+
+| Variabelnavn | Beskrivelse |
+|---|---|
+| `id` | Unik identifikator for annonsen |
+| `pris` | Månedsleie i kroner |
+| `areal` | Boligens areal i kvadratmeter |
+| `soverom` | Antall soverom (1–4) |
+| `bydel` | Bydel: `"Bergenhus"` (sentrum), `"Årstad"`, `"Fana"` eller `"Åsane"` |
+| `mobelert` | `"Ja"` = leies ut møblert, `"Nei"` = umøblert |
+| `balkong` | `"Ja"` = har balkong, `"Nei"` = har ikke |
+| `byggeaar` | Byggeår |
+| `avstand` | Kjøreavstand til sentrum i kilometer |
+
+: Beskrivelse av variablene i datasettet `boliger`. {.striped}
+
+Merk at dataene er simulerte. De er laget for å ligne på et reelt utleiemarked, men de beskriver ikke faktiske leiepriser i Bergen.
+
+::: {.callout-tip}
+## Vil du jobbe lokalt i RStudio?
+
+Du trenger det ikke, alt kan løses i nettleseren. Men vil du heller sitte i RStudio, laste inn dataene i ditt eget miljø og utforske dem fritt, kan du laste ned datasettet:
+
+[**boliger.RData**](boliger.RData)
+
+Legg filen i arbeidsmappen din og les den inn på samme måte som over. Du trenger `dplyr` og `ggplot2` installert lokalt (`install.packages(c("dplyr", "ggplot2"))`), se avsnittet om pakker i modul 1.
+
+Svarene blir identiske, siden det er nøyaktig samme fil. Husk at selve innleveringen uansett skjer her på siden: oppgavene må være grønne her for at fullføringskoden skal dukke opp.
+:::
+
+## Oppgave 1 – Deskriptiv statistikk
+
+### Oppgave 1a
+
+Hvor mange av boligene i utvalget ligger i **Bergenhus** og leies ut **møblert**? La siste linje gi antallet.
+
+```{webr}
+#| exercise: ex1a
+#| setup: true
+library(dplyr)
+library(ggplot2)
+load("boliger.RData")
+```
+
+```{webr}
+#| exercise: ex1a
+# Tell opp boligene som både ligger i Bergenhus og leies ut møblert:
+
+```
+
+```{webr}
+#| exercise: ex1a
+#| check: true
+verdi <- .result
+if (is.data.frame(verdi) && nrow(verdi) == 1 && ncol(verdi) == 1) verdi <- verdi[[1]]
+verdi <- suppressWarnings(tryCatch(as.numeric(verdi), error = function(e) NA_real_))
+if (length(verdi) != 1 || is.na(verdi)) {
+  list(correct = FALSE, message = "Svaret bør være ett enkelt tall, altså antall boliger.", type = "warning")
+} else if (abs(verdi - 248) < 0.5) {
+  list(correct = TRUE, message = "Riktig! 248 av de 319 boligene i Bergenhus leies ut møblert. Legg merke til at møblering er langt vanligere i sentrum enn i de andre bydelene. Det blir viktig senere.", type = "success")
+} else if (abs(verdi - 319) < 0.5) {
+  list(correct = FALSE, message = "Du har telt alle boligene i Bergenhus. Du skal telle dem som i tillegg er møblert, altså begge betingelsene samtidig.", type = "error")
+} else if (abs(verdi - 413) < 0.5) {
+  list(correct = FALSE, message = "Du har telt alle møblerte boliger i hele utvalget. Du skal bare ha dem som ligger i Bergenhus.", type = "error")
+} else {
+  list(correct = FALSE, message = "Ikke helt. Kombiner de to betingelsene med & og summer opp: sum(boliger$bydel == \"Bergenhus\" & boliger$mobelert == \"Ja\").", type = "error")
+}
+```
+
+::: {.hint exercise="ex1a"}
+Med `filter()` fra modul 1 kan du sette flere kriterier samtidig ved å skille dem med komma, og `n()` inne i `summarise()` teller radene som er igjen. Vil du heller bruke base R, gir `boliger$bydel == "Bergenhus"` en vektor av `TRUE`/`FALSE`, to slike kan kombineres med `&`, og `sum()` teller antallet `TRUE`. En tredje vei er `table(boliger$bydel, boliger$mobelert)`, som gir hele krysstabellen på én gang.
+:::
+
+::: {.solution exercise="ex1a"}
+```r
+boliger %>%
+  filter(bydel == "Bergenhus", mobelert == "Ja") %>%
+  summarise(antall = n())
+```
+
+Eller i base R:
+
+```r
+sum(boliger$bydel == "Bergenhus" & boliger$mobelert == "Ja")
+```
+:::
+
+### Oppgave 1b
+
+Regn ut **korrelasjonen** mellom `pris` og `areal`.
+
+```{webr}
+#| exercise: ex1b
+#| setup: true
+library(dplyr)
+library(ggplot2)
+load("boliger.RData")
+```
+
+```{webr}
+#| exercise: ex1b
+# Regn ut korrelasjonen mellom pris og areal:
+
+```
+
+```{webr}
+#| exercise: ex1b
+#| check: true
+verdi <- .result
+if (is.data.frame(verdi) && nrow(verdi) == 1 && ncol(verdi) == 1) verdi <- verdi[[1]]
+verdi <- suppressWarnings(tryCatch(as.numeric(verdi), error = function(e) NA_real_))
+if (length(verdi) != 1 || is.na(verdi)) {
+  list(correct = FALSE, message = "Svaret bør være ett enkelt tall mellom -1 og 1.", type = "warning")
+} else if (abs(verdi - 0.7697) < 0.002) {
+  list(correct = TRUE, message = "Riktig! Korrelasjonen er ca. 0,77. Areal og pris henger sterkt sammen, som forventet: større boliger koster mer. Merk at korrelasjonen ikke er 1, så areal forklarer ikke alt.", type = "success")
+} else {
+  list(correct = FALSE, message = "Ikke helt. Bruk cor(boliger$pris, boliger$areal). Får du NA, sjekk at du har skrevet variabelnavnene riktig.", type = "error")
+}
+```
+
+::: {.hint exercise="ex1b"}
+`cor(x, y)` regner ut korrelasjonen mellom to vektorer.
+:::
+
+::: {.solution exercise="ex1b"}
+```r
+cor(boliger$pris, boliger$areal)
+```
+:::
+
+### Oppgave 1c
+
+Kjør cellen under for å lage to boksplott: leiepris per bydel, og areal per bydel.
+
+**Utforsk (denne cellen rettes ikke):**
+
+```{webr}
+library(ggplot2)
+load("boliger.RData")
+
+ggplot(boliger, aes(x = bydel, y = pris)) +
+  geom_boxplot() +
+  labs(title = "Leiepris per bydel", x = "Bydel", y = "Kroner per måned")
+
+ggplot(boliger, aes(x = bydel, y = areal)) +
+  geom_boxplot() +
+  labs(title = "Areal per bydel", x = "Bydel", y = "Kvadratmeter")
+```
+
+Hvilken påstand er best i tråd med det de to figurene viser?
+
+**a)** Bergenhus har de høyeste leieprisene, noe som er forventet siden bydelen ligger mest sentralt.
+
+**b)** Fana og Åsane har høyere medianpris enn Bergenhus og Årstad, og en nærliggende forklaring er at boligene der er større.
+
+**c)** Bydel har ingen betydning for hva en bolig koster.
+
+**d)** Prisforskjellene mellom bydelene er så store at areal ikke kan ha noe å si for prisen.
+
+```{webr}
+#| exercise: ex1c
+#| setup: true
+library(dplyr)
+library(ggplot2)
+load("boliger.RData")
+```
+
+```{webr}
+#| exercise: ex1c
+# Skriv bokstaven til alternativet du mener er riktig, f.eks. "a"
+
+```
+
+```{webr}
+#| exercise: ex1c
+#| check: true
+svar <- if (is.character(.result) && length(.result) == 1) tolower(trimws(.result)) else ""
+if (svar == "b") {
+  list(correct = TRUE, message = "Riktig! Det er de perifere bydelene som har de høyeste leieprisene, og av det andre boksplottet ser du hvorfor: boligene i Fana og Åsane er vesentlig større. Sentral beliggenhet trekker prisen opp, men her måler vi ikke beliggenhet alene, vi måler beliggenhet og størrelse samtidig.", type = "success")
+} else if (svar == "a") {
+  list(correct = FALSE, message = "Dette er den intuitive forventningen, men figuren viser det motsatte: Bergenhus har blant de laveste medianprisene. Se på det andre boksplottet for å finne forklaringen.", type = "error")
+} else if (svar == "c") {
+  list(correct = FALSE, message = "Boksene ligger tydelig forskjøvet i forhold til hverandre, så bydel henger klart sammen med pris. Spørsmålet er hva den sammenhengen skyldes.", type = "error")
+} else if (svar == "d") {
+  list(correct = FALSE, message = "Her trekkes en motsetning som ikke finnes. At bydelene har ulikt prisnivå utelukker ikke at areal betyr noe; i oppgave 1b fant du en korrelasjon på 0,77 mellom areal og pris.", type = "error")
+} else {
+  list(correct = FALSE, message = "Svar med bokstaven til alternativet som en tekststreng, f.eks. \"b\", på siste linje.", type = "warning")
+}
+```
+
+::: {.hint exercise="ex1c"}
+Sammenlign de to figurene. Bydelen med høyest medianpris: er den også bydelen med de største boligene?
+:::
+
+### Oppgave 1d
+
+Regn ut **medianprisen i hver bydel**, og la svaret bli **differansen mellom den høyeste og den laveste** av de fire medianene.
+
+```{webr}
+#| exercise: ex1d
+#| setup: true
+library(dplyr)
+library(ggplot2)
+load("boliger.RData")
+```
+
+```{webr}
+#| exercise: ex1d
+# Finn medianprisen per bydel, og regn ut spennet mellom høyeste og laveste:
+
+```
+
+```{webr}
+#| exercise: ex1d
+#| check: true
+verdi <- .result
+if (is.data.frame(verdi) && nrow(verdi) == 1 && ncol(verdi) == 1) verdi <- verdi[[1]]
+verdi <- suppressWarnings(tryCatch(as.numeric(verdi), error = function(e) NA_real_))
+if (length(verdi) != 1 || is.na(verdi)) {
+  list(correct = FALSE, message = "Svaret bør være ett enkelt tall: differansen mellom den høyeste og den laveste medianprisen.", type = "warning")
+} else if (abs(verdi - 2425) < 1) {
+  list(correct = TRUE, message = "Riktig! Spennet er 2 425 kroner: Fana har høyest median med 19 595 kroner og Bergenhus lavest med 17 170. Til sammenligning er standardavviket til pris nesten 5 000 kroner, så forskjellen mellom bydelene er beskjeden sammenlignet med variasjonen innad i hver bydel.", type = "success")
+} else if (abs(verdi - 2184) < 1) {
+  list(correct = FALSE, message = "Du har regnet på gjennomsnitt i stedet for median. Oppgaven ber om medianprisen i hver bydel.", type = "error")
+} else {
+  list(correct = FALSE, message = "Ikke helt. tapply(boliger$pris, boliger$bydel, median) gir deg de fire medianene. Deretter tar du max(...) - min(...) av dem.", type = "error")
+}
+```
+
+::: {.hint exercise="ex1d"}
+Dette er `group_by()` og `summarise()` fra modul 1: del dataene inn i grupper, og regn ut ett tall per gruppe. Du står igjen med fire medianer, og på dem kan du bruke `max()` og `min()`, enten i en ny `summarise()` eller direkte.
+:::
+
+::: {.solution exercise="ex1d"}
+```r
+boliger %>%
+  group_by(bydel) %>%
+  summarise(median_pris = median(pris)) %>%
+  summarise(spenn = max(median_pris) - min(median_pris))
+```
+
+Eller i base R:
+
+```r
+medianer <- tapply(boliger$pris, boliger$bydel, median)
+max(medianer) - min(medianer)
+```
+:::
+
+## Oppgave 2 – Hypotesetesting
+
+Selskapet vil vite om møblerte boliger leies ut til en annen pris enn umøblerte. I denne oppgaven sammenligner vi de to gruppene direkte.
+
+### Oppgave 2a
+
+Før vi sammenligner gjennomsnittene, må vi vite om vi kan anta lik varians i de to gruppene. Utfør en **F-test for like varianser** i `pris` mellom møblerte og umøblerte boliger, og la svaret bli **p-verdien**.
+
+```{webr}
+#| exercise: ex2a
+#| setup: true
+library(dplyr)
+library(ggplot2)
+load("boliger.RData")
+```
+
+```{webr}
+#| exercise: ex2a
+# Utfør F-testen for like varianser og la siste linje gi p-verdien:
+
+```
+
+```{webr}
+#| exercise: ex2a
+#| check: true
+verdi <- .result
+if (is.data.frame(verdi) && nrow(verdi) == 1 && ncol(verdi) == 1) verdi <- verdi[[1]]
+verdi <- suppressWarnings(tryCatch(as.numeric(verdi), error = function(e) NA_real_))
+if (length(verdi) != 1 || is.na(verdi)) {
+  list(correct = FALSE, message = "Svaret bør være ett enkelt tall (p-verdien). Hent den ut med $p.value.", type = "warning")
+} else if (abs(verdi - 0.2875) < 0.002) {
+  list(correct = TRUE, message = "Riktig! p-verdien er ca. 0,29. Testobservatoren er F = 1,11, altså nær 1, som er akkurat det vi venter når variansene er like. Hva dette betyr for valget av t-test, svarer du på i 2b.", type = "success")
+} else {
+  list(correct = FALSE, message = "Ikke helt. F-testen for to varianser er var.test(). Skriv var.test(pris ~ mobelert, data = boliger)$p.value.", type = "error")
+}
+```
+
+::: {.hint exercise="ex2a"}
+`var.test()` tester $H_0: \sigma_1^2 = \sigma_2^2$. Formelsyntaksen `pris ~ mobelert` betyr «pris gruppert etter møblering», og fungerer på samme måte som i `t.test()`.
+
+Kjører du bare `var.test(pris ~ mobelert, data = boliger)`, får du hele utskriften, men oppgaven ber om ett tall. Lagre testen i en variabel og hent ut komponenten du vil ha med `$`:
+
+```r
+test <- var.test(pris ~ mobelert, data = boliger)
+test$p.value
+```
+
+Du kan også hekte `$p.value` rett på funksjonskallet. Samme framgangsmåte gjelder for `t.test()` og `chisq.test()` senere i settet, der du trenger `$statistic`.
+:::
+
+::: {.solution exercise="ex2a"}
+```r
+test <- var.test(pris ~ mobelert, data = boliger)
+test$p.value
+```
+
+Eller i én linje:
+
+```r
+var.test(pris ~ mobelert, data = boliger)$p.value
+```
+:::
+
+### Oppgave 2b
+
+Hva følger av resultatet i 2a for valget av t-test?
+
+**a)** Variansene er signifikant forskjellige, så vi må bruke Welch-testen, altså `var.equal = FALSE`.
+
+**b)** Vi forkaster ikke $H_0$ om like varianser, så vi kan bruke den poolede t-testen, altså `var.equal = TRUE`.
+
+**c)** Den høye p-verdien viser at variansene er nøyaktig like i de to gruppene.
+
+**d)** F-testen sier ingenting om varianser, bare om gjennomsnitt, så den er irrelevant her.
+
+```{webr}
+#| exercise: ex2b
+# Skriv bokstaven til alternativet du mener er riktig, f.eks. "a"
+
+```
+
+```{webr}
+#| exercise: ex2b
+#| check: true
+svar <- if (is.character(.result) && length(.result) == 1) tolower(trimws(.result)) else ""
+if (svar == "b") {
+  list(correct = TRUE, message = "Riktig! p-verdien på 0,29 gir ingen grunn til å forkaste antakelsen om like varianser, så vi kan bruke den poolede t-testen. Merk at var.equal = FALSE er standardvalget i R, så her må du overstyre det.", type = "success")
+} else if (svar == "a") {
+  list(correct = FALSE, message = "Se på p-verdien igjen. 0,29 er langt over alle vanlige signifikansnivå, så vi forkaster ikke H0 om like varianser.", type = "error")
+} else if (svar == "c") {
+  list(correct = FALSE, message = "Dette er en vanlig felle. En stor p-verdi betyr at dataene er forenlige med H0, ikke at H0 er bevist. Vi mangler grunnlag for å forkaste antakelsen, og det er noe annet enn å ha vist at den er sann.", type = "error")
+} else if (svar == "d") {
+  list(correct = FALSE, message = "F-testen i var.test() tester nettopp forholdet mellom to varianser. Det er t-testen som handler om gjennomsnitt.", type = "error")
+} else {
+  list(correct = FALSE, message = "Svar med bokstaven til alternativet som en tekststreng, f.eks. \"b\", på siste linje.", type = "warning")
+}
+```
+
+::: {.hint exercise="ex2b"}
+Nullhypotesen i `var.test()` er at de to variansene er like. Hva gjør du med en nullhypotese når p-verdien er 0,29, og hva slags t-test tillater det deg å bruke?
+:::
+
+### Oppgave 2c
+
+Utfør en **tosidig to-utvalgs t-test** av om gjennomsnittlig `pris` er forskjellig for møblerte og umøblerte boliger. Bruk varianten du kom fram til i 2b. La svaret bli **testobservatoren $t$**.
+
+```{webr}
+#| exercise: ex2c
+#| setup: true
+library(dplyr)
+library(ggplot2)
+load("boliger.RData")
+```
+
+```{webr}
+#| exercise: ex2c
+# Utfør t-testen og la siste linje gi testobservatoren:
+
+```
+
+```{webr}
+#| exercise: ex2c
+#| check: true
+verdi <- .result
+if (is.data.frame(verdi) && nrow(verdi) == 1 && ncol(verdi) == 1) verdi <- verdi[[1]]
+verdi <- suppressWarnings(tryCatch(as.numeric(verdi), error = function(e) NA_real_))
+if (length(verdi) != 1 || is.na(verdi)) {
+  list(correct = FALSE, message = "Svaret bør være ett enkelt tall (testobservatoren). Hent den ut med $statistic.", type = "warning")
+} else if (abs(abs(verdi) - 7.3167) < 0.01) {
+  list(correct = TRUE, message = "Riktig! t = 7,32 med p-verdi 5,6e-13. Umøblerte boliger koster i snitt 19 201 kroner, møblerte 16 848, altså 2 353 kroner mindre. Forskjellen er klart signifikant, men legg merke til retningen: de møblerte er billigst. Hva det betyr, svarer du på i 2e.", type = "success")
+} else if (abs(abs(verdi) - 7.3472) < 0.01) {
+  list(correct = TRUE, message = "Godkjent. Du har brukt Welch-testen (t = 7,35), som er standardvalget i R. Gitt F-testen i 2a kunne du brukt den poolede varianten (var.equal = TRUE), som gir t = 7,32. Her er de to nesten identiske, nettopp fordi variansene er like. Legg merke til retningen: de møblerte boligene er de billigste. Hva det betyr, svarer du på i 2e.", type = "success")
+} else if (abs(abs(verdi) - 2353.4) < 5) {
+  list(correct = FALSE, message = "Du har regnet ut differansen mellom gjennomsnittene, ikke testobservatoren. Testobservatoren er differansen delt på standardfeilen til differansen, og du henter den ut med $statistic.", type = "error")
+} else {
+  list(correct = FALSE, message = "Ikke helt. Skriv t.test(pris ~ mobelert, data = boliger, var.equal = TRUE)$statistic. Pass på at testen er tosidig, som er standard.", type = "error")
+}
+```
+
+::: {.hint exercise="ex2c"}
+`t.test(pris ~ mobelert, data = boliger, var.equal = TRUE)` utfører testen. Kjører du den uten mer, får du hele utskriften, og der står testobservatoren på linjen som begynner med `t = `. Du kan lese tallet derfra og skrive det inn selv.
+
+Vil du heller hente det ut programmatisk, slik du gjorde med p-verdien i 2a, er komponenten `$statistic`:
+
+```r
+test <- t.test(pris ~ mobelert, data = boliger, var.equal = TRUE)
+test$statistic
+```
+
+Fortegnet avhenger av hvilken gruppe R setter først, og spiller ingen rolle her; begge fortegn godtas.
+:::
+
+::: {.solution exercise="ex2c"}
+```r
+t.test(pris ~ mobelert, data = boliger, var.equal = TRUE)$statistic
+```
+:::
+
+### Oppgave 2d
+
+Testen i 2c var tosidig: den spør bare om det finnes en forskjell, uten å ta stilling til retningen. Men selskapet har en klar formening. De tror at møblering gir **høyere** leie, og det er den eneste retningen som er relevant for beslutningen deres: er premien null eller negativ, møblerer de ikke.
+
+Gjennomfør derfor testen på nytt som en **ensidig** test av selskapets hypotese:
+
+$$H_0: \mu_{\text{møblert}} = \mu_{\text{umøblert}} \qquad \text{mot} \qquad H_A: \mu_{\text{møblert}} > \mu_{\text{umøblert}}$$
+
+La svaret bli **p-verdien**. Vær nøye med retningen: `mobelert` har nivåene `"Nei"` og `"Ja"` i den rekkefølgen.
+
+```{webr}
+#| exercise: ex2d
+#| setup: true
+library(dplyr)
+library(ggplot2)
+load("boliger.RData")
+```
+
+```{webr}
+#| exercise: ex2d
+# Utfør den ensidige testen og la siste linje gi p-verdien:
+
+```
+
+```{webr}
+#| exercise: ex2d
+#| check: true
+verdi <- .result
+if (is.data.frame(verdi) && nrow(verdi) == 1 && ncol(verdi) == 1) verdi <- verdi[[1]]
+verdi <- suppressWarnings(tryCatch(as.numeric(verdi), error = function(e) NA_real_))
+if (length(verdi) != 1 || is.na(verdi)) {
+  list(correct = FALSE, message = "Svaret bør være ett enkelt tall (p-verdien). Hent den ut med $p.value.", type = "warning")
+} else if (abs(verdi - 1) < 0.001) {
+  list(correct = TRUE, message = "Riktig, og svaret er verdt å stoppe ved: p-verdien er 1,00. Selskapets hypotese får ikke bare svak støtte, den får ingen støtte overhodet, fordi dataene peker stikk motsatt vei. Merk to ting. En ensidig test er per konstruksjon blind for effekter i den andre retningen: den kan aldri forkaste H0 til fordel for noe den ikke ser etter. Og nå som du har sett dataene, kan du ikke snu alternativhypotesen og teste på nytt. Da velger du hypotese etter resultat, og p-verdien mister sin betydning.", type = "success")
+} else if (abs(verdi - 2.817e-13) < 1e-14) {
+  list(correct = FALSE, message = "Du har testet i motsatt retning av selskapets hypotese. Dette er den vanligste fellen med formelsyntaks: nivåene i mobelert er \"Nei\" først og \"Ja\" sist, så R ser på differansen Nei minus Ja. Skal du teste at møblerte er DYRERE, må den differansen være NEGATIV, altså alternative = \"less\".", type = "error")
+} else if (abs(verdi - 5.633e-13) < 1e-14) {
+  list(correct = FALSE, message = "Dette er p-verdien fra den tosidige testen i 2c. Oppgaven ber om en ensidig test, som du får med alternative-argumentet.", type = "error")
+} else if (abs(verdi - 0.5) < 0.001) {
+  list(correct = FALSE, message = "Du er nær tanken, men ikke tallet. Halver gjerne en tosidig p-verdi for hånd bare når testobservatoren peker i alternativhypotesens retning. Her gjør den ikke det, og da blir den ensidige p-verdien nesten 1, ikke 0,5. Bruk alternative-argumentet i t.test() og la R gjøre jobben.", type = "error")
+} else {
+  list(correct = FALSE, message = "Ikke helt. Bruk t.test(pris ~ mobelert, data = boliger, var.equal = TRUE, alternative = ...)$p.value, og tenk nøye gjennom hvilken vei R regner differansen.", type = "error")
+}
+```
+
+::: {.hint exercise="ex2d"}
+Du styrer retningen med `alternative`-argumentet, som kan være `"less"` eller `"greater"`.
+
+Nøkkelen er hvilken vei R regner differansen. Med formelsyntaks bestemmes det av nivårekkefølgen i den kategoriske variabelen, og `mobelert` har `"Nei"` før `"Ja"`. R ser altså på `Nei - Ja`. Skal du teste at de møblerte er *dyrere*, må `Nei - Ja` være *negativ*.
+
+Sjekk alltid utskriften: `t.test()` skriver eksplisitt ut hva den tester, for eksempel `"alternative hypothesis: true difference in means between group Nei and group Ja is less than 0"`.
+:::
+
+::: {.solution exercise="ex2d"}
+```r
+test <- t.test(pris ~ mobelert, data = boliger,
+               var.equal = TRUE, alternative = "less")
+test$p.value
+```
+:::
+
+### Oppgave 2e
+
+Testen i 2c viser at møblerte boliger i utvalget har klart lavere leie enn umøblerte. Hvilken konklusjon er den riktige?
+
+**a)** Testen viser at det å møblere en bolig gjør den billigere å leie ut.
+
+**b)** Møblerte boliger i utvalget har lavere leie, men testen sier ikke at møbleringen er årsaken. Møblerte og umøblerte boliger kan skille seg fra hverandre på andre måter som også påvirker prisen.
+
+**c)** Fordi p-verdien er ekstremt liten, er forskjellen på 2 353 kroner også økonomisk stor.
+
+**d)** Testen er ikke gyldig, siden de to gruppene ikke er like store.
+
+```{webr}
+#| exercise: ex2e
+# Skriv bokstaven til alternativet du mener er riktig, f.eks. "a"
+
+```
+
+```{webr}
+#| exercise: ex2e
+#| check: true
+svar <- if (is.character(.result) && length(.result) == 1) tolower(trimws(.result)) else ""
+if (svar == "b") {
+  list(correct = TRUE, message = "Riktig! Dette er kjernen i hele oppgavesettet. I oppgave 1a fant du at møblering er langt vanligere i Bergenhus, og i 1c at boligene der er små. Møblerte boliger er altså systematisk mindre enn umøblerte, og t-testen sammenligner de to gruppene uten å ta hensyn til det. I oppgave 3 kontrollerer vi for areal.", type = "success")
+} else if (svar == "a") {
+  list(correct = FALSE, message = "Her tolkes en gruppeforskjell som en årsakssammenheng. Testen sammenligner to grupper slik de er, og gruppene kan skille seg fra hverandre på flere måter enn bare møblering. Tenk på hva du fant i oppgave 1a og 1c.", type = "error")
+} else if (svar == "c") {
+  list(correct = FALSE, message = "p-verdien sier hvor sikre vi er på at det finnes en forskjell, ikke hvor stor den er. Med n = 900 blir selv små forskjeller signifikante. Om 2 353 kroner er økonomisk mye, er et faglig spørsmål om utleiemarkedet, ikke et statistisk et.", type = "error")
+} else if (svar == "d") {
+  list(correct = FALSE, message = "To-utvalgs t-test krever ikke like store grupper. Ulik gruppestørrelse håndteres i formelen for standardfeilen.", type = "error")
+} else {
+  list(correct = FALSE, message = "Svar med bokstaven til alternativet som en tekststreng, f.eks. \"b\", på siste linje.", type = "warning")
+}
+```
+
+::: {.hint exercise="ex2e"}
+Se tilbake på oppgave 1a og 1c. Hvor ligger de møblerte boligene, og hvor store er boligene der?
+:::
+
+### Oppgave 2f
+
+Selskapet lurer også på om møblering er like vanlig i alle bydeler. Lag en krysstabell over `bydel` og `mobelert`, og utfør en **kjikvadrattest for uavhengighet**. La svaret bli **testobservatoren $\chi^2$**.
+
+```{webr}
+#| exercise: ex2f
+#| setup: true
+library(dplyr)
+library(ggplot2)
+load("boliger.RData")
+```
+
+```{webr}
+#| exercise: ex2f
+# Lag krysstabellen, utfør testen, og la siste linje gi testobservatoren:
+
+```
+
+```{webr}
+#| exercise: ex2f
+#| check: true
+verdi <- .result
+if (is.data.frame(verdi) && nrow(verdi) == 1 && ncol(verdi) == 1) verdi <- verdi[[1]]
+verdi <- suppressWarnings(tryCatch(as.numeric(verdi), error = function(e) NA_real_))
+if (length(verdi) != 1 || is.na(verdi)) {
+  list(correct = FALSE, message = "Svaret bør være ett enkelt tall (testobservatoren). Hent den ut med $statistic.", type = "warning")
+} else if (abs(verdi - 217.7436) < 0.05) {
+  list(correct = TRUE, message = "Riktig! Chi-kvadrat er 217,7 med 3 frihetsgrader, og p-verdien er forsvinnende liten. Møblering og bydel er altså sterkt avhengige av hverandre: 78 prosent av boligene i Bergenhus er møblert, mot 19 prosent i Fana. Det er nettopp denne skjevheten som gjør den enkle sammenligningen i 2c misvisende.", type = "success")
+} else if (abs(verdi - 3) < 0.001) {
+  list(correct = FALSE, message = "Du har hentet ut antall frihetsgrader ($parameter), ikke testobservatoren. Bruk $statistic.", type = "error")
+} else {
+  list(correct = FALSE, message = "Ikke helt. Lag først krysstabellen med table(boliger$bydel, boliger$mobelert), og send den inn i chisq.test(). Hent testobservatoren med $statistic.", type = "error")
+}
+```
+
+::: {.hint exercise="ex2f"}
+`chisq.test(table(boliger$bydel, boliger$mobelert))` gir hele testen. Testobservatoren hentes ut med `$statistic`.
+:::
+
+::: {.solution exercise="ex2f"}
+```r
+chisq.test(table(boliger$bydel, boliger$mobelert))$statistic
+```
+:::
+
+## Oppgave 3 – Regresjon
+
+Nå skal vi forsøke å isolere hva møbleringen faktisk er verdt.
+
+### Oppgave 3a
+
+Tilpass en **enkel lineær regresjon** med `pris` som responsvariabel og `mobelert` som eneste forklaringsvariabel. La svaret bli **koeffisienten for møblering**.
+
+```{webr}
+#| exercise: ex3a
+#| setup: true
+library(dplyr)
+library(ggplot2)
+load("boliger.RData")
+```
+
+```{webr}
+#| exercise: ex3a
+# Tilpass modellen og la siste linje gi koeffisienten for mobelert:
+
+```
+
+```{webr}
+#| exercise: ex3a
+#| check: true
+verdi <- .result
+if (is.data.frame(verdi) && nrow(verdi) == 1 && ncol(verdi) == 1) verdi <- verdi[[1]]
+verdi <- suppressWarnings(tryCatch(as.numeric(verdi), error = function(e) NA_real_))
+if (length(verdi) != 1 || is.na(verdi)) {
+  list(correct = FALSE, message = "Svaret bør være ett enkelt tall: koeffisienten for mobelertJa.", type = "warning")
+} else if (abs(verdi - (-2353.387)) < 1) {
+  list(correct = TRUE, message = "Riktig! Koeffisienten er -2 353. Modellen sier at møblerte boliger i snitt leies ut for 2 353 kroner mindre per måned. Legg merke til at dette er nøyaktig differansen mellom gruppegjennomsnittene fra 2c: en regresjon med bare en todelt forklaringsvariabel er den samme sammenligningen, skrevet som en modell.", type = "success")
+} else if (abs(verdi - 19201.2) < 5) {
+  list(correct = FALSE, message = "Du har hentet ut konstantleddet, som er gjennomsnittsprisen for umøblerte boliger. Du skal ha den andre koeffisienten, mobelertJa.", type = "error")
+} else if (abs(verdi - 2353.387) < 1) {
+  list(correct = FALSE, message = "Riktig tallverdi, men feil fortegn. Møblerte boliger er billigere i denne modellen, så koeffisienten er negativ.", type = "error")
+} else {
+  list(correct = FALSE, message = "Ikke helt. Tilpass modellen med lm(pris ~ mobelert, data = boliger) og hent ut koeffisienten, for eksempel med coef(modell)[2].", type = "error")
+}
+```
+
+::: {.hint exercise="ex3a"}
+`lm(pris ~ mobelert, data = boliger)` tilpasser modellen. `coef()` gir deg koeffisientene, og du plukker ut nummer to med `[2]`. Siden `mobelert` har nivåene `"Nei"` og `"Ja"`, er `"Nei"` referansen, og koeffisienten heter `mobelertJa`.
+:::
+
+::: {.solution exercise="ex3a"}
+```r
+modell <- lm(pris ~ mobelert, data = boliger)
+coef(modell)[2]
+```
+:::
+
+### Oppgave 3b
+
+Utvid modellen slik at den kontrollerer for boligens egenskaper. Tilpass
+
+```r
+pris ~ mobelert + areal + soverom + bydel + byggeaar + balkong
+```
+
+og la svaret bli **koeffisienten for møblering** i denne modellen.
+
+```{webr}
+#| exercise: ex3b
+#| setup: true
+library(dplyr)
+library(ggplot2)
+load("boliger.RData")
+```
+
+```{webr}
+#| exercise: ex3b
+# Tilpass den multiple modellen og la siste linje gi koeffisienten for mobelert:
+
+```
+
+```{webr}
+#| exercise: ex3b
+#| check: true
+verdi <- .result
+if (is.data.frame(verdi) && nrow(verdi) == 1 && ncol(verdi) == 1) verdi <- verdi[[1]]
+verdi <- suppressWarnings(tryCatch(as.numeric(verdi), error = function(e) NA_real_))
+if (length(verdi) != 1 || is.na(verdi)) {
+  list(correct = FALSE, message = "Svaret bør være ett enkelt tall: koeffisienten for mobelertJa.", type = "warning")
+} else if (abs(verdi - 1905.24) < 1) {
+  list(correct = TRUE, message = "Riktig! Koeffisienten er nå +1 905, med standardfeil 233 og p-verdi under 1e-15. Når vi sammenligner boliger med samme areal, antall soverom, bydel, byggeår og balkong, leies de møblerte ut for nesten 1 900 kroner mer per måned. Fortegnet har snudd fra oppgave 3a. Hvorfor, svarer du på i 3c.", type = "success")
+} else if (abs(verdi - (-2353.387)) < 1) {
+  list(correct = FALSE, message = "Dette er koeffisienten fra den enkle modellen i 3a. Sjekk at du faktisk har lagt til alle de fem kontrollvariablene i formelen.", type = "error")
+} else {
+  list(correct = FALSE, message = "Ikke helt. Bruk lm(pris ~ mobelert + areal + soverom + bydel + byggeaar + balkong, data = boliger) og hent ut koeffisienten som heter mobelertJa.", type = "error")
+}
+```
+
+::: {.hint exercise="ex3b"}
+Formelen skrives med `+` mellom forklaringsvariablene. `coef(modell)["mobelertJa"]` henter ut akkurat den koeffisienten du er ute etter, uansett hvilken plass den har i rekken.
+:::
+
+::: {.solution exercise="ex3b"}
+```r
+modell <- lm(pris ~ mobelert + areal + soverom + bydel + byggeaar + balkong, data = boliger)
+coef(modell)["mobelertJa"]
+```
+:::
+
+### Oppgave 3c
+
+I 3a var koeffisienten for møblering -2 353. I 3b er den +1 905. Hva er den beste forklaringen på at fortegnet snudde?
+
+**a)** Fortegnet snudde fordi den multiple modellen bruker flere observasjoner enn den enkle.
+
+**b)** Møblerte boliger er systematisk mindre enn umøblerte, i snitt 51 mot 77 kvadratmeter. I den enkle modellen måler møblert-koeffisienten både møbleringen og størrelsesforskjellen, og størrelsen dominerer. Når areal holdes fast, isolerer koeffisienten selve møbleringen.
+
+**c)** Fortegnet snudde fordi areal og møblering er ukorrelerte, slik at de to modellene måler helt ulike ting.
+
+**d)** Den enkle modellen er den riktige. Den multiple modellen er overtilpasset og bør forkastes.
+
+```{webr}
+#| exercise: ex3c
+#| setup: true
+library(dplyr)
+library(ggplot2)
+load("boliger.RData")
+```
+
+```{webr}
+#| exercise: ex3c
+# Skriv bokstaven til alternativet du mener er riktig, f.eks. "a"
+
+```
+
+```{webr}
+#| exercise: ex3c
+#| check: true
+svar <- if (is.character(.result) && length(.result) == 1) tolower(trimws(.result)) else ""
+if (svar == "b") {
+  list(correct = TRUE, message = "Riktig! Dette er en utelatt variabel. Areal henger sammen med både møblering (møblerte boliger er små) og pris (store boliger er dyre). Utelater vi areal, blir størrelseseffekten liggende igjen i møblert-koeffisienten, og den er sterk nok til å snu fortegnet. Med areal i modellen sammenligner vi boliger av samme størrelse, og da kommer møbleringspremien fram.", type = "success")
+} else if (svar == "a") {
+  list(correct = FALSE, message = "Begge modellene bruker de samme 900 observasjonene. Det er hvilke variabler som er med, ikke hvor mange rader, som skiller dem.", type = "error")
+} else if (svar == "c") {
+  list(correct = FALSE, message = "Det motsatte er tilfellet. Nettopp fordi areal og møblering henger tett sammen, forstyrrer areal målingen av møbleringseffekten når den utelates. Var de ukorrelerte, ville koeffisienten vært omtrent den samme i begge modellene.", type = "error")
+} else if (svar == "d") {
+  list(correct = FALSE, message = "En modell med seks forklaringsvariabler og 900 observasjoner er ikke overtilpasset. Og den enkle modellen svarer på et annet spørsmål: den sammenligner møblerte og umøblerte boliger slik de faktisk er, ikke boliger som ellers er like.", type = "error")
+} else {
+  list(correct = FALSE, message = "Svar med bokstaven til alternativet som en tekststreng, f.eks. \"b\", på siste linje.", type = "warning")
+}
+```
+
+::: {.hint exercise="ex3c"}
+Kjør `boliger %>% group_by(mobelert) %>% summarise(snitt_areal = mean(areal))` i en av cellene over. Hvor store er de møblerte boligene sammenlignet med de umøblerte, og hvordan påvirker det en sammenligning som ikke tar hensyn til areal?
+:::
+
+### Oppgave 3d
+
+Selskapet skal legge ut fem nye boliger for utleie. De ligger i datasettet `nye`. Bruk modellen fra 3b til å **predikere leieprisen** for alle fem, og la svaret bli **den høyeste predikerte prisen**.
+
+```{webr}
+#| exercise: ex3d
+#| setup: true
+library(dplyr)
+library(ggplot2)
+load("boliger.RData")
+```
+
+```{webr}
+#| exercise: ex3d
+# Tilpass modellen fra 3b, prediker for datasettet nye, og la siste linje gi den høyeste prisen:
+
+```
+
+```{webr}
+#| exercise: ex3d
+#| check: true
+verdi <- .result
+if (is.data.frame(verdi) && nrow(verdi) == 1 && ncol(verdi) == 1) verdi <- verdi[[1]]
+verdi <- suppressWarnings(tryCatch(as.numeric(verdi), error = function(e) NA_real_))
+if (length(verdi) != 1 || is.na(verdi)) {
+  list(correct = FALSE, message = "Svaret bør være ett enkelt tall: den høyeste av de fem predikerte prisene.", type = "warning")
+} else if (abs(verdi - 25644.05) < 5) {
+  list(correct = TRUE, message = "Riktig! Den høyeste predikerte leien er ca. 25 644 kroner, for bolig 905: 110 kvadratmeter i Åsane. Selv om Åsane har et lavere prisnivå enn de andre bydelene når vi holder alt annet fast, veier arealet tungt nok til å gjøre denne boligen dyrest.", type = "success")
+} else if (abs(verdi - 22528.2) < 5) {
+  list(correct = FALSE, message = "Du har funnet den nest høyeste (bolig 903). Sjekk at du tar max() over alle fem prediksjonene.", type = "error")
+} else if (abs(verdi - 15834.4) < 5) {
+  list(correct = FALSE, message = "Du har tatt den første prediksjonen i stedet for den høyeste. Bruk max() på hele vektoren av prediksjoner.", type = "error")
+} else {
+  list(correct = FALSE, message = "Ikke helt. Bruk predict(modell, newdata = nye) for å få de fem prediksjonene, og max() på resultatet. Pass på at modellen er nøyaktig den fra 3b.", type = "error")
+}
+```
+
+::: {.hint exercise="ex3d"}
+`predict(modell, newdata = nye)` gir en vektor med fem prediksjoner, én per bolig. `max()` plukker ut den største. Skriv `nye` i en celle først hvis du vil se hvilke boliger det er snakk om.
+:::
+
+::: {.solution exercise="ex3d"}
+```r
+modell <- lm(pris ~ mobelert + areal + soverom + bydel + byggeaar + balkong, data = boliger)
+max(predict(modell, newdata = nye))
+```
+:::
+
+## Oppgave 4 – Utfordring
+
+Denne siste oppgaven er tøffere, og bygger på alt det foregående.
+
+### Oppgave 4a
+
+Selskapet mistenker at møblering er verdt mer i sentrum, der studenter og pendlere flytter oftere, enn i bydelene lenger ut. For å teste det trenger vi en modell der møbleringseffekten får lov til å variere mellom bydelene. Det får vi med et **interaksjonsledd**, som skrives `mobelert * bydel`:
+
+```r
+pris ~ mobelert * bydel + areal + soverom + byggeaar + balkong
+```
+
+Tilpass modellen, og la svaret bli **koeffisienten `mobelertJa`**. Siden `"Bergenhus"` er referansenivået for `bydel`, er dette møbleringspremien i Bergenhus.
+
+```{webr}
+#| exercise: ex4a
+#| setup: true
+library(dplyr)
+library(ggplot2)
+load("boliger.RData")
+```
+
+```{webr}
+#| exercise: ex4a
+# Tilpass interaksjonsmodellen og la siste linje gi koeffisienten mobelertJa:
+
+```
+
+```{webr}
+#| exercise: ex4a
+#| check: true
+verdi <- .result
+if (is.data.frame(verdi) && nrow(verdi) == 1 && ncol(verdi) == 1) verdi <- verdi[[1]]
+verdi <- suppressWarnings(tryCatch(as.numeric(verdi), error = function(e) NA_real_))
+if (length(verdi) != 1 || is.na(verdi)) {
+  list(correct = FALSE, message = "Svaret bør være ett enkelt tall: koeffisienten mobelertJa.", type = "warning")
+} else if (abs(verdi - 2976.09) < 1) {
+  list(correct = TRUE, message = "Riktig! Møbleringspremien i Bergenhus er 2 976 kroner. De tre interaksjonsleddene er alle negative, mellom -1 349 og -1 890, så premien er lavere i de andre bydelene. I Årstad er den for eksempel 2 976 - 1 890 = 1 086 kroner. Mistanken til selskapet får altså støtte i dataene.", type = "success")
+} else if (abs(verdi - 1905.24) < 1) {
+  list(correct = FALSE, message = "Dette er koeffisienten fra modellen i 3b, uten interaksjon. Sjekk at du har brukt mobelert * bydel og ikke mobelert + bydel.", type = "error")
+} else {
+  list(correct = FALSE, message = "Ikke helt. Skriv lm(pris ~ mobelert * bydel + areal + soverom + byggeaar + balkong, data = boliger) og hent ut coef(modell)[\"mobelertJa\"].", type = "error")
+}
+```
+
+::: {.hint exercise="ex4a"}
+`mobelert * bydel` er kortform for `mobelert + bydel + mobelert:bydel`, altså begge hovedeffektene pluss samspillet. Du får hele bildet med `summary(modell)`, og henter ut den ene koeffisienten med `coef(modell)["mobelertJa"]`.
+:::
+
+::: {.solution exercise="ex4a"}
+```r
+modell <- lm(pris ~ mobelert * bydel + areal + soverom + byggeaar + balkong, data = boliger)
+coef(modell)["mobelertJa"]
+```
+:::
+
+### Oppgave 4b
+
+Kjør `summary()` på modellen fra 4a i cellen under, og se på de tre interaksjonsleddene nederst i koeffisienttabellen.
+
+**Utforsk (denne cellen rettes ikke):**
+
+```{webr}
+load("boliger.RData")
+
+modell <- lm(pris ~ mobelert * bydel + areal + soverom + byggeaar + balkong,
+             data = boliger)
+summary(modell)
+```
+
+Hvilken påstand er riktig?
+
+**a)** Møbleringspremien er den samme i alle fire bydelene.
+
+**b)** Møbleringspremien er størst i Bergenhus, rundt 3 000 kroner, og lavere i de tre andre bydelene. Alle tre interaksjonsleddene er signifikante på 5 prosent nivå.
+
+**c)** Interaksjonsleddene viser at areal påvirker prisen ulikt fra bydel til bydel.
+
+**d)** Siden interaksjonsleddene er negative, er møblering verdiløst utenfor Bergenhus.
+
+```{webr}
+#| exercise: ex4b
+#| setup: true
+library(dplyr)
+library(ggplot2)
+load("boliger.RData")
+```
+
+```{webr}
+#| exercise: ex4b
+# Skriv bokstaven til alternativet du mener er riktig, f.eks. "a"
+
+```
+
+```{webr}
+#| exercise: ex4b
+#| check: true
+svar <- if (is.character(.result) && length(.result) == 1) tolower(trimws(.result)) else ""
+if (svar == "b") {
+  list(correct = TRUE, message = "Riktig, og med det er du ferdig. Premien i Bergenhus er 2 976 kroner, og de tre interaksjonsleddene er -1 890 (p = 0,0004), -1 495 (p = 0,017) og -1 349 (p = 0,029), altså alle signifikante på 5 prosent nivå. Møblering er verdt mest der boligene er små og flyttefrekvensen høy.", type = "success")
+} else if (svar == "a") {
+  list(correct = FALSE, message = "Da ville alle interaksjonsleddene vært nær null og ikke-signifikante. Se på Estimate-kolonnen og p-verdiene for de tre leddene som har kolon i navnet.", type = "error")
+} else if (svar == "c") {
+  list(correct = FALSE, message = "Interaksjonen er mellom mobelert og bydel, ikke mellom areal og bydel. Leddene heter mobelertJa:bydel..., og de sier hvordan møbleringspremien varierer mellom bydelene.", type = "error")
+} else if (svar == "d") {
+  list(correct = FALSE, message = "Interaksjonsleddene trekker premien ned, men ikke helt til null. I Årstad er den 2 976 - 1 890 = 1 086 kroner, altså fortsatt positiv. Et negativt interaksjonsledd betyr mindre effekt, ikke ingen effekt.", type = "error")
+} else {
+  list(correct = FALSE, message = "Svar med bokstaven til alternativet som en tekststreng, f.eks. \"b\", på siste linje.", type = "warning")
+}
+```
+
+::: {.hint exercise="ex4b"}
+Interaksjonsleddene er de tre radene med kolon i navnet, for eksempel `mobelertJa:bydelÅrstad`. Møbleringspremien i Årstad er `mobelertJa` pluss `mobelertJa:bydelÅrstad`.
+:::
+
+## Fullføring
+
+Oversikten under oppdateres automatisk etter hvert som oppgavene blir grønne, så du ser hvilke som gjenstår. Når **alle 16** er løst, skriver du inn kandidatnummeret ditt, så dukker fullføringskoden opp.
+
+Merk at fremdriften ligger i nettleserens minne. Laster du siden på nytt, nullstilles den, og oppgavene må kjøres om igjen. Det tar bare noen sekunder når koden din allerede står i cellene, men det kan være greit å ta kursgodkjenningen i én økt.
+
+```{ojs}
+//| echo: false
+// Leser av hvilke oppgaver som er løst. Oppgavelista utledes fra sidens egen
+// DOM, i dokumentrekkefølge, slik at den holder seg i takt om oppgaver legges
+// til eller fjernes. Generatoren yielder bare når noe faktisk har endret seg,
+// så visningen under ikke tegnes på nytt hvert halvsekund.
+oppgaveSignatur = {
+  let forrige = null;
+  while (true) {
+    const alle = [];
+    for (const el of document.querySelectorAll("[data-exercise]")) {
+      const id = el.getAttribute("data-exercise");
+      if (id && !alle.includes(id)) alle.push(id);
+    }
+    const loste = [];
+    for (const g of document.querySelectorAll(".exercise-grade.alert-success")) {
+      const wrap = g.closest("[data-exercise]");
+      const id = wrap && wrap.getAttribute("data-exercise");
+      if (id && !loste.includes(id)) loste.push(id);
+    }
+    const signatur = JSON.stringify({ alle, loste });
+    if (signatur !== forrige) {
+      forrige = signatur;
+      yield signatur;
+    }
+    await new Promise((r) => setTimeout(r, 400));
+  }
+}
+```
+
+```{ojs}
+//| echo: false
+status = JSON.parse(oppgaveSignatur)
+```
+
+```{ojs}
+//| echo: false
+antallRiktige = status.loste.length
+```
+
+```{ojs}
+//| echo: false
+totalOppgaver = 16
+```
+
+```{ojs}
+//| echo: false
+fremdrift = {
+  const ferdig = antallRiktige >= totalOppgaver;
+  const farge = ferdig ? "#22aa66" : "#666";
+  const lost = new Set(status.loste);
+
+  // Grupper etter hovedoppgave: ex2c -> "2"
+  const grupper = new Map();
+  for (const id of status.alle) {
+    const merke = id.replace(/^ex/, "");
+    const hoved = merke.charAt(0);
+    if (!grupper.has(hoved)) grupper.set(hoved, []);
+    grupper.get(hoved).push({ merke, ok: lost.has(id) });
+  }
+
+  const brikke = (b) => html`<span
+    title=${b.ok ? "Oppgave " + b.merke + " er riktig" : "Oppgave " + b.merke + " gjenstår"}
+    style="display:inline-flex;align-items:center;gap:0.3em;
+           padding:0.2em 0.6em;border-radius:999px;font-size:0.95em;
+           font-variant-numeric:tabular-nums;
+           border:1px solid ${b.ok ? "#22aa66" : "#ccc"};
+           background:${b.ok ? "#eafbf1" : "transparent"};
+           color:${b.ok ? "#177a49" : "#888"}">
+    ${b.ok ? "✓" : "○"} ${b.merke}
+  </span>`;
+
+  const rader = [...grupper.entries()].map(
+    ([hoved, brikker]) => html`<div style="display:flex;align-items:baseline;
+                                           gap:0.5em;margin:0.35em 0;flex-wrap:wrap">
+      <span style="color:#888;font-size:0.9em;min-width:6.5em">Oppgave ${hoved}</span>
+      ${brikker.map(brikke)}
+    </div>`
+  );
+
+  return html`<div style="margin:0.8em 0">
+    <div style="font-size:1.15em;margin-bottom:0.5em">
+      Fremdrift: <strong style="color:${farge}">${antallRiktige} av ${totalOppgaver}</strong>
+      oppgaver riktige ${ferdig ? "🎉" : ""}
+    </div>
+    ${rader}
+    ${ferdig
+      ? ""
+      : html`<div style="color:#888;font-size:0.9em;margin-top:0.5em">
+          Gjenstår: ${status.alle
+            .filter((id) => !lost.has(id))
+            .map((id) => id.replace(/^ex/, ""))
+            .join(", ")}
+        </div>`}
+  </div>`;
+}
+```
+
+```{ojs}
+//| echo: false
+viewof kandidat = Inputs.text({label: "Kandidatnummer:", placeholder: "f.eks. 42", width: 320})
+```
+
+```{ojs}
+//| echo: false
+function lagKode(k) {
+  const n = parseInt(String(k).replace(/\D/g, ""), 10);
+  if (!n) return null;
+  const c = (n * 7919 + 12345) % 100000;
+  return "MET4-KG-" + n + "-" + String(c).padStart(5, "0");
+}
+```
+
+```{ojs}
+//| echo: false
+resultat = {
+  const alle = antallRiktige >= totalOppgaver;
+  if (!alle) {
+    return html`<div style="padding:1em;border:1px dashed #999;border-radius:8px;background:#fafafa">
+      Løs alle 16 oppgavene (grønt) for å låse opp fullføringskoden.
+    </div>`;
+  }
+  const kode = kandidat ? lagKode(kandidat) : null;
+  return kode
+    ? html`<div style="padding:1em;border:2px solid #22aa66;border-radius:8px;background:#eafbf1">
+        <strong>🎉 Alle oppgavene er løst!</strong><br>
+        Din fullføringskode er:<br>
+        <code style="font-size:1.4em;user-select:all">${kode}</code><br>
+        Kopier koden til Canvas-innleveringen for å få kursgodkjenningen godkjent.
+      </div>`
+    : html`<div style="padding:1em;border:1px solid #22aa66;border-radius:8px;background:#eafbf1">
+        Alt er riktig! Skriv inn kandidatnummeret ditt over for å få fullføringskoden.
+      </div>`;
+}
+```
