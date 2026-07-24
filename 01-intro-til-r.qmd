@@ -1,3 +1,19 @@
+---
+aliases:
+  - en-gjennomgang-av-rstudio.html
+  - enkle-beregninger-og-variabler.html
+  - innlesing-av-data.html
+  - introduksjon-til-r.html
+  - ki-og-programmering.html
+  - mappesti.html
+  - pakker.html
+  - pipe.html
+  - r-ekstra.html
+  - r-plotting.html
+  - script.html
+  - statistiske-analyser.html
+  - vektorer.html
+---
 
 # Introduksjon til R 
 

@@ -1,3 +1,12 @@
+---
+aliases:
+  - dataving-1---grunnleggende-statistikk.html
+  - dataving-2.html
+  - dataving-3.html
+  - dataving-4.html
+  - dataving-5.html
+  - datavinger.html
+---
 
 # Dataøvinger
 

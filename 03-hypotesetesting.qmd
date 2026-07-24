@@ -1,3 +1,13 @@
+---
+aliases:
+  - enpop.html
+  - generelt-om-hypotesetesting.html
+  - hypotesetesting.html
+  - inferens-om-to-populasjoner.html
+  - kjikvadrattester.html
+  - oppgaver.html
+  - relevante-r-testing.html
+---
 
 # Hypotesetesting
 

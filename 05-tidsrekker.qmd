@@ -1,3 +1,17 @@
+---
+aliases:
+  - ar.html
+  - arma-arima.html
+  - autokorrelasjon.html
+  - intro.html
+  - ma.html
+  - modellbygging-1.html
+  - oppgaver-2.html
+  - relevante-r-tidsrekker.html
+  - stasjonaritet.html
+  - tidsrekker.html
+  - trend-og-sesong.html
+---
 
 # Tidsrekker
 

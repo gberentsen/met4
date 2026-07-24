@@ -1,3 +1,13 @@
+---
+aliases:
+  - seminar.html
+  - seminar-1---grunnleggende-statistikk.html
+  - seminar-2---hypotesetesting.html
+  - seminar-3---regresjon-i.html
+  - seminar-4---regresjon-ii.html
+  - seminar-5---tidsrekker.html
+  - seminar-6---avansert-regresjon-og-maskinlring.html
+---
 
 # Seminaroppgaver {#sec-seminar}
 

@@ -1,3 +1,13 @@
+---
+aliases:
+  - avansert-regresjon-og-maskinlring.html
+  - identifikasjon-og-kausalitet.html
+  - introduksjon-til-maskinlring-med-knn.html
+  - logistisk-regresjon.html
+  - oppgaver-3.html
+  - paneldata.html
+  - relevante-r-avansert-regresjon.html
+---
 
 # Avansert regresjon og maskinlæring 
 

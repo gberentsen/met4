@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="nb" xml:lang="nb"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Hjemmesiden til kurset MET4 – Empiriske Metoder ved Norges Handelshøyskole.">
+
+<title>1&nbsp; Introduksjon til R – MET4 – Empiriske Metoder</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./02-grunnleggende-statistikk.html" rel="next">
+<link href="./index.html" rel="prev">
+<link href="./icon/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ec8eff129d6f50c8392963982e963180.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Ingen resultater",
+    "search-matching-documents-text": "Samsvarende dokumenter",
+    "search-copy-link-title": "Kopier link for å søke",
+    "search-hide-matches-text": "Skjul ytterlige resultater",
+    "search-more-match-text": "annet resultat i dette dokumentet",
+    "search-more-matches-text": "andre resultater i dette dokumentet",
+    "search-clear-button-title": "Tøm",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Avbryt",
+    "search-submit-button-title": "Send inn",
+    "search-label": "Søk"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Slå av eller på sidebarnavigering" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-intro-til-r.html">Moduler</a></li><li class="breadcrumb-item"><a href="./01-intro-til-r.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduksjon til R</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Slå av eller på sidebarnavigering" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Søk" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">MET4 – Empiriske Metoder</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Søk"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Innledning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Moduler</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Slå på delen">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro-til-r.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduksjon til R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-grunnleggende-statistikk.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Grunnleggende statistikk</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-hypotesetesting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hypotesetesting</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-regresjon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regresjon</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-tidsrekker.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tidsrekker</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-avansert-regresjon-og-maskinlaering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Avansert regresjon og maskinlæring</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Oppgaver og eksamen</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Slå på delen">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-dataøvinger.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dataøvinger</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-seminaroppgaver.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Seminaroppgaver</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-Eksamensoppgaver.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Eksamensoppgaver</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Innholdsfortegnelse</h2>
+   
+  <ul>
+  <li><a href="#en-gjennomgang-av-rstudio" id="toc-en-gjennomgang-av-rstudio" class="nav-link active" data-scroll-target="#en-gjennomgang-av-rstudio"><span class="header-section-number">1.1</span> En gjennomgang av RStudio</a></li>
+  <li><a href="#enkle-beregninger-og-variabler" id="toc-enkle-beregninger-og-variabler" class="nav-link" data-scroll-target="#enkle-beregninger-og-variabler"><span class="header-section-number">1.2</span> Enkle beregninger og variabler</a></li>
+  <li><a href="#vektorer" id="toc-vektorer" class="nav-link" data-scroll-target="#vektorer"><span class="header-section-number">1.3</span> Vektorer</a></li>
+  <li><a href="#sec-pakker" id="toc-sec-pakker" class="nav-link" data-scroll-target="#sec-pakker"><span class="header-section-number">1.4</span> Pakker</a></li>
+  <li><a href="#mappesti" id="toc-mappesti" class="nav-link" data-scroll-target="#mappesti"><span class="header-section-number">1.5</span> Mappesti</a></li>
+  <li><a href="#innlesing-av-data" id="toc-innlesing-av-data" class="nav-link" data-scroll-target="#innlesing-av-data"><span class="header-section-number">1.6</span> Innlesing av data</a></li>
+  <li><a href="#statistiske-analyser" id="toc-statistiske-analyser" class="nav-link" data-scroll-target="#statistiske-analyser"><span class="header-section-number">1.7</span> Statistiske analyser</a></li>
+  <li><a href="#sec-r-plotting" id="toc-sec-r-plotting" class="nav-link" data-scroll-target="#sec-r-plotting"><span class="header-section-number">1.8</span> Plotting</a></li>
+  <li><a href="#script" id="toc-script" class="nav-link" data-scroll-target="#script"><span class="header-section-number">1.9</span> Script</a></li>
+  <li><a href="#sec-pipe" id="toc-sec-pipe" class="nav-link" data-scroll-target="#sec-pipe"><span class="header-section-number">1.10</span> Pipe-operatoren <code>%&gt;%</code> og enkel datavask</a></li>
+  <li><a href="#ki-og-programmering" id="toc-ki-og-programmering" class="nav-link" data-scroll-target="#ki-og-programmering"><span class="header-section-number">1.11</span> KI og programmering</a></li>
+  <li><a href="#sec-r-ekstra" id="toc-sec-r-ekstra" class="nav-link" data-scroll-target="#sec-r-ekstra"><span class="header-section-number">1.12</span> Oppgaver</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-intro-til-r.html">Moduler</a></li><li class="breadcrumb-item"><a href="./01-intro-til-r.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduksjon til R</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduksjon til R</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Vi skal i dette kurset bruke programmeringsspråket <strong>R</strong> til å gjøre beregninger og gjennomføre de ulike statistiske analysene som vi skal lære etter hvert. Dette vil være nytt for mange. Vi skal først og fremst skrive <em>kode</em> og <em>kommandolinjer</em> for å få ut resultater i R, noe som kan oppleves uvant siden vi ellers er vant til å klikke oss frem i et menysystem når vi jobber med ulike programmer. Trøsten kan være at ferdigheter i programmering blir stadig viktigere i mange yrker, spesielt innen økonomifaget.</p>
+<p>R er <em>kommandobasert</em>: du skriver en kommando, og R regner ut svaret. Vil du for eksempel ha gjennomsnittet av tallene 3, 2 og 5, skriver du <code>mean(c(3, 2, 5))</code> og får svaret tilbake. Dette føles uvant i starten, men du kommer raskt inn i tankegangen, og datalabbene gir deg god trening.</p>
+<p>Vi må installere to ting på maskinen vår før vi går videre: selve programmeringsspråket R, samt programmet RStudio som vi skal bruke til å skrive og kjøre koden. RStudio gjør R enklere å bruke: på samme måte som Word hjelper deg å lage oversiktlige tekster, hjelper RStudio deg å skrive og kjøre oversiktlige R-analyser. Begge deler er gratis, og begge deler fungerer fint på både Windows og Mac (og Linux!). Det er greiest å gjøre dette i riktig rekkefølge:</p>
+<ol type="1">
+<li><p>Gå til <a href="https://cloud.r-project.org/">cloud.r-project.org</a> for å laste ned R til ditt operativsystem, og installer på vanlig måte uten å forandre på foreslåtte innstillinger.</p></li>
+<li><p>Gå til <a href="https://posit.co/download/rstudio-desktop/">posit.co/download/rstudio-desktop</a>. Der laster du ned <strong>RStudio</strong>-programmet for ditt operativsystem og installerer på vanlig måte. Det er heller ikke her nødvendig å forandre på de foreslåtte innstillingene.</p></li>
+</ol>
+<p>Du kan så åpne RStudio, og følge sekvensen av videoforelesninger som følger under.</p>
+<section id="en-gjennomgang-av-rstudio" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="en-gjennomgang-av-rstudio"><span class="header-section-number">1.1</span> En gjennomgang av RStudio</h2>
+<iframe src="https://player.vimeo.com/video/638313293?h=a3e60f8e49" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>I denne videoen snakker vi litt om forskjellen mellom <em>programmeringsspråket R</em> og <em>programmet</em> RStudio. Vi åpner opp RStudio og rusler gjennom det grafiske grensesnittet.</p>
+<p>Under følger en skriftlig oversikt for deg som vil ha det i tillegg til videoen. Første gang du åpner RStudio ser du tre vinduer. Et fjerde vindu åpner du med å klikke på <strong>File</strong> i menyen, så <strong>New File</strong>, og så <strong>R Script</strong>. <a href="#fig-rstudio1" class="quarto-xref">Figur&nbsp;<span>1.1</span></a> viser en oversikt over de fire vinduene. Det er viktig at du forstår forskjellen på de to vinduene til venstre.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-rstudio1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rstudio1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="bilder/Rstudio1.PNG" class="img-fluid figure-img" width="590">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rstudio1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figur&nbsp;1.1: Oversikt over vinduene i RStudio.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Nederste vindu til venstre (b) viser R-konsollen, og det er her alle utregninger blir gjennomført. I dette vinduet kan du for eksempel skrive:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">3</span><span class="sc">*</span><span class="dv">5</span> <span class="sc">-</span> <span class="dv">3</span><span class="sc">/</span><span class="dv">4</span>)<span class="sc">*</span>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 57</code></pre>
+</div>
+</div>
+<p>Her er <code>(3*5 - 3/4)*(2 + 2)</code> en kommando, og det er R som finner ut hva du mener og gir deg svaret <code>57</code> i retur. R tillater alle de vanlige matteoperasjonene som gange, deling, pluss og minus (<code>*, /, +, -</code>).</p>
+<p>Det øverste vinduet til venstre (a) viser en <code>.R</code>-fil (et <em>skript</em>). En <code>.R</code>-fil fungerer som et manuskript med R-kommandoer, og kan lagres slik at du senere kan se hvilke kommandoer du har brukt og fortsette der du slapp. Når du vil at R skal utføre en kommando du har skrevet i <code>.R</code>-filen, markerer du linjen (eller lar pekeren stå i den) og trykker <strong>Ctrl + Enter</strong> (<strong>Cmd + Enter</strong> på Mac):</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bilder/Rstudiorun.PNG" class="img-fluid figure-img" width="600"></p>
+<figcaption>Utførelse av kommandoer du har skrevet i R-filen. Marker eller la pekeren stå i linjen du vil kjøre og trykk <strong>Ctrl + Enter</strong> (<strong>Cmd + Enter</strong> på Mac).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Vinduet nederst til høyre (d) viser blant annet figurer du lager og hjelpetekst. Vinduet øverst til høyre (c) gir deg en oversikt over hvilke objekter du har laget, og er spesielt nyttig hvis du vil ta en nærmere titt på et datasett du har lest inn.</p>
+<p>Det er viktig at du forstår forskjellen på de to vinduene til venstre, altså <code>.R</code>-filen og konsollen. R-kode du vil ta vare på, og som er en essensiell del av analysen, skriver og lagrer du i <code>.R</code>-filen, mens små eksperimenter og undersøkelser du ikke trenger senere kan du gjøre direkte i konsollen.</p>
+<p>For de av dere som er glad i hurtigtaster finnes det en oversikt i RStudio som kommer opp dersom du trykker <strong>Alt + Shift + K</strong> (<strong>Option + Shift + K</strong> på Mac). Hurtigtasten du kommer til å bruke desidert mest er <strong>Ctrl + Enter</strong> for å kjøre kode fra R-skriptet ditt i konsollen (på Mac erstatter du <strong>Ctrl</strong> med <strong>Cmd</strong> overalt).</p>
+</section>
+<section id="enkle-beregninger-og-variabler" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="enkle-beregninger-og-variabler"><span class="header-section-number">1.2</span> Enkle beregninger og variabler</h2>
+<iframe src="https://player.vimeo.com/video/638313310?h=d38164022f" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>Vi går videre og skriver våre første kommandoer i R. Det er kritisk at vi allerede nå setter i gang med å få programmeringen inn i fingrene, og det gjøres best ved å skrive inn kodelinjene slik det gjøres i videoen, og passe på at du får ut de samme resultatene.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vi kan bruke R som en kalkulator:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Det var enkelt! Vi må bruke parenteser dersom vi har mer kompliserte uttrykk:</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span><span class="sc">+</span><span class="dv">8</span>)<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">8</span><span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Variabler er viktige i R. Vi kan lagre mer eller mindre hva som helst i </span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># dataminnet ved å gi det navn:</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>a</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>a<span class="sc">*</span><span class="dv">5</span> </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># R gjennomfører alle operasjoner på høyresiden før verdien blir tilordnet </span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># variabelen c:</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> a<span class="sc">+</span>b</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>c</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Ingen feilmeldinger, advarsler eller spørsmål ved overskriving:</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> c <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>c</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co"># La oss lage en feilmelding!</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>d</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Vi kan navngi omtrent slik vi vil, og dette er ikke et trivielt problem i</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="co"># større prosjekter!</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>hva_som_helst <span class="ot">&lt;-</span> <span class="st">"hello world"</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>hva_som_helst</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>R har også en rekke innebygde <strong>standardfunksjoner</strong> for vanlige matematiske operasjoner. To av dem, eksponentialfunksjonen <code>exp()</code> og logaritmen <code>log()</code>, kommer vi til å bruke mye senere i kurset, blant annet til logaritmiske transformasjoner i regresjon og til logaritmisk avkastning i tidsrekker:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eksponentialfunksjonen og logaritmen:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">1</span>)              <span class="co"># e opphøyd i 1, altså tallet e (ca. 2.718)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="fu">exp</span>(<span class="dv">1</span>))         <span class="co"># naturlig logaritme (grunntall e), motstykket til exp()</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">100</span>)            <span class="co"># NB: log() regner ut den NATURLIGE logaritmen</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">log10</span>(<span class="dv">100</span>)          <span class="co"># tierlogaritmen (grunntall 10)</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">8</span>, <span class="at">base =</span> <span class="dv">2</span>)    <span class="co"># logaritme med valgfritt grunntall (her 2)</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Noen andre nyttige standardfunksjoner:</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">16</span>)            <span class="co"># kvadratrot</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(<span class="sc">-</span><span class="dv">5</span>)             <span class="co"># absoluttverdi</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14159</span>, <span class="dv">2</span>)   <span class="co"># avrunding til 2 desimaler</span></span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Legg spesielt merke til at <code>log()</code> som standard regner ut den <em>naturlige</em> logaritmen (grunntall <span class="math inline">\(e\)</span>), ikke tierlogaritmen. Ønsker du tierlogaritmen, bruker du <code>log10()</code>.</p>
+<p>Når du er ferdig med det kan du prøve deg på følgende lille oppgave:</p>
+<p><strong>Oppgave:</strong> Velg dine tre favorittall og lagre dem i tre forskjellige variabler. Beregn så ditt magiske tall, som er summen av favorittallene dine. Lagre ditt magiske tall i en ny variabel, og gi denne variabelen et informativt navn som identifiserer hva det er.</p>
+<p>Fikk du det til? Kikk på løsningen under for å sjekke.</p>
+<details>
+<summary>
+Løsning
+</summary>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tall1 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>tall2 <span class="ot">&lt;-</span> <span class="dv">87</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>tall3 <span class="ot">&lt;-</span> <span class="dv">101</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>magisk_tall <span class="ot">&lt;-</span> tall1 <span class="sc">+</span> tall2 <span class="sc">+</span> tall3</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</details>
+</section>
+<section id="vektorer" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="vektorer"><span class="header-section-number">1.3</span> Vektorer</h2>
+<iframe src="https://player.vimeo.com/video/638313322?h=abdebf4b44" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>Vi introduserer begrepet <em>vektorer</em> som er svært viktig i statistikk generelt og i R spesielt. En vektor er ganske enkelt en samling med tall, og når vi senere begynner å jobbe med data kommer vi til å lagre observasjoner av ulikt slag i vektorer. Vi ser også at vi kan gjøre operasjoner på vektorer ved å bruke <em>funksjoner</em>. For eksempel bruker vi <code>sum()</code>-funksjonen til å regne ut summen av alle tallene som er lagret i en vektor.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vi kan lage en vektor på følgende måte:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>vector1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="fl">7.8</span>, <span class="dv">10</span>, <span class="dv">2</span>, <span class="fl">0.16</span>, <span class="sc">-</span><span class="dv">3</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Skriv ut:</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>vector1</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plukke ut verdier</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>vector1[<span class="dv">1</span>]        <span class="co"># Plukker ut verdier med hakeparenteser</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>vector1[<span class="dv">10</span>]       <span class="co"># Out-of-range error</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>vector1[<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>]      <span class="co"># Plukke ut en sekvens</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>vector1[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]   <span class="co"># Plukke ut verdier basert på en ny vektor!</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Bokstaven "c" står for combine. R gjør det veldig enkelt å jobbe med </span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># vektorer:</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>vector1 <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>vector1<span class="sc">*</span><span class="dv">3</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Vi kan bruke *funksjoner* til å regne ut forskjellige ting:</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(vector1)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(vector1)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(vector1)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(vector1)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Vi kan lage vektorer av andre ting enn tall:</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>vector2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"hello"</span>, <span class="st">"world"</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co"># ... men en vektor kan bare inneholde en datatype.</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Kanskje trenger vi standardavviket senere?</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>sd_vector1 <span class="ot">&lt;-</span> <span class="fu">sd</span>(vector1)</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>sd_vector1</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Oppgave:</strong> Beregn maksimum- og minimumsverdien av <code>vector1</code>, samt medianen, ved å bruke funksjoner i R. (<strong>Hint:</strong> en dårlig skjult hemmelighet i anvendt programmering er at dersom vi ikke vet navnet på funksjonen vi skal bruke, så er Google vår beste venn!)</p>
+<details>
+<summary>
+Løsning
+</summary>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Relevante Google-søk: "minimum value r", "maximum r", "median r"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(vector1)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(vector1)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(vector1)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</details>
+</section>
+<section id="sec-pakker" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="sec-pakker"><span class="header-section-number">1.4</span> Pakker</h2>
+<iframe src="https://player.vimeo.com/video/638313337?h=b60490cd1e" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>Vi lærer at når vi laster ned R så følger det med et grunnleggende sett av funksjoner (“base R”), men at det finnes et stort antall tilleggspakker. Vi kan enkelt laste ned og installere disse pakkene ved å skrive kommandoen <code>install.packages("pakkenavn")</code>. Det trenger vi bare gjøre en gang på datamaskinen vår. For å bruke pakken må vi skrive kommandoen <code>library(pakkenavn)</code>, og det må vi gjøre hver gang vi restarter R.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For å installere pakken så kjører vi følgende kommando. Denne kjøres </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># bare en gang per maskin, den blir installert en gang for alle.</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"readxl"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Når vi skal bruke pakken så laster vi den inn ved å bruke "library()"-</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># funksjonen, og den må kjøres hver gang vi starter R:</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Oppgave:</strong> Installer følgende pakker, som vi kommer til å bruke senere i kurset:</p>
+<ul>
+<li><code>ggplot2</code></li>
+<li><code>dplyr</code></li>
+<li><code>stargazer</code></li>
+</ul>
+<details>
+<summary>
+Løsning
+</summary>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"stargazer"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</details>
+</section>
+<section id="mappesti" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="mappesti"><span class="header-section-number">1.5</span> Mappesti</h2>
+<iframe src="https://player.vimeo.com/video/638313346?h=56d3761b80" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>Vi kommer til å forholde oss til <em>filer</em> på flere måter. Vi skal lese inn datafiler, og vi kommer til å produsere ulike former for output, slik som figurer og tabeller. Vi må da ha kontroll på hva R bruker som gjeldende mappesti (“working directory”) der filer som skal leses inn ligger, og der ulike output-filer havner. Vi kan bruke funksjonen <code>getwd()</code> til å sjekke hva som er gjeldende mappesti. For å forandre mappestien kan vi bruke menysystemet (Session -&gt; Set Working Directory -&gt; Choose Directory), eventuelt funksjonen <code>setwd()</code> med ønsket mappesti som argument.</p>
+<p><strong>Oppgave:</strong> Pass på at du har gjort følgende før du går videre til neste leksjon:</p>
+<ul>
+<li>Du har laget en dedikert mappe på datamaskinen din der du skal samle alt materiale som vi bruker i dette kapitlet.</li>
+<li>Du har lastet ned filen <a href="datasett/testdata.xls">testdata.xls</a> og lagt den i den nye mappen din.</li>
+<li>Du har endret gjeldende mappesti til denne mappen.</li>
+<li>Du har <strong>bekreftet</strong> at gjeldende mappesti nå er korrekt.</li>
+</ul>
+</section>
+<section id="innlesing-av-data" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="innlesing-av-data"><span class="header-section-number">1.6</span> Innlesing av data</h2>
+<iframe src="https://player.vimeo.com/video/638313361?h=393f457fdd" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>Vi leser inn tabellen i excelfilen som en tabell (“data frame”) i R ved hjelp av funksjonen <code>read_excel()</code> i <code>readxl</code>-pakken og ser på noen enkle kommandoer for å jobbe med en slik tabell.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Datasettet er i .xls-formatet, så vi trenger readxl-pakken for å laste det inn</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># i R.</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Inne i denne pakken så er det en funksjon som heter read_excel:</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">"testdata.xls"</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Det gikk bra, men for å bruke dette datasettet, så må vi lagre det til en </span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># variabel.</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>testdata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"testdata.xls"</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Skriver ut (toppen av) datasettet.</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>testdata</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Nå ser vi datasettet i vinduet oppe til høyre. Vi kan se på det ved å </span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co"># skrive navnet til datasettet i konsollen, og vi kan hente ut individuelle</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co"># kolonner som vektorer ved å bruke dollartegnet $:</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>testdata<span class="sc">$</span>X1</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Regner ut gjennomsnittet for X1 og X2:</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(testdata<span class="sc">$</span>X1)</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(testdata<span class="sc">$</span>X2)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Hvor mange rekker/observasjoner har vi?</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(testdata)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Oppgave:</strong></p>
+<ol type="1">
+<li>Hvor mange kolonner har datasettet vårt?</li>
+<li>Kan du finne en måte å skrive ut en vektor som inneholder summen av <code>X1</code>- og <code>X2</code>-kolonnene i datasettet? (Altså, vi vil vite summen av de to første elementene i <code>X1</code> og <code>X2</code>, summen av de to andre elementene, osv.)</li>
+<li>Hva er summen av <em>alle</em> tallene i <code>X1</code>- og <code>X2</code>-kolonnene i<code>testdata</code>?</li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(testdata)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 </span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>testdata<span class="sc">$</span>X1 <span class="sc">+</span> testdata<span class="sc">$</span>X2</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(testdata<span class="sc">$</span>X1 <span class="sc">+</span> testdata<span class="sc">$</span>X2)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</details>
+</section>
+<section id="statistiske-analyser" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="statistiske-analyser"><span class="header-section-number">1.7</span> Statistiske analyser</h2>
+<iframe src="https://player.vimeo.com/video/638313375?h=a52e39e460" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>Vi ser på et eksempel der vi kjører en enkel statistisk analyse (en <span class="math inline">\(t\)</span>-test) på datasettet vårt, og hvordan vi kan gjøre ulike valg ved å endre argumenter i funksjonskallet. Vi bruker også hjelpefilene til å lese mer om funksjonen vi bruker.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># En grunnleggende t-test for likhet mellom to forventningsverdier:</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(testdata<span class="sc">$</span>X1, testdata<span class="sc">$</span>X2)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Antar lik varians og kjører tosidig test (dette kommer vi tilbake til):</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(testdata<span class="sc">$</span>X1, testdata<span class="sc">$</span>X2, <span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Du kan lese mer om enhver funksjon i R, inkludert om alle mulige argumenter og </span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># eksempler på bruk, ved å skrive et spørsmålstegn foran funksjonsnavnet i </span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># konsollen:</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>?t.test</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Kanskje ønsker vi å hente ut p-verdien for testen og bruke den til noe senere. </span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Vi kan lagre testresultatet i en variabel først, og så bruke $-tegnet til å hente</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ut p-verdien på følgende måte:</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>testresultat <span class="ot">&lt;-</span> <span class="fu">t.test</span>(testdata<span class="sc">$</span>X1, testdata<span class="sc">$</span>X2, <span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>testresultat<span class="sc">$</span>p.value</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Hvilken annen informasjon finner vi i dette testobjektet?</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(testresultat)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Hjelpesiden til en funksjon er bygd opp likt for de fleste funksjoner: en kort beskrivelse av hva funksjonen gjør, en liste over argumentene den tar, og helt nederst noen konkrete eksempler på bruk. Eksemplene nederst er ofte det raskeste stedet å begynne når du skal lære en ny funksjon.</p>
+<p><strong>Oppgave:</strong> Hva er verdien av <em>testobservatoren (test statistic)</em> i testen som vi gjorde i denne videoen? Hint: Bruk hjelpefilene til <code>t.test()</code>-funksjonen.</p>
+<details>
+<summary>
+Løsning
+</summary>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>testresultat<span class="sc">$</span>statistic</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</details>
+</section>
+<section id="sec-r-plotting" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="sec-r-plotting"><span class="header-section-number">1.8</span> Plotting</h2>
+<iframe src="https://player.vimeo.com/video/638313396?h=4832e32309" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>Vi lager vår første figur i R ved å bruke den innebygde <code>plot()</code>-funksjonen. Vi går så over til å se hvordan vi kan lage det samme plottet ved å bruke <code>ggplot</code>-pakken, som er det vi kommer til å bruke til å lage figurer i dette kurset. Vi ser også hvordan vi kan gå frem for å <em>lagre</em> plottet som en pdf-fil i arbeidsmappen vår.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Et viktig element i dataanalyse er å lage grafiske presentasjoner av datasett. </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># La oss lage et enkelt spredningsplott av våre to variabler ved å bruke den </span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># innebygde plottefunksjonen i R.</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(testdata<span class="sc">$</span>X1, testdata<span class="sc">$</span>X2)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Gjør noen justeringer:</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(testdata<span class="sc">$</span>X1, testdata<span class="sc">$</span>X2,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">20</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">bty =</span> <span class="st">"l"</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"X1"</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"X2"</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co"># I dette kurset skal vi heller bruke ggplot2-pakken til plotting:</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Her er koden for å lage et enkelt spredningsplott for X1- og X2-kolonnene i</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co"># datasettet vårt:</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(testdata, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Vi lagrer plottet ved å kjøre ggsave-kommandoen rett etter plottekommandoen:</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"testplot.pdf"</span>)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co"># En mer fleksibel måte å gjøre dette på er å lagre plottet i en variabel, og så</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="co"># gi navnet til plottet inn som et argument i ggsave-funksjonen. </span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(testdata, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"testplot.pdf"</span>, p)</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="co"># På den måten så kan vi lagre plottet p når som helst, vi trenger ikke </span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="co"># nødvendigvis gjøre det rett etter plottekommandoene.</span></span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Oppgave:</strong> Klarer du, for eksempel ved å søke etter relevante ggplot-kommandoer på nettet, å få prikkene i plottet til å bli større, og samtidig gjøre dem blå?</p>
+<details>
+<summary>
+Løsning
+</summary>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(testdata, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"blue"</span>, <span class="at">size =</span> <span class="dv">5</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</details>
+</section>
+<section id="script" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="script"><span class="header-section-number">1.9</span> Script</h2>
+<iframe src="https://player.vimeo.com/video/638313424?h=68e178de52" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>I stedet for å skrive kommandoene rett inn i konsollen, hopper vi nå over til teksteditoren i RStudio og lager et <em>script</em> i stedet. Her kan vi samle alle kommandoene våre i en fil, som vi kan lagre og kjøre igjen senere. Vi ser også hvordan vi enkelt kan kjøre enkeltlinjer i scriptet vårt i R-konsollen ved hjelp av Ctrl-Enter (Command-Enter på Mac). Vi ser at vi kan skrive kommentarer i scriptene våre ved å bruke <code>#</code>-tegnet, som kan være nyttig for å holde oversikten. Til slutt lagrer vi scriptet i arbeidsmappen.</p>
+<p><strong>Oppgave:</strong> Pass på at du nå har lagret scriptet som en .R-fil i mappen som vi laget for denne R-leksjonen. Lukk RStudio. Naviger så til denne mappen i filutforskeren og dobbelklikk på skriptet. Forhåpentligvis åpnes RStudio nå (Hvis ikke, eller hvis filen åpnes i det som heter R GUI, høyreklikker du på filen og velger “Åpne i”, og deretter RStudio. Du kan også gjerne sette RStudio som standardprogram for .R-filer).</p>
+<p>Finn ut hva gjeldende arbeidsmappe nå er i RStudio. Hva skjedde nå? Hvorfor er dette nyttig?</p>
+<details>
+<summary>
+Løsning
+</summary>
+<p>Når vi åpner RStudio ved å dobbeltklikke på skriptfilen, så blir arbeidsstien satt automatisk til mappen der skriptfilen ligger. Dette er veldig nyttig når vi kommer tilbake og skal jobbe videre med prosjektet vårt.</p>
+</details>
+<p>Det lønner seg å venne seg til å skrive ryddig kode fra starten. To enkle grep hjelper mye: bruk <code>#</code> til å skrive korte kommentarer som forklarer <em>hva</em> koden gjør, og gi variablene informative navn med litt luft (mellomrom og linjeskift) mellom kodebitene. Sammenlign disse to måtene å regne ut et konfidensintervall på. Først en lite lesbar variant:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">7</span>);m<span class="ot">&lt;-</span><span class="fu">mean</span>(x);s<span class="ot">&lt;-</span><span class="fu">sd</span>(x);n<span class="ot">&lt;-</span><span class="fu">length</span>(x)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>l<span class="ot">&lt;-</span>m<span class="sc">-</span><span class="fu">qt</span>(<span class="fl">0.975</span>,n<span class="dv">-1</span>)<span class="sc">*</span>s<span class="sc">/</span><span class="fu">sqrt</span>(n);u<span class="ot">&lt;-</span>m<span class="sc">+</span><span class="fu">qt</span>(<span class="fl">0.975</span>,n<span class="dv">-1</span>)<span class="sc">*</span>s<span class="sc">/</span><span class="fu">sqrt</span>(n)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>og så den samme utregningen skrevet ryddig:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">7</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Byggeklosser</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>n     <span class="ot">&lt;-</span> <span class="fu">length</span>(x)              <span class="co"># antall observasjoner</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>snitt <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)                <span class="co"># gjennomsnitt</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>s     <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)                  <span class="co"># standardavvik</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>tkrit <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)  <span class="co"># kritisk verdi fra t-fordelingen</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 95 %-konfidensintervall</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>nedre <span class="ot">&lt;-</span> snitt <span class="sc">-</span> tkrit <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>ovre  <span class="ot">&lt;-</span> snitt <span class="sc">+</span> tkrit <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Begge gir nøyaktig samme resultat, men den nederste er lett å lese og lett å rette hvis noe er feil. Dårlige vaner kan være vonde å vende, så prøv å skrive pen kode allerede fra første datalab.</p>
+</section>
+<section id="sec-pipe" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="sec-pipe"><span class="header-section-number">1.10</span> Pipe-operatoren <code>%&gt;%</code> og enkel datavask</h2>
+<iframe src="https://player.vimeo.com/video/638313442?h=01dfc85626" width="640" height="388" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>Vi går gjennom to nyttige programmeringsteknikker som begge er inneholdt i <code>dplyr</code>-pakken:</p>
+<ol type="1">
+<li>Pipe-operatoren <code>%&gt;%</code>, som gjør at vi kan skrive opp en sekvens av funksjonskall i den rekkefølgen de skal kjøres, og uten å miste oversikten i et hav av parenteser.</li>
+<li>Funksjoner for enkel datavask: <code>select()</code> for å velge ut kolonner i et datasett, <code>filter()</code> for å filtrere rader basert på kriterier, <code>mutate()</code> for å lage nye kolonner, og <code>summarise()</code> for å regne ut oppsummerende tall (som gjennomsnitt eller sum) fra en hel kolonne.</li>
+</ol>
+<p>Her er et par ekstra tips i denne sammenhengen:</p>
+<ul>
+<li>Når du bruker <code>select()</code>, så kan du bruke minustegnet for å spesifisere kolonner som du <em>ikke</em> vil ha med: <code>testdata %&gt;% select(-X1)</code>.</li>
+<li>I <code>filter()</code>-funksjonen så kan vi bruke andre kriterier enn <em>større enn</em> (<code>&gt;</code>):
+<ul>
+<li><code>&lt;</code> = “mindre enn”</li>
+<li><code>&gt;=</code> = “større enn eller lik”</li>
+<li><code>&lt;=</code> = “mindre enn eller lik”</li>
+<li><code>==</code> = “er lik”</li>
+<li><code>!=</code> = “er ikke lik”</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vi kan bruke klammeparentesen til å hente ut enkelttall, kolonner eller rader:</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>testdata[<span class="dv">1</span>,<span class="dv">2</span>]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>testdata[<span class="dv">1</span>,]</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>testdata[,<span class="dv">2</span>]</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>testdata[, <span class="fu">c</span>(<span class="st">"X1"</span>, <span class="st">"X2"</span>)]</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Vi kan også filtrere ut rader basert på kriterier:</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>testdata[testdata<span class="sc">$</span>X1 <span class="sc">&gt;</span> <span class="dv">100</span>,]</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Eller vi kan legge til en ny kolonne, som er summen av to kolonner</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>testdata<span class="sc">$</span>sum <span class="ot">&lt;-</span> testdata<span class="sc">$</span>X1 <span class="sc">+</span> testdata<span class="sc">$</span>X2</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Det finnes en enklere måte å gjøre dette på ved hjelp av den såkalte </span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co"># "pipe"-operatoren og egne funksjoner for datamanipulasjon. Begge deler</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co"># er inkludert i dplyr-pakken, som du eventuelt må installere:</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("dplyr")</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Det første konseptet er pipen, og det er en veldig fin kommando når vi</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co"># skal bruke flere funksjoner etter hverandre. La oss si at vi skal regne ut</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co"># logaritmen til kvadratroten til 2. I base R kan vi skrive:</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="fu">sqrt</span>(<span class="dv">2</span>))</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Kvadratroten av 2 skrevet som en pipe blir</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">%&gt;%</span> sqrt</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="co"># ... og logaritmen til kvadratroten til 2 blir da </span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">%&gt;%</span> sqrt <span class="sc">%&gt;%</span> log</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Dette kan vi lese fra venstre mot høyre i den rekkefølgen det skjer, og vi trenger </span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="co"># ikke holde styr på flere lag med parenteser.</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Dette er en teknikk som gjør det veldig greit å jobbe med tabeller av data, og</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="co"># vi skal se på tre veldig sentrale funksjoner i dplyr-pakken:</span></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Bruk "select()" til å velge kolonner i et datasett:</span></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span> <span class="fu">select</span>(X1, X2)</span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Bruk "filter()" for å filtrere ut rader basert på kriterier:</span></span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span> <span class="fu">filter</span>(X1 <span class="sc">&gt;</span> <span class="dv">100</span>)</span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Bruk "mutate()" for å lage nye kolonner, gjerne basert på de vi allerede har:</span></span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">sum =</span> X1 <span class="sc">+</span> X2)</span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Bruk "summarise()" for å regne ut ett oppsummerende tall fra en hel kolonne,</span></span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a><span class="co"># for eksempel gjennomsnittet av alle verdiene i X1:</span></span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">snitt_X1 =</span> <span class="fu">mean</span>(X1))</span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a><span class="co"># summarise() blir spesielt kraftig sammen med "group_by()", som først deler</span></span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a><span class="co"># dataene inn i grupper. Da får vi ett tall per gruppe. Her regner vi ut</span></span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a><span class="co"># gjennomsnittet av X1 for hver verdi av A1-kolonnen:</span></span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span></span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(A1) <span class="sc">%&gt;%</span></span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">snitt_X1 =</span> <span class="fu">mean</span>(X1))</span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Legg merke til at vi her bare skriver navnet på datasettet en gang, nemlig helt i</span></span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a><span class="co"># starten. Vi kan også kjøre flere slike pipes etter hverandre, og lagre resultatet </span></span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a><span class="co"># i en ny variabel:</span></span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>ny_testdata <span class="ot">&lt;-</span> </span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>    testdata <span class="sc">%&gt;%</span></span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(X1, X2) <span class="sc">%&gt;%</span></span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(X1 <span class="sc">&gt;</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">sum =</span> X1 <span class="sc">+</span> X2)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Legg spesielt merke til <code>summarise()</code> og <code>group_by()</code> over. Der <code>select()</code>, <code>filter()</code> og <code>mutate()</code> gir oss en ny tabell tilbake, <em>kollapser</em> <code>summarise()</code> mange rader ned til noen få oppsummerende tall. Kombinert med <code>group_by()</code> er dette en av de mest brukte teknikkene i praktisk dataanalyse: del dataene inn i grupper, og regn ut et tall (gjennomsnitt, sum, antall og så videre) for hver gruppe.</p>
+<p><strong>Oppgave:</strong> Basert på <code>testdata</code>, lag en tabell som bare inneholder radene der <code>A1</code>-kolonnen er lik 1 <em>og</em> <code>A2</code>-kolonnen er lik 0, men der vi bare skal ha med kolonnene <code>X1</code> og <code>X2</code>. Lag til slutt en ny kolonne som inneholder differansen av tallene i <code>X1</code> og <code>X2</code>-kolonnene.</p>
+<details>
+<summary>
+Løsning
+</summary>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(A1 <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(A2 <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(X1, X2) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">differanse =</span> X1 <span class="sc">-</span> X2)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</details>
+</section>
+<section id="ki-og-programmering" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="ki-og-programmering"><span class="header-section-number">1.11</span> KI og programmering</h2>
+<p>De siste årene har verktøy basert på kunstig intelligens (KI), som ChatGPT, Claude, Copilot og lignende, blitt en naturlig del av hverdagen til mange som programmerer. Slike verktøy kan være til god hjelp også når du skriver R-kode, og du er velkommen til å bruke dem mens du jobber deg gjennom kurset. Noen typiske måter de kan hjelpe deg på:</p>
+<ul>
+<li><strong>Forklare feilmeldinger.</strong> Feilmeldingene i R kan være kryptiske. Lim inn feilmeldingen sammen med koden din, og be om en forklaring på hva som er galt og hvordan du retter det.</li>
+<li><strong>Foreslå funksjoner.</strong> Vet du hva du vil gjøre, men ikke hvilken funksjon du trenger? Beskriv oppgaven med vanlige ord (for eksempel «hvordan regner jeg ut medianen av en kolonne i R?»), så får du gjerne et forslag.</li>
+<li><strong>Forklare kode.</strong> Har du en kodesnutt du ikke forstår, kan du be om en forklaring, gjerne linje for linje.</li>
+<li><strong>Komme i gang.</strong> Du kan be om et utkast til kode for en oppgave, og deretter jobbe videre med det selv.</li>
+</ul>
+<p><strong>Men hvorfor lære å programmere selv, når KI kan gjøre det for oss?</strong> Vi mener det fortsatt er gode grunner til å lære litt programmering selv, slik vi gjør i dette kurset:</p>
+<ul>
+<li><strong>Du må kunne vurdere om svaret er riktig.</strong> KI-verktøy er ikke feilfrie. De kan finne på funksjoner som ikke finnes, bruke feil argumenter, eller gi kode som kjører helt fint, men som svarer på feil spørsmål. I statistikk er dette ekstra lumskt: en analyse kan se riktig ut og likevel være metodisk feil. Uten egen kompetanse har du ingen mulighet til å oppdage det.</li>
+<li><strong>Forståelsen kan ingen ta fra deg.</strong> Målet i MET4 er ikke å produsere kode, men å forstå og bruke statistiske metoder riktig. KI kan skrive koden, men den kan ikke overta forståelsen din av <em>hva</em> du gjør og <em>hvorfor</em>. Det er den forståelsen som gjør deg i stand til å stille de riktige spørsmålene og til å tolke svarene fornuftig.</li>
+<li><strong>På eksamen er du på egen hånd.</strong> Eksamen i MET4 er en digital skoleeksamen der du har tilgang til R, men skal klare deg uten KI-hjelp. Da må du kunne skrive og forstå koden selv.</li>
+<li><strong>KI blir et bedre verktøy jo mer du selv kan.</strong> Jo mer du forstår, jo mer presist kan du spørre, jo raskere ser du når svaret er feil, og jo bedre klarer du å bygge videre på det du får. Litt programmeringskompetanse gjør deg altså til en langt mer effektiv bruker av KI, ikke en overflødig en.</li>
+</ul>
+<p>Kort sagt: bruk gjerne KI som en tålmodig hjelpelærer mens du lærer, men bruk den til å <em>forstå mer</em>, ikke til å slippe å forstå. Det er nettopp derfor vi bruker tid på å skrive kode selv i dette kurset.</p>
+</section>
+<section id="sec-r-ekstra" class="level2" data-number="1.12">
+<h2 data-number="1.12" class="anchored" data-anchor-id="sec-r-ekstra"><span class="header-section-number">1.12</span> Oppgaver</h2>
+<p>Her er noen oppgaver du kan bruke til å øve på det vi har gått gjennom i modulen. Prøv å skrive koden selv i R før du sjekker løsningsforslaget.</p>
+<ol type="1">
+<li>Regn ut følgende i R:
+<ol type="a">
+<li>15 delt på 4</li>
+<li>kvadratroten av 144</li>
+<li>den naturlige logaritmen av 20</li>
+<li>tallet <span class="math inline">\(e\)</span> opphøyd i 2</li>
+</ol></li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dv">15</span> <span class="sc">/</span> <span class="dv">4</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">144</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">20</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</details>
+<ol start="2" type="1">
+<li>Lag en variabel <code>pris</code> med verdien 250 og en variabel <code>antall</code> med verdien 12. Regn ut den totale kostnaden <code>pris * antall</code> og lagre resultatet i en ny variabel <code>total</code>. Skriv til slutt ut <code>total</code>.</li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>pris <span class="ot">&lt;-</span> <span class="dv">250</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>antall <span class="ot">&lt;-</span> <span class="dv">12</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>total <span class="ot">&lt;-</span> pris <span class="sc">*</span> antall</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>total</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</details>
+<ol start="3" type="1">
+<li>Lag en vektor <code>alder</code> som inneholder tallene 23, 19, 31, 27 og 22. Bruk innebygde funksjoner til å regne ut (a) gjennomsnittsalderen, (b) den høyeste alderen og (c) hvor mange personer det er i vektoren.</li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>alder <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">19</span>, <span class="dv">31</span>, <span class="dv">27</span>, <span class="dv">22</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(alder)     <span class="co"># gjennomsnitt</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(alder)      <span class="co"># høyeste alder</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(alder)   <span class="co"># antall personer</span></span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</details>
+<ol start="4" type="1">
+<li>Vektoren <code>inntekt &lt;- c(400000, 550000, 900000, 2500000)</code> inneholder fire årsinntekter. Slike data er ofte svært skjevfordelte, og da er det vanlig å se på logaritmen i stedet. Lag en ny vektor <code>log_inntekt</code> med den naturlige logaritmen av inntektene.</li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>inntekt <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">400000</span>, <span class="dv">550000</span>, <span class="dv">900000</span>, <span class="dv">2500000</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>log_inntekt <span class="ot">&lt;-</span> <span class="fu">log</span>(inntekt)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>log_inntekt</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</details>
+<ol start="5" type="1">
+<li>Bruk datasettet <code>testdata</code> og pipe-operatoren <code>%&gt;%</code> til å lage en tabell som bare inneholder radene der <code>X1</code> er større enn 100, og bare kolonnene <code>X1</code> og <code>X2</code>.</li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>testdata <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(X1 <span class="sc">&gt;</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(X1, X2)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</details>
+<p>Dersom du har fulgt modulen selv har du nå kanskje skrevet et lite script i tekstvinduet som ser ut omtrent som koden under. Når du har gjort alt riktig, skal du nå kunne kjøre gjennom disse kodelinjene uten feilmeldinger ved hjelp av <code>Ctrl-Enter</code>.</p>
+<p><strong>Dette er helt grunnleggende (Spør om hjelp! Gi hjelp!). Har du problemer her, sørg for å få dem ordnet. Spør først en medstudent om hjelp, og deretter eventuelt studentassistent eller foreleser. Studenter som har god erfaring med data og/eller programmering, kan lære mye av å hjelpe medstudenter løse feilmeldinger.</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Introduksjon til R</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -------------------</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Laster inn nødvendige pakker</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Laster inn datasettet</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>testdata <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"testdata.xls"</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co"># En t-test for om X1 og X2 har samme forventning</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>testresultat <span class="ot">&lt;-</span> <span class="fu">t.test</span>(testdata<span class="sc">$</span>X1,</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>                       testdata<span class="sc">$</span>X2, </span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>                       <span class="at">var.equal =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>                       <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Skriver ut resultatet av denne t-testen</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>testresultat</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Lager et plott av variabelen X1 mot X2</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(testdata, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2)) <span class="sc">+</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>()</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Lagrer plottet</span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"testplot.pdf"</span>, <span class="at">plot =</span> p)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="6" type="1">
+<li><p>Lagre scriptet ditt. I RStudio velger du <code>File -&gt; Save</code> og trykker <code>Ok</code> dersom det kommer opp et vindu om <em>character encoding</em> e.l. Finn en fornuftig plassering (gjerne i samme mappe som øvelsesdatasettet) og gi filen et fornuftig navn. Standard filending for R-script er <code>.R</code>, men det er skjult for de fleste Windowsbrukere. Lukk RStudio.</p></li>
+<li><p>Du kan nå åpne skriptfilen i RStudio igjen. Enten ved å dobbeltklikke på den, eller ved å åpne RStudio, velge <code>File -&gt; Open file</code>, og så videre (dersom skriptet ikke allerede ligger åpnet). Du kan også åpne skriptfilen i en hvilken som helst notatbok (Notebook e.l.) og se at det er en helt standard, <em>ren tekstfil</em>. Hva er fordelen med å lagre en analyse som <em>et skript</em> versus å gjøre ting i et menydrevet grafisk grensesnitt?</p></li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<p>Når vi lagrer koden vår i et skript sørger vi for at <em>hele analysen vår er lagret</em>, ikke bare resultatene. Med andre ord, dersom du på et senere tidspunkt ønsker å komme tilbake til et analyseprosjekt og gjøre noen enkle forandringer, så er det fort gjort å gjøre det i skriptet, og så kjøre hele analysen på nytt. Dersom du i stedet hadde brukt et menydrevet system for å gjennomføre analysen (pek og klikk) kunne du risikere å måtte gjøre alt sammen på nytt (hvis du da husker hvordan du gjorde det), fordi du ikke like enkelt kan <em>lagre</em> hvert eneste museklikk.</p>
+</details>
+<ol start="8" type="1">
+<li>Vi skal nå pynte på plottet og gjøre det riktig pent. Det gjør vi ved å legge til nye linjer i ggplot-kommandoen. Erstatt den nest siste linjen i skriptet med kommandoen under, og se at du får en figur omtrent som den som følger under det igjen (vi bruker aksetitler i henhold til oppgavene i den første datalabben, der vi får vite at datasettet representerer kvalitet på kaffeavlingen før og etter en omlegging i produksjonsmetode):</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(testdata, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2)) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">xlab</span>(<span class="st">"Produksjonsmetode 1"</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ylab</span>(<span class="st">"Produksjonsmetode 2"</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01-intro-til-r_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="9" type="1">
+<li><p>Merk at vi bruker “+”-tegnet til å legge til flere “lag” med grafiske egenskaper til plottet. Hvert “lag” består av en funksjon, som ofte kan ta argumenter; f.eks. brukes funksjonen <code>geom_point()</code> til å lage prikker, og så kan vi f.eks. bruke argumentet <code>size</code> til å styre størrelsen på prikkene. Kan du finne ut hva hvert enkelt av disse “lagene” gjør? Hint: ta bort en linje av gangen, og se hva som skjer. Pass på at det er et pluss mellom hvert lag.</p></li>
+<li><p>Prøv å endre på noen av lagene eller legg til nye. For eksempel kan du lage en tittel ved å legge til funksjonen <code>ggtitle()</code> som et lag, og du kan endre aksetitlene. Prøv også å bruke argumentet <code>shape</code> i <code>geom_point()</code> til å bytte ut prikkene med en annen form. Det finnes flere andre “tema” i tillegg til <code>theme_classic()</code>, f.eks. <code>theme_bw()</code>, <code>theme_dark()</code>, etc.</p></li>
+</ol>
+<details>
+<summary>
+Forslag
+</summary>
+<p>Prøv for eksempel dette:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(testdata, <span class="fu">aes</span>(<span class="at">x =</span> X1, <span class="at">y =</span> X2)) <span class="sc">+</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">shape =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggtitle</span>(<span class="st">"Produksjonskvalitet"</span>) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">xlab</span>(<span class="st">"Ny aksetittel"</span>) <span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ylab</span>(<span class="st">"Enda en aksetittel"</span>) <span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_light</span>()</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01-intro-til-r_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</details>
+<ol start="11" type="1">
+<li>Det følger med omfattende dokumentasjon med <code>R</code>. Du kan lese om alle <code>R</code>-funksjoner ved å skrive <code>?</code> før funksjonsnavnet i konsollen. Prøv for eksempel å skrive <code>?mean</code> i konsollen og trykk enter.</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopiert!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopiert!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Innledning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Innledning</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./02-grunnleggende-statistikk.html" class="pagination-link" aria-label="Grunnleggende statistikk">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Grunnleggende statistikk</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>MET4 – Empiriske Metoder, NHH</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.nhh.no/en/employees/faculty/hakon-otneim/">
+<p>Håkon Otneim</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.nhh.no/en/employees/faculty/geir-drage-berentsen/">
+<p>Geir Drage Berentsen</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

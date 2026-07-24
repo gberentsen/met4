@@ -1,0 +1,2355 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="nb" xml:lang="nb"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Hjemmesiden til kurset MET4 – Empiriske Metoder ved Norges Handelshøyskole.">
+
+<title>5&nbsp; Tidsrekker – MET4 – Empiriske Metoder</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./06-avansert-regresjon-og-maskinlaering.html" rel="next">
+<link href="./04-regresjon.html" rel="prev">
+<link href="./icon/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ec8eff129d6f50c8392963982e963180.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Ingen resultater",
+    "search-matching-documents-text": "Samsvarende dokumenter",
+    "search-copy-link-title": "Kopier link for å søke",
+    "search-hide-matches-text": "Skjul ytterlige resultater",
+    "search-more-match-text": "annet resultat i dette dokumentet",
+    "search-more-matches-text": "andre resultater i dette dokumentet",
+    "search-clear-button-title": "Tøm",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Avbryt",
+    "search-submit-button-title": "Send inn",
+    "search-label": "Søk"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Slå av eller på sidebarnavigering" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-intro-til-r.html">Moduler</a></li><li class="breadcrumb-item"><a href="./05-tidsrekker.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tidsrekker</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Slå av eller på sidebarnavigering" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Søk" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">MET4 – Empiriske Metoder</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Søk"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Innledning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Moduler</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Slå på delen">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro-til-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduksjon til R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-grunnleggende-statistikk.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Grunnleggende statistikk</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-hypotesetesting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hypotesetesting</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-regresjon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regresjon</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-tidsrekker.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tidsrekker</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-avansert-regresjon-og-maskinlaering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Avansert regresjon og maskinlæring</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Oppgaver og eksamen</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Slå på delen">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-dataøvinger.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dataøvinger</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-seminaroppgaver.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Seminaroppgaver</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-Eksamensoppgaver.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Eksamensoppgaver</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Innholdsfortegnelse</h2>
+   
+  <ul>
+  <li><a href="#sec-intro" id="toc-sec-intro" class="nav-link active" data-scroll-target="#sec-intro"><span class="header-section-number">5.1</span> Introduksjon til tidsrekker</a>
+  <ul class="collapse">
+  <li><a href="#kontrollspørsmål" id="toc-kontrollspørsmål" class="nav-link" data-scroll-target="#kontrollspørsmål"><span class="header-section-number">5.1.1</span> Kontrollspørsmål</a></li>
+  <li><a href="#oppgaver-fra-lærebok" id="toc-oppgaver-fra-lærebok" class="nav-link" data-scroll-target="#oppgaver-fra-lærebok"><span class="header-section-number">5.1.2</span> Oppgaver fra lærebok</a></li>
+  <li><a href="#r-øving" id="toc-r-øving" class="nav-link" data-scroll-target="#r-øving"><span class="header-section-number">5.1.3</span> R-øving</a></li>
+  </ul></li>
+  <li><a href="#sec-trend-og-sesong" id="toc-sec-trend-og-sesong" class="nav-link" data-scroll-target="#sec-trend-og-sesong"><span class="header-section-number">5.2</span> Trend og sesong</a>
+  <ul class="collapse">
+  <li><a href="#kontrollspørsmål-1" id="toc-kontrollspørsmål-1" class="nav-link" data-scroll-target="#kontrollspørsmål-1"><span class="header-section-number">5.2.1</span> Kontrollspørsmål</a></li>
+  <li><a href="#r-øving-1" id="toc-r-øving-1" class="nav-link" data-scroll-target="#r-øving-1"><span class="header-section-number">5.2.2</span> R-øving</a></li>
+  </ul></li>
+  <li><a href="#sec-ar" id="toc-sec-ar" class="nav-link" data-scroll-target="#sec-ar"><span class="header-section-number">5.3</span> AR(p)</a>
+  <ul class="collapse">
+  <li><a href="#kontrollspørsmål-2" id="toc-kontrollspørsmål-2" class="nav-link" data-scroll-target="#kontrollspørsmål-2"><span class="header-section-number">5.3.1</span> Kontrollspørsmål</a></li>
+  <li><a href="#r-øving-2" id="toc-r-øving-2" class="nav-link" data-scroll-target="#r-øving-2"><span class="header-section-number">5.3.2</span> R-øving</a></li>
+  </ul></li>
+  <li><a href="#sec-stasjonaritet" id="toc-sec-stasjonaritet" class="nav-link" data-scroll-target="#sec-stasjonaritet"><span class="header-section-number">5.4</span> Stasjonaritet</a>
+  <ul class="collapse">
+  <li><a href="#kontrollspørsmål-3" id="toc-kontrollspørsmål-3" class="nav-link" data-scroll-target="#kontrollspørsmål-3"><span class="header-section-number">5.4.1</span> Kontrollspørsmål</a></li>
+  <li><a href="#merk" id="toc-merk" class="nav-link" data-scroll-target="#merk"><span class="header-section-number">5.4.2</span> Merk</a></li>
+  </ul></li>
+  <li><a href="#sec-autokorrelasjon" id="toc-sec-autokorrelasjon" class="nav-link" data-scroll-target="#sec-autokorrelasjon"><span class="header-section-number">5.5</span> Autokorrelasjon</a>
+  <ul class="collapse">
+  <li><a href="#kontrollspørsmåldiskusjonsspørsmål" id="toc-kontrollspørsmåldiskusjonsspørsmål" class="nav-link" data-scroll-target="#kontrollspørsmåldiskusjonsspørsmål"><span class="header-section-number">5.5.1</span> Kontrollspørsmål/Diskusjonsspørsmål</a></li>
+  <li><a href="#r-øving-3" id="toc-r-øving-3" class="nav-link" data-scroll-target="#r-øving-3"><span class="header-section-number">5.5.2</span> R-øving</a></li>
+  </ul></li>
+  <li><a href="#sec-ma" id="toc-sec-ma" class="nav-link" data-scroll-target="#sec-ma"><span class="header-section-number">5.6</span> MA(q)</a>
+  <ul class="collapse">
+  <li><a href="#kontrollspørsmåldiskusjonsspørsmål-1" id="toc-kontrollspørsmåldiskusjonsspørsmål-1" class="nav-link" data-scroll-target="#kontrollspørsmåldiskusjonsspørsmål-1"><span class="header-section-number">5.6.1</span> Kontrollspørsmål/Diskusjonsspørsmål</a></li>
+  <li><a href="#r-øving-4" id="toc-r-øving-4" class="nav-link" data-scroll-target="#r-øving-4"><span class="header-section-number">5.6.2</span> R-øving</a></li>
+  </ul></li>
+  <li><a href="#sec-arma-arima" id="toc-sec-arma-arima" class="nav-link" data-scroll-target="#sec-arma-arima"><span class="header-section-number">5.7</span> ARMA og ARIMA</a>
+  <ul class="collapse">
+  <li><a href="#kontrollspørsmåldiskusjonsspørsmål-2" id="toc-kontrollspørsmåldiskusjonsspørsmål-2" class="nav-link" data-scroll-target="#kontrollspørsmåldiskusjonsspørsmål-2"><span class="header-section-number">5.7.1</span> Kontrollspørsmål/Diskusjonsspørsmål</a></li>
+  <li><a href="#r-øving-5" id="toc-r-øving-5" class="nav-link" data-scroll-target="#r-øving-5"><span class="header-section-number">5.7.2</span> R-øving</a></li>
+  </ul></li>
+  <li><a href="#modellbygging" id="toc-modellbygging" class="nav-link" data-scroll-target="#modellbygging"><span class="header-section-number">5.8</span> Modellbygging</a>
+  <ul class="collapse">
+  <li><a href="#r-øving-6" id="toc-r-øving-6" class="nav-link" data-scroll-target="#r-øving-6"><span class="header-section-number">5.8.1</span> R-øving</a></li>
+  </ul></li>
+  <li><a href="#oppgaver" id="toc-oppgaver" class="nav-link" data-scroll-target="#oppgaver"><span class="header-section-number">5.9</span> Oppgaver</a></li>
+  <li><a href="#sec-relevante-r-tidsrekker" id="toc-sec-relevante-r-tidsrekker" class="nav-link" data-scroll-target="#sec-relevante-r-tidsrekker"><span class="header-section-number">5.10</span> Relevante R-kommandoer</a>
+  <ul class="collapse">
+  <li><a href="#tidsrekkedata" id="toc-tidsrekkedata" class="nav-link" data-scroll-target="#tidsrekkedata">Tidsrekkedata</a></li>
+  <li><a href="#plotte-en-tidsrekke" id="toc-plotte-en-tidsrekke" class="nav-link" data-scroll-target="#plotte-en-tidsrekke">Plotte en tidsrekke</a></li>
+  <li><a href="#glidende-gjennomsnitt" id="toc-glidende-gjennomsnitt" class="nav-link" data-scroll-target="#glidende-gjennomsnitt">Glidende gjennomsnitt</a></li>
+  <li><a href="#eksponensiell-glatting" id="toc-eksponensiell-glatting" class="nav-link" data-scroll-target="#eksponensiell-glatting">Eksponensiell glatting</a></li>
+  <li><a href="#dekomponering-i-trend-sesong-og-residualer" id="toc-dekomponering-i-trend-sesong-og-residualer" class="nav-link" data-scroll-target="#dekomponering-i-trend-sesong-og-residualer">Dekomponering i trend, sesong og residualer</a></li>
+  <li><a href="#differensiering" id="toc-differensiering" class="nav-link" data-scroll-target="#differensiering">Differensiering</a></li>
+  <li><a href="#autokorrelasjonsplott-acf" id="toc-autokorrelasjonsplott-acf" class="nav-link" data-scroll-target="#autokorrelasjonsplott-acf">Autokorrelasjonsplott (ACF)</a></li>
+  <li><a href="#estimere-arima-modeller" id="toc-estimere-arima-modeller" class="nav-link" data-scroll-target="#estimere-arima-modeller">Estimere ARIMA-modeller</a></li>
+  <li><a href="#automatisk-modellvalg" id="toc-automatisk-modellvalg" class="nav-link" data-scroll-target="#automatisk-modellvalg">Automatisk modellvalg</a></li>
+  <li><a href="#predikering" id="toc-predikering" class="nav-link" data-scroll-target="#predikering">Predikering</a></li>
+  <li><a href="#dele-opp-i-trenings--og-testsett" id="toc-dele-opp-i-trenings--og-testsett" class="nav-link" data-scroll-target="#dele-opp-i-trenings--og-testsett">Dele opp i trenings- og testsett</a></li>
+  <li><a href="#out-of-sample-vurdering" id="toc-out-of-sample-vurdering" class="nav-link" data-scroll-target="#out-of-sample-vurdering">Out-of-sample vurdering</a></li>
+  <li><a href="#simulere-tidsrekker" id="toc-simulere-tidsrekker" class="nav-link" data-scroll-target="#simulere-tidsrekker">Simulere tidsrekker</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-intro-til-r.html">Moduler</a></li><li class="breadcrumb-item"><a href="./05-tidsrekker.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tidsrekker</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Tidsrekker</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Den neste MET4 handler om tidsrekker. I motsetning til modulene vi har jobbet med frem til nå, der vi separerte teorivideoene og dataøvingene, er disse to elementene nå blandet sammen. Vi har delt stoffet opp i en serie overskrifter, der du finner videosnuttene fulgt av en guide til relevante R-funksjoner, programmeringsøvelser og noen regneoppgaver.</p>
+<p>Dataøvingen til denne modulen er også laget for å passe inn i BED4-opplegget. I øvingen skal vi lage prognoser av noen tidsrekker som kommer til å bli nyttige i en av casene i BED4. Hvis du ikke tar BED4 dette semesteret så er det også helt greit – dataøvingen vår står støtt på egne bein.</p>
+<p>Faglærer og studentassistenter vil være tilgjengelig på vanlig måte for konsultasjon, diskusjon og problemløsning.</p>
+<p>Lykke til!</p>
+<section id="sec-intro" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec-intro"><span class="header-section-number">5.1</span> Introduksjon til tidsrekker</h2>
+<div style="padding:75% 0 0 0;position:relative;">
+<iframe src="https://vimeo.com/showcase/7660844/embed" allowfullscreen="" frameborder="0" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+</iframe>
+</div>
+<section id="kontrollspørsmål" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="kontrollspørsmål"><span class="header-section-number">5.1.1</span> Kontrollspørsmål</h3>
+<ol type="1">
+<li>Hvilke forskjeller er det mellom en tidsrekke og et sett med samtidige observasjoner?</li>
+<li>Nevn noen typiske mønstre som vi kan se etter i en tidsrekke.</li>
+<li>Hvorfor er det nyttig å identifisere slike mønstre?</li>
+<li>Hvorfor kan det være nyttig å glatte en tidsrekke?</li>
+<li>Beskriv kort hvordan man regner ut et glidende gjennomsnitt.</li>
+<li>Hvorfor kan vi ikke bruke det glidende gjennomsnittet til å predikere neste observasjon i en tidsrekke?</li>
+<li>Beskriv kort hvordan eksponensiell glatting fungerer, og hvorfor denne teknikken kan brukes til prediksjon.</li>
+</ol>
+</section>
+<section id="oppgaver-fra-lærebok" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="oppgaver-fra-lærebok"><span class="header-section-number">5.1.2</span> Oppgaver fra lærebok</h3>
+<p><strong>Keller: Statistics for Management and Economics, 11. utg</strong></p>
+<p><strong>a)</strong> Regn ut et glidende gjennomsnitt med vindusstørrelse 3 for følgende tidsrekke:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">t</th>
+<th style="text-align: left;">Y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">48</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">41</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">37</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">32</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">36</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">31</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">43</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">52</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">60</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">48</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">41</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">30</td>
+</tr>
+</tbody>
+</table>
+<!-- ```{r, echo = F, out.width="300px"} -->
+<!-- knitr::include_graphics("bilder/oppgave1.jpg") -->
+<!-- ``` -->
+<!-- ![](bilder/oppgave1.jpg){#id .class width=80% height=80%} -->
+<details>
+<summary>
+Løsning
+</summary>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>t</th>
+<th style="text-align: center;">Glidende gjennomsnitt</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td style="text-align: center;">(48+41+37)/3 = 42.00</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td style="text-align: center;">(41+37+32)/3 = 36.67</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td style="text-align: center;">(37+32+36)/3 = 35.00</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td style="text-align: center;">(32+36+31)/3 = 33.00</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td style="text-align: center;">(36+31+43)/3 = 36.67</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td style="text-align: center;">(31+43+52)/3 = 42.00</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td style="text-align: center;">(43+52+60)/3 = 51.67</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td style="text-align: center;">(52+60+48)/3 = 53.33</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td style="text-align: center;">(60+48+41)/3 = 49.67</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td style="text-align: center;">(48+41+30)/3 = 39.67</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td style="text-align: center;">NA</td>
+</tr>
+</tbody>
+</table>
+</details>
+<p><strong>b)</strong> Regn ut et glidende gjennomsnitt med vindusstørrelse 5 for tidsrekken over.</p>
+<details>
+<summary>
+Løsning
+</summary>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>t</th>
+<th style="text-align: center;">Glidende gjennomsnitt</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td style="text-align: center;">(48 +41+37+32+36)/5 = 38.8</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td style="text-align: center;">(41+37+32+36+31)/5 = 35.4</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td style="text-align: center;">(37+32+36+31+43)/5 = 35.8</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td style="text-align: center;">(32+36+31+43+52)/5 = 38.8</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td style="text-align: center;">(36+31+43+52+60)/5 = 44.4</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td style="text-align: center;">(31+43+52+60+48)/5 = 46.8</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td style="text-align: center;">(43+52+60+48+41)/5 = 48.8</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td style="text-align: center;">(52+60+48+41+30)/5 = 46.2</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td style="text-align: center;">NA</td>
+</tr>
+</tbody>
+</table>
+</details>
+<p><strong>c)</strong> Tegn inn tidsrekken over med de to glattingene inn i samme figur.</p>
+<details>
+<summary>
+Løsning
+</summary>
+<p>“Manuelt” i R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Les først inn dine utregninger</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">12</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">48</span>, <span class="dv">41</span>, <span class="dv">37</span>, <span class="dv">32</span>, <span class="dv">36</span>, <span class="dv">31</span>, <span class="dv">43</span>, <span class="dv">52</span>, <span class="dv">60</span>, <span class="dv">48</span>, <span class="dv">41</span>, <span class="dv">30</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>glatt3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="dv">42</span>, <span class="fl">36.67</span>, <span class="dv">35</span>, <span class="dv">33</span>, <span class="fl">36.67</span>, <span class="dv">42</span>, <span class="fl">51.67</span>, <span class="fl">53.33</span>, <span class="fl">49.67</span>, <span class="fl">39.67</span>, <span class="cn">NA</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>glatt5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="fl">38.8</span>, <span class="fl">35.4</span>, <span class="fl">35.8</span>, <span class="fl">38.8</span>, <span class="fl">44.4</span>, <span class="fl">46.8</span>, <span class="fl">48.8</span>, <span class="fl">46.2</span>, <span class="cn">NA</span>, <span class="cn">NA</span>) </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Med base-R plot</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(time, y)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(time, glatt3, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(time, glatt5, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># eller med ggplot</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">time =</span> <span class="fu">rep</span>(time, <span class="dv">2</span>),</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> <span class="fu">rep</span>(y, <span class="dv">2</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">glatting =</span> <span class="fu">c</span>(glatt3, glatt5),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">vindulengde =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"3"</span>, <span class="dv">12</span>), <span class="fu">rep</span>(<span class="st">"5"</span>, <span class="dv">12</span>))))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> time , <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> glatting, <span class="at">color =</span> vindulengde))</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</details>
+<p><strong>d)</strong> Regn ut eksponensiell glatting for tidsrekken under med glattefaktor <span class="math inline">\(w = 0.1\)</span>:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">t</th>
+<th style="text-align: left;">Y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">38</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">43</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">42</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">45</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">46</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">48</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">49</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">46</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">45</td>
+</tr>
+</tbody>
+</table>
+<!--  ```{r, echo = F, out.width="300px"} -->
+<!--  knitr::include_graphics("bilder/oppgave1b.jpg") -->
+<!--  ``` -->
+<details>
+<summary>
+Løsning
+</summary>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>t</th>
+<th style="text-align: center;">Eksponensiell glatting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td style="text-align: center;">38.00</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td style="text-align: center;">0.1(43) + 0.9(38) = 38.50</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td style="text-align: center;">0.1(42) + 0.9(38.50) = 38.85</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td style="text-align: center;">0.1(45) + 0.9(38.85) = 39.47</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td style="text-align: center;">0.1(46) + 0.9(39.47) = 40.12</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td style="text-align: center;">0.1(48) + 0.9(40.12) = 40.91</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td style="text-align: center;">0.1(50) + 0.9(40.91) = 41.82</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td style="text-align: center;">0.1(49) + 0.9(41.82) = 42.53</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td style="text-align: center;">0.1(46) + 0.9(42.53) = 42.88</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td style="text-align: center;">0.1(45) + 0.9(42.88) = 43.09</td>
+</tr>
+</tbody>
+</table>
+</details>
+<p><strong>e)</strong> Gjenta oppgaven over med glattefaktor <span class="math inline">\(w = 0.8\)</span>.</p>
+<details>
+<summary>
+Løsning
+</summary>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>t</th>
+<th style="text-align: center;">Glidende gjennomsnitt</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td style="text-align: center;">38</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td style="text-align: center;">0.8(43) + 0.2(38) = 42.00</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td style="text-align: center;">0.8(42) + 0.2(42.00) = 42.00</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td style="text-align: center;">0.8(45) + 0.2(42.00) = 44.40</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td style="text-align: center;">0.8(46) + 0.2(44.40) = 45.68</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td style="text-align: center;">0.8(48) + 0.2(45.68) = 47.54</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td style="text-align: center;">0.8(50) + 0.2(47.54) = 49.51</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td style="text-align: center;">0.8(49) + 0.2(49.51) = 49.10</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td style="text-align: center;">0.8(46) + 0.2(49.10) = 46.62</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td style="text-align: center;">0.8(45) + 0.2(46.62) = 45.32</td>
+</tr>
+</tbody>
+</table>
+</details>
+<p><strong>f)</strong> Tegn tidsrekken over inn i samme figur som de to glattede versjonene. Ser det ut til å være en trend i denne tidsrekken?</p>
+<details>
+<summary>
+Løsning
+</summary>
+<p>“Manuelt” i R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Les først inn dine utregninger</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">10</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">38</span>, <span class="dv">43</span>, <span class="dv">42</span>, <span class="dv">45</span>, <span class="dv">46</span>, <span class="dv">48</span>, <span class="dv">50</span>, <span class="dv">49</span>, <span class="dv">46</span>, <span class="dv">45</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>exp01 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">38</span>, <span class="fl">38.50</span>, <span class="fl">38.85</span>, <span class="fl">39.47</span>, <span class="fl">40.12</span>, <span class="fl">40.91</span>, <span class="fl">41.82</span>, <span class="fl">42.53</span>, <span class="fl">42.88</span>, <span class="fl">43.09</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>exp08 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">38</span>, <span class="dv">42</span>, <span class="dv">42</span>, <span class="fl">44.40</span>, <span class="fl">45.68</span>, <span class="fl">47.54</span>, <span class="fl">49.51</span>, <span class="fl">49.10</span>, <span class="fl">46.62</span>, <span class="fl">45.32</span>) </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Med base-R plot</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(time, y)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(time, exp01, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(time, exp08, <span class="at">col =</span> <span class="st">"blue"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># eller med ggplot</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">time =</span> <span class="fu">rep</span>(time, <span class="dv">2</span>),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> <span class="fu">rep</span>(y, <span class="dv">2</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">glatting =</span> <span class="fu">c</span>(exp01, exp08),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">glattefaktor =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"0.1"</span>, <span class="dv">10</span>), <span class="fu">rep</span>(<span class="st">"0.9"</span>, <span class="dv">10</span>))))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> time , <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> glatting, <span class="at">color =</span> glattefaktor))</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Det ser ut til at det er en stigende trend som avtar mot de siste observasjonene i tidsrekken.</p>
+</details>
+<p><strong>bonusspørsmål)</strong> Hva blir prediksjonen av <span class="math inline">\(Y_{11}\)</span> når du bruker modellen i henholdsvis oppgave d) og e)?</p>
+<details>
+<summary>
+Løsning
+</summary>
+<p>Våre prediksjoner av <span class="math inline">\(Y_{11}\)</span> blir da henholdsvis <span class="math inline">\(43.09\)</span> og <span class="math inline">\(45.32\)</span>.</p>
+</details>
+</section>
+<section id="r-øving" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="r-øving"><span class="header-section-number">5.1.3</span> R-øving</h3>
+<p>Vi har lastet <a href="datasett/equinor.xlsx">ned den daglige prisen på Eqinoraksjen</a> over en 5-års periode fra Oslo Børs’ hjemmeside. Vi laster inn datasettet som før ved hjelp av <code>readxl</code>-pakken, og henter ut den aktuelle kolonnen. Legg merke til at vi bruker <code>rev()</code>-funksjonen til å reversere rekkefølgen til observasjonene slik at den første verdien kommer først:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>equinor <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"equinor.xlsx"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>pris <span class="ot">&lt;-</span> <span class="fu">rev</span>(equinor<span class="sc">$</span>Siste)                </span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Du kan så lage et raskt plott av tidsrekken:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pris, <span class="at">type =</span> <span class="st">"l"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Både glidende gjennomsnitt og eksponensiell glatting har flere ulike implementeringer i R. For glidende gjennomsnitt skal vi bruke funksjonen <code>rollmean()</code> i pakken <code>zoo</code>. Du må først installere pakken og laste den inn;</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"zoo"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zoo)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Hvis du leser litt på dokumentasjonen til <code>rollmean()</code> ved å kjøre <code>?rollmean</code> vil du se at du kan regne ut f.eks et glidende gjennomsnitt for Equinoraksjen med vindusstørrelse 5 ved å kjøre</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pris_glatt5 <span class="ot">&lt;-</span> <span class="fu">rollmean</span>(pris, <span class="at">k =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="cn">NA</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Da får vi ut en ny vektor med lik lengde som den vi hadde, og som inneholder den glattede versjonen. Den fyller opp verdiene i starten og slutten som vi ikke kan regne ut med et glidende gjennomsnitt med NA, slik at vi kan tegne inn den glattede versjonen i samme plott som vi viste selve tidsrekken:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(pris_glatt5, <span class="at">col =</span> <span class="st">"red"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Dersom du er interessert kan du lese mer <a href="https://tradingsim.com/blog/simple-moving-average/">her</a> om hvordan det glidende gjennomsnittet blir brukt som en investeringsstrategi.</p>
+<p>Tanken er at det glidende gjennomsnittet representerer den langsiktige trenden. Dersom tidrekken ligger under det glidende gjennomsnittet tolkes det som at aksjen er på vei nedover, og motsatt: dersom prisen ligger over det glidende gjennomsnittet, så er det et tegn på at aksjen er på vei oppover. Når de to seriene krysser hverandre går “alarmen”, og man tar stilling til om man skal kjøpe eller selge.</p>
+<p>Vindusstørrelsen velger man ut fra hvor hyppig man handler. For profesjonelle investorer som driver med handel i høy hastighet kan kanskje 5-dagersviduet som vi regnet ut over være nok. Andre med mellomlang og lang sikt vil gjerne bruke et vindu på 50 eller 200 dager.</p>
+<p><strong>Oppgave:</strong> Regn ut et glidende gjennomsnitt med vindusstørrelse 200 for Equinoraksjen, og tegn det inn i figuren du har laget. Hjelper denne figuren deg til å lage en investeringsstrategi?</p>
+<details>
+<summary>
+Løsning
+</summary>
+<p>Forutsatt at du har gjort det over kan du skrive</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pris_glatt200 <span class="ot">&lt;-</span> <span class="fu">rollmean</span>(pris, <span class="at">k =</span> <span class="dv">200</span>, <span class="at">fill =</span> <span class="cn">NA</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pris, <span class="at">type =</span> <span class="st">"l"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(pris_glatt200, <span class="at">col =</span> <span class="st">"red"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Nå kan vi jo ikke se det glidende gjennomsnittet for de siste observasjonene, så ved bare å sammenligne de siste observasjonene hvor vi også har det glidende gjennomsnittet så ligger prisen under det glidende gjennomsnittet, altså bør vi ikke investere (evt. selge, shorte etc.).</p>
+</details>
+<p>Et problem med analysen over er at vi trenger <em>fremtidige observasjoner</em> til å regne ut den glattede tidsrekken. Det betyr at vi kjenner den glattede versjonen av tidsrekken ved tid <span class="math inline">\(t\)</span> først ved tid <span class="math inline">\(t+200\)</span>. Vi kan enkelt lage en annen variant der vi glatter tidsrekken ved tid <span class="math inline">\(t\)</span> ved å ta gjennomsnittet av <span class="math inline">\(Y_{t-200}, Y_{t-199}, \ldots, Y_{t-1}\)</span> i stedet for <span class="math inline">\(Y_{t-100}, \ldots, Y_{t}, \ldots, Y_{t+100}\)</span>, altså at vi bare bruker fortiden. Det gjør du i R ved å legge til det ekstra argumentet <code>align = "right"</code> i funksjonen <code>rollmean</code>. Fordelen nå er at vi ved hvert tidspunkt kjenner både prisen på aksjen og den glattede varianten.</p>
+<p><strong>Oppgave:</strong> Regn ut et glidende gjennomsnitt med vindusstørrelse 200 for Equinoraksjen som hele tiden bruker tidligere observasjoner i glattingen. Tegn glattingen inn i figuren. Hvordan ser investeringsstrategien din ut nå?</p>
+<details>
+<summary>
+Løsning
+</summary>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pris_glatt200 <span class="ot">&lt;-</span> <span class="fu">rollmean</span>(pris, <span class="at">k =</span> <span class="dv">200</span>, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">align =</span> <span class="st">"right"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pris, <span class="at">type =</span> <span class="st">"l"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(pris_glatt200, <span class="at">col =</span> <span class="st">"red"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>I denne figuren ligger de siste prisene over det glidende gjennomsnittet noe som er indikasjon på en stigende trend. Altså kan en strategi være å investere i aksjen.</p>
+</details>
+<p><strong>Eksponensiell glatting</strong> har også et annet navn: Holt Winters Metode. En funksjon for å gjennomføre den finnes innebygget i R, og heter <code>HoltWinters()</code>. I denne funksjonen er vektparameteren <span class="math inline">\(w\)</span> representert ved argumentet <code>alpha</code>. Funksjonen har noen flere argumenter som ikke vi skal bruke, så dersom vi ønsker å regne ut den eksponensielle glattingen for Equinoraksjen med <span class="math inline">\(w = 0.5\)</span>, kjører vi:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pris_exp1 <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(pris, <span class="at">alpha =</span> .<span class="dv">5</span>, <span class="at">beta =</span> <span class="cn">FALSE</span>, <span class="at">gamma =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For å hente ut den glattede versjonen skriver vi</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pris_exp1<span class="sc">$</span>fitted[,<span class="st">"xhat"</span>]</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Oppgave:</strong> Lag en ny figur der du tegner inn aksjeprisen, samt den eksponensielle glattingen med hhv. <span class="math inline">\(w = 0.5\)</span>, <span class="math inline">\(w = 0.01\)</span> og <span class="math inline">\(w = 0.99\)</span>.</p>
+<details>
+<summary>
+Løsning
+</summary>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pris_exp1 <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(pris, <span class="at">alpha =</span> .<span class="dv">5</span>, <span class="at">beta =</span> <span class="cn">FALSE</span>, <span class="at">gamma =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>pris_exp2 <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(pris, <span class="at">alpha =</span> .<span class="dv">01</span>, <span class="at">beta =</span> <span class="cn">FALSE</span>, <span class="at">gamma =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>pris_exp3 <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(pris, <span class="at">alpha =</span> .<span class="dv">99</span>, <span class="at">beta =</span> <span class="cn">FALSE</span>, <span class="at">gamma =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pris, <span class="at">type =</span> <span class="st">"l"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(pris_exp1<span class="sc">$</span>fitted[,<span class="st">"xhat"</span>], <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(pris_exp2<span class="sc">$</span>fitted[,<span class="st">"xhat"</span>], <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(pris_exp3<span class="sc">$</span>fitted[,<span class="st">"xhat"</span>], <span class="at">col =</span> <span class="st">"green"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</details>
+</section>
+</section>
+<section id="sec-trend-og-sesong" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sec-trend-og-sesong"><span class="header-section-number">5.2</span> Trend og sesong</h2>
+<iframe src="https://player.vimeo.com/video/467126794" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="">
+</iframe>
+<section id="kontrollspørsmål-1" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="kontrollspørsmål-1"><span class="header-section-number">5.2.1</span> Kontrollspørsmål</h3>
+<ol type="1">
+<li>Hvilke tre komponenter kan en tidsrekke typisk bestå av?</li>
+</ol>
+</section>
+<section id="r-øving-1" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="r-øving-1"><span class="header-section-number">5.2.2</span> R-øving</h3>
+<p><strong>1. Data.</strong> I pakken <code>fpp2</code> finnes en tidsrekke som heter <code>ausbeer</code>, som er den kvartalsvise produksjonen av øl i Australia fra 1956 til 2008. Du kan få tak i det og se på tidsrekken ved å kjøre følgende kommandoer:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"fpp2"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fpp2)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ausbeer)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Vi ser at det er en klar trendkomponent, selv om den ikke er lineær, samt en årlig sesongvariasjon.</p>
+<p><strong>2. Dekomponering.</strong> Funksjonen <code>stl</code> <em>dekomponerer</em> tidsrekken i de tre komponentene: trend, sesong, og tilfeldig variasjon. For å få tilgang på denne funskjonen trenger vi pakken <code>forecast</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"forecast"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Vi så kan kjøre funksjonen slik:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dekomponert <span class="ot">&lt;-</span> <span class="fu">stl</span>(ausbeer, <span class="at">s.window =</span> <span class="st">"periodic"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Vi kan hente ut de ulike komponentene ved å bruke dollartegnet: <code>dekomponert$time.series</code>. Pakken <code>forecast</code> har en egen plottefunksjon, <code>autoplot</code> som er spesialdesignet for tidsrekkeobjekter. Prøv å plotte de tre komponentene hver for seg ved å kjøre:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(dekomponert)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/autoplot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>3. Predikere.</strong> For predikering bruker vi funksjonen <code>forecast()</code>, som tar en estimert modell som input, og som bruker modellen til å skrive frem tidsrekken ved å estimere fremtidige verdier. Dekomponeringen over utgjør også en modell som vi kan bruke til å predikere fremtidige observasjoner med.</p>
+<p>Kodesnutten under viser hvordan man predikerer <span class="math inline">\(10\)</span> tidssteg frem i tid ved å sette <code>h = 10</code> i funksjonen. I tillegg kan funksjonen regne ut prediksjonsintervall med en gitt dekningsgrad, her velger vi <code>level = 0.95</code> for <span class="math inline">\(95\%\)</span> prediksjonsintervall. Resultatet lagrer vi i objektet <code>prediksjon</code>. Dette objektet kan vi plotte ved bruk av <code>autoplot</code>-funksjonen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>prediksjon <span class="ot">&lt;-</span> <span class="fu">forecast</span>(dekomponert, <span class="at">h =</span> <span class="dv">10</span>, <span class="at">level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(prediksjon)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-ar" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-ar"><span class="header-section-number">5.3</span> AR(p)</h2>
+<div style="padding:56.25% 0 0 0;position:relative;">
+<iframe src="https://vimeo.com/showcase/7661169/embed" allowfullscreen="" frameborder="0" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+</iframe>
+</div>
+<section id="kontrollspørsmål-2" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="kontrollspørsmål-2"><span class="header-section-number">5.3.1</span> Kontrollspørsmål</h3>
+<ol type="1">
+<li>Hva er definisjonen på en Hvit-støy-prosess?</li>
+<li>Hva er definisjonen på en AR(1)-prosess?</li>
+<li>Hvilken effekt har parameteren <span class="math inline">\(\phi\)</span> på egenskapene til en AR(1)-prosess?</li>
+<li>Hva er forskjellen på en AR(1)-prosess og en generell AR(<span class="math inline">\(p\)</span>)-prosess?</li>
+<li>Hvorfor kan vi si at AR(<span class="math inline">\(p\)</span>) er en <em>utvidelse</em>/<em>generalisering</em> av hvit støy?</li>
+</ol>
+</section>
+<section id="r-øving-2" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="r-øving-2"><span class="header-section-number">5.3.2</span> R-øving</h3>
+<p><strong>1. Simulere.</strong> La oss først se hvordan vi kan simulere noen realiseringer fra disse tidsrekkene. Hvit støy består av ukorrelerte trekninger som alle har samme forventningsverdi og varians, noe vi kan simulere i R ved å bare trekke <span class="math inline">\(n\)</span> uavhengige observasjoner fra hvilken som helst fordeling og kalle det en tidsrekke. For eksempel har vi tidligere trukket standard normalfordelte observasjoner ved hjelp av <code>rnorm()</code>-funsksjonen. La oss gjøre det igjen, og plotte det som en tidsrekke. Merk at din trekning ikke vil være identisk som den under:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>hvit_støy <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(hvit_støy, <span class="at">type =</span> <span class="st">"b"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Vi kan bruke funksjonen <code>arima.sim()</code> til å simulere tidsrekker fra AR-modellen (og den mer generelle ARIMA-modellen, mer om det senere). Du kan for eksempel simulere <span class="math inline">\(n\)</span> observasjoner fra en AR(1)-prosess med <span class="math inline">\(\phi = 0.95\)</span> ved hjelp av følgende kommandoer:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ar1 <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="at">model =</span> <span class="fu">list</span>(<span class="at">ar =</span> <span class="fl">0.95</span>), n)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ar1, <span class="at">type =</span> <span class="st">"b"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>I det siste eksempelet trekker <code>arima.sim()</code>-funskjonen hvit-støy-prosessen <span class="math inline">\(u_t\)</span> fra <code>rnorm()</code>-funksjonen, men det kan vi endre på hvis vi vil, se hjelpesiden <code>?arima.sim</code>. Videre kan vi bruke denne funksjonen til å simulere fra hvit støy ved å sette <code>model</code>-argumentet til en tom liste (<code>model = list()</code>), eller vi kan simulere fra en AR(2)-prosess med <span class="math inline">\(\phi_1 = 0.2\)</span> og <span class="math inline">\(\phi_2 = 0.1\)</span> ved å sette <code>model = list(ar = c(0.2, 0.1))</code>.</p>
+<p><strong>2. Estimere.</strong></p>
+<p>La oss i første omgang si at vi har observert tidsrekken <code>ar1</code> som vi simulerte over, at vi mistenker at den følger en AR(1)-prosess <span class="math inline">\(Y_t = \phi Y_{t-1} + u_t\)</span>, og at vi ønsker å estimere den ukjente parameteren <span class="math inline">\(\phi\)</span> ved hjelp av observasjonene. Som vi antydet i <strong>AR</strong>-videoen kan vi i dette tilfellet betrakte det som et regresjonsproblem med <span class="math inline">\(Y_t\)</span> som responsvariabel og <span class="math inline">\(Y_{t-1}\)</span> som forklaringsvariabel. La oss lage en <code>data.frame</code> med disse to kolonnene, og se hva vi får når vi bruker <code>lm()</code>-funksjonen. .</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Y =</span> ar1[<span class="dv">2</span><span class="sc">:</span>n],</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">lagged_Y =</span> ar1[<span class="dv">1</span><span class="sc">:</span>(n<span class="dv">-1</span>)])</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(Y <span class="sc">~</span> lagged_Y, <span class="at">data =</span> df))</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ lagged_Y, data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.6296 -0.5506  0.0798  0.6570  2.9301 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -0.17877    0.17838  -1.002    0.321    
+lagged_Y     0.82150    0.08302   9.895  4.5e-13 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.112 on 47 degrees of freedom
+Multiple R-squared:  0.6757,    Adjusted R-squared:  0.6688 
+F-statistic: 97.91 on 1 and 47 DF,  p-value: 4.5e-13</code></pre>
+</div>
+</div>
+<p>Vi ser at vårt estimat av <span class="math inline">\(\phi\)</span>, som i regresjonutskriften er koeffisienten til <code>lagged_Y</code>, er i nærheten av den sanne verdien 0.95, men med så få observasjoner kan det godt hende at ditt estimat er noe forskjellig. Poenget er: vi kan bruke lineær regresjon til å estimere koeffisientene i en AR-modell basert på observasjoner.</p>
+<p>Som i forrige oppgave er pakken <code>forecast</code> svært nyttig for estimering og predikering:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Denne pakken inneholder en funskjon <code>Arima</code> for å estimere koeffisientene i en AR-modell (egentlig den mer generelle klasssen av ARIMA-modeller som vi kommer tilbake til senere). Denne funksjonen kan vi andvende direkte på tidsrekken ved å skrive</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Arima</span>(ar1, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: ar1 
+ARIMA(1,0,0) with non-zero mean 
+
+Coefficients:
+         ar1     mean
+      0.8081  -0.8981
+s.e.  0.0773   0.7363
+
+sigma^2 = 1.213:  log likelihood = -75.29
+AIC=156.58   AICc=157.1   BIC=162.32</code></pre>
+</div>
+</div>
+<p>I første omgang kan vi legge merke til at vi har spesifisert <em>hvilken</em> modell vi ønsker å estimere gjennom argumentet <code>order = c(1, 0, 0)</code>, der ett-tallet angir AR-modellens orden <span class="math inline">\(p\)</span>, som i dette tilfellet er 1. Dersom du mistenker at AR(2)-modellen gir en bedre beskrivelse av tidsrekken din, kan du endre til <code>order = c(2, 0, 0)</code>. Vi kommer tilbake til spørsmålet om hvordan du kan velge den beste modellen for et gitt praktisk problem.</p>
+<p>Legg merke til at de to estimatene ikke er identiske selv om vi bruker det samme tidsrekken. Det er fordi <code>arima()</code>-funksjonen ikke bruker minste kvadraters metode til å regne ut estimatene (slik <code>lm()</code> gjør), men heller bruker en annen estimeringsteknikk som heter <em>maximum likelihood</em>.</p>
+<p><strong>3. Predikere.</strong> For predikering bruker vi funksjonen <code>forecast()</code>, som tar en estimert modell som input, og som bruker modellen til å skrive frem tidsrekken ved å estimere fremtidige verdier.</p>
+<p>I kodesnutten under bruker vi den simulerte tidsrekken, og estimerer en AR(1)-modell som over som vi lagrer i objektet <code>ar1_estimat</code>. Så bruker vi det som argument i <code>forecast()</code>, der vi også spesifiserer hvor mange tidssteg fremover vi ønsker å predikere, her velger vi <code>h = 10</code>. I tillegg kan funksjonen regne ut prediksjonsintervall med en gitt dekningsgrad, her velger vi <code>level = 0.95</code> for <span class="math inline">\(95\%\)</span> prediksjonsintervall. Resultatet lagrer vi i objektet <code>prediksjon</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>ar1_estimat <span class="ot">&lt;-</span> <span class="fu">Arima</span>(ar1, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>prediksjon  <span class="ot">&lt;-</span> <span class="fu">forecast</span>(ar1_estimat, <span class="at">h =</span> <span class="dv">10</span>, <span class="at">level =</span> <span class="fl">0.95</span>) </span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Vi kan plotte resultatet i en pen liten figur ved å bruke funksjonen <code>autoplot</code> som under:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotter den opprinnerlige tidsrekken, sammen med prediksjon og</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># prediksjonsintervall</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(prediksjon)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-stasjonaritet" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="sec-stasjonaritet"><span class="header-section-number">5.4</span> Stasjonaritet</h2>
+<iframe src="https://player.vimeo.com/video/467126666" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="">
+</iframe>
+<section id="kontrollspørsmål-3" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="kontrollspørsmål-3"><span class="header-section-number">5.4.1</span> Kontrollspørsmål</h3>
+<ol type="1">
+<li>Hva er definisjonen på en stasjonær tidsrekke?</li>
+<li>Hva er poenget med å innføre stasjonaritet som et konsept i tidsrekkeanalyse?</li>
+<li>Er AR(1) prosessen <span class="math inline">\(X_t = 1.5 X_{t - 1} + u_t\)</span> stasjonær?</li>
+</ol>
+</section>
+<section id="merk" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="merk"><span class="header-section-number">5.4.2</span> Merk</h3>
+<p>En AR-prosess kan vi definere også med et konstantledd <span class="math inline">\(c\)</span>, f.eks: <span class="math inline">\(Y_t = c + \phi Y_{t-1} + u_t\)</span>. Vi kan ikke forvente at alle tidsrekkene vi observerer i praksis vil ligge å variere rundt null (dvs at E<span class="math inline">\((Y_t) = 0\)</span>). Vi kan flytte den opp og ned ved å legge til den samme konstanten <span class="math inline">\(c\)</span> i hver tidssteg. I forrige oppgavesett, der vi estimerte parameteren <span class="math inline">\(\phi\)</span> i en AR(1)-modell, kom det (på samme måte som når vi gjør regresjon) ut et estimat av et <code>intercept</code>, som altså er denne <span class="math inline">\(c\)</span>’en. I den simulerte tidsrekken vi jobbet med der, var det ikke noe konstantledd (altså, <span class="math inline">\(c = 0\)</span>), som vi ser igjen i estimatene ved at de ikke er signifikant forskjellige fra null. Vi kunne tvunget estimeringsfunksjonene til å sette <span class="math inline">\(c = 0\)</span>, f.eks ved å inkludere argumentet <code>include.mean = FALSE</code> i <code>arima()</code>-funksjonen.</p>
+</section>
+</section>
+<section id="sec-autokorrelasjon" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="sec-autokorrelasjon"><span class="header-section-number">5.5</span> Autokorrelasjon</h2>
+<iframe src="https://player.vimeo.com/video/467120768" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="">
+</iframe>
+<section id="kontrollspørsmåldiskusjonsspørsmål" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="kontrollspørsmåldiskusjonsspørsmål"><span class="header-section-number">5.5.1</span> Kontrollspørsmål/Diskusjonsspørsmål</h3>
+<ol type="1">
+<li>Formuler med egne ord: Hva er autokorrelasjon?</li>
+<li>Hva kan vi lære ved å se på autokorrelasjonsplottet til en tidsrekke?</li>
+<li>Kan du komme på noe vi <em>ikke</em> kan finne ut av ved å se på korrelasjoneplottet til en tidsrekke?</li>
+</ol>
+</section>
+<section id="r-øving-3" class="level3" data-number="5.5.2">
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="r-øving-3"><span class="header-section-number">5.5.2</span> R-øving</h3>
+<p><strong>1. Utregning av ACF</strong> I R bruker vi funsksjonen <code>acf()</code> til å lage autokorrelasjonsplott. La oss i første omgang gjenskape noen av figurene fra videoen ved hjelp av simuleringer. For eksempel kan vi laget til to tidsrekker som på forrige oppgavesett, en hvit støy og en AR(1):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>hvit_støy <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>ar1 <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="at">model =</span> <span class="fu">list</span>(<span class="at">ar =</span> <span class="fl">0.95</span>), n)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Autokorrelasjonsplottene til disse to tidsrekkene kan vi få frem ved å anvende <code>acf()</code>-funksjonen på dem:</p>
+<!-- ```{r fig.subcap=c('Autokorrelasjonsplott til en simulert hvit støy prosess', 'Autokorrelasjonsplott til en simulert AR(1)-prosess'), out.width='.49\\linewidth', fig.asp=1, fig.ncol = 2} -->
+<!-- acf(hvit_støy) -->
+<!-- acf(ar1) -->
+<!-- ``` -->
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(hvit_støy)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(ar1)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-29-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Vi ser igjen mønsteret fra videoen: Hvit støy består av ukorrelerte observasjoner, mens AR(1)-modellen består av observasjoner som bygger på forrige observasjon, slik at det er en viss korrelasjon, og dermed avhengighet fra dag til dag. Det ser vi igjen i autokorrelasjonsplottet som gir tydelig utslag, og der korrelasjonen går gradvis mot null med økende avstand mellom observasjonene.</p>
+<p><strong>2. ACF som sjekk av modell</strong> En sjekk vi gjerne gjør for å se om en estimert tidsrekkemodell passer dataene våre, er å se autokorrelasjonen til residualene i modellen er liten. Det betyr nemlig at modellen plukker opp den (lineære) avhengigheten i tidsrekken. For en AR(1) modell er residualene f.eks gitt ved <span class="math inline">\(\hat{u}_t = Y_t - \hat{\phi}Y_{t-1}\)</span>, men disse er tilgjengelig direkte fra modell estimeringen i R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>ar1_estimat <span class="ot">&lt;-</span> <span class="fu">Arima</span>(ar1, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(ar1_estimat<span class="sc">$</span>residuals)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>3. Oppgave:</strong> Prøv nå å plotte autokorrelasjonsfunksjonen for for følgende tre tidsrekker, og knytt en kort kommentar til hver av dem om hva du lærer om tidsrekken ved å se på autokorrelasjonsplottet til:</p>
+<ol type="1">
+<li>Prisen på Equinor-aksjen, som vi jobbet med i det første oppgavesettet.</li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>equinor <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"equinor.xlsx"</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>pris <span class="ot">&lt;-</span> <span class="fu">rev</span>(equinor<span class="sc">$</span>Siste)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(pris)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Vi ser at det er høy positiv autokorrelasjon selv for store avstander (lag). En lav pris (historisk sett) vil være assosiert med lave priser de foregående dagene og tilsvarende for høye priser. Dette stemmer bra med teorien med at dersom markedet er effisient (ikke pensum, slapp av!) skal prisen følge en tilfeldig gang, selv om dette ikke alltid er tilfellet. Det kan altså se ut til at prisen idag er tilnærmet prisen i går pluss ny støy.</p>
+</details>
+<ol start="2" type="1">
+<li>Equinoraksjens <em>prosentvise avkastning</em> (som er tilnærmet lik <code>diff(log(pris))</code> fra dag til dag.</li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>pr_avkastning <span class="ot">&lt;-</span> <span class="fu">diff</span>(<span class="fu">log</span>(pris))<span class="er">)</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(pr_avkastning)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Her ser vi at autokorrelasjon er svært lav uansett lag. Det virker altså ikke å være noen lineær sammenheng mellom avkastningen fra en dag til den neste (og den om 2, 3, .. dagen). Dette stemmer bra med at prisen i teorien skal følge en tilfeldig gang og at det i et effisient marked ikke skal gå an å predikere avkastningen for en aksje, noe som i teorien hadde vært mulige hadde det vært en positiv autokorrelasjon.</p>
+</details>
+<ol start="3" type="1">
+<li>Tidsrekken som er igjen etter at du fjernet trend og sesong fra ølproduksjonstidsrekken i det andre oppgavesettet.</li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fpp2)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>dekomponert <span class="ot">&lt;-</span> <span class="fu">stl</span>(ausbeer, <span class="at">s.window =</span> <span class="st">"periodic"</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(dekomponert<span class="sc">$</span>time.series[ ,<span class="dv">3</span>], <span class="at">na.action =</span> na.pass)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+Figuren er litt misvisende siden ett lag i figuren svarer til ett år, og siden vi har kvartalsvise observasjoner har vi 4 acf verdier per år. Det kan se ut til at det er en årlig sesongvariasjon som ikke har blitt dekomponert fullt ut av tidsrekken pga av disse toppene i acf som kommer 1,2,3. .. året.
+</details>
+<p>Til slutt: husk at også autokorrelasjonsplottene må pyntes og ordnes på hvis vi skal vise dem til andre i rapporter, innleveringer etc. Du kan stort sett bruke de samme argumetene som i vanlige plott: <code>xlab =</code>, <code>ylab =</code>, <code>main =</code> osv.</p>
+</section>
+</section>
+<section id="sec-ma" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="sec-ma"><span class="header-section-number">5.6</span> MA(q)</h2>
+<iframe src="https://player.vimeo.com/video/467126617" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="">
+</iframe>
+<section id="kontrollspørsmåldiskusjonsspørsmål-1" class="level3" data-number="5.6.1">
+<h3 data-number="5.6.1" class="anchored" data-anchor-id="kontrollspørsmåldiskusjonsspørsmål-1"><span class="header-section-number">5.6.1</span> Kontrollspørsmål/Diskusjonsspørsmål</h3>
+<ol type="1">
+<li>Hva er definisjonen på en MA(1)- og en MA(<span class="math inline">\(q\)</span>)-modell?</li>
+<li>Hvordan skiller definisjonen av en MA-prosess seg fra definisjonen av en AR-prosess?</li>
+<li>På hvilken måte er autokorrelasjonsfunksjonene til AR- og MA-prosesser forskjellige?</li>
+<li>Kan du, med egne ord, beskrive en type reelle fenomener som kan modelleres som en MA-prosess?</li>
+</ol>
+</section>
+<section id="r-øving-4" class="level3" data-number="5.6.2">
+<h3 data-number="5.6.2" class="anchored" data-anchor-id="r-øving-4"><span class="header-section-number">5.6.2</span> R-øving</h3>
+<p><strong>1. Estimering og predikering.</strong> På samme måte som for AR-prosessen kan vi nå <strong>simulere</strong> og <strong>estimere</strong> en MA(1)-prosess med <span class="math inline">\(\theta = 0.95\)</span>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)                                <span class="co"># Trengs for estimering</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>n    <span class="ot">&lt;-</span> <span class="dv">100</span>                                      <span class="co"># Antall observasjoner</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>ma1  <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="at">model =</span> <span class="fu">list</span>(<span class="at">ma =</span> <span class="fl">0.95</span>), n)    <span class="co"># Simuler tidsrekken</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ma1, <span class="at">type =</span> <span class="st">"b"</span>)                            <span class="co"># Lag et plott </span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Arima</span>(ma1, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))                     <span class="co"># Estimer theta</span></span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Stemmer estimatet overens med den sanne <span class="math inline">\(\theta\)</span>? Sjekk ut dokumentasjonen <code>?Arima</code> og se hva du må gjøre for å spesifisere at modellen ikke har noe konstantledd <span class="math inline">\(c\)</span>. Prøv også å modifisere koden fra AR-oppgavene slik at du predikerer den simulerte MA(1)-tidsrekken 10 steg frem.</p>
+<p><strong>2. Analyse av global temperatur.</strong> La oss når ta for oss eksempelet fra videoen der vi ser på den globale månendlige gjennomsnittstemperaturen fra 1880 til 2016. Last ned <a href="datasett/temp.csv">temp.csv</a>, som er en CSV-fil med datasettet. Se på de første par radene:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"temp.csv"</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(temp)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>        Date    Mean
+1 1880-01-06  0.0009
+2 1880-02-06 -0.1229
+3 1880-03-06 -0.1357
+4 1880-04-06 -0.0499
+5 1880-05-06 -0.0738
+6 1880-06-06 -0.1692</code></pre>
+</div>
+</div>
+<p>Første kolonne inneholder informasjon om tidspunkt, og temperaturen er inneholdt i andre kolonne. La oss plotte både temperaturrekken og den <em>differensierte</em> temperaturrekken (dvs. forskjellen fra dag til dag). Hvis vi avslører at den differensierte tidsrekken kan regnes ut ved å kjøre <code>difftemp &lt;- diff(temp$Mean)</code>, skulle det nå være grei skuring å produsere følgende to enkle plott:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>difftemp <span class="ot">&lt;-</span> <span class="fu">diff</span>(temp<span class="sc">$</span>Mean)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(temp<span class="sc">$</span>Mean, <span class="at">type =</span> <span class="st">"l"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(difftemp, <span class="at">type =</span> <span class="st">"l"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-42-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Lag videre autokorrelasjonsplottet som vist i videoen for den differensierte tidsrekken:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>I autokorrelasjonsplottet ser vi nettopp et slikt MA-mønster som vi så i videoen; nemlig at autokorrelasjonen plutselig blir null (eller omtrent null) for et gitt lag. I dette tilfellet har vi at første ordens autokorrelasjon er klart forskjellig fra null, men at den fra og med <span class="math inline">\(k = 2\)</span> nesten ikke har utslag.</p>
+<p>Hvis de differensierte temperaturmålingene faktisk er MA(1), kan den skrives slik:</p>
+<p><span class="math display">\[Y_t = c + \theta u_{t-1} + u_t,\]</span> der <span class="math inline">\(\theta\)</span> er en ukjent parameter. Vi kan bruke datasettet vårt til å estimere <span class="math inline">\(\theta\)</span> ved å bruke <code>Arima()</code>-funksjenen på samme måte som da vi estimerte en AR(1)-modell. Den eneste forandringen vi må gjøre er å endre <code>order</code>-argumentet fra <code>c(1, 0, 0)</code> til <code>c(0, 0, 1)</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Arima</span>(difftemp, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: difftemp 
+ARIMA(0,0,1) with non-zero mean 
+
+Coefficients:
+          ma1    mean
+      -0.4988  0.0005
+s.e.   0.0251  0.0012
+
+sigma^2 = 0.009078:  log likelihood = 1532.11
+AIC=-3058.23   AICc=-3058.21   BIC=-3042.01</code></pre>
+</div>
+</div>
+<p>Hvis du har tid til slutt og vil ha litt ekstra trening kan du prøve deg på følgende oppgave:</p>
+<ul>
+<li>Prediker den differensierte temperaturrekken tre måneder frem i tid.</li>
+<li>Lag en figur der du plotter de 12 siste månedene i den observerte tidsrekken sammen med prediksjonene dine med prediksjonsintervaller.</li>
+<li><strong>Bonuspoeng:</strong> Husk at vi nå har predikert <em>forandringen</em> i den globale gjennomsnittstemperaturen fra måned til måned. Kan du heller lage en figur med selve temperaturserien og bruke prediksjonene dine til å heller plotte inn de tilhørende predikerte temperaturene?</li>
+<li>Pynt så figuren slik at du kan sende den fra deg.</li>
+</ul>
+</section>
+</section>
+<section id="sec-arma-arima" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="sec-arma-arima"><span class="header-section-number">5.7</span> ARMA og ARIMA</h2>
+<div style="padding:56.25% 0 0 0;position:relative;">
+<iframe src="https://vimeo.com/showcase/7661207/embed" allowfullscreen="" frameborder="0" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+</iframe>
+</div>
+<section id="kontrollspørsmåldiskusjonsspørsmål-2" class="level3" data-number="5.7.1">
+<h3 data-number="5.7.1" class="anchored" data-anchor-id="kontrollspørsmåldiskusjonsspørsmål-2"><span class="header-section-number">5.7.1</span> Kontrollspørsmål/Diskusjonsspørsmål</h3>
+<ol type="1">
+<li>Hva er sammenhengen mellom AR-, MA-, og ARMA-modellene?</li>
+<li>Hva er en ARIMA-modell?</li>
+<li>Hvilken modell er dette: <span class="math display">\[y_t = \phi_1 y_{t-1} + \phi_2 y_{t-2} + \theta u_{t-1} + u_t\]</span></li>
+</ol>
+</section>
+<section id="r-øving-5" class="level3" data-number="5.7.2">
+<h3 data-number="5.7.2" class="anchored" data-anchor-id="r-øving-5"><span class="header-section-number">5.7.2</span> R-øving</h3>
+<p><strong>1. Data</strong> Vi tar en ny titt på <a href="datasett/equinor.xlsx">den daglige prisen på Eqinoraksjen</a> over en 5-års periode som vi så på i introduksjonen til tidsrekker. Vi laster inn datasettet som før ved hjelp av <code>readxl</code>-pakken, og henter ut den aktuelle kolonnen. Legg merke til at vi bruker <code>rev()</code>-funksjonen til å reversere rekkefølgen til observasjonene slik at den første verdien komme først:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>equinor <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"equinor.xlsx"</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>pris <span class="ot">&lt;-</span> <span class="fu">rev</span>(equinor<span class="sc">$</span>Siste)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pris, <span class="at">type =</span> <span class="st">"l"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Vi kan lage en figur av den differensierte tidsrekken på følgende måte:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sjekk av differanse </span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>diff_pris <span class="ot">&lt;-</span> <span class="fu">diff</span>(pris)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(diff_pris, <span class="at">type =</span> <span class="st">"l"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Oppgave:</strong> Vurder om en ARIMA modell er bedre egnet enn en ARMA modell ut fra de to figurene over.</p>
+<details>
+<summary>
+Løsning
+</summary>
+<p>I forhold til prisen ser den differensierte prisen stasjonær ut og det er derfor rimelig med en ARIMA model. I et effisient marked skal prisen i teorien følge en tilfeldig gang slik at den differensierte tidsrekken bare er støy, altså at prisen følger en ARIMA(0, 1, 0) modell.</p>
+</details>
+<p><strong>2. Estimering av ARIMA modeller</strong> Vi bruker den samme funksjonen <code>Arima</code> fra <code>forecast</code> pakken til å estimere både ARMA og ARIMA modeller og spesifisering av modellen gjør vi via argumentet <code>order</code>. Skal du estimerer en ARMA(1,1) modell setter du f.eks dette argumentet til <code>c(1, 0, 1)</code>. Elementet i midten av denne vektoren spesifiserer hvor mange ganger tidsrekken skal differensieres i ARIMA modellen. Estimering av en ARIMA modell med en enkelt differensiering og ett MA og AR ledd kan gjøres slik:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>arima111 <span class="ot">&lt;-</span> <span class="fu">Arima</span>(pris, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span> , <span class="dv">1</span>))</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>3. Hvordan skal vi velge p, d og q i en ARIMA(p,d,q) modell?</strong> Etter å ha tilpasset en ARIMA modell kan vi bruke modellen til å predikere de samme observasjonene vi har brukt til å tilpasse modellen. Vi kan så sammenligne hvor nær prediksjoner fra forskjellige modeller er de sanne dataene. Dette heter på godt norsk å gjøre en “in-sample” vurdering av modellen.</p>
+<p>Når du har tilpasset en modell, kan du ved å bruke <code>summary</code> funksjonen få opp flere mål på hvor god modellen er in-sample under fanen “Training set error measure”:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(arima111)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: pris 
+ARIMA(1,1,1) 
+
+Coefficients:
+         ar1      ma1
+      0.5121  -0.5780
+s.e.  0.1680   0.1584
+
+sigma^2 = 6.614:  log likelihood = -2958.16
+AIC=5922.32   AICc=5922.34   BIC=5937.72
+
+Training set error measures:
+                     ME     RMSE      MAE         MPE     MAPE      MASE
+Training set 0.03973471 2.568719 1.949446 0.009091475 1.251353 0.9955157
+                   ACF1
+Training set 0.02035596</code></pre>
+</div>
+</div>
+<p>Her er f.eks <span class="math inline">\(RMSE = \sqrt{1/T\sum_{t = 1}^T (\hat{y}_t - y_t)^2}\)</span> et slags gjennomsnittlig avvik mellom prediksjonene og observasjonene. Litt lenger oppe i <code>summary</code> utskriften er det også en størrelse som heter AIC som måler hvor sannsynlig hver observasjon er gitt modelvalget ditt. Sammenligner du flere modeller er du på jakt etter den modellen som har minst RMSE og/eller AIC.</p>
+<p>Det krever en del arbeid skal du sammenligne mange ARIMA(p,d,q) modeller ettersom det er så mange måter å kombinere p,d og q på selv om du bestemmer en maksverdi for hver av dem. Det finnes heldigvis en veldig smart R funksjon kalt <code>auto.arima</code> som følger med pakken <code>forecast</code> som estimerer mange modeller og gir deg ut den modellen med minst AIC:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>arima_best_AIC <span class="ot">&lt;-</span> <span class="fu">auto.arima</span>(pris)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(arima_best_AIC)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: pris 
+ARIMA(0,1,2) 
+
+Coefficients:
+          ma1      ma2
+      -0.0421  -0.0947
+s.e.   0.0282   0.0281
+
+sigma^2 = 6.581:  log likelihood = -2955.04
+AIC=5916.09   AICc=5916.1   BIC=5931.48
+
+Training set error measures:
+                    ME    RMSE      MAE         MPE     MAPE      MASE
+Training set 0.0398931 2.56232 1.948444 0.009249629 1.249956 0.9950042
+                     ACF1
+Training set -0.001297121</code></pre>
+</div>
+</div>
+<p>Hva slags modell har <code>auto.arima</code> valgt her?</p>
+<p><strong>4. Prediksjon</strong> Prediksjon gjøres som tidligere med <code>forecast</code> funksjonen, så hvis en vil predikere 10 tidssteg frem i tid gjør man følgende:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>pred_arima111 <span class="ot">&lt;-</span> <span class="fu">forecast</span>(arima111, <span class="at">h =</span>  <span class="dv">10</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(pred_arima111, <span class="at">include =</span> <span class="dv">100</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>merk at i <code>autoplot</code> har vi valgt å bare vise 100 observasjoner av tidsrekken sammen med prediksjonene.</p>
+<p>Kommentar: I et effisient marked skal prisutviklingen i teorien følge en tilfeldig gang og dagens pris vil da være det beste du kan tippe på for morgendagens pris. Vi ser her at dette blir reflektert i prediksjonen gjort av Arima(1,1,1) modellen.</p>
+</section>
+</section>
+<section id="modellbygging" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="modellbygging"><span class="header-section-number">5.8</span> Modellbygging</h2>
+<p>Vi har allerede sett på hvordan vi kan sammenligne modeller “in-sample”. For å sammenligne tidsrekkemodeller bruker en ofte også å sammenligne hvor godt modellene predikerer observasjoner som ikke har vært inkludert når man tilpasser modellen. Dette heter på godt norsk å vurdere “out-of-sample” egenskapene ved modellen.</p>
+<p>Det finnes mange varianter for å undersøke dette, og under skal vi ta en titt på en enkel variant.</p>
+<p><strong>Oppgave</strong> Vi viser hvordan dette gjøres for en modell med eksponensiell glatting. Du skal gjenta prosedyren, men for en ARIMA-modell (velg den med best AIC, hint: <code>auto.arima</code>). Sammenlign så out-of-sample egenskapene til til disse to modellene.</p>
+<section id="r-øving-6" class="level3" data-number="5.8.1">
+<h3 data-number="5.8.1" class="anchored" data-anchor-id="r-øving-6"><span class="header-section-number">5.8.1</span> R-øving</h3>
+<p><strong>1. Data</strong> Vi skal i denne øvingen prøve å finne en god modell for dax-indeksen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>dax <span class="ot">&lt;-</span> EuStockMarkets[ ,<span class="dv">1</span>]</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dax)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-52-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>2. Trening og test data</strong> Vi ønsker f.eks å teste hvor god modellen er til å predikere de 10 siste observasjonene i datasettet. Vi deler derfor dataene inn i et treningssett bestående av alle observasjoner utenom disse 10 siste observasjonene, og et testsett bestående av de 10 siste observasjonene:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>trening <span class="ot">&lt;-</span> <span class="fu">head</span>(dax, <span class="fu">length</span>(dax) <span class="sc">-</span> <span class="dv">10</span>)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">tail</span>(dax, <span class="dv">10</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>3. Estimering og prediksjon</strong> Vi tilpasser så en modell til treningssettet ved bruk av eksponensiell glatting og predikerer 10 tidssteg frem for å få prediksjoner av testsettet:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>fit_exp <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(trening)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>pred_exp <span class="ot">&lt;-</span> <span class="fu">forecast</span>(fit_exp, <span class="at">h =</span> <span class="dv">10</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Merk at når vi ikke spesifiserer noen argumenter i <code>HoltWinters</code> vil en mer avansert modell bli tilpasset, samtidig som glattingsparameteren faktisk vil bli estimert ved å minimerer MSE.</p>
+<p><strong>3. Out-of-sample vurdering</strong></p>
+<p>Vi kan så sammenligne disse prediksjonene <code>pred_exp</code> med de faktiske observasjonene <code>test</code> ved å “måle” hvor langt disse er fra hverandre. Funksjonen <code>accuracy</code> som kommer med <code>forecast</code> pakken regner ut flere forskjellig mål på avstand:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">accuracy</span>(pred_exp, test)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      ME      RMSE       MAE         MPE      MAPE       MASE
+Training set    1.251117  35.82454  23.42652  0.03438446 0.8276219 0.04295353
+Test set     -317.477645 350.63504 317.47765 -5.82900543 5.8290054 0.58210884
+                   ACF1 Theil's U
+Training set 0.07394258        NA
+Test set     0.62441059  3.510695</code></pre>
+</div>
+</div>
+<p>Hver kolonne i utskriften over representerer et slikt mål, og det er rad nummer to med navn “Test set” som vi er interessert i siden det er utregningen av disse målene mellom prediksjonene og testsettet (Den første raden representerer in-sample egenskapene). Jo mindre disse verdiene er jo mindre er avstanden mellom prediksjonene og de sanne verdiene i vårt testsett.</p>
+</section>
+</section>
+<section id="oppgaver" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="oppgaver"><span class="header-section-number">5.9</span> Oppgaver</h2>
+<ol type="1">
+<li>Første ordens autokorrelasjon til en tidsrekke <span class="math inline">\(Y_t\)</span> er lik <span class="math inline">\(-0.5\)</span>. Andre ordens autokorrelasjon er lik <span class="math inline">\(0.3\)</span>.
+<ol type="a">
+<li>Tegn opp grafen til autokorrelasjonsfunksjonen til <span class="math inline">\(Y_t\)</span>.</li>
+<li>Forklar med ord hva det vil si at autokorrelasjonsfunksjonen til <span class="math inline">\(Y_t\)</span> ser slik ut for <em>observerte</em> verdier av <span class="math inline">\(Y_t\)</span>.</li>
+<li>Forklar hva som er forskjellen på autokorrelasjonsfunksjonen til <span class="math inline">\(Y_t\)</span> og den <em>empiriske</em> autokorrelasjonen til <span class="math inline">\(Y_t\)</span> som vi har regnet ut for eksempel ved hjelp av 100 observerte realiseringer av tidsrekken.</li>
+<li>Tegn opp en graf som kunne vært den empiriske autokorrelasjonsfunksjonen til <span class="math inline">\(Y_t\)</span> regnet ut for eksempel ved hjelp av 100 observerte realiseringer av tidsrekken.</li>
+</ol></li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<blockquote class="blockquote">
+<ol type="a">
+<li>Graf av autokorrelasjonen:</li>
+</ol>
+</blockquote>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="bilder/tidsrekkeoppgaver1.png" class="img-fluid figure-img" width="500"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<ol start="2" type="a">
+<li><p>Første ordens autokorrelasjon er lik <span class="math inline">\(-0.5\)</span>, noe som betyr at korrelasjonen mellom påfølgende observerte verdier av <span class="math inline">\(Y_t\)</span> er lik <span class="math inline">\(-0.5\)</span>. I praksis betyr det at to påfølgende observasjoner vil ha en tendens til å være ganske forskjellige fra hverandre. Hvis <span class="math inline">\(Y_t\)</span> er “liten” (på en eller annen relevant skala), så vil <span class="math inline">\(Y_{t+1}\)</span> ha en tendens til å være “stor”. Og hvis <span class="math inline">\(Y_{t+1}\)</span> er “stor”, ja da vil <span class="math inline">\(Y_{t+2}\)</span> igjen ha en tendens til å være “liten”.</p>
+<p>Andre ordens autokorrelasjon er lik <span class="math inline">\(0.3\)</span>, noe som betyr at korrelasjonen mellom to observasjoner som er observert med ett tidssteg mellom seg er lik <span class="math inline">\(0.3\)</span>. I praksis betyr det at dersom <span class="math inline">\(Y_t\)</span> er “liten”, så vil <span class="math inline">\(Y_{t+2}\)</span> også ha en tendens til å være “liten”, men denne tendensen er noe svakere enn den som er mellom to påfølgende observasjoner, der absoluttverdien til autokorrelasjonen er <span class="math inline">\(0.5\)</span>.</p>
+<p>For eksempel kan vi tenke oss at en realisering av <span class="math inline">\(Y_t\)</span> ser slik ut:</p></li>
+</ol>
+</blockquote>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="bilder/tidsrekkeoppgaver2.png" class="img-fluid figure-img" width="500"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<ol start="3" type="a">
+<li><p>Dette er samme type spørsmål som vi kjenner til med forventningsverdi/gjennomsnitt, samt teoretisk og empirisk varians. En stokastisk variabel <span class="math inline">\(X\)</span> har en forventningsverdi <span class="math inline">\(\mu\)</span> og en varians <span class="math inline">\(\sigma^2\)</span>, men disse er i praksis ukjente. Vi kan derimot <em>estimere</em> forventningsverdien ved å ta et gjennomsnitt <span class="math inline">\(\overline X\)</span>, og vi kan <em>estimere</em> den teoretiske variansen ved å regne ut den <em>empiriske</em> variansen <span class="math inline">\(s^2\)</span>. Store talls lov garanterer at dette er gode estimater, ved at <span class="math inline">\(\overline X \rightarrow \mu\)</span> og <span class="math inline">\(s^2 \rightarrow \sigma^2\)</span> når antall observasjoner går mot uendelig.</p>
+<p>Vi har nøyaktig det samme forholdet mellom empiriske og teoretiske autokorrelasjoner. Autokorrelasjonsfunksjonen til <span class="math inline">\(Y_t\)</span> som vi beskrev over er den teoretiske, og den er ikke kjent i praksis med mindre vi simulerer fra en kjent tidsrekkemodell.</p>
+<p>For et gitt datasett kan vi derimot regne ut den empiriske autokorrelasjonsfunksjonen, som er et <em>estimat</em> av det sanne, teoretiske autokorrelasjonsfunksjonen. Vi vet, fra store talls lov, at dette er et godt estimat som vil konvergere mot sannheten etter hvert som vi får flere og flere observasjoner.</p></li>
+<li><p>Den empiriske autokorrelasjonsfunksjonen vil ligne på den sanne autokorrelasjonsfunksjonen som vi tegnet opp over, men det vil være noe estimeringsfeil i tillegg som kommer av at vi bare har et endelig antall observasjoner. Laggene med null korrelasjon vil ikke måles til å ha <em>eksakt</em> null autokorrelasjon, men bare om lag 5% av dem vil havne utenfor forkastningsgrensene på 5% signifikansnivå. Vi tegner også inn noen tenkte forkastningsgrenser i figuren.</p></li>
+</ol>
+</blockquote>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="bilder/tidsrekkeoppgaver3.png" class="img-fluid figure-img" width="500"></p>
+</figure>
+</div>
+</div>
+</div>
+</details>
+<ol start="2" type="1">
+<li>Vurdere hvilke(n) tidsrekkemodell(er) som passer til de empiriske autokorrelasjonsplottene under, regnet ut ved hjelp av <span class="math inline">\(n=500\)</span> observasjoner.</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-tidsrekker_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<details>
+<summary>
+Løsning
+</summary>
+<blockquote class="blockquote">
+<ol type="a">
+<li><p>Vi har et statistisk signifikant negativt utslag på første lag, og et statistisk signifikant positivt utslag på andre lag. Det er ingen flere lags der autokorrelasjonsfunksjonen er stiatistisk signifikant forskjellig fra null. Det kan tyde på en MA(2)-prosess, med <span class="math inline">\(\theta_1 &lt;0\)</span> og <span class="math inline">\(\theta_2&gt;0\)</span>.</p></li>
+<li><p>Autokorrelasjonsfunksjonen går sakte mot null med økende lag. Det kan tyde på en autoregressiv prosess, muligens en AR(1)-prosess med <span class="math inline">\(\phi_1 &gt; 0\)</span>.</p></li>
+<li><p>Autokorrelasjonsfunksjonen alternerer mellom positive og negative verdier, men i absoluttverdi ser de ut til å avta sakte mot null. Det kan tyde på en autoregressiv prosess, muligens en AR(1)-prosess med <span class="math inline">\(\phi_1 &lt; 0\)</span>.</p></li>
+</ol>
+<p>Det er ikke mulig å entydig fastslå hvilken modell som er “korrekt” ut fra et autokorrelasjonsplott. I alle tilfellene kan det være AR- eller MA-ledd som har for små koeffisienter, til at vi klarer å estimere dem til å være statistisk signifikant forskjellig fra null ved hjelp av datasettet som vi har. Det er også vanskelig å visuelt skille høyere ordens prosesser fra hverandre kun ved å se på autokorrelasjonsplottet. I det midterste plottet over for eksempel, kunne det like gjerne vært med andre- og tredjeordens AR-ledd, uten at vi ville klart å se så stor forskjell på plottet.</p>
+<p>(I denne oppgaven er datasettene 500 observasjoner simulert fra henholdsvis en MA(2)-modell med <span class="math inline">\(\theta_1 = -0.2279\)</span> og <span class="math inline">\(\theta_2 = 0.2488\)</span>, en AR(1)-modell med <span class="math inline">\(\phi_1 = 0.588\)</span>, og en AR(1)-modell med <span class="math inline">\(\phi_1 = -0.5\)</span>.)</p>
+</blockquote>
+</details>
+<ol start="3" type="1">
+<li>Under har vi anvendt funksjonen <code>auto.arima</code> fra <code>forecast</code>-pakken for fire tidsrekker. Identifiser hvilken modell som er plukket ut i hvert tilfelle, og skriv den opp:</li>
+</ol>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: ts 
+ARIMA(1,0,1) with zero mean 
+
+Coefficients:
+         ar1      ma1
+      0.4307  -0.6955
+s.e.  0.2427   0.1922
+
+sigma^2 = 0.8962:  log likelihood = -135.48
+AIC=276.97   AICc=277.22   BIC=284.78</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: ts 
+ARIMA(2,0,1) with zero mean 
+
+Coefficients:
+         ar1     ar2      ma1
+      0.3037  0.4736  -0.5945
+s.e.  0.1447  0.0871   0.1489
+
+sigma^2 = 0.9683:  log likelihood = -139.01
+AIC=286.01   AICc=286.43   BIC=296.43</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: ts 
+ARIMA(1,1,0) 
+
+Coefficients:
+         ar1
+      0.3568
+s.e.  0.0933
+
+sigma^2 = 1.01:  log likelihood = -141.96
+AIC=287.92   AICc=288.04   BIC=293.13</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: ts 
+ARIMA(2,1,2) with drift 
+
+Coefficients:
+          ar1     ar2     ma1     ma2    drift
+      -0.0001  0.4345  0.2207  0.8386  -0.7286
+s.e.   0.0996  0.1023  0.0609  0.0730   0.3520
+
+sigma^2 = 1.027:  log likelihood = -142.71
+AIC=297.43   AICc=298.33   BIC=313.06</code></pre>
+</div>
+</div>
+<details>
+<summary>
+Løsning
+</summary>
+<blockquote class="blockquote">
+<ol type="a">
+<li><p>En ARMA(1,1)-modell:</p>
+<p><span class="math display">\[Y_t = 0.4307Y_{t-1} - 0.6955u_{t-1} + u_t,\]</span></p></li>
+<li><p>En ARMA(2,1)-modell:</p>
+<p><span class="math display">\[Y_t = 0.3037Y_{t-1} + 0.4736Y_{t-2} - 0.5945u_{t-1} + u_t,\]</span></p></li>
+<li><p>En ARIMA(1,1,0)-modell:</p>
+<p><span class="math display">\[\Delta Y_t = 0.3568\Delta Y_{t-1} + u_t,\]</span></p>
+<p>der <span class="math inline">\(\Delta Y_t\)</span> er tidsrekken <span class="math inline">\(Y_t\)</span> differensiert en gang. Med andre ord er førstedifferansen til <span class="math inline">\(Y_t\)</span> en AR(1) prosess med <span class="math inline">\(\phi_1 = 0.3568\)</span>.</p></li>
+<li><p>En ARIMA(2,1,2)-modell:</p>
+<p><span class="math display">\[\Delta Y_t = -0.0001\Delta Y_{t-1} + 0.4345\Delta Y_{t-2} + 0.2207u_{t-1} + 0.8386u_{t-2} + u_t,\]</span></p>
+<p>Med andre ord er førstedifferansen til <span class="math inline">\(Y_t\)</span> en ARMA(2,2)-modell.</p></li>
+</ol>
+<p>I alle tilfellene er <span class="math inline">\(u_t\)</span> hvit støy.</p>
+</blockquote>
+</details>
+<ol start="4" type="1">
+<li>Regn ut forventning og varians til følgende tidsrekkemodeller og avgjør om de er stasjonære. I alle tilfeller er <span class="math inline">\(u_t\)</span> hvit støy der <span class="math inline">\(E(u_t)=0\)</span> og <span class="math inline">\(Var(u_t)=\sigma^2\)</span>.</li>
+</ol>
+<ol type="a">
+<li><span class="math inline">\(Y_t = t + u_t\)</span></li>
+<li><span class="math inline">\(Y_t = 3 + u_t\)</span></li>
+<li><span class="math inline">\(Y_t = t\cdot u_t\)</span></li>
+<li><span class="math inline">\(Y_t = u_1 + u_2 + \dots + u_t\)</span></li>
+</ol>
+<details>
+<summary>
+Løsning
+</summary>
+<blockquote class="blockquote">
+<ol type="a">
+<li><span class="math display">\[E(Y_t) = E(t + u_t) = E(t) + E(u_t) = t + 0 = t.\]</span> <span class="math display">\[Var(Y_t) = Var(t + u_t) = Var(t) + Var(u_t) = 0 + \sigma^2 = \sigma^2\]</span></li>
+</ol>
+<p>Siden forventningsverdien ikke er konstant kan ikke dette være en stasjonær tidsrekke.</p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p><span class="math display">\[E(Y_t) = E(3 + u_t) = E(3) + E(u_t) = 3 + 0 = 3.\]</span> <span class="math display">\[Var(Y_t) = Var(3 + u_t) = Var(3) + Var(u_t) = 0 + \sigma^2 = \sigma^2\]</span></p>
+<p>Her er både forventning og varians konstant i tid så dette kan være en stasjonær tidsrekke (vi må formelt også sjekke at autokorrelasjonen er konstant)</p>
+<ol start="3" type="a">
+<li></li>
+</ol>
+<p><span class="math display">\[E(Y_t) = E(t\cdot u_t) = t \cdot E(u_t) = t\cdot 0 = 0.\]</span> <span class="math display">\[Var(Y_t) = Var(t\cdot u_t) = t^2\cdot Var(u_t) = t^2\sigma^2 \]</span></p>
+<p>Siden varians ikke er konstant i tid kan ikke dette være en stasjonær tidsrekke.</p>
+<ol start="4" type="a">
+<li></li>
+</ol>
+<p><span class="math display">\[E(Y_t) = E(u_1 + u_2 + \dots + u_t) = E(u_1) + E(u_2) + \cdot + E(u_t) = 0 + 0 + \dots + 0 = 0.\]</span> <span class="math display">\[\begin{align*}
+Var(Y_t) &amp;= Var(u_1 + u_2 + \dots + u_t) \\
+&amp; = Var(u_1) + Var(u_2) + \dots + Var(u_t) = \sigma^2 + \sigma^2 + \dots + \sigma^2 = t\sigma^2
+\end{align*}\]</span> Siden variansen ikke er konstant i tid kan ikke dette være en stasjonær tidsrekke.</p>
+</blockquote>
+</details>
+<ol start="5" type="1">
+<li><a href="tidligere-eksamensoppgaver/skole-21-v.pdf">Individuell eksamen V21, oppgave 3</a>
+<details>
+<summary>
+Løsning
+</summary>
+<a href="tidligere-eksamensoppgaver/skole-21-v-fasit.pdf">Løsningsforslag</a>
+</details></li>
+<li><a href="tidligere-eksamensoppgaver/skole-20-v.pdf">Individuell eksamen V20, oppgave 3</a>
+<details>
+<summary>
+Løsning
+</summary>
+<a href="tidligere-eksamensoppgaver/skole-20-v-fasit.pdf">Løsningsforslag</a>
+</details></li>
+</ol>
+</section>
+<section id="sec-relevante-r-tidsrekker" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="sec-relevante-r-tidsrekker"><span class="header-section-number">5.10</span> Relevante R-kommandoer</h2>
+<p>Under følger en liste over hvilke oppgaver du skal klare i R fra denne modulen. Vår policy er at R-kommandoene under er <em>tilstrekkelige</em> for å løse oppgavene i datalabber og eksamen i MET4. Det er med andre ord ikke nødvendig å lære seg teknikker utover det som er listet opp eksplisitt i listen under. Eventuelle nye teknikker som trengs for å løse en bestemt oppgave vil bli oppgitt og forklart dersom det er nødvendig. Det antas i tillegg at du kan den grunnleggende R-syntaksen som er dekket under [Introduksjon til R].</p>
+<section id="tidsrekkedata" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="tidsrekkedata">Tidsrekkedata</h3>
+<p>I tidsrekkemodulen må vi håndtere følgende når det gjelder datasettene:</p>
+<ul>
+<li>Tidsrekkedata vil typisk ha en kolonne for dato eller tidspunkt, og en eller flere kolonner med tidsrekker nedover.</li>
+<li>Vi må kunne hente ut en enkelt kolonne fra en data frame som en vektor, f.eks <code>pris &lt;- equinor$Siste</code>.</li>
+<li>Noen tidsrekkedata (spesielt de som følger med ulike pakker i R) er lagret i spesialiserte datatyper (for eksempel klassen <code>ts</code>). Vi trenger ikke lage slike objekter selv, men vi må kunne bruke dem som input til funksjoner som <code>stl()</code>, <code>Arima()</code> og <code>forecast()</code>.</li>
+</ul>
+</section>
+<section id="plotte-en-tidsrekke" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="plotte-en-tidsrekke">Plotte en tidsrekke</h3>
+<p>Vi må kunne lage et enkelt plott av en tidsrekke. For en vektor med observasjoner bruker vi <code>plot()</code> med argumentet <code>type = "l"</code> for å tegne en linje:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pris, <span class="at">type =</span> <span class="st">"l"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Alternativt kan vi bruke <code>autoplot()</code> fra <code>forecast</code>-pakken, som er spesialdesignet for tidsrekkeobjekter:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(ausbeer)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="glidende-gjennomsnitt" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="glidende-gjennomsnitt">Glidende gjennomsnitt</h3>
+<p>For å regne ut et glidende gjennomsnitt bruker vi <code>rollmean()</code> fra <code>zoo</code>-pakken. Argumentet <code>k</code> angir vindusstørrelsen, og <code>fill = NA</code> sørger for at resultatet har like mange elementer som den opprinnelige tidsrekken:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Glidende gjennomsnitt med vindusstørrelse 5 (sentrert)</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>pris_glatt <span class="ot">&lt;-</span> <span class="fu">rollmean</span>(pris, <span class="at">k =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="cn">NA</span>)</span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Glidende gjennomsnitt som kun bruker tidligere observasjoner</span></span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>pris_glatt_bak <span class="ot">&lt;-</span> <span class="fu">rollmean</span>(pris, <span class="at">k =</span> <span class="dv">200</span>, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">align =</span> <span class="st">"right"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Vi kan tegne den glattede versjonen inn i et eksisterende plott ved hjelp av <code>lines()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pris, <span class="at">type =</span> <span class="st">"l"</span>)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(pris_glatt, <span class="at">col =</span> <span class="st">"red"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="eksponensiell-glatting" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="eksponensiell-glatting">Eksponensiell glatting</h3>
+<p>For eksponensiell glatting bruker vi <code>HoltWinters()</code>. Glattefaktoren <span class="math inline">\(w\)</span> styres gjennom argumentet <code>alpha</code>. Vi setter <code>beta = FALSE</code> og <code>gamma = FALSE</code> for enkel eksponensiell glatting:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>pris_exp <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(pris, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">beta =</span> <span class="cn">FALSE</span>, <span class="at">gamma =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Hente ut den glattede versjonen:</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>pris_exp<span class="sc">$</span>fitted[, <span class="st">"xhat"</span>]</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="dekomponering-i-trend-sesong-og-residualer" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="dekomponering-i-trend-sesong-og-residualer">Dekomponering i trend, sesong og residualer</h3>
+<p>Funksjonen <code>stl()</code> dekomponerer en tidsrekke i tre komponenter: trend, sesong og tilfeldig variasjon. Den krever at input er et tidsrekkeobjekt av klassen <code>ts</code>. Vi bruker <code>autoplot()</code> for å plotte dekomponeringen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>dekomponert <span class="ot">&lt;-</span> <span class="fu">stl</span>(ausbeer, <span class="at">s.window =</span> <span class="st">"periodic"</span>)</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotte de tre komponentene:</span></span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(dekomponert)</span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Hente ut komponentene (trend, sesong, residualer):</span></span>
+<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>dekomponert<span class="sc">$</span>time.series</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="differensiering" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="differensiering">Differensiering</h3>
+<p>For å differensiere en tidsrekke (dvs. beregne <span class="math inline">\(\Delta Y_t = Y_t - Y_{t-1}\)</span>) bruker vi funksjonen <code>diff()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>diff_pris <span class="ot">&lt;-</span> <span class="fu">diff</span>(pris)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="autokorrelasjonsplott-acf" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="autokorrelasjonsplott-acf">Autokorrelasjonsplott (ACF)</h3>
+<p>For å lage et autokorrelasjonsplott bruker vi <code>acf()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Autokorrelasjonsplott av en tidsrekke</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(pris)</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Autokorrelasjonsplott av residualene fra en estimert modell</span></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(modell<span class="sc">$</span>residuals)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Plottet kan pyntes med de vanlige argumentene, som <code>main</code>, <code>xlab</code> og <code>ylab</code>.</p>
+</section>
+<section id="estimere-arima-modeller" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="estimere-arima-modeller">Estimere ARIMA-modeller</h3>
+<p>Vi bruker <code>Arima()</code> fra <code>forecast</code>-pakken til å estimere AR-, MA-, ARMA- og ARIMA-modeller. Modellen spesifiseres gjennom argumentet <code>order = c(p, d, q)</code>, der <code>p</code> er antall AR-ledd, <code>d</code> er antall ganger tidsrekken differensieres, og <code>q</code> er antall MA-ledd:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="co"># AR(1)-modell:</span></span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="fu">Arima</span>(pris, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a><span class="co"># MA(1)-modell:</span></span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a><span class="fu">Arima</span>(pris, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ARMA(1,1)-modell:</span></span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a><span class="fu">Arima</span>(pris, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a><span class="co"># ARIMA(1,1,1)-modell (én differensiering):</span></span>
+<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a><span class="fu">Arima</span>(pris, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="automatisk-modellvalg" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="automatisk-modellvalg">Automatisk modellvalg</h3>
+<p>Funksjonen <code>auto.arima()</code> prøver mange kombinasjoner av <span class="math inline">\(p\)</span>, <span class="math inline">\(d\)</span> og <span class="math inline">\(q\)</span>, og velger den modellen som har lavest AIC:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>beste_modell <span class="ot">&lt;-</span> <span class="fu">auto.arima</span>(pris)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(beste_modell)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="predikering" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="predikering">Predikering</h3>
+<p>For å predikere fremtidige verdier bruker vi <code>forecast()</code>. Argumentet <code>h</code> angir hvor mange tidssteg frem i tid vi ønsker å predikere, og <code>level</code> angir dekningsgraden til prediksjonsintervallet:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimer en modell og prediker 10 steg frem</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>modell <span class="ot">&lt;-</span> <span class="fu">Arima</span>(pris, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>prediksjon <span class="ot">&lt;-</span> <span class="fu">forecast</span>(modell, <span class="at">h =</span> <span class="dv">10</span>, <span class="at">level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plott tidsrekken med prediksjoner og prediksjonsintervall</span></span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(prediksjon)</span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Begrens antall historiske observasjoner som vises i plottet</span></span>
+<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(prediksjon, <span class="at">include =</span> <span class="dv">100</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Prediksjon kan også gjøres direkte fra en dekomponering. Her kan vi i tillegg spesifisere at residualtidsrekken skal modelleres med en ARIMA-modell:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>dekomponert <span class="ot">&lt;-</span> <span class="fu">stl</span>(tidsrekke, <span class="at">s.window =</span> <span class="st">"periodic"</span>)</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>prediksjon  <span class="ot">&lt;-</span> <span class="fu">forecast</span>(dekomponert, <span class="at">method =</span> <span class="st">"arima"</span>, <span class="at">h =</span> <span class="dv">24</span>, <span class="at">level =</span> <span class="dv">95</span>)</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(prediksjon)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="dele-opp-i-trenings--og-testsett" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="dele-opp-i-trenings--og-testsett">Dele opp i trenings- og testsett</h3>
+<p>For å vurdere en modells prediksjonsevne kan vi dele tidsrekken i et treningssett og et testsett. For en vanlig vektor gjør vi dette med <code>head()</code> og <code>tail()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>trening <span class="ot">&lt;-</span> <span class="fu">head</span>(pris, <span class="fu">length</span>(pris) <span class="sc">-</span> <span class="dv">10</span>)</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>test    <span class="ot">&lt;-</span> <span class="fu">tail</span>(pris, <span class="dv">10</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For tidsrekkeobjekter av klassen <code>ts</code> kan vi bruke <code>window()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>trening <span class="ot">&lt;-</span> <span class="fu">window</span>(tidsrekke, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>), <span class="at">end =</span> <span class="fu">c</span>(<span class="dv">263</span>, <span class="dv">23</span>))</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>test    <span class="ot">&lt;-</span> <span class="fu">window</span>(tidsrekke, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">264</span>, <span class="dv">0</span>), <span class="at">end =</span> <span class="fu">c</span>(<span class="dv">264</span>, <span class="dv">23</span>))</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="out-of-sample-vurdering" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="out-of-sample-vurdering">Out-of-sample vurdering</h3>
+<p>Etter at vi har estimert en modell på treningssettet og predikert testsettet, kan vi bruke <code>accuracy()</code> fra <code>forecast</code>-pakken til å sammenligne prediksjonene med de faktiske verdiene:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>modell     <span class="ot">&lt;-</span> <span class="fu">auto.arima</span>(trening)</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>prediksjon <span class="ot">&lt;-</span> <span class="fu">forecast</span>(modell, <span class="at">h =</span> <span class="fu">length</span>(test))</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="fu">accuracy</span>(prediksjon, test)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Det er raden “Test set” i utskriften som viser out-of-sample egenskapene. Jo lavere verdiene er (spesielt RMSE), desto bedre er modellens prediksjonsevne.</p>
+</section>
+<section id="simulere-tidsrekker" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="simulere-tidsrekker">Simulere tidsrekker</h3>
+<p>Funksjonen <code>arima.sim()</code> kan brukes til å simulere tidsrekker fra ulike modeller. Det er nyttig for å forstå egenskapene til ulike modeller:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hvit støy</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>hvit_støy <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="co"># AR(1) med phi = 0.95</span></span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>ar1 <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="at">model =</span> <span class="fu">list</span>(<span class="at">ar =</span> <span class="fl">0.95</span>), <span class="at">n =</span> <span class="dv">100</span>)</span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a><span class="co"># MA(1) med theta = 0.5</span></span>
+<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a>ma1 <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="at">model =</span> <span class="fu">list</span>(<span class="at">ma =</span> <span class="fl">0.5</span>), <span class="at">n =</span> <span class="dv">100</span>)</span>
+<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a><span class="co"># ARMA(2,2) med phi_1 = 0.2, phi_2 = 0.1, theta_1 = 0.3, theta_2 = 0.4</span></span>
+<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a>arma22 <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="at">model =</span> <span class="fu">list</span>(<span class="at">ar =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.1</span>), <span class="at">ma =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.4</span>)), <span class="at">n =</span> <span class="dv">100</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopiert!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopiert!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./04-regresjon.html" class="pagination-link" aria-label="Regresjon">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regresjon</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./06-avansert-regresjon-og-maskinlaering.html" class="pagination-link" aria-label="Avansert regresjon og maskinlæring">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Avansert regresjon og maskinlæring</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>MET4 – Empiriske Metoder, NHH</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.nhh.no/en/employees/faculty/hakon-otneim/">
+<p>Håkon Otneim</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.nhh.no/en/employees/faculty/geir-drage-berentsen/">
+<p>Geir Drage Berentsen</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -1,3 +1,12 @@
+---
+aliases:
+  - enkel-regresjon.html
+  - modellbygging.html
+  - multippel-regresjon.html
+  - oppgaver-1.html
+  - regresjon.html
+  - relevante-r-regresjon.html
+---
 
 # Regresjon
 

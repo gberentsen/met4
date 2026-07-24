@@ -1,3 +1,11 @@
+---
+aliases:
+  - deskriptiv-statistikk.html
+  - grunnleggende-statistikk.html
+  - oppgaverdeskriptiv.html
+  - relevant-r-grunnleggende.html
+  - utvalg-og-estimering.html
+---
 
 # Grunnleggende statistikk
 
