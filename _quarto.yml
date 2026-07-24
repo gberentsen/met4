@@ -21,8 +21,15 @@ book:
   author: "Geir Drage Berentsen, Håkon Otneim og Maren Holthe Hedne"
   description: "Hjemmesiden til kurset MET4 – Empiriske Metoder ved Norges Handelshøyskole."
   search: true
+  favicon: icon/favicon.ico
+  page-navigation: true
   page-footer:
     left: "MET4 – Empiriske Metoder, NHH"
+    right:
+      - text: "Håkon Otneim"
+        href: "https://www.nhh.no/en/employees/faculty/hakon-otneim/"
+      - text: "Geir Drage Berentsen"
+        href: "https://www.nhh.no/en/employees/faculty/geir-drage-berentsen/"
   chapters:
     - index.qmd
     - part: "Moduler"

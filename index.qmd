@@ -1,4 +1,7 @@
 # Innledning {.unnumbered}
+
+[![Norges Handelshøyskole](bilder/nhh.png){width=260 fig-alt="Norges Handelshøyskole"}](https://www.nhh.no/)
+
 <figure style="float:right; padding:10px; text-align:center">
   <img alt="Maren" src="bilder/maren.jpg" width="120" height="150"/>
   <figcaption>Maren</figcaption>
