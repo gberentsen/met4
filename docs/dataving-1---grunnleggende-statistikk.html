@@ -270,16 +270,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Lag gjerne en liten overskrift ved hjelp av kommentartegnet <code>#</code> slik at .R filen din ser omtrent slik ut:</p>
 <p><img src="bilder/rstudio3.JPG" /><!-- --></p>
 <p><strong>Oppgave 2.</strong> Du skal nå lese inn excel filen du lagret i over i R. Selv om det finnes mange funksjoner som allerede er innebygget i R, må man noen ganger installere ekstra ‘pakker’ for å få tilgang til spesielle funksjoner. For å lese inn en excel fil trenger du nettopp en slik ikke standard funksjon. Denne finnes i pakken <code>readxl</code>. Selve installeringen kan du gjøre direkte i konsollen med å skrive (hvis du ikke har gjort det allerede, for eksempel da du gikk gjennom <a href="pakker.html#pakker">forelesningsvideoen om R-pakker</a>):</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="dataving-1---grunnleggende-statistikk.html#cb340-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;readxl&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="dataving-1---grunnleggende-statistikk.html#cb355-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;readxl&quot;</span>)</span></code></pre></div>
 <p>Pakken legger seg da i en bibliotekmappe der R er installert. For å gi R beskjed om å laste inn funksjonene til pakken du nettopp installerte bruker du funksjonen <code>library()</code>. Du har nå tilgang til en funksjon kalt <code>read_excel()</code> som du kan bruke til å lese inn excel filen:</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="dataving-1---grunnleggende-statistikk.html#cb341-1" tabindex="-1"></a><span class="co"># MET4 - Dataøving 1</span></span>
-<span id="cb341-2"><a href="dataving-1---grunnleggende-statistikk.html#cb341-2" tabindex="-1"></a><span class="co"># ------------------</span></span>
-<span id="cb341-3"><a href="dataving-1---grunnleggende-statistikk.html#cb341-3" tabindex="-1"></a></span>
-<span id="cb341-4"><a href="dataving-1---grunnleggende-statistikk.html#cb341-4" tabindex="-1"></a><span class="co"># les inn data</span></span>
-<span id="cb341-5"><a href="dataving-1---grunnleggende-statistikk.html#cb341-5" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb341-6"><a href="dataving-1---grunnleggende-statistikk.html#cb341-6" tabindex="-1"></a>violence <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;violence.xlsx&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="dataving-1---grunnleggende-statistikk.html#cb356-1" tabindex="-1"></a><span class="co"># MET4 - Dataøving 1</span></span>
+<span id="cb356-2"><a href="dataving-1---grunnleggende-statistikk.html#cb356-2" tabindex="-1"></a><span class="co"># ------------------</span></span>
+<span id="cb356-3"><a href="dataving-1---grunnleggende-statistikk.html#cb356-3" tabindex="-1"></a></span>
+<span id="cb356-4"><a href="dataving-1---grunnleggende-statistikk.html#cb356-4" tabindex="-1"></a><span class="co"># les inn data</span></span>
+<span id="cb356-5"><a href="dataving-1---grunnleggende-statistikk.html#cb356-5" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb356-6"><a href="dataving-1---grunnleggende-statistikk.html#cb356-6" tabindex="-1"></a>violence <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;violence.xlsx&quot;</span>)</span></code></pre></div>
 <p>Marker linjene du nettopp skrev i R-skriptet ditt og trykk <strong>Ctrl + Enter</strong> (<strong>Cmd + Enter</strong>), for å opprette objektet <code>violence</code> som inneholder datasettet. Funksjonen <code>ls()</code> lister opp alle objekter som har blitt definert. Du kan prøve selv å skrive følgende i konsollen:</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="dataving-1---grunnleggende-statistikk.html#cb342-1" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="dataving-1---grunnleggende-statistikk.html#cb357-1" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
 <pre><code>##   [1] &quot;A&quot;                 &quot;AK&quot;                &quot;ar1&quot;              
 ##   [4] &quot;ar1_estimat&quot;       &quot;arima_best_AIC&quot;    &quot;arima111&quot;         
 ##   [7] &quot;avkastning&quot;        &quot;avstand&quot;           &quot;B&quot;                
@@ -291,50 +291,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  [25] &quot;df_tv&quot;             &quot;dfreg&quot;             &quot;did&quot;              
 ##  [28] &quot;did_fe&quot;            &quot;did_twfe&quot;          &quot;diff_pris&quot;        
 ##  [31] &quot;difftemp&quot;          &quot;e&quot;                 &quot;eps_ar_base&quot;      
-##  [34] &quot;equinor&quot;           &quot;etter_ombygging&quot;   &quot;exp01&quot;            
-##  [37] &quot;exp08&quot;             &quot;f&quot;                 &quot;F_obs&quot;            
-##  [40] &quot;fe&quot;                &quot;fe_id&quot;             &quot;fe_id_t&quot;          
-##  [43] &quot;fe_model&quot;          &quot;fe_model2&quot;         &quot;fit_exp&quot;          
-##  [46] &quot;fond1&quot;             &quot;fond2&quot;             &quot;foo1&quot;             
-##  [49] &quot;foo2&quot;              &quot;for_ombygging&quot;     &quot;gj.snitt&quot;         
-##  [52] &quot;glatt3&quot;            &quot;glatt5&quot;            &quot;hvit_støy&quot;        
-##  [55] &quot;i&quot;                 &quot;immigration&quot;       &quot;kontrafaktisk&quot;    
-##  [58] &quot;kontroll&quot;          &quot;krit&quot;              &quot;kurve&quot;            
-##  [61] &quot;L&quot;                 &quot;LCL&quot;               &quot;levetid&quot;          
-##  [64] &quot;lower&quot;             &quot;M&quot;                 &quot;means_table&quot;      
-##  [67] &quot;med_sparkesykkel&quot;  &quot;metodeA&quot;           &quot;metodeB&quot;          
-##  [70] &quot;mu0&quot;               &quot;mu1&quot;               &quot;mu2&quot;              
-##  [73] &quot;n&quot;                 &quot;n1&quot;                &quot;n2&quot;               
-##  [76] &quot;nA&quot;                &quot;nB&quot;                &quot;new_df&quot;           
-##  [79] &quot;njmin&quot;             &quot;ny_x1&quot;             &quot;ny_x2&quot;            
-##  [82] &quot;obs&quot;               &quot;ols&quot;               &quot;ols_model&quot;        
-##  [85] &quot;p.df&quot;              &quot;p.hatt&quot;            &quot;p.pool&quot;           
-##  [88] &quot;p_verdier&quot;         &quot;p0&quot;                &quot;pols&quot;             
-##  [91] &quot;pr_avkastning&quot;     &quot;pred_arima111&quot;     &quot;pred_exp&quot;         
-##  [94] &quot;prediksjon&quot;        &quot;pris&quot;              &quot;pris_exp1&quot;        
-##  [97] &quot;pris_exp2&quot;         &quot;pris_exp3&quot;         &quot;pris_glatt200&quot;    
-## [100] &quot;pris_glatt5&quot;       &quot;reg&quot;               &quot;reg.conf&quot;         
-## [103] &quot;reg.fe&quot;            &quot;reg.fe2&quot;           &quot;reg.fe3&quot;          
-## [106] &quot;reg.pred&quot;          &quot;reg.re&quot;            &quot;reg.zero&quot;         
-## [109] &quot;reg_colin1&quot;        &quot;reg_colin2&quot;        &quot;reg_conf&quot;         
-## [112] &quot;reg_pred&quot;          &quot;s&quot;                 &quot;s_p&quot;              
-## [115] &quot;sdd&quot;               &quot;sdmetodeB&quot;         &quot;Sensor1&quot;          
-## [118] &quot;Sensor2&quot;           &quot;sigma_0&quot;           &quot;sigma0&quot;           
-## [121] &quot;sigma1&quot;            &quot;t&quot;                 &quot;t_krit&quot;           
-## [124] &quot;t_kritisk&quot;         &quot;t_kritisk2&quot;        &quot;T_obs&quot;            
-## [127] &quot;t2&quot;                &quot;tabell&quot;            &quot;telco&quot;            
-## [130] &quot;temp&quot;              &quot;test&quot;              &quot;testdata&quot;         
-## [133] &quot;tidsplan&quot;          &quot;time&quot;              &quot;trening&quot;          
-## [136] &quot;ts&quot;                &quot;ts1&quot;               &quot;ts1_acf&quot;          
-## [139] &quot;ts2&quot;               &quot;ts2_acf&quot;           &quot;ts3&quot;              
-## [142] &quot;ts3_acf&quot;           &quot;U&quot;                 &quot;UCL&quot;              
-## [145] &quot;upper&quot;             &quot;uten_sparkesykkel&quot; &quot;vekt&quot;             
-## [148] &quot;violence&quot;          &quot;x&quot;                 &quot;x1&quot;               
-## [151] &quot;X1&quot;                &quot;x2&quot;                &quot;X2&quot;               
-## [154] &quot;X3&quot;                &quot;xA&quot;                &quot;xB&quot;               
-## [157] &quot;y&quot;                 &quot;y1&quot;                &quot;y2&quot;               
-## [160] &quot;y3&quot;                &quot;y4&quot;                &quot;Z&quot;                
-## [163] &quot;zkrit&quot;             &quot;zobs&quot;</code></pre>
+##  [34] &quot;equinor&quot;           &quot;etter_kurs&quot;        &quot;etter_ombygging&quot;  
+##  [37] &quot;exp01&quot;             &quot;exp08&quot;             &quot;f&quot;                
+##  [40] &quot;F_obs&quot;             &quot;fe&quot;                &quot;fe_id&quot;            
+##  [43] &quot;fe_id_t&quot;           &quot;fe_model&quot;          &quot;fe_model2&quot;        
+##  [46] &quot;fit_exp&quot;           &quot;fond1&quot;             &quot;fond2&quot;            
+##  [49] &quot;foo1&quot;              &quot;foo2&quot;              &quot;for_kurs&quot;         
+##  [52] &quot;for_ombygging&quot;     &quot;gj.snitt&quot;          &quot;glatt3&quot;           
+##  [55] &quot;glatt5&quot;            &quot;hvit_støy&quot;         &quot;i&quot;                
+##  [58] &quot;immigration&quot;       &quot;kast&quot;              &quot;kontrafaktisk&quot;    
+##  [61] &quot;kontroll&quot;          &quot;krit&quot;              &quot;kurve&quot;            
+##  [64] &quot;L&quot;                 &quot;LCL&quot;               &quot;levetid&quot;          
+##  [67] &quot;lower&quot;             &quot;M&quot;                 &quot;maskin1&quot;          
+##  [70] &quot;maskin2&quot;           &quot;means_table&quot;       &quot;med_sparkesykkel&quot; 
+##  [73] &quot;metode_a&quot;          &quot;metode_b&quot;          &quot;metodeA&quot;          
+##  [76] &quot;metodeB&quot;           &quot;mu0&quot;               &quot;mu1&quot;              
+##  [79] &quot;mu2&quot;               &quot;n&quot;                 &quot;n1&quot;               
+##  [82] &quot;n2&quot;                &quot;nA&quot;                &quot;nB&quot;               
+##  [85] &quot;new_df&quot;            &quot;njmin&quot;             &quot;ny_x1&quot;            
+##  [88] &quot;ny_x2&quot;             &quot;obs&quot;               &quot;ols&quot;              
+##  [91] &quot;ols_model&quot;         &quot;p.df&quot;              &quot;p.hatt&quot;           
+##  [94] &quot;p.pool&quot;            &quot;p_verdier&quot;         &quot;p0&quot;               
+##  [97] &quot;pols&quot;              &quot;pr_avkastning&quot;     &quot;pred_arima111&quot;    
+## [100] &quot;pred_exp&quot;          &quot;prediksjon&quot;        &quot;pris&quot;             
+## [103] &quot;pris_exp1&quot;         &quot;pris_exp2&quot;         &quot;pris_exp3&quot;        
+## [106] &quot;pris_glatt200&quot;     &quot;pris_glatt5&quot;       &quot;reg&quot;              
+## [109] &quot;reg.conf&quot;          &quot;reg.fe&quot;            &quot;reg.fe2&quot;          
+## [112] &quot;reg.fe3&quot;           &quot;reg.pred&quot;          &quot;reg.re&quot;           
+## [115] &quot;reg.zero&quot;          &quot;reg_colin1&quot;        &quot;reg_colin2&quot;       
+## [118] &quot;reg_conf&quot;          &quot;reg_pred&quot;          &quot;s&quot;                
+## [121] &quot;s_p&quot;               &quot;sdd&quot;               &quot;sdmetodeB&quot;        
+## [124] &quot;Sensor1&quot;           &quot;Sensor2&quot;           &quot;sigma_0&quot;          
+## [127] &quot;sigma0&quot;            &quot;sigma1&quot;            &quot;t&quot;                
+## [130] &quot;t_krit&quot;            &quot;t_kritisk&quot;         &quot;t_kritisk2&quot;       
+## [133] &quot;T_obs&quot;             &quot;t2&quot;                &quot;tab&quot;              
+## [136] &quot;tabell&quot;            &quot;telco&quot;             &quot;temp&quot;             
+## [139] &quot;test&quot;              &quot;testdata&quot;          &quot;tidsplan&quot;         
+## [142] &quot;time&quot;              &quot;trening&quot;           &quot;ts&quot;               
+## [145] &quot;ts1&quot;               &quot;ts1_acf&quot;           &quot;ts2&quot;              
+## [148] &quot;ts2_acf&quot;           &quot;ts3&quot;               &quot;ts3_acf&quot;          
+## [151] &quot;U&quot;                 &quot;UCL&quot;               &quot;upper&quot;            
+## [154] &quot;uten_sparkesykkel&quot; &quot;vekt&quot;              &quot;ventetid&quot;         
+## [157] &quot;violence&quot;          &quot;x&quot;                 &quot;x1&quot;               
+## [160] &quot;X1&quot;                &quot;x2&quot;                &quot;X2&quot;               
+## [163] &quot;X3&quot;                &quot;xA&quot;                &quot;xB&quot;               
+## [166] &quot;y&quot;                 &quot;y1&quot;                &quot;y2&quot;               
+## [169] &quot;y3&quot;                &quot;y4&quot;                &quot;Z&quot;                
+## [172] &quot;zkrit&quot;             &quot;zobs&quot;</code></pre>
 <p>Du ser at det har kommet et nytt objekt som heter <code>violence</code>. En tilsvarende oversikt finner du i vinduet øverst til høyre i RStudio (se Figur <a href="en-gjennomgang-av-rstudio.html#fig:rstudio1">1.1</a>) hvor du også kan klikke på objektet for å se nærmere på det.</p>
 <p><strong>Oppgave 3.</strong> Ta en titt på strukturen til datasettet du nettopp leste inn. Når du gjør slike små utforskninger kan du gjerne jobbe direkte i konsollen, og det du gjør i dette punktet trenger nødvendigvis ikke være med i .R-filen din. Gå til konsollen og bruk funksjoner som <code>class</code>, <code>dim</code>, <code>names</code>, <code>head</code> og <code>str</code> for å utforske strukturen på dataene. Vi ser at det er 5 variabler:</p>
 <ul>
@@ -347,21 +350,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Oppgave 4.</strong></p>
 <p>Vi skal se nærmere på om aggresjonsnivået er forskjellig i de to gruppene. Da må vi trekke ut de aktuelle tallene fra datasettet. Vi ønsker å velge ut <em>to vektorer</em> for å gjøre denne sammenligningen: en vektor som inneholder aggresjonsnivået til gruppen som har spilt det voldelige dataspillet, og en vektor som inneholder aggresjonsnivået til gruppen som har spilt det ikke-voldelige dataspillet.</p>
 <p>La disse to vektorene få navn <code>voldelig</code> og <code>ikke_voldelig</code>, og lag dem ved å skrive følgende kodelinjer (se <a href="pipe.html#pipe">video om pipe-operatoren og enkel datavask</a> for en forklaring av disse funksjonene. Den siste linjen, <code>pull</code>, gjør en dataframe med én kolonne om til en vektor) :</p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="dataving-1---grunnleggende-statistikk.html#cb344-1" tabindex="-1"></a><span class="co"># Laster inn dplyr-pakken</span></span>
-<span id="cb344-2"><a href="dataving-1---grunnleggende-statistikk.html#cb344-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb344-3"><a href="dataving-1---grunnleggende-statistikk.html#cb344-3" tabindex="-1"></a></span>
-<span id="cb344-4"><a href="dataving-1---grunnleggende-statistikk.html#cb344-4" tabindex="-1"></a><span class="co"># Vektorer med aggresjonsnivå til gruppen som har spilt voldelig/ikke-voldelig spill </span></span>
-<span id="cb344-5"><a href="dataving-1---grunnleggende-statistikk.html#cb344-5" tabindex="-1"></a>voldelig <span class="ot">&lt;-</span> </span>
-<span id="cb344-6"><a href="dataving-1---grunnleggende-statistikk.html#cb344-6" tabindex="-1"></a>  violence <span class="sc">%&gt;%</span> </span>
-<span id="cb344-7"><a href="dataving-1---grunnleggende-statistikk.html#cb344-7" tabindex="-1"></a>  <span class="fu">filter</span>(violent_treatment <span class="sc">==</span> <span class="st">&quot;Violent&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb344-8"><a href="dataving-1---grunnleggende-statistikk.html#cb344-8" tabindex="-1"></a>  <span class="fu">select</span>(aggression_level) <span class="sc">%&gt;%</span> </span>
-<span id="cb344-9"><a href="dataving-1---grunnleggende-statistikk.html#cb344-9" tabindex="-1"></a>  pull</span>
-<span id="cb344-10"><a href="dataving-1---grunnleggende-statistikk.html#cb344-10" tabindex="-1"></a></span>
-<span id="cb344-11"><a href="dataving-1---grunnleggende-statistikk.html#cb344-11" tabindex="-1"></a>ikke_voldelig <span class="ot">&lt;-</span> </span>
-<span id="cb344-12"><a href="dataving-1---grunnleggende-statistikk.html#cb344-12" tabindex="-1"></a>  violence <span class="sc">%&gt;%</span> </span>
-<span id="cb344-13"><a href="dataving-1---grunnleggende-statistikk.html#cb344-13" tabindex="-1"></a>  <span class="fu">filter</span>(violent_treatment <span class="sc">==</span> <span class="st">&quot;Less Violent&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb344-14"><a href="dataving-1---grunnleggende-statistikk.html#cb344-14" tabindex="-1"></a>  <span class="fu">select</span>(aggression_level) <span class="sc">%&gt;%</span> </span>
-<span id="cb344-15"><a href="dataving-1---grunnleggende-statistikk.html#cb344-15" tabindex="-1"></a>  pull</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="dataving-1---grunnleggende-statistikk.html#cb359-1" tabindex="-1"></a><span class="co"># Laster inn dplyr-pakken</span></span>
+<span id="cb359-2"><a href="dataving-1---grunnleggende-statistikk.html#cb359-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb359-3"><a href="dataving-1---grunnleggende-statistikk.html#cb359-3" tabindex="-1"></a></span>
+<span id="cb359-4"><a href="dataving-1---grunnleggende-statistikk.html#cb359-4" tabindex="-1"></a><span class="co"># Vektorer med aggresjonsnivå til gruppen som har spilt voldelig/ikke-voldelig spill </span></span>
+<span id="cb359-5"><a href="dataving-1---grunnleggende-statistikk.html#cb359-5" tabindex="-1"></a>voldelig <span class="ot">&lt;-</span> </span>
+<span id="cb359-6"><a href="dataving-1---grunnleggende-statistikk.html#cb359-6" tabindex="-1"></a>  violence <span class="sc">%&gt;%</span> </span>
+<span id="cb359-7"><a href="dataving-1---grunnleggende-statistikk.html#cb359-7" tabindex="-1"></a>  <span class="fu">filter</span>(violent_treatment <span class="sc">==</span> <span class="st">&quot;Violent&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb359-8"><a href="dataving-1---grunnleggende-statistikk.html#cb359-8" tabindex="-1"></a>  <span class="fu">select</span>(aggression_level) <span class="sc">%&gt;%</span> </span>
+<span id="cb359-9"><a href="dataving-1---grunnleggende-statistikk.html#cb359-9" tabindex="-1"></a>  pull</span>
+<span id="cb359-10"><a href="dataving-1---grunnleggende-statistikk.html#cb359-10" tabindex="-1"></a></span>
+<span id="cb359-11"><a href="dataving-1---grunnleggende-statistikk.html#cb359-11" tabindex="-1"></a>ikke_voldelig <span class="ot">&lt;-</span> </span>
+<span id="cb359-12"><a href="dataving-1---grunnleggende-statistikk.html#cb359-12" tabindex="-1"></a>  violence <span class="sc">%&gt;%</span> </span>
+<span id="cb359-13"><a href="dataving-1---grunnleggende-statistikk.html#cb359-13" tabindex="-1"></a>  <span class="fu">filter</span>(violent_treatment <span class="sc">==</span> <span class="st">&quot;Less Violent&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb359-14"><a href="dataving-1---grunnleggende-statistikk.html#cb359-14" tabindex="-1"></a>  <span class="fu">select</span>(aggression_level) <span class="sc">%&gt;%</span> </span>
+<span id="cb359-15"><a href="dataving-1---grunnleggende-statistikk.html#cb359-15" tabindex="-1"></a>  pull</span></code></pre></div>
 <p>Sjekk nå at dette har fungert ved å skrive <code>voldelig</code> og <code>ikke_voldelig</code> inn i konsollen for å se at det faktisk er vektorer som inneholder tallene 1 til 9. Bruk også noen minutter til å prøve å forstå hva kodelinjene over faktisk gjør.</p>
 <p>(<strong>NB!</strong> Pass på at du skriver <code>Violent</code> og <code>Less Violent</code> helt riktig med store og små bokstaver, ellers vil det ikke fungere!)</p>
 <p><strong>Oppgave 5.</strong> I eksamensoppgaven fra 2019 får vi oppgitt deskriptiv statistikk over aggresjonsnivået for de to gruppene i følgende tabell:</p>
@@ -370,23 +373,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Oppgave 6.</strong> Vi skal nå lage et histogram av aggresjonsnivået, med ett histogram for hver av de to gruppene. Et svært viktig punkt er følgende:</p>
 <p><strong><code>ggplot</code>-funksjonen skal alltid ha hele datasettet (en data frame) som argument!!</strong></p>
 <p>Det betyr at vi <em>ikke</em> skal bruke de to vektorene <code>voldelig</code> og <code>ikke_voldelig</code> som vi lagde over, men hele datasettet <code>violence</code>. Variabelen som inneholder aggresjonsnivået er <code>aggression_level</code>, så det er den vi bruker som <span class="math inline">\(x\)</span>-argument. Vi husker å laste inn <code>ggplot2</code>-pakken først, og gjør et første forsøk:</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="dataving-1---grunnleggende-statistikk.html#cb345-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb345-2"><a href="dataving-1---grunnleggende-statistikk.html#cb345-2" tabindex="-1"></a><span class="fu">ggplot</span>(violence, <span class="fu">aes</span>(<span class="at">x =</span> aggression_level)) <span class="sc">+</span></span>
-<span id="cb345-3"><a href="dataving-1---grunnleggende-statistikk.html#cb345-3" tabindex="-1"></a>        <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">9</span>)</span></code></pre></div>
-<p><img src="met4_files/figure-html/unnamed-chunk-269-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="dataving-1---grunnleggende-statistikk.html#cb360-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb360-2"><a href="dataving-1---grunnleggende-statistikk.html#cb360-2" tabindex="-1"></a><span class="fu">ggplot</span>(violence, <span class="fu">aes</span>(<span class="at">x =</span> aggression_level)) <span class="sc">+</span></span>
+<span id="cb360-3"><a href="dataving-1---grunnleggende-statistikk.html#cb360-3" tabindex="-1"></a>        <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">9</span>)</span></code></pre></div>
+<p><img src="met4_files/figure-html/unnamed-chunk-277-1.png" alt="" width="672" /></p>
 <p>Nesten! Det eneste problemet er at vi har ett histogram for alle observasjonene, mens det vi egentlig ønsket var å lage et histogram for hver av gruppene. Dette er såre enkelt i <code>ggplot2</code>. Det eneste vi trenger å gjøre er å identifisere den variabelen i datasettet som angir gruppetilhørighet (sjekk variabeloversikten over, svaret er <code>violent_treatment</code>), og så plusse på en funksjon som heter <code>facet_wrap()</code> som vist under.</p>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="dataving-1---grunnleggende-statistikk.html#cb346-1" tabindex="-1"></a><span class="fu">ggplot</span>(violence, <span class="fu">aes</span>(<span class="at">x =</span> aggression_level)) <span class="sc">+</span></span>
-<span id="cb346-2"><a href="dataving-1---grunnleggende-statistikk.html#cb346-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">9</span>) <span class="sc">+</span></span>
-<span id="cb346-3"><a href="dataving-1---grunnleggende-statistikk.html#cb346-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> violent_treatment)</span></code></pre></div>
-<p><img src="met4_files/figure-html/unnamed-chunk-270-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="dataving-1---grunnleggende-statistikk.html#cb361-1" tabindex="-1"></a><span class="fu">ggplot</span>(violence, <span class="fu">aes</span>(<span class="at">x =</span> aggression_level)) <span class="sc">+</span></span>
+<span id="cb361-2"><a href="dataving-1---grunnleggende-statistikk.html#cb361-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">9</span>) <span class="sc">+</span></span>
+<span id="cb361-3"><a href="dataving-1---grunnleggende-statistikk.html#cb361-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> violent_treatment)</span></code></pre></div>
+<p><img src="met4_files/figure-html/unnamed-chunk-278-1.png" alt="" width="672" /></p>
 <p>Dersom vi i stedet ønsker et skalert histogram kan vi spesifisere <code>y</code>-argumentet på følgende vis:</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="dataving-1---grunnleggende-statistikk.html#cb347-1" tabindex="-1"></a><span class="fu">ggplot</span>(violence, <span class="fu">aes</span>(<span class="at">x =</span> aggression_level, <span class="at">y =</span> <span class="fu">after_stat</span>(density))) <span class="sc">+</span></span>
-<span id="cb347-2"><a href="dataving-1---grunnleggende-statistikk.html#cb347-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">9</span>) <span class="sc">+</span></span>
-<span id="cb347-3"><a href="dataving-1---grunnleggende-statistikk.html#cb347-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> violent_treatment)</span></code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="dataving-1---grunnleggende-statistikk.html#cb362-1" tabindex="-1"></a><span class="fu">ggplot</span>(violence, <span class="fu">aes</span>(<span class="at">x =</span> aggression_level, <span class="at">y =</span> <span class="fu">after_stat</span>(density))) <span class="sc">+</span></span>
+<span id="cb362-2"><a href="dataving-1---grunnleggende-statistikk.html#cb362-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">9</span>) <span class="sc">+</span></span>
+<span id="cb362-3"><a href="dataving-1---grunnleggende-statistikk.html#cb362-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> violent_treatment)</span></code></pre></div>
 <p><strong>Oppgave 7.</strong> Når man skal sammenligne sentrum og spredning i to grupper er et boxplott et ypperlig alternativ og vi kan da bruke funksjonen <code>boxplot()</code> i “base R”, eller funksjonen <code>geom_boxplot()</code> hvis vi heller ønsker å benytte <code>ggplot2</code>. Vi holder oss til det siste alternativet her, og ser at kodelinjene ligner på det vi laget over.</p>
 <p>Dersom vi ønsker å lage et enkelt boxplot av en variabel for å sammenligne spredingen i to eller flere grupper kan vi skrive</p>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="dataving-1---grunnleggende-statistikk.html#cb348-1" tabindex="-1"></a><span class="fu">ggplot</span>(a, <span class="fu">aes</span>(<span class="at">x =</span> b, <span class="at">y =</span> c)) <span class="sc">+</span></span>
-<span id="cb348-2"><a href="dataving-1---grunnleggende-statistikk.html#cb348-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="dataving-1---grunnleggende-statistikk.html#cb363-1" tabindex="-1"></a><span class="fu">ggplot</span>(a, <span class="fu">aes</span>(<span class="at">x =</span> b, <span class="at">y =</span> c)) <span class="sc">+</span></span>
+<span id="cb363-2"><a href="dataving-1---grunnleggende-statistikk.html#cb363-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 <p>Her må du selv erstatte bokstavene a, b og c i henhold til følgende regel:</p>
 <ul>
 <li><code>a</code> er navnet på datasettet.</li>
