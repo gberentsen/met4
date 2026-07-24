@@ -294,8 +294,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./09-kursgodkjenning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Obligatorisk kursgodkjenning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./10-Eksamensoppgaver.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Eksamensoppgaver</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eksamensoppgaver</span></span></a>
   </div>
 </li>
       </ul>
@@ -360,6 +366,7 @@ window.Quarto = {
   <li><a href="#tester-for-andeler" id="toc-tester-for-andeler" class="nav-link" data-scroll-target="#tester-for-andeler"><span class="header-section-number">3.6.2</span> Tester for andeler</a></li>
   <li><a href="#varianstester" id="toc-varianstester" class="nav-link" data-scroll-target="#varianstester"><span class="header-section-number">3.6.3</span> Varianstester</a></li>
   <li><a href="#kjikvadrattester-1" id="toc-kjikvadrattester-1" class="nav-link" data-scroll-target="#kjikvadrattester-1"><span class="header-section-number">3.6.4</span> Kjikvadrattester</a></li>
+  <li><a href="#sec-hente-ut-testverdier" id="toc-sec-hente-ut-testverdier" class="nav-link" data-scroll-target="#sec-hente-ut-testverdier"><span class="header-section-number">3.6.5</span> Hente ut enkelttall fra en test</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -900,6 +907,7 @@ ratio of variances
 </div>
 </div>
 <p><strong>p-verdien</strong> er 0.009, under 0.05, så vi forkaster <span class="math inline">\(H_0\)</span>. Utskriften gir også selve <span class="math inline">\(F\)</span>-verdien og et konfidensintervall for forholdet mellom variansene.</p>
+<p>Her ligger de to fondene i hver sin vektor. Kommer dataene i stedet som ett datasett med en kategorisk variabel som angir gruppen, tar <code>var.test()</code> også formelsyntaks, <code>var.test(verdi ~ gruppe, data = df)</code>, på samme måte som <code>t.test()</code>. Og vil du bare ha ett av tallene i utskriften, henter du det ut med <code>$</code>, for eksempel <code>var.test(...)$p.value</code>. Begge deler er beskrevet i <a href="#sec-relevante-r-testing" class="quarto-xref"><span>Seksjon 3.6</span></a>.</p>
 </section>
 <section id="sammenligning-av-to-andeler" class="level3" data-number="3.3.5">
 <h3 data-number="3.3.5" class="anchored" data-anchor-id="sammenligning-av-to-andeler"><span class="header-section-number">3.3.5</span> Sammenligning av to andeler</h3>
@@ -2320,7 +2328,7 @@ Løsning
 <section id="sec-relevante-r-testing" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="sec-relevante-r-testing"><span class="header-section-number">3.6</span> Relevante R-kommandoer</h2>
 <p>Under følger en liste over hvilke oppgaver du skal klare i R fra denne modulen. Vår policy er at R-kommandoene under er <em>tilstrekkelige</em> for å løse oppgavene i datalabber og eksamen i MET4. Det er med andre ord ikke nødvendig å lære seg teknikker utover det som er listet opp eksplisitt i listen under. Eventuelle nye teknikker som trengs for å løse en bestemt oppgave vil bli oppgitt og forklart dersom det er nødvendig. Det antas i tillegg at du kan den grunnleggende R-syntaksen som er dekket under [Introduksjon til R].</p>
-<p>Vi følger samme rekkefølge som i teorien: først tester for et gjennomsnitt og for differansen mellom to gjennomsnitt (t-tester), så tester for andeler, så varianstester, og til slutt kji-kvadrattester. De fleste testene kjører vi direkte med en ferdig funksjon (<code>t.test()</code>, <code>var.test()</code>, <code>chisq.test()</code> og så videre), som gir både testobservator og p-verdi. Trenger du i stedet en <em>kritisk verdi</em> (for eksempel på eksamen), finner du den med <strong>kvantilfunksjonene</strong> <code>qt()</code>, <code>qnorm()</code>, <code>qchisq()</code> og <code>qf()</code>. Under hver testtype viser vi begge deler. (Kvantil- og sannsynlighetsfunksjonene ble introdusert i modul 2, se <a href="02-grunnleggende-statistikk.html#sec-relevant-r-grunnleggende" class="quarto-xref"><span>Seksjon 2.4</span></a>.)</p>
+<p>Vi følger samme rekkefølge som i teorien: først tester for et gjennomsnitt og for differansen mellom to gjennomsnitt (t-tester), så tester for andeler, så varianstester, og til slutt kji-kvadrattester. De fleste testene kjører vi direkte med en ferdig funksjon (<code>t.test()</code>, <code>var.test()</code>, <code>chisq.test()</code> og så videre), som gir både testobservator og p-verdi. Trenger du i stedet en <em>kritisk verdi</em> (for eksempel på eksamen), finner du den med <strong>kvantilfunksjonene</strong> <code>qt()</code>, <code>qnorm()</code>, <code>qchisq()</code> og <code>qf()</code>. Under hver testtype viser vi begge deler. (Kvantil- og sannsynlighetsfunksjonene ble introdusert i modul 2, se <a href="02-grunnleggende-statistikk.html#sec-relevant-r-grunnleggende" class="quarto-xref"><span>Seksjon 2.18</span></a>.)</p>
 <section id="t-tester" class="level3" data-number="3.6.1">
 <h3 data-number="3.6.1" class="anchored" data-anchor-id="t-tester"><span class="header-section-number">3.6.1</span> t-tester</h3>
 <p>Du må kunne gjøre de ulike <span class="math inline">\(t\)</span>-testene ved hjelp av <code>t.test()</code>-funksjonen. Vi bruker eksempeldatasettet <a href="datasett/testdata.xls">testdata.xls</a> som illustrasjon, som inneholder de to kolonnene <code>X1</code> og <code>X2</code>. I bunn og grunn handler det om å hente ut de relevante kolonnene som vektorer og sette argumentene i <code>t.test()</code> riktig.</p>
@@ -2551,19 +2559,24 @@ prop 1 prop 2
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(testdata<span class="sc">$</span>X1, testdata<span class="sc">$</span>X2)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Vi kan også her gjøre ensidige tester ved å sette <code>alternative =</code>-argumentet til enten <code>"less"</code> eller <code>"greater"</code>.</p>
+<p><code>var.test()</code> tar også <strong>formelsyntaks</strong>, på nøyaktig samme måte som <code>t.test()</code>. Har du ett datasett <code>df</code> der den numeriske variabelen <code>verdi</code> skal sammenlignes mellom nivåene i den kategoriske variabelen <code>gruppe</code>, slipper du å plukke ut to vektorer først:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(verdi <span class="sc">~</span> gruppe, <span class="at">data =</span> df)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Alt som står om nivårekkefølge i avsnittet om formelsyntaks for <code>t.test()</code> over gjelder også her: R danner forholdet mellom variansene i den rekkefølgen nivåene har. Dette er ofte den raskeste veien når du skal sjekke om du kan bruke <code>var.equal = TRUE</code> i en påfølgende <code>t.test()</code> på det samme datasettet, siden begge testene da kan skrives på nøyaktig samme form.</p>
 </section>
 <section id="kritiske-verdier-i-f-fordelingen" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="kritiske-verdier-i-f-fordelingen">Kritiske verdier i F-fordelingen</h4>
 <p>For to-utvalgs varianstesten bruker vi F-fordelingen. Setter vi den største variansen i telleren, <span class="math inline">\(F = s_1^2/s_2^2\)</span>, trenger vi bare øvre hale, uansett om testen er ensidig eller tosidig. Har vi <span class="math inline">\(30\)</span> observasjoner bak <span class="math inline">\(s_1^2\)</span> og <span class="math inline">\(25\)</span> bak <span class="math inline">\(s_2^2\)</span>, er kritisk verdi for en tosidig test (<span class="math inline">\(H_A: \sigma_1^2 \neq \sigma_2^2\)</span>):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qf</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span><span class="sc">/</span><span class="dv">2</span>, <span class="at">df1 =</span> <span class="dv">30</span> <span class="sc">-</span> <span class="dv">1</span>, <span class="at">df2 =</span> <span class="dv">25</span> <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qf</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span><span class="sc">/</span><span class="dv">2</span>, <span class="at">df1 =</span> <span class="dv">30</span> <span class="sc">-</span> <span class="dv">1</span>, <span class="at">df2 =</span> <span class="dv">25</span> <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.217443</code></pre>
 </div>
 </div>
 <p>og for en ensidig test (<span class="math inline">\(H_A: \sigma_1^2 &gt; \sigma_2^2\)</span>):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qf</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>, <span class="at">df1 =</span> <span class="dv">30</span> <span class="sc">-</span> <span class="dv">1</span>, <span class="at">df2 =</span> <span class="dv">25</span> <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qf</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>, <span class="at">df1 =</span> <span class="dv">30</span> <span class="sc">-</span> <span class="dv">1</span>, <span class="at">df2 =</span> <span class="dv">25</span> <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.945259</code></pre>
 </div>
@@ -2577,10 +2590,10 @@ prop 1 prop 2
 <h4 class="unnumbered anchored" data-anchor-id="goodness-of-fit">Goodness-of-fit</h4>
 <p>For en goodness-of-fit-test bruker vi <code>chisq.test()</code>. Vi gir den de observerte frekvensene (<code>x =</code>) og sannsynlighetene under <span class="math inline">\(H_0\)</span> (<code>p =</code>). Pass på å bruke disse argumentnavnene:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>f  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">102</span>, <span class="dv">82</span>, <span class="dv">16</span>)       <span class="co"># observerte frekvenser</span></span>
-<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.45</span>, <span class="fl">0.40</span>, <span class="fl">0.15</span>)  <span class="co"># fordeling under H0</span></span>
-<span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb135-4"><a href="#cb135-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="at">x =</span> f, <span class="at">p =</span> p0)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a>f  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">102</span>, <span class="dv">82</span>, <span class="dv">16</span>)       <span class="co"># observerte frekvenser</span></span>
+<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.45</span>, <span class="fl">0.40</span>, <span class="fl">0.15</span>)  <span class="co"># fordeling under H0</span></span>
+<span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb136-4"><a href="#cb136-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="at">x =</span> f, <span class="at">p =</span> p0)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Chi-squared test for given probabilities
@@ -2594,24 +2607,24 @@ X-squared = 8.1833, df = 2, p-value = 0.01671</code></pre>
 <h4 class="unnumbered anchored" data-anchor-id="uavhengighet">Uavhengighet</h4>
 <p>Har vi et rådatasett med to kategoriske variabler, lager vi en krysstabell med <code>table()</code> og sender den inn i <code>chisq.test()</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb137-3"><a href="#cb137-3" aria-hidden="true" tabindex="-1"></a>violence <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"violence.xlsx"</span>)</span>
-<span id="cb137-4"><a href="#cb137-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb137-5"><a href="#cb137-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Lag krysstabell av de to variablene, og kjør testen:</span></span>
-<span id="cb137-6"><a href="#cb137-6" aria-hidden="true" tabindex="-1"></a>krysstabell <span class="ot">&lt;-</span> violence <span class="sc">%&gt;%</span></span>
-<span id="cb137-7"><a href="#cb137-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(violent_treatment, experienced_violence) <span class="sc">%&gt;%</span></span>
-<span id="cb137-8"><a href="#cb137-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>()</span>
-<span id="cb137-9"><a href="#cb137-9" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(krysstabell)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb138-2"><a href="#cb138-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb138-3"><a href="#cb138-3" aria-hidden="true" tabindex="-1"></a>violence <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"violence.xlsx"</span>)</span>
+<span id="cb138-4"><a href="#cb138-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb138-5"><a href="#cb138-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Lag krysstabell av de to variablene, og kjør testen:</span></span>
+<span id="cb138-6"><a href="#cb138-6" aria-hidden="true" tabindex="-1"></a>krysstabell <span class="ot">&lt;-</span> violence <span class="sc">%&gt;%</span></span>
+<span id="cb138-7"><a href="#cb138-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(violent_treatment, experienced_violence) <span class="sc">%&gt;%</span></span>
+<span id="cb138-8"><a href="#cb138-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>()</span>
+<span id="cb138-9"><a href="#cb138-9" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(krysstabell)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Ofte kommer dataene allerede som en ferdig tabell med <em>antall</em> (slik som i flere av oppgavene og på eksamen), ikke som et råmateriale vi må krysstabulere selv. Da lager vi tabellen direkte med <code>matrix()</code>. Vi fyller inn tallene rad for rad med <code>byrow = TRUE</code>, oppgir antall rader med <code>nrow</code>, og kan gi rad- og kolonnenavn med <code>dimnames</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a>tabell <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">45</span>, <span class="dv">25</span>,      <span class="co"># rad 1</span></span>
-<span id="cb138-2"><a href="#cb138-2" aria-hidden="true" tabindex="-1"></a>                   <span class="dv">50</span>, <span class="dv">20</span>, <span class="dv">35</span>),     <span class="co"># rad 2</span></span>
-<span id="cb138-3"><a href="#cb138-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb138-4"><a href="#cb138-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"Gruppe A"</span>, <span class="st">"Gruppe B"</span>),</span>
-<span id="cb138-5"><a href="#cb138-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">c</span>(<span class="st">"Lav"</span>, <span class="st">"Middels"</span>, <span class="st">"Høy"</span>)))</span>
-<span id="cb138-6"><a href="#cb138-6" aria-hidden="true" tabindex="-1"></a>tabell</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a>tabell <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">45</span>, <span class="dv">25</span>,      <span class="co"># rad 1</span></span>
+<span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a>                   <span class="dv">50</span>, <span class="dv">20</span>, <span class="dv">35</span>),     <span class="co"># rad 2</span></span>
+<span id="cb139-3"><a href="#cb139-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb139-4"><a href="#cb139-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"Gruppe A"</span>, <span class="st">"Gruppe B"</span>),</span>
+<span id="cb139-5"><a href="#cb139-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">c</span>(<span class="st">"Lav"</span>, <span class="st">"Middels"</span>, <span class="st">"Høy"</span>)))</span>
+<span id="cb139-6"><a href="#cb139-6" aria-hidden="true" tabindex="-1"></a>tabell</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Lav Middels Høy
 Gruppe A  30      45  25
@@ -2620,7 +2633,7 @@ Gruppe B  50      20  35</code></pre>
 </div>
 <p>Denne matrisen sender vi rett inn i <code>chisq.test()</code>, akkurat som krysstabellen over:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(tabell)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb141"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(tabell)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -2634,15 +2647,59 @@ X-squared = 16.17, df = 2, p-value = 0.0003082</code></pre>
 <h4 class="unnumbered anchored" data-anchor-id="kritiske-verdier-i-chi2-fordelingen-1">Kritiske verdier i <span class="math inline">\(\chi^2\)</span>-fordelingen</h4>
 <p>For kji-kvadrattestene (både goodness-of-fit og uavhengighet) forkaster vi <em>alltid</em> i øvre hale, fordi en stor testobservator betyr at de observerte antallene er langt fra de forventede. Med <span class="math inline">\(2\)</span> frihetsgrader (for eksempel <span class="math inline">\(k = 3\)</span> kategorier i en goodness-of-fit-test):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>, <span class="at">df =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.05</span>, <span class="at">df =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5.991465</code></pre>
 </div>
 </div>
 <p>og du forkaster dersom testobservatoren er større enn dette tallet. For en uavhengighetstest er antall frihetsgrader <span class="math inline">\((r-1)(s-1)\)</span>.</p>
-
-
 </section>
+</section>
+<section id="sec-hente-ut-testverdier" class="level3" data-number="3.6.5">
+<h3 data-number="3.6.5" class="anchored" data-anchor-id="sec-hente-ut-testverdier"><span class="header-section-number">3.6.5</span> Hente ut enkelttall fra en test</h3>
+<p><code>t.test()</code>, <code>var.test()</code>, <code>prop.test()</code> og <code>chisq.test()</code> skriver ut en hel rapport når du kjører dem. Noen ganger vil du bare ha ett av tallene, for eksempel fordi du skal regne videre på det, sammenligne mange tester, eller svare på et spørsmål som bare ber om p-verdien. Da lagrer du testen i en variabel og henter ut den enkelte komponenten med <code>$</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">t.test</span>(testdata<span class="sc">$</span>X1, <span class="at">mu =</span> <span class="dv">100</span>)</span>
+<span id="cb145-2"><a href="#cb145-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb145-3"><a href="#cb145-3" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span>p.value      <span class="co"># p-verdien</span></span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8812229</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb147"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span>statistic    <span class="co"># testobservatoren</span></span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        t 
+0.1510191 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb149"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span>conf.int     <span class="co"># konfidensintervallet</span></span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  96.55472 103.98928
+attr(,"conf.level")
+[1] 0.95</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb151"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span>estimate     <span class="co"># utvalgsgjennomsnittet</span></span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>mean of x 
+  100.272 </code></pre>
+</div>
+</div>
+<p>Trenger du bare ett tall, kan du hekte <code>$</code> rett på funksjonskallet:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb153"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(testdata<span class="sc">$</span>X1, <span class="at">mu =</span> <span class="dv">100</span>)<span class="sc">$</span>p.value</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8812229</code></pre>
+</div>
+</div>
+<p>Navnene er de samme for de andre testfunksjonene, med to unntak verdt å merke seg: <code>chisq.test()</code> har verken <code>estimate</code> eller <code>conf.int</code>, men til gjengjeld <code>expected</code> (de forventede frekvensene under <span class="math inline">\(H_0\)</span>), og <code>estimate</code> i <code>var.test()</code> er <em>forholdet</em> mellom de to utvalgsvariansene, ikke et gjennomsnitt.</p>
+<p>Vil du se hvilke komponenter en bestemt test har, gir <code>names()</code> deg hele lista:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb155"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">var.test</span>(testdata<span class="sc">$</span>X1, testdata<span class="sc">$</span>X2))</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "statistic"   "parameter"   "p.value"     "conf.int"    "estimate"   
+[6] "null.value"  "alternative" "method"      "data.name"  </code></pre>
+</div>
+</div>
+
+
 </section>
 </section>
 

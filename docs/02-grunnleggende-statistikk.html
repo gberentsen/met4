@@ -151,6 +151,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </script>
 
+<script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -294,8 +296,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./09-kursgodkjenning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Obligatorisk kursgodkjenning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./10-Eksamensoppgaver.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Eksamensoppgaver</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Eksamensoppgaver</span></span></a>
   </div>
 </li>
       </ul>
@@ -310,37 +318,29 @@ window.Quarto = {
     <h2 id="toc-title">Innholdsfortegnelse</h2>
    
   <ul>
-  <li><a href="#deskriptiv-statistikk" id="toc-deskriptiv-statistikk" class="nav-link active" data-scroll-target="#deskriptiv-statistikk"><span class="header-section-number">2.1</span> Deskriptiv statistikk</a>
+  <li><a href="#variabeltyper-og-målenivå" id="toc-variabeltyper-og-målenivå" class="nav-link active" data-scroll-target="#variabeltyper-og-målenivå"><span class="header-section-number">2.1</span> Variabeltyper og målenivå</a></li>
+  <li><a href="#sentraltendens" id="toc-sentraltendens" class="nav-link" data-scroll-target="#sentraltendens"><span class="header-section-number">2.2</span> Sentraltendens</a></li>
+  <li><a href="#spredning" id="toc-spredning" class="nav-link" data-scroll-target="#spredning"><span class="header-section-number">2.3</span> Spredning</a></li>
+  <li><a href="#sammenheng-mellom-to-variabler" id="toc-sammenheng-mellom-to-variabler" class="nav-link" data-scroll-target="#sammenheng-mellom-to-variabler"><span class="header-section-number">2.4</span> Sammenheng mellom to variabler</a></li>
+  <li><a href="#å-presentere-data" id="toc-å-presentere-data" class="nav-link" data-scroll-target="#å-presentere-data"><span class="header-section-number">2.5</span> Å presentere data</a></li>
+  <li><a href="#et-eksempel-i-r" id="toc-et-eksempel-i-r" class="nav-link" data-scroll-target="#et-eksempel-i-r"><span class="header-section-number">2.6</span> Et eksempel i R</a></li>
+  <li><a href="#inferens-populasjoner-utvalg-og-estimatorer" id="toc-inferens-populasjoner-utvalg-og-estimatorer" class="nav-link" data-scroll-target="#inferens-populasjoner-utvalg-og-estimatorer"><span class="header-section-number">2.7</span> Inferens: populasjoner, utvalg og estimatorer</a></li>
+  <li><a href="#populasjonen-som-sannsynlighetsmodell" id="toc-populasjonen-som-sannsynlighetsmodell" class="nav-link" data-scroll-target="#populasjonen-som-sannsynlighetsmodell"><span class="header-section-number">2.8</span> Populasjonen som sannsynlighetsmodell</a></li>
+  <li><a href="#sec-forventning-varians" id="toc-sec-forventning-varians" class="nav-link" data-scroll-target="#sec-forventning-varians"><span class="header-section-number">2.9</span> Forventning og varians</a></li>
+  <li><a href="#utvalgsstørrelser-og-populasjonsstørrelser" id="toc-utvalgsstørrelser-og-populasjonsstørrelser" class="nav-link" data-scroll-target="#utvalgsstørrelser-og-populasjonsstørrelser"><span class="header-section-number">2.10</span> Utvalgsstørrelser og populasjonsstørrelser</a></li>
+  <li><a href="#samplingfordelinger" id="toc-samplingfordelinger" class="nav-link" data-scroll-target="#samplingfordelinger"><span class="header-section-number">2.11</span> Samplingfordelinger</a></li>
+  <li><a href="#sentralgrenseteoremet" id="toc-sentralgrenseteoremet" class="nav-link" data-scroll-target="#sentralgrenseteoremet"><span class="header-section-number">2.12</span> Sentralgrenseteoremet</a></li>
+  <li><a href="#samplingfordelingen-til-en-andel" id="toc-samplingfordelingen-til-en-andel" class="nav-link" data-scroll-target="#samplingfordelingen-til-en-andel"><span class="header-section-number">2.13</span> Samplingfordelingen til en andel</a></li>
+  <li><a href="#gode-estimatorer" id="toc-gode-estimatorer" class="nav-link" data-scroll-target="#gode-estimatorer"><span class="header-section-number">2.14</span> Gode estimatorer</a></li>
+  <li><a href="#konfidensintervall" id="toc-konfidensintervall" class="nav-link" data-scroll-target="#konfidensintervall"><span class="header-section-number">2.15</span> Konfidensintervall</a></li>
+  <li><a href="#kontrollspørsmål" id="toc-kontrollspørsmål" class="nav-link" data-scroll-target="#kontrollspørsmål"><span class="header-section-number">2.16</span> Kontrollspørsmål</a></li>
+  <li><a href="#sec-oppgaverdeskriptiv" id="toc-sec-oppgaverdeskriptiv" class="nav-link" data-scroll-target="#sec-oppgaverdeskriptiv"><span class="header-section-number">2.17</span> Oppgaver</a>
   <ul class="collapse">
-  <li><a href="#variabeltyper-og-målenivå" id="toc-variabeltyper-og-målenivå" class="nav-link" data-scroll-target="#variabeltyper-og-målenivå"><span class="header-section-number">2.1.1</span> Variabeltyper og målenivå</a></li>
-  <li><a href="#sentraltendens" id="toc-sentraltendens" class="nav-link" data-scroll-target="#sentraltendens"><span class="header-section-number">2.1.2</span> Sentraltendens</a></li>
-  <li><a href="#spredning" id="toc-spredning" class="nav-link" data-scroll-target="#spredning"><span class="header-section-number">2.1.3</span> Spredning</a></li>
-  <li><a href="#sammenheng-mellom-to-variabler" id="toc-sammenheng-mellom-to-variabler" class="nav-link" data-scroll-target="#sammenheng-mellom-to-variabler"><span class="header-section-number">2.1.4</span> Sammenheng mellom to variabler</a></li>
-  <li><a href="#å-presentere-data" id="toc-å-presentere-data" class="nav-link" data-scroll-target="#å-presentere-data"><span class="header-section-number">2.1.5</span> Å presentere data</a></li>
-  <li><a href="#et-eksempel-i-r" id="toc-et-eksempel-i-r" class="nav-link" data-scroll-target="#et-eksempel-i-r"><span class="header-section-number">2.1.6</span> Et eksempel i R</a></li>
-  <li><a href="#kontrollspørsmål" id="toc-kontrollspørsmål" class="nav-link" data-scroll-target="#kontrollspørsmål"><span class="header-section-number">2.1.7</span> Kontrollspørsmål</a></li>
+  <li><a href="#teorioppgaver" id="toc-teorioppgaver" class="nav-link" data-scroll-target="#teorioppgaver"><span class="header-section-number">2.17.1</span> Teorioppgaver</a></li>
+  <li><a href="#nøtter" id="toc-nøtter" class="nav-link" data-scroll-target="#nøtter"><span class="header-section-number">2.17.2</span> Nøtter</a></li>
+  <li><a href="#r-oppgaver" id="toc-r-oppgaver" class="nav-link" data-scroll-target="#r-oppgaver"><span class="header-section-number">2.17.3</span> R-oppgaver</a></li>
   </ul></li>
-  <li><a href="#utvalg-og-estimering" id="toc-utvalg-og-estimering" class="nav-link" data-scroll-target="#utvalg-og-estimering"><span class="header-section-number">2.2</span> Utvalg og estimering</a>
-  <ul class="collapse">
-  <li><a href="#inferens-populasjoner-parametre-og-estimator" id="toc-inferens-populasjoner-parametre-og-estimator" class="nav-link" data-scroll-target="#inferens-populasjoner-parametre-og-estimator"><span class="header-section-number">2.2.1</span> Inferens: Populasjoner, parametre og estimator</a></li>
-  <li><a href="#hva-er-et-tilfeldig-utvalg" id="toc-hva-er-et-tilfeldig-utvalg" class="nav-link" data-scroll-target="#hva-er-et-tilfeldig-utvalg"><span class="header-section-number">2.2.2</span> Hva er et tilfeldig utvalg?</a></li>
-  <li><a href="#populasjonen-som-sannsynlighetsmodell" id="toc-populasjonen-som-sannsynlighetsmodell" class="nav-link" data-scroll-target="#populasjonen-som-sannsynlighetsmodell"><span class="header-section-number">2.2.3</span> Populasjonen som sannsynlighetsmodell</a></li>
-  <li><a href="#sec-forventning-varians" id="toc-sec-forventning-varians" class="nav-link" data-scroll-target="#sec-forventning-varians"><span class="header-section-number">2.2.4</span> Forventning og varians</a></li>
-  <li><a href="#utvalgsstørrelser-og-populasjonsstørrelser" id="toc-utvalgsstørrelser-og-populasjonsstørrelser" class="nav-link" data-scroll-target="#utvalgsstørrelser-og-populasjonsstørrelser"><span class="header-section-number">2.2.5</span> Utvalgsstørrelser og populasjonsstørrelser</a></li>
-  <li><a href="#samplingfordelinger" id="toc-samplingfordelinger" class="nav-link" data-scroll-target="#samplingfordelinger"><span class="header-section-number">2.2.6</span> Samplingfordelinger</a></li>
-  <li><a href="#sentralgrenseteoremet" id="toc-sentralgrenseteoremet" class="nav-link" data-scroll-target="#sentralgrenseteoremet"><span class="header-section-number">2.2.7</span> Sentralgrenseteoremet</a></li>
-  <li><a href="#samplingfordelingen-til-en-andel" id="toc-samplingfordelingen-til-en-andel" class="nav-link" data-scroll-target="#samplingfordelingen-til-en-andel"><span class="header-section-number">2.2.8</span> Samplingfordelingen til en andel</a></li>
-  <li><a href="#gode-estimatorer" id="toc-gode-estimatorer" class="nav-link" data-scroll-target="#gode-estimatorer"><span class="header-section-number">2.2.9</span> Gode estimatorer</a></li>
-  <li><a href="#konfidensintervall" id="toc-konfidensintervall" class="nav-link" data-scroll-target="#konfidensintervall"><span class="header-section-number">2.2.10</span> Konfidensintervall</a></li>
-  <li><a href="#kontrollspørsmål-1" id="toc-kontrollspørsmål-1" class="nav-link" data-scroll-target="#kontrollspørsmål-1"><span class="header-section-number">2.2.11</span> Kontrollspørsmål</a></li>
-  </ul></li>
-  <li><a href="#sec-oppgaverdeskriptiv" id="toc-sec-oppgaverdeskriptiv" class="nav-link" data-scroll-target="#sec-oppgaverdeskriptiv"><span class="header-section-number">2.3</span> Oppgaver</a>
-  <ul class="collapse">
-  <li><a href="#teorioppgaver" id="toc-teorioppgaver" class="nav-link" data-scroll-target="#teorioppgaver"><span class="header-section-number">2.3.1</span> Teorioppgaver</a></li>
-  <li><a href="#nøtter" id="toc-nøtter" class="nav-link" data-scroll-target="#nøtter"><span class="header-section-number">2.3.2</span> Nøtter</a></li>
-  <li><a href="#r-oppgaver" id="toc-r-oppgaver" class="nav-link" data-scroll-target="#r-oppgaver"><span class="header-section-number">2.3.3</span> R-oppgaver</a></li>
-  </ul></li>
-  <li><a href="#sec-relevant-r-grunnleggende" id="toc-sec-relevant-r-grunnleggende" class="nav-link" data-scroll-target="#sec-relevant-r-grunnleggende"><span class="header-section-number">2.4</span> Relevante R-kommandoer</a>
+  <li><a href="#sec-relevant-r-grunnleggende" id="toc-sec-relevant-r-grunnleggende" class="nav-link" data-scroll-target="#sec-relevant-r-grunnleggende"><span class="header-section-number">2.18</span> Relevante R-kommandoer</a>
   <ul class="collapse">
   <li><a href="#antakelser-om-datasett" id="toc-antakelser-om-datasett" class="nav-link" data-scroll-target="#antakelser-om-datasett">Antakelser om datasett</a></li>
   <li><a href="#numerisk-deskriptiv-statistikk" id="toc-numerisk-deskriptiv-statistikk" class="nav-link" data-scroll-target="#numerisk-deskriptiv-statistikk">Numerisk deskriptiv statistikk</a></li>
@@ -376,21 +376,29 @@ window.Quarto = {
 .video-showcase { position: relative; margin-bottom: 0.4rem; }
 .video-showcase iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 .video-note { font-size: 0.85em; font-style: italic; color: #6c757d; margin: 0 0 2rem; text-align: center; }
+
+/* Observable Inputs gir etiketten faste 120px og flex-shrink: 0, så de lange
+   etikettene i sentralgrenseteorem-figuren løper inn i valgene til høyre. */
+#fig-sgt form { --label-width: 165px; }
+#fig-sgt form label { padding-right: 0.75rem; }
+
+/* Koden er skjult med echo: false, men Quarto legger likevel igjen en
+   kopier-knapp per celle. Den har ingenting å kopiere her. */
+#fig-sgt .code-copy-outer-scaffold { display: none; }
 </style>
 <div class="video-showcase" style="padding:56.25% 0 0 0;">
 <iframe src="https://player.vimeo.com/video/470668919" allowfullscreen="" frameborder="0">
 </iframe>
 </div>
 <p>I denne modulen introduserer vi en del grunnleggende statistiske begreper. Mye vil oppleves som repetisjon, mens noe vil være nytt. Noe er veldig praktisk ved at vi kan bruke det direkte i eksempler, mens andre ting er mer teoretisk av natur. Felles for det vi skal se på her er at vi kommer til å bruke mange av begrepene vi lærer senere i kurset.</p>
+<p>Vi begynner med <strong>deskriptiv statistikk</strong>, som har to hovedformål. Det første er å <strong>bli kjent med et datasett</strong>: før vi setter i gang med mer avansert analyse, vil vi danne oss et bilde av hva slags tall vi har foran oss, om det finnes åpenbare feil eller ekstremverdier, og hvilke mønstre som umiddelbart trer frem. Det andre formålet er å <strong>presentere resultater</strong> slik at de er lette å forstå for andre. Et viktig poeng er at deskriptiv statistikk verken generaliserer fra utvalget til en større populasjon eller tester årsakssammenhenger. Vi lar rett og slett dataene fortelle sin egen historie.</p>
+<p>Deretter tar vi steget videre til <strong>statistisk inferens</strong>. Da ser vi på datasettet vårt som et <em>utvalg</em> trukket fra en større <em>populasjon</em>, og vi bruker utvalget til å si noe om populasjonen. Det tvinger oss til å holde orden på hva som er sant i populasjonen og hva vi bare har regnet ut fra dataene våre, og til å forstå hvordan et anslag varierer fra utvalg til utvalg. Nøkkelbegrepet er <em>samplingfordelingen</em>, som ligger i bunnen av alt vi gjør senere i kurset, fra hypotesetesting til regresjon.</p>
 <p>I videoforelesningene går vi gjennom noen slides, og vi skriver et R-skript. Du kan laste disse ned ved å klikke på lenkene under:</p>
 <p><a href="script-slides/grunnleggende-stat/grunnleggende-stat-slides.html">Slides til “Grunnleggende statistikk”</a></p>
 <p><a href="script-slides/grunnleggende-stat/grunnleggende-stat-script.R">R-script til “Grunnleggende statistikk”</a></p>
 <p><strong>TIPS:</strong> Hvis du ønsker å laste ned lysbildene som PDF trykker du på linken over, velger “Skriv ut”, og så skriver du ut som PDF. Før du gjør det bør du scrolle gjennom alle sidene slik at ligningene vises korrekt.</p>
-<section id="deskriptiv-statistikk" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="deskriptiv-statistikk"><span class="header-section-number">2.1</span> Deskriptiv statistikk</h2>
-<p>Deskriptiv statistikk har to hovedformål. Det første er å <strong>bli kjent med et datasett</strong>: før vi setter i gang med mer avansert analyse, vil vi danne oss et bilde av hva slags tall vi har foran oss, om det finnes åpenbare feil eller ekstremverdier, og hvilke mønstre som umiddelbart trer frem. Det andre formålet er å <strong>presentere resultater</strong> slik at de er lette å forstå for andre. Et viktig poeng er at deskriptiv statistikk verken generaliserer fra utvalget til en større populasjon eller tester årsakssammenhenger. Vi lar rett og slett dataene fortelle sin egen historie. Selve slutningen fra utvalg til populasjon kommer vi tilbake til i neste delkapittel.</p>
-<section id="variabeltyper-og-målenivå" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="variabeltyper-og-målenivå"><span class="header-section-number">2.1.1</span> Variabeltyper og målenivå</h3>
+<section id="variabeltyper-og-målenivå" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="variabeltyper-og-målenivå"><span class="header-section-number">2.1</span> Variabeltyper og målenivå</h2>
 <div class="video-showcase" style="padding:56.25% 0 0 0;">
 <iframe src="https://vimeo.com/showcase/12340230/embed" allowfullscreen="" frameborder="0">
 </iframe>
@@ -413,8 +421,8 @@ window.Quarto = {
 <p>Nivåene bygger på hverandre: hvert nivå tillater alt det forrige gjør, pluss litt mer. Målenivået styrer også hvilke beskrivende mål som gir mening. For en nominal variabel er <em>typetallet</em> det eneste fornuftige sentralmålet; for ordinaldata kan vi i tillegg bruke <em>medianen</em>; og først for intervall- og forholdsdata er <em>gjennomsnittet</em> meningsfullt.</p>
 <p>Når vi beskriver en tallvariabel numerisk, er det særlig to spørsmål vi stiller: <em>hvor ligger tyngdepunktet i dataene</em>, og <em>hvor spredt er de rundt dette tyngdepunktet</em>? Har vi to variabler, kommer et tredje spørsmål til: <em>henger de sammen</em>?</p>
 </section>
-<section id="sentraltendens" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="sentraltendens"><span class="header-section-number">2.1.2</span> Sentraltendens</h3>
+<section id="sentraltendens" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sentraltendens"><span class="header-section-number">2.2</span> Sentraltendens</h2>
 <div class="video-showcase" style="padding:56.25% 0 0 0;">
 <iframe src="https://vimeo.com/showcase/12340232/embed" allowfullscreen="" frameborder="0">
 </iframe>
@@ -430,8 +438,8 @@ window.Quarto = {
 </ul>
 <p>Hvorfor bry seg med mer enn gjennomsnittet? Fordi medianen er langt mer <strong>robust</strong> mot ekstremverdier. Tenk deg lønningene på en liten arbeidsplass med ti ansatte, der én av dem tilfeldigvis er konsernsjefen. Gjennomsnittslønnen kan da bli misvisende høy og gi et helt feilaktig bilde av hva en «typisk» ansatt tjener, mens medianen er upåvirket av hvor ekstremt høy den ene lønnen er. Nettopp derfor rapporteres for eksempel medianinntekt, og ikke gjennomsnittsinntekt, i mange sammenhenger.</p>
 </section>
-<section id="spredning" class="level3" data-number="2.1.3">
-<h3 data-number="2.1.3" class="anchored" data-anchor-id="spredning"><span class="header-section-number">2.1.3</span> Spredning</h3>
+<section id="spredning" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="spredning"><span class="header-section-number">2.3</span> Spredning</h2>
 <div class="video-showcase" style="padding:56.25% 0 0 0;">
 <iframe src="https://vimeo.com/showcase/12340242/embed" allowfullscreen="" frameborder="0">
 </iframe>
@@ -444,8 +452,8 @@ window.Quarto = {
 <p>som grovt sagt måler hvor langt observasjonene i gjennomsnitt ligger fra <span class="math inline">\(\overline{X}\)</span>. Kvadratet <span class="math inline">\(s^2\)</span> kalles <strong>variansen</strong>. Standardavviket har samme måleenhet som dataene selv (kroner, centimeter, …) og er derfor lettest å tolke.</p>
 <p>Et alternativ som (i likhet med medianen) er robust mot ekstremverdier, er å bruke <strong>prosentiler</strong>. Den <span class="math inline">\(p\)</span>-te prosentilen er den verdien som har <span class="math inline">\(p\)</span> % av observasjonene under seg. De tre kvartilene (25-, 50- og 75-prosentilene) deler dataene i fire like store deler, og avstanden mellom øvre og nedre kvartil kalles <strong>interkvartilbredden</strong> (IQR). Et boksplott er en effektiv grafisk fremstilling av nettopp disse størrelsene.</p>
 </section>
-<section id="sammenheng-mellom-to-variabler" class="level3" data-number="2.1.4">
-<h3 data-number="2.1.4" class="anchored" data-anchor-id="sammenheng-mellom-to-variabler"><span class="header-section-number">2.1.4</span> Sammenheng mellom to variabler</h3>
+<section id="sammenheng-mellom-to-variabler" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="sammenheng-mellom-to-variabler"><span class="header-section-number">2.4</span> Sammenheng mellom to variabler</h2>
 <div class="video-showcase" style="padding:56.25% 0 0 0;">
 <iframe src="https://vimeo.com/showcase/12340244/embed" allowfullscreen="" frameborder="0">
 </iframe>
@@ -461,8 +469,8 @@ window.Quarto = {
 </ul>
 <p>Her lurer en klassisk felle: <strong>at <span class="math inline">\(r = 0\)</span> betyr ikke at variablene er uavhengige.</strong> Korrelasjonskoeffisienten fanger bare opp <em>lineære</em> sammenhenger. To variabler kan ha en tydelig, men krum, sammenheng (for eksempel U-formet) og likevel ha korrelasjon null. Det motsatte holder derimot alltid: er to variabler uavhengige, er de også ukorrelerte.</p>
 </section>
-<section id="å-presentere-data" class="level3" data-number="2.1.5">
-<h3 data-number="2.1.5" class="anchored" data-anchor-id="å-presentere-data"><span class="header-section-number">2.1.5</span> Å presentere data</h3>
+<section id="å-presentere-data" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="å-presentere-data"><span class="header-section-number">2.5</span> Å presentere data</h2>
 <div class="video-showcase" style="padding:56.25% 0 0 0;">
 <iframe src="https://vimeo.com/showcase/12340248/embed" allowfullscreen="" frameborder="0">
 </iframe>
@@ -473,8 +481,8 @@ window.Quarto = {
 <p>Deskriptiv statistikk handler like mye om å <em>presentere</em> tall som om å regne dem ut. Dette er en ferdighet det er verdt å ta på alvor: evnen til å lage en overbevisende tabell eller figur kan være direkte avgjørende for gjennomslagskraften din, enten du legger fram resultater for en sjef, en kunde eller en eksamenssensor.</p>
 <p>Et av de mest berømte eksemplene på god deskriptiv statistikk er Charles Minards figur fra 1869 over Napoleons felttog mot Moskva, som vi ser nærmere på i videoforelesningen. På ett enkelt bilde klarer den å formidle tid, antall soldater, geografisk posisjon og temperatur samtidig, et forbilledlig eksempel på hvor mye informasjon en gjennomtenkt figur kan bære. I forelesningen ser vi også på noen <em>grelle</em> eksempler på det motsatte: hvordan grafiske virkemidler kan brukes til å gi skjeve og misvisende fremstillinger.</p>
 </section>
-<section id="et-eksempel-i-r" class="level3" data-number="2.1.6">
-<h3 data-number="2.1.6" class="anchored" data-anchor-id="et-eksempel-i-r"><span class="header-section-number">2.1.6</span> Et eksempel i R</h3>
+<section id="et-eksempel-i-r" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="et-eksempel-i-r"><span class="header-section-number">2.6</span> Et eksempel i R</h2>
 <p>La oss se hvordan vi kan beskrive et datasett i praksis. Tenk deg den daglige avkastningen (i prosent) til to ulike investeringsstrategier (en <em>forsiktig</em> og en <em>offensiv</em>) over 1000 handledager. Her simulerer vi tallene selv, slik at du kan kjøre koden og få nøyaktig de samme resultatene:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
@@ -498,60 +506,54 @@ window.Quarto = {
 1      0.08967023    0.4010085     0.09149121    1.577698</code></pre>
 </div>
 </div>
-<p>De to strategiene har praktisk talt samme gjennomsnittlige daglige avkastning (rundt 0,09 %), men legg merke til hvor forskjellige <em>standardavvikene</em> er. Det illustrerer et hovedpoeng fra teorien: gjennomsnittet alene forteller ikke hele historien. Spredningen er vel så viktig. Det kommer enda tydeligere fram i et histogram for hver strategi:</p>
+<p>De to strategiene har praktisk talt samme gjennomsnittlige daglige avkastning (rundt 0,09 %), men legg merke til hvor forskjellige <em>standardavvikene</em> er. Det illustrerer et hovedpoeng fra teorien: gjennomsnittet alene forteller ikke hele historien. Spredningen er vel så viktig. Det kommer enda tydeligere fram i et histogram for hver strategi. Da er det viktig at de to histogrammene tegnes med <em>samme</em> akse, ellers skalerer figuren bort nettopp den forskjellen vi vil vise. Vi stabler derfor de to kolonnene oppå hverandre i en lang tabell og lar <code>facet_wrap()</code> lage ett panel per strategi, med felles akse:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(avkastning, <span class="fu">aes</span>(<span class="at">x =</span> forsiktig)) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Daglig avkastning (%)"</span>, <span class="at">y =</span> <span class="st">"Antall dager"</span>, <span class="at">title =</span> <span class="st">"Forsiktig strategi"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(avkastning, <span class="fu">aes</span>(<span class="at">x =</span> offensiv)) <span class="sc">+</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Daglig avkastning (%)"</span>, <span class="at">y =</span> <span class="st">"Antall dager"</span>, <span class="at">title =</span> <span class="st">"Offensiv strategi"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>lang <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">strategi   =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Forsiktig"</span>, <span class="st">"Offensiv"</span>), <span class="at">each =</span> <span class="dv">1000</span>),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">avkastning =</span> <span class="fu">c</span>(avkastning<span class="sc">$</span>forsiktig, avkastning<span class="sc">$</span>offensiv)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lang, <span class="fu">aes</span>(<span class="at">x =</span> avkastning)) <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> strategi) <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Daglig avkastning (%)"</span>, <span class="at">y =</span> <span class="st">"Antall dager"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="02-grunnleggende-statistikk_files/figure-html/hist-avkastning-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Daglig avkastning for to strategier med samme gjennomsnitt, men ulik spredning.</figcaption>
+<div id="fig-hist-avkastning" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-hist-avkastning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="02-grunnleggende-statistikk_files/figure-html/fig-hist-avkastning-1.png" class="img-fluid figure-img" width="624">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-avkastning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figur&nbsp;2.1: Daglig avkastning for to strategier med samme gjennomsnitt, men ulik spredning. Aksene er felles, slik at panelene kan sammenlignes direkte.
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="02-grunnleggende-statistikk_files/figure-html/hist-avkastning-2.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Daglig avkastning for to strategier med samme gjennomsnitt, men ulik spredning.</figcaption>
-</figure>
 </div>
-</div>
-</div>
-<p>Den offensive strategien har en langt bredere fordeling (større svingninger, og dermed høyere risiko) selv om den i snitt gir like mye som den forsiktige.</p>
+<p>Den offensive strategien har en langt bredere fordeling (større svingninger, og dermed høyere risiko) selv om den i snitt gir like mye som den forsiktige, se <a href="#fig-hist-avkastning" class="quarto-xref">Figur&nbsp;<span>2.1</span></a>.</p>
 <p>Et <strong>boksplott</strong> oppsummerer mye av den samme informasjonen enda mer kompakt, og egner seg godt til å sammenlikne de to strategiene side om side. Her bruker vi den innebygde funksjonen <code>boxplot()</code>, som tar en data.frame med to kolonner og tegner én boks for hver:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(avkastning,</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Daglig avkastning (%)"</span>,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Fordeling av daglig avkastning per strategi"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="02-grunnleggende-statistikk_files/figure-html/boks-avkastning-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Boksplott av daglig avkastning for de to strategiene.</figcaption>
+<div id="fig-boks-avkastning" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boks-avkastning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="02-grunnleggende-statistikk_files/figure-html/fig-boks-avkastning-1.png" class="img-fluid figure-img" width="624">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boks-avkastning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figur&nbsp;2.2: Boksplott av daglig avkastning for de to strategiene.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Slik leser vi figuren (jf. spredningsmålene i avsnittet om spredning): streken inne i boksen er medianen, selve boksen dekker interkvartilbredden fra nedre til øvre kvartil, og «værhårene» strekker seg ut til de mest ekstreme observasjonene som ikke regnes som uteliggere. Punktene utenfor værhårene er nettopp uteliggere. Igjen ser vi at de to strategiene har omtrent samme midtpunkt, men at den offensive har en mye høyere boks og lengre værhår, altså langt større spredning.</p>
+<p>Slik leser vi <a href="#fig-boks-avkastning" class="quarto-xref">Figur&nbsp;<span>2.2</span></a> (jf. spredningsmålene i avsnittet om spredning): streken inne i boksen er medianen, selve boksen dekker interkvartilbredden fra nedre til øvre kvartil, og «værhårene» strekker seg ut til de mest ekstreme observasjonene som ikke regnes som uteliggere. Punktene utenfor værhårene er nettopp uteliggere. Igjen ser vi at de to strategiene har omtrent samme midtpunkt, men at den offensive har en mye høyere boks og lengre værhår, altså langt større spredning.</p>
 </section>
-<section id="kontrollspørsmål" class="level3" data-number="2.1.7">
-<h3 data-number="2.1.7" class="anchored" data-anchor-id="kontrollspørsmål"><span class="header-section-number">2.1.7</span> Kontrollspørsmål</h3>
-<p>Her er noen kontrollspørsmål som du kan prøve deg på:</p>
-<ol type="1">
-<li>Hva er forskjellen på deskriptiv statistikk og statistisk inferens?</li>
-<li>Deskriptiv statistikk kan gjøres grafisk eller numerisk, eventuelt som tabeller av ulike numeriske mål. Nevn noen fordeler og ulemper man må veie mot hverandre når vi skal velge mellom grafisk og numerisk deskriptiv statistikk.</li>
-</ol>
-</section>
-</section>
-<section id="utvalg-og-estimering" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="utvalg-og-estimering"><span class="header-section-number">2.2</span> Utvalg og estimering</h2>
+<section id="inferens-populasjoner-utvalg-og-estimatorer" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="inferens-populasjoner-utvalg-og-estimatorer"><span class="header-section-number">2.7</span> Inferens: populasjoner, utvalg og estimatorer</h2>
 <blockquote class="blockquote">
 <p>You can, for example, never foretell what any one man will do, but you can say with presicion what an average number will be up to. Individuals vary, but percentages remain constant. So says the statistician.</p>
 </blockquote>
@@ -559,27 +561,18 @@ window.Quarto = {
 — Sherlock Holmes
 </footer>
 <div class="video-showcase" style="padding:56.25% 0 0 0;">
-<iframe src="https://player.vimeo.com/video/470669444" allowfullscreen="" frameborder="0">
-</iframe>
-</div>
-<p>I forrige delkapittel beskrev vi data slik de forelå. Nå tar vi et viktig steg videre: vi tenker på datasettet vårt som et <strong>utvalg</strong> trukket fra en større <strong>populasjon</strong>, og vi vil bruke utvalget til å si noe om populasjonen. Dette er kjernen i <strong>statistisk inferens</strong>, og et tema som følger oss gjennom resten av kurset.</p>
-<section id="inferens-populasjoner-parametre-og-estimator" class="level3" data-number="2.2.1">
-<h3 data-number="2.2.1" class="anchored" data-anchor-id="inferens-populasjoner-parametre-og-estimator"><span class="header-section-number">2.2.1</span> Inferens: Populasjoner, parametre og estimator</h3>
-<div class="video-showcase" style="padding:56.25% 0 0 0;">
 <iframe src="https://player.vimeo.com/video/470669794" allowfullscreen="" frameborder="0">
 </iframe>
 </div>
+<p>Hittil har vi beskrevet data slik de forelå. Nå tar vi et viktig steg videre: vi tenker på datasettet vårt som et <strong>utvalg</strong> trukket fra en større <strong>populasjon</strong>, og vi vil bruke utvalget til å si noe om populasjonen. Dette er kjernen i <strong>statistisk inferens</strong>, og et tema som følger oss gjennom resten av kurset. Herfra bygger vi videre på sannsynlighetsregningen fra MET2: fordelinger, stokastiske variabler, forventning og varians. Ligger dette langt bak i bevisstheten, kan det være lurt å friske det opp.</p>
 <p>Populasjonen er hele mengden vi egentlig er interessert i, for eksempel alle norske velgere, eller all fisk i en oppdrettsmerd. En <strong>parameter</strong> er et tall som beskriver populasjonen, slik som den sanne forventningen <span class="math inline">\(\mu\)</span>, det sanne standardavviket <span class="math inline">\(\sigma\)</span>, eller den sanne andelen <span class="math inline">\(p\)</span>. Problemet er at vi nesten aldri kan måle hele populasjonen; vi må nøye oss med et utvalg. Ut fra utvalget regner vi så ut en <strong>estimator</strong> (også kalt en observator), en «regel» for å gjette parameterverdien, for eksempel gjennomsnittet <span class="math inline">\(\overline{X}\)</span> som et anslag på <span class="math inline">\(\mu\)</span>.</p>
-<p>Det helt sentrale poenget er dette: siden observasjonene i utvalget er tilfeldige, blir også estimatoren tilfeldig. Trekker vi et nytt utvalg, får vi et litt annet gjennomsnitt. Estimatoren er altså selv en stokastisk variabel med sin egen fordeling, og den fordelingen kaller vi en <strong>samplingfordeling</strong>. Nesten alt vi gjør senere i kurset, handler i bunn og grunn om å forstå samplingfordelinger.</p>
-</section>
-<section id="hva-er-et-tilfeldig-utvalg" class="level3" data-number="2.2.2">
-<h3 data-number="2.2.2" class="anchored" data-anchor-id="hva-er-et-tilfeldig-utvalg"><span class="header-section-number">2.2.2</span> Hva er et tilfeldig utvalg?</h3>
-<p>Hele resonnementet over hviler på at utvalget er <em>tilfeldig</em>. Med et <strong>tilfeldig utvalg</strong> mener vi at enhetene trekkes fra populasjonen ved en form for loddtrekning: hver enhet har samme sjanse til å bli med, uavhengig av de andre. Det er nettopp dette som gjør at vi kan behandle observasjonene <span class="math inline">\(X_1, \ldots, X_n\)</span> som uavhengige trekninger fra den samme fordelingen, og hele inferensmaskineriet senere i kurset bygger på den forutsetningen.</p>
+<p>Det helt sentrale poenget er dette: siden observasjonene i utvalget er tilfeldige, blir også estimatoren tilfeldig. Trekker vi et nytt utvalg, får vi et litt annet gjennomsnitt. Estimatoren er altså selv en stokastisk variabel, med sin egen fordeling. Å få tak på nettopp den fordelingen er nøkkelen til nesten alt vi gjør senere i kurset, og vi kommer tilbake til den så snart vi har på plass verktøyene som trengs.</p>
+<p>Hele resonnementet hviler på at utvalget er <em>tilfeldig</em>. Med et <strong>tilfeldig utvalg</strong> mener vi at enhetene trekkes fra populasjonen ved en form for loddtrekning: hver enhet har samme sjanse til å bli med, uavhengig av de andre. Det er nettopp dette som gjør at vi kan behandle observasjonene <span class="math inline">\(X_1, \ldots, X_n\)</span> som uavhengige trekninger fra den samme fordelingen, og hele inferensmaskineriet senere i kurset bygger på den forutsetningen.</p>
 <p>Det avgjørende ordet er <em>representativt</em>. Et tilfeldig utvalg speiler populasjonen, slik at et utvalgsgjennomsnitt blir et rimelig anslag på populasjonsgjennomsnittet. Trekker vi derimot utvalget skjevt, blir anslaget systematisk feil, og da hjelper det ikke å samle inn mer data. Vanlige fallgruver er <em>selvseleksjon</em> (bare de mest engasjerte svarer på en frivillig undersøkelse) og <em>bekvemmelighetsutvalg</em> (vi spør dem som er lettest å nå). Et berømt eksempel er magasinet <em>Literary Digest</em>, som i 1936 spådde feil vinner av det amerikanske presidentvalget: utvalget var på over to millioner personer, men trukket blant bil- og telefoneiere, som den gang var systematisk rikere enn velgerne flest. Utvalget var enormt, men skjevt, og et langt mindre, virkelig tilfeldig utvalg traff bedre.</p>
 <p>I praksis er et perfekt tilfeldig utvalg vanskelig å få til, men det er idealet vi strekker oss mot, og forutsetningen vi antar er (tilnærmet) oppfylt i regnestykkene under.</p>
 </section>
-<section id="populasjonen-som-sannsynlighetsmodell" class="level3" data-number="2.2.3">
-<h3 data-number="2.2.3" class="anchored" data-anchor-id="populasjonen-som-sannsynlighetsmodell"><span class="header-section-number">2.2.3</span> Populasjonen som sannsynlighetsmodell</h3>
+<section id="populasjonen-som-sannsynlighetsmodell" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="populasjonen-som-sannsynlighetsmodell"><span class="header-section-number">2.8</span> Populasjonen som sannsynlighetsmodell</h2>
 <div class="video-showcase" style="padding:56.25% 0 0 0;">
 <iframe src="https://vimeo.com/showcase/12340249/embed" allowfullscreen="" frameborder="0">
 </iframe>
@@ -593,8 +586,8 @@ window.Quarto = {
 <p>En <strong>sannsynlighetsmodell</strong> er en slik matematisk beskrivelse av en stokastisk variabel. Fra MET2 kjenner du flere: den kontinuerlige <strong>normalfordelingen</strong> <span class="math inline">\(N(\mu, \sigma^2)\)</span>, som beskriver mange naturlige størrelser og spiller en helt sentral rolle i dette kurset, og diskrete modeller som binomisk- og poissonfordelingen. En fordeling er fullt bestemt av noen få <strong>parametre</strong> (for normalfordelingen forventningen <span class="math inline">\(\mu\)</span> og standardavviket <span class="math inline">\(\sigma\)</span>), og vi skriver gjerne <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span> for å si at <span class="math inline">\(X\)</span> følger en slik fordeling.</p>
 <p>Poenget for oss er dette: når vi antar at observasjonene våre er trekninger fra en fordeling med forventning <span class="math inline">\(\mu\)</span> og varians <span class="math inline">\(\sigma^2\)</span>, kan vi bruke sannsynlighetsregningen til å si noe presist om hvordan estimatorene våre oppfører seg. Det er akkurat det vi bygger videre på når vi snart skal finne samplingfordelingen til gjennomsnittet.</p>
 </section>
-<section id="sec-forventning-varians" class="level3" data-number="2.2.4">
-<h3 data-number="2.2.4" class="anchored" data-anchor-id="sec-forventning-varians"><span class="header-section-number">2.2.4</span> Forventning og varians</h3>
+<section id="sec-forventning-varians" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="sec-forventning-varians"><span class="header-section-number">2.9</span> Forventning og varians</h2>
 <div class="video-showcase" style="padding:56.25% 0 0 0;">
 <iframe src="https://player.vimeo.com/video/470669617" allowfullscreen="" frameborder="0">
 </iframe>
@@ -602,17 +595,17 @@ window.Quarto = {
 <p>Når vi tenker på en observasjon <span class="math inline">\(X\)</span> som en trekning fra en fordeling, er de to viktigste kjennetegnene ved fordelingen <strong>forventningen</strong> og <strong>variansen</strong>.</p>
 <p><strong>Forventningen</strong> <span class="math inline">\(\textrm{E}(X)\)</span> er tyngdepunktet i fordelingen, altså den verdien vi i gjennomsnitt ender opp med dersom vi trekker svært mange ganger. For populasjonen er nettopp <span class="math inline">\(\textrm{E}(X) = \mu\)</span>, populasjonsgjennomsnittet.</p>
 <p><strong>Variansen</strong> <span class="math inline">\(\textrm{Var}(X) = \textrm{E}\!\left[(X - \mu)^2\right] = \sigma^2\)</span> måler hvor mye verdiene typisk spriker rundt forventningen. Standardavviket <span class="math inline">\(\sigma = \sqrt{\textrm{Var}(X)}\)</span> er kvadratroten av variansen, og har samme måleenhet som <span class="math inline">\(X\)</span> selv.</p>
-<p>Formelt er forventningen et vektet gjennomsnitt av alle mulige verdier, der vekten er hvor sannsynlig hver verdi er. For en <strong>diskret</strong> variabel summerer vi, og for en <strong>kontinuerlig</strong> variabel integrerer vi:</p>
+<p>Formelt er forventningen et vektet gjennomsnitt av alle mulige verdier, der vekten er hvor sannsynlig hver verdi er, altså en sum for en diskret variabel og et integral for en kontinuerlig:</p>
 <p><span class="math display">\[\textrm{E}(X) = \sum_x x\,P(X = x) \quad (\text{diskret}), \qquad \textrm{E}(X) = \int_{-\infty}^{\infty} x\,f(x)\,\textrm{d}x \quad (\text{kontinuerlig}).\]</span></p>
-<p>Variansen er som nevnt bare forventningen til det kvadrerte avviket <span class="math inline">\((X - \mu)^2\)</span>, så den regnes ut med de samme summene eller integralene, bare med <span class="math inline">\((x - \mu)^2\)</span> der det over står <span class="math inline">\(x\)</span>. Definisjonene er de samme som i MET2; her er det først og fremst regnereglene under vi får bruk for.</p>
+<p>Variansen regnes ut med de samme summene eller integralene, bare med <span class="math inline">\((x - \mu)^2\)</span> der det over står <span class="math inline">\(x\)</span>. Definisjonene er de samme som i MET2, og her er det først og fremst regnereglene under vi får bruk for.</p>
 <p>Det som gjør disse to størrelsene så anvendelige, er at de følger noen enkle <strong>regneregler</strong>. La <span class="math inline">\(a\)</span> og <span class="math inline">\(b\)</span> være konstanter og <span class="math inline">\(X, Y\)</span> stokastiske variabler. For forventningen gjelder:</p>
 <p><span class="math display">\[\textrm{E}(aX + b) = a\,\textrm{E}(X) + b, \qquad \textrm{E}(X + Y) = \textrm{E}(X) + \textrm{E}(Y).\]</span></p>
 <p>Forventningen er altså <strong>lineær</strong>: den kan flyttes rett inn i en sum og forbi konstanter. For variansen gjelder:</p>
 <p><span class="math display">\[\textrm{Var}(aX + b) = a^2\,\textrm{Var}(X), \qquad \textrm{Var}(X + Y) = \textrm{Var}(X) + \textrm{Var}(Y) \quad (\text{når } X \text{ og } Y \text{ er uavhengige}).\]</span></p>
 <p>To ting er verdt å merke seg. Et konstantledd <span class="math inline">\(b\)</span> påvirker ikke variansen: å flytte hele fordelingen sidelengs endrer ikke spredningen. En skaleringsfaktor <span class="math inline">\(a\)</span> slår derimot inn i <em>annen</em> potens, fordi varians måles i kvadrerte enheter (og standardavviket dermed skaleres med <span class="math inline">\(|a|\)</span>). Og mens forventningen alltid kan splittes over en sum, krever den enkle variansregelen at leddene er uavhengige.</p>
 </section>
-<section id="utvalgsstørrelser-og-populasjonsstørrelser" class="level3" data-number="2.2.5">
-<h3 data-number="2.2.5" class="anchored" data-anchor-id="utvalgsstørrelser-og-populasjonsstørrelser"><span class="header-section-number">2.2.5</span> Utvalgsstørrelser og populasjonsstørrelser</h3>
+<section id="utvalgsstørrelser-og-populasjonsstørrelser" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="utvalgsstørrelser-og-populasjonsstørrelser"><span class="header-section-number">2.10</span> Utvalgsstørrelser og populasjonsstørrelser</h2>
 <div class="video-showcase" style="padding:56.25% 0 0 0;">
 <iframe src="https://player.vimeo.com/video/470669655" allowfullscreen="" frameborder="0">
 </iframe>
@@ -651,8 +644,8 @@ window.Quarto = {
 </table>
 <p>Skillet er grunnleggende, og de to variantene er lette å blande sammen. Når vi snakker om «gjennomsnittet», må vi hele tiden være bevisste på om vi mener det sanne <strong>populasjonsgjennomsnittet</strong> <span class="math inline">\(\mu\)</span> (som vi sjelden kjenner) eller <strong>utvalgsgjennomsnittet</strong> <span class="math inline">\(\overline{X}\)</span> (som vi regner ut fra dataene våre, og som vil variere fra utvalg til utvalg). Notasjonen hjelper oss å holde dem fra hverandre: populasjonsstørrelser skrives gjerne med greske bokstaver (<span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(p\)</span>), mens utvalgsstørrelser skrives med latinske bokstaver eller med en «hatt», som i <span class="math inline">\(\overline{X}\)</span> og <span class="math inline">\(\widehat{p}\)</span>.</p>
 </section>
-<section id="samplingfordelinger" class="level3" data-number="2.2.6">
-<h3 data-number="2.2.6" class="anchored" data-anchor-id="samplingfordelinger"><span class="header-section-number">2.2.6</span> Samplingfordelinger</h3>
+<section id="samplingfordelinger" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="samplingfordelinger"><span class="header-section-number">2.11</span> Samplingfordelinger</h2>
 <div class="video-showcase" style="padding:56.25% 0 0 0;">
 <iframe src="https://vimeo.com/showcase/12340252/embed" allowfullscreen="" frameborder="0">
 </iframe>
@@ -660,16 +653,16 @@ window.Quarto = {
 <div class="video-note">
 <p>Dette delkapittelet inneholder flere videoer. Bruk nedtrekksmenyen øverst til venstre i videovinduet for å bla mellom dem.</p>
 </div>
-<p>Vi har så vidt vært innom begrepet allerede; la oss slå det fast skikkelig. Når vi trekker et utvalg og regner ut et kjennetegn ved det, for eksempel gjennomsnittet <span class="math inline">\(\overline{X}\)</span> eller en andel <span class="math inline">\(\widehat{p}\)</span>, vil resultatet variere fra utvalg til utvalg fordi observasjonene er tilfeldige. <strong>Samplingfordelingen</strong> er fordelingen til et slikt utvalgskjennetegn: den forteller hvilke verdier estimatoren kan ta, og hvor sannsynlige de er, over alle tenkelige utvalg av samme størrelse. Det er denne fordelingen som gjør statistisk inferens mulig, for den forteller oss hvor presist et estimat er. Her tar vi for oss samplingfordelingen til gjennomsnittet; andelen kommer vi tilbake til litt lenger ned.</p>
-<p>Anta at observasjonene <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> er uavhengige, med samme forventning <span class="math inline">\(\mu\)</span> og varians <span class="math inline">\(\sigma^2\)</span>, og se på gjennomsnittet <span class="math inline">\(\overline{X} = \frac{1}{n}\sum_{i=1}^n X_i\)</span>. Nå får vi bruk for regnereglene fra avsnitt <a href="#sec-forventning-varians" class="quarto-xref"><span>Seksjon 2.2.4</span></a>. Forventningen følger av at forventningen er lineær:</p>
+<p>Når vi trekker et utvalg og regner ut et kjennetegn ved det, for eksempel gjennomsnittet <span class="math inline">\(\overline{X}\)</span> eller en andel <span class="math inline">\(\widehat{p}\)</span>, vil resultatet variere fra utvalg til utvalg fordi observasjonene er tilfeldige. <strong>Samplingfordelingen</strong> er fordelingen til et slikt utvalgskjennetegn: den forteller hvilke verdier estimatoren kan ta, og hvor sannsynlige de er, over alle tenkelige utvalg av samme størrelse. Det er denne fordelingen som gjør statistisk inferens mulig, for den forteller oss hvor presist et estimat er. Her tar vi for oss samplingfordelingen til gjennomsnittet; andelen kommer vi tilbake til litt lenger ned.</p>
+<p>Anta at observasjonene <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> er uavhengige, med samme forventning <span class="math inline">\(\mu\)</span> og varians <span class="math inline">\(\sigma^2\)</span>, og se på gjennomsnittet <span class="math inline">\(\overline{X} = \frac{1}{n}\sum_{i=1}^n X_i\)</span>. Nå får vi bruk for regnereglene fra avsnitt <a href="#sec-forventning-varians" class="quarto-xref"><span>Seksjon 2.9</span></a>. Forventningen følger av at forventningen er lineær:</p>
 <p><span class="math display">\[\textrm{E}(\overline{X}) = \frac{1}{n}\sum_{i=1}^n \textrm{E}(X_i) = \frac{1}{n}\cdot n\mu = \mu.\]</span></p>
 <p>For variansen bruker vi at observasjonene er uavhengige, og at faktoren <span class="math inline">\(1/n\)</span> kvadreres:</p>
 <p><span class="math display">\[\textrm{Var}(\overline{X}) = \frac{1}{n^2}\sum_{i=1}^n \textrm{Var}(X_i) = \frac{1}{n^2}\cdot n\sigma^2 = \frac{\sigma^2}{n}, \qquad \textrm{det vil si} \qquad \sigma(\overline{X}) = \frac{\sigma}{\sqrt{n}}.\]</span></p>
 <p>To ting er verdt å dvele ved. For det første er gjennomsnittet <strong>forventningsrett</strong>: i snitt treffer det den sanne verdien <span class="math inline">\(\mu\)</span>. For det andre, og dette er kanskje det viktigste enkeltresultatet i modulen, skrumper standardavviket til gjennomsnittet inn som <span class="math inline">\(1/\sqrt{n}\)</span> når utvalget vokser. Med andre ord: jo flere observasjoner vi samler inn, jo mer presist blir anslaget vårt. Men presisjonen øker bare med <em>kvadratroten</em> av <span class="math inline">\(n\)</span>, så for å halvere usikkerheten må vi firedoble antall observasjoner.</p>
 <p>Men legg merke til hva vi <em>ikke</em> har funnet ut ennå: vi kjenner nå forventningen og variansen til <span class="math inline">\(\overline{X}\)</span>, men ikke selve <em>formen</em> på samplingfordelingen. Er den normalfordelt, eller skjev? Det er akkurat dette spørsmålet sentralgrenseteoremet svarer på i neste delkapittel.</p>
 </section>
-<section id="sentralgrenseteoremet" class="level3" data-number="2.2.7">
-<h3 data-number="2.2.7" class="anchored" data-anchor-id="sentralgrenseteoremet"><span class="header-section-number">2.2.7</span> Sentralgrenseteoremet</h3>
+<section id="sentralgrenseteoremet" class="level2" data-number="2.12">
+<h2 data-number="2.12" class="anchored" data-anchor-id="sentralgrenseteoremet"><span class="header-section-number">2.12</span> Sentralgrenseteoremet</h2>
 <div class="video-showcase" style="padding:56.25% 0 0 0;">
 <iframe src="https://vimeo.com/showcase/12340253/embed" allowfullscreen="" frameborder="0">
 </iframe>
@@ -681,11 +674,143 @@ window.Quarto = {
 <p>Med forventningen <span class="math inline">\(\mu\)</span> og variansen <span class="math inline">\(\sigma^2/n\)</span> fra forrige delkapittel kan vi dermed skrive opp samplingfordelingen til gjennomsnittet på lukket form:</p>
 <p><span class="math display">\[\overline{X} \;\sim\; N\!\left(\mu,\; \frac{\sigma^2}{n}\right).\]</span></p>
 <p>Dette gjelder <em>eksakt</em> når observasjonene selv er normalfordelte, og <em>tilnærmet</em> ellers, så lenge <span class="math inline">\(n\)</span> er stor nok.</p>
+<p>Påstanden er drøy nok til at den fortjener å bli etterprøvd, og det kan du gjøre selv i <a href="#fig-sgt" class="quarto-xref">Figur&nbsp;<span>2.3</span></a>. Velg en populasjonsfordeling (den øverste figuren viser hvordan enkeltobservasjonene er fordelt), og dra deretter i bryteren for <span class="math inline">\(n\)</span>. For hver innstilling trekkes 2000 nye utvalg, og den nederste figuren viser hvordan de 2000 gjennomsnittene fordeler seg. Den røde kurven er normalfordelingen <span class="math inline">\(N(\mu,\, \sigma^2/n)\)</span> som teoremet lover.</p>
+<div id="fig-sgt" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sgt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb6" data-startfrom="302" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 301;"><span id="cb6-302"><a href="#cb6-302" aria-hidden="true" tabindex="-1"></a>viewof fordeling <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">radio</span>(</span>
+<span id="cb6-303"><a href="#cb6-303" aria-hidden="true" tabindex="-1"></a>  [<span class="st">"Kraftig høyreskjev"</span><span class="op">,</span> <span class="st">"Uniform"</span><span class="op">,</span> <span class="st">"To topper"</span><span class="op">,</span> <span class="st">"Normal"</span>]<span class="op">,</span></span>
+<span id="cb6-304"><a href="#cb6-304" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="st">"Kraftig høyreskjev"</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Populasjonsfordeling:"</span>}</span>
+<span id="cb6-305"><a href="#cb6-305" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb7" data-startfrom="310" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 309;"><span id="cb7-310"><a href="#cb7-310" aria-hidden="true" tabindex="-1"></a>viewof n <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">100</span>]<span class="op">,</span> {<span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Utvalgsstørrelse n:"</span>})</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb8" data-startfrom="315" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 314;"><span id="cb8-315"><a href="#cb8-315" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb8-316"><a href="#cb8-316" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Populasjonsfordelingene studenten kan velge mellom. Hver gir en trekkefunksjon,</span></span>
+<span id="cb8-317"><a href="#cb8-317" aria-hidden="true" tabindex="-1"></a>  <span class="co">// sin sanne mu og sigma (som normalkurven tegnes fra), og det faste akseintervallet.</span></span>
+<span id="cb8-318"><a href="#cb8-318" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> lagFordeling <span class="op">=</span> (navn<span class="op">,</span> rng) <span class="kw">=&gt;</span> {</span>
+<span id="cb8-319"><a href="#cb8-319" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (navn <span class="op">===</span> <span class="st">"Kraftig høyreskjev"</span>)</span>
+<span id="cb8-320"><a href="#cb8-320" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> {<span class="dt">trekk</span><span class="op">:</span> d3<span class="op">.</span><span class="at">randomExponential</span><span class="op">.</span><span class="fu">source</span>(rng)(<span class="dv">1</span>)<span class="op">,</span> <span class="dt">mu</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">sigma</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">domene</span><span class="op">:</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">5</span>]}<span class="op">;</span></span>
+<span id="cb8-321"><a href="#cb8-321" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (navn <span class="op">===</span> <span class="st">"Uniform"</span>)</span>
+<span id="cb8-322"><a href="#cb8-322" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> {<span class="dt">trekk</span><span class="op">:</span> d3<span class="op">.</span><span class="at">randomUniform</span><span class="op">.</span><span class="fu">source</span>(rng)(<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">,</span> <span class="dt">mu</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span> <span class="dt">sigma</span><span class="op">:</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span>(<span class="dv">1</span> <span class="op">/</span> <span class="dv">12</span>)<span class="op">,</span> <span class="dt">domene</span><span class="op">:</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span>]}<span class="op">;</span></span>
+<span id="cb8-323"><a href="#cb8-323" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (navn <span class="op">===</span> <span class="st">"To topper"</span>) {</span>
+<span id="cb8-324"><a href="#cb8-324" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> lav  <span class="op">=</span> d3<span class="op">.</span><span class="at">randomNormal</span><span class="op">.</span><span class="fu">source</span>(rng)(<span class="op">-</span><span class="fl">1.5</span><span class="op">,</span> <span class="fl">0.5</span>)<span class="op">;</span></span>
+<span id="cb8-325"><a href="#cb8-325" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> hoy  <span class="op">=</span> d3<span class="op">.</span><span class="at">randomNormal</span><span class="op">.</span><span class="fu">source</span>(rng)(<span class="fl">1.5</span><span class="op">,</span> <span class="fl">0.5</span>)<span class="op">;</span></span>
+<span id="cb8-326"><a href="#cb8-326" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> mynt <span class="op">=</span> d3<span class="op">.</span><span class="at">randomUniform</span><span class="op">.</span><span class="fu">source</span>(rng)(<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb8-327"><a href="#cb8-327" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> {<span class="dt">trekk</span><span class="op">:</span> () <span class="kw">=&gt;</span> (<span class="fu">mynt</span>() <span class="op">&lt;</span> <span class="fl">0.5</span> <span class="op">?</span> <span class="fu">lav</span>() <span class="op">:</span> <span class="fu">hoy</span>())<span class="op">,</span> <span class="dt">mu</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">sigma</span><span class="op">:</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span>(<span class="fl">2.5</span>)<span class="op">,</span> <span class="dt">domene</span><span class="op">:</span> [<span class="op">-</span><span class="dv">4</span><span class="op">,</span> <span class="dv">4</span>]}<span class="op">;</span></span>
+<span id="cb8-328"><a href="#cb8-328" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-329"><a href="#cb8-329" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="dt">trekk</span><span class="op">:</span> d3<span class="op">.</span><span class="at">randomNormal</span><span class="op">.</span><span class="fu">source</span>(rng)(<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">,</span> <span class="dt">mu</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">sigma</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">domene</span><span class="op">:</span> [<span class="op">-</span><span class="dv">4</span><span class="op">,</span> <span class="dv">4</span>]}<span class="op">;</span></span>
+<span id="cb8-330"><a href="#cb8-330" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb8-331"><a href="#cb8-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-332"><a href="#cb8-332" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Histogram med faste binkanter, normalisert til tetthet slik at søylene</span></span>
+<span id="cb8-333"><a href="#cb8-333" aria-hidden="true" tabindex="-1"></a>  <span class="co">// kan sammenlignes direkte med normalkurven.</span></span>
+<span id="cb8-334"><a href="#cb8-334" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> histogram <span class="op">=</span> (verdier<span class="op">,</span> lo<span class="op">,</span> hi<span class="op">,</span> antallBins) <span class="kw">=&gt;</span> {</span>
+<span id="cb8-335"><a href="#cb8-335" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> bredde <span class="op">=</span> (hi <span class="op">-</span> lo) <span class="op">/</span> antallBins<span class="op">;</span></span>
+<span id="cb8-336"><a href="#cb8-336" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> antall <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(antallBins)<span class="op">.</span><span class="fu">fill</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb8-337"><a href="#cb8-337" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (<span class="kw">const</span> v <span class="kw">of</span> verdier) {</span>
+<span id="cb8-338"><a href="#cb8-338" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> k <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">floor</span>((v <span class="op">-</span> lo) <span class="op">/</span> bredde)<span class="op">;</span></span>
+<span id="cb8-339"><a href="#cb8-339" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (k <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> k <span class="op">&lt;</span> antallBins) antall[k]<span class="op">++;</span></span>
+<span id="cb8-340"><a href="#cb8-340" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-341"><a href="#cb8-341" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> antall<span class="op">.</span><span class="fu">map</span>((c<span class="op">,</span> k) <span class="kw">=&gt;</span> ({</span>
+<span id="cb8-342"><a href="#cb8-342" aria-hidden="true" tabindex="-1"></a>      <span class="dt">x1</span><span class="op">:</span> lo <span class="op">+</span> k <span class="op">*</span> bredde<span class="op">,</span></span>
+<span id="cb8-343"><a href="#cb8-343" aria-hidden="true" tabindex="-1"></a>      <span class="dt">x2</span><span class="op">:</span> lo <span class="op">+</span> (k <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> bredde<span class="op">,</span></span>
+<span id="cb8-344"><a href="#cb8-344" aria-hidden="true" tabindex="-1"></a>      <span class="dt">tetthet</span><span class="op">:</span> c <span class="op">/</span> (verdier<span class="op">.</span><span class="at">length</span> <span class="op">*</span> bredde)</span>
+<span id="cb8-345"><a href="#cb8-345" aria-hidden="true" tabindex="-1"></a>    }))<span class="op">;</span></span>
+<span id="cb8-346"><a href="#cb8-346" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb8-347"><a href="#cb8-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-348"><a href="#cb8-348" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> rng <span class="op">=</span> d3<span class="op">.</span><span class="fu">randomLcg</span>(<span class="fl">0.42</span>)<span class="op">;</span></span>
+<span id="cb8-349"><a href="#cb8-349" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p <span class="op">=</span> <span class="fu">lagFordeling</span>(fordeling<span class="op">,</span> rng)<span class="op">;</span></span>
+<span id="cb8-350"><a href="#cb8-350" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> [lo<span class="op">,</span> hi] <span class="op">=</span> p<span class="op">.</span><span class="at">domene</span><span class="op">;</span></span>
+<span id="cb8-351"><a href="#cb8-351" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> se <span class="op">=</span> p<span class="op">.</span><span class="at">sigma</span> <span class="op">/</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span>(n)<span class="op">;</span></span>
+<span id="cb8-352"><a href="#cb8-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-353"><a href="#cb8-353" aria-hidden="true" tabindex="-1"></a>  <span class="co">// 2000 utvalg à n observasjoner, og et stort utvalg som viser populasjonen selv.</span></span>
+<span id="cb8-354"><a href="#cb8-354" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> snitt <span class="op">=</span> <span class="kw">new</span> <span class="bu">Float64Array</span>(<span class="dv">2000</span>)<span class="op">;</span></span>
+<span id="cb8-355"><a href="#cb8-355" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">let</span> r <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> r <span class="op">&lt;</span> snitt<span class="op">.</span><span class="at">length</span><span class="op">;</span> r<span class="op">++</span>) {</span>
+<span id="cb8-356"><a href="#cb8-356" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-357"><a href="#cb8-357" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++</span>) sum <span class="op">+=</span> p<span class="op">.</span><span class="fu">trekk</span>()<span class="op">;</span></span>
+<span id="cb8-358"><a href="#cb8-358" aria-hidden="true" tabindex="-1"></a>    snitt[r] <span class="op">=</span> sum <span class="op">/</span> n<span class="op">;</span></span>
+<span id="cb8-359"><a href="#cb8-359" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-360"><a href="#cb8-360" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> pop <span class="op">=</span> <span class="kw">new</span> <span class="bu">Float64Array</span>(<span class="dv">20000</span>)<span class="op">;</span></span>
+<span id="cb8-361"><a href="#cb8-361" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> pop<span class="op">.</span><span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) pop[i] <span class="op">=</span> p<span class="op">.</span><span class="fu">trekk</span>()<span class="op">;</span></span>
+<span id="cb8-362"><a href="#cb8-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-363"><a href="#cb8-363" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> kurve <span class="op">=</span> d3<span class="op">.</span><span class="fu">range</span>(<span class="dv">401</span>)<span class="op">.</span><span class="fu">map</span>(i <span class="kw">=&gt;</span> {</span>
+<span id="cb8-364"><a href="#cb8-364" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> x <span class="op">=</span> lo <span class="op">+</span> (hi <span class="op">-</span> lo) <span class="op">*</span> i <span class="op">/</span> <span class="dv">400</span><span class="op">;</span></span>
+<span id="cb8-365"><a href="#cb8-365" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {x<span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">exp</span>(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> ((x <span class="op">-</span> p<span class="op">.</span><span class="at">mu</span>) <span class="op">/</span> se) <span class="op">**</span> <span class="dv">2</span>) <span class="op">/</span> (se <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span>(<span class="dv">2</span> <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span>))}<span class="op">;</span></span>
+<span id="cb8-366"><a href="#cb8-366" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb8-367"><a href="#cb8-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-368"><a href="#cb8-368" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> felles <span class="op">=</span> {</span>
+<span id="cb8-369"><a href="#cb8-369" aria-hidden="true" tabindex="-1"></a>    <span class="dt">width</span><span class="op">:</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">min</span>(width<span class="op">,</span> <span class="dv">680</span>)<span class="op">,</span></span>
+<span id="cb8-370"><a href="#cb8-370" aria-hidden="true" tabindex="-1"></a>    <span class="dt">height</span><span class="op">:</span> <span class="dv">190</span><span class="op">,</span></span>
+<span id="cb8-371"><a href="#cb8-371" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">55</span><span class="op">,</span></span>
+<span id="cb8-372"><a href="#cb8-372" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marginRight</span><span class="op">:</span> <span class="dv">15</span><span class="op">,</span></span>
+<span id="cb8-373"><a href="#cb8-373" aria-hidden="true" tabindex="-1"></a>    <span class="dt">style</span><span class="op">:</span> {<span class="dt">fontSize</span><span class="op">:</span> <span class="st">"11px"</span>}<span class="op">,</span></span>
+<span id="cb8-374"><a href="#cb8-374" aria-hidden="true" tabindex="-1"></a>    <span class="dt">y</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span> <span class="st">"Tetthet"</span>}</span>
+<span id="cb8-375"><a href="#cb8-375" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb8-376"><a href="#cb8-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-377"><a href="#cb8-377" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> ovre <span class="op">=</span> Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb8-378"><a href="#cb8-378" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span>felles<span class="op">,</span></span>
+<span id="cb8-379"><a href="#cb8-379" aria-hidden="true" tabindex="-1"></a>    <span class="dt">x</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [lo<span class="op">,</span> hi]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span>}<span class="op">,</span></span>
+<span id="cb8-380"><a href="#cb8-380" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb8-381"><a href="#cb8-381" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">rectY</span>(<span class="fu">histogram</span>(pop<span class="op">,</span> lo<span class="op">,</span> hi<span class="op">,</span> <span class="dv">60</span>)<span class="op">,</span> {<span class="dt">x1</span><span class="op">:</span> <span class="st">"x1"</span><span class="op">,</span> <span class="dt">x2</span><span class="op">:</span> <span class="st">"x2"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"tetthet"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"#c9c9c9"</span>})<span class="op">,</span></span>
+<span id="cb8-382"><a href="#cb8-382" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">ruleY</span>([<span class="dv">0</span>])</span>
+<span id="cb8-383"><a href="#cb8-383" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb8-384"><a href="#cb8-384" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb8-385"><a href="#cb8-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-386"><a href="#cb8-386" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Aksen er fast, men toppen blir smalere med voksende n. Vi finskalerer derfor</span></span>
+<span id="cb8-387"><a href="#cb8-387" aria-hidden="true" tabindex="-1"></a>  <span class="co">// binbredden etter sigma/sqrt(n), ellers forsvinner formen i noen få søyler.</span></span>
+<span id="cb8-388"><a href="#cb8-388" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> binsSnitt <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">max</span>(<span class="dv">40</span><span class="op">,</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">min</span>(<span class="dv">400</span><span class="op">,</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>((hi <span class="op">-</span> lo) <span class="op">/</span> (se <span class="op">/</span> <span class="dv">4</span>))))<span class="op">;</span></span>
+<span id="cb8-389"><a href="#cb8-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-390"><a href="#cb8-390" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> nedre <span class="op">=</span> Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb8-391"><a href="#cb8-391" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span>felles<span class="op">,</span></span>
+<span id="cb8-392"><a href="#cb8-392" aria-hidden="true" tabindex="-1"></a>    <span class="dt">x</span><span class="op">:</span> {<span class="dt">domain</span><span class="op">:</span> [lo<span class="op">,</span> hi]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Verdi"</span>}<span class="op">,</span></span>
+<span id="cb8-393"><a href="#cb8-393" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb8-394"><a href="#cb8-394" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">rectY</span>(<span class="fu">histogram</span>(snitt<span class="op">,</span> lo<span class="op">,</span> hi<span class="op">,</span> binsSnitt)<span class="op">,</span> {<span class="dt">x1</span><span class="op">:</span> <span class="st">"x1"</span><span class="op">,</span> <span class="dt">x2</span><span class="op">:</span> <span class="st">"x2"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"tetthet"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"#c9c9c9"</span>})<span class="op">,</span></span>
+<span id="cb8-395"><a href="#cb8-395" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">line</span>(kurve<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"x"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"y"</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"firebrick"</span><span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="fl">1.5</span>})<span class="op">,</span></span>
+<span id="cb8-396"><a href="#cb8-396" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">ruleY</span>([<span class="dv">0</span>])</span>
+<span id="cb8-397"><a href="#cb8-397" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb8-398"><a href="#cb8-398" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb8-399"><a href="#cb8-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-400"><a href="#cb8-400" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div&gt;</span></span>
+<span id="cb8-401"><a href="#cb8-401" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div style="font-size:0.85rem; font-weight:600; margin-bottom:0.1rem"&gt;Populasjonen: én enkelt observasjon&lt;/div&gt;</span></span>
+<span id="cb8-402"><a href="#cb8-402" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>ovre<span class="sc">}</span></span>
+<span id="cb8-403"><a href="#cb8-403" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div style="font-size:0.85rem; font-weight:600; margin:0.5rem 0 0.1rem"&gt;Gjennomsnittet av n = </span><span class="sc">${</span>n<span class="sc">}</span><span class="vs"> observasjoner&lt;/div&gt;</span></span>
+<span id="cb8-404"><a href="#cb8-404" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>nedre<span class="sc">}</span></span>
+<span id="cb8-405"><a href="#cb8-405" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div style="font-size:0.8rem; color:#6c757d; margin-top:0.2rem"&gt;</span></span>
+<span id="cb8-406"><a href="#cb8-406" aria-hidden="true" tabindex="-1"></a><span class="vs">      Populasjonen har σ = </span><span class="sc">${</span>p<span class="op">.</span><span class="at">sigma</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="vs">, og gjennomsnittet har σ/√n = </span><span class="sc">${</span>se<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="vs">.</span></span>
+<span id="cb8-407"><a href="#cb8-407" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb8-408"><a href="#cb8-408" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb8-409"><a href="#cb8-409" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-3" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sgt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figur&nbsp;2.3: Sentralgrenseteoremet i praksis. Øverst: fordelingen til én enkelt observasjon i populasjonen. Nederst: fordelingen til gjennomsnittet av <span class="math inline">\(n\)</span> slike observasjoner, basert på 2000 simulerte utvalg, med normalfordelingen <span class="math inline">\(N(\mu, \sigma^2/n)\)</span> tegnet oppå. Aksen er den samme i begge figurene.
+</figcaption>
+</figure>
+</div>
+<p>Legg merke til to ting mens du drar i bryteren. Formen blir symmetrisk og klokkeformet selv når populasjonen er tydelig skjev eller har to topper, og det skjer overraskende raskt. Og fordelingen til gjennomsnittet blir smalere og smalere, akkurat som <span class="math inline">\(\sigma/\sqrt{n}\)</span>-regelen fra forrige delkapittel sier: firedobler du <span class="math inline">\(n\)</span>, halveres bredden.</p>
 <p>Sentralgrenseteoremet formuleres gjerne for <em>summen</em> <span class="math inline">\(S_n = X_1 + \cdots + X_n\)</span> i stedet for gjennomsnittet. Da sier det at også <span class="math inline">\(S_n\)</span> er tilnærmet normalfordelt, <span class="math inline">\(S_n \sim N(n\mu,\, n\sigma^2)\)</span>. Dette er egentlig samme utsagn: gjennomsnittet er jo bare summen delt på <span class="math inline">\(n\)</span>, så <em>formen</em> (normal) er den samme, mens forventning og varians skaleres deretter.</p>
 <p>Det er dette resultatet vi bygger videre på i hypotesetesting og konfidensintervaller, og det har en tvillingsøster for andeler som vi ser på nå.</p>
 </section>
-<section id="samplingfordelingen-til-en-andel" class="level3" data-number="2.2.8">
-<h3 data-number="2.2.8" class="anchored" data-anchor-id="samplingfordelingen-til-en-andel"><span class="header-section-number">2.2.8</span> Samplingfordelingen til en andel</h3>
+<section id="samplingfordelingen-til-en-andel" class="level2" data-number="2.13">
+<h2 data-number="2.13" class="anchored" data-anchor-id="samplingfordelingen-til-en-andel"><span class="header-section-number">2.13</span> Samplingfordelingen til en andel</h2>
 <div class="video-showcase" style="padding:56.25% 0 0 0;">
 <iframe src="https://vimeo.com/showcase/12340254/embed" allowfullscreen="" frameborder="0">
 </iframe>
@@ -697,8 +822,8 @@ window.Quarto = {
 <p><span class="math display">\[\widehat{p} \;\sim\; N\!\left(p,\; \frac{p(1-p)}{n}\right).\]</span></p>
 <p>Tilnærmingen regnes som god når <span class="math inline">\(np &gt; 5\)</span> og <span class="math inline">\(n(1-p) &gt; 5\)</span>. Legg merke til at også her avtar usikkerheten som <span class="math inline">\(1/\sqrt{n}\)</span>. Det er derfor en meningsmåling med rundt 1000 respondenter kan gi et brukbart anslag på hva et helt land mener.</p>
 </section>
-<section id="gode-estimatorer" class="level3" data-number="2.2.9">
-<h3 data-number="2.2.9" class="anchored" data-anchor-id="gode-estimatorer"><span class="header-section-number">2.2.9</span> Gode estimatorer</h3>
+<section id="gode-estimatorer" class="level2" data-number="2.14">
+<h2 data-number="2.14" class="anchored" data-anchor-id="gode-estimatorer"><span class="header-section-number">2.14</span> Gode estimatorer</h2>
 <div class="video-showcase" style="padding:56.25% 0 0 0;">
 <iframe src="https://vimeo.com/showcase/12340255/embed" allowfullscreen="" frameborder="0">
 </iframe>
@@ -713,28 +838,27 @@ window.Quarto = {
 <li>En estimator er <strong>konsistent</strong> dersom den nærmer seg den sanne verdien når utvalget vokser. Gjennomsnittet er konsistent nettopp fordi variansen <span class="math inline">\(\sigma^2/n\)</span> går mot null når <span class="math inline">\(n\)</span> øker.</li>
 </ul>
 </section>
-<section id="konfidensintervall" class="level3" data-number="2.2.10">
-<h3 data-number="2.2.10" class="anchored" data-anchor-id="konfidensintervall"><span class="header-section-number">2.2.10</span> Konfidensintervall</h3>
-<p>Begrepene i dette delkapittelet bygger videre på sannsynlighetsregningen fra MET2: fordelinger, stokastiske variabler, forventning og varians. Ligger dette langt bak i bevisstheten, kan det være lurt å friske det opp.</p>
+<section id="konfidensintervall" class="level2" data-number="2.15">
+<h2 data-number="2.15" class="anchored" data-anchor-id="konfidensintervall"><span class="header-section-number">2.15</span> Konfidensintervall</h2>
 <p>Vi kan lage et <em>punktestimat</em> av en forventningsverdi ved å ta gjennomsnittet av observasjonene. Men et enkelt tall sier ingenting om hvor sikkert anslaget er, og derfor er vi ofte mer interessert i et <strong>konfidensintervall</strong>: et helt intervall av rimelige verdier, der bredden forteller oss hvor presist estimatet er.</p>
 <p>La oss se et eksempel. Tenk deg at vi vil anslå den forventede vekten til laksen i en stor oppdrettsmerd. Vi kan ikke veie all fisken, så vi trekker et tilfeldig <strong>utvalg</strong> på 25 laks og veier dem. Vi simulerer et slikt utvalg:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Vekten (i kg) til 25 tilfeldig valgte laks</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>vekt <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">25</span>, <span class="at">mean =</span> <span class="fl">5.2</span>, <span class="at">sd =</span> <span class="fl">0.8</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Vekten (i kg) til 25 tilfeldig valgte laks</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>vekt <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">25</span>, <span class="at">mean =</span> <span class="fl">5.2</span>, <span class="at">sd =</span> <span class="fl">0.8</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Punktestimatet vårt for den forventede vekten er rett og slett utvalgsgjennomsnittet. I praksis kjenner vi ikke det sanne standardavviket i populasjonen, så vi må estimere det med utvalgsstandardavviket <span class="math inline">\(s\)</span>. Denne ekstra usikkerheten gjør at vi bruker <strong>t-fordelingen</strong> i stedet for normalfordelingen når vi finner den kritiske verdien. For et 95 %-konfidensintervall henter vi verdien fra t-fordelingen med <span class="math inline">\(n - 1\)</span> frihetsgrader ved hjelp av <code>qt()</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">mean</span>(vekt)              <span class="co"># utvalgsgjennomsnittet, vårt punktestimat</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>s        <span class="ot">&lt;-</span> <span class="fu">sd</span>(vekt)                <span class="co"># utvalgsstandardavviket (vi kjenner ikke det sanne)</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>n        <span class="ot">&lt;-</span> <span class="fu">length</span>(vekt)            <span class="co"># antall observasjoner</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>t_krit   <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)   <span class="co"># kritisk verdi fra t-fordelingen</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Nedre og øvre grense i konfidensintervallet (LCL og UCL):</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>LCL <span class="ot">&lt;-</span> gj.snitt <span class="sc">-</span> t_krit <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>UCL <span class="ot">&lt;-</span> gj.snitt <span class="sc">+</span> t_krit <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(LCL, gj.snitt, UCL)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">mean</span>(vekt)              <span class="co"># utvalgsgjennomsnittet, vårt punktestimat</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>s        <span class="ot">&lt;-</span> <span class="fu">sd</span>(vekt)                <span class="co"># utvalgsstandardavviket (vi kjenner ikke det sanne)</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>n        <span class="ot">&lt;-</span> <span class="fu">length</span>(vekt)            <span class="co"># antall observasjoner</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>t_krit   <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)   <span class="co"># kritisk verdi fra t-fordelingen</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Nedre og øvre grense i konfidensintervallet (LCL og UCL):</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>LCL <span class="ot">&lt;-</span> gj.snitt <span class="sc">-</span> t_krit <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>UCL <span class="ot">&lt;-</span> gj.snitt <span class="sc">+</span> t_krit <span class="sc">*</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(LCL, gj.snitt, UCL)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5.021184 5.334932 5.648680</code></pre>
 </div>
@@ -746,11 +870,29 @@ window.Quarto = {
 <li>Den korrekte tolkningen er: «Dersom vi gjentatte ganger trakk nye utvalg av samme størrelse fra populasjonen og regnet ut et nytt konfidensintervall hver gang, ville 95 av 100 slike intervaller inneholde den sanne parameterverdien».</li>
 </ul>
 <p>Forskjellen er subtil, men viktig. Problemet med den første formuleringen er at den gir inntrykk av at det er <em>parameteren</em> som er tilfeldig og hopper inn og ut av et fast intervall. Det motsatte er tilfellet: den sanne parameterverdien er fast, mens det er <em>grensene</em> til konfidensintervallet som er tilfeldige, siden de regnes ut fra et tilfeldig utvalg. Bredden til intervallet er dermed et uttrykk for <em>usikkerhet</em>, eller motsatt: <em>presisjon</em>.</p>
+<p>Den korrekte tolkningen handler altså om noe vi aldri får se: alle de utvalgene vi <em>kunne</em> ha trukket. Men i en simulering kan vi faktisk se dem. I <a href="#fig-ki-dekning" class="quarto-xref">Figur&nbsp;<span>2.4</span></a> har vi gjentatt laksemålingen 100 ganger, med et nytt utvalg på 25 fisk hver gang, og regnet ut et nytt 95 %-konfidensintervall for hvert av dem:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-ki-dekning" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ki-dekning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="02-grunnleggende-statistikk_files/figure-html/fig-ki-dekning-1.png" class="img-fluid figure-img" width="624">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ki-dekning-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figur&nbsp;2.4: Hundre simulerte 95 %-konfidensintervaller for forventet laksevekt. Hvert intervall er regnet ut fra et nytt tilfeldig utvalg på 25 laks fra den samme populasjonen, der den sanne verdien er <span class="math inline">\(\mu = 5.2\)</span> kg (stiplet linje). Punktet er utvalgsgjennomsnittet. Intervallene som bommer på den sanne verdien, er markert i rødt.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Legg merke til at intervallene ligger på litt ulike steder og har litt ulik bredde, mens den sanne verdien står helt stille. 7 av de 100 intervallene bommer, mot 5 forventet i snitt (også <em>det</em> tallet varierer fra simulering til simulering). Poenget er at vi i praksis bare trekker <em>ett</em> av disse utvalgene, og da vet vi aldri om vi endte opp med et grått eller et rødt intervall. Det er prosedyren som treffer 95 ganger av 100, ikke det ene intervallet vi sitter med.</p>
 </section>
-<section id="kontrollspørsmål-1" class="level3" data-number="2.2.11">
-<h3 data-number="2.2.11" class="anchored" data-anchor-id="kontrollspørsmål-1"><span class="header-section-number">2.2.11</span> Kontrollspørsmål</h3>
+<section id="kontrollspørsmål" class="level2" data-number="2.16">
+<h2 data-number="2.16" class="anchored" data-anchor-id="kontrollspørsmål"><span class="header-section-number">2.16</span> Kontrollspørsmål</h2>
 <p>Når du har vært gjennom dette stoffet skal du forhåpentligvis være i stand til å diskutere følgende spørsmål med f.eks. en medstudent:</p>
 <ol type="1">
+<li>Hva er forskjellen på deskriptiv statistikk og statistisk inferens?</li>
+<li>Deskriptiv statistikk kan gjøres grafisk eller numerisk, eventuelt som tabeller av ulike numeriske mål. Nevn noen fordeler og ulemper man må veie mot hverandre når vi skal velge mellom grafisk og numerisk deskriptiv statistikk.</li>
 <li>Hva er en samplingfordeling?</li>
 <li>Hva sier sentralgrenseteoremet?</li>
 <li>Hva mener en statistiker når hen sier at “gjennomsnittet konvergerer som <span class="math inline">\(1/\sqrt{n}\)</span>”?</li>
@@ -760,12 +902,11 @@ window.Quarto = {
 <li>Hva vil det si at et estimator er konsistent?</li>
 </ol>
 </section>
-</section>
-<section id="sec-oppgaverdeskriptiv" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="sec-oppgaverdeskriptiv"><span class="header-section-number">2.3</span> Oppgaver</h2>
+<section id="sec-oppgaverdeskriptiv" class="level2" data-number="2.17">
+<h2 data-number="2.17" class="anchored" data-anchor-id="sec-oppgaverdeskriptiv"><span class="header-section-number">2.17</span> Oppgaver</h2>
 <p>Til de fleste oppgavene under ligger det et løsningsforslag som du folder ut ved å trykke på <strong>Løsning</strong>. Rådet vårt er at du først forsøker å løse oppgaven skikkelig på egen hånd, og heller bruker løsningsforslaget etterpå til å kontrollere svaret ditt (eller som en pekepinn dersom du står helt fast). Du lærer langt mer av å bryne deg på oppgaven selv enn av å lese løsningen.</p>
-<section id="teorioppgaver" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="teorioppgaver"><span class="header-section-number">2.3.1</span> Teorioppgaver</h3>
+<section id="teorioppgaver" class="level3" data-number="2.17.1">
+<h3 data-number="2.17.1" class="anchored" data-anchor-id="teorioppgaver"><span class="header-section-number">2.17.1</span> Teorioppgaver</h3>
 <ol type="1">
 <li>Beskriv kort forskjellen mellom deskriptiv statistikk og statistisk inferens.</li>
 </ol>
@@ -887,7 +1028,7 @@ Løsning
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-grunnleggende-statistikk_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02-grunnleggende-statistikk_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -908,7 +1049,7 @@ Løsning
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-grunnleggende-statistikk_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02-grunnleggende-statistikk_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -945,7 +1086,7 @@ Løsning
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-grunnleggende-statistikk_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02-grunnleggende-statistikk_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1058,7 +1199,7 @@ Løsning
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02-grunnleggende-statistikk_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02-grunnleggende-statistikk_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1072,7 +1213,7 @@ Løsning
 <li>Gjenta oppgave a med <span class="math inline">\(p = 0.55\)</span>.</li>
 <li>Gjenta oppgave a med <span class="math inline">\(p = 0.60\)</span>.</li>
 </ol>
-<p><em>Tips: normalsannsynligheter som <span class="math inline">\(P(Z &gt; z)\)</span> finner du i R med <code>pnorm()</code>, se Avsnitt <a href="#sec-relevant-r-grunnleggende" class="quarto-xref"><span>Seksjon 2.4</span></a>.</em></p>
+<p><em>Tips: normalsannsynligheter som <span class="math inline">\(P(Z &gt; z)\)</span> finner du i R med <code>pnorm()</code>, se Avsnitt <a href="#sec-relevant-r-grunnleggende" class="quarto-xref"><span>Seksjon 2.18</span></a>.</em></p>
 <details>
 <summary>
 Løsning
@@ -1116,7 +1257,7 @@ P(\hat{p} &gt; 0.60) &amp;= P\left(\frac{\hat{p} - p}{\sqrt{p(1 - p)/n}} &gt; \f
 <li>Hva er sannsynligheten for dette utfallet?</li>
 <li>Kommenter påstanden til produsenten.</li>
 </ol>
-<p><em>Tips: normalsannsynligheter som <span class="math inline">\(P(Z &lt; z)\)</span> finner du i R med <code>pnorm()</code>, se Avsnitt <a href="#sec-relevant-r-grunnleggende" class="quarto-xref"><span>Seksjon 2.4</span></a>.</em></p>
+<p><em>Tips: normalsannsynligheter som <span class="math inline">\(P(Z &lt; z)\)</span> finner du i R med <code>pnorm()</code>, se Avsnitt <a href="#sec-relevant-r-grunnleggende" class="quarto-xref"><span>Seksjon 2.18</span></a>.</em></p>
 <details>
 <summary>
 Løsning
@@ -1135,7 +1276,7 @@ Løsning
 <li>Hva vil du si om selgerens påstand dersom mer enn 6% svarer at de har hatt behov for service?</li>
 <li>Anta nå at du istedet spurte 400 hustander. Hva vil du si om selgerens påstand dersom mer enn 6% svarer at de har hatt behov for service?</li>
 </ol>
-<p><em>Tips: normalsannsynligheter som <span class="math inline">\(P(Z &gt; z)\)</span> finner du i R med <code>pnorm()</code>, se Avsnitt <a href="#sec-relevant-r-grunnleggende" class="quarto-xref"><span>Seksjon 2.4</span></a>.</em></p>
+<p><em>Tips: normalsannsynligheter som <span class="math inline">\(P(Z &gt; z)\)</span> finner du i R med <code>pnorm()</code>, se Avsnitt <a href="#sec-relevant-r-grunnleggende" class="quarto-xref"><span>Seksjon 2.18</span></a>.</em></p>
 <details>
 <summary>
 Løsning
@@ -1246,8 +1387,8 @@ Løsning
 </blockquote>
 </details>
 </section>
-<section id="nøtter" class="level3" data-number="2.3.2">
-<h3 data-number="2.3.2" class="anchored" data-anchor-id="nøtter"><span class="header-section-number">2.3.2</span> Nøtter</h3>
+<section id="nøtter" class="level3" data-number="2.17.2">
+<h3 data-number="2.17.2" class="anchored" data-anchor-id="nøtter"><span class="header-section-number">2.17.2</span> Nøtter</h3>
 <p>Nøtt 1. Korrelasjon er enten knyttet til et bestemt utvalg, eller en populasjon/modell, men vi sier sjelden “utvalgskorrelasjon” eller “populasjonskorrelasjon” og vi må ofte bare forstå dette ut fra situasjonen eller notasjonen (<span class="math inline">\(r\)</span> versus <span class="math inline">\(\rho\)</span>). Men utvalgskorrelasjonen</p>
 <p><span class="math display">\[r = s_{xy}/(s_xs_y)=\frac{\frac{1}{n-1}\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{\sqrt{\frac{1}{n-1}\sum_{i = 1}^n(x_i - \overline{x})^2\frac{1}{n-1}\sum_{i = 1}^n(y_i - \overline{y})^2}}\]</span></p>
 <p>et altså en <em>estimator</em> av populasjonskorrelasjonen</p>
@@ -1401,7 +1542,7 @@ Løsning
 </blockquote>
 </details>
 <p>Nøtt 6. Anta at vi har to normalfordelte populasjoner hvor observasjoner fra populasjon 1 følger en <span class="math inline">\(N(40, 6^2)\)</span> og observasjoner fra populasjon 2 følger en <span class="math inline">\(N(38, 8^2)\)</span>. Dersom man trekker 25 tilfeldige observasjoner fra hver populasjon, hva er sannsynligheten for at gjennomsnittet til trekningen fra populasjon 1 er større enn gjennomsnittet til trekningen fra populasjon 2?</p>
-<p><em>Tips: normalsannsynligheter som <span class="math inline">\(P(Z &gt; z)\)</span> finner du i R med <code>pnorm()</code>, se Avsnitt <a href="#sec-relevant-r-grunnleggende" class="quarto-xref"><span>Seksjon 2.4</span></a>.</em></p>
+<p><em>Tips: normalsannsynligheter som <span class="math inline">\(P(Z &gt; z)\)</span> finner du i R med <code>pnorm()</code>, se Avsnitt <a href="#sec-relevant-r-grunnleggende" class="quarto-xref"><span>Seksjon 2.18</span></a>.</em></p>
 <details>
 <summary>
 Løsning
@@ -1416,14 +1557,14 @@ P(\overline{X}_1 - \overline{X}_2 &gt; 0) &amp;= P\left(\frac{\overline{X}_1 - \
 </blockquote>
 </details>
 </section>
-<section id="r-oppgaver" class="level3" data-number="2.3.3">
-<h3 data-number="2.3.3" class="anchored" data-anchor-id="r-oppgaver"><span class="header-section-number">2.3.3</span> R-oppgaver</h3>
+<section id="r-oppgaver" class="level3" data-number="2.17.3">
+<h3 data-number="2.17.3" class="anchored" data-anchor-id="r-oppgaver"><span class="header-section-number">2.17.3</span> R-oppgaver</h3>
 <p>Her bruker vi R til å utforske teorien fra dette kapittelet i praksis.</p>
 <p><strong>Oppgave 1.</strong> Som demonstrert i forelesningen kan vi i R simulere standard normalfordelte observasjoner (altså normalfordelte observasjoner med <span class="math inline">\(\mu = 0\)</span> og <span class="math inline">\(\sigma^2 = 1\)</span>) med kommandoen <code>rnorm(n)</code>, der <code>n</code> er antallet observasjoner vi ønsker. For eksempel kan vi generere 10 observasjoner slik:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)   <span class="co"># gjør de tilfeldige tallene reproduserbare</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(n)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)   <span class="co"># gjør de tilfeldige tallene reproduserbare</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(n)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] -0.6264538  0.1836433 -0.8356286  1.5952808  0.3295078 -0.8204684
  [7]  0.4874291  0.7383247  0.5757814 -0.3053884</code></pre>
@@ -1433,10 +1574,10 @@ P(\overline{X}_1 - \overline{X}_2 &gt; 0) &amp;= P\left(\frac{\overline{X}_1 - \
 <p>Ved å skrive <code>mean(rnorm(n))</code> i stedet regner vi ut gjennomsnittet av observasjonene direkte.</p>
 <p>La oss gjøre dette 100 ganger og notere ned gjennomsnittet hver gang. I stedet for å gjøre det manuelt, kan vi skrive et lite program som gjør dette for oss ved å bruke en for-løkke. Det er ikke nødvendig (eller pensum) å forstå akkurat hvordan dette fungerer, men dersom du kjører følgende linjer vil du få en ny vektor <code>gj.snitt</code> som inneholder 100 slike gjennomsnitt:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    gj.snitt[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(n))</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    gj.snitt[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(n))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Skriv ut denne vektoren og kontroller at det ser korrekt ut. Vi husker at funksjonen <code>sd()</code> regner ut standardavviket til en vektor. Hvilket tall forventer du å få ut dersom du nå kjører <code>sd(gj.snitt)</code> i konsollen? Stemmer det?</p>
 <details>
@@ -1451,10 +1592,10 @@ Hint
 Hint
 </summary>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">1000</span>)            <span class="co"># Lager en tom vektor med 1000 plasser</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) {                   <span class="co"># Fyller hver plass med et gjennomsnitt av</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    gj.snitt[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(n))    <span class="co"># 10 standard normalfordelte observasjoner.</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>gj.snitt <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">1000</span>)            <span class="co"># Lager en tom vektor med 1000 plasser</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) {                   <span class="co"># Fyller hver plass med et gjennomsnitt av</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    gj.snitt[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(n))    <span class="co"># 10 standard normalfordelte observasjoner.</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </details>
 <p>Prøv å forklare.</p>
@@ -1466,8 +1607,8 @@ Svar
 </details>
 </section>
 </section>
-<section id="sec-relevant-r-grunnleggende" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="sec-relevant-r-grunnleggende"><span class="header-section-number">2.4</span> Relevante R-kommandoer</h2>
+<section id="sec-relevant-r-grunnleggende" class="level2" data-number="2.18">
+<h2 data-number="2.18" class="anchored" data-anchor-id="sec-relevant-r-grunnleggende"><span class="header-section-number">2.18</span> Relevante R-kommandoer</h2>
 <p>Under følger en liste over hvilke oppgaver du skal klare i R fra denne modulen. Vår policy er at R-kommandoene under er <em>tilstrekkelige</em> for å løse oppgavene i datalabber og eksamen i MET4. Det er med andre ord ikke nødvendig å lære seg teknikker utover det som er listet opp eksplisitt i listen under. Eventuelle nye teknikker som trengs for å løse en bestemt oppgave vil bli oppgitt og forklart dersom det er nødvendig. Det antas i tillegg at du kan den grunnleggende R-syntaksen som er dekket under [Introduksjon til R].</p>
 <section id="antakelser-om-datasett" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="antakelser-om-datasett">Antakelser om datasett</h3>
@@ -1475,16 +1616,16 @@ Svar
 <p>I denne modulen kan du anta at alle datasett består av <span class="math inline">\(p\)</span> kolonner (variabler) med variabelnavn og <span class="math inline">\(n\)</span> rader (observasjoner). Datasettene blir gitt enten som Excel-filer (<code>.xls</code> eller <code>.xlsx</code>) eller som <code>.csv</code>-filer. Dersom du ønsker å prøve på kommandoene selv, kan du laste ned følgende eksempelfiler: <a href="datasett/data.xls">data.xls</a>, <a href="datasett/data.xlsx">data.xlsx</a>, <a href="datasett/data.csv">data.csv</a>.</p>
 <p>Excel-filer kan leses inn i R ved hjelp av <code>read_excel()</code> som ligger i <code>readxl</code>-pakken:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data.xls"</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ...eller dersom det er en .xlsx-fil:</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data.xlsx"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data.xls"</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ...eller dersom det er en .xlsx-fil:</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data.xlsx"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><code>.csv</code>-filer kan lastes inn i R ved hjelp av <code>read_csv()</code> som ligger i <code>readr</code>-pakken:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data.csv"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data.csv"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>“csv” er en forkortelse for “comma separated values”, og grunnen til det kan du se ved å åpne opp <code>data.csv</code> i en ren tekst-editor. Da ser du at verdiene på rekken er separert med et komma. Av og til har disse filene litt andre formater, så vi må kunne håndtere følgende varianter:</p>
 <ul>
@@ -1497,38 +1638,38 @@ Svar
 <h3 class="unnumbered anchored" data-anchor-id="numerisk-deskriptiv-statistikk">Numerisk deskriptiv statistikk</h3>
 <p>Vi bruker eksempeldatasettene <a href="datasett/data_survey.csv">data_survey.csv</a> og <a href="datasett/data_fishermen_mercury.csv">data_fishermen_mercury.csv</a> som eksempler. Du skal kunne bruke følgende funksjoner for å regne ut numerisk deskriptiv statistikk:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>survey    <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data_survey.csv"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>fishermen <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data_fishermen_mercury.csv"</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(survey<span class="sc">$</span>age)                          <span class="co"># Gjennomsnitt</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(survey<span class="sc">$</span>age)                        <span class="co"># Median</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(survey<span class="sc">$</span>age)                           <span class="co"># Minste verdi</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(survey<span class="sc">$</span>age)                           <span class="co"># Største verdi</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(survey<span class="sc">$</span>age)                       <span class="co"># Fem-tallssammendrag (min, kvartiler, maks) og snitt</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(survey<span class="sc">$</span>party)                       <span class="co"># Kan lese av typetallet manuelt.</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(<span class="fu">table</span>(survey<span class="sc">$</span>party))            <span class="co"># Eller bruke funksjonen which.max()</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(fishermen<span class="sc">$</span>total_mercury)               <span class="co"># Standardavvik</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(fishermen<span class="sc">$</span>total_mercury, <span class="fl">0.20</span>)   <span class="co"># Kvantiler</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(fishermen<span class="sc">$</span>total_mercury)         <span class="co"># Kvartilene</span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(fishermen<span class="sc">$</span>height, fishermen<span class="sc">$</span>weight)   <span class="co"># Korrelasjonskoeffisient</span></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(survey<span class="sc">$</span>religious)                   <span class="co"># Frekvenstabell </span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">%&gt;%</span>                                <span class="co"># Krysstabell av to variabler (krever</span></span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(party, religious) <span class="sc">%&gt;%</span>            <span class="co"># pipe-operatoren og select()-funks.  </span></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  table                                   <span class="co"># fra dplyr-pakken)</span></span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalisert krysstabell: prop.table() gjør antall om til andeler.</span></span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">%&gt;%</span></span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(party, religious) <span class="sc">%&gt;%</span></span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>()                            <span class="co"># andel av totalen</span></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">%&gt;%</span></span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(party, religious) <span class="sc">%&gt;%</span></span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>(<span class="at">margin =</span> <span class="dv">1</span>)                  <span class="co"># andel innenfor hver rad (margin = 2 gir kolonne)</span></span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>survey    <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data_survey.csv"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>fishermen <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data_fishermen_mercury.csv"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(survey<span class="sc">$</span>age)                          <span class="co"># Gjennomsnitt</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(survey<span class="sc">$</span>age)                        <span class="co"># Median</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(survey<span class="sc">$</span>age)                           <span class="co"># Minste verdi</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(survey<span class="sc">$</span>age)                           <span class="co"># Største verdi</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(survey<span class="sc">$</span>age)                       <span class="co"># Fem-tallssammendrag (min, kvartiler, maks) og snitt</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(survey<span class="sc">$</span>party)                       <span class="co"># Kan lese av typetallet manuelt.</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(<span class="fu">table</span>(survey<span class="sc">$</span>party))            <span class="co"># Eller bruke funksjonen which.max()</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(fishermen<span class="sc">$</span>total_mercury)               <span class="co"># Standardavvik</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(fishermen<span class="sc">$</span>total_mercury, <span class="fl">0.20</span>)   <span class="co"># Kvantiler</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(fishermen<span class="sc">$</span>total_mercury)         <span class="co"># Kvartilene</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(fishermen<span class="sc">$</span>height, fishermen<span class="sc">$</span>weight)   <span class="co"># Korrelasjonskoeffisient</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(survey<span class="sc">$</span>religious)                   <span class="co"># Frekvenstabell </span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">%&gt;%</span>                                <span class="co"># Krysstabell av to variabler (krever</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(party, religious) <span class="sc">%&gt;%</span>            <span class="co"># pipe-operatoren og select()-funks.  </span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  table                                   <span class="co"># fra dplyr-pakken)</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalisert krysstabell: prop.table() gjør antall om til andeler.</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">%&gt;%</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(party, religious) <span class="sc">%&gt;%</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>()                            <span class="co"># andel av totalen</span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">%&gt;%</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(party, religious) <span class="sc">%&gt;%</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prop.table</span>(<span class="at">margin =</span> <span class="dv">1</span>)                  <span class="co"># andel innenfor hver rad (margin = 2 gir kolonne)</span></span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="kjente-fordelinger-kvantiler-og-sannsynligheter" class="level3 unnumbered">
@@ -1540,17 +1681,17 @@ Svar
 </ul>
 <p>De fire fordelingene vi møter i kurset, har hvert sitt funksjonspar:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># KVANTILER (persentiler): hvilken verdi har denne andelen under seg?</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>)                 <span class="co"># 97,5-persentilen i standardnormalfordelingen (ca. 1,96)</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="dv">24</span>)           <span class="co"># 97,5-persentilen i t-fordelingen med 24 frihetsgrader</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">5</span>)         <span class="co"># 95-persentilen i kji-kvadratfordelingen med 5 frihetsgrader</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qf</span>(<span class="fl">0.95</span>, <span class="at">df1 =</span> <span class="dv">3</span>, <span class="at">df2 =</span> <span class="dv">20</span>)  <span class="co"># 95-persentilen i F-fordelingen</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># SANNSYNLIGHETER: hvor stor andel ligger under denne verdien?</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.96</span>)                  <span class="co"># P(Z &lt; 1,96) i standardnormalfordelingen (ca. 0,975)</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="fl">2.0</span>, <span class="at">df =</span> <span class="dv">24</span>)             <span class="co"># P(T &lt; 2,0) i t-fordelingen med 24 frihetsgrader</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="fl">11.07</span>, <span class="at">df =</span> <span class="dv">5</span>)        <span class="co"># P(X &lt; 11,07) i kji-kvadratfordelingen</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fu">pf</span>(<span class="fl">3.10</span>, <span class="at">df1 =</span> <span class="dv">3</span>, <span class="at">df2 =</span> <span class="dv">20</span>)  <span class="co"># P(X &lt; 3,10) i F-fordelingen</span></span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># KVANTILER (persentiler): hvilken verdi har denne andelen under seg?</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>)                 <span class="co"># 97,5-persentilen i standardnormalfordelingen (ca. 1,96)</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="dv">24</span>)           <span class="co"># 97,5-persentilen i t-fordelingen med 24 frihetsgrader</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">5</span>)         <span class="co"># 95-persentilen i kji-kvadratfordelingen med 5 frihetsgrader</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qf</span>(<span class="fl">0.95</span>, <span class="at">df1 =</span> <span class="dv">3</span>, <span class="at">df2 =</span> <span class="dv">20</span>)  <span class="co"># 95-persentilen i F-fordelingen</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># SANNSYNLIGHETER: hvor stor andel ligger under denne verdien?</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.96</span>)                  <span class="co"># P(Z &lt; 1,96) i standardnormalfordelingen (ca. 0,975)</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="fl">2.0</span>, <span class="at">df =</span> <span class="dv">24</span>)             <span class="co"># P(T &lt; 2,0) i t-fordelingen med 24 frihetsgrader</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="fl">11.07</span>, <span class="at">df =</span> <span class="dv">5</span>)        <span class="co"># P(X &lt; 11,07) i kji-kvadratfordelingen</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="fu">pf</span>(<span class="fl">3.10</span>, <span class="at">df1 =</span> <span class="dv">3</span>, <span class="at">df2 =</span> <span class="dv">20</span>)  <span class="co"># P(X &lt; 3,10) i F-fordelingen</span></span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Legg merke til at <code>q...()</code> og <code>p...()</code> er motsatte operasjoner: <code>qnorm(0.975)</code> gir 1,96, og <code>pnorm(1.96)</code> gir 0,975 tilbake. Vil du ha sannsynligheten <em>over</em> en verdi (arealet til høyre), tar du <code>1 - p...()</code>, for eksempel <code>1 - pnorm(1.96)</code>.</p>
 </section>
@@ -1558,43 +1699,43 @@ Svar
 <h3 class="unnumbered anchored" data-anchor-id="grafisk-deskriptiv-statistikk-med-ggplot2">Grafisk deskriptiv statistikk med <code>ggplot2</code></h3>
 <p>Du skal kunne lage følgende plott ved hjelp av <code>ggplot2</code>-pakken;</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Boksplott</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  ggplot <span class="sc">+</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> total_mercury)) </span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Deler opp i grupper basert på en annen variabel</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  ggplot <span class="sc">+</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> total_mercury, <span class="at">x =</span> <span class="fu">as.factor</span>(fisherman))) </span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Søylediagram</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">%&gt;%</span> </span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  ggplot <span class="sc">+</span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(religious)))</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram</span></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">%&gt;%</span> </span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  ggplot <span class="sc">+</span> </span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> age))</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Spredningsplott</span></span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  ggplot <span class="sc">+</span> </span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> weight))</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Boksplott</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  ggplot <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> total_mercury)) </span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Deler opp i grupper basert på en annen variabel</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  ggplot <span class="sc">+</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> total_mercury, <span class="at">x =</span> <span class="fu">as.factor</span>(fisherman))) </span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Søylediagram</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">%&gt;%</span> </span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  ggplot <span class="sc">+</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(religious)))</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">%&gt;%</span> </span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  ggplot <span class="sc">+</span> </span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> age))</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Spredningsplott</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  ggplot <span class="sc">+</span> </span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> weight))</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Du skal kunne grunnleggende bearbeiding av <code>ggplot</code>-figurer:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># En bearbeidet variant</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  ggplot <span class="sc">+</span> </span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> weight)) <span class="sc">+</span>          <span class="co"># Dette er selve figuren</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Høyde"</span>) <span class="sc">+</span>                                    <span class="co"># Tittel x-akse</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Vekt"</span>) <span class="sc">+</span>                                     <span class="co"># Tittel y-akse</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Sammenheng mellom høyde og vekt"</span>) <span class="sc">+</span>       <span class="co"># Tittel plott</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()                                    <span class="co"># Ryddig layout</span></span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># En bearbeidet variant</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>fishermen <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  ggplot <span class="sc">+</span> </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> weight)) <span class="sc">+</span>          <span class="co"># Dette er selve figuren</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Høyde"</span>) <span class="sc">+</span>                                    <span class="co"># Tittel x-akse</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Vekt"</span>) <span class="sc">+</span>                                     <span class="co"># Tittel y-akse</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Sammenheng mellom høyde og vekt"</span>) <span class="sc">+</span>       <span class="co"># Tittel plott</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()                                    <span class="co"># Ryddig layout</span></span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
@@ -1602,6 +1743,17 @@ Svar
 </section>
 
 </main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBmb3JkZWxpbmcgPSBJbnB1dHMucmFkaW8oXG4gIFtcIktyYWZ0aWcgaMO4eXJlc2tqZXZcIiwgXCJVbmlmb3JtXCIsIFwiVG8gdG9wcGVyXCIsIFwiTm9ybWFsXCJdLFxuICB7dmFsdWU6IFwiS3JhZnRpZyBow7h5cmVza2pldlwiLCBsYWJlbDogXCJQb3B1bGFzam9uc2ZvcmRlbGluZzpcIn1cbilcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBuID0gSW5wdXRzLnJhbmdlKFsxLCAxMDBdLCB7dmFsdWU6IDEsIHN0ZXA6IDEsIGxhYmVsOiBcIlV0dmFsZ3NzdMO4cnJlbHNlIG46XCJ9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0zIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoie1xuICAvLyBQb3B1bGFzam9uc2ZvcmRlbGluZ2VuZSBzdHVkZW50ZW4ga2FuIHZlbGdlIG1lbGxvbS4gSHZlciBnaXIgZW4gdHJla2tlZnVua3Nqb24sXG4gIC8vIHNpbiBzYW5uZSBtdSBvZyBzaWdtYSAoc29tIG5vcm1hbGt1cnZlbiB0ZWduZXMgZnJhKSwgb2cgZGV0IGZhc3RlIGFrc2VpbnRlcnZhbGxldC5cbiAgY29uc3QgbGFnRm9yZGVsaW5nID0gKG5hdm4sIHJuZykgPT4ge1xuICAgIGlmIChuYXZuID09PSBcIktyYWZ0aWcgaMO4eXJlc2tqZXZcIilcbiAgICAgIHJldHVybiB7dHJla2s6IGQzLnJhbmRvbUV4cG9uZW50aWFsLnNvdXJjZShybmcpKDEpLCBtdTogMSwgc2lnbWE6IDEsIGRvbWVuZTogWzAsIDVdfTtcbiAgICBpZiAobmF2biA9PT0gXCJVbmlmb3JtXCIpXG4gICAgICByZXR1cm4ge3RyZWtrOiBkMy5yYW5kb21Vbmlmb3JtLnNvdXJjZShybmcpKDAsIDEpLCBtdTogMC41LCBzaWdtYTogTWF0aC5zcXJ0KDEgLyAxMiksIGRvbWVuZTogWzAsIDFdfTtcbiAgICBpZiAobmF2biA9PT0gXCJUbyB0b3BwZXJcIikge1xuICAgICAgY29uc3QgbGF2ICA9IGQzLnJhbmRvbU5vcm1hbC5zb3VyY2Uocm5nKSgtMS41LCAwLjUpO1xuICAgICAgY29uc3QgaG95ICA9IGQzLnJhbmRvbU5vcm1hbC5zb3VyY2Uocm5nKSgxLjUsIDAuNSk7XG4gICAgICBjb25zdCBteW50ID0gZDMucmFuZG9tVW5pZm9ybS5zb3VyY2Uocm5nKSgwLCAxKTtcbiAgICAgIHJldHVybiB7dHJla2s6ICgpID0+IChteW50KCkgPCAwLjUgPyBsYXYoKSA6IGhveSgpKSwgbXU6IDAsIHNpZ21hOiBNYXRoLnNxcnQoMi41KSwgZG9tZW5lOiBbLTQsIDRdfTtcbiAgICB9XG4gICAgcmV0dXJuIHt0cmVrazogZDMucmFuZG9tTm9ybWFsLnNvdXJjZShybmcpKDAsIDEpLCBtdTogMCwgc2lnbWE6IDEsIGRvbWVuZTogWy00LCA0XX07XG4gIH07XG5cbiAgLy8gSGlzdG9ncmFtIG1lZCBmYXN0ZSBiaW5rYW50ZXIsIG5vcm1hbGlzZXJ0IHRpbCB0ZXR0aGV0IHNsaWsgYXQgc8O4eWxlbmVcbiAgLy8ga2FuIHNhbW1lbmxpZ25lcyBkaXJla3RlIG1lZCBub3JtYWxrdXJ2ZW4uXG4gIGNvbnN0IGhpc3RvZ3JhbSA9ICh2ZXJkaWVyLCBsbywgaGksIGFudGFsbEJpbnMpID0+IHtcbiAgICBjb25zdCBicmVkZGUgPSAoaGkgLSBsbykgLyBhbnRhbGxCaW5zO1xuICAgIGNvbnN0IGFudGFsbCA9IG5ldyBBcnJheShhbnRhbGxCaW5zKS5maWxsKDApO1xuICAgIGZvciAoY29uc3QgdiBvZiB2ZXJkaWVyKSB7XG4gICAgICBjb25zdCBrID0gTWF0aC5mbG9vcigodiAtIGxvKSAvIGJyZWRkZSk7XG4gICAgICBpZiAoayA+PSAwICYmIGsgPCBhbnRhbGxCaW5zKSBhbnRhbGxba10rKztcbiAgICB9XG4gICAgcmV0dXJuIGFudGFsbC5tYXAoKGMsIGspID0+ICh7XG4gICAgICB4MTogbG8gKyBrICogYnJlZGRlLFxuICAgICAgeDI6IGxvICsgKGsgKyAxKSAqIGJyZWRkZSxcbiAgICAgIHRldHRoZXQ6IGMgLyAodmVyZGllci5sZW5ndGggKiBicmVkZGUpXG4gICAgfSkpO1xuICB9O1xuXG4gIGNvbnN0IHJuZyA9IGQzLnJhbmRvbUxjZygwLjQyKTtcbiAgY29uc3QgcCA9IGxhZ0ZvcmRlbGluZyhmb3JkZWxpbmcsIHJuZyk7XG4gIGNvbnN0IFtsbywgaGldID0gcC5kb21lbmU7XG4gIGNvbnN0IHNlID0gcC5zaWdtYSAvIE1hdGguc3FydChuKTtcblxuICAvLyAyMDAwIHV0dmFsZyDDoCBuIG9ic2VydmFzam9uZXIsIG9nIGV0IHN0b3J0IHV0dmFsZyBzb20gdmlzZXIgcG9wdWxhc2pvbmVuIHNlbHYuXG4gIGNvbnN0IHNuaXR0ID0gbmV3IEZsb2F0NjRBcnJheSgyMDAwKTtcbiAgZm9yIChsZXQgciA9IDA7IHIgPCBzbml0dC5sZW5ndGg7IHIrKykge1xuICAgIGxldCBzdW0gPSAwO1xuICAgIGZvciAobGV0IGkgPSAwOyBpIDwgbjsgaSsrKSBzdW0gKz0gcC50cmVraygpO1xuICAgIHNuaXR0W3JdID0gc3VtIC8gbjtcbiAgfVxuICBjb25zdCBwb3AgPSBuZXcgRmxvYXQ2NEFycmF5KDIwMDAwKTtcbiAgZm9yIChsZXQgaSA9IDA7IGkgPCBwb3AubGVuZ3RoOyBpKyspIHBvcFtpXSA9IHAudHJla2soKTtcblxuICBjb25zdCBrdXJ2ZSA9IGQzLnJhbmdlKDQwMSkubWFwKGkgPT4ge1xuICAgIGNvbnN0IHggPSBsbyArIChoaSAtIGxvKSAqIGkgLyA0MDA7XG4gICAgcmV0dXJuIHt4LCB5OiBNYXRoLmV4cCgtMC41ICogKCh4IC0gcC5tdSkgLyBzZSkgKiogMikgLyAoc2UgKiBNYXRoLnNxcnQoMiAqIE1hdGguUEkpKX07XG4gIH0pO1xuXG4gIGNvbnN0IGZlbGxlcyA9IHtcbiAgICB3aWR0aDogTWF0aC5taW4od2lkdGgsIDY4MCksXG4gICAgaGVpZ2h0OiAxOTAsXG4gICAgbWFyZ2luTGVmdDogNTUsXG4gICAgbWFyZ2luUmlnaHQ6IDE1LFxuICAgIHN0eWxlOiB7Zm9udFNpemU6IFwiMTFweFwifSxcbiAgICB5OiB7bGFiZWw6IFwiVGV0dGhldFwifVxuICB9O1xuXG4gIGNvbnN0IG92cmUgPSBQbG90LnBsb3Qoe1xuICAgIC4uLmZlbGxlcyxcbiAgICB4OiB7ZG9tYWluOiBbbG8sIGhpXSwgbGFiZWw6IG51bGx9LFxuICAgIG1hcmtzOiBbXG4gICAgICBQbG90LnJlY3RZKGhpc3RvZ3JhbShwb3AsIGxvLCBoaSwgNjApLCB7eDE6IFwieDFcIiwgeDI6IFwieDJcIiwgeTogXCJ0ZXR0aGV0XCIsIGZpbGw6IFwiI2M5YzljOVwifSksXG4gICAgICBQbG90LnJ1bGVZKFswXSlcbiAgICBdXG4gIH0pO1xuXG4gIC8vIEFrc2VuIGVyIGZhc3QsIG1lbiB0b3BwZW4gYmxpciBzbWFsZXJlIG1lZCB2b2tzZW5kZSBuLiBWaSBmaW5za2FsZXJlciBkZXJmb3JcbiAgLy8gYmluYnJlZGRlbiBldHRlciBzaWdtYS9zcXJ0KG4pLCBlbGxlcnMgZm9yc3Zpbm5lciBmb3JtZW4gaSBub2VuIGbDpSBzw7h5bGVyLlxuICBjb25zdCBiaW5zU25pdHQgPSBNYXRoLm1heCg0MCwgTWF0aC5taW4oNDAwLCBNYXRoLnJvdW5kKChoaSAtIGxvKSAvIChzZSAvIDQpKSkpO1xuXG4gIGNvbnN0IG5lZHJlID0gUGxvdC5wbG90KHtcbiAgICAuLi5mZWxsZXMsXG4gICAgeDoge2RvbWFpbjogW2xvLCBoaV0sIGxhYmVsOiBcIlZlcmRpXCJ9LFxuICAgIG1hcmtzOiBbXG4gICAgICBQbG90LnJlY3RZKGhpc3RvZ3JhbShzbml0dCwgbG8sIGhpLCBiaW5zU25pdHQpLCB7eDE6IFwieDFcIiwgeDI6IFwieDJcIiwgeTogXCJ0ZXR0aGV0XCIsIGZpbGw6IFwiI2M5YzljOVwifSksXG4gICAgICBQbG90LmxpbmUoa3VydmUsIHt4OiBcInhcIiwgeTogXCJ5XCIsIHN0cm9rZTogXCJmaXJlYnJpY2tcIiwgc3Ryb2tlV2lkdGg6IDEuNX0pLFxuICAgICAgUGxvdC5ydWxlWShbMF0pXG4gICAgXVxuICB9KTtcblxuICByZXR1cm4gaHRtbGA8ZGl2PlxuICAgIDxkaXYgc3R5bGU9XCJmb250LXNpemU6MC44NXJlbTsgZm9udC13ZWlnaHQ6NjAwOyBtYXJnaW4tYm90dG9tOjAuMXJlbVwiPlBvcHVsYXNqb25lbjogw6luIGVua2VsdCBvYnNlcnZhc2pvbjwvZGl2PlxuICAgICR7b3ZyZX1cbiAgICA8ZGl2IHN0eWxlPVwiZm9udC1zaXplOjAuODVyZW07IGZvbnQtd2VpZ2h0OjYwMDsgbWFyZ2luOjAuNXJlbSAwIDAuMXJlbVwiPkdqZW5ub21zbml0dGV0IGF2IG4gPSAke259IG9ic2VydmFzam9uZXI8L2Rpdj5cbiAgICAke25lZHJlfVxuICAgIDxkaXYgc3R5bGU9XCJmb250LXNpemU6MC44cmVtOyBjb2xvcjojNmM3NTdkOyBtYXJnaW4tdG9wOjAuMnJlbVwiPlxuICAgICAgUG9wdWxhc2pvbmVuIGhhciDPgyA9ICR7cC5zaWdtYS50b0ZpeGVkKDIpfSwgb2cgZ2plbm5vbXNuaXR0ZXQgaGFyIM+DL+KImm4gPSAke3NlLnRvRml4ZWQoMyl9LlxuICAgIDwvZGl2PlxuICA8L2Rpdj5gO1xufVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdmb3JkZWxpbmcnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnbicpIn1dfQ==
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../..";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
