@@ -9,6 +9,16 @@ aliases:
 
 # Grunnleggende statistikk
 
+```{=html}
+<style>
+.video-showcase { position: relative; margin-bottom: 0.4rem; }
+.video-showcase iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.video-note { font-size: 0.85em; font-style: italic; color: #6c757d; margin: 0 0 2rem; text-align: center; }
+</style>
+```
+
+<div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://player.vimeo.com/video/470668919' allowfullscreen frameborder='0'></iframe></div>
+
 I denne modulen introduserer vi en del grunnleggende statistiske begreper. Mye vil oppleves som repetisjon, mens noe vil være nytt. Noe er veldig praktisk ved at vi kan bruke det direkte i eksempler, mens andre ting er mer teoretisk av natur. Felles for det vi skal se på her er at vi kommer til å bruke mange av begrepene vi lærer senere i kurset.
 
 I videoforelesningene går vi gjennom noen slides, og vi skriver et R-skript. Du kan laste disse ned ved å klikke på lenkene under:
@@ -21,15 +31,15 @@ I videoforelesningene går vi gjennom noen slides, og vi skriver et R-skript. Du
 
 ## Deskriptiv statistikk
 
-### Videoforelesninger {.unnumbered}
-
-<div style='padding:74.79% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7748078/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
-
-*Videovinduet inneholder flere videoer. Bruk nedtrekksmenyen øverst i vinduet for å få en oversikt over alle videoene i dette delkapittelet og bytte mellom dem.*
-
 Deskriptiv statistikk har to hovedformål. Det første er å **bli kjent med et datasett**: før vi setter i gang med mer avansert analyse, vil vi danne oss et bilde av hva slags tall vi har foran oss, om det finnes åpenbare feil eller ekstremverdier, og hvilke mønstre som umiddelbart trer frem. Det andre formålet er å **presentere resultater** slik at de er lette å forstå for andre. Et viktig poeng er at deskriptiv statistikk verken generaliserer fra utvalget til en større populasjon eller tester årsakssammenhenger. Vi lar rett og slett dataene fortelle sin egen historie. Selve slutningen fra utvalg til populasjon kommer vi tilbake til i neste delkapittel.
 
 ### Variabeltyper og målenivå
+
+<div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340230/embed' allowfullscreen frameborder='0'></iframe></div>
+
+::: {.video-note}
+Dette delkapittelet inneholder flere videoer. Bruk nedtrekksmenyen øverst til venstre i videovinduet for å bla mellom dem.
+:::
 
 Før vi beskriver et datasett, er det nyttig å vite *hva slags* variabler vi har med å gjøre, for det avgjør hvilke regnestykker og figurer som gir mening. Vi skiller grovt mellom to hovedtyper:
 
@@ -49,6 +59,12 @@ Når vi beskriver en tallvariabel numerisk, er det særlig to spørsmål vi stil
 
 ### Sentraltendens
 
+<div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340232/embed' allowfullscreen frameborder='0'></iframe></div>
+
+::: {.video-note}
+Dette delkapittelet inneholder flere videoer. Bruk nedtrekksmenyen øverst til venstre i videovinduet for å bla mellom dem.
+:::
+
 Tyngdepunktet, eller sentraltendensen, kan måles på flere måter:
 
 - **Gjennomsnittet** $\overline{X} = \frac{1}{n}\sum_{i=1}^n X_i$ er summen av alle verdiene delt på antallet. Dette er det vanligste målet, men det trekkes lett i retning av ekstremverdier.
@@ -58,6 +74,12 @@ Tyngdepunktet, eller sentraltendensen, kan måles på flere måter:
 Hvorfor bry seg med mer enn gjennomsnittet? Fordi medianen er langt mer **robust** mot ekstremverdier. Tenk deg lønningene på en liten arbeidsplass med ti ansatte, der én av dem tilfeldigvis er konsernsjefen. Gjennomsnittslønnen kan da bli misvisende høy og gi et helt feilaktig bilde av hva en «typisk» ansatt tjener, mens medianen er upåvirket av hvor ekstremt høy den ene lønnen er. Nettopp derfor rapporteres for eksempel medianinntekt, og ikke gjennomsnittsinntekt, i mange sammenhenger.
 
 ### Spredning
+
+<div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340242/embed' allowfullscreen frameborder='0'></iframe></div>
+
+::: {.video-note}
+Dette delkapittelet inneholder flere videoer. Bruk nedtrekksmenyen øverst til venstre i videovinduet for å bla mellom dem.
+:::
 
 To datasett kan ha nøyaktig samme gjennomsnitt og likevel se helt forskjellige ut, fordi verdiene er ulikt spredt. Det vanligste spredningsmålet er **standardavviket**
 
@@ -69,6 +91,12 @@ Et alternativ som (i likhet med medianen) er robust mot ekstremverdier, er å br
 
 ### Sammenheng mellom to variabler
 
+<div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340244/embed' allowfullscreen frameborder='0'></iframe></div>
+
+::: {.video-note}
+Dette delkapittelet inneholder flere videoer, blant annet en korrelasjonsquiz med fasit. Bruk nedtrekksmenyen øverst til venstre i videovinduet for å bla mellom dem.
+:::
+
 Har vi målt to variabler for de samme observasjonene (for eksempel høyde og vekt), vil vi ofte vite om de henger sammen. Grafisk gjør vi det med et **spredningsplott**, og numerisk med **korrelasjonskoeffisienten** $r$. Den forteller oss hvor nær punktene ligger en rett linje, og har tre egenskaper det er verdt å merke seg:
 
 - $r$ ligger alltid mellom $-1$ og $1$.
@@ -78,6 +106,12 @@ Har vi målt to variabler for de samme observasjonene (for eksempel høyde og ve
 Her lurer en klassisk felle: **at $r = 0$ betyr ikke at variablene er uavhengige.** Korrelasjonskoeffisienten fanger bare opp *lineære* sammenhenger. To variabler kan ha en tydelig, men krum, sammenheng (for eksempel U-formet) og likevel ha korrelasjon null. Det motsatte holder derimot alltid: er to variabler uavhengige, er de også ukorrelerte.
 
 ### Å presentere data
+
+<div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340248/embed' allowfullscreen frameborder='0'></iframe></div>
+
+::: {.video-note}
+Dette delkapittelet inneholder flere videoer. Bruk nedtrekksmenyen øverst til venstre i videovinduet for å bla mellom dem.
+:::
 
 Deskriptiv statistikk handler like mye om å *presentere* tall som om å regne dem ut. Dette er en ferdighet det er verdt å ta på alvor: evnen til å lage en overbevisende tabell eller figur kan være direkte avgjørende for gjennomslagskraften din, enten du legger fram resultater for en sjef, en kunde eller en eksamenssensor.
 
@@ -145,13 +179,13 @@ Her er noen kontrollspørsmål som du kan prøve deg på:
 
 `r tufte::quote_footer('--- Sherlock Holmes')`
 
-### Videoforelesninger {.unnumbered}
-
-<div style='padding:74.93% 0 0 0;position:relative;'><iframe src='https://vimeo.com/showcase/7774368/embed' allowfullscreen frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>
+<div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://player.vimeo.com/video/470669444' allowfullscreen frameborder='0'></iframe></div>
 
 I forrige delkapittel beskrev vi data slik de forelå. Nå tar vi et viktig steg videre: vi tenker på datasettet vårt som et **utvalg** trukket fra en større **populasjon**, og vi vil bruke utvalget til å si noe om populasjonen. Dette er kjernen i **statistisk inferens**, og et tema som følger oss gjennom resten av kurset.
 
-### Populasjon, parameter og estimator
+### Inferens: Populasjoner, parametre og estimator
+
+<div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://player.vimeo.com/video/470669794' allowfullscreen frameborder='0'></iframe></div>
 
 Populasjonen er hele mengden vi egentlig er interessert i, for eksempel alle norske velgere, eller all fisk i en oppdrettsmerd. En **parameter** er et tall som beskriver populasjonen, slik som den sanne forventningen $\mu$, det sanne standardavviket $\sigma$, eller den sanne andelen $p$. Problemet er at vi nesten aldri kan måle hele populasjonen; vi må nøye oss med et utvalg. Ut fra utvalget regner vi så ut en **estimator** (også kalt en observator), en «regel» for å gjette parameterverdien, for eksempel gjennomsnittet $\overline{X}$ som et anslag på $\mu$.
 
@@ -167,6 +201,12 @@ I praksis er et perfekt tilfeldig utvalg vanskelig å få til, men det er ideale
 
 ### Populasjonen som sannsynlighetsmodell
 
+<div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340249/embed' allowfullscreen frameborder='0'></iframe></div>
+
+::: {.video-note}
+Dette delkapittelet inneholder flere videoer. Bruk nedtrekksmenyen øverst til venstre i videovinduet for å bla mellom dem.
+:::
+
 Hittil har vi snakket om populasjonen som en konkret samling enheter: all fisken i en oppdrettsmerd, alle norske velgere. Da er en parameter som $\mu$ rett og slett gjennomsnittet regnet over samtlige enheter, og å trekke et utvalg betyr å plukke ut noen av dem tilfeldig.
 
 Det finnes en annen, og ofte mer fruktbar, måte å tenke på en populasjon: som en **sannsynlighetsfordeling**. Da ser vi på hver observasjon som en tilfeldig trekning fra en fordeling, og «populasjonen» er selve denne fordelingen, altså en matematisk beskrivelse av hvilke verdier som er mulige og hvor sannsynlige de er. Parameteren $\mu$ er forventningen i fordelingen, $\sigma$ er standardavviket, og så videre.
@@ -178,6 +218,8 @@ En **sannsynlighetsmodell** er en slik matematisk beskrivelse av en stokastisk v
 Poenget for oss er dette: når vi antar at observasjonene våre er trekninger fra en fordeling med forventning $\mu$ og varians $\sigma^2$, kan vi bruke sannsynlighetsregningen til å si noe presist om hvordan estimatorene våre oppfører seg. Det er akkurat det vi bygger videre på når vi snart skal finne samplingfordelingen til gjennomsnittet.
 
 ### Forventning og varians {#sec-forventning-varians}
+
+<div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://player.vimeo.com/video/470669617' allowfullscreen frameborder='0'></iframe></div>
 
 Når vi tenker på en observasjon $X$ som en trekning fra en fordeling, er de to viktigste kjennetegnene ved fordelingen **forventningen** og **variansen**.
 
@@ -203,6 +245,8 @@ To ting er verdt å merke seg. Et konstantledd $b$ påvirker ikke variansen: å 
 
 ### Utvalgsstørrelser og populasjonsstørrelser
 
+<div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://player.vimeo.com/video/470669655' allowfullscreen frameborder='0'></iframe></div>
+
 Et poeng det er verdt å feste seg ved med en gang, er at nesten alle størrelsene vi jobber med, finnes i **to varianter**: én for populasjonen og én for utvalget. Populasjonsstørrelsen er den sanne, men ukjente verdien vi er ute etter. Utvalgsstørrelsen er det vi faktisk regner ut fra dataene, og som vi bruker som et anslag på den første.
 
 | Størrelse | I populasjonen (sann, ukjent) | I utvalget (beregnet fra data) |
@@ -213,7 +257,15 @@ Et poeng det er verdt å feste seg ved med en gang, er at nesten alle størrelse
 
 Skillet er grunnleggende, og de to variantene er lette å blande sammen. Når vi snakker om «gjennomsnittet», må vi hele tiden være bevisste på om vi mener det sanne **populasjonsgjennomsnittet** $\mu$ (som vi sjelden kjenner) eller **utvalgsgjennomsnittet** $\overline{X}$ (som vi regner ut fra dataene våre, og som vil variere fra utvalg til utvalg). Notasjonen hjelper oss å holde dem fra hverandre: populasjonsstørrelser skrives gjerne med greske bokstaver ($\mu$, $\sigma$, $p$), mens utvalgsstørrelser skrives med latinske bokstaver eller med en «hatt», som i $\overline{X}$ og $\widehat{p}$.
 
-### Samplingfordelingen til et gjennomsnitt
+### Samplingfordelinger
+
+<div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340252/embed' allowfullscreen frameborder='0'></iframe></div>
+
+::: {.video-note}
+Dette delkapittelet inneholder flere videoer. Bruk nedtrekksmenyen øverst til venstre i videovinduet for å bla mellom dem.
+:::
+
+Vi har så vidt vært innom begrepet allerede; la oss slå det fast skikkelig. Når vi trekker et utvalg og regner ut et kjennetegn ved det, for eksempel gjennomsnittet $\overline{X}$ eller en andel $\widehat{p}$, vil resultatet variere fra utvalg til utvalg fordi observasjonene er tilfeldige. **Samplingfordelingen** er fordelingen til et slikt utvalgskjennetegn: den forteller hvilke verdier estimatoren kan ta, og hvor sannsynlige de er, over alle tenkelige utvalg av samme størrelse. Det er denne fordelingen som gjør statistisk inferens mulig, for den forteller oss hvor presist et estimat er. Her tar vi for oss samplingfordelingen til gjennomsnittet; andelen kommer vi tilbake til litt lenger ned.
 
 Anta at observasjonene $X_1, X_2, \ldots, X_n$ er uavhengige, med samme forventning $\mu$ og varians $\sigma^2$, og se på gjennomsnittet $\overline{X} = \frac{1}{n}\sum_{i=1}^n X_i$. Nå får vi bruk for regnereglene fra avsnitt @sec-forventning-varians. Forventningen følger av at forventningen er lineær:
 
@@ -225,11 +277,35 @@ $$\textrm{Var}(\overline{X}) = \frac{1}{n^2}\sum_{i=1}^n \textrm{Var}(X_i) = \fr
 
 To ting er verdt å dvele ved. For det første er gjennomsnittet **forventningsrett**: i snitt treffer det den sanne verdien $\mu$. For det andre, og dette er kanskje det viktigste enkeltresultatet i modulen, skrumper standardavviket til gjennomsnittet inn som $1/\sqrt{n}$ når utvalget vokser. Med andre ord: jo flere observasjoner vi samler inn, jo mer presist blir anslaget vårt. Men presisjonen øker bare med *kvadratroten* av $n$, så for å halvere usikkerheten må vi firedoble antall observasjoner.
 
+Men legg merke til hva vi *ikke* har funnet ut ennå: vi kjenner nå forventningen og variansen til $\overline{X}$, men ikke selve *formen* på samplingfordelingen. Er den normalfordelt, eller skjev? Det er akkurat dette spørsmålet sentralgrenseteoremet svarer på i neste delkapittel.
+
 ### Sentralgrenseteoremet
+
+<div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340253/embed' allowfullscreen frameborder='0'></iframe></div>
+
+::: {.video-note}
+Dette delkapittelet inneholder flere videoer. Bruk nedtrekksmenyen øverst til venstre i videovinduet for å bla mellom dem.
+:::
 
 Dersom $X$-ene i utgangspunktet er normalfordelte, er gjennomsnittet også eksakt normalfordelt. Men hva om vi ikke kjenner fordelingen til den enkelte observasjonen? Her kommer statistikkfagets kanskje mest bemerkelsesverdige resultat til unnsetning. **Sentralgrenseteoremet** sier at fordelingen til gjennomsnittet nærmer seg normalfordelingen når $n$ blir stor, *nesten uansett hvordan de enkelte observasjonene er fordelt*. Det er dette som gjør normalfordelingen så gjennomgripende i statistikken: så snart vi jobber med gjennomsnitt (eller summer) av mange observasjoner, dukker den nesten alltid opp. En vanlig tommelfingerregel er at tilnærmingen er god når vi har mer enn 50–100 observasjoner.
 
+Med forventningen $\mu$ og variansen $\sigma^2/n$ fra forrige delkapittel kan vi dermed skrive opp samplingfordelingen til gjennomsnittet på lukket form:
+
+$$\overline{X} \;\sim\; N\!\left(\mu,\; \frac{\sigma^2}{n}\right).$$
+
+Dette gjelder *eksakt* når observasjonene selv er normalfordelte, og *tilnærmet* ellers, så lenge $n$ er stor nok.
+
+Sentralgrenseteoremet formuleres gjerne for *summen* $S_n = X_1 + \cdots + X_n$ i stedet for gjennomsnittet. Da sier det at også $S_n$ er tilnærmet normalfordelt, $S_n \sim N(n\mu,\, n\sigma^2)$. Dette er egentlig samme utsagn: gjennomsnittet er jo bare summen delt på $n$, så *formen* (normal) er den samme, mens forventning og varians skaleres deretter.
+
+Det er dette resultatet vi bygger videre på i hypotesetesting og konfidensintervaller, og det har en tvillingsøster for andeler som vi ser på nå.
+
 ### Samplingfordelingen til en andel
+
+<div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340254/embed' allowfullscreen frameborder='0'></iframe></div>
+
+::: {.video-note}
+Dette delkapittelet inneholder flere videoer. Bruk nedtrekksmenyen øverst til venstre i videovinduet for å bla mellom dem.
+:::
 
 Ofte er vi ikke ute etter et gjennomsnitt, men en **andel**, for eksempel andelen velgere som støtter et bestemt parti, eller andelen defekte enheter i en produksjon. En observert andel $\widehat{p}$ kan skrives som et gjennomsnitt av nuller og enere (fiasko og suksess), og da slår sentralgrenseteoremet til på nytt:
 
@@ -238,6 +314,12 @@ $$\widehat{p} \;\sim\; N\!\left(p,\; \frac{p(1-p)}{n}\right).$$
 Tilnærmingen regnes som god når $np > 5$ og $n(1-p) > 5$. Legg merke til at også her avtar usikkerheten som $1/\sqrt{n}$. Det er derfor en meningsmåling med rundt 1000 respondenter kan gi et brukbart anslag på hva et helt land mener.
 
 ### Gode estimatorer
+
+<div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340255/embed' allowfullscreen frameborder='0'></iframe></div>
+
+::: {.video-note}
+Dette delkapittelet inneholder flere videoer. Bruk nedtrekksmenyen øverst til venstre i videovinduet for å bla mellom dem.
+:::
 
 Det finnes gjerne flere mulige estimatorer for samme parameter, og da må vi kunne vurdere hvilken som er best. Tre egenskaper står sentralt:
 
