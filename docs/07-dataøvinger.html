@@ -71,7 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./08-seminaroppgaver.html" rel="next">
 <link href="./06-avansert-regresjon-og-maskinlaering.html" rel="prev">
-<link href="./icon/favicon.ico" rel="icon">
+<link href="./bilder/icon/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -110,26 +110,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <script>
+
 document.addEventListener("DOMContentLoaded", function () {
+
   var title = document.querySelector(".sidebar-title");
+
   if (title && !document.getElementById("nhh-sidebar-logo")) {
+
     var base = document.querySelector('meta[name="quarto:offset"]');
+
     var prefix = base ? base.getAttribute("content") : "";
+
     var link = document.createElement("a");
+
     link.href = "https://www.nhh.no/";
+
     link.id = "nhh-sidebar-logo";
+
     link.style.display = "block";
+
     link.style.margin = "0.6rem 0 0.2rem 0";
+
     var img = document.createElement("img");
+
     img.src = prefix + "bilder/nhh.png";
+
     img.alt = "Norges Handelshøyskole";
+
     img.style.maxWidth = "180px";
+
     img.style.width = "100%";
+
     link.appendChild(img);
+
     title.parentNode.insertBefore(link, title.nextSibling);
+
   }
+
 });
+
 </script>
+
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -1224,7 +1245,7 @@ Note:               *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xlsx</span>(prediksjoner3, <span class="st">"no5_prediksjoner.xlsx"</span>)</span></code></pre></div><button title="Kopier til utklipstavle" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Du kan laste ned de ferdige Excel-filene her for å kontrollere at du har fått det til: <a href="no3_prediksjoner.xlsx"><code>no3_prediksjoner.xlsx</code></a> og <a href="no5_prediksjoner.xlsx"><code>no5_prediksjoner.xlsx</code></a>.</p>
+<p>Du kan laste ned de ferdige Excel-filene her for å kontrollere at du har fått det til: <a href="datasett/no3_prediksjoner.xlsx"><code>no3_prediksjoner.xlsx</code></a> og <a href="datasett/no5_prediksjoner.xlsx"><code>no5_prediksjoner.xlsx</code></a>.</p>
 </section>
 </section>
 <section id="dataøving-5" class="level2" data-number="7.5">

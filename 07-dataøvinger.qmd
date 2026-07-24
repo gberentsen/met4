@@ -874,7 +874,7 @@ write_xlsx(prediksjoner3, "no5_prediksjoner.xlsx")
 ```
 
 
-Du kan laste ned de ferdige Excel-filene her for å kontrollere at du har fått det til: [`no3_prediksjoner.xlsx`](no3_prediksjoner.xlsx) og  [`no5_prediksjoner.xlsx`](no5_prediksjoner.xlsx).
+Du kan laste ned de ferdige Excel-filene her for å kontrollere at du har fått det til: [`no3_prediksjoner.xlsx`](datasett/no3_prediksjoner.xlsx) og  [`no5_prediksjoner.xlsx`](datasett/no5_prediksjoner.xlsx).
 
 ## Dataøving 5
 

@@ -4,11 +4,9 @@ project:
   resources:
     - bilder/
     - datasett/
-    - genererte_datasett/
     - tidligere-eksamensoppgaver/
     - script-slides/
     - diverse/
-    - icon/
   render:
     - index.qmd
     - 01-intro-til-r.qmd
@@ -29,7 +27,7 @@ book:
   author: "Geir Drage Berentsen, Håkon Otneim og Maren Holthe Hedne"
   description: "Hjemmesiden til kurset MET4 – Empiriske Metoder ved Norges Handelshøyskole."
   search: true
-  favicon: icon/favicon.ico
+  favicon: bilder/icon/favicon.ico
   page-navigation: true
   page-footer:
     left: "MET4 – Empiriske Metoder, NHH"

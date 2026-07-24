@@ -71,7 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./05-tidsrekker.html" rel="next">
 <link href="./03-hypotesetesting.html" rel="prev">
-<link href="./icon/favicon.ico" rel="icon">
+<link href="./bilder/icon/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -110,26 +110,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <script>
+
 document.addEventListener("DOMContentLoaded", function () {
+
   var title = document.querySelector(".sidebar-title");
+
   if (title && !document.getElementById("nhh-sidebar-logo")) {
+
     var base = document.querySelector('meta[name="quarto:offset"]');
+
     var prefix = base ? base.getAttribute("content") : "";
+
     var link = document.createElement("a");
+
     link.href = "https://www.nhh.no/";
+
     link.id = "nhh-sidebar-logo";
+
     link.style.display = "block";
+
     link.style.margin = "0.6rem 0 0.2rem 0";
+
     var img = document.createElement("img");
+
     img.src = prefix + "bilder/nhh.png";
+
     img.alt = "Norges Handelshøyskole";
+
     img.style.maxWidth = "180px";
+
     img.style.width = "100%";
+
     link.appendChild(img);
+
     title.parentNode.insertBefore(link, title.nextSibling);
+
   }
+
 });
+
 </script>
+
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -1059,7 +1080,7 @@ som er veldig liten. Altså bekrefter analysen at det er sammenheng mellom forkl
 </section>
 <section id="oppgave-2-1" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="oppgave-2-1">Oppgave 2</h4>
-<p>Denne oppgaven følger samme premiss som oppgave 1, men handler om kolinearitet. Last ned datasettene <a href="genererte_datasett/colinearity_1.RData">1</a> og <a href="genererte_datasett/colinearity_2.RData">2</a>, hvor y er responsvariabel og forklaringsvariable er navngitt x.</p>
+<p>Denne oppgaven følger samme premiss som oppgave 1, men handler om kolinearitet. Last ned datasettene <a href="datasett/colinearity_1.RData">1</a> og <a href="datasett/colinearity_2.RData">2</a>, hvor y er responsvariabel og forklaringsvariable er navngitt x.</p>
 <p>Disse dataene er lagret som .RData filer. For å laste inn dataene i R laster du filene over ned i en mappe, setter mappestien til denne mappen og kjører følgende R-kommandoer:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"colinearity_1.RData"</span>)</span>

@@ -576,7 +576,7 @@ som er veldig liten. Altså bekrefter analysen at det er sammenheng mellom forkl
 </blockquote></details>
 
 #### Oppgave 2 {.unnumbered}
-Denne oppgaven følger samme premiss som oppgave 1, men handler om kolinearitet. Last ned datasettene [1](genererte_datasett/colinearity_1.RData) og [2](genererte_datasett/colinearity_2.RData), hvor y er responsvariabel og forklaringsvariable er navngitt x.
+Denne oppgaven følger samme premiss som oppgave 1, men handler om kolinearitet. Last ned datasettene [1](datasett/colinearity_1.RData) og [2](datasett/colinearity_2.RData), hvor y er responsvariabel og forklaringsvariable er navngitt x.
 
 Disse dataene er lagret som .RData filer. For å laste inn dataene i R laster du filene over ned i en mappe, setter mappestien til denne mappen og kjører følgende R-kommandoer:
 
@@ -609,7 +609,7 @@ df_colin1 <- data.frame(
   mutate(
     y = 1.3 * x1 + (-0.8) * x2 + rnorm(100, sd = 1)
   )
-# save(df_colin1, file = "genererte_datasett/colinearity_1.RData")
+# save(df_colin1, file = "datasett/colinearity_1.RData")
 set.seed(4)
 df_colin2 <- data.frame(
     x1 = rnorm(100, sd = 2),
@@ -625,7 +625,7 @@ df_colin2 <- data.frame(
   mutate(
     y = 2 * x1 + (-1) * x2 + rnorm(100, sd = 1)
   )
-# save(df_colin2, file = "genererte_datasett/colinearity_2.RData")
+# save(df_colin2, file = "datasett/colinearity_2.RData")
 ```
 
 1) 

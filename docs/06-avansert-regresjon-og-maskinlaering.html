@@ -71,7 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./07-dataøvinger.html" rel="next">
 <link href="./05-tidsrekker.html" rel="prev">
-<link href="./icon/favicon.ico" rel="icon">
+<link href="./bilder/icon/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -110,26 +110,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <script>
+
 document.addEventListener("DOMContentLoaded", function () {
+
   var title = document.querySelector(".sidebar-title");
+
   if (title && !document.getElementById("nhh-sidebar-logo")) {
+
     var base = document.querySelector('meta[name="quarto:offset"]');
+
     var prefix = base ? base.getAttribute("content") : "";
+
     var link = document.createElement("a");
+
     link.href = "https://www.nhh.no/";
+
     link.id = "nhh-sidebar-logo";
+
     link.style.display = "block";
+
     link.style.margin = "0.6rem 0 0.2rem 0";
+
     var img = document.createElement("img");
+
     img.src = prefix + "bilder/nhh.png";
+
     img.alt = "Norges Handelshøyskole";
+
     img.style.maxWidth = "180px";
+
     img.style.width = "100%";
+
     link.appendChild(img);
+
     title.parentNode.insertBefore(link, title.nextSibling);
+
   }
+
 });
+
 </script>
+
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
