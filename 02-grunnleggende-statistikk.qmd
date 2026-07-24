@@ -14,12 +14,25 @@ aliases:
 .video-showcase { position: relative; margin-bottom: 0.4rem; }
 .video-showcase iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 .video-note { font-size: 0.85em; font-style: italic; color: #6c757d; margin: 0 0 2rem; text-align: center; }
+
+/* Observable Inputs gir etiketten faste 120px og flex-shrink: 0, så de lange
+   etikettene i sentralgrenseteorem-figuren løper inn i valgene til høyre. */
+#fig-sgt form { --label-width: 165px; }
+#fig-sgt form label { padding-right: 0.75rem; }
+
+/* Koden er skjult med echo: false, men Quarto legger likevel igjen en
+   kopier-knapp per celle. Den har ingenting å kopiere her. */
+#fig-sgt .code-copy-outer-scaffold { display: none; }
 </style>
 ```
 
 <div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://player.vimeo.com/video/470668919' allowfullscreen frameborder='0'></iframe></div>
 
 I denne modulen introduserer vi en del grunnleggende statistiske begreper. Mye vil oppleves som repetisjon, mens noe vil være nytt. Noe er veldig praktisk ved at vi kan bruke det direkte i eksempler, mens andre ting er mer teoretisk av natur. Felles for det vi skal se på her er at vi kommer til å bruke mange av begrepene vi lærer senere i kurset.
+
+Vi begynner med **deskriptiv statistikk**, som har to hovedformål. Det første er å **bli kjent med et datasett**: før vi setter i gang med mer avansert analyse, vil vi danne oss et bilde av hva slags tall vi har foran oss, om det finnes åpenbare feil eller ekstremverdier, og hvilke mønstre som umiddelbart trer frem. Det andre formålet er å **presentere resultater** slik at de er lette å forstå for andre. Et viktig poeng er at deskriptiv statistikk verken generaliserer fra utvalget til en større populasjon eller tester årsakssammenhenger. Vi lar rett og slett dataene fortelle sin egen historie.
+
+Deretter tar vi steget videre til **statistisk inferens**. Da ser vi på datasettet vårt som et *utvalg* trukket fra en større *populasjon*, og vi bruker utvalget til å si noe om populasjonen. Det tvinger oss til å holde orden på hva som er sant i populasjonen og hva vi bare har regnet ut fra dataene våre, og til å forstå hvordan et anslag varierer fra utvalg til utvalg. Nøkkelbegrepet er *samplingfordelingen*, som ligger i bunnen av alt vi gjør senere i kurset, fra hypotesetesting til regresjon.
 
 I videoforelesningene går vi gjennom noen slides, og vi skriver et R-skript. Du kan laste disse ned ved å klikke på lenkene under:
 
@@ -29,11 +42,7 @@ I videoforelesningene går vi gjennom noen slides, og vi skriver et R-skript. Du
 
 **TIPS:** Hvis du ønsker å laste ned lysbildene som PDF trykker du på linken over, velger "Skriv ut", og så skriver du ut som PDF. Før du gjør det bør du scrolle gjennom alle sidene slik at ligningene vises korrekt.
 
-## Deskriptiv statistikk
-
-Deskriptiv statistikk har to hovedformål. Det første er å **bli kjent med et datasett**: før vi setter i gang med mer avansert analyse, vil vi danne oss et bilde av hva slags tall vi har foran oss, om det finnes åpenbare feil eller ekstremverdier, og hvilke mønstre som umiddelbart trer frem. Det andre formålet er å **presentere resultater** slik at de er lette å forstå for andre. Et viktig poeng er at deskriptiv statistikk verken generaliserer fra utvalget til en større populasjon eller tester årsakssammenhenger. Vi lar rett og slett dataene fortelle sin egen historie. Selve slutningen fra utvalg til populasjon kommer vi tilbake til i neste delkapittel.
-
-### Variabeltyper og målenivå
+## Variabeltyper og målenivå
 
 <div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340230/embed' allowfullscreen frameborder='0'></iframe></div>
 
@@ -57,7 +66,7 @@ Nivåene bygger på hverandre: hvert nivå tillater alt det forrige gjør, pluss
 
 Når vi beskriver en tallvariabel numerisk, er det særlig to spørsmål vi stiller: *hvor ligger tyngdepunktet i dataene*, og *hvor spredt er de rundt dette tyngdepunktet*? Har vi to variabler, kommer et tredje spørsmål til: *henger de sammen*?
 
-### Sentraltendens
+## Sentraltendens
 
 <div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340232/embed' allowfullscreen frameborder='0'></iframe></div>
 
@@ -73,7 +82,7 @@ Tyngdepunktet, eller sentraltendensen, kan måles på flere måter:
 
 Hvorfor bry seg med mer enn gjennomsnittet? Fordi medianen er langt mer **robust** mot ekstremverdier. Tenk deg lønningene på en liten arbeidsplass med ti ansatte, der én av dem tilfeldigvis er konsernsjefen. Gjennomsnittslønnen kan da bli misvisende høy og gi et helt feilaktig bilde av hva en «typisk» ansatt tjener, mens medianen er upåvirket av hvor ekstremt høy den ene lønnen er. Nettopp derfor rapporteres for eksempel medianinntekt, og ikke gjennomsnittsinntekt, i mange sammenhenger.
 
-### Spredning
+## Spredning
 
 <div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340242/embed' allowfullscreen frameborder='0'></iframe></div>
 
@@ -89,7 +98,7 @@ som grovt sagt måler hvor langt observasjonene i gjennomsnitt ligger fra $\over
 
 Et alternativ som (i likhet med medianen) er robust mot ekstremverdier, er å bruke **prosentiler**. Den $p$-te prosentilen er den verdien som har $p$ % av observasjonene under seg. De tre kvartilene (25-, 50- og 75-prosentilene) deler dataene i fire like store deler, og avstanden mellom øvre og nedre kvartil kalles **interkvartilbredden** (IQR). Et boksplott er en effektiv grafisk fremstilling av nettopp disse størrelsene.
 
-### Sammenheng mellom to variabler
+## Sammenheng mellom to variabler
 
 <div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340244/embed' allowfullscreen frameborder='0'></iframe></div>
 
@@ -105,7 +114,7 @@ Har vi målt to variabler for de samme observasjonene (for eksempel høyde og ve
 
 Her lurer en klassisk felle: **at $r = 0$ betyr ikke at variablene er uavhengige.** Korrelasjonskoeffisienten fanger bare opp *lineære* sammenhenger. To variabler kan ha en tydelig, men krum, sammenheng (for eksempel U-formet) og likevel ha korrelasjon null. Det motsatte holder derimot alltid: er to variabler uavhengige, er de også ukorrelerte.
 
-### Å presentere data
+## Å presentere data
 
 <div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340248/embed' allowfullscreen frameborder='0'></iframe></div>
 
@@ -117,7 +126,7 @@ Deskriptiv statistikk handler like mye om å *presentere* tall som om å regne d
 
 Et av de mest berømte eksemplene på god deskriptiv statistikk er Charles Minards figur fra 1869 over Napoleons felttog mot Moskva, som vi ser nærmere på i videoforelesningen. På ett enkelt bilde klarer den å formidle tid, antall soldater, geografisk posisjon og temperatur samtidig, et forbilledlig eksempel på hvor mye informasjon en gjennomtenkt figur kan bære. I forelesningen ser vi også på noen *grelle* eksempler på det motsatte: hvordan grafiske virkemidler kan brukes til å gi skjeve og misvisende fremstillinger.
 
-### Et eksempel i R
+## Et eksempel i R
 
 La oss se hvordan vi kan beskrive et datasett i praksis. Tenk deg den daglige avkastningen (i prosent) til to ulike investeringsstrategier (en *forsiktig* og en *offensiv*) over 1000 handledager. Her simulerer vi tallene selv, slik at du kan kjøre koden og få nøyaktig de samme resultatene:
 
@@ -142,64 +151,54 @@ avkastning %>%
   )
 ```
 
-De to strategiene har praktisk talt samme gjennomsnittlige daglige avkastning (rundt 0,09 %), men legg merke til hvor forskjellige *standardavvikene* er. Det illustrerer et hovedpoeng fra teorien: gjennomsnittet alene forteller ikke hele historien. Spredningen er vel så viktig. Det kommer enda tydeligere fram i et histogram for hver strategi:
+De to strategiene har praktisk talt samme gjennomsnittlige daglige avkastning (rundt 0,09 %), men legg merke til hvor forskjellige *standardavvikene* er. Det illustrerer et hovedpoeng fra teorien: gjennomsnittet alene forteller ikke hele historien. Spredningen er vel så viktig. Det kommer enda tydeligere fram i et histogram for hver strategi. Da er det viktig at de to histogrammene tegnes med *samme* akse, ellers skalerer figuren bort nettopp den forskjellen vi vil vise. Vi stabler derfor de to kolonnene oppå hverandre i en lang tabell og lar `facet_wrap()` lage ett panel per strategi, med felles akse:
 
-```{r hist-avkastning, fig.show='hold', fig.cap='Daglig avkastning for to strategier med samme gjennomsnitt, men ulik spredning.', message=FALSE, warning=FALSE}
+```{r fig-hist-avkastning, fig.width=6.5, fig.height=3, fig.cap='Daglig avkastning for to strategier med samme gjennomsnitt, men ulik spredning. Aksene er felles, slik at panelene kan sammenlignes direkte.', message=FALSE, warning=FALSE}
 library(ggplot2)
-ggplot(avkastning, aes(x = forsiktig)) +
+lang <- data.frame(
+  strategi   = rep(c("Forsiktig", "Offensiv"), each = 1000),
+  avkastning = c(avkastning$forsiktig, avkastning$offensiv)
+)
+
+ggplot(lang, aes(x = avkastning)) +
   geom_histogram(bins = 30) +
-  labs(x = "Daglig avkastning (%)", y = "Antall dager", title = "Forsiktig strategi")
-ggplot(avkastning, aes(x = offensiv)) +
-  geom_histogram(bins = 30) +
-  labs(x = "Daglig avkastning (%)", y = "Antall dager", title = "Offensiv strategi")
+  facet_wrap(~ strategi) +
+  labs(x = "Daglig avkastning (%)", y = "Antall dager")
 ```
 
-Den offensive strategien har en langt bredere fordeling (større svingninger, og dermed høyere risiko) selv om den i snitt gir like mye som den forsiktige.
+Den offensive strategien har en langt bredere fordeling (større svingninger, og dermed høyere risiko) selv om den i snitt gir like mye som den forsiktige, se @fig-hist-avkastning.
 
 Et **boksplott** oppsummerer mye av den samme informasjonen enda mer kompakt, og egner seg godt til å sammenlikne de to strategiene side om side. Her bruker vi den innebygde funksjonen `boxplot()`, som tar en data.frame med to kolonner og tegner én boks for hver:
 
-```{r boks-avkastning, fig.cap='Boksplott av daglig avkastning for de to strategiene.'}
+```{r fig-boks-avkastning, fig.width=6.5, fig.height=3.6, fig.cap='Boksplott av daglig avkastning for de to strategiene.'}
 boxplot(avkastning,
         ylab = "Daglig avkastning (%)",
         main = "Fordeling av daglig avkastning per strategi")
 ```
 
-Slik leser vi figuren (jf. spredningsmålene i avsnittet om spredning): streken inne i boksen er medianen, selve boksen dekker interkvartilbredden fra nedre til øvre kvartil, og «værhårene» strekker seg ut til de mest ekstreme observasjonene som ikke regnes som uteliggere. Punktene utenfor værhårene er nettopp uteliggere. Igjen ser vi at de to strategiene har omtrent samme midtpunkt, men at den offensive har en mye høyere boks og lengre værhår, altså langt større spredning.
+Slik leser vi @fig-boks-avkastning (jf. spredningsmålene i avsnittet om spredning): streken inne i boksen er medianen, selve boksen dekker interkvartilbredden fra nedre til øvre kvartil, og «værhårene» strekker seg ut til de mest ekstreme observasjonene som ikke regnes som uteliggere. Punktene utenfor værhårene er nettopp uteliggere. Igjen ser vi at de to strategiene har omtrent samme midtpunkt, men at den offensive har en mye høyere boks og lengre værhår, altså langt større spredning.
 
-### Kontrollspørsmål
-
-Her er noen kontrollspørsmål som du kan prøve deg på:
-
-1. Hva er forskjellen på deskriptiv statistikk og statistisk inferens?
-1. Deskriptiv statistikk kan gjøres grafisk eller numerisk, eventuelt som tabeller av ulike numeriske mål. Nevn noen fordeler og ulemper man må veie mot hverandre når vi skal velge mellom grafisk og numerisk deskriptiv statistikk.
-
-## Utvalg og estimering
+## Inferens: populasjoner, utvalg og estimatorer
 
 > You can, for example, never foretell what any one man will do, but you can say with presicion what an average number will be up to. Individuals vary, but percentages remain constant. So says the statistician.
 
 `r tufte::quote_footer('--- Sherlock Holmes')`
 
-<div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://player.vimeo.com/video/470669444' allowfullscreen frameborder='0'></iframe></div>
-
-I forrige delkapittel beskrev vi data slik de forelå. Nå tar vi et viktig steg videre: vi tenker på datasettet vårt som et **utvalg** trukket fra en større **populasjon**, og vi vil bruke utvalget til å si noe om populasjonen. Dette er kjernen i **statistisk inferens**, og et tema som følger oss gjennom resten av kurset.
-
-### Inferens: Populasjoner, parametre og estimator
-
 <div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://player.vimeo.com/video/470669794' allowfullscreen frameborder='0'></iframe></div>
+
+Hittil har vi beskrevet data slik de forelå. Nå tar vi et viktig steg videre: vi tenker på datasettet vårt som et **utvalg** trukket fra en større **populasjon**, og vi vil bruke utvalget til å si noe om populasjonen. Dette er kjernen i **statistisk inferens**, og et tema som følger oss gjennom resten av kurset. Herfra bygger vi videre på sannsynlighetsregningen fra MET2: fordelinger, stokastiske variabler, forventning og varians. Ligger dette langt bak i bevisstheten, kan det være lurt å friske det opp.
 
 Populasjonen er hele mengden vi egentlig er interessert i, for eksempel alle norske velgere, eller all fisk i en oppdrettsmerd. En **parameter** er et tall som beskriver populasjonen, slik som den sanne forventningen $\mu$, det sanne standardavviket $\sigma$, eller den sanne andelen $p$. Problemet er at vi nesten aldri kan måle hele populasjonen; vi må nøye oss med et utvalg. Ut fra utvalget regner vi så ut en **estimator** (også kalt en observator), en «regel» for å gjette parameterverdien, for eksempel gjennomsnittet $\overline{X}$ som et anslag på $\mu$.
 
-Det helt sentrale poenget er dette: siden observasjonene i utvalget er tilfeldige, blir også estimatoren tilfeldig. Trekker vi et nytt utvalg, får vi et litt annet gjennomsnitt. Estimatoren er altså selv en stokastisk variabel med sin egen fordeling, og den fordelingen kaller vi en **samplingfordeling**. Nesten alt vi gjør senere i kurset, handler i bunn og grunn om å forstå samplingfordelinger.
+Det helt sentrale poenget er dette: siden observasjonene i utvalget er tilfeldige, blir også estimatoren tilfeldig. Trekker vi et nytt utvalg, får vi et litt annet gjennomsnitt. Estimatoren er altså selv en stokastisk variabel, med sin egen fordeling. Å få tak på nettopp den fordelingen er nøkkelen til nesten alt vi gjør senere i kurset, og vi kommer tilbake til den så snart vi har på plass verktøyene som trengs.
 
-### Hva er et tilfeldig utvalg?
-
-Hele resonnementet over hviler på at utvalget er *tilfeldig*. Med et **tilfeldig utvalg** mener vi at enhetene trekkes fra populasjonen ved en form for loddtrekning: hver enhet har samme sjanse til å bli med, uavhengig av de andre. Det er nettopp dette som gjør at vi kan behandle observasjonene $X_1, \ldots, X_n$ som uavhengige trekninger fra den samme fordelingen, og hele inferensmaskineriet senere i kurset bygger på den forutsetningen.
+Hele resonnementet hviler på at utvalget er *tilfeldig*. Med et **tilfeldig utvalg** mener vi at enhetene trekkes fra populasjonen ved en form for loddtrekning: hver enhet har samme sjanse til å bli med, uavhengig av de andre. Det er nettopp dette som gjør at vi kan behandle observasjonene $X_1, \ldots, X_n$ som uavhengige trekninger fra den samme fordelingen, og hele inferensmaskineriet senere i kurset bygger på den forutsetningen.
 
 Det avgjørende ordet er *representativt*. Et tilfeldig utvalg speiler populasjonen, slik at et utvalgsgjennomsnitt blir et rimelig anslag på populasjonsgjennomsnittet. Trekker vi derimot utvalget skjevt, blir anslaget systematisk feil, og da hjelper det ikke å samle inn mer data. Vanlige fallgruver er *selvseleksjon* (bare de mest engasjerte svarer på en frivillig undersøkelse) og *bekvemmelighetsutvalg* (vi spør dem som er lettest å nå). Et berømt eksempel er magasinet *Literary Digest*, som i 1936 spådde feil vinner av det amerikanske presidentvalget: utvalget var på over to millioner personer, men trukket blant bil- og telefoneiere, som den gang var systematisk rikere enn velgerne flest. Utvalget var enormt, men skjevt, og et langt mindre, virkelig tilfeldig utvalg traff bedre.
 
 I praksis er et perfekt tilfeldig utvalg vanskelig å få til, men det er idealet vi strekker oss mot, og forutsetningen vi antar er (tilnærmet) oppfylt i regnestykkene under.
 
-### Populasjonen som sannsynlighetsmodell
+## Populasjonen som sannsynlighetsmodell
 
 <div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340249/embed' allowfullscreen frameborder='0'></iframe></div>
 
@@ -217,7 +216,7 @@ En **sannsynlighetsmodell** er en slik matematisk beskrivelse av en stokastisk v
 
 Poenget for oss er dette: når vi antar at observasjonene våre er trekninger fra en fordeling med forventning $\mu$ og varians $\sigma^2$, kan vi bruke sannsynlighetsregningen til å si noe presist om hvordan estimatorene våre oppfører seg. Det er akkurat det vi bygger videre på når vi snart skal finne samplingfordelingen til gjennomsnittet.
 
-### Forventning og varians {#sec-forventning-varians}
+## Forventning og varians {#sec-forventning-varians}
 
 <div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://player.vimeo.com/video/470669617' allowfullscreen frameborder='0'></iframe></div>
 
@@ -227,11 +226,11 @@ Når vi tenker på en observasjon $X$ som en trekning fra en fordeling, er de to
 
 **Variansen** $\textrm{Var}(X) = \textrm{E}\!\left[(X - \mu)^2\right] = \sigma^2$ måler hvor mye verdiene typisk spriker rundt forventningen. Standardavviket $\sigma = \sqrt{\textrm{Var}(X)}$ er kvadratroten av variansen, og har samme måleenhet som $X$ selv.
 
-Formelt er forventningen et vektet gjennomsnitt av alle mulige verdier, der vekten er hvor sannsynlig hver verdi er. For en **diskret** variabel summerer vi, og for en **kontinuerlig** variabel integrerer vi:
+Formelt er forventningen et vektet gjennomsnitt av alle mulige verdier, der vekten er hvor sannsynlig hver verdi er, altså en sum for en diskret variabel og et integral for en kontinuerlig:
 
 $$\textrm{E}(X) = \sum_x x\,P(X = x) \quad (\text{diskret}), \qquad \textrm{E}(X) = \int_{-\infty}^{\infty} x\,f(x)\,\textrm{d}x \quad (\text{kontinuerlig}).$$
 
-Variansen er som nevnt bare forventningen til det kvadrerte avviket $(X - \mu)^2$, så den regnes ut med de samme summene eller integralene, bare med $(x - \mu)^2$ der det over står $x$. Definisjonene er de samme som i MET2; her er det først og fremst regnereglene under vi får bruk for.
+Variansen regnes ut med de samme summene eller integralene, bare med $(x - \mu)^2$ der det over står $x$. Definisjonene er de samme som i MET2, og her er det først og fremst regnereglene under vi får bruk for.
 
 Det som gjør disse to størrelsene så anvendelige, er at de følger noen enkle **regneregler**. La $a$ og $b$ være konstanter og $X, Y$ stokastiske variabler. For forventningen gjelder:
 
@@ -243,7 +242,7 @@ $$\textrm{Var}(aX + b) = a^2\,\textrm{Var}(X), \qquad \textrm{Var}(X + Y) = \tex
 
 To ting er verdt å merke seg. Et konstantledd $b$ påvirker ikke variansen: å flytte hele fordelingen sidelengs endrer ikke spredningen. En skaleringsfaktor $a$ slår derimot inn i *annen* potens, fordi varians måles i kvadrerte enheter (og standardavviket dermed skaleres med $|a|$). Og mens forventningen alltid kan splittes over en sum, krever den enkle variansregelen at leddene er uavhengige.
 
-### Utvalgsstørrelser og populasjonsstørrelser
+## Utvalgsstørrelser og populasjonsstørrelser
 
 <div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://player.vimeo.com/video/470669655' allowfullscreen frameborder='0'></iframe></div>
 
@@ -257,7 +256,7 @@ Et poeng det er verdt å feste seg ved med en gang, er at nesten alle størrelse
 
 Skillet er grunnleggende, og de to variantene er lette å blande sammen. Når vi snakker om «gjennomsnittet», må vi hele tiden være bevisste på om vi mener det sanne **populasjonsgjennomsnittet** $\mu$ (som vi sjelden kjenner) eller **utvalgsgjennomsnittet** $\overline{X}$ (som vi regner ut fra dataene våre, og som vil variere fra utvalg til utvalg). Notasjonen hjelper oss å holde dem fra hverandre: populasjonsstørrelser skrives gjerne med greske bokstaver ($\mu$, $\sigma$, $p$), mens utvalgsstørrelser skrives med latinske bokstaver eller med en «hatt», som i $\overline{X}$ og $\widehat{p}$.
 
-### Samplingfordelinger
+## Samplingfordelinger
 
 <div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340252/embed' allowfullscreen frameborder='0'></iframe></div>
 
@@ -265,7 +264,7 @@ Skillet er grunnleggende, og de to variantene er lette å blande sammen. Når vi
 Dette delkapittelet inneholder flere videoer. Bruk nedtrekksmenyen øverst til venstre i videovinduet for å bla mellom dem.
 :::
 
-Vi har så vidt vært innom begrepet allerede; la oss slå det fast skikkelig. Når vi trekker et utvalg og regner ut et kjennetegn ved det, for eksempel gjennomsnittet $\overline{X}$ eller en andel $\widehat{p}$, vil resultatet variere fra utvalg til utvalg fordi observasjonene er tilfeldige. **Samplingfordelingen** er fordelingen til et slikt utvalgskjennetegn: den forteller hvilke verdier estimatoren kan ta, og hvor sannsynlige de er, over alle tenkelige utvalg av samme størrelse. Det er denne fordelingen som gjør statistisk inferens mulig, for den forteller oss hvor presist et estimat er. Her tar vi for oss samplingfordelingen til gjennomsnittet; andelen kommer vi tilbake til litt lenger ned.
+Når vi trekker et utvalg og regner ut et kjennetegn ved det, for eksempel gjennomsnittet $\overline{X}$ eller en andel $\widehat{p}$, vil resultatet variere fra utvalg til utvalg fordi observasjonene er tilfeldige. **Samplingfordelingen** er fordelingen til et slikt utvalgskjennetegn: den forteller hvilke verdier estimatoren kan ta, og hvor sannsynlige de er, over alle tenkelige utvalg av samme størrelse. Det er denne fordelingen som gjør statistisk inferens mulig, for den forteller oss hvor presist et estimat er. Her tar vi for oss samplingfordelingen til gjennomsnittet; andelen kommer vi tilbake til litt lenger ned.
 
 Anta at observasjonene $X_1, X_2, \ldots, X_n$ er uavhengige, med samme forventning $\mu$ og varians $\sigma^2$, og se på gjennomsnittet $\overline{X} = \frac{1}{n}\sum_{i=1}^n X_i$. Nå får vi bruk for regnereglene fra avsnitt @sec-forventning-varians. Forventningen følger av at forventningen er lineær:
 
@@ -279,7 +278,7 @@ To ting er verdt å dvele ved. For det første er gjennomsnittet **forventningsr
 
 Men legg merke til hva vi *ikke* har funnet ut ennå: vi kjenner nå forventningen og variansen til $\overline{X}$, men ikke selve *formen* på samplingfordelingen. Er den normalfordelt, eller skjev? Det er akkurat dette spørsmålet sentralgrenseteoremet svarer på i neste delkapittel.
 
-### Sentralgrenseteoremet
+## Sentralgrenseteoremet
 
 <div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340253/embed' allowfullscreen frameborder='0'></iframe></div>
 
@@ -295,11 +294,133 @@ $$\overline{X} \;\sim\; N\!\left(\mu,\; \frac{\sigma^2}{n}\right).$$
 
 Dette gjelder *eksakt* når observasjonene selv er normalfordelte, og *tilnærmet* ellers, så lenge $n$ er stor nok.
 
+Påstanden er drøy nok til at den fortjener å bli etterprøvd, og det kan du gjøre selv i @fig-sgt. Velg en populasjonsfordeling (den øverste figuren viser hvordan enkeltobservasjonene er fordelt), og dra deretter i bryteren for $n$. For hver innstilling trekkes 2000 nye utvalg, og den nederste figuren viser hvordan de 2000 gjennomsnittene fordeler seg. Den røde kurven er normalfordelingen $N(\mu,\, \sigma^2/n)$ som teoremet lover.
+
+::: {#fig-sgt}
+
+```{ojs}
+//| echo: false
+viewof fordeling = Inputs.radio(
+  ["Kraftig høyreskjev", "Uniform", "To topper", "Normal"],
+  {value: "Kraftig høyreskjev", label: "Populasjonsfordeling:"}
+)
+```
+
+```{ojs}
+//| echo: false
+viewof n = Inputs.range([1, 100], {value: 1, step: 1, label: "Utvalgsstørrelse n:"})
+```
+
+```{ojs}
+//| echo: false
+{
+  // Populasjonsfordelingene studenten kan velge mellom. Hver gir en trekkefunksjon,
+  // sin sanne mu og sigma (som normalkurven tegnes fra), og det faste akseintervallet.
+  const lagFordeling = (navn, rng) => {
+    if (navn === "Kraftig høyreskjev")
+      return {trekk: d3.randomExponential.source(rng)(1), mu: 1, sigma: 1, domene: [0, 5]};
+    if (navn === "Uniform")
+      return {trekk: d3.randomUniform.source(rng)(0, 1), mu: 0.5, sigma: Math.sqrt(1 / 12), domene: [0, 1]};
+    if (navn === "To topper") {
+      const lav  = d3.randomNormal.source(rng)(-1.5, 0.5);
+      const hoy  = d3.randomNormal.source(rng)(1.5, 0.5);
+      const mynt = d3.randomUniform.source(rng)(0, 1);
+      return {trekk: () => (mynt() < 0.5 ? lav() : hoy()), mu: 0, sigma: Math.sqrt(2.5), domene: [-4, 4]};
+    }
+    return {trekk: d3.randomNormal.source(rng)(0, 1), mu: 0, sigma: 1, domene: [-4, 4]};
+  };
+
+  // Histogram med faste binkanter, normalisert til tetthet slik at søylene
+  // kan sammenlignes direkte med normalkurven.
+  const histogram = (verdier, lo, hi, antallBins) => {
+    const bredde = (hi - lo) / antallBins;
+    const antall = new Array(antallBins).fill(0);
+    for (const v of verdier) {
+      const k = Math.floor((v - lo) / bredde);
+      if (k >= 0 && k < antallBins) antall[k]++;
+    }
+    return antall.map((c, k) => ({
+      x1: lo + k * bredde,
+      x2: lo + (k + 1) * bredde,
+      tetthet: c / (verdier.length * bredde)
+    }));
+  };
+
+  const rng = d3.randomLcg(0.42);
+  const p = lagFordeling(fordeling, rng);
+  const [lo, hi] = p.domene;
+  const se = p.sigma / Math.sqrt(n);
+
+  // 2000 utvalg à n observasjoner, og et stort utvalg som viser populasjonen selv.
+  const snitt = new Float64Array(2000);
+  for (let r = 0; r < snitt.length; r++) {
+    let sum = 0;
+    for (let i = 0; i < n; i++) sum += p.trekk();
+    snitt[r] = sum / n;
+  }
+  const pop = new Float64Array(20000);
+  for (let i = 0; i < pop.length; i++) pop[i] = p.trekk();
+
+  const kurve = d3.range(401).map(i => {
+    const x = lo + (hi - lo) * i / 400;
+    return {x, y: Math.exp(-0.5 * ((x - p.mu) / se) ** 2) / (se * Math.sqrt(2 * Math.PI))};
+  });
+
+  const felles = {
+    width: Math.min(width, 680),
+    height: 190,
+    marginLeft: 55,
+    marginRight: 15,
+    style: {fontSize: "11px"},
+    y: {label: "Tetthet"}
+  };
+
+  const ovre = Plot.plot({
+    ...felles,
+    x: {domain: [lo, hi], label: null},
+    marks: [
+      Plot.rectY(histogram(pop, lo, hi, 60), {x1: "x1", x2: "x2", y: "tetthet", fill: "#c9c9c9"}),
+      Plot.ruleY([0])
+    ]
+  });
+
+  // Aksen er fast, men toppen blir smalere med voksende n. Vi finskalerer derfor
+  // binbredden etter sigma/sqrt(n), ellers forsvinner formen i noen få søyler.
+  const binsSnitt = Math.max(40, Math.min(400, Math.round((hi - lo) / (se / 4))));
+
+  const nedre = Plot.plot({
+    ...felles,
+    x: {domain: [lo, hi], label: "Verdi"},
+    marks: [
+      Plot.rectY(histogram(snitt, lo, hi, binsSnitt), {x1: "x1", x2: "x2", y: "tetthet", fill: "#c9c9c9"}),
+      Plot.line(kurve, {x: "x", y: "y", stroke: "firebrick", strokeWidth: 1.5}),
+      Plot.ruleY([0])
+    ]
+  });
+
+  return html`<div>
+    <div style="font-size:0.85rem; font-weight:600; margin-bottom:0.1rem">Populasjonen: én enkelt observasjon</div>
+    ${ovre}
+    <div style="font-size:0.85rem; font-weight:600; margin:0.5rem 0 0.1rem">Gjennomsnittet av n = ${n} observasjoner</div>
+    ${nedre}
+    <div style="font-size:0.8rem; color:#6c757d; margin-top:0.2rem">
+      Populasjonen har σ = ${p.sigma.toFixed(2)}, og gjennomsnittet har σ/√n = ${se.toFixed(3)}.
+    </div>
+  </div>`;
+}
+```
+
+Sentralgrenseteoremet i praksis. Øverst: fordelingen til én enkelt observasjon i populasjonen. Nederst: fordelingen til gjennomsnittet av $n$ slike observasjoner, basert på 2000 simulerte utvalg, med normalfordelingen $N(\mu, \sigma^2/n)$ tegnet oppå. Aksen er den samme i begge figurene.
+
+:::
+
+Legg merke til to ting mens du drar i bryteren. Formen blir symmetrisk og klokkeformet selv når populasjonen er tydelig skjev eller har to topper, og det skjer overraskende raskt. Og fordelingen til gjennomsnittet blir smalere og smalere, akkurat som $\sigma/\sqrt{n}$-regelen fra forrige delkapittel sier: firedobler du $n$, halveres bredden.
+
 Sentralgrenseteoremet formuleres gjerne for *summen* $S_n = X_1 + \cdots + X_n$ i stedet for gjennomsnittet. Da sier det at også $S_n$ er tilnærmet normalfordelt, $S_n \sim N(n\mu,\, n\sigma^2)$. Dette er egentlig samme utsagn: gjennomsnittet er jo bare summen delt på $n$, så *formen* (normal) er den samme, mens forventning og varians skaleres deretter.
 
 Det er dette resultatet vi bygger videre på i hypotesetesting og konfidensintervaller, og det har en tvillingsøster for andeler som vi ser på nå.
 
-### Samplingfordelingen til en andel
+## Samplingfordelingen til en andel
 
 <div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340254/embed' allowfullscreen frameborder='0'></iframe></div>
 
@@ -313,7 +434,7 @@ $$\widehat{p} \;\sim\; N\!\left(p,\; \frac{p(1-p)}{n}\right).$$
 
 Tilnærmingen regnes som god når $np > 5$ og $n(1-p) > 5$. Legg merke til at også her avtar usikkerheten som $1/\sqrt{n}$. Det er derfor en meningsmåling med rundt 1000 respondenter kan gi et brukbart anslag på hva et helt land mener.
 
-### Gode estimatorer
+## Gode estimatorer
 
 <div class="video-showcase" style="padding:56.25% 0 0 0;"><iframe src='https://vimeo.com/showcase/12340255/embed' allowfullscreen frameborder='0'></iframe></div>
 
@@ -327,9 +448,7 @@ Det finnes gjerne flere mulige estimatorer for samme parameter, og da må vi kun
 - Blant flere forventningsrette estimatorer foretrekker vi den mest **effektive**, altså den med minst varians.
 - En estimator er **konsistent** dersom den nærmer seg den sanne verdien når utvalget vokser. Gjennomsnittet er konsistent nettopp fordi variansen $\sigma^2/n$ går mot null når $n$ øker.
 
-### Konfidensintervall
-
-Begrepene i dette delkapittelet bygger videre på sannsynlighetsregningen fra MET2: fordelinger, stokastiske variabler, forventning og varians. Ligger dette langt bak i bevisstheten, kan det være lurt å friske det opp.
+## Konfidensintervall
 
 Vi kan lage et *punktestimat* av en forventningsverdi ved å ta gjennomsnittet av observasjonene. Men et enkelt tall sier ingenting om hvor sikkert anslaget er, og derfor er vi ofte mer interessert i et **konfidensintervall**: et helt intervall av rimelige verdier, der bredden forteller oss hvor presist estimatet er.
 
@@ -365,17 +484,48 @@ Selve *fortolkningen* av et konfidensintervall er lett å misforstå, og verdt �
 
 Forskjellen er subtil, men viktig. Problemet med den første formuleringen er at den gir inntrykk av at det er *parameteren* som er tilfeldig og hopper inn og ut av et fast intervall. Det motsatte er tilfellet: den sanne parameterverdien er fast, mens det er *grensene* til konfidensintervallet som er tilfeldige, siden de regnes ut fra et tilfeldig utvalg. Bredden til intervallet er dermed et uttrykk for *usikkerhet*, eller motsatt: *presisjon*.
 
-### Kontrollspørsmål
+Den korrekte tolkningen handler altså om noe vi aldri får se: alle de utvalgene vi *kunne* ha trukket. Men i en simulering kan vi faktisk se dem. I @fig-ki-dekning har vi gjentatt laksemålingen 100 ganger, med et nytt utvalg på 25 fisk hver gang, og regnet ut et nytt 95 %-konfidensintervall for hvert av dem:
+
+```{r fig-ki-dekning, echo = FALSE, message = FALSE, warning = FALSE, fig.width = 6.5, fig.height = 4.2, fig.cap = 'Hundre simulerte 95 %-konfidensintervaller for forventet laksevekt. Hvert intervall er regnet ut fra et nytt tilfeldig utvalg på 25 laks fra den samme populasjonen, der den sanne verdien er $\\mu = 5.2$ kg (stiplet linje). Punktet er utvalgsgjennomsnittet. Intervallene som bommer på den sanne verdien, er markert i rødt.'}
+library(ggplot2)
+set.seed(2)
+
+mu_sann <- 5.2
+n_sim   <- 100
+
+sim <- replicate(n_sim, {
+  x  <- rnorm(25, mean = mu_sann, sd = 0.8)
+  fm <- qt(0.975, df = 24) * sd(x) / sqrt(25)
+  c(mean(x) - fm, mean(x), mean(x) + fm)
+})
+
+ki <- data.frame(nr = 1:n_sim, LCL = sim[1, ], snitt = sim[2, ], UCL = sim[3, ])
+ki$dekker <- ki$LCL <= mu_sann & mu_sann <= ki$UCL
+
+ggplot(ki, aes(y = nr, colour = dekker)) +
+  geom_segment(aes(x = LCL, xend = UCL, yend = nr), linewidth = 0.4) +
+  geom_point(aes(x = snitt), size = 0.6) +
+  geom_vline(xintercept = mu_sann, linetype = "dashed") +
+  scale_colour_manual(values = c("TRUE" = "grey65", "FALSE" = "firebrick"), guide = "none") +
+  labs(x = "Vekt (kg)", y = "Simulert utvalg nr.") +
+  theme_classic()
+```
+
+Legg merke til at intervallene ligger på litt ulike steder og har litt ulik bredde, mens den sanne verdien står helt stille. `r sum(!ki$dekker)` av de 100 intervallene bommer, mot 5 forventet i snitt (også *det* tallet varierer fra simulering til simulering). Poenget er at vi i praksis bare trekker *ett* av disse utvalgene, og da vet vi aldri om vi endte opp med et grått eller et rødt intervall. Det er prosedyren som treffer 95 ganger av 100, ikke det ene intervallet vi sitter med.
+
+## Kontrollspørsmål
 
 Når du har vært gjennom dette stoffet skal du forhåpentligvis være i stand til å diskutere følgende spørsmål med f.eks. en medstudent:
 
-1. Hva er en samplingfordeling?
-2. Hva sier sentralgrenseteoremet?
-3. Hva mener en statistiker når hen sier at "gjennomsnittet konvergerer som $1/\sqrt{n}$"?
-4. Hva er samplingfordelingen til et gjennomsnitt?
-5. Hva er samplingfordelingen til en andel?
-6. Hva vil det si at et estimator er forventningsrett?
-7. Hva vil det si at et estimator er konsistent?
+1. Hva er forskjellen på deskriptiv statistikk og statistisk inferens?
+2. Deskriptiv statistikk kan gjøres grafisk eller numerisk, eventuelt som tabeller av ulike numeriske mål. Nevn noen fordeler og ulemper man må veie mot hverandre når vi skal velge mellom grafisk og numerisk deskriptiv statistikk.
+3. Hva er en samplingfordeling?
+4. Hva sier sentralgrenseteoremet?
+5. Hva mener en statistiker når hen sier at "gjennomsnittet konvergerer som $1/\sqrt{n}$"?
+6. Hva er samplingfordelingen til et gjennomsnitt?
+7. Hva er samplingfordelingen til en andel?
+8. Hva vil det si at et estimator er forventningsrett?
+9. Hva vil det si at et estimator er konsistent?
 
 ## Oppgaver {#sec-oppgaverdeskriptiv}
 
