@@ -472,6 +472,8 @@ var.test(fond1, fond2, alternative = "greater")
 
 **p-verdien** er 0.009, under 0.05, så vi forkaster $H_0$. Utskriften gir også selve $F$-verdien og et konfidensintervall for forholdet mellom variansene.
 
+Her ligger de to fondene i hver sin vektor. Kommer dataene i stedet som ett datasett med en kategorisk variabel som angir gruppen, tar `var.test()` også formelsyntaks, `var.test(verdi ~ gruppe, data = df)`, på samme måte som `t.test()`. Og vil du bare ha ett av tallene i utskriften, henter du det ut med `$`, for eksempel `var.test(...)$p.value`. Begge deler er beskrevet i @sec-relevante-r-testing.
+
 ### Sammenligning av to andeler
 
 Vil vi sammenligne to *andeler*, for eksempel konverteringsraten (andelen av dem som ser en annonse som faktisk handler) for to ulike annonser, tester vi $H_0: p_1 = p_2$. Under nullhypotesen er de to andelene like, så vi slår sammen (pooler) dataene til ett felles estimat $\widehat{p} = (x_1 + x_2)/(n_1 + n_2)$, der $x_1$ og $x_2$ er antall «suksesser» i de to gruppene. Testobservatoren er
@@ -1665,6 +1667,14 @@ var.test(testdata$X1, testdata$X2)
 ```
 Vi kan også her gjøre ensidige tester ved å sette `alternative =`-argumentet til enten `"less"` eller `"greater"`.
 
+`var.test()` tar også **formelsyntaks**, på nøyaktig samme måte som `t.test()`. Har du ett datasett `df` der den numeriske variabelen `verdi` skal sammenlignes mellom nivåene i den kategoriske variabelen `gruppe`, slipper du å plukke ut to vektorer først:
+
+```{r, eval = FALSE}
+var.test(verdi ~ gruppe, data = df)
+```
+
+Alt som står om nivårekkefølge i avsnittet om formelsyntaks for `t.test()` over gjelder også her: R danner forholdet mellom variansene i den rekkefølgen nivåene har. Dette er ofte den raskeste veien når du skal sjekke om du kan bruke `var.equal = TRUE` i en påfølgende `t.test()` på det samme datasettet, siden begge testene da kan skrives på nøyaktig samme form.
+
 #### Kritiske verdier i F-fordelingen {.unnumbered}
 For to-utvalgs varianstesten bruker vi F-fordelingen. Setter vi den største variansen i telleren, $F = s_1^2/s_2^2$, trenger vi bare øvre hale, uansett om testen er ensidig eller tosidig. Har vi $30$ observasjoner bak $s_1^2$ og $25$ bak $s_2^2$, er kritisk verdi for en tosidig test ($H_A: \sigma_1^2 \neq \sigma_2^2$):
 ```{r, eval = TRUE}
@@ -1726,3 +1736,30 @@ For kji-kvadrattestene (både goodness-of-fit og uavhengighet) forkaster vi *all
 qchisq(1 - 0.05, df = 2)
 ```
 og du forkaster dersom testobservatoren er større enn dette tallet. For en uavhengighetstest er antall frihetsgrader $(r-1)(s-1)$.
+
+### Hente ut enkelttall fra en test {#sec-hente-ut-testverdier}
+
+`t.test()`, `var.test()`, `prop.test()` og `chisq.test()` skriver ut en hel rapport når du kjører dem. Noen ganger vil du bare ha ett av tallene, for eksempel fordi du skal regne videre på det, sammenligne mange tester, eller svare på et spørsmål som bare ber om p-verdien. Da lagrer du testen i en variabel og henter ut den enkelte komponenten med `$`:
+
+```{r}
+test <- t.test(testdata$X1, mu = 100)
+
+test$p.value      # p-verdien
+test$statistic    # testobservatoren
+test$conf.int     # konfidensintervallet
+test$estimate     # utvalgsgjennomsnittet
+```
+
+Trenger du bare ett tall, kan du hekte `$` rett på funksjonskallet:
+
+```{r}
+t.test(testdata$X1, mu = 100)$p.value
+```
+
+Navnene er de samme for de andre testfunksjonene, med to unntak verdt å merke seg: `chisq.test()` har verken `estimate` eller `conf.int`, men til gjengjeld `expected` (de forventede frekvensene under $H_0$), og `estimate` i `var.test()` er *forholdet* mellom de to utvalgsvariansene, ikke et gjennomsnitt.
+
+Vil du se hvilke komponenter en bestemt test har, gir `names()` deg hele lista:
+
+```{r}
+names(var.test(testdata$X1, testdata$X2))
+```
