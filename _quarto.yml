@@ -7,6 +7,12 @@ project:
     - tidligere-eksamensoppgaver/
     - script-slides/
     - diverse/
+    # Kursgodkjenningen bygges separat (den bruker formatet live-html fra
+    # quarto-live) og kopieres inn som ferdige filer. Listet eksplisitt, ikke
+    # som mappe: løsningsforslaget i samme kildemappe skal IKKE publiseres.
+    - kursgodkjenning/kursgodkjenning.html
+    - kursgodkjenning/kursgodkjenning_files/
+    - kursgodkjenning/boliger.RData
   render:
     - index.qmd
     - 01-intro-til-r.qmd
@@ -17,6 +23,7 @@ project:
     - 06-avansert-regresjon-og-maskinlaering.qmd
     - 07-dataøvinger.qmd
     - 08-seminaroppgaver.qmd
+    - 09-kursgodkjenning.qmd
     - 10-Eksamensoppgaver.qmd
 
 lang: nb
@@ -50,6 +57,7 @@ book:
       chapters:
         - 07-dataøvinger.qmd
         - 08-seminaroppgaver.qmd
+        - 09-kursgodkjenning.qmd
         - 10-Eksamensoppgaver.qmd
 
 format:

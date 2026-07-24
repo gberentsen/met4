@@ -88,6 +88,9 @@ tidsplan %>%
 <!--   # row_spec(11, bold = T, background = "DarkRed", color = "white") -->
 <!-- ``` -->
 
+### Obligatorisk kursgodkjenning {.unnumbered}
+For å kunne gå opp til eksamen må du ha fått godkjent den obligatoriske kursgodkjenningen. Det er en individuell dataanalyseoppgave som du løser direkte i nettleseren, uten å installere noe, og som er bygget opp som Del 1 på skoleeksamen. Se @sec-kursgodkjenning for hva den går ut på og hvordan du leverer. Fristen finner du i Canvas.
+
 ### Lærebok og pensum {.unnumbered}
 I utgangspunktet dekker denne siden, sammen med forelesninger, seminar og dataøvinger hele pensum i MET4. 
 

@@ -1,0 +1,52 @@
+# Obligatorisk kursgodkjenning {#sec-kursgodkjenning}
+
+For å kunne gå opp til eksamen i MET4 må du ha fått godkjent den obligatoriske kursgodkjenningen. Den er en individuell dataanalyseoppgave som du løser her på nettsiden, og den er bygget etter samme mal som Del 1 på skoleeksamen: ett sammenhengende datasett, som du beskriver, tester hypoteser på og til slutt modellerer med regresjon.
+
+::: {.callout-important}
+## Til kursgodkjenningen
+
+[**Åpne kursgodkjenningen**](kursgodkjenning/kursgodkjenning.html)
+
+Oppgaven åpnes som en egen side. **R kjører rett i nettleseren**, så du trenger ikke installere noe for å løse den.
+:::
+
+## Hva den går ut på
+
+Du får utlevert et datasett med 900 utleieannonser i Bergen, og skal svare på om det lønner seg for et eiendomsselskap å møblere boligene de leier ut. Underveis får du bruk for det meste av modul 1 til 4:
+
+| Oppgave | Tema | Modul |
+|---|---|---|
+| 1 | Deskriptiv statistikk: krysstabeller, korrelasjon, boksplott, median per gruppe | 1–2 |
+| 2 | Hypotesetesting: F-test for like varianser, to-utvalgs t-test, ensidig test, kjikvadrattest | 3 |
+| 3 | Regresjon: enkel og multippel modell, tolkning av koeffisienter, prediksjon | 4 |
+| 4 | Utfordring: interaksjonsledd | 4 |
+
+Til sammen er det 16 deloppgaver. Omtrent to tredeler er regneoppgaver, der du skriver R-kode og svarer med et tall. Resten er tolkningsoppgaver, der du velger mellom påstander om hva resultatet faktisk betyr. Begge deler rettes automatisk med én gang, og du kan prøve så mange ganger du vil.
+
+## Slik leverer du
+
+1. Løs alle 16 deloppgavene, slik at de blir grønne. En oversikt nederst på siden viser deg hvilke som gjenstår.
+2. Skriv inn **kandidatnummeret** ditt i feltet nederst. Du får da opp en **fullføringskode**.
+3. Lever koden i Canvas innen fristen, som du finner i Canvas.
+
+::: {.callout-warning}
+## Gjør den i én økt
+
+Fremdriften ligger i nettleserens minne og lagres ikke. Laster du siden på nytt, eller lukker fanen, må oppgavene kjøres om igjen. Det går fort når koden allerede står i cellene, men det er en god grunn til å sette av sammenhengende tid.
+:::
+
+## Regler
+
+- Kursgodkjenningen er **individuell**. Du skal løse den selv.
+- Du kan fritt bruke denne nettsiden, notatene dine og hjelpesidene i R (`?funksjonsnavn`).
+- Det er ingen tidsbegrensning utover innleveringsfristen, og ingen karakter. Den er godkjent eller ikke godkjent.
+
+Står du fast, er hver oppgave utstyrt med et hint, og regneoppgavene har i tillegg et løsningsforslag du kan låse opp. Bruk dem gjerne. Poenget med kursgodkjenningen er at du skal ha vært gjennom en fullstendig dataanalyse før eksamen, ikke at du skal klare den uten hjelp.
+
+## Vil du jobbe lokalt?
+
+Alt kan løses i nettleseren, men vil du heller sitte i RStudio med dine egne verktøy, kan du laste ned datasettet direkte:
+
+[boliger.RData](kursgodkjenning/boliger.RData)
+
+Da trenger du `dplyr` og `ggplot2` installert lokalt, se @sec-pakker. Svarene blir identiske, siden det er nøyaktig samme fil. Husk at selve innleveringen uansett skjer på kursgodkjenningssiden: oppgavene må være grønne der for at fullføringskoden skal dukke opp.
