@@ -73,6 +73,27 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Søk"
   }
 }</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var title = document.querySelector(".sidebar-title");
+  if (title && !document.getElementById("nhh-sidebar-logo")) {
+    var base = document.querySelector('meta[name="quarto:offset"]');
+    var prefix = base ? base.getAttribute("content") : "";
+    var link = document.createElement("a");
+    link.href = "https://www.nhh.no/";
+    link.id = "nhh-sidebar-logo";
+    link.style.display = "block";
+    link.style.margin = "0.6rem 0 0.2rem 0";
+    var img = document.createElement("img");
+    img.src = prefix + "bilder/nhh.png";
+    img.alt = "Norges Handelshøyskole";
+    img.style.maxWidth = "180px";
+    img.style.width = "100%";
+    link.appendChild(img);
+    title.parentNode.insertBefore(link, title.nextSibling);
+  }
+});
+</script>
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
@@ -286,136 +307,136 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">2017 - Vår</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-17-v.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-17-v-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-17-v.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-17-v-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;">1c</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2017 - Høst</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-17-h.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-17-h-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-17-h.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-17-h-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;">1f-1h</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2018 - Vår</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-18-v.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-18-v-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-18-v.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-18-v-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2018 - Høst</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-18-h.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-18-h-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-18-h.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-18-h-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;">1d, 1g</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2019 - Vår</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-19-v.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-19-v-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-19-v.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-19-v-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;">1c</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2019 - Høst</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-19-h.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-19-h-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-19-h.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-19-h-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2020 - Vår</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-20-v.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-20-v-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-20-v.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-20-v-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2020 - Høst</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-20-h.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-20-h-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-20-h.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-20-h-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2021 - Vår</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-21-v.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-21-v-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-21-v.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-21-v-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2021 - Høst</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-21-h.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-21-h-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-21-h.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-21-h-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2022 - Vår</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-22-v.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-22-v-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-22-v.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-22-v-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2022 - Høst</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-22-h.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-22-h-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-22-h.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-22-h-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2023 - Vår</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-23-v.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-23-v-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-23-v.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-23-v-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2023 - Høst</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-23-h.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-23-h-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-23-h.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-23-h-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2024 - Vår</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-24-v.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-24-v-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-24-v.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-24-v-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2024 - Høst</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-24-h.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-24-h-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-24-h.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-24-h-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2025 - Vår</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-25-v.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-25-v-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-25-v.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-25-v-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">[Materiale](tidligere-eksamensoppgaver/skole-25-v-ekstra.zip)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-25-v-ekstra.zip">Materiale</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2025 - høst</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-25-h.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-25-h-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-25-h.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-25-h-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">[Materiale](tidligere-eksamensoppgaver/skole-25-h-ekstra.zip)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-25-h-ekstra.zip">Materiale</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2026 - Vår</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/skole-26-v.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/skole-26-v-fasit.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-26-v.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-26-v-fasit.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">[Materiale](tidligere-eksamensoppgaver/skole-26-v-ekstra.zip)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/skole-26-v-ekstra.zip">Materiale</a></td>
 </tr>
 </tbody>
 </table>
@@ -564,93 +585,93 @@ Forventningen er konstant, og lik 0, om det er ca like mange punkter over som un
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">2017 - Vår</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/hjemme-17-v.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-17-v.pdf">Oppgaveformulering</a></td>
 <td style="text-align: left;">Ikke tilgjengelig</td>
-<td style="text-align: left;">[Materiale](tidligere-eksamensoppgaver/hjemme-17-v-ekstra.zip)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-17-v-ekstra.zip">Materiale</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2017 - Høst</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/hjemme-17-h.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/hjemme-17-h-solprop.pdf)</td>
-<td style="text-align: left;">[Materiale](tidligere-eksamensoppgaver/hjemme-17-h-ekstra.zip)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-17-h.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-17-h-solprop.pdf">Løsningsforslag</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-17-h-ekstra.zip">Materiale</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2018 - Vår</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/hjemme-18-v.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/hjemme-18-v-solprop.pdf)</td>
-<td style="text-align: left;">[Materiale](tidligere-eksamensoppgaver/hjemme-18-v-ekstra.zip), [Eksempelbesvarelser](tidligere-eksamensoppgaver/hjemme-18-v-eksempler.zip)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-18-v.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-18-v-solprop.pdf">Løsningsforslag</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-18-v-ekstra.zip">Materiale</a>, <a href="tidligere-eksamensoppgaver/hjemme-18-v-eksempler.zip">Eksempelbesvarelser</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2018 - Høst</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/hjemme-18-h.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/hjemme-18-h-solprop.pdf)</td>
-<td style="text-align: left;">[Materiale](tidligere-eksamensoppgaver/hjemme-18-h-ekstra.zip)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-18-h.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-18-h-solprop.pdf">Løsningsforslag</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-18-h-ekstra.zip">Materiale</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2019 - Vår</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/hjemme-19-v.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/hjemme-19-v-solprop.pdf)</td>
-<td style="text-align: left;">[Materiale](tidligere-eksamensoppgaver/hjemme-19-v-ekstra.zip)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-19-v.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-19-v-solprop.pdf">Løsningsforslag</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-19-v-ekstra.zip">Materiale</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2019 - Høst</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/hjemme-19-h.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/hjemme-19-h-solprop.pdf)</td>
-<td style="text-align: left;">[Materiale](tidligere-eksamensoppgaver/hjemme-19-h-ekstra.zip)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-19-h.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-19-h-solprop.pdf">Løsningsforslag</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-19-h-ekstra.zip">Materiale</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2020 - Vår</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/hjemme-20-v.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/hjemme-20-v-solprop.pdf)</td>
-<td style="text-align: left;">[Materiale](tidligere-eksamensoppgaver/hjemme-20-v-ekstra.zip)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-20-v.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-20-v-solprop.pdf">Løsningsforslag</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-20-v-ekstra.zip">Materiale</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2020 - Høst</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/hjemme-20-h.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/hjemme-20-h-solprop.pdf)</td>
-<td style="text-align: left;">[Materiale](tidligere-eksamensoppgaver/hjemme-20-h-ekstra.zip)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-20-h.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-20-h-solprop.pdf">Løsningsforslag</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-20-h-ekstra.zip">Materiale</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2021 - Vår</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/hjemme-21-v.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/hjemme-21-v-solprop.pdf)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-21-v.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-21-v-solprop.pdf">Løsningsforslag</a></td>
 <td style="text-align: left;">Data ikke lenger tilgjengelig.</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2021 - Høst</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/hjemme-21-h.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/hjemme-21-h-solprop.html)</td>
-<td style="text-align: left;">[Materiale](tidligere-eksamensoppgaver/hjemme-21-h-ekstra.zip)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-21-h.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-21-h-solprop.html">Løsningsforslag</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-21-h-ekstra.zip">Materiale</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2022 - Vår</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/hjemme-22-v.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/hjemme-22-v-solprop.html)</td>
-<td style="text-align: left;">[Materiale](tidligere-eksamensoppgaver/hjemme-22-v-ekstra.zip)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-22-v.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-22-v-solprop.html">Løsningsforslag</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-22-v-ekstra.zip">Materiale</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2022 - Høst</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/hjemme-22-h.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/hjemme-22-h-solprop.html)</td>
-<td style="text-align: left;">[Materiale](tidligere-eksamensoppgaver/hjemme-22-h-ekstra.zip)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-22-h.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-22-h-solprop.html">Løsningsforslag</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-22-h-ekstra.zip">Materiale</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2023 - Vår</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/hjemme-23-v.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/hjemme-23-v-solprop.html)</td>
-<td style="text-align: left;">[Materiale](tidligere-eksamensoppgaver/hjemme-23-v-ekstra.zip)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-23-v.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-23-v-solprop.html">Løsningsforslag</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-23-v-ekstra.zip">Materiale</a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2023 - Høst</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/hjemme-23-h.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/hjemme-23-h-solprop.html)</td>
-<td style="text-align: left;">[Materiale](tidligere-eksamensoppgaver/hjemme-23-h-ekstra.zip)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-23-h.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-23-h-solprop.html">Løsningsforslag</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-23-h-ekstra.zip">Materiale</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">2024 - Vår</td>
-<td style="text-align: left;">[Oppgaveformulering](tidligere-eksamensoppgaver/hjemme-24-v.pdf)</td>
-<td style="text-align: left;">[Løsningsforslag](tidligere-eksamensoppgaver/hjemme-24-v-solprop.html)</td>
-<td style="text-align: left;">[Materiale](tidligere-eksamensoppgaver/hjemme-24-v-ekstra.zip)</td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-24-v.pdf">Oppgaveformulering</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-24-v-solprop.html">Løsningsforslag</a></td>
+<td style="text-align: left;"><a href="tidligere-eksamensoppgaver/hjemme-24-v-ekstra.zip">Materiale</a></td>
 </tr>
 </tbody>
 </table>

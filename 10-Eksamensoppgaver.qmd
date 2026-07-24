@@ -22,8 +22,12 @@ skoleeksamen <- readxl::read_excel("tidligere-eksamensoppgaver/skoleeksamen.xlsx
 
 options(knitr.kable.NA = '')
 
-skoleeksamen %>% 
-  kableExtra::kbl() %>% 
+# Gjør om markdown-lenkene [tekst](url) i cellene til HTML slik at de blir klikkbare
+md2a <- function(x) gsub("\\[([^]]+)\\]\\(([^)]+)\\)", '<a href="\\2">\\1</a>', x)
+
+skoleeksamen %>%
+  mutate(across(where(is.character), md2a)) %>%
+  kableExtra::kbl(escape = FALSE) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
 ```
 
@@ -238,8 +242,11 @@ hjemmeeksamen <- readxl::read_excel("tidligere-eksamensoppgaver/hjemmeeksamen.xl
 
 options(knitr.kable.NA = '')
 
-hjemmeeksamen %>% 
-  kableExtra::kbl() %>% 
+md2a <- function(x) gsub("\\[([^]]+)\\]\\(([^)]+)\\)", '<a href="\\2">\\1</a>', x)
+
+hjemmeeksamen %>%
+  mutate(across(where(is.character), md2a)) %>%
+  kableExtra::kbl(escape = FALSE) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
 ```
 

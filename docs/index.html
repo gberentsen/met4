@@ -74,6 +74,27 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Søk"
   }
 }</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var title = document.querySelector(".sidebar-title");
+  if (title && !document.getElementById("nhh-sidebar-logo")) {
+    var base = document.querySelector('meta[name="quarto:offset"]');
+    var prefix = base ? base.getAttribute("content") : "";
+    var link = document.createElement("a");
+    link.href = "https://www.nhh.no/";
+    link.id = "nhh-sidebar-logo";
+    link.style.display = "block";
+    link.style.margin = "0.6rem 0 0.2rem 0";
+    var img = document.createElement("img");
+    img.src = prefix + "bilder/nhh.png";
+    img.alt = "Norges Handelshøyskole";
+    img.style.maxWidth = "180px";
+    img.style.width = "100%";
+    link.appendChild(img);
+    title.parentNode.insertBefore(link, title.nextSibling);
+  }
+});
+</script>
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
@@ -252,12 +273,6 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="innledning" class="level1 unnumbered">
 <h1 class="unnumbered">Innledning</h1>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://www.nhh.no/"><img src="bilder/nhh.png" class="img-fluid figure-img" alt="Norges Handelshøyskole" width="260"></a></p>
-<figcaption>Norges Handelshøyskole</figcaption>
-</figure>
-</div>
 <figure style="float:right; padding:10px; text-align:center" class="figure">
 <img alt="Maren" src="bilder/maren.jpg" width="120" height="150" class="figure-img">
 <figcaption>

@@ -61,6 +61,7 @@ format:
     toc-depth: 3
     code-copy: true
     code-overflow: wrap
+    include-in-header: nhh-sidebar.html
 
 execute:
   freeze: auto

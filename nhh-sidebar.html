@@ -1,0 +1,21 @@
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var title = document.querySelector(".sidebar-title");
+  if (title && !document.getElementById("nhh-sidebar-logo")) {
+    var base = document.querySelector('meta[name="quarto:offset"]');
+    var prefix = base ? base.getAttribute("content") : "";
+    var link = document.createElement("a");
+    link.href = "https://www.nhh.no/";
+    link.id = "nhh-sidebar-logo";
+    link.style.display = "block";
+    link.style.margin = "0.6rem 0 0.2rem 0";
+    var img = document.createElement("img");
+    img.src = prefix + "bilder/nhh.png";
+    img.alt = "Norges Handelshøyskole";
+    img.style.maxWidth = "180px";
+    img.style.width = "100%";
+    link.appendChild(img);
+    title.parentNode.insertBefore(link, title.nextSibling);
+  }
+});
+</script>
