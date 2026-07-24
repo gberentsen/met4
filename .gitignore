@@ -20,3 +20,11 @@ Thumbs.db
 # Feillagret git-output (se historikken: filene chap og qq lå sporet i rota)
 /chap
 /qq
+
+/.quarto/
+**/*.quarto_ipynb
+
+# Quarto
+/_book/
+/_freeze/
+/.quarto/

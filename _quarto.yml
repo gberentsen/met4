@@ -1,0 +1,24 @@
+project:
+  type: book
+  output-dir: _book
+
+lang: nb
+
+book:
+  title: "MET4 – Empiriske Metoder"
+  subtitle: "Høst 2026"
+  author: "Geir Drage Berentsen, Håkon Otneim og Maren Holthe Hedne"
+  description: "Hjemmesiden til kurset MET4 – Empiriske Metoder ved Norges Handelshøyskole."
+  chapters:
+    - index.qmd
+    - 03-hypotesetesting.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 4
+    code-copy: true
+
+execute:
+  freeze: auto
